@@ -1,0 +1,38 @@
+---
+Gemfile:
+  optional:
+    ':system_tests':
+      - gem: 'github_changelog_generator'
+        git: 'https://github.com/skywinder/github-changelog-generator'
+        ref: '20ee04ba1234e9e83eb2ffb5056e23d641c7a018'
+        condition: "Gem::Version.new(RUBY_VERSION.dup) >= Gem::Version.new('2.2.2')"
+      - gem: 'puppet_litmus'
+        git: 'https://github.com/puppetlabs/puppet_litmus.git'
+        ref: 'main'
+      - gem: 'serverspec'
+      - gem: 'hiera-puppet-helper'
+      - gem: 'puppet-lint-security-plugins'
+    ':development':
+      - gem: 'puppet-strings'
+
+spec/spec_helper.rb:
+  mock_with: ':rspec'
+  spec_overrides:
+    - 'RSpec.configure do |c|'
+    - "  c.hiera_config = File.expand_path(File.join(File.dirname(__FILE__), '/fixtures/hiera/hiera.yaml'))"
+    - "  c.after(:suite) do"
+    - "    RSpec::Puppet::Coverage.report!(80)"
+    - "  end"
+    - "end"
+
+".rubocop.yml":
+  default_configs:
+    inherit_from: ".rubocop_todo.yml"
+    require:
+    - rubocop-rspec
+
+appveyor.yml:
+  delete: true
+
+.gitlab-ci.yml:
+  delete: true

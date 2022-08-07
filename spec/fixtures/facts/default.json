@@ -1,0 +1,519 @@
+{
+  "network6" : "fe:",
+  "cis_security_hardening" : {
+    "accounts" : {
+      "no_shell_nologin" : [ ],
+      "no_shell_nologin_count" : 0,
+      "root_gid" : "0"
+    },
+    "auditd" : {
+      "access" : true,
+      "action_mail_acct" : "root",
+      "actions" : true,
+      "admin_space_left_action" : "halt",
+      "auditing_process" : "audit=1",
+      "backlog_limit" : "none",
+      "delete" : true,
+      "identity" : true,
+      "immutable" : false,
+      "logins" : true,
+      "mac-policy" : true,
+      "max_log_file" : 16,
+      "max_log_file_action" : "keep_logs",
+      "modules" : true,
+      "mounts" : true,
+      "perm-mod" : true,
+      "priv-cmds" : false,
+      "priv-cmds-list" : [ [ "-a always,exit -S all -F path=/usr/bin/fusermount -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/bin/passwd -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/bin/umount -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/bin/wall -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/bin/chsh -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/bin/gpasswd -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/bin/sudo -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/bin/pkexec -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/bin/su -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/bin/locate -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/bin/crontab -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/bin/newgrp -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/bin/screen -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/bin/mount -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/bin/chage -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/bin/at -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/bin/ksu -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/bin/write -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/bin/chfn -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/bin/ssh-agent -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/lib/polkit-1/polkit-agent-helper-1 -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/sbin/usernetctl -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/sbin/netreport -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/sbin/mount.nfs -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/sbin/postqueue -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/sbin/postdrop -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/sbin/unix_chkpwd -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/sbin/pam_timestamp_check -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/lib64/nagios/plugins/check_fping -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/lib64/nagios/plugins/check_ide_smart -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/lib64/nagios/plugins/check_dhcp -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/lib64/nagios/plugins/check_icmp -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/libexec/utempter/utempter -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/libexec/sssd/krb5_child -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/libexec/sssd/selinux_child -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/libexec/sssd/proxy_child -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/libexec/sssd/ldap_child -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/libexec/dbus-1/dbus-daemon-launch-helper -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/libexec/openssh/ssh-keysign -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/libexec/abrt-action-install-debuginfo-to-abrt-cache -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged" ] ],
+      "priv-cmds-rules" : {
+        "/usr" : [ "-a always,exit -S all -F path=/usr/bin/fusermount -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/bin/passwd -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/bin/umount -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/bin/wall -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/bin/chsh -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/bin/gpasswd -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/bin/sudo -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/bin/pkexec -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/bin/su -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/bin/locate -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/bin/crontab -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/bin/newgrp -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/bin/screen -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/bin/mount -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/bin/chage -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/bin/at -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/bin/ksu -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/bin/write -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/bin/chfn -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/bin/ssh-agent -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/lib/polkit-1/polkit-agent-helper-1 -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/sbin/usernetctl -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/sbin/netreport -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/sbin/mount.nfs -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/sbin/postqueue -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/sbin/postdrop -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/sbin/unix_chkpwd -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/sbin/pam_timestamp_check -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/lib64/nagios/plugins/check_fping -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/lib64/nagios/plugins/check_ide_smart -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/lib64/nagios/plugins/check_dhcp -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/lib64/nagios/plugins/check_icmp -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/libexec/utempter/utempter -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/libexec/sssd/krb5_child -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/libexec/sssd/selinux_child -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/libexec/sssd/proxy_child -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/libexec/sssd/ldap_child -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/libexec/dbus-1/dbus-daemon-launch-helper -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/libexec/openssh/ssh-keysign -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged", "-a always,exit -S all -F path=/usr/libexec/abrt-action-install-debuginfo-to-abrt-cache -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged" ]
+      },
+      "scope" : true,
+      "session" : false,
+      "session-logins" : true,
+      "space_left_action" : "email",
+      "srv_auditd" : "enabled",
+      "system-locale" : true,
+      "time-change" : true,
+      "when_full" : true
+    },
+    "duplicate_gids" : "none",
+    "duplicate_groups" : "none",
+    "duplicate_uids" : "none",
+    "duplicate_users" : "none",
+    "empty_passwords" : "none",
+    "file_permissions" : {
+      "group" : {
+        "combined" : "0-0-420",
+        "gid" : 0,
+        "mode" : 420,
+        "uid" : 0
+      },
+      "group-" : {
+        "combined" : "0-0-420",
+        "gid" : 0,
+        "mode" : 420,
+        "uid" : 0
+      },
+      "gshadow" : {
+        "combined" : "0-0-0",
+        "gid" : 0,
+        "mode" : 0,
+        "uid" : 0
+      },
+      "gshadow-" : {
+        "combined" : "0-0-0",
+        "gid" : 0,
+        "mode" : 0,
+        "uid" : 0
+      },
+      "passwd" : {
+        "combined" : "0-0-420",
+        "gid" : 0,
+        "mode" : 420,
+        "uid" : 0
+      },
+      "passwd-" : {
+        "combined" : "0-0-420",
+        "gid" : 0,
+        "mode" : 420,
+        "uid" : 0
+      },
+      "shadow" : {
+        "combined" : "0-0-0",
+        "gid" : 0,
+        "mode" : 0,
+        "uid" : 0
+      },
+      "shadow-" : {
+        "combined" : "0-0-0",
+        "gid" : 0,
+        "mode" : 0,
+        "uid" : 0
+      },
+      "system_files" : [ ],
+      "system_files_count" : 0,
+      "ungrouped" : [ ],
+      "ungrouped_count" : 0,
+      "unowned" : [ ],
+      "unowned_count" : 0
+    },
+    "forward_files" : "none",
+    "gnome_gdm" : false,
+    "gnome_gdm_conf" : true,
+    "grub_ipv6_disabled" : false,
+    "home_dir_owners" : "none",
+    "home_dir_permissions" : "none",
+    "ip6tables" : {
+      "default_policies" : {
+        "FORWARD" : "ACCEPT",
+        "INPUT" : "ACCEPT",
+        "OUTPUT" : "ACCEPT"
+      },
+      "policy" : { },
+      "policy_status" : false
+    },
+    "iptables" : {
+      "default_policies" : {
+        "FORWARD" : "DROP",
+        "INPUT" : "DROP",
+        "OUTPUT" : "DROP"
+      },
+      "policy" : {
+        "rule 1" : {
+          "chain" : "INPUT",
+          "dpt" : "",
+          "dst" : "0.0.0.0/0",
+          "icmptype" : "",
+          "in" : "lo",
+          "info" : "/* 001 accept all incoming traffic to local interface */",
+          "opts" : "--",
+          "out" : "*",
+          "proto" : "all",
+          "spt" : "",
+          "src" : "0.0.0.0/0",
+          "state" : "",
+          "target" : "ACCEPT"
+        },
+        "rule 10" : {
+          "chain" : "OUTPUT",
+          "dpt" : "53",
+          "dst" : "0.0.0.0/0",
+          "icmptype" : "",
+          "in" : "*",
+          "info" : "multiport dports 53 state NEW /* 103 dns udp outbound */",
+          "opts" : "--",
+          "out" : "*",
+          "proto" : "udp",
+          "spt" : "",
+          "src" : "0.0.0.0/0",
+          "state" : "NEW",
+          "target" : "ACCEPT"
+        },
+        "rule 11" : {
+          "chain" : "OUTPUT",
+          "dpt" : "53",
+          "dst" : "0.0.0.0/0",
+          "icmptype" : "",
+          "in" : "*",
+          "info" : "multiport dports 53 state NEW /* 104 dns tcp inbound */",
+          "opts" : "--",
+          "out" : "*",
+          "proto" : "tcp",
+          "spt" : "",
+          "src" : "0.0.0.0/0",
+          "state" : "NEW",
+          "target" : "ACCEPT"
+        },
+        "rule 12" : {
+          "chain" : "OUTPUT",
+          "dpt" : "8140",
+          "dst" : "0.0.0.0/0",
+          "icmptype" : "",
+          "in" : "*",
+          "info" : "multiport dports 8140 state NEW /* 105 puppet 8140 output */",
+          "opts" : "--",
+          "out" : "*",
+          "proto" : "tcp",
+          "spt" : "",
+          "src" : "0.0.0.0/0",
+          "state" : "NEW",
+          "target" : "ACCEPT"
+        },
+        "rule 13" : {
+          "chain" : "OUTPUT",
+          "dpt" : "8142",
+          "dst" : "0.0.0.0/0",
+          "icmptype" : "",
+          "in" : "*",
+          "info" : "multiport dports 8142 state NEW /* 106 puppet 8142 output */",
+          "opts" : "--",
+          "out" : "*",
+          "proto" : "tcp",
+          "spt" : "",
+          "src" : "0.0.0.0/0",
+          "state" : "NEW",
+          "target" : "ACCEPT"
+        },
+        "rule 2" : {
+          "chain" : "INPUT",
+          "dpt" : "",
+          "dst" : "0.0.0.0/0",
+          "icmptype" : "",
+          "in" : "*",
+          "info" : "/* 003 drop all traffic to lo 127.0.0.1/8 */",
+          "opts" : "--",
+          "out" : "*",
+          "proto" : "all",
+          "spt" : "",
+          "src" : "127.0.0.0/8",
+          "state" : "",
+          "target" : "DROP"
+        },
+        "rule 3" : {
+          "chain" : "INPUT",
+          "dpt" : "",
+          "dst" : "0.0.0.0/0",
+          "icmptype" : "",
+          "in" : "*",
+          "info" : "state ESTABLISHED /* 008 accept inbound udp state established */",
+          "opts" : "--",
+          "out" : "*",
+          "proto" : "udp",
+          "spt" : "",
+          "src" : "0.0.0.0/0",
+          "state" : "ESTABLISHED",
+          "target" : "ACCEPT"
+        },
+        "rule 4" : {
+          "chain" : "INPUT",
+          "dpt" : "",
+          "dst" : "0.0.0.0/0",
+          "icmptype" : "",
+          "in" : "*",
+          "info" : "state ESTABLISHED /* 009 accept inbound icmp state established */",
+          "opts" : "--",
+          "out" : "*",
+          "proto" : "icmp",
+          "spt" : "",
+          "src" : "0.0.0.0/0",
+          "state" : "ESTABLISHED",
+          "target" : "ACCEPT"
+        },
+        "rule 5" : {
+          "chain" : "INPUT",
+          "dpt" : "22",
+          "dst" : "0.0.0.0/0",
+          "icmptype" : "",
+          "in" : "*",
+          "info" : "multiport dports 22 state NEW /* 100 ssh inbound */",
+          "opts" : "--",
+          "out" : "*",
+          "proto" : "tcp",
+          "spt" : "",
+          "src" : "0.0.0.0/0",
+          "state" : "NEW",
+          "target" : "ACCEPT"
+        },
+        "rule 6" : {
+          "chain" : "INPUT",
+          "dpt" : "443",
+          "dst" : "0.0.0.0/0",
+          "icmptype" : "",
+          "in" : "*",
+          "info" : "multiport dports 443 state NEW /* 101 httpd inbound */",
+          "opts" : "--",
+          "out" : "*",
+          "proto" : "tcp",
+          "spt" : "",
+          "src" : "0.0.0.0/0",
+          "state" : "NEW",
+          "target" : "ACCEPT"
+        },
+        "rule 7" : {
+          "chain" : "INPUT",
+          "dpt" : "53",
+          "dst" : "0.0.0.0/0",
+          "icmptype" : "",
+          "in" : "*",
+          "info" : "multiport dports 53 state NEW /* 102 dns udp inbound */",
+          "opts" : "--",
+          "out" : "*",
+          "proto" : "udp",
+          "spt" : "",
+          "src" : "0.0.0.0/0",
+          "state" : "NEW",
+          "target" : "ACCEPT"
+        },
+        "rule 8" : {
+          "chain" : "OUTPUT",
+          "dpt" : "",
+          "dst" : "0.0.0.0/0",
+          "icmptype" : "",
+          "in" : "*",
+          "info" : "/* 002 accept all outgoing traffic to local interface */",
+          "opts" : "--",
+          "out" : "lo",
+          "proto" : "all",
+          "spt" : "",
+          "src" : "0.0.0.0/0",
+          "state" : "",
+          "target" : "ACCEPT"
+        },
+        "rule 9" : {
+          "chain" : "OUTPUT",
+          "dpt" : "",
+          "dst" : "0.0.0.0/0",
+          "icmptype" : "",
+          "in" : "*",
+          "info" : "state NEW,ESTABLISHED /* 006 accept outbound icmp state new, established */",
+          "opts" : "--",
+          "out" : "*",
+          "proto" : "icmp",
+          "spt" : "",
+          "src" : "0.0.0.0/0",
+          "state" : "NEW,ESTABLISHED",
+          "target" : "ACCEPT"
+        }
+      },
+      "policy_status" : true
+    },
+    "issue" : {
+      "net" : {
+        "combined" : "0-0-420",
+        "content" : "",
+        "gid" : 0,
+        "mode" : 420,
+        "uid" : 0
+      },
+      "os" : {
+        "combined" : "0-0-420",
+        "content" : "",
+        "gid" : 0,
+        "mode" : 420,
+        "uid" : 0
+      }
+    },
+    "local_users" : {
+      "kriegeth" : {
+        "account_expires_days" : "never",
+        "last_password_change_days" : 0,
+        "max_days_between_password_change" : 90,
+        "min_days_between_password_change" : 7,
+        "password_date_valid" : true,
+        "password_expires_days" : 90,
+        "password_inactive_days" : 30,
+        "warn_days_between_password_change" : 7
+      },
+      "root" : {
+        "account_expires_days" : "never",
+        "last_password_change_days" : "never",
+        "max_days_between_password_change" : 99999,
+        "min_days_between_password_change" : 0,
+        "password_date_valid" : "",
+        "password_expires_days" : "never",
+        "password_inactive_days" : "never",
+        "warn_days_between_password_change" : 7
+      }
+    },
+    "motd" : {
+      "combined" : "0-0-420",
+      "content" : "",
+      "gid" : 0,
+      "mode" : 420,
+      "uid" : 0
+    },
+    "mta" : {
+      "local" : ""
+    },
+    "netrc_files" : "none",
+    "netrc_files_write" : "none",
+    "ntp" : {
+      "chrony_options" : "OPTIONS=\"\"",
+      "chrony_server" : "server 10.10.54.4",
+      "chrony_status" : true,
+      "ntp_options" : "none",
+      "ntp_restrict" : "restrict default nomodify notrap nopeer noquery\nrestrict 127.0.0.1 \nrestrict ::1",
+      "ntp_server" : "server 0.centos.pool.ntp.org iburst\nserver 1.centos.pool.ntp.org iburst\nserver 2.centos.pool.ntp.org iburst\nserver 3.centos.pool.ntp.org iburst",
+      "ntp_status" : true,
+      "ntp_use" : "used"
+    },
+    "pam" : {
+      "opasswd" : {
+        "password-auth" : true,
+        "status" : true,
+        "system-auth" : true
+      },
+      "pwquality" : {
+        "dcredit" : "-1",
+        "lcredit" : "-1",
+        "lockout" : true,
+        "minlen" : "14",
+        "ocredit" : "-1",
+        "password-auth" : "password     requisite      pam_pwquality.so try_first_pass retry=3",
+        "password-auth-config" : true,
+        "status" : true,
+        "system-auth" : "password     requisite      pam_pwquality.so try_first_pass retry=3",
+        "system-auth-config" : true,
+        "ucredit" : "-1"
+      },
+      "sha512" : {
+        "password-auth" : true,
+        "status" : true,
+        "system-auth" : true
+      },
+      "wheel" : "auth required pam_wheel.so use_uid",
+      "wheel_users" : [ "root" ],
+      "wheel_users_count" : 1
+    },
+    "passwd_group" : "none",
+    "pw_data" : {
+      "inactive" : 30,
+      "inactive_status" : false,
+      "pass_max_days" : 90,
+      "pass_max_days_status" : false,
+      "pass_min_days" : "7",
+      "pass_min_days_status" : false,
+      "pass_warn_age" : "7",
+      "pass_warn_age_status" : false,
+      "pw_change_in_future" : true
+    },
+    "rhosts_files" : "none",
+    "root_path_integrity" : "none",
+    "security_patches" : "none",
+    "shadow_group" : [ ],
+    "shadow_group_count" : 0,
+    "sshd" : {
+      "allowgroups" : [ ],
+      "allowtcpforwarding" : "no",
+      "allowusers" : [ "kriegeth", "root", "vagrant", "centos", "ec2-user", "ubuntu" ],
+      "banner" : "/etc/issue.net",
+      "ciphers" : [ "aes256-gcm@openssh.com", "aes128-gcm@openssh.com", "aes256-ctr", "aes192-ctr", "aes128-ctr" ],
+      "clientalivecountmax" : "0",
+      "clientaliveinterval" : "300",
+      "crypto_policy" : "none",
+      "denygroups" : [ ],
+      "denyusers" : [ ],
+      "hostbasedauthentication" : "no",
+      "ignorerhosts" : "yes",
+      "kexalgorithms" : [ "curve25519-sha256", "curve25519-sha256@libssh.org", "diffie-hellman-group14-sha256", "diffie-hellman-group16-sha512", "diffie-hellman-group18-sha512", "ecdh-sha2-nistp521", "ecdh-sha2-nistp384", "ecdh-sha2-nistp256", "diffie-hellman-group-exchange-sha256" ],
+      "logingracetime" : "60",
+      "loglevel" : "INFO",
+      "macs" : [ "hmac-sha2-512-etm@openssh.com", "hmac-sha2-256-etm@openssh.com", "hmac-sha2-512", "hmac-sha2-256" ],
+      "maxauthtries" : "4",
+      "maxsessions" : "4",
+      "maxstartups" : "10:30:60",
+      "package" : true,
+      "permitemptypasswords" : "no",
+      "permitrootlogin" : "no",
+      "permituserenvironment" : "no",
+      "priv_key_files" : {
+        "/etc/ssh/ssh_host_ecdsa_key" : {
+          "combined" : "0-0-384",
+          "gid" : 0,
+          "mode" : 384,
+          "uid" : 0
+        },
+        "/etc/ssh/ssh_host_ed25519_key" : {
+          "combined" : "0-0-384",
+          "gid" : 0,
+          "mode" : 384,
+          "uid" : 0
+        },
+        "/etc/ssh/ssh_host_rsa_key" : {
+          "combined" : "0-0-384",
+          "gid" : 0,
+          "mode" : 384,
+          "uid" : 0
+        }
+      },
+      "priv_key_files_status" : true,
+      "protocol" : "2",
+      "pub_key_files" : {
+        "/etc/ssh/ssh_host_ecdsa_key.pub" : {
+          "combined" : "0-0-420",
+          "gid" : 0,
+          "mode" : 420,
+          "uid" : 0
+        },
+        "/etc/ssh/ssh_host_ed25519_key.pub" : {
+          "combined" : "0-0-420",
+          "gid" : 0,
+          "mode" : 420,
+          "uid" : 0
+        },
+        "/etc/ssh/ssh_host_rsa_key.pub" : {
+          "combined" : "0-0-420",
+          "gid" : 0,
+          "mode" : 420,
+          "uid" : 0
+        }
+      },
+      "pub_key_files_status" : true,
+      "usepam" : "yes",
+      "x11forwarding" : "no",
+      "/etc/ssh/sshd_config" : {
+        "combined" : "0-0-384",
+        "gid" : 0,
+        "mode" : 384,
+        "uid" : 0
+      }
+    },
+    "uid_0" : "root",
+    "unconfined_daemons" : "none",
+    "unconfined_services" : "none",
+    "user_dot_file_write" : "none",
+    "user_home_dirs" : "none",
+    "world_writable" : [ ],
+    "world_writable_count" : 0,
+    "x11" : {
+      "installed" : true,
+      "packages" : [ "xorg-x11-server-utils-7.7-20.el7.x86_64", "xorg-x11-font-utils-7.5-21.el7.x86_64" ]
+    },
+    "yum" : {
+      "gpgcheck" : true,
+      "repolist" : [ "base/7/x86_64         CentOS-7 - Base                                     10072", "epel/7/x86_64         Extra Packages for Enterprise Linux 7 - x86_64      13560", "extras/7/x86_64       CentOS-7 - Extras                                     460", "updates/7/x86_64      CentOS-7 - Updates                                   1898" ],
+      "repolist_config" : true
+    }
+  }
+}

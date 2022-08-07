@@ -1,0 +1,6 @@
+{
+    "description": "Check minimum days between password changes is configured.",
+    "input_method": "environment",
+    "parameters": {
+    }
+  }

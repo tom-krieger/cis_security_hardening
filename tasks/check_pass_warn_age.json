@@ -1,0 +1,6 @@
+{
+    "description": "Check password expiration warning days is 7 or more.",
+    "input_method": "environment",
+    "parameters": {
+    }
+  }

@@ -1,0 +1,7 @@
+{
+    "description": "Cleanup old files from (previous) cis module",
+    "input_method": "environment",
+    "parameters": {
+    }
+  }
+ 

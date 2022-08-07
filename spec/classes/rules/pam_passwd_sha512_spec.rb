@@ -1,0 +1,165 @@
+# frozen_string_literal: true
+
+require 'spec_helper'
+
+enforce_options = [true, false]
+
+describe 'cis_security_hardening::rules::pam_passwd_sha512' do
+  let(:pre_condition) do
+    <<-EOF
+    exec { 'authselect-apply-changes':
+      command     => 'authselect apply-changes',
+      path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+      refreshonly => true,
+    }
+    EOF
+  end
+
+  on_supported_os.each do |_os, os_facts|
+    enforce_options.each do |enforce|
+      context "on RedHat 7 with enforce #{enforce}" do
+        let(:facts) do
+          os_facts.merge!(
+            cis_security_hardening: {
+              authselect: {
+                profile: 'testprofile',
+              },
+              pam: {
+                pwquality: {
+                  status: false,
+                },
+              },
+            },
+          )
+        end
+        let(:params) do
+          {
+            'enforce' => enforce,
+          }
+        end
+
+        it {
+          is_expected.to compile
+          if enforce
+
+            if os_facts[:osfamily].casecmp('redhat').zero?
+
+              if os_facts[:operatingsystemmajrelease] == '7'
+                is_expected.not_to contain_exec('update authselect config for sha512 system-auth')
+                is_expected.not_to contain_exec('update authselect config for sha512 password-auth')
+
+                is_expected.to contain_exec('switch sha512 on')
+                  . with(
+                    'command' => 'authconfig --passalgo=sha512 --updateall',
+                    'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+                    'onlyif'  => 'test -z "$(grep -E "^password\\s+sufficient\\s+pam_unix.so.*sha512" /etc/pam.d/system-auth)"',
+                  )
+              else
+                is_expected.not_to contain_exec('switch sha512 on')
+
+                is_expected.to contain_exec('update authselect config for sha512 system-auth')
+                  .with(
+                    'command' => "sed -ri 's/^\\s*(password\\s+sufficient\\s+pam_unix.so\\s+)(.*)$/\\1\\2 sha512/' /etc/authselect/custom/testprofile/system-auth",
+                    'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+                    'onlyif'  => "test -z \"\$(grep -E '^\\s*password\\s+sufficient\\s+pam_unix.so\\s+.*sha512\\s*.*\$' /etc/authselect/custom/testprofile/system-auth)\"",
+                  )
+                  .that_notifies('Exec[authselect-apply-changes]')
+
+                is_expected.to contain_exec('update authselect config for sha512 password-auth')
+                  .with(
+                    'command' => "sed -ri 's/^\\s*(password\\s+sufficient\\s+pam_unix.so\\s+)(.*)$/\\1\\2 sha512/' /etc/authselect/custom/testprofile/password-auth",
+                    'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+                    'onlyif'  => "test -z \"\$(grep -E '^\\s*password\\s+sufficient\\s+pam_unix.so\\s+.*sha512\\s*.*\$' /etc/authselect/custom/testprofile/password-auth)\"",
+                  )
+                  .that_notifies('Exec[authselect-apply-changes]')
+              end
+
+            elsif os_facts[:osfamily].casecmp('debian').zero?
+              is_expected.not_to contain_exec('update authselect config for sha512 system-auth')
+              is_expected.not_to contain_exec('update authselect config for sha512 password-auth')
+              is_expected.not_to contain_exec('switch sha512 on')
+
+              is_expected.to contain_pam('pam-common-password-unix')
+                .with(
+                  'ensure'           => 'present',
+                  'service'          => 'common-password',
+                  'type'             => 'password',
+                  'control'          => '[success=1 default=ignore]',
+                  'control_is_param' => true,
+                  'module'           => 'pam_unix.so',
+                  'arguments'        => ['sha512'],
+                )
+
+            end
+
+          else
+            is_expected.not_to contain_exec('update authselect config for sha512 system-auth')
+            is_expected.not_to contain_exec('update authselect config for sha512 password-auth')
+            is_expected.not_to contain_exec('switch sha512 on')
+            is_expected.not_to contain_pam('pam-common-password-unix')
+          end
+        }
+      end
+
+      context "on RedHat 8 with enforce #{enforce}" do
+        let(:pre_condition) do
+          <<-EOF
+          exec { 'authselect-apply-changes':
+            command     => 'authselect apply-changes',
+            path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+            refreshonly => true,
+          }
+          EOF
+        end
+        let(:facts) do
+          {
+            osfamily: 'RedHat',
+            operatingsystem: 'CentOS',
+            architecture: 'x86_64',
+            operatingsystemmajrelease: '8',
+            cis_security_hardening: {
+              authselect: {
+                profile: 'testprofile',
+              },
+              pam: {
+                sha512: {
+                  status: false,
+                },
+              },
+            },
+          }
+        end
+        let(:params) do
+          {
+            'enforce' => enforce,
+          }
+        end
+
+        it { is_expected.to compile }
+        it {
+          if enforce
+            is_expected.to contain_exec('update authselect config for sha512 system-auth')
+              .with(
+                'command' => "sed -ri 's/^\\s*(password\\s+sufficient\\s+pam_unix.so\\s+)(.*)$/\\1\\2 sha512/' /etc/authselect/custom/testprofile/system-auth",
+                'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+                'onlyif'  => "test -z \"\$(grep -E '^\\s*password\\s+sufficient\\s+pam_unix.so\\s+.*sha512\\s*.*\$' /etc/authselect/custom/testprofile/system-auth)\"",
+              )
+              .that_notifies('Exec[authselect-apply-changes]')
+
+            is_expected.to contain_exec('update authselect config for sha512 password-auth')
+              .with(
+                'command' => "sed -ri 's/^\\s*(password\\s+sufficient\\s+pam_unix.so\\s+)(.*)$/\\1\\2 sha512/' /etc/authselect/custom/testprofile/password-auth",
+                'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+                'onlyif'  => "test -z \"\$(grep -E '^\\s*password\\s+sufficient\\s+pam_unix.so\\s+.*sha512\\s*.*\$' /etc/authselect/custom/testprofile/password-auth)\"",
+              )
+              .that_notifies('Exec[authselect-apply-changes]')
+          else
+            is_expected.not_to contain_exec('update authselect config for sha512 system-auth')
+            is_expected.not_to contain_exec('update authselect config for sha512 password-auth')
+            is_expected.not_to contain_exec('switch sha512 on')
+          end
+        }
+      end
+    end
+  end
+end

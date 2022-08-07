@@ -1,0 +1,6 @@
+{
+    "description": "Check all users last password change date is in the past.",
+    "input_method": "environment",
+    "parameters": {
+    }
+  }

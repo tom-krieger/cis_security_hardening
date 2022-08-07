@@ -1,0 +1,6 @@
+{
+  "description": "Audit SGID executables",
+  "input_method": "environment",
+  "parameters": {
+  }
+}

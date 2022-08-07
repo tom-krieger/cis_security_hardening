@@ -1,0 +1,5 @@
+#!/bin/bash
+
+/usr/local/bin/puppet facts upload
+
+exit 0

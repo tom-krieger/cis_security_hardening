@@ -1,0 +1,6 @@
+{
+  "description": "Check system accounts are secured.",
+  "input_method": "environment",
+  "parameters": {
+  }
+}

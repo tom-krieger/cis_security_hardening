@@ -1,0 +1,11 @@
+{
+  "description": "Fix or report wrong home directory permissions",
+  "input_method": "environment",
+  "parameters": {
+    "fix": {
+      "description": "Fix permissions or just report.",
+      "type": "Enum[yes,no]",
+      "default": "no"
+    }
+  }
+}

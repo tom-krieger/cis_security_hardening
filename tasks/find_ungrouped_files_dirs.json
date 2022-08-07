@@ -1,0 +1,6 @@
+{
+  "description": "Find ungrouped files and directories.",
+  "input_method": "environment",
+  "parameters": {
+  }
+}

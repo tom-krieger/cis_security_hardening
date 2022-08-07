@@ -1,0 +1,6 @@
+{
+  "description": "Audit SUID executables",
+  "input_method": "environment",
+  "parameters": {
+  }
+}

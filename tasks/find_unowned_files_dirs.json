@@ -1,0 +1,6 @@
+{
+  "description": "Find unowned files and directories.",
+  "input_method": "environment",
+  "parameters": {
+  }
+}

@@ -1,0 +1,6 @@
+{
+    "description": "Check password expiration is 365 days or less.",
+    "input_method": "environment",
+    "parameters": {
+    }
+  }

@@ -1,0 +1,6 @@
+{
+  "description": "Find world writable files.",
+  "input_method": "environment",
+  "parameters": {
+  }
+}

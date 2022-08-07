@@ -1,0 +1,15 @@
+#!/bin/bash
+
+TMPFILE=/tmp/sticky_ww.$$
+rm -f $TMPFILE
+touch $TMPFILE
+
+<% $dirs_to_exclude.each |$dir| { -%>
+echo "<%= $dir %>" >> $TMPFILE
+<% } -%>
+
+df --local -P | awk {'if (NR!=1) print $6'} | grep -v -f ${TMPFILE} | xargs -I '{}' find '{}' -xdev -type d \( -perm -0002 -a ! -perm -1000 \) > <%= $filename %>
+
+rm -f $TMPFILE
+
+exit $?

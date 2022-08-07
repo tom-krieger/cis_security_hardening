@@ -1,0 +1,11 @@
+# set shell timeout
+
+<%- if $os == 'debian' { -%>
+if [ -z "$TMOUT" ] ; then
+  readonly TMOUT=<%= $default_timeout %> ; export TMOUT
+fi
+<%- } else { -%>
+TMOUT=<%= $default_timeout %>
+readonly TMOUT
+export TMOUT
+<% } %>

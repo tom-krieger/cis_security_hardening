@@ -1,0 +1,34 @@
+---
+version: 5
+
+defaults:  # Used for any hierarchy level that omits these keys.
+  datadir: data         # This path is relative to hiera.yaml's directory.
+  data_hash: yaml_data  # Use the built-in YAML backend.
+
+hierarchy:
+  - name: "CentOS 7 Benchmark"
+    paths:
+      - "cis/cis_centos_7_params.yaml"
+      - "cis/cis_centos_7_rules.yaml"
+  - name: "CentOS 8 Benchmark"
+    paths:
+      - "cis/cis_centos_8_params.yaml"
+      - "cis/cis_centos_8_rules.yaml"
+  - name: "Ubuntu 18.04 Benchmark"
+    paths:
+      - "cis/cis_ubuntu_18.04_params.yaml"
+      - "cis/cis_ubuntu_18.04_rules.yaml"
+  - name: "Ubuntu 20.04 Benchmark"
+    paths:
+      - "cis/cis_ubuntu_20.04_params.yaml"
+      - "cis/cis_ubuntu_20.04_rules.yaml"
+  - name: "Debian 10 Benchmark"
+    paths:
+      - "cis/cis_debian_10_params.yaml"
+      - "cis/cis_debian_10_rules.yaml"
+  - name: 'SLES 15 Benchmark'
+    paths:
+      - "cis/cis_sles_15_params.yaml"
+      - "cis/cis_sles_15_rules.yaml"
+  - name: 'common definitions'
+    path: 'common.yaml'

@@ -1,0 +1,11 @@
+{
+  "description": "Check inactive password lock is 30 days or less.",
+  "input_method": "environment",
+  "parameters": {
+    "inactive": {
+      "description": "Max. inactive days.",
+      "type": "Integer",
+      "default": 30
+    }
+  }
+}
