@@ -1,0 +1,6 @@
+{
+  "description": "Check users' dot files are not group or world writable.",
+  "input_method": "environment",
+  "parameters": {
+  }
+}

@@ -8,7 +8,7 @@
 
 #### Public Classes
 
-* [`cis_security_hardening`](#cis_security_hardening): Security baseline enforcement and monitoring
+* [`cis_security_hardening`](#cis_security_hardening): Security baseline enforcement
 * [`cis_security_hardening::config`](#cis_security_hardeningconfig): Configure the module
 * [`cis_security_hardening::services`](#cis_security_hardeningservices): Services
 * [`cis_security_hardening::sticky_world_writable_cron`](#cis_security_hardeningsticky_world_writable_cron): Create cron job for searching world writable dir3ctories with sticky bit
@@ -264,7 +264,7 @@
 * [`check_pass_warn_age`](#check_pass_warn_age): Check password expiration warning days is 7 or more.
 * [`check_system_accounts_secured`](#check_system_accounts_secured): Check system accounts are secured.
 * [`check_user_last_passwd_in_past`](#check_user_last_passwd_in_past): Check all users last password change date is in the past.
-* [`cleanup_old_stuff`](#cleanup_old_stuff): Cleanup old files from cis module
+* [`cleanup_old_stuff`](#cleanup_old_stuff): Cleanup old files from (previous) cis module
 * [`find_ungrouped_files_dirs`](#find_ungrouped_files_dirs): Find ungrouped files and directories.
 * [`find_unowned_files_dirs`](#find_unowned_files_dirs): Find unowned files and directories.
 * [`find_world_writable_files`](#find_world_writable_files): Find world writable files.
@@ -277,8 +277,6 @@
 Define a complete security baseline and monitor the rules. The definition of the baseline can be done in Hiera.
 The purpose of the module is to give the ability to setup complete security baseline which not necessarily have to stick
 to an industry security guide like the CIS benchmarks.
-One main purpose is to ensure the module can be extended by further security settings and monitorings without changing the code of
-this module.
 
 The easiest way to use the module is to put all rule data into a hiera file. For more information please coinsult the README file.
 
@@ -683,7 +681,7 @@ Check all users last password change date is in the past.
 
 ### <a name="cleanup_old_stuff"></a>`cleanup_old_stuff`
 
-Cleanup old files from cis module
+Cleanup old files from (previous) cis module
 
 **Supports noop?** false
 

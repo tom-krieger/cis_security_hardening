@@ -24,8 +24,7 @@ class cis_security_hardening::rules::disable_ip_forwarding (
       'net.ipv4.ip_forward':
         value => 0,
     }
-    if  $facts['operatingsystem'].downcase() == 'sles' and
-    fact('network6') != undef {
+    if  $facts['operatingsystem'].downcase() == 'sles' and fact('network6') != undef {
       Sysctl {
         'net.ipv6.conf.all.forwarding':
           value => 0,

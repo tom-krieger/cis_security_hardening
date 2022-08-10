@@ -1,0 +1,6 @@
+{
+  "description": "Check no duplicate user names exist.",
+  "input_method": "environment",
+  "parameters": {
+  }
+}

@@ -29,8 +29,7 @@ class cis_security_hardening::rules::ip6tables_open_ports (
   Boolean $enforce     = false,
   Hash $firewall_rules = {},
 ) {
-  if  $enforce and
-  fact('network6') != undef {
+  if  $enforce and fact('network6') != undef {
     if(empty($firewall_rules)) {
       $rule10 = fact('cis_security_hardening.ip6tables.policy').filter |$rule, $data| {
         $data['chain'] == 'INPUT' and $data['proto'] == 'tcp' and $data['dpt'] == '22' and

@@ -1,0 +1,6 @@
+{
+  "description": "Check no duplicate UIDs exist.",
+  "input_method": "environment",
+  "parameters": {
+  }
+}

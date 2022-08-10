@@ -1,0 +1,6 @@
+{
+  "description": "Check no duplicate GIDs exist.",
+  "input_method": "environment",
+  "parameters": {
+  }
+}

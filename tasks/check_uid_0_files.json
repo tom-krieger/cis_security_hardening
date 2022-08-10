@@ -1,0 +1,6 @@
+{
+  "description": "Check root is the only UID 0 account.",
+  "input_method": "environment",
+  "parameters": {
+  }
+}

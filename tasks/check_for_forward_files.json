@@ -1,0 +1,6 @@
+{
+  "description": "Check users users have no .forward files.",
+  "input_method": "environment",
+  "parameters": {
+  }
+}
