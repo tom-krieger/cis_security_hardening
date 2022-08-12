@@ -45,6 +45,12 @@
 # @param retry
 #    allowed retries when password is wrong
 #
+# @param dictcheck
+#   Ensure passwords can not use dictonary words
+#
+# @param difok
+#    Number of characters to change.
+#
 # @example
 #   class { 'cis_security_hardening::rules::pam_pw_requirements':
 #       enforce => true,
@@ -53,14 +59,16 @@
 #
 # @api private
 class cis_security_hardening::rules::pam_pw_requirements (
-  Boolean $enforce  = false,
-  Integer $minlen   = 14,
-  Integer $dcredit  = -1,
-  Integer $ucredit  = -1,
-  Integer $ocredit  = -1,
-  Integer $lcredit  = -1,
-  Integer $minclass = -1,
-  Integer $retry    = 3,
+  Boolean $enforce   = false,
+  Integer $minlen    = 14,
+  Integer $dcredit   = -1,
+  Integer $ucredit   = -1,
+  Integer $ocredit   = -1,
+  Integer $lcredit   = -1,
+  Integer $minclass  = -1,
+  Integer $retry     = 3,
+  Boolean $dictcheck = false,
+  Integer $difok     = 0,
 ) {
   if $enforce {
     $services = [
@@ -112,6 +120,24 @@ class cis_security_hardening::rules::pam_pw_requirements (
               path   => '/etc/security/pwquality.conf',
               line   => "lcredit = ${lcredit}",
               match  => '^#?lcredit',
+            }
+
+            if $dictcheck {
+              file_line { 'pam dictcheck':
+                ensure => 'present',
+                path   => '/etc/security/pwquality.conf',
+                line   => 'dictcheck = 1',
+                match  => '^#?dictcheck',
+              }
+            }
+
+            if $difok != 0 {
+              file_line { 'pam difok':
+                ensure => 'present',
+                path   => '/etc/security/pwquality.conf',
+                line   => "difok = ${difok}",
+                match  => '^#?difok',
+              }
             }
           }
         }

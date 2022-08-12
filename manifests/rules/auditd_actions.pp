@@ -1,4 +1,4 @@
-# @summary 
+# @summary
 #    Ensure system administrator actions (sudolog) are collected (Automated)
 #
 # Monitor the sudo log file. If the system has been properly configured to disable the use 
@@ -34,8 +34,7 @@ class cis_security_hardening::rules::auditd_actions (
             content => '-w /var/log/sudo.log -p wa -k actions',
           }
         } else {
-          if  $facts['architecture'] == 'x86_64' or
-          $facts['architecture'] == 'amd64' {
+          if  $facts['architecture'] == 'x86_64' or $facts['architecture'] == 'amd64' {
             concat::fragment { 'watch admin actions rule 1':
               order   => 21,
               target  => $cis_security_hardening::rules::auditd_init::rules_file,
@@ -51,8 +50,7 @@ class cis_security_hardening::rules::auditd_actions (
         }
       }
       'ubuntu': {
-        if  $facts['architecture'] == 'x86_64' or
-        $facts['architecture'] == 'amd64' {
+        if  $facts['architecture'] == 'x86_64' or $facts['architecture'] == 'amd64' {
           concat::fragment { 'watch admin actions rule 1':
             order   => 21,
             target  => $cis_security_hardening::rules::auditd_init::rules_file,

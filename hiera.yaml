@@ -6,10 +6,6 @@ defaults:  # Used for any hierarchy level that omits these keys.
   data_hash: yaml_data  # Use the built-in YAML backend.
 
 hierarchy:
-  - name: "Ubuntu 20.04 STIG Benchmark"
-    paths:
-      - "stig/cis_ubuntu_20.04_params.yaml"
-      - "stig/cis_ubuntu_20.04_rules.yaml"
   - name: "CentOS 7 Benchmark"
     paths:
       - "cis/cis_centos_7_params.yaml"
