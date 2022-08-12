@@ -208,6 +208,7 @@ audited
 * `cis_security_hardening::rules::passwd_inactive_days`: Ensure inactive password lock is 30 days or less (Automated)
 * `cis_security_hardening::rules::passwd_min_days`: Ensure minimum days between password changes is 7 or more (Automated)
 * `cis_security_hardening::rules::passwd_perms`: Ensure permissions on /etc/passwd are configured (Automated)
+* `cis_security_hardening::rules::passwd_sha512`: Ensure ENCRYPT_METHOD is SHA512
 * `cis_security_hardening::rules::passwd_warn_days`: Ensure password expiration warning days is 7 or more (Automated)
 * `cis_security_hardening::rules::pki_certs_validation`: Ensure certificates are validated by constructing a certification path to an accepted trust anchor
 * `cis_security_hardening::rules::restrict_core_dumps`: A core dump is the memory of an executable program. It is generally used to determine why a program aborted. It can also be used to glean con
@@ -290,6 +291,8 @@ audited
 * `cis_security_hardening::rules::var_tmp_nodev`: Ensure nodev option set on /var/tmp partition (Automated)
 * `cis_security_hardening::rules::var_tmp_noexec`: Ensure noexec option set on /var/tmp partition (Automated)
 * `cis_security_hardening::rules::var_tmp_nosuid`: Ensure nosuid option set on /var/tmp partition (Automated)
+* `cis_security_hardening::rules::vlock`: A
+Ensure vlock is installed
 * `cis_security_hardening::rules::vsftp`: Ensure FTP Server is not enabled (Automated)
 * `cis_security_hardening::rules::x11_installed`: Ensure X Window System is not installed (Automated)
 * `cis_security_hardening::rules::xdmcp_config`: Ensure XDCMP is not enabled (Automated)

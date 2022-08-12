@@ -192,7 +192,7 @@ cis_security_hardening::benchmark::ubuntu::20:
         - auditd_privileged_priv_change
         - auditd_chfn_use
         - auditd_ssh_agent_use
-        - auditd_ssh_keysign
+        - auditd_ssh_keysign_use
         - auditd_setxattr_use
         - auditd_lsetxattr_use
         - auditd_fsetxattr_use
