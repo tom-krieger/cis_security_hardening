@@ -20,13 +20,13 @@ describe 'cis_security_hardening::rules::pam_use_mappers' do
 
           if enforce
             is_expected.to contain_file('/etc/pam_pkcs11/pam_pkcs11.conf')
-                .with(
+              .with(
                   'ensure' => 'file',
                   'owner'  => 'root',
                   'group'  => 'root',
                   'mode'   => '0644',
                 )
-            
+
             is_expected.to contain_file_line('pam use mappers')
               .with(
                 'ensure' => 'present',

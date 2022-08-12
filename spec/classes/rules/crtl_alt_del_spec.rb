@@ -33,7 +33,7 @@ describe 'cis_security_hardening::rules::crtl_alt_del' do
               .with(
                 'command' => 'systemctl mask ctrl-alt-del.target',
                 'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                'onlyif'  => 'test -z "$(systemctl status ctrl-alt-del.target | grep -i\"active: inactive\"")"',
+                'unless'  => 'test -z "$(systemctl status ctrl-alt-del.target | grep -i \"active: inactive\"")"',
               )
               .that_notifies('Exec[systemd-daemon-reload]')
           else

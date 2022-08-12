@@ -32,7 +32,7 @@ class cis_security_hardening::rules::limits_maxlogins (
       ensure             => present,
       path               => '/etc/security/limits.conf',
       match              => "^*\s+hard\s+maxlogins\s+${maxlogins}",
-      line               => " *\thard\tmaxlogins\t${maxlogins}",
+      line               => "*\thard\tmaxlogins\t${maxlogins}",
       append_on_no_match => true,
     }
   }

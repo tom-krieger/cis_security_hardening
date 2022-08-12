@@ -24,7 +24,7 @@ describe 'cis_security_hardening::rules::timezone_utc_gmt' do
               .with(
                 'command' => 'timedatectl set-timezone UTC',
                 'path'    => ['/bin', '/usr/bin'],
-                'onlyif'  => "test -z \"timedatectl status | grep -i 'time zone' | grep UTC\"",
+                'unless'  => "test -z \"timedatectl status | grep -i 'time zone' | grep UTC\"",
               )
           else
             is_expected.not_to contain_exec('set timezone')

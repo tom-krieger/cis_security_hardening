@@ -24,7 +24,7 @@ class cis_security_hardening::rules::crtl_alt_del (
     exec { 'mask ctrl-alt-del.target':
       command => 'systemctl mask ctrl-alt-del.target',
       path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-      onlyif  => 'test -z "$(systemctl status ctrl-alt-del.target | grep -i\"active: inactive\"")"',
+      unless  => 'test -z "$(systemctl status ctrl-alt-del.target | grep -i \"active: inactive\"")"',
       notify  => Exec['systemd-daemon-reload'],
     }
   }

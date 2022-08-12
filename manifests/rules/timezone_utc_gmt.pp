@@ -32,7 +32,7 @@ class cis_security_hardening::rules::timezone_utc_gmt (
     exec { 'set timezone':
       command => "timedatectl set-timezone ${timezone}", #lint:ignore:security_class_or_define_parameter_in_exec
       path    => ['/bin', '/usr/bin'],
-      onlyif  => "test -z \"timedatectl status | grep -i 'time zone' | grep ${timezone}\"",
+      unless  => "test -z \"timedatectl status | grep -i 'time zone' | grep ${timezone}\"",
     }
   }
 }

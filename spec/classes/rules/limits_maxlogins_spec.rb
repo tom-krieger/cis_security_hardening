@@ -25,7 +25,7 @@ describe 'cis_security_hardening::rules::limits_maxlogins' do
                 'ensure'             => 'present',
                 'path'               => '/etc/security/limits.conf',
                 'match'              => "^*\s+hard\s+maxlogins\s+5",
-                'line'               => " *\thard\tmaxlogins\t5",
+                'line'               => "*\thard\tmaxlogins\t5",
                 'append_on_no_match' => true,
               )
           else
