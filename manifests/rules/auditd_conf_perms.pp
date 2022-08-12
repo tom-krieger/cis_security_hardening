@@ -60,12 +60,18 @@ class cis_security_hardening::rules::auditd_conf_perms (
         has_key($facts['cis_security_hardening']['auditd'], 'config_files')
     {
       $facts['cis_security_hardening']['auditd']['config_files'].each |$conf| {
-        file { $conf:
-          ensure => file,
-          owner  => $user,
-          group  => $group,
-          mode   => $mode,
+
+        if $conf != $cis_security_hardening::rules::auditd_init::rules_file {
+
+          file { $conf:
+            ensure => file,
+            owner  => $user,
+            group  => $group,
+            mode   => $mode,
+          }
+
         }
+
       }
     }
   }

@@ -5,6 +5,21 @@ require 'spec_helper'
 enforce_options = [true, false]
 
 describe 'cis_security_hardening::rules::auditd_conf_perms' do
+
+  let(:pre_condition) do
+    <<-EOF
+    class {'cis_security_hardening::rules::auditd_init':
+      rules_file => '/etc/audit/rules.d/cis_security_hardening.rules',
+    }
+
+    reboot { 'after_run':
+      timeout => 60,
+      message => 'forced reboot by Puppet',
+      apply   => 'finished',
+    }
+    EOF
+  end
+  
   on_supported_os.each do |os, os_facts|
     enforce_options.each do |enforce|
       context "on #{os} with enforce = #{enforce}" do
