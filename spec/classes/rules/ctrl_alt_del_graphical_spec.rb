@@ -27,7 +27,7 @@ describe 'cis_security_hardening::rules::ctrl_alt_del_graphical' do
                 'mode'   => '0644',
               )
 
-            is_expected.to contain_ini_setting('ctrl-alt-del-fraphical')
+            is_expected.to contain_ini_setting('ctrl-alt-del-graphical')
               .with(
                 'ensure'  => 'present',
                 'path'    => '/etc/dconf/db/local.d/00-disable-CAD',
@@ -35,9 +35,10 @@ describe 'cis_security_hardening::rules::ctrl_alt_del_graphical' do
                 'setting' => 'logout',
                 'value'   => '',
               )
+              .that_requires('File[/etc/dconf/db/local.d/00-disable-CAD]')
           else
             is_expected.not_to contain_file('/etc/dconf/db/local.d/00-disable-CAD')
-            is_expected.not_to contain_ini_setting('ctrl-alt-del-fraphical')
+            is_expected.not_to contain_ini_setting('ctrl-alt-del-graphical')
           end
         }
       end

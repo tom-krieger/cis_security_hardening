@@ -1,4 +1,4 @@
-# @summary
+  # @summary
 #    Ensure the Ctrl-Alt-Delete key sequence is disabled
 #
 # The operating system must disable the x86 Ctrl-Alt-Delete key sequence.

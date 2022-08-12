@@ -29,12 +29,13 @@ class cis_security_hardening::rules::ctrl_alt_del_graphical (
       mode   => '0644',
     }
 
-    ini_setting { 'ctrl-alt-del-fraphical':
+    ini_setting { 'ctrl-alt-del-graphical':
       ensure  => present,
       path    => '/etc/dconf/db/local.d/00-disable-CAD',
       section => 'org/gnome/settings-daemon/plugins/media-keys',
       setting => 'logout',
       value   => '',
+      require => File['/etc/dconf/db/local.d/00-disable-CAD']
     }
   }
 }

@@ -21,11 +21,19 @@ class cis_security_hardening::rules::pam_cached_auth (
   Boolean $enforce = false
 ) {
   if $enforce {
+    file { '/etc/sssd/conf.d/cis.conf':
+      ensure => file,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0644',
+    }
+
     file_line { 'pam cached auth':
-      ensure => 'present',
-      path   => '/etc/sssd/sssd.conf',
-      line   => 'offline_credentials_expiration = 1',
-      match  => '^#?offline_credentials_expiration',
+      ensure  => 'present',
+      path    => '/etc/sssd/conf.d/cis.conf',
+      line    => 'offline_credentials_expiration = 1',
+      match   => '^#?offline_credentials_expiration',
+      require => File['/etc/sssd/conf.d/cis.conf']
     }
   }
 }
