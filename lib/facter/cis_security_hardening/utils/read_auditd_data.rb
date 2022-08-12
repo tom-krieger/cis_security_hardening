@@ -11,7 +11,7 @@ def read_auditd_data
 
   cmd = 'find /etc/audit/ /etc/audit/rules.d -type f 2>/dev/null'
   conf_raw = Facter::Core::Execution.exec(cmd).split("\n")
-  auditd['config_files'] = conf_raw
+  auditd['config_files'] = conf_raw.uniq
 
   auditd
 end
