@@ -22,6 +22,13 @@ class cis_security_hardening::rules::ctrl_alt_del_graphical (
   Boolean $enforce = false
 ) {
   if $enforce {
+    file { '/etc/dconf/db/local.d':
+      ensure => directory,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0755',
+    }
+
     file { '/etc/dconf/db/local.d/00-disable-CAD':
       ensure => file,
       owner  => 'root',
