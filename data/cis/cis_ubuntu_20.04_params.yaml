@@ -315,7 +315,7 @@ cis_security_hardening::rules::auditd_log_perms::enforce: true
 cis_security_hardening::rules::auditd_log_perms::user: root
 cis_security_hardening::rules::auditd_log_perms::group: root
 cis_security_hardening::rules::auditd_log_perms::mode: '0600'
-cis_security_hardening::rules::auditd_log_dir_perms:.enforce: true
+cis_security_hardening::rules::auditd_log_dir_perms::enforce: true
 cis_security_hardening::rules::auditd_log_dir_perms::mode: '0750'
 cis_security_hardening::rules::auditd_conf_perms::enforce: true
 cis_security_hardening::rules::auditd_conf_perms::user: root

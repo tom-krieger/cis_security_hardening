@@ -101,7 +101,7 @@ cis_security_hardening::benchmark::ubuntu::20:
         - nis_client
         - rsh_client
         - talk_client
-        - telnet_client**
+        - telnet_client
 
         - ldap_client
         - rpcbind
