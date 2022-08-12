@@ -9,7 +9,7 @@ def read_auditd_data
   priv_cmds.push(rules_raw)
   auditd['priv-cmds-list'] = priv_cmds.uniq
 
-  cmd = 'find /etc/audit/ etc/audit/rules.d -type f 2>/dev/null'
+  cmd = 'find /etc/audit/ /etc/audit/rules.d -type f 2>/dev/null'
   conf_raw = Facter::Core::Execution.exec(cmd).split("\n")
   auditd['config_files'] = conf_raw
 
