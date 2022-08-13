@@ -84,6 +84,7 @@ class cis_security_hardening::rules::pam_pw_requirements (
             path   => '/etc/security/pwquality.conf',
             line   => "minlen = ${minlen}",
             match  => '^#?minlen',
+            append_on_no_match => true,
           }
 
           if ($minclass != -1) and ($facts['operatingsystemmajrelease'] > '7') {
@@ -92,6 +93,7 @@ class cis_security_hardening::rules::pam_pw_requirements (
               path   => '/etc/security/pwquality.conf',
               line   => "minclass = ${minclass}",
               match  => '^#?minclass',
+              append_on_no_match => true,
             }
           } else {
             file_line { 'pam dcredit':
@@ -99,6 +101,7 @@ class cis_security_hardening::rules::pam_pw_requirements (
               path   => '/etc/security/pwquality.conf',
               line   => "dcredit = ${dcredit}",
               match  => '^#?dcredit',
+              append_on_no_match => true,
             }
 
             file_line { 'pam ucredit':
@@ -106,6 +109,7 @@ class cis_security_hardening::rules::pam_pw_requirements (
               path   => '/etc/security/pwquality.conf',
               line   => "ucredit = ${ucredit}",
               match  => '^#?ucredit',
+              append_on_no_match => true,
             }
 
             file_line { 'pam ocredit':
@@ -113,6 +117,7 @@ class cis_security_hardening::rules::pam_pw_requirements (
               path   => '/etc/security/pwquality.conf',
               line   => "ocredit = ${ocredit}",
               match  => '^#?ocredit',
+              append_on_no_match => true,
             }
 
             file_line { 'pam lcredit':
@@ -120,6 +125,7 @@ class cis_security_hardening::rules::pam_pw_requirements (
               path   => '/etc/security/pwquality.conf',
               line   => "lcredit = ${lcredit}",
               match  => '^#?lcredit',
+              append_on_no_match => true,
             }
 
             if $dictcheck {
@@ -128,6 +134,7 @@ class cis_security_hardening::rules::pam_pw_requirements (
                 path   => '/etc/security/pwquality.conf',
                 line   => 'dictcheck = 1',
                 match  => '^#?dictcheck',
+                append_on_no_match => true,
               }
             }
 
@@ -137,6 +144,7 @@ class cis_security_hardening::rules::pam_pw_requirements (
                 path   => '/etc/security/pwquality.conf',
                 line   => "difok = ${difok}",
                 match  => '^#?difok',
+                append_on_no_match => true,
               }
             }
           }
@@ -207,6 +215,7 @@ class cis_security_hardening::rules::pam_pw_requirements (
           path   => '/etc/security/pwquality.conf',
           line   => "minlen = ${minlen}",
           match  => '^#?minlen',
+          append_on_no_match => true,
         }
 
         file_line { 'pam minclass':
@@ -214,6 +223,7 @@ class cis_security_hardening::rules::pam_pw_requirements (
           path   => '/etc/security/pwquality.conf',
           line   => "minclass = ${minclass}",
           match  => '^#?minclass',
+          append_on_no_match => true,
         }
 
         file_line { 'pam enforcing':
@@ -221,6 +231,7 @@ class cis_security_hardening::rules::pam_pw_requirements (
           path   => '/etc/security/pwquality.conf',
           line   => 'enforcing = 1',
           match  => '^#?enforcing',
+          append_on_no_match => true,
         }
 
         file_line { 'pam dcredit':
@@ -228,6 +239,7 @@ class cis_security_hardening::rules::pam_pw_requirements (
           path   => '/etc/security/pwquality.conf',
           line   => "dcredit = ${dcredit}",
           match  => '^#?dcredit',
+          append_on_no_match => true,
         }
 
         file_line { 'pam ucredit':
@@ -235,6 +247,7 @@ class cis_security_hardening::rules::pam_pw_requirements (
           path   => '/etc/security/pwquality.conf',
           line   => "ucredit = ${ucredit}",
           match  => '^#?ucredit',
+          append_on_no_match => true,
         }
 
         file_line { 'pam ocredit':
@@ -242,6 +255,7 @@ class cis_security_hardening::rules::pam_pw_requirements (
           path   => '/etc/security/pwquality.conf',
           line   => "ocredit = ${ocredit}",
           match  => '^#?ocredit',
+          append_on_no_match => true,
         }
 
         file_line { 'pam lcredit':
@@ -249,6 +263,7 @@ class cis_security_hardening::rules::pam_pw_requirements (
           path   => '/etc/security/pwquality.conf',
           line   => "lcredit = ${lcredit}",
           match  => '^#?lcredit',
+          append_on_no_match => true,
         }
 
         if $difok != 0 {
@@ -257,6 +272,7 @@ class cis_security_hardening::rules::pam_pw_requirements (
             path   => '/etc/security/pwquality.conf',
             line   => "difok = ${difok}",
             match  => '^#?difok',
+            append_on_no_match => true,
           }
         }
 
@@ -266,6 +282,7 @@ class cis_security_hardening::rules::pam_pw_requirements (
             path   => '/etc/security/pwquality.conf',
             line   => 'dictcheck = 1',
             match  => '^#dictcheck',
+            append_on_no_match => true,
           }
         }
 
