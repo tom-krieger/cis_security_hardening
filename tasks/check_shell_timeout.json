@@ -1,0 +1,6 @@
+{
+  "description": "Check default user shell timeout is 600 seconds or less.",
+  "input_method": "environment",
+  "parameters": {
+  }
+}

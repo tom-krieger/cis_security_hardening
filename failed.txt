@@ -1,57 +1,30 @@
 RuleScan statusLast passed on
 1.5.7 Ensure FIPS mode is enabled	
 
-2.1.1.5 Ensure system timezone is set to UTC or GMT	 (ok)
+2.1.20 Ensure Endpoint Security for Linux Threat Prevention is installed	
 
-2.1.1.6 Ensure system clocks are synchronized with a time server designated for the appropriate DoD network	(ok)
+4.1.4.1 Ensure audit log files are not read or write-accessible by unauthorized users	
 
-2.1.1.7 Ensure system clocks are synchronize to the authoritative time source when the time difference is greater than one second	
+4.1.4.4 Ensure the audit log directory is 0750 or more restrictive	
 
-2.1.20 Ensure Endpoint Security for Linux Threat Prevention is installed (??)
+4.2.1.7 Ensure remote access methods are monitored	
 
-4.1.2.4 Ensure shut down by default upon audit failure	(ok)
+4.2.5 Ensure permissions on all logfiles are configured	
 
-4.1.4.1 Ensure audit log files are not read or write-accessible by unauthorized users	(ok)
+5.4.12 Ensure change of at least 8 characters when passwords are changed	
 
-4.1.4.4 Ensure the audit log directory is 0750 or more restrictive	(ok)
+5.4.18 Ensure certificates are validated by constructing a certification path to an accepted trust anchor	
 
-4.1.4.5 Ensure audit configuration files are 0640 or more restrictive	(ok)
+5.4.19 Ensure Personal Identity Verification credentials are electronically verified	
 
-4.2.1.7 Ensure remote access methods are monitored	(??)
-
-4.2.5 Ensure permissions on all logfiles are configured	(ok)
-
-5.3.29 Ensure X11UseLocalhost is enabled	(ok)
-
-5.4.2 Ensure new and changed passwords use pwquality	(ok)
-
-5.4.7 Ensure password includes at least one upper-case character	(ok)
-
-5.4.8 Ensure password includes at least one lower-case character	(ok)
-
-5.4.9 Ensure password includes at least one numeric character	(ok)
-
-5.4.10 Ensure password includes at least one special character	(ok)
-
-5.4.11 Ensure passwords can not use dictionary words	(??)
-
-5.4.12 Ensure change of at least 8 characters when passwords are changed	(??)
-
-5.4.17 Ensure smart card logins for multifactor authentication for local and network access	(ok)
-
-5.4.18 Ensure certificates are validated by constructing a certification path to an accepted trust anchor	(ok)
-
-5.4.19 Ensure Personal Identity Verification credentials are electronically verified	(ok)
-
-5.4.20 Ensure PKI local cache of revocation data	(ok)
+5.4.20 Ensure PKI local cache of revocation data	
 
 5.5.1.8 Ensure root account is locked	
 
-5.5.5 Ensure default user umask is 077 or more restrictive	
+5.5.5 Ensure default user umask is 077 or more restrictive	(ok)
 
-5.5.7 Ensure default user shell timeout is 600 seconds or less	
+5.5.7 Ensure default user shell timeout is 600 seconds or less	(wrong result)
 
 5.8 Ensure /etc/ssl/certs only contains certificate files whose sha256 fingerprint match the fingerprint of DoD PKI-established certificate authorities	
 
-6.1.17 Ensure system command files are group-owned by root	
-
+6.1.17 Ensure system command files are group-owned by root	(ok)

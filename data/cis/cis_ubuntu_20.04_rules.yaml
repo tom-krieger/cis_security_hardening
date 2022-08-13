@@ -326,4 +326,6 @@ cis_security_hardening::benchmark::ubuntu::20:
     configure_user_groups:
       level1:
         - shadowed_passwords
+      stig:
+        - system_cmd_group
         

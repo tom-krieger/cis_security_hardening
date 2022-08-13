@@ -522,3 +522,11 @@ cis_security_hardening::rules::shadow_bak_perms::enforce: true
 cis_security_hardening::rules::gshadow_bak_perms::enforce: true
 
 cis_security_hardening::rules::shadowed_passwords::enforce: true
+cis_security_hardening::rules::system_cmd_group::enforce: true
+cis_security_hardening::rules::system_cmd_group::system_dirs:
+  - /bin
+  - /sbin
+  - /usr/bin
+  - /usr/sbin
+  - /usr/local/bin
+  - /usr/local/sbin
