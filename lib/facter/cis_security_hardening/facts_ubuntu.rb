@@ -5,6 +5,7 @@ require 'facter/cis_security_hardening/utils/check_value_string'
 require 'facter/cis_security_hardening/utils/read_file_stats'
 require 'facter/cis_security_hardening/utils/read_iptables_rules'
 require 'facter/cis_security_hardening/utils/read_apparmor_data'
+require 'facter/cis_security_hardening/urils/read_system_command_files'
 require 'pp'
 
 def facts_ubuntu(os, distid, release)
@@ -49,6 +50,9 @@ def facts_ubuntu(os, distid, release)
 
   # check for xdmcp
   cis_security_hardening['xdcmp'] = File.exist?('/etc/gdm3/custom.conf')
+
+  # get system command files
+  cis_security_hardening['system_command_files'] = read_system_command_files
 
   # return results
   cis_security_hardening

@@ -251,21 +251,21 @@ class cis_security_hardening::rules::pam_pw_requirements (
           match  => '^#?lcredit',
         }
 
+        if $difok != 0 {
+          file_line { 'pam difok':
+            ensure => 'present',
+            path   => '/etc/security/pwquality.conf',
+            line   => "difok = ${difok}",
+            match  => '^#?difok',
+          }
+        }
+
         if $dictcheck {
           file_line { 'pam dictcheck':
             ensure => 'present',
             path   => '/etc/security/pwquality.conf',
             line   => 'dictcheck = 1',
             match  => '^#dictcheck',
-          }
-        }
-
-        if $difok != 0 {
-          file_line { 'pam difok':
-            ensure => 'present',
-            path   => '/etc/security/pwquality.conf',
-            line   => "difok = ${difok}",
-            match  => '^#difok',
           }
         }
 

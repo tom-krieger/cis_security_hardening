@@ -42,6 +42,8 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
             'ocredit' => -1,
             'minclass' => 4,
             'retry' => 3,
+            'dictcheck' => true,
+            'difok' => 8,
           }
         end
 
@@ -96,6 +98,22 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                     'match'  => '^#?lcredit',
                   )
 
+                is_expected.to contain_file_line('pam dictcheck')
+                  .with(
+                    'ensure' => 'present',
+                    'path'   => '/etc/security/pwquality.conf',
+                    'line'   => 'dictcheck = 1',
+                    'match'  => '^#?dictcheck',
+                  )
+       
+                is_expected.to contain_file_line('pam difok')
+                  .with(
+                    'ensure' => 'present',
+                    'path'   => '/etc/security/pwquality.conf',
+                    'line'   => "difok = 8",
+                    'match'  => '^#?difok',
+                  )
+                
                 is_expected.to contain_pam('pam-system-auth-requisite')
                   .with(
                     'ensure'    => 'present',
@@ -228,6 +246,22 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                   'match'  => '^#?enforcing',
                 )
 
+                is_expected.to contain_file_line('pam dictcheck')
+                .with(
+                  'ensure' => 'present',
+                  'path'   => '/etc/security/pwquality.conf',
+                  'line'   => 'dictcheck = 1',
+                  'match'  => '^#dictcheck',
+                )
+     
+              is_expected.to contain_file_line('pam difok')
+                .with(
+                  'ensure' => 'present',
+                  'path'   => '/etc/security/pwquality.conf',
+                  'line'   => "difok = 8",
+                  'match'  => '^#?difok',
+                )
+
               is_expected.to contain_pam('pam-common-password-requisite')
                 .with(
                   'ensure'    => 'present',
@@ -266,6 +300,8 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
             is_expected.not_to contain_pam('pam-system-auth-requisite')
             is_expected.not_to contain_pam('pam-password-auth-requisite')
             is_expected.not_to contain_package('libpam-pwquality')
+            is_expected.not_to contain_file_line('pam dictcheck')
+            is_expected.not_to contain_file_line('pam difok')
           end
         }
       end

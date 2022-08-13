@@ -44,6 +44,7 @@ class cis_security_hardening::rules::pki_certs_validation (
       path               => '/etc/pam_pkcs11/pam_pkcs11.conf',
       line               => "cert_policy = ${cert_policy}",
       match              => '^#cert_policy',
+      multiple           => true,
       append_on_no_match => true,
     }
   }

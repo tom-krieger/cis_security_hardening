@@ -32,6 +32,8 @@ describe 'cis_security_hardening::rules::pki_certs_validation' do
                 'path'   => '/etc/pam_pkcs11/pam_pkcs11.conf',
                 'line'   => 'cert_policy = ca,signature,ocsp_on;',
                 'match'  => '^#cert_policy',
+                'multiple'           => true,
+                'append_on_no_match' => true,
               )
           else
             is_expected.not_to contain_file_line('pki certs validation')

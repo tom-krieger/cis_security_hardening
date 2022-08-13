@@ -16,28 +16,26 @@
 #
 # @param enforce
 #    Enforce the rule.
-# @param syswtem_dirs
-#    List of directories to configure.
 #
 # @example
 #   class { 'cis_security_hardening::rules::system_cmd_group':
 #     enforce => true,
-#     system_dirs => ['/bin','/sbin'],
 #   }
 # 
 # @api private
 class cis_security_hardening::rules::system_cmd_group (
   Boolean $enforce   = false,
-  Array $system_dirs = ['/bin','/sbin','/usr/bin','/usr/sbin','/usr/local/bin','/usr/local/sbin'],
 ) {
   if $enforce {
+    $files = fact('cis_security_hardening.system_command_files')
+    unless $files == undef {
+      $files.each |$file| {
 
-    $system_dirs.each |$system_dir| {
+        file { $file:
+          group => 'root',
+        }
 
-      file { $system_dir:
-        group => 'root',
       }
-
     }
   }
 }

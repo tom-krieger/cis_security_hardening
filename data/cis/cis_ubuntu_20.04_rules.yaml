@@ -313,6 +313,7 @@ cis_security_hardening::benchmark::ubuntu::20:
       stig:
         - passwd_sha512
         - vlock
+        - lock_root
     system_file_permissions:
       level1:
         - passwd_perms
