@@ -111,16 +111,16 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                     'match'  => '^#?dictcheck',
                     'append_on_no_match' => true,
                   )
-       
+
                 is_expected.to contain_file_line('pam difok')
                   .with(
                     'ensure' => 'present',
                     'path'   => '/etc/security/pwquality.conf',
-                    'line'   => "difok = 8",
+                    'line'   => 'difok = 8',
                     'match'  => '^#?difok',
                     'append_on_no_match' => true,
                   )
-                
+
                 is_expected.to contain_pam('pam-system-auth-requisite')
                   .with(
                     'ensure'    => 'present',
@@ -260,20 +260,20 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                   'append_on_no_match' => true,
                 )
 
-                is_expected.to contain_file_line('pam dictcheck')
+              is_expected.to contain_file_line('pam dictcheck')
                 .with(
-                  'ensure' => 'present',
-                  'path'   => '/etc/security/pwquality.conf',
-                  'line'   => 'dictcheck = 1',
-                  'match'  => '^#dictcheck',
-                  'append_on_no_match' => true,
-                )
-     
+                'ensure' => 'present',
+                'path'   => '/etc/security/pwquality.conf',
+                'line'   => 'dictcheck = 1',
+                'match'  => '^#dictcheck',
+                'append_on_no_match' => true,
+              )
+
               is_expected.to contain_file_line('pam difok')
                 .with(
                   'ensure' => 'present',
                   'path'   => '/etc/security/pwquality.conf',
-                  'line'   => "difok = 8",
+                  'line'   => 'difok = 8',
                   'match'  => '^#?difok',
                   'append_on_no_match' => true,
                 )

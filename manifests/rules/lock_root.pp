@@ -39,7 +39,7 @@ class cis_security_hardening::rules::lock_root (
     exec { 'lock root account':
       command => 'passwd -l root',
       path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-      unless  => 'test -z "$(passwd -S root | grep \'root L\')"',
+      onlyif  => 'test -z "$(passwd -S root | grep \'root L\')"',
     }
   }
 }

@@ -4,7 +4,7 @@ def read_system_command_files
   files_raw = Facter::Core::Execution.exec(cmd).split("\n")
   ret = []
   files_raw.each do |line|
-    data = line.split(" ")
+    data = line.split(' ')
     ret.push(data[0])
   end
 

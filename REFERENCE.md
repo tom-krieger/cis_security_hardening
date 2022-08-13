@@ -169,6 +169,7 @@ audited
 * `cis_security_hardening::rules::ldap_client`: Ensure LDAP client is not installed (Automated)
 * `cis_security_hardening::rules::ldapd`: Ensure LDAP server is not enabled (Automated)
 * `cis_security_hardening::rules::limits_maxlogins`: Ensure maxlogins is 10 or less
+* `cis_security_hardening::rules::lock_root`: Ensure root account is locked
 * `cis_security_hardening::rules::log_suspicious_packets`: Ensure suspicious packets are logged (Automated)
 * `cis_security_hardening::rules::logfile_permissions`: Ensure permissions on all logfiles are configured (Automated)
 * `cis_security_hardening::rules::logrotate`: Ensure logrotate is configured (Manual)
@@ -269,6 +270,7 @@ audited
 * `cis_security_hardening::rules::sudo_installed`: Ensure sudo is installed (Automated)
 * `cis_security_hardening::rules::sudo_log`: Ensure sudo log file exists (Automated)
 * `cis_security_hardening::rules::sudo_use_pty`: Ensure sudo commands use pty (Automated)
+* `cis_security_hardening::rules::system_cmd_group`: Ensure system command files are group-owned by root
 * `cis_security_hardening::rules::systemd_timesyncd`: Ensure systemd-timesyncd is configured (Not Scored)
 * `cis_security_hardening::rules::talk_client`: Ensure talk client is not installed (Automated)
 * `cis_security_hardening::rules::telnet_client`: Ensure telnet client is not installed (Automated)
@@ -334,6 +336,7 @@ Ensure vlock is installed
 * [`check_pass_warn_age`](#check_pass_warn_age): Check password expiration warning days is 7 or more.
 * [`check_root_path_integrety`](#check_root_path_integrety): Check root PATH Integrity.
 * [`check_shadow_group_is_empty`](#check_shadow_group_is_empty): Check shadow group is empty.
+* [`check_shell_timeout`](#check_shell_timeout): Check default user shell timeout is 600 seconds or less.
 * [`check_system_accounts_secured`](#check_system_accounts_secured): Check system accounts are secured.
 * [`check_uid_0_files`](#check_uid_0_files): Check root is the only UID 0 account.
 * [`check_user_home_dirs_exist`](#check_user_home_dirs_exist): Check all users' home directories exist.
@@ -989,6 +992,12 @@ Check root PATH Integrity.
 ### <a name="check_shadow_group_is_empty"></a>`check_shadow_group_is_empty`
 
 Check shadow group is empty.
+
+**Supports noop?** false
+
+### <a name="check_shell_timeout"></a>`check_shell_timeout`
+
+Check default user shell timeout is 600 seconds or less.
 
 **Supports noop?** false
 

@@ -21,6 +21,9 @@
 # @param admin_space_left_action
 #    This parameter tells the system what action to take when the system has detected that it is low on disk space.
 #
+# @param disk_full_action
+#    Action to do when disk is full.
+#
 # @example
 #   class { 'cis_security_hardening::rules::auditd_when_disk_full':
 #             enforce => true,
