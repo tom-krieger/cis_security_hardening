@@ -15,15 +15,15 @@ describe 'cis_security_hardening::rules::lock_root' do
           }
         end
 
-        it { 
-          is_expected.to compile 
+        it {
+          is_expected.to compile
 
-          if enforce 
+          if enforce
             is_expected.to contain_exec('lock root account')
               .with(
                 'command' => 'passwd -l root',
                 'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                'unless'  => 'test -z "$(passwd -S root | grep \'root L\')"',
+                'onlyif'  => 'test -z "$(passwd -S root | grep \'root L\')"',
               )
           else
             is_expected.not_to contain_exec('lock root account')
