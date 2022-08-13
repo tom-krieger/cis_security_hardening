@@ -5,7 +5,7 @@ require 'facter/cis_security_hardening/utils/check_value_string'
 require 'facter/cis_security_hardening/utils/read_file_stats'
 require 'facter/cis_security_hardening/utils/read_iptables_rules'
 require 'facter/cis_security_hardening/utils/read_apparmor_data'
-require 'facter/cis_security_hardening/urils/read_system_command_files'
+require 'facter/cis_security_hardening/utils/read_system_command_files'
 require 'pp'
 
 def facts_ubuntu(os, distid, release)
