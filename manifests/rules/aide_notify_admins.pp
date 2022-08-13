@@ -37,7 +37,7 @@ class cis_security_hardening::rules::aide_notify_admins (
     file_line { 'set silentreports to no':
       ensure             => present,
       path               => $file,
-      match              => '^SILENTREPORTS',
+      match              => '^#?SILENTREPORTS',
       line               => 'SILENTREPORTS=no',
       append_on_no_match => true,
     }

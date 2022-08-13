@@ -29,7 +29,7 @@ describe 'cis_security_hardening::rules::aide_notify_admins' do
               .with(
                 'ensure'             => 'present',
                 'path'               => file.to_s,
-                'match'              => '^SILENTREPORTS',
+                'match'              => '^#?SILENTREPORTS',
                 'line'               => 'SILENTREPORTS=no',
                 'append_on_no_match' => true,
               )
