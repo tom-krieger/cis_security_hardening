@@ -52,11 +52,16 @@ class cis_security_hardening::rules::auditd_log_perms (
   String $mode     = '0600',
 ) {
   if $enforce {
-    file { '/var/log/audit/audit.log':
-      ensure => file,
-      owner  => $user,
-      group  => $group,
-      mode   => $mode,
+    $logfiles = fact('cis_security_hardening.auditd.log_files')
+    if $logfiles != undef {
+      $logfiles.each |$logfile| {
+        file { $logfile:
+          ensure => file,
+          owner  => $user,
+          group  => $group,
+          mode   => $mode,
+        }
+      }
     }
   }
 }

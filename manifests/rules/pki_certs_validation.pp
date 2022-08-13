@@ -40,10 +40,11 @@ class cis_security_hardening::rules::pki_certs_validation (
 ) {
   if $enforce {
     file_line { 'pki certs validation':
-      ensure => present,
-      path   => '/etc/pam_pkcs11/pam_pkcs11.conf',
-      line   => "cert_policy = ${cert_policy}",
-      match  => '^#?cert_policy',
+      ensure             => present,
+      path               => '/etc/pam_pkcs11/pam_pkcs11.conf',
+      line               => "cert_policy = ${cert_policy}",
+      match              => '^#cert_policy',
+      append_on_no_match => true,
     }
   }
 }

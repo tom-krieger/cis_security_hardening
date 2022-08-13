@@ -92,6 +92,7 @@ cis_security_hardening::benchmark::ubuntu::20:
         - rsyncd
         - nis
       stig: 
+        - timezone_utc_gmt
         - chrony_sync_to_authritative
         - telnet_server
         - rsh_server

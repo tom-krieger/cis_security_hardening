@@ -135,6 +135,8 @@ cis_security_hardening::rules::nis::enforce: true
 cis_security_hardening::rules::telnet_server::enforce: true
 cis_security_hardening::rules::rsh_server::enforce: true
 cis_security_hardening::rules::mfetp::enforce: false
+cis_security_hardening::rules::timezone_utc_gmt::enforce: true
+cis_security_hardening::rules::timezone_utc_gmt::timezone: UTC
 
 cis_security_hardening::rules::nis_client::enforce: true
 cis_security_hardening::rules::rsh_client::enforce: true
@@ -261,6 +263,7 @@ cis_security_hardening::rules::auditd_when_disk_full::enforce: true
 cis_security_hardening::rules::auditd_when_disk_full::space_left_action: email
 cis_security_hardening::rules::auditd_when_disk_full::action_mail_acct: root
 cis_security_hardening::rules::auditd_when_disk_full::admin_space_left_action: halt
+cis_security_hardening::rules::auditd_when_disk_full::disk_full_action: suspend
 cis_security_hardening::rules::auditd_backlog_limit::enforce: true
 cis_security_hardening::rules::auditd_backlog_limit::backlog_limit: 8192
 cis_security_hardening::rules::auditd_time_change::enforce: true

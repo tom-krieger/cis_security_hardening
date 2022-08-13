@@ -15,6 +15,7 @@ describe 'cis_security_hardening::rules::auditd_when_disk_full' do
                 action_mail_acct: 'none',
                 admin_space_left_action: 'none',
                 space_left_action: 'none',
+                disk_full_action: 'none'
               },
             },
           )
@@ -25,6 +26,7 @@ describe 'cis_security_hardening::rules::auditd_when_disk_full' do
             'space_left_action' => 'email',
             'action_mail_acct' => 'root',
             'admin_space_left_action' => 'halt',
+            'disk_full_action' => 'halt'
           }
         end
 
@@ -52,10 +54,17 @@ describe 'cis_security_hardening::rules::auditd_when_disk_full' do
                 'path'  => '/etc/audit/auditd.conf',
                 'match' => '^admin_space_left_action',
               )
+            is_expected.to contain_file_line('disk_full_action')
+              .with(
+                'line'  => 'disk_full_action = halt',
+                'path'  => '/etc/audit/auditd.conf',
+                'match' => '^disk_full_action',
+              )
           else
             is_expected.not_to contain_file_line('auditd_space_left_action')
             is_expected.not_to contain_file_line('auditd_action_mail_acct')
             is_expected.not_to contain_file_line('auditd_admin_space_left_action')
+            is_expected.not_to contain_file_line('disk_full_action')
           end
         }
       end

@@ -216,6 +216,59 @@ class cis_security_hardening::rules::pam_pw_requirements (
           match  => '^#?minclass',
         }
 
+        file_line { 'pam enforcing':
+          ensure => 'present',
+          path   => '/etc/security/pwquality.conf',
+          line   => 'enforcing = 1',
+          match  => '^#?enforcing',
+        }
+
+        file_line { 'pam dcredit':
+          ensure => 'present',
+          path   => '/etc/security/pwquality.conf',
+          line   => "dcredit = ${dcredit}",
+          match  => '^#?dcredit',
+        }
+
+        file_line { 'pam ucredit':
+          ensure => 'present',
+          path   => '/etc/security/pwquality.conf',
+          line   => "ucredit = ${ucredit}",
+          match  => '^#?ucredit',
+        }
+
+        file_line { 'pam ocredit':
+          ensure => 'present',
+          path   => '/etc/security/pwquality.conf',
+          line   => "ocredit = ${ocredit}",
+          match  => '^#?ocredit',
+        }
+
+        file_line { 'pam lcredit':
+          ensure => 'present',
+          path   => '/etc/security/pwquality.conf',
+          line   => "lcredit = ${lcredit}",
+          match  => '^#?lcredit',
+        }
+
+        if $dictcheck {
+          file_line { 'pam dictcheck':
+            ensure => 'present',
+            path   => '/etc/security/pwquality.conf',
+            line   => 'dictcheck = 1',
+            match  => '^#dictcheck',
+          }
+        }
+
+        if $difok != 0 {
+          file_line { 'pam difok':
+            ensure => 'present',
+            path   => '/etc/security/pwquality.conf',
+            line   => "difok = ${difok}",
+            match  => '^#difok',
+          }
+        }
+
         Pam { 'pam-common-password-requisite':
           ensure    => present,
           service   => 'common-password',

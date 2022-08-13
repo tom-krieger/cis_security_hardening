@@ -173,6 +173,38 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
 
             elsif os_facts[:osfamily].casecmp('debian').zero?
 
+              is_expected.to contain_file_line('pam dcredit')
+                .with(
+                    'ensure' => 'present',
+                    'path'   => '/etc/security/pwquality.conf',
+                    'line'   => 'dcredit = -1',
+                    'match'  => '^#?dcredit',
+                  )
+
+              is_expected.to contain_file_line('pam ucredit')
+                .with(
+                  'ensure' => 'present',
+                  'path'   => '/etc/security/pwquality.conf',
+                  'line'   => 'ucredit = -1',
+                  'match'  => '^#?ucredit',
+                )
+
+              is_expected.to contain_file_line('pam ocredit')
+                .with(
+                  'ensure' => 'present',
+                  'path'   => '/etc/security/pwquality.conf',
+                  'line'   => 'ocredit = -1',
+                  'match'  => '^#?ocredit',
+                )
+
+              is_expected.to contain_file_line('pam lcredit')
+                .with(
+                  'ensure' => 'present',
+                  'path'   => '/etc/security/pwquality.conf',
+                  'line'   => 'lcredit = -1',
+                  'match'  => '^#?lcredit',
+                )
+
               is_expected.to contain_file_line('pam minlen')
                 .with(
                   'ensure' => 'present',
@@ -186,6 +218,14 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                   'path'   => '/etc/security/pwquality.conf',
                   'line'   => 'minclass = 4',
                   'match'  => '^#?minclass',
+                )
+
+              is_expected.to contain_file_line('pam enforcing')
+                .with(
+                  'ensure' => 'present',
+                  'path'   => '/etc/security/pwquality.conf',
+                  'line'   => 'enforcing = 1',
+                  'match'  => '^#?enforcing',
                 )
 
               is_expected.to contain_pam('pam-common-password-requisite')

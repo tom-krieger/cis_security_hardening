@@ -15,6 +15,10 @@
 #
 # @param enforce
 #    Enforce the rule.
+# @param user
+#    The user to own the directory.
+# @param group
+#    The group to own the directory.
 # @param mode
 #    Directory access permissions.
 #
@@ -27,11 +31,15 @@
 # @api private
 class cis_security_hardening::rules::auditd_log_dir_perms (
   Boolean $enforce = false,
+  String $user     = 'root',
+  String $group    = 'root',
   String $mode     = '0750'
 ) {
   if $enforce {
     file { '/var/log/audit':
       ensure => directory,
+      owner  => $user,
+      group  => $group,
       mode   => $mode,
     }
   }

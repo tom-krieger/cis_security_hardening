@@ -34,6 +34,19 @@ class cis_security_hardening::rules::pam_mfa (
   Boolean $enforce = false
 ) {
   if $enforce {
+    $path = ($facts['operatingsystem'] == 'SLES' and $facts['operatingsystemmajrelease'] == '12') ? {
+      true    => '/usr/etc/ssh/sshd_config',
+      default => '/etc/ssh/sshd_config',
+    }
+
+    file_line { 'sshd-mfa-login':
+      ensure => present,
+      path   => $path,
+      line   => 'PubkeyAuthentication yes',
+      match  => '^PubkeyAuthentication.*',
+      notify => Exec['reload-sshd'],
+    }
+
     Pam { 'pam-common-mfa':
       ensure           => present,
       service          => 'common-auth',

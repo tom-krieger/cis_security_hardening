@@ -20,6 +20,8 @@ describe 'cis_security_hardening::rules::auditd_log_dir_perms' do
         let(:params) do
           {
             'enforce' => enforce,
+            'user' => 'root',
+            'group' => 'root',
             'mode' => '0750',
           }
         end
@@ -31,6 +33,8 @@ describe 'cis_security_hardening::rules::auditd_log_dir_perms' do
             is_expected.to contain_file('/var/log/audit')
               .with(
                 'ensure' => 'directory',
+                'owner'  => 'root',
+                'group'  => 'root',
                 'mode'   => '0750',
               )
           else

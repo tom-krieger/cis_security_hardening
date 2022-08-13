@@ -13,6 +13,7 @@ describe 'cis_security_hardening::rules::auditd_log_perms' do
             cis_security_hardening: {
               auditd: {
                 auditing_process: 'none',
+                log_files: ['/var/log/audit/audit.log', '/var/log/audit/audit.log.1']
               },
             },
           )
@@ -37,8 +38,16 @@ describe 'cis_security_hardening::rules::auditd_log_perms' do
                 'group' => 'root',
                 'mode' => '0600',
               )
+            is_expected.to contain_file('/var/log/audit/audit.log.1')
+              .with(
+                'ensure' => 'file',
+                'owner' => 'root',
+                'group' => 'root',
+                'mode' => '0600',
+              )
           else
             is_expected.not_to contain_file('/var/log/audit/audit.log')
+            is_expected.not_to contain_file('/var/log/audit/audit.log.1')
           end
         }
       end

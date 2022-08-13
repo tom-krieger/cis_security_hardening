@@ -29,7 +29,7 @@ class cis_security_hardening::rules::sshd_x11_use_localhost (
     file_line { 'sshd-x11-use-localhost':
       ensure => present,
       path   => $path,
-      line   => 'X11UseLocalhost no',
+      line   => 'X11UseLocalhost yes',
       match  => '^X11UseLocalhost.*',
       notify => Exec['reload-sshd'],
     }

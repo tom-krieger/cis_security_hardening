@@ -79,7 +79,7 @@ describe 'cis_security_hardening::rules::sshd_x11_use_localhost' do
               .with(
                 'ensure' => 'present',
                 'path'   => path,
-                'line'   => 'X11UseLocalhost no',
+                'line'   => 'X11UseLocalhost yes',
                 'match'  => '^X11UseLocalhost.*',
               )
               .that_notifies('Exec[reload-sshd]')
