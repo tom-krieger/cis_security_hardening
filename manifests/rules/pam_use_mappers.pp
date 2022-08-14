@@ -21,13 +21,6 @@ class cis_security_hardening::rules::pam_use_mappers (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    file { '/etc/pam_pkcs11/pam_pkcs11.conf':
-      ensure => file,
-      owner  => 'root',
-      group  => 'root',
-      mode   => '0644',
-    }
-
     file_line { 'pam use mappers':
       ensure  => 'present',
       path    => '/etc/pam_pkcs11/pam_pkcs11.conf',

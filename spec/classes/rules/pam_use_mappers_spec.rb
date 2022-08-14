@@ -19,14 +19,6 @@ describe 'cis_security_hardening::rules::pam_use_mappers' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file('/etc/pam_pkcs11/pam_pkcs11.conf')
-              .with(
-                  'ensure' => 'file',
-                  'owner'  => 'root',
-                  'group'  => 'root',
-                  'mode'   => '0644',
-                )
-
             is_expected.to contain_file_line('pam use mappers')
               .with(
                 'ensure' => 'present',
@@ -35,6 +27,8 @@ describe 'cis_security_hardening::rules::pam_use_mappers' do
                 'match'  => 'use_mappers\s*=',
               )
               .that_requires('File[/etc/pam_pkcs11/pam_pkcs11.conf]')
+          else
+            is_expected.not_to contain_file_line('pam use mappers')
           end
         }
       end
