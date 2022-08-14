@@ -9,7 +9,7 @@ def read_pam_pkcs11_conf
                       ''
                     else
                       mod = val.match(%r{use_pkcs11_module\s*=\s*(?<module>.*);})
-                      if mod.nil? || mod.empty?
+                      if mod.nil?
                         ''
                       else
                         mod[:module]
