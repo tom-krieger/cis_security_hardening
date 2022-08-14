@@ -39,13 +39,15 @@ class cis_security_hardening::rules::pki_certs_validation (
   String $cert_policy = 'ca,signature,ocsp_on;',
 ) {
   if $enforce {
+    $policy = fact('cis_security_hardening.pkcs11_config.policy')
+    $match = "cert_policy\\s*=\\s*${policy};"
+    $line = "cert_policy = ${cert_policy}"
+
     file_line { 'pki certs validation':
-      ensure             => present,
-      path               => '/etc/pam_pkcs11/pam_pkcs11.conf',
-      line               => "cert_policy = ${cert_policy}",
-      match              => '^\s*cert_policy',
-      multiple           => true,
-      append_on_no_match => true,
+      ensure => present,
+      path   => '/etc/pam_pkcs11/pam_pkcs11.conf',
+      line   => $line,
+      match  => $match,
     }
   }
 }
