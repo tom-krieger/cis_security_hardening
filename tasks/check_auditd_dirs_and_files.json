@@ -1,0 +1,11 @@
+{
+  "description": "Check auditd directory and file permissions.",
+  "input_method": "environment",
+  "parameters": {
+    "audit_dir": {
+      "description": "Directory containing auditd log files.",
+      "type": "String",
+      "default": "/var/log/audit"
+    }
+  }
+}

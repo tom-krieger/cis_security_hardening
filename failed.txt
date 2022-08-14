@@ -1,30 +1,22 @@
-RuleScan statusLast passed on
-1.5.7 Ensure FIPS mode is enabled	
 
-2.1.20 Ensure Endpoint Security for Linux Threat Prevention is installed	
+1.5.7 Ensure FIPS mode is enabled	(not tested)
 
-4.1.4.1 Ensure audit log files are not read or write-accessible by unauthorized users	
+2.1.20 Ensure Endpoint Security for Linux Threat Prevention is installed	(not tested)
 
-4.1.4.4 Ensure the audit log directory is 0750 or more restrictive	
+4.1.4.1 Ensure audit log files are not read or write-accessible by unauthorized users	(false positive)
+
+4.1.4.4 Ensure the audit log directory is 0750 or more restrictive	(false positive)
 
 4.2.1.7 Ensure remote access methods are monitored	
 
-4.2.5 Ensure permissions on all logfiles are configured	
+4.2.5 Ensure permissions on all logfiles are configured	(ok)
 
-5.4.12 Ensure change of at least 8 characters when passwords are changed	
+5.4.19 Ensure Personal Identity Verification credentials are electronically verified	 (ok)
 
-5.4.18 Ensure certificates are validated by constructing a certification path to an accepted trust anchor	
+5.4.20 Ensure PKI local cache of revocation data	(ok)
 
-5.4.19 Ensure Personal Identity Verification credentials are electronically verified	
+5.5.7 Ensure default user shell timeout is 600 seconds or less	(false positive)
 
-5.4.20 Ensure PKI local cache of revocation data	
+5.8 Ensure /etc/ssl/certs only contains certificate files whose sha256 fingerprint match the fingerprint of DoD PKI-established certificate authorities	(ok)
 
-5.5.1.8 Ensure root account is locked	
-
-5.5.5 Ensure default user umask is 077 or more restrictive	(ok)
-
-5.5.7 Ensure default user shell timeout is 600 seconds or less	(wrong result)
-
-5.8 Ensure /etc/ssl/certs only contains certificate files whose sha256 fingerprint match the fingerprint of DoD PKI-established certificate authorities	
-
-6.1.17 Ensure system command files are group-owned by root	(ok)
+6.1.17 Ensure system command files are group-owned by root	(false positive)

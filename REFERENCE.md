@@ -323,6 +323,7 @@ Ensure vlock is installed
 
 * [`audit_sgid_executables`](#audit_sgid_executables): Audit SGID executables
 * [`audit_suid_executables`](#audit_suid_executables): Audit SUID executables
+* [`check_auditd_dirs_and_files`](#check_auditd_dirs_and_files): Check auditd directory and file permissions.
 * [`check_for_duplicate_gids`](#check_for_duplicate_gids): Check no duplicate GIDs exist.
 * [`check_for_duplicate_group_names`](#check_for_duplicate_group_names): Check no duplicate group names exist.
 * [`check_for_duplicate_uids`](#check_for_duplicate_uids): Check no duplicate UIDs exist.
@@ -337,6 +338,7 @@ Ensure vlock is installed
 * [`check_root_path_integrety`](#check_root_path_integrety): Check root PATH Integrity.
 * [`check_shadow_group_is_empty`](#check_shadow_group_is_empty): Check shadow group is empty.
 * [`check_shell_timeout`](#check_shell_timeout): Check default user shell timeout is 600 seconds or less.
+* [`check_stig_cert_fingerprints`](#check_stig_cert_fingerprints): Check if all certificates match DoD fingerprints.
 * [`check_system_accounts_secured`](#check_system_accounts_secured): Check system accounts are secured.
 * [`check_uid_0_files`](#check_uid_0_files): Check root is the only UID 0 account.
 * [`check_user_home_dirs_exist`](#check_user_home_dirs_exist): Check all users' home directories exist.
@@ -909,6 +911,20 @@ Audit SUID executables
 
 **Supports noop?** false
 
+### <a name="check_auditd_dirs_and_files"></a>`check_auditd_dirs_and_files`
+
+Check auditd directory and file permissions.
+
+**Supports noop?** false
+
+#### Parameters
+
+##### `audit_dir`
+
+Data type: `String`
+
+Directory containing auditd log files.
+
 ### <a name="check_for_duplicate_gids"></a>`check_for_duplicate_gids`
 
 Check no duplicate GIDs exist.
@@ -998,6 +1014,20 @@ Check shadow group is empty.
 ### <a name="check_shell_timeout"></a>`check_shell_timeout`
 
 Check default user shell timeout is 600 seconds or less.
+
+**Supports noop?** false
+
+#### Parameters
+
+##### `tmout`
+
+Data type: `Integer`
+
+Maximal timeout setting.
+
+### <a name="check_stig_cert_fingerprints"></a>`check_stig_cert_fingerprints`
+
+Check if all certificates match DoD fingerprints.
 
 **Supports noop?** false
 

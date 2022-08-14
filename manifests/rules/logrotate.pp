@@ -29,7 +29,8 @@ class cis_security_hardening::rules::logrotate (
 ) {
   if $enforce {
     class { 'logrotate':
-      config => {
+      create_base_rules => false,
+      config            => {
         dateext      => true,
         compress     => true,
         rotate       => 7,

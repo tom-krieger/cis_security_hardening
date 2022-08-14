@@ -179,7 +179,11 @@ the Suse SLES compliance code.
 
 ### Issues with CISCAT scanner
 
-The CISCAT scanner for UBUNTO 20.04 LTS STIG reports a not correct configured TMOUT setting but running the check task from the benchmark reports PASSED.
+* CISCAT scanner for Ubuntu 20.04 LTS STIG false positives:
+  * reports a not correct configured TMOUT setting but running the check task from the benchmark reports PASSED.
+  * reports that not all audit log files re not read or write-accessible by unauthorized users which seems to be caused by a `lost+found` directory with permissions 0700
+  * reports that audit log directory is not set 0750 or more restrictive but it is 0750
+  * reports that not all system command files are group-owned by root but the check searches for all files and not only these not having permissions /2000
 
 ## Credits
 

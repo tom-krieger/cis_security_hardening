@@ -2,5 +2,10 @@
   "description": "Check default user shell timeout is 600 seconds or less.",
   "input_method": "environment",
   "parameters": {
+    "tmout": {
+      "description": "Maximal timeout setting.",
+      "type": "Integer",
+      "default": "900"
+    }
   }
 }
