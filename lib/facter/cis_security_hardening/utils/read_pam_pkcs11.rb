@@ -4,7 +4,7 @@
 def read_pam_pkcs11_conf
   ret = {}
   if File.exist?('/etc/pam_pkcs11/pam_pkcs11.conf')
-    val = Facter::Core::Execurion.exec('grep use_pkcs11_module /etc/pam_pkcs11/pam_pkcs11.conf')
+    val = Facter::Core::Execution.exec('grep use_pkcs11_module /etc/pam_pkcs11/pam_pkcs11.conf')
     ret['module'] = if val.nil? || val.empty?
                       ''
                     else
