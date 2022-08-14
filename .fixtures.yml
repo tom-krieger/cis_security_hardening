@@ -58,8 +58,8 @@ fixtures:
       repo: "puppetlabs/ntp"
       ref: "8.0.0"
     chrony:
-      repo: "jorten/chrony"
-      ref: "0.3.0"
+      repo: "puppet/chrony"
+      ref: "2.5.0"
     augeas_core:
       repo: "puppetlabs/augeas_core"
       ref: "1.0.5"

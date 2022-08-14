@@ -32,7 +32,7 @@
 # @api private
 class cis_security_hardening::rules::chrony (
   Boolean $enforce   = false,
-  Hash $ntp_servers = [],
+  Hash $ntp_servers = {},
   Integer $makestep_seconds = 1,
   Integer $makestep_updates = 3,
 ) {
