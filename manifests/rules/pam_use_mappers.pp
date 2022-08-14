@@ -31,8 +31,8 @@ class cis_security_hardening::rules::pam_use_mappers (
     file_line { 'pam use mappers':
       ensure  => 'present',
       path    => '/etc/pam_pkcs11/pam_pkcs11.conf',
-      line    => 'use_mappers = pwent',
-      match   => '^\s*use_mappers',
+      line    => '  use_mappers = pwent',
+      match   => 'use_mappers\s*=',
       require => File['/etc/pam_pkcs11/pam_pkcs11.conf']
     }
   }
