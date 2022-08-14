@@ -32,7 +32,7 @@ describe 'cis_security_hardening::rules::pam_use_mappers' do
                 'ensure' => 'present',
                 'path'   => '/etc/pam_pkcs11/pam_pkcs11.conf',
                 'line'   => 'use_mappers = pwent',
-                'match'  => '^#?use_mappers',
+                'match'  => '^\s*use_mappers',
               )
               .that_requires('File[/etc/pam_pkcs11/pam_pkcs11.conf]')
           end

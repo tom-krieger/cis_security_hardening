@@ -6,6 +6,7 @@ require 'facter/cis_security_hardening/utils/read_file_stats'
 require 'facter/cis_security_hardening/utils/read_iptables_rules'
 require 'facter/cis_security_hardening/utils/read_apparmor_data'
 require 'facter/cis_security_hardening/utils/read_system_command_files'
+require 'facter/cis_security_hardening/utils/read_pam_pkcs11'
 require 'pp'
 
 def facts_ubuntu(os, distid, release)
@@ -53,6 +54,9 @@ def facts_ubuntu(os, distid, release)
 
   # get system command files
   cis_security_hardening['system_command_files'] = read_system_command_files
+
+  # read pkcs11 config
+  cis_security_hardening['pkcs11_config'] = read_pam_pkcs11_conf
 
   # return results
   cis_security_hardening
