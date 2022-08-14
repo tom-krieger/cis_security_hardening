@@ -26,7 +26,6 @@ describe 'cis_security_hardening::rules::pam_use_mappers' do
                 'line'   => '  use_mappers = pwent',
                 'match'  => 'use_mappers\s*=',
               )
-              .that_requires('File[/etc/pam_pkcs11/pam_pkcs11.conf]')
           else
             is_expected.not_to contain_file_line('pam use mappers')
           end
