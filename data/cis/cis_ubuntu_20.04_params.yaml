@@ -103,6 +103,8 @@ cis_security_hardening::rules::chrony::enforce: false
 cis_security_hardening::rules::chrony::ntp_servers:
   - hostname: 10.10.10.10
   - hostname: 10.10.10.11
+cis_security_hardening::rules::chrony::makestep_seconds: 1
+cis_security_hardening::rules::chrony::makestep_updates: 3
 cis_security_hardening::rules::ntpd::enforce: true
 cis_security_hardening::rules::ntpd::ntp_servers:
   - 10.10.10.1
@@ -115,7 +117,6 @@ cis_security_hardening::rules::ntpd::ntp_statsdir: ''
 cis_security_hardening::rules::ntpd::ntp_disable_monitor: true
 cis_security_hardening::rules::ntpd::ntp_burst: false
 cis_security_hardening::rules::ntpd::ntp_service_manage: true
-cis_security_hardening::rules::chrony_sync_to_authritative::enforce: false
 cis_security_hardening::rules::x11_installed::enforce: true
 cis_security_hardening::rules::avahi::enforce: true
 cis_security_hardening::rules::cups::enforce: true
