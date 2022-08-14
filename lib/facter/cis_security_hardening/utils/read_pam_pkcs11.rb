@@ -24,7 +24,7 @@ def read_pam_pkcs11_conf
         parse = true
       end
       if parse
-        m = rule.match(%r{cert_policy\s*=\s*(?<policy>.*);})
+        m = line.match(%r{cert_policy\s*=\s*(?<policy>.*);})
         unless m.nil?
           policy = m[:policy]
           next
