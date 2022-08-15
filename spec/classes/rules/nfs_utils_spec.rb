@@ -29,6 +29,11 @@ describe 'cis_security_hardening::rules::nfs_utils' do
                 .with(
                   'ensure' => 'absent',
                 )
+            elsif os_facts[:operatingsystem].casecmp('rocky').zero?
+              is_expected.to contain_package('nfs-utils')
+                .with(
+                  'ensure' => 'absent',
+                )
             else
               is_expected.to contain_service('nfs-server')
                 .with(

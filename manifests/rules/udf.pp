@@ -23,8 +23,15 @@ class cis_security_hardening::rules::udf (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    kmod::install { 'udf':
-      command => '/bin/true',
+    if $facts['operatingsystem'].downcase() == 'rocky' {
+      kmod::install { 'udf':
+        command => '/bin/false',
+      }
+      kmod::blacklist {  'udf': }
+    } else {
+      kmod::install { 'udf':
+        command => '/bin/true',
+      }
     }
   }
 }

@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure nodev option set on /home partition (Scored)
+#    Ensure nodev option set on /home partition
 #
 # The nodev mount option specifies that the filesystem cannot contain special devices.
 #

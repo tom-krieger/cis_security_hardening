@@ -15,7 +15,6 @@ cis_security_hardening::auditd_rules_fact_file: '/opt/puppetlabs/facter/facts.d/
 
 cis_security_hardening::rules::cramfs::enforce: true
 cis_security_hardening::rules::squashfs::enforce: true
-cis_security_hardening::rules::fat::enforce: false
 cis_security_hardening::rules::udf::enforce: true
 cis_security_hardening::rules::tmp_filesystem::enforce: true
 cis_security_hardening::rules::tmp_filesystem::enable: false
@@ -23,6 +22,15 @@ cis_security_hardening::rules::tmp_filesystem::size: 0
 cis_security_hardening::rules::tmp_noexec::enforce: true
 cis_security_hardening::rules::tmp_nodev::enforce: true
 cis_security_hardening::rules::tmp_nosuid::enforce: true
+cis_security_hardening::rules::var_nodev::enforce: true
+cis_security_hardening::rules::var_noexec::enforce: true
+cis_security_hardening::rules::var_nosuid::enforce: true
+cis_security_hardening::rules::var_log_nodev::enforce: true
+cis_security_hardening::rules::var_log_noexec::enforce: true
+cis_security_hardening::rules::var_log_nosuid::enforce: true
+cis_security_hardening::rules::var_log_audit_nodev::enforce: true
+cis_security_hardening::rules::var_log_audit_noexec::enforce: true
+cis_security_hardening::rules::var_log_audit_nosuid::enforce: true
 cis_security_hardening::rules::dev_shm::enforce: true
 cis_security_hardening::rules::dev_shm::size: 0
 cis_security_hardening::rules::dev_shm_noexec::enforce: true
@@ -32,6 +40,9 @@ cis_security_hardening::rules::var_tmp_noexec::enforce: true
 cis_security_hardening::rules::var_tmp_nodev::enforce: true
 cis_security_hardening::rules::var_tmp_nosuid::enforce: true
 cis_security_hardening::rules::home_nodev::enforce: true
+cis_security_hardening::rules::home_nosuid::enforce: true
+cis_security_hardening::rules::home_usrquota::enforce: true
+cis_security_hardening::rules::home_grpquote::enforce: true
 cis_security_hardening::rules::sticky_world_writeable_files::enforce: true
 cis_security_hardening::rules::disable_automount::enforce: true
 cis_security_hardening::rules::disable_usb_storage::enforce: true
@@ -85,6 +96,9 @@ cis_security_hardening::rules::motd_perms::content: |
 cis_security_hardening::rules::issue_perms::enforce: true
 cis_security_hardening::rules::issue_net_perms::enforce: true
 cis_security_hardening::rules::gnome_gdm::enforce: true
+cis_security_hardening::rules::gnome_gdm_package::enforce: true
+cis_security_hardening::rules::xdmcp_config::enforce: true
+cis_security_hardening::rules::gdm_auto_mount::enforce: true
 cis_security_hardening::rules::crypto_policy::enforce: true
 cis_security_hardening::rules::crypto_policy::crypto_policy: FUTURE
 
@@ -115,6 +129,7 @@ cis_security_hardening::rules::ldapd::enforce: true
 cis_security_hardening::rules::rpcbind::enforce: true
 cis_security_hardening::rules::bind::enforce: true
 cis_security_hardening::rules::vsftp::enforce: true
+cis_security_hardening::rules::ftp::enforce: true
 cis_security_hardening::rules::httpd::enforce: true
 cis_security_hardening::rules::dovecot::enforce: true
 cis_security_hardening::rules::samba::enforce: true
@@ -124,10 +139,16 @@ cis_security_hardening::rules::mta_local::enforce: true
 cis_security_hardening::rules::rsyncd::enforce: true
 cis_security_hardening::rules::nis::enforce: true
 cis_security_hardening::rules::nfs: true
+cis_security_hardening::rules::tftp_server::enforce: true
+cis_security_hardening::rules::telnet_server::enforce: true
+cis_security_hardening::rules::nfs_utils::enforce: true
 
 cis_security_hardening::rules::nis_client::enforce: true
 cis_security_hardening::rules::telnet_client::enforce: true
 cis_security_hardening::rules::ldap_client::enforce: true
+cis_security_hardening::rules::rsh_client::enforce: true
+cis_security_hardening::rules::talk_client::enforce: true
+cis_security_hardening::rules::tftp_client::enforce: true
 
 cis_security_hardening::rules::disable_ipv6::enforce: true
 
@@ -146,8 +167,6 @@ cis_security_hardening::rules::ipv6_router_advertisements::enforce: true
 
 cis_security_hardening::rules::disable_dccp::enforce: true
 cis_security_hardening::rules::disable_sctp::enforce: true
-cis_security_hardening::rules::disable_rds::enforce: true
-cis_security_hardening::rules::disable_tipc::enforce: true
 
 cis_security_hardening::rules::firewalld_install::enforce: false
 cis_security_hardening::rules::firewalld_service::enforce: false
@@ -181,7 +200,6 @@ cis_security_hardening::rules::nftables_default_deny::additional_rules: {}
 cis_security_hardening::rules::nftables_persistence::enforce: false
 cis_security_hardening::rules::nftables_service::enforce: false
 
-cis_security_hardening::bundles::centos::v7::configure_iptables::configure_ip6tables: false
 cis_security_hardening::rules::iptables_install::enforce: true
 cis_security_hardening::rules::iptables_deny_policy::enforce: true
 cis_security_hardening::rules::iptables_deny_policy::input_policy: drop

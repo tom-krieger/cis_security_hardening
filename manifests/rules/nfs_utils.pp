@@ -24,15 +24,23 @@ class cis_security_hardening::rules::nfs_utils (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    if $facts['operatingsystem'].downcase() == 'sles' {
-      ensure_packages(['nfs-utils', 'nfs-kernel-server'], {
-          ensure => absent,
-      })
-    } else {
-      ensure_resource('service', 'nfs-server', {
-          ensure => stopped,
-          enable => false,
-      })
+    case $facts['os']['name'].downcase() {
+      'sles': {
+        ensure_packages(['nfs-utils', 'nfs-kernel-server'], {
+            ensure => absent,
+        })
+      }
+      'rocky': {
+        ensure_packages(['nfs-utils'], {
+            ensure => absent,
+        })
+      }
+      default: {
+        ensure_resource('service', 'nfs-server', {
+            ensure => stopped,
+            enable => false,
+        })
+      }
     }
   }
 }

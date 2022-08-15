@@ -144,7 +144,10 @@ audited
 * `cis_security_hardening::rules::gshadow_perms`: Ensure permissions on /etc/gshadow are configured (Automated)
 * `cis_security_hardening::rules::hfs`: Ensure mounting of hfs filesystems is disabled (Automated)
 * `cis_security_hardening::rules::hfsplus`: Ensure mounting of hfsplus filesystems is disabled (Automated)
-* `cis_security_hardening::rules::home_nodev`: Ensure nodev option set on /home partition (Scored)
+* `cis_security_hardening::rules::home_grpquota`: Ensure grpquota option set on /home partition
+* `cis_security_hardening::rules::home_nodev`: Ensure nodev option set on /home partition
+* `cis_security_hardening::rules::home_nosuid`: Ensure nosuid option set on /home partition
+* `cis_security_hardening::rules::home_usrquota`: Ensure usrquota option set on /home partition
 * `cis_security_hardening::rules::httpd`: Ensure HTTP server is not enabled (Automated)
 * `cis_security_hardening::rules::icmp_redirects`: Ensure ICMP redirects are not accepted (Automated)
 * `cis_security_hardening::rules::ignore_bogus_icmp_responses`: Ensure bogus ICMP responses are ignored (Automated)
@@ -289,7 +292,16 @@ audited
 * `cis_security_hardening::rules::ufw_outbound`: Ensure outbound connections are configured (Not Scored)
 * `cis_security_hardening::rules::ufw_service`: Ensure ufw service is enabled (Automated)
 * `cis_security_hardening::rules::umask_setting`: Ensure default user umask is configured (Automated)
+* `cis_security_hardening::rules::var_log_audit_nodev`: Ensure nodev option set on /var/log/audit partition
+* `cis_security_hardening::rules::var_log_audit_noexec`: Ensure noexec option set on /var/log/audit partition
+* `cis_security_hardening::rules::var_log_audit_nosuid`: Ensure nosuid option set on /var/log/audit partition
+* `cis_security_hardening::rules::var_log_nodev`: Ensure nodev option set on /var/log partition
+* `cis_security_hardening::rules::var_log_noexec`: Ensure noexec option set on /var/log partition
+* `cis_security_hardening::rules::var_log_nosuid`: Ensure nosuid option set on /var/log partition
 * `cis_security_hardening::rules::var_log_syslog_perms`: Ensure /var/log/syslog is group-owned by adm, owned by syslog and has permissions 0640
+* `cis_security_hardening::rules::var_nodev`: Ensure nodev option set on /var partition
+* `cis_security_hardening::rules::var_noexec`: Ensure noexec option set on /var partition
+* `cis_security_hardening::rules::var_nosuid`: Ensure nosuid option set on /var partition
 * `cis_security_hardening::rules::var_tmp_nodev`: Ensure nodev option set on /var/tmp partition (Automated)
 * `cis_security_hardening::rules::var_tmp_noexec`: Ensure noexec option set on /var/tmp partition (Automated)
 * `cis_security_hardening::rules::var_tmp_nosuid`: Ensure nosuid option set on /var/tmp partition (Automated)

@@ -22,10 +22,10 @@ class cis_security_hardening::rules::pam_use_mappers (
 ) {
   if $enforce {
     file_line { 'pam use mappers':
-      ensure  => 'present',
-      path    => '/etc/pam_pkcs11/pam_pkcs11.conf',
-      line    => '  use_mappers = pwent',
-      match   => 'use_mappers\s*=',
+      ensure => 'present',
+      path   => '/etc/pam_pkcs11/pam_pkcs11.conf',
+      line   => '  use_mappers = pwent',
+      match  => 'use_mappers\s*=',
     }
   }
 }

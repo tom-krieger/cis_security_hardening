@@ -42,9 +42,7 @@ class cis_security_hardening::rules::restrict_core_dumps (
       default => false,
     }
 
-    if  ($facts['osfamily'].downcase() == 'redhat' or
-    $facts['osfamily'].downcase() == 'suse') and
-    $installed {
+    if  ($facts['osfamily'].downcase() == 'redhat' or $facts['osfamily'].downcase() == 'suse') and $installed {
       file_line { 'systemd-coredump-storage':
         path => '/etc/systemd/coredump.conf',
         line => 'Storage=none',

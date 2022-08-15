@@ -27,5 +27,14 @@ class cis_security_hardening::rules::yum_gpgcheck (
       line   => 'gpgcheck=1',
       match  => '^gpgcheck',
     }
+
+    if $facts['osfamily'].downcase() == 'redhat' and $facts['operatingsystemmajrelease'] >= '8' {
+      file_line { 'yum_gpgcheck dns':
+        ensure => present,
+        path   => '/etc/dnf/dnf.conf',
+        line   => 'gpgcheck=1',
+        match  => '^gpgcheck',
+      }
+    }
   }
 }
