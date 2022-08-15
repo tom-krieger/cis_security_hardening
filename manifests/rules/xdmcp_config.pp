@@ -26,7 +26,7 @@ class cis_security_hardening::rules::xdmcp_config (
   $xdcmp = fact('cis_security_hardening.xdcmp')
 
   if  $enforce and $xdcmp != undef and $xdcmp {
-    $file = if $facts['os']['name'].downcase() ? {
+    $file = $facts['os']['name'].downcase() ? {
       'rocky' => '/etc/gdm/custom.conf',
       default => '/etc/gdm3/custom.conf',
     }
