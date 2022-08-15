@@ -21,8 +21,13 @@ class cis_security_hardening::rules::tftp_server (
   Boolean $enforce = false,
 ) {
   if $enforce {
+    $ensure = $facts['os']['family'].downcase() ? {
+      'suse'  => 'absent',
+      default => 'purged',
+    }
+
     ensure_packages(['tftp-server'], {
-        ensure => purged,
+        ensure => $ensure,
     })
   }
 }

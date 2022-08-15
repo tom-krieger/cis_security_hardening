@@ -21,8 +21,12 @@ class cis_security_hardening::rules::ftp (
   Boolean $enforce = false,
 ) {
   if $enforce {
+    $ensure = $facts['os']['family'].downcase() ? {
+      'suse'  => 'absent',
+      default => 'purged',
+    }
     ensure_packages(['ftp'], {
-        ensure => purged,
+        ensure => $ensure,
     })
   }
 }

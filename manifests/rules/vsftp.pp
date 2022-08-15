@@ -22,8 +22,7 @@ class cis_security_hardening::rules::vsftp (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    if  $facts['operatingsystem'].downcase() == 'ubuntu' or
-    $facts['operatingsystem'].downcase() == 'sles' {
+    if  $facts['operatingsystem'].downcase() == 'ubuntu' or $facts['operatingsystem'].downcase() == 'sles' {
       $ensure = $facts['osfamily'].downcase() ? {
         'suse'  => 'absent',
         default => 'purged',

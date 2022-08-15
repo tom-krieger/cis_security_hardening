@@ -25,10 +25,16 @@ describe 'cis_security_hardening::rules::xdmcp_config' do
           is_expected.to compile
 
           if enforce
+            filename = if os_facts[:operatingsystem].casecmp('rocky').zero?
+                         '/etc/gdm/custom.conf'
+                       else
+                         '/etc/gdm3/custom.conf'
+                       end
+
             is_expected.to contain_file_line('remove enable')
               .with(
                 'ensure'            => 'absent',
-                'path'              => '/etc/gdm3/custom.conf',
+                'path'              => filename,
                 'match'             => 'Enable=true',
                 'match_for_absence' => true,
               )
