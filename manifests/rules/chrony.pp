@@ -43,10 +43,24 @@ class cis_security_hardening::rules::chrony (
       makestep_updates => $makestep_updates,
     }
 
-    if $facts['operatingsystem'].downcase() == 'ubuntu' {
-      ensure_packages(['ntp'], {
-          ensure => purged,
-      })
+    case $facts['os']['name'].downcase() {
+      'ubuntu': {
+        ensure_packages(['ntp'], {
+            ensure => purged,
+        })
+      }
+      'rocky': {
+        file { '/etc/sysconfig/chrony':
+          ensure  => file,
+          owner   => 'root',
+          group   => 'root',
+          mode    => '0644',
+          content => 'OPTIONS="-u ntp:chrony"',
+        }
+      }
+      default: {
+        # nothing to do
+      }
     }
   }
 }

@@ -23,10 +23,14 @@ class cis_security_hardening::rules::auditd_chcon_use (
   Boolean $enforce = false,
 ) {
   if $enforce {
+    $auid = $facts['operatingsystem'].downcase() ? {
+      'rocky' => 'unset',
+      default => '4294967295',
+    }
     concat::fragment { 'watch chcon command rule 1':
       order   => '176',
       target  => $cis_security_hardening::rules::auditd_init::rules_file,
-      content => '-a always,exit -F path=/usr/bin/chcon -F perm=x -F auid>=1000 -F auid!=4294967295 -k perm_chng',
+      content => "-a always,exit -F path=/usr/bin/chcon -F perm=x -F auid>=1000 -F auid!=${auid} -k perm_chng",
     }
   }
 }

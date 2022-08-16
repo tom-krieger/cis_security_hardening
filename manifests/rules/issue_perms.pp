@@ -24,11 +24,12 @@ class cis_security_hardening::rules::issue_perms (
   String $content  = '',
 ) {
   if $enforce {
+    $issue_link = fact('cis_security_hardening.etc_issue_link')
+
+
     unless  $facts['operatingsystem'] == 'SLES' and
     $facts['operatingsystemmajrelease'] == '12' and
-    has_key($facts, 'cis_security_hardening') and
-    has_key($facts['cis_security_hardening'], 'etc_issue_link') and
-    $facts['cis_security_hardening']['etc_issue_link'] {
+    $issue_link {
       ensure_resource('file', '/etc/issue', {
           ensure  => present,
           content => $content,

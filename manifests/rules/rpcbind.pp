@@ -35,7 +35,7 @@ class cis_security_hardening::rules::rpcbind (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    case $facts['operatingsystem'].downcase() {
+    case $facts['os']['name'].downcase() {
       'ubuntu': {
         ensure_packages(['rpcbind'], {
             ensure => purged,
@@ -52,6 +52,16 @@ class cis_security_hardening::rules::rpcbind (
         })
         ensure_packages(['rpcbind'], {
             ensure => absent,
+        })
+      }
+      'rocky': {
+        ensure_packages(['rpcbind'], {
+            ensure => absent,
+        })
+
+        ensure_resource('service', ['rpcbind.socket'], {
+            ensure => 'stopped',
+            enable => false,
         })
       }
       default: {

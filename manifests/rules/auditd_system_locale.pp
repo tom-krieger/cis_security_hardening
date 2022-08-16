@@ -32,8 +32,7 @@ class cis_security_hardening::rules::auditd_system_locale (
   Boolean $enforce                 = false,
 ) {
   if $enforce {
-    if  $facts['architecture'] == 'x86_64' or
-    $facts['architecture'] == 'amd64' {
+    if  $facts['architecture'] == 'x86_64' or $facts['architecture'] == 'amd64' {
       concat::fragment { 'watch network environment rule 7':
         order   => '130',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,
@@ -71,6 +70,14 @@ class cis_security_hardening::rules::auditd_system_locale (
         order   => '135',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,
         content => '-w /etc/sysconfig/network -p wa -k system-locale',
+      }
+    }
+
+    if $facts['operatingsystem'].downcase() == 'rocky' {
+      concat::fragment { 'watch network environment rule 6':
+        order   => '135',
+        target  => $cis_security_hardening::rules::auditd_init::rules_file,
+        content => '-w /etc/sysconfig/network-scripts/ -p wa -k system-locale',
       }
     }
   }

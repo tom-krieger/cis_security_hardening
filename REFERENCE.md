@@ -133,6 +133,8 @@ audited
 * `cis_security_hardening::rules::firewalld_ports_services`: Ensure unnecessary services and ports are not accepted (Manual)
 * `cis_security_hardening::rules::firewalld_service`: Ensure firewalld service is enabled and running (Automated)
 * `cis_security_hardening::rules::freevxfs`: Ensure mounting of freevxfs filesystems is disabled (Automated)
+* `cis_security_hardening::rules::ftp`: Ensure FTP Server is not installed
+* `cis_security_hardening::rules::gdm_auto_mount`: Ensure automatic mounting of removable media is disabled
 * `cis_security_hardening::rules::gdm_lock_enabled`: Ensure user's session lock is enabled
 * `cis_security_hardening::rules::gnome_gdm`
 * `cis_security_hardening::rules::gnome_gdm_package`: Ensure GNOME Display Manager is removed (Manual)
@@ -278,6 +280,8 @@ audited
 * `cis_security_hardening::rules::talk_client`: Ensure talk client is not installed (Automated)
 * `cis_security_hardening::rules::telnet_client`: Ensure telnet client is not installed (Automated)
 * `cis_security_hardening::rules::telnet_server`: Ensure telnet-server is not installed (Automated)
+* `cis_security_hardening::rules::tftp_client`: Ensure TFTP client is not installed
+* `cis_security_hardening::rules::tftp_server`: Ensure TFTP Server is not installed
 * `cis_security_hardening::rules::timeout_setting`: Ensure default user shell timeout is configured (Automated)
 * `cis_security_hardening::rules::timezone_utc_gmt`: Ensure system timezone is set to UTC or GMT
 * `cis_security_hardening::rules::tmp_filesystem`: Ensure /tmp is configured (Automated)

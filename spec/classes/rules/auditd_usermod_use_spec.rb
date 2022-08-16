@@ -41,11 +41,16 @@ describe 'cis_security_hardening::rules::auditd_usermod_use' do
           is_expected.to compile
 
           if enforce
+            auid = if os_facts[:operatingsystem].casecmp('rocky').zero?
+                     'unset'
+                   else
+                     '4294967295'
+                   end
             is_expected.to contain_concat__fragment('watch usermod command rule 1')
               .with(
                 'order'   => '184',
                 'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                'content' => '-a always,exit -F path=/usr/sbin/usermod -F perm=x -F auid>=1000 -F auid!=4294967295 -k privileged-usermod',
+                'content' => "-a always,exit -F path=/usr/sbin/usermod -F perm=x -F auid>=1000 -F auid!=#{auid} -k privileged-usermod",
               )
           else
             is_expected.not_to contain_concat__fragment('watch usermod command rule 1')

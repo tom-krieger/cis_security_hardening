@@ -40,10 +40,21 @@ describe 'cis_security_hardening::rules::chrony' do
                 .with(
                   'ensure' => 'purged',
                 )
+            elsif os_facts[:operatingsystem].casecmp('rocky').zero?
+              is_expected.to contain_file('/etc/sysconfig/chrony')
+                .with(
+                  'ensure'  => 'file',
+                  'owner'   => 'root',
+                  'group'   => 'root',
+                  'mode'    => '0644',
+                  'content' => 'OPTIONS="-u ntp:chrony"',
+                )
+
             end
           else
             is_expected.not_to contain_class('chrony')
             is_expected.not_to contain_package('ntp')
+            is_expected.not_to contain_file('/etc/sysconfig/chrony')
           end
         }
       end

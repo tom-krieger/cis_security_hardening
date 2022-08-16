@@ -19,6 +19,11 @@ describe 'cis_security_hardening::rules::gdm_auto_mount' do
           is_expected.to compile
 
           if enforce
+            is_expected.to contain_package('dconf')
+              .with(
+                'ensure' => 'present',
+              )
+
             is_expected.to contain_file('/etc/dconf/db/local.d')
               .with(
                 'ensure' => 'directory',
@@ -26,6 +31,7 @@ describe 'cis_security_hardening::rules::gdm_auto_mount' do
                 'group'  => 'root',
                 'mode'   => '0755',
               )
+
             is_expected.to contain_file('/etc/dconf/db/local.d/00-media-automount')
               .with(
                 'ensure' => 'file',
@@ -33,15 +39,18 @@ describe 'cis_security_hardening::rules::gdm_auto_mount' do
                 'group'  => 'root',
                 'mode'   => '0644',
               )
+
             is_expected.to contain_ini_setting('gdm-disable-automount')
               .with(
-                'ensure'  => 'present',
-                'path'    => '/etc/dconf/db/local.d/00-media-automount',
-                'section' => 'org/gnome/desktop/media-handling',
-                'setting' => 'automount',
-                'value'   => 'false',
-              )
+                 'ensure'  => 'present',
+                 'path'    => '/etc/dconf/db/local.d/00-media-automount',
+                 'section' => 'org/gnome/desktop/media-handling',
+                 'setting' => 'automount',
+                 'value'   => 'false',
+               )
               .that_requires('File[/etc/dconf/db/local.d/00-media-automount]')
+              .that_notifies('Exec[dconf update]')
+
             is_expected.to contain_ini_setting('gdm-disable-automount-open')
               .with(
                 'ensure'  => 'present',
@@ -51,6 +60,14 @@ describe 'cis_security_hardening::rules::gdm_auto_mount' do
                 'value'   => 'false',
               )
               .that_requires('File[/etc/dconf/db/local.d/00-media-automount]')
+              .that_notifies('Exec[dconf update]')
+
+          else
+            is_expected.not_to contain_package('dconf')
+            is_expected.not_to contain_file('/etc/dconf/db/local.d')
+            is_expected.not_to contain_file('/etc/dconf/db/local.d/00-media-automount')
+            is_expected.not_to contain_ini_setting('gdm-disable-automount')
+            is_expected.not_to contain_ini_setting('gdm-disable-automount-open')
           end
         }
       end

@@ -5,7 +5,7 @@ require 'spec_helper'
 enforce_options = [true, false]
 arch_options = ['x86_64', 'i686']
 
-describe 'cis_security_hardening::rules::auditd_delete' do
+describe 'cis_security_hardening::rules::auditd_kernel_modules' do
   on_supported_os.each do |os, os_facts|
     enforce_options.each do |enforce|
       arch_options.each do |arch|
@@ -48,27 +48,27 @@ describe 'cis_security_hardening::rules::auditd_delete' do
                      else
                        '4294967295'
                      end
-              is_expected.to contain_concat__fragment('watch deletes rule 1')
+              is_expected.to contain_concat__fragment('watch kernel modules rule 1')
                 .with(
-                  'order' => '31',
+                  'order' => '204',
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => "-a always,exit -F arch=b32 -S unlink -S unlinkat -S rename -S renameat -F auid>=1000 -F auid!=#{auid} -k delete",
+                  'content' => "-a always,exit -S all -F path=/usr/bin/kmod -F perm=x -F auid>=1000 -F auid!=#{auid} -F key=kernel_modules",
                 )
 
               if ['x86_64', 'amd64'].include?(arch)
-                is_expected.to contain_concat__fragment('watch deletes rule 2')
+                is_expected.to contain_concat__fragment('watch kernel modules rule 2')
                   .with(
-                    'order' => '32',
+                    'order' => '205',
                     'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                    'content' => "-a always,exit -F arch=b64 -S unlink -S unlinkat -S rename -S renameat -F auid>=1000 -F auid!=#{auid} -k delete",
+                    'content' => "-a always,exit -F arch=b64 -S init_module,finit_module,delete_module,create_module,query_module -F auid>=1000 -F auid!=#{auid} -k kernel_modules",
                   )
 
               else
-                is_expected.not_to contain_concat__fragment('watch deletes rule 2')
+                is_expected.not_to contain_concat__fragment('watch kernel modules rule 2')
               end
             else
-              is_expected.not_to contain_concat__fragment('watch deletes rule 1')
-              is_expected.not_to contain_concat__fragment('watch deletes rule 2')
+              is_expected.not_to contain_concat__fragment('watch kernel modules rule 1')
+              is_expected.not_to contain_concat__fragment('watch kernel modules rule 2')
             end
           }
         end

@@ -25,6 +25,10 @@ class cis_security_hardening::rules::gdm_auto_mount (
   Boolean $enforce = false,
 ) {
   if $enforce {
+    ensure_packages(['dconf'], {
+        ensure => present,
+    })
+
     ensure_resource('file', '/etc/dconf/db/local.d', {
         ensure => directory,
         owner  => 'root',
@@ -46,6 +50,7 @@ class cis_security_hardening::rules::gdm_auto_mount (
       setting => 'automount',
       value   => 'false',
       require => File['/etc/dconf/db/local.d/00-media-automount'],
+      notify  => Exec['dconf update'],
     }
 
     ini_setting { 'gdm-disable-automount-open':
@@ -55,6 +60,13 @@ class cis_security_hardening::rules::gdm_auto_mount (
       setting => 'automount-open',
       value   => 'false',
       require => File['/etc/dconf/db/local.d/00-media-automount'],
+      notify  => Exec['dconf update'],
+    }
+
+    exec { 'dconf update':
+      command     => 'dconf update',
+      path        => ['/bin', '/usr/bin'],
+      refreshonly => true,
     }
   }
 }

@@ -26,26 +26,33 @@ class cis_security_hardening::rules::auditd_access (
   Boolean $enforce                 = false,
 ) {
   if $enforce {
+    $auid = $facts['operatingsystem'].downcase() ? {
+      'rocky' => 'unset',
+      default => '4294967295',
+    }
+
     concat::fragment { 'watch access rule 1':
       target  => $cis_security_hardening::rules::auditd_init::rules_file,
-      content => '-a always,exit -F arch=b32 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=4294967295 -k access', #lint:ignore:140chars
+      content => "-a always,exit -F arch=b32 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=${auid} -k access", #lint:ignore:140chars
       order   => '11',
     }
+
     concat::fragment { 'watch access rule 2':
       target  => $cis_security_hardening::rules::auditd_init::rules_file,
-      content => '-a always,exit -F arch=b32 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -k access', #lint:ignore:140chars
+      content => "-a always,exit -F arch=b32 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=${auid} -k access", #lint:ignore:140chars
       order   => '12',
     }
-    if  $facts['architecture'] == 'x86_64' or
-    $facts['architecture'] == 'amd64' {
+
+    if  $facts['architecture'] == 'x86_64' or $facts['architecture'] == 'amd64' {
       concat::fragment { 'watch access rule 3':
         target  => $cis_security_hardening::rules::auditd_init::rules_file,
-        content => '-a always,exit -F arch=b64 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=4294967295 -k access', #lint:ignore:140chars
+        content => "-a always,exit -F arch=b64 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=${auid} -k access", #lint:ignore:140chars
         order   => '13',
       }
+
       concat::fragment { 'watch access rule 4':
         target  => $cis_security_hardening::rules::auditd_init::rules_file,
-        content => '-a always,exit -F arch=b64 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -k access', #lint:ignore:140chars
+        content => "-a always,exit -F arch=b64 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=${auid} -k access", #lint:ignore:140chars
         order   => '14',
       }
     }

@@ -42,7 +42,7 @@ cis_security_hardening::rules::var_tmp_nosuid::enforce: true
 cis_security_hardening::rules::home_nodev::enforce: true
 cis_security_hardening::rules::home_nosuid::enforce: true
 cis_security_hardening::rules::home_usrquota::enforce: true
-cis_security_hardening::rules::home_grpquote::enforce: true
+cis_security_hardening::rules::home_grpquota::enforce: true
 cis_security_hardening::rules::sticky_world_writeable_files::enforce: true
 cis_security_hardening::rules::disable_automount::enforce: true
 cis_security_hardening::rules::disable_usb_storage::enforce: true
@@ -94,8 +94,13 @@ cis_security_hardening::rules::motd_perms::content: |
   
 
 cis_security_hardening::rules::issue_perms::enforce: true
+cis_security_hardening::rules::issue_perms::content: Authorized uses only. All activity may be monitored and reported.
 cis_security_hardening::rules::issue_net_perms::enforce: true
+cis_security_hardening::rules::issue_net_perms::content: Authorized uses only. All activity may be monitored and reported.
 cis_security_hardening::rules::gnome_gdm::enforce: true
+cis_security_hardening::rules::gnome_gdm_package::enforce: true
+cis_security_hardening::rules::xdmcp_config::enforce: true
+cis_security_hardening::rules::gdm_auto_mount::enforce: true
 cis_security_hardening::rules::crypto_policy::enforce: true
 cis_security_hardening::rules::crypto_policy::crypto_policy: FUTURE
 
@@ -126,6 +131,7 @@ cis_security_hardening::rules::ldapd::enforce: true
 cis_security_hardening::rules::rpcbind::enforce: true
 cis_security_hardening::rules::bind::enforce: true
 cis_security_hardening::rules::vsftp::enforce: true
+cis_security_hardening::rules::ftp::enforce: true
 cis_security_hardening::rules::httpd::enforce: true
 cis_security_hardening::rules::dovecot::enforce: true
 cis_security_hardening::rules::samba::enforce: true
@@ -135,10 +141,16 @@ cis_security_hardening::rules::mta_local::enforce: true
 cis_security_hardening::rules::rsyncd::enforce: true
 cis_security_hardening::rules::nis::enforce: true
 cis_security_hardening::rules::nfs: true
+cis_security_hardening::rules::tftp_server::enforce: true
+cis_security_hardening::rules::telnet_server::enforce: true
+cis_security_hardening::rules::nfs_utils::enforce: true
 
 cis_security_hardening::rules::nis_client::enforce: true
 cis_security_hardening::rules::telnet_client::enforce: true
 cis_security_hardening::rules::ldap_client::enforce: true
+cis_security_hardening::rules::rsh_client::enforce: true
+cis_security_hardening::rules::talk_client::enforce: true
+cis_security_hardening::rules::tftp_client::enforce: true
 
 cis_security_hardening::rules::disable_ipv6::enforce: true
 
@@ -157,8 +169,6 @@ cis_security_hardening::rules::ipv6_router_advertisements::enforce: true
 
 cis_security_hardening::rules::disable_dccp::enforce: true
 cis_security_hardening::rules::disable_sctp::enforce: true
-cis_security_hardening::rules::disable_rds::enforce: true
-cis_security_hardening::rules::disable_tipc::enforce: true
 
 cis_security_hardening::rules::firewalld_install::enforce: false
 cis_security_hardening::rules::firewalld_service::enforce: false
@@ -275,9 +285,16 @@ cis_security_hardening::rules::auditd_privileged_commands::enforce: true
 cis_security_hardening::rules::auditd_mounts::enforce: true
 cis_security_hardening::rules::auditd_delete::enforce: true
 cis_security_hardening::rules::auditd_scope::enforce: true
+cis_security_hardening::rules::auditd_user_emulation::enforce: true
 cis_security_hardening::rules::auditd_actions::enforce: true
 cis_security_hardening::rules::auditd_modules::enforce: true
 cis_security_hardening::rules::auditd_immutable::enforce: true
+cis_security_hardening::rules::auditd_discretionary_access::enforce: true
+cis_security_hardening::rules::auditd_chcon_use::enforce: true
+cis_security_hardening::rules::auditd_setfacl_use::enforce: true
+cis_security_hardening::rules::auditd_chacl_use::enforce: true
+cis_security_hardening::rules::auditd_usermod_use::enforce: true
+cis_security_hardening::rules::auditd_kernel_modules::enforce: true
 
 cis_security_hardening::rules::rsyslog_installed::enforce: true
 cis_security_hardening::rules::rsyslog_service::enforce: true
