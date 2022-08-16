@@ -16,10 +16,11 @@ def read_auditd_data
   auditd['log_files'] = files_raw.uniq
 
   cmd = "awk '/^\s*UID_MIN/{print $2}' /etc/login.defs"
-  auditd['uid_min'] = if cmd.nil? || cmd.empty?
+  val = Facter::Core::Execution.exec(cmd)
+  auditd['uid_min'] = if val.nil? || val.empty?
                         '1000'
                       else
-                        cmd.strip.to_s
+                        val.strip.to_s
                       end
 
   auditd
