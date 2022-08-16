@@ -1,0 +1,182 @@
+#
+# Configuration file for pam_pkcs11 module
+#
+# Version 0.4
+# Author: Juan Antonio Martinez <jonsito@teleline.es>
+#
+pam_pkcs11 {
+  nullok = true;
+  debug = true;
+  use_first_pass = false;
+  try_first_pass = false;
+  use_authtok = false;
+  use_pkcs11_module = opensc;
+
+  pkcs11_module opensc {
+    module = /usr/lib/opensc-pkcs11.so;
+    description = "OpenSC PKCS#11 module";
+    slot_description = "none";
+    ca_dir = /etc/pam_pkcs11/cacerts;
+    crl_dir = /etc/pam_pkcs11/crls;
+    support_threads = false;
+    cert_policy = <%= $cert_policy %>;
+
+    # What kind of token?
+    # The value of the token_type parameter will be used in the user prompt
+    # messages.   The default value is "Smart card".
+    token_type = "Smart card";
+  }
+
+  pkcs11_module etoken {
+    module = /usr/local/lib/libetpkcs11.so
+    description = "Aladdin eTokenPRO-32";
+    slot_num = 0;
+    support_threads = true;
+    ca_dir = /etc/pam_pkcs11/cacerts;
+    crl_dir = /etc/pam_pkcs11/crls;
+    cert_policy = ca,signature;
+  }
+
+  pkcs11_module nss {
+    nss_dir = /etc/ssl/nssdb;
+    crl_policy = none;
+  }
+
+  pkcs11_module default {
+    module = /lib/pam_pkcs11/pkcs11_module.so;
+    description = "Default pkcs#11 module";
+    slot_num = 0;
+    support_threads = false;
+    ca_dir = /etc/pam_pkcs11/cacerts;
+    crl_dir = /etc/pam_pkcs11/crls;
+    cert_policy = none;
+  }
+
+  use_mappers = pwent
+  mapper_search_path = /lib/pam_pkcs11;
+
+  mapper generic {
+        debug = true;
+        #module = /lib/pam_pkcs11/generic_mapper.so;
+        module = internal;
+        # ignore letter case on match/compare
+        ignorecase = false;
+        # Use one of "cn" , "subject" , "kpn" , "email" , "upn" , "uid" or "serial"
+        cert_item  = cn;
+        # Define mapfile if needed, else select "none"
+        mapfile = file:///etc/pam_pkcs11/generic_mapping;
+        use_getpwent = false;
+  }
+
+  mapper subject {
+    debug = false;
+    # module = /lib/pam_pkcs11/subject_mapper.so;
+    module = internal;
+    ignorecase = false;
+    mapfile = file:///etc/pam_pkcs11/subject_mapping;
+  }
+
+  mapper openssh {
+    debug = false;
+    module = /lib/pam_pkcs11/openssh_mapper.so;
+  }
+
+  mapper opensc {
+    debug = false;
+    module = /lib/pam_pkcs11/opensc_mapper.so;
+  }
+
+  mapper pwent {
+    debug = false;
+    ignorecase = false;
+    module = internal;
+    # module = /lib/pam_pkcs11/pwent_mapper.so;
+  }
+
+  # Null ( no map ) mapper. when user as finder matchs to NULL or "nobody"
+  mapper null {
+    debug = false;
+    # module = /lib/pam_pkcs11/null_mapper.so;
+    module = internal ;
+    # select behavior: always match, or always fail
+    default_match = false;
+    default_user = nobody ;
+  }
+
+  # Directory ( ldap style ) mapper
+  mapper ldap {
+    debug = false;
+    module = /lib/pam_pkcs11/ldap_mapper.so;
+    # hostname of ldap server (use LDAP-URI for more then one)
+    ldaphost = "";
+    # Port on ldap server to connect, this is also the default
+    #   if no port is given in URI below
+    #   if empty, then 389 for TLS and 636 for SSL is used
+    ldapport = ;
+    # space separted list of LDAP URIs (URIs are used by given order)
+    URI = "";
+    # Scope of search: 0-2
+    scope = 2;
+    binddn = "cn=pam,o=example,c=com";
+    passwd = "";
+    base = "ou=People,o=example,c=com";
+    attribute = "userCertificate";
+    filter = "(&(objectClass=posixAccount)(uid=%s))"
+    ssl = tls
+    tls_cacertfile = /etc/ssl/cacert.pem
+    tls_checkpeer = 0
+  }
+
+  mapper cn {
+    debug = false;
+    module = internal;
+    # module = /lib/pam_pkcs11/cn_mapper.so;
+    ignorecase = true;
+    # mapfile = file:///etc/pam_pkcs11/cn_map;
+    mapfile = "none";
+  }
+
+  mapper mail {
+    debug = false;
+    module = internal;
+    # module = /lib/pam_pkcs11/mail_mapper.so;
+    # Declare mapfile or
+    # leave empty "" or "none" to use no map 
+    mapfile = file:///etc/pam_pkcs11/mail_mapping;
+    ignorecase = true;
+    ignoredomain = false;
+  }
+
+  mapper ms {
+    debug = false;
+    module = internal;
+    # module = /lib/pam_pkcs11/ms_mapper.so;
+    ignorecase = false;
+    ignoredomain = false;
+    domainname = "domain.com";
+  }
+
+  mapper krb {
+    debug = false;
+    module = internal;
+    # module = /lib/pam_pkcs11/krb_mapper.so;
+    ignorecase = false;
+    mapfile = "none";
+  }
+
+  mapper uid {
+    debug = false;
+    module = internal;
+    # module = /lib/pam_pkcs11/uid_mapper.so;
+    ignorecase = false;
+    mapfile = "none";
+  }
+
+  mapper digest {
+    debug = false;
+    module = internal;
+    algorithm = "sha1";
+    mapfile = file:///etc/pam_pkcs11/digest_mapping;
+  }
+
+}

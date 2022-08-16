@@ -1,0 +1,6 @@
+{
+  "description": "Check users have no .rhosts files.",
+  "input_method": "environment",
+  "parameters": {
+  }
+}

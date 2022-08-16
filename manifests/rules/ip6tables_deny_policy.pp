@@ -37,8 +37,7 @@ class cis_security_hardening::rules::ip6tables_deny_policy (
   Enum['drop', 'accept'] $output_policy  = 'accept',
   Enum['drop', 'accept'] $forward_policy = 'drop',
 ) {
-  if  $enforce and
-  fact('network6') != undef {
+  if  $enforce and fact('network6') != undef {
     firewallchain { 'OUTPUT:filter:IPv6':
       ensure => present,
       policy => $output_policy,

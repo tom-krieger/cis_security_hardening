@@ -1,0 +1,6 @@
+{
+  "description": "Check all users' home directories exist.",
+  "input_method": "environment",
+  "parameters": {
+  }
+}

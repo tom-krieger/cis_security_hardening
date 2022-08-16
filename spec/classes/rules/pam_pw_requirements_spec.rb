@@ -42,6 +42,8 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
             'ocredit' => -1,
             'minclass' => 4,
             'retry' => 3,
+            'dictcheck' => true,
+            'difok' => 8,
           }
         end
 
@@ -59,6 +61,7 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                   'path'   => '/etc/security/pwquality.conf',
                   'line'   => 'minlen = 14',
                   'match'  => '^#?minlen',
+                  'append_on_no_match' => true,
                 )
 
               if os_facts[:operatingsystemmajrelease] == '7'
@@ -70,6 +73,7 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                     'path'   => '/etc/security/pwquality.conf',
                     'line'   => 'dcredit = -1',
                     'match'  => '^#?dcredit',
+                    'append_on_no_match' => true,
                   )
 
                 is_expected.to contain_file_line('pam ucredit')
@@ -78,6 +82,7 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                     'path'   => '/etc/security/pwquality.conf',
                     'line'   => 'ucredit = -1',
                     'match'  => '^#?ucredit',
+                    'append_on_no_match' => true,
                   )
 
                 is_expected.to contain_file_line('pam ocredit')
@@ -86,6 +91,7 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                     'path'   => '/etc/security/pwquality.conf',
                     'line'   => 'ocredit = -1',
                     'match'  => '^#?ocredit',
+                    'append_on_no_match' => true,
                   )
 
                 is_expected.to contain_file_line('pam lcredit')
@@ -94,6 +100,25 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                     'path'   => '/etc/security/pwquality.conf',
                     'line'   => 'lcredit = -1',
                     'match'  => '^#?lcredit',
+                    'append_on_no_match' => true,
+                  )
+
+                is_expected.to contain_file_line('pam dictcheck')
+                  .with(
+                    'ensure' => 'present',
+                    'path'   => '/etc/security/pwquality.conf',
+                    'line'   => 'dictcheck = 1',
+                    'match'  => '^#?dictcheck',
+                    'append_on_no_match' => true,
+                  )
+
+                is_expected.to contain_file_line('pam difok')
+                  .with(
+                    'ensure' => 'present',
+                    'path'   => '/etc/security/pwquality.conf',
+                    'line'   => 'difok = 8',
+                    'match'  => '^#?difok',
+                    'append_on_no_match' => true,
                   )
 
                 is_expected.to contain_pam('pam-system-auth-requisite')
@@ -173,12 +198,49 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
 
             elsif os_facts[:osfamily].casecmp('debian').zero?
 
+              is_expected.to contain_file_line('pam dcredit')
+                .with(
+                    'ensure' => 'present',
+                    'path'   => '/etc/security/pwquality.conf',
+                    'line'   => 'dcredit = -1',
+                    'match'  => '^#?dcredit',
+                    'append_on_no_match' => true,
+                  )
+
+              is_expected.to contain_file_line('pam ucredit')
+                .with(
+                  'ensure' => 'present',
+                  'path'   => '/etc/security/pwquality.conf',
+                  'line'   => 'ucredit = -1',
+                  'match'  => '^#?ucredit',
+                  'append_on_no_match' => true,
+                )
+
+              is_expected.to contain_file_line('pam ocredit')
+                .with(
+                  'ensure' => 'present',
+                  'path'   => '/etc/security/pwquality.conf',
+                  'line'   => 'ocredit = -1',
+                  'match'  => '^#?ocredit',
+                  'append_on_no_match' => true,
+                )
+
+              is_expected.to contain_file_line('pam lcredit')
+                .with(
+                  'ensure' => 'present',
+                  'path'   => '/etc/security/pwquality.conf',
+                  'line'   => 'lcredit = -1',
+                  'match'  => '^#?lcredit',
+                  'append_on_no_match' => true,
+                )
+
               is_expected.to contain_file_line('pam minlen')
                 .with(
                   'ensure' => 'present',
                   'path'   => '/etc/security/pwquality.conf',
                   'line'   => 'minlen = 14',
                   'match'  => '^#?minlen',
+                  'append_on_no_match' => true,
                 )
               is_expected.to contain_file_line('pam minclass')
                 .with(
@@ -186,6 +248,34 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                   'path'   => '/etc/security/pwquality.conf',
                   'line'   => 'minclass = 4',
                   'match'  => '^#?minclass',
+                  'append_on_no_match' => true,
+                )
+
+              is_expected.to contain_file_line('pam enforcing')
+                .with(
+                  'ensure' => 'present',
+                  'path'   => '/etc/security/pwquality.conf',
+                  'line'   => 'enforcing = 1',
+                  'match'  => '^#?enforcing',
+                  'append_on_no_match' => true,
+                )
+
+              is_expected.to contain_file_line('pam dictcheck')
+                .with(
+                'ensure' => 'present',
+                'path'   => '/etc/security/pwquality.conf',
+                'line'   => 'dictcheck = 1',
+                'match'  => '^#dictcheck',
+                'append_on_no_match' => true,
+              )
+
+              is_expected.to contain_file_line('pam difok')
+                .with(
+                  'ensure' => 'present',
+                  'path'   => '/etc/security/pwquality.conf',
+                  'line'   => 'difok = 8',
+                  'match'  => '^#?difok',
+                  'append_on_no_match' => true,
                 )
 
               is_expected.to contain_pam('pam-common-password-requisite')
@@ -226,6 +316,8 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
             is_expected.not_to contain_pam('pam-system-auth-requisite')
             is_expected.not_to contain_pam('pam-password-auth-requisite')
             is_expected.not_to contain_package('libpam-pwquality')
+            is_expected.not_to contain_file_line('pam dictcheck')
+            is_expected.not_to contain_file_line('pam difok')
           end
         }
       end

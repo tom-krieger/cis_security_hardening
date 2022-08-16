@@ -19,8 +19,7 @@
 class cis_security_hardening::rules::ip6tables_outbound_established (
   Boolean $enforce = false,
 ) {
-  if  $enforce and
-  fact('network6') != undef {
+  if  $enforce and fact('network6') != undef {
     firewall { '004-6 accept outbound tcp state new, established':
       chain    => 'OUTPUT',
       proto    => 'tcp',

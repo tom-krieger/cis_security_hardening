@@ -1,0 +1,6 @@
+{
+  "description": "Check root PATH Integrity.",
+  "input_method": "environment",
+  "parameters": {
+  }
+}

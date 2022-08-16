@@ -1,0 +1,6 @@
+{
+  "description": "Check users have no .netrc files.",
+  "input_method": "environment",
+  "parameters": {
+  }
+}

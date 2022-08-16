@@ -51,6 +51,7 @@ The code of this security baseline module is based on the following CIS Benchmar
 | CentOS 8     | CIS CentOS Linux 8 Benchmark                                 | 1.0.0   | 10-31-2019 |
 | Ubuntu 18.04 | CIS Ubuntu Linux 18.04 LTS Benchmark                         | 2.0.1   | 01-03-2020 |
 | Ubuntu 20.04 | CIS Ubuntu Linux 20.04 LTS Benchmark                         | 1.1.0   | 03-31-2021 |
+| Ubunto 20.04 | CIS Ubuntu Linux 20.04 LTS STIG Benchmark                    | 1.0.0   | 26.07.2021 |
 | Debian 10    | CIS Debian Linux 10 Benchmark                                | 1.0.1   | 01-13-2020 |
 
 The benchmarks can be found at [CIS Benchmarks Website](https://www.cisecurity.org/cis-benchmarks/).
@@ -175,6 +176,14 @@ cis_security_hardening::reboot_timeout: 120
 
 The compliance tules have been implemented without or very limited testing. Please report problems or creste pull requests to improve
 the Suse SLES compliance code.
+
+### Issues with CISCAT scanner
+
+* CISCAT scanner for Ubuntu 20.04 LTS STIG false positives:
+  * reports a not correct configured TMOUT setting but running the check task from the benchmark reports PASSED.
+  * reports that not all audit log files re not read or write-accessible by unauthorized users which seems to be caused by a `lost+found` directory with permissions 0700
+  * reports that audit log directory is not set 0750 or more restrictive but it is 0750
+  * reports that not all system command files are group-owned by root but the check searches for all files and not only these not having permissions /2000
 
 ## Credits
 

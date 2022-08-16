@@ -72,13 +72,18 @@ class cis_security_hardening::rules::pam_lockout (
         }
       }
       'debian': {
+        if $lockouttime == 0 {
+          $args = ['onerr=fail', 'audit', 'silent', "deny=${attempts}"]
+        } else {
+          $args = ['onerr=fail', 'audit', 'silent', "deny=${attempts}", "unlock_time=${lockouttime}"]
+        }
         Pam { 'pam-common-auth-require-tally2':
           ensure    => present,
           service   => 'common-auth',
           type      => 'auth',
           control   => 'required',
           module    => 'pam_tally2.so',
-          arguments => ['onerr=fail', 'audit', 'silent', "deny=${attempts}", "unlock_time=${lockouttime}"],
+          arguments => $args,
         }
 
         Pam { 'pam-common-account-requisite-deny':

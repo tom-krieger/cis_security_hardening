@@ -21,6 +21,9 @@
 # @param admin_space_left_action
 #    This parameter tells the system what action to take when the system has detected that it is low on disk space.
 #
+# @param disk_full_action
+#    Action to do when disk is full.
+#
 # @example
 #   class { 'cis_security_hardening::rules::auditd_when_disk_full':
 #             enforce => true,
@@ -35,6 +38,7 @@ class cis_security_hardening::rules::auditd_when_disk_full (
   String $space_left_action       = 'email',
   String $action_mail_acct        = 'root',
   String $admin_space_left_action = 'halt',
+  String $disk_full_action        = 'SUSPEND',
 ) {
   if $enforce {
     file_line { 'auditd_space_left_action':
@@ -51,6 +55,11 @@ class cis_security_hardening::rules::auditd_when_disk_full (
       line  => "admin_space_left_action = ${admin_space_left_action}",
       path  => '/etc/audit/auditd.conf',
       match => '^admin_space_left_action',
+    }
+    file_line { 'disk_full_action':
+      line  => "disk_full_action = ${disk_full_action}",
+      path  => '/etc/audit/auditd.conf',
+      match => '^disk_full_action',
     }
   }
 }

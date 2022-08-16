@@ -1,0 +1,6 @@
+{
+  "description": "Check if all certificates match DoD fingerprints.",
+  "input_method": "environment",
+  "parameters": {
+  }
+}

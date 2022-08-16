@@ -1,0 +1,22 @@
+
+1.5.7 Ensure FIPS mode is enabled	(not tested)
+
+2.1.20 Ensure Endpoint Security for Linux Threat Prevention is installed	(not tested)
+
+4.1.4.1 Ensure audit log files are not read or write-accessible by unauthorized users	(false positive)
+
+4.1.4.4 Ensure the audit log directory is 0750 or more restrictive	(false positive)
+
+4.2.1.7 Ensure remote access methods are monitored	
+
+4.2.5 Ensure permissions on all logfiles are configured	(ok)
+
+5.4.19 Ensure Personal Identity Verification credentials are electronically verified	 (ok)
+
+5.4.20 Ensure PKI local cache of revocation data	(ok)
+
+5.5.7 Ensure default user shell timeout is 600 seconds or less	(false positive)
+
+5.8 Ensure /etc/ssl/certs only contains certificate files whose sha256 fingerprint match the fingerprint of DoD PKI-established certificate authorities	(ok)
+
+6.1.17 Ensure system command files are group-owned by root	(false positive)

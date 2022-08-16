@@ -1,0 +1,6 @@
+{
+  "description": "Check shadow group is empty.",
+  "input_method": "environment",
+  "parameters": {
+  }
+}

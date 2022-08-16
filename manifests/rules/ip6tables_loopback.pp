@@ -21,8 +21,7 @@
 class cis_security_hardening::rules::ip6tables_loopback (
   Boolean $enforce = false,
 ) {
-  if  $enforce and
-  fact('network6') != undef {
+  if  $enforce and fact('network6') != undef {
     firewall { '001-6 accept all incoming traffic to local interface':
       chain    => 'INPUT',
       proto    => 'all',

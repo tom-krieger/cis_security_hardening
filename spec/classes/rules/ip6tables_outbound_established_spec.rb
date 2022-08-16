@@ -197,6 +197,7 @@ describe 'cis_security_hardening::rules::ip6tables_outbound_established' do
                 'policy_status' => false,
               },
             },
+            'network6' => '1.2.3.4',
           )
         end
         let(:params) do
