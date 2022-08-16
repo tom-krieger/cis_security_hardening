@@ -3,8 +3,7 @@
 def read_auditd_data
   auditd = {}
 
-  priv_cmds = []
-  cmd = "find /usr -xdev \\( -perm -4000 -o -perm -2000 \\) -type f"
+  cmd = 'find /usr -xdev \\( -perm -4000 -o -perm -2000 \\) -type f'
   priv_cmds = Facter::Core::Execution.exec(cmd).split("\n")
   auditd['priv-cmds-list'] = priv_cmds.uniq.sort
 
@@ -15,6 +14,13 @@ def read_auditd_data
   cmd = 'find /var/log/audit/ -maxdepth 1 -type f 2>/dev/null'
   files_raw = Facter::Core::Execution.exec(cmd).split("\n")
   auditd['log_files'] = files_raw.uniq
+
+  cmd = "awk '/^\s*UID_MIN/{print $2}' /etc/login.defs"
+  auditd['uid_min'] = if cmd.nil? || cmd.empty?
+                        '1000'
+                      else
+                        cmd.strip.to_s
+                      end
 
   auditd
 end

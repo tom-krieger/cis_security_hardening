@@ -289,7 +289,6 @@ cis_security_hardening::rules::auditd_user_emulation::enforce: true
 cis_security_hardening::rules::auditd_actions::enforce: true
 cis_security_hardening::rules::auditd_modules::enforce: true
 cis_security_hardening::rules::auditd_immutable::enforce: true
-cis_security_hardening::rules::auditd_discretionary_access::enforce: true
 cis_security_hardening::rules::auditd_chcon_use::enforce: true
 cis_security_hardening::rules::auditd_setfacl_use::enforce: true
 cis_security_hardening::rules::auditd_chacl_use::enforce: true

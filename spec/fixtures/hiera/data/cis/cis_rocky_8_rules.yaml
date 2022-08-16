@@ -160,7 +160,6 @@ cis_security_hardening::benchmark::rocky::8:
         - auditd_time_change
         - auditd_mac_policy
         - auditd_system_locale
-        - auditd_discretionary_access
         - auditd_perm_mod
         - auditd_access
         - auditd_identity

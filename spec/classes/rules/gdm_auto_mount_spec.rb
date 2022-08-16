@@ -62,12 +62,19 @@ describe 'cis_security_hardening::rules::gdm_auto_mount' do
               .that_requires('File[/etc/dconf/db/local.d/00-media-automount]')
               .that_notifies('Exec[dconf update]')
 
+            is_expected.to contain_exec('dconf update')
+              .with(
+                'command'     => 'dconf update',
+                'path'        => ['/bin', '/usr/bin'],
+                'refreshonly' => true,
+              )
           else
             is_expected.not_to contain_package('dconf')
             is_expected.not_to contain_file('/etc/dconf/db/local.d')
             is_expected.not_to contain_file('/etc/dconf/db/local.d/00-media-automount')
             is_expected.not_to contain_ini_setting('gdm-disable-automount')
             is_expected.not_to contain_ini_setting('gdm-disable-automount-open')
+            is_expected.not_to contain_exec('dconf update')
           end
         }
       end

@@ -38,7 +38,7 @@ class cis_security_hardening::rules::auditd_actions (
             concat::fragment { 'watch admin actions rule 1':
               order   => 21,
               target  => $cis_security_hardening::rules::auditd_init::rules_file,
-              content => '-a exit,always -F arch=b64 -C euid!=uid -F euid=0 -Fauid>=1000 -F auid!=4294967295 -S execve -k actions',
+              content => '-a exit,always -F arch=b64 -C euid!=uid -F euid=0 -F auid>=1000 -F auid!=4294967295 -S execve -k actions',
             }
           }
 
@@ -54,7 +54,7 @@ class cis_security_hardening::rules::auditd_actions (
           concat::fragment { 'watch admin actions rule 1':
             order   => 21,
             target  => $cis_security_hardening::rules::auditd_init::rules_file,
-            content => '-a exit,always -F arch=b64 -C euid!=uid -F euid=0 -Fauid>=1000 -F auid!=4294967295 -S execve -k actions',
+            content => '-a exit,always -F arch=b64 -C euid!=uid -F euid=0 -F auid>=1000 -F auid!=4294967295 -S execve -k actions',
           }
         }
 

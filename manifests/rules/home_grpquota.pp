@@ -20,6 +20,10 @@ class cis_security_hardening::rules::home_grpquota (
   Boolean $enforce = false,
 ) {
   if ($enforce) and has_key($facts['mountpoints'], '/home') {
+    cis_security_hardening::set_mount_options { '/home-grpquota-quota':
+      mountpoint   => '/home',
+      mountoptions => 'quota',
+    }
     cis_security_hardening::set_mount_options { '/home-grpquota':
       mountpoint   => '/home',
       mountoptions => 'grpquota',

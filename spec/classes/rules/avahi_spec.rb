@@ -20,7 +20,7 @@ describe 'cis_security_hardening::rules::avahi' do
 
           if enforce
 
-            if os_facts[:operatingsystem].casecmp('redhat').zero? || os_facts[:operatingsystem].casecmp('centos').zero? 
+            if os_facts[:operatingsystem].casecmp('redhat').zero? || os_facts[:operatingsystem].casecmp('centos').zero?
 
               if os_facts[:operatingsystemmajrelease] < '8'
                 is_expected.to contain_service('avahi-daemon')
