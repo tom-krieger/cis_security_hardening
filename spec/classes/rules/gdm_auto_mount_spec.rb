@@ -38,29 +38,31 @@ describe 'cis_security_hardening::rules::gdm_auto_mount' do
                 'owner'  => 'root',
                 'group'  => 'root',
                 'mode'   => '0644',
+                'content' => "[org/gnome/desktop/media-handling]\nautomount=false\nautomount-open=false\n",
               )
-
-            is_expected.to contain_ini_setting('gdm-disable-automount')
-              .with(
-                 'ensure'  => 'present',
-                 'path'    => '/etc/dconf/db/local.d/00-media-automount',
-                 'section' => 'org/gnome/desktop/media-handling',
-                 'setting' => 'automount',
-                 'value'   => 'false',
-               )
-              .that_requires('File[/etc/dconf/db/local.d/00-media-automount]')
               .that_notifies('Exec[dconf update]')
 
-            is_expected.to contain_ini_setting('gdm-disable-automount-open')
-              .with(
-                'ensure'  => 'present',
-                'path'    => '/etc/dconf/db/local.d/00-media-automount',
-                'section' => 'org/gnome/desktop/media-handling',
-                'setting' => 'automount-open',
-                'value'   => 'false',
-              )
-              .that_requires('File[/etc/dconf/db/local.d/00-media-automount]')
-              .that_notifies('Exec[dconf update]')
+            # is_expected.to contain_ini_setting('gdm-disable-automount')
+            #   .with(
+            #      'ensure'  => 'present',
+            #      'path'    => '/etc/dconf/db/local.d/00-media-automount',
+            #      'section' => 'org/gnome/desktop/media-handling',
+            #      'setting' => 'automount',
+            #      'value'   => 'false',
+            #    )
+            #   .that_requires('File[/etc/dconf/db/local.d/00-media-automount]')
+            #   .that_notifies('Exec[dconf update]')
+
+            # is_expected.to contain_ini_setting('gdm-disable-automount-open')
+            #   .with(
+            #     'ensure'  => 'present',
+            #     'path'    => '/etc/dconf/db/local.d/00-media-automount',
+            #     'section' => 'org/gnome/desktop/media-handling',
+            #     'setting' => 'automount-open',
+            #     'value'   => 'false',
+            #   )
+            #   .that_requires('File[/etc/dconf/db/local.d/00-media-automount]')
+            #   .that_notifies('Exec[dconf update]')
 
             is_expected.to contain_exec('dconf update')
               .with(
