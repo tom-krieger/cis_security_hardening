@@ -48,7 +48,7 @@ describe 'cis_security_hardening::rules::auditd_time_change' do
                   .with(
                     'order' => '121',
                     'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                    'content' => '-a always,exit -F arch=b32 -S adjtimex,settimeofday,clock_settime -k time- change',
+                    'content' => '-a always,exit -F arch=b32 -S adjtimex,settimeofday,clock_settime -k time-change',
                   )
                 if ['x86_64', 'amd64'].include?(arch)
                   is_expected.to contain_concat__fragment('watch for date-time-change rule 2')
