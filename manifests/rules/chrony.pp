@@ -50,7 +50,7 @@ class cis_security_hardening::rules::chrony (
         })
       }
       'rocky': {
-        file { '/etc/sysconfig/chrony':
+        file { '/etc/sysconfig/chronyd':
           ensure  => file,
           owner   => 'root',
           group   => 'root',
