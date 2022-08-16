@@ -29,17 +29,21 @@ class cis_security_hardening::rules::auditd_mounts (
   Boolean $enforce                 = false,
 ) {
   if $enforce {
+    $uid = fact('cis_security_hardening.auditd.uid_min') ? {
+      undef => '1000',
+      default => fact('cis_security_hardening.auditd.uid_min'),
+    }
     concat::fragment { 'watch mounts rule 1':
       order   => '81',
       target  => $cis_security_hardening::rules::auditd_init::rules_file,
-      content => '-a always,exit -F arch=b32 -S mount -F auid>=1000 -F auid!=4294967295 -k mounts',
+      content => "-a always,exit -F arch=b32 -S mount -F auid>=${uid} -F auid!=4294967295 -k mounts",
     }
     if  $facts['architecture'] == 'x86_64' or
     $facts['architecture'] == 'amd64' {
       concat::fragment { 'watch mounts rule 2':
         order   => '82',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,
-        content => '-a always,exit -F arch=b64 -S mount -F auid>=1000 -F auid!=4294967295 -k mounts',
+        content => "-a always,exit -F arch=b64 -S mount -F auid>=${uid} -F auid!=4294967295 -k mounts",
       }
     }
   }

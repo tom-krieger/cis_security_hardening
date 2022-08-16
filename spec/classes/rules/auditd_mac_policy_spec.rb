@@ -25,6 +25,7 @@ describe 'cis_security_hardening::rules::auditd_mac_policy' do
           os_facts.merge!(
             cis_security_hardening: {
               auditd: {
+                uid_min: '1000',
                 'mac-policy' => false,
               },
             },

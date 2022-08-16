@@ -29,10 +29,16 @@ describe 'cis_security_hardening::rules::home_usrquota' do
             is_expected.to contain_cis_security_hardening__set_mount_options('/home-usrquota')
               .with(
                 'mountpoint'   => '/home',
-                'mountoptions' => 'quota,usrquota',
+                'mountoptions' => 'usrquota',
+              )
+            is_expected.to contain_cis_security_hardening__set_mount_options('/home-usrquota-quota')
+              .with(
+                'mountpoint'   => '/home',
+                'mountoptions' => 'quota',
               )
           else
             is_expected.not_to contain_cis_security_hardening__set_mount_options('/home-usrquota')
+            is_expected.not_to contain_cis_security_hardening__set_mount_options('/home-usrquota-quota')
           end
         }
       end

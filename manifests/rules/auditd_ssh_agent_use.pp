@@ -23,10 +23,14 @@ class cis_security_hardening::rules::auditd_ssh_agent_use (
   Boolean $enforce = false,
 ) {
   if $enforce {
+    $uid = fact('cis_security_hardening.auditd.uid_min') ? {
+      undef => '1000',
+      default => fact('cis_security_hardening.auditd.uid_min'),
+    }
     concat::fragment { 'watch ssh-agent command rule 1':
       order   => '142',
       target  => $cis_security_hardening::rules::auditd_init::rules_file,
-      content => '-a always,exit -F path=/usr/bin/ssh-agent -F perm=x -F auid>=1000 -F auid!=4294967295 -k privileged-ssh',
+      content => "-a always,exit -F path=/usr/bin/ssh-agent -F perm=x -F auid>=${uid} -F auid!=4294967295 -k privileged-ssh",
     }
   }
 }

@@ -35,17 +35,21 @@ class cis_security_hardening::rules::auditd_kernel_modules (
       'rocky' => 'unset',
       default => '4294967295',
     }
+    $uid = fact('cis_security_hardening.auditd.uid_min') ? {
+      undef => '1000',
+      default => fact('cis_security_hardening.auditd.uid_min'),
+    }
     concat::fragment { 'watch kernel modules rule 1':
       order   => '204',
       target  => $cis_security_hardening::rules::auditd_init::rules_file,
-      content => "-a always,exit -S all -F path=/usr/bin/kmod -F perm=x -F auid>=1000 -F auid!=${auid} -F key=kernel_modules",
+      content => "-a always,exit -S all -F path=/usr/bin/kmod -F perm=x -F auid>=${uid} -F auid!=${auid} -F key=kernel_modules",
     }
     if  $facts['architecture'] == 'x86_64' or
     $facts['architecture'] == 'amd64' {
       concat::fragment { 'watch kernel modules rule 2':
         order   => '205',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,
-        content => "-a always,exit -F arch=b64 -S init_module,finit_module,delete_module,create_module,query_module -F auid>=1000 -F auid!=${auid} -k kernel_modules", #lint:ignore:140chars
+        content => "-a always,exit -F arch=b64 -S init_module,finit_module,delete_module,create_module,query_module -F auid>=${uid} -F auid!=${auid} -k kernel_modules", #lint:ignore:140chars
       }
     }
   }

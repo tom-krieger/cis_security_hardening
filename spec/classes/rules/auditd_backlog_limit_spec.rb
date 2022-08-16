@@ -12,6 +12,7 @@ describe 'cis_security_hardening::rules::auditd_backlog_limit' do
           os_facts.merge!(
             cis_security_hardening: {
               auditd: {
+                uid_min: '1000',
                 'backlog_limit' => 'none',
               },
             },

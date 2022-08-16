@@ -23,7 +23,11 @@ class cis_security_hardening::rules::home_usrquota (
   if ($enforce) and has_key($facts['mountpoints'], '/home') {
     cis_security_hardening::set_mount_options { '/home-usrquota':
       mountpoint   => '/home',
-      mountoptions => 'quota,usrquota',
+      mountoptions => 'usrquota',
+    }
+    cis_security_hardening::set_mount_options { '/home-usrquota-quota':
+      mountpoint   => '/home',
+      mountoptions => 'quota',
     }
   }
 }

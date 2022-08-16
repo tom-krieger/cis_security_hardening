@@ -28,6 +28,7 @@ describe 'cis_security_hardening::rules::auditd_delete' do
               architecture: arch.to_s,
               cis_security_hardening: {
                 auditd: {
+                  uid_min: '1000',
                   delete: false,
                 },
               },

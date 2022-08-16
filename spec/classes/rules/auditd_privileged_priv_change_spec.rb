@@ -26,6 +26,7 @@ describe 'cis_security_hardening::rules::auditd_privileged_priv_change' do
           os_facts.merge!(
             cis_security_hardening: {
               auditd: {
+                uid_min: '1000',
                 auditing_process: 'none',
               },
             },
