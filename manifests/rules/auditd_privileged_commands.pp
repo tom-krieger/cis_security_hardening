@@ -21,14 +21,18 @@ class cis_security_hardening::rules::auditd_privileged_commands (
   Boolean $enforce                 = false,
 ) {
   if $enforce {
+    $dir = dirname($cis_security_hardening::rules::auditd_init::rules_file)
+    $rules_file = "${dir}/cis_security_hardening_priv_cmds.rules"
     $privlist = fact('cis_security_hardening.auditd.priv-cmds-list')
     unless $privlist == undef {
-      concat::fragment { 'priv. commands rules':
-        target  => $cis_security_hardening::rules::auditd_init::rules_file,
+      file { $rules_file:
+        ensure  => file,
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0640',
         content => epp('cis_security_hardening/rules/common/auditd_priv_commands.epp', {
             data => $privlist
         }),
-        order   => '250',
       }
     }
   }
