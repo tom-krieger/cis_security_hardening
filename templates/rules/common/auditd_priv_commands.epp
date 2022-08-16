@@ -1,5 +1,3 @@
-<%- $data.each |$part, $rules| { -%>
-<%- $rules.each |$rule| { -%>
+<%- $data.each |$rule| { -%>
 <%= $rule %>
-<% } -%>
 <% } -%>
