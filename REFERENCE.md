@@ -48,6 +48,7 @@
 * `cis_security_hardening::rules::auditd_identity`: Ensure events that modify user/group information are collected (Automated)
 * `cis_security_hardening::rules::auditd_immutable`: Ensure the audit configuration is immutable (Automated)
 * `cis_security_hardening::rules::auditd_init`: Initialize auditd rules file
+* `cis_security_hardening::rules::auditd_kernel_modules`: Ensure kernel module loading unloading and modification is collected
 * `cis_security_hardening::rules::auditd_kmod_use`: Ensure successful and unsuccessful attempts to use the kmod command are recorded
 * `cis_security_hardening::rules::auditd_log_dir_perms`: Ensure the audit log directory is 0750 or more restrictive
 * `cis_security_hardening::rules::auditd_logins`: Ensure login and logout events are collected (Automated)
@@ -83,6 +84,7 @@ audited
 * `cis_security_hardening::rules::auditd_time_change`: Ensure events that modify date and time information are collected (Automated)
 * `cis_security_hardening::rules::auditd_tools_perms`: Ensure audit tools are mode of 0755 or more restrictive and owned by the right user and group
 * `cis_security_hardening::rules::auditd_unix_update_use`: Ensure successful and unsuccessful attempts to use the unix_update command are recorded
+* `cis_security_hardening::rules::auditd_user_emulation`: Ensure actions as another user are always logged
 * `cis_security_hardening::rules::auditd_usermod_use`: Ensure successful and unsuccessful attempts to use the usermod command are recorded
 * `cis_security_hardening::rules::auditd_when_disk_full`: Ensure system is disabled when audit logs are full (Automated)
 * `cis_security_hardening::rules::authselect_profile`: Create custom authselect profile (Scored)
@@ -91,7 +93,6 @@ audited
 * `cis_security_hardening::rules::avahi`: Ensure Avahi Server is not enabled (Automated)
 * `cis_security_hardening::rules::bind`: Ensure DNS Server is not installed (Automated)
 * `cis_security_hardening::rules::chrony`: Ensure chrony is configured (Automated)
-* `cis_security_hardening::rules::chrony_sync_to_authritative`: Ensure system clocks are synchronize to the authoritative time source when the time difference is greater than one second
 * `cis_security_hardening::rules::cramfs`: Ensure mounting of cramfs filesystems is disabled (Automated)
 * `cis_security_hardening::rules::cron_daily`: Ensure permissions on /etc/cron.daily are configured (Automated)
 * `cis_security_hardening::rules::cron_hourly`: Ensure permissions on /etc/cron.hourly are configured (Automated)
@@ -870,7 +871,7 @@ Check a mount option
 Alias of
 
 ```puppet
-Pattern[/^[\/a-zA-Z0-9]+$/]
+Pattern[/^[\/a-zA-Z0-9\,]+$/]
 ```
 
 ### <a name="cis_security_hardeningmountpoint"></a>`Cis_security_hardening::Mountpoint`

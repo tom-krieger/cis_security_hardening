@@ -47,7 +47,7 @@ describe 'cis_security_hardening::rules::chrony' do
                   'owner'   => 'root',
                   'group'   => 'root',
                   'mode'    => '0644',
-                  'content' => 'OPTIONS="-u ntp:chrony"',
+                  'content' => 'OPTIONS="-u chrony"',
                 )
 
             end

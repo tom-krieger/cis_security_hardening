@@ -44,23 +44,25 @@ class cis_security_hardening::rules::gdm_auto_mount (
     })
 
     ini_setting { 'gdm-disable-automount':
-      ensure  => present,
-      path    => '/etc/dconf/db/local.d/00-media-automount',
-      section => 'org/gnome/desktop/media-handling',
-      setting => 'automount',
-      value   => 'false',
-      require => File['/etc/dconf/db/local.d/00-media-automount'],
-      notify  => Exec['dconf update'],
+      ensure            => present,
+      path              => '/etc/dconf/db/local.d/00-media-automount',
+      section           => 'org/gnome/desktop/media-handling',
+      setting           => 'automount',
+      key_val_separator => '=',
+      value             => 'false',
+      require           => File['/etc/dconf/db/local.d/00-media-automount'],
+      notify            => Exec['dconf update'],
     }
 
     ini_setting { 'gdm-disable-automount-open':
-      ensure  => present,
-      path    => '/etc/dconf/db/local.d/00-media-automount',
-      section => 'org/gnome/desktop/media-handling',
-      setting => 'automount-open',
-      value   => 'false',
-      require => File['/etc/dconf/db/local.d/00-media-automount'],
-      notify  => Exec['dconf update'],
+      ensure            => present,
+      path              => '/etc/dconf/db/local.d/00-media-automount',
+      section           => 'org/gnome/desktop/media-handling',
+      setting           => 'automount-open',
+      key_val_separator => '=',
+      value             => 'false',
+      require           => File['/etc/dconf/db/local.d/00-media-automount'],
+      notify            => Exec['dconf update'],
     }
 
     exec { 'dconf update':

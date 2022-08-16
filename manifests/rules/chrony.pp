@@ -55,7 +55,7 @@ class cis_security_hardening::rules::chrony (
           owner   => 'root',
           group   => 'root',
           mode    => '0644',
-          content => 'OPTIONS="-u ntp:chrony"',
+          content => 'OPTIONS="-u chrony"',
         }
       }
       default: {
