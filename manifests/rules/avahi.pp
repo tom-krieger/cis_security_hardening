@@ -24,7 +24,7 @@ class cis_security_hardening::rules::avahi (
 ) {
   if $enforce {
     case $facts['operatingsystem'].downcase {
-      'redhat', 'centos', 'almalinux', 'rocky': {
+      'redhat', 'centos': {
         if $facts['operatingsystemmajrelease'] >= '8' {
           ensure_resource('service', ['avahi-daemon.socket'], {
               ensure => 'stopped',
@@ -40,6 +40,19 @@ class cis_security_hardening::rules::avahi (
               enable => false,
           })
         }
+      }
+      'almalinux', 'rocky': {
+        ensure_resource('service', ['avahi-daemon.socket'], {
+            ensure => 'stopped',
+            enable => false,
+        })
+        ensure_resource('service', ['avahi-daemon.service'], {
+            ensure => 'stopped',
+            enable => false,
+        })
+        ensure_packages(['avahi-autoipd', 'avahi'], {
+            ensure => absent,
+        })
       }
       'ubuntu': {
         ensure_resource('service', ['avahi-daemon.socket'], {

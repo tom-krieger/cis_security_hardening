@@ -33,7 +33,15 @@ class cis_security_hardening::rules::auditd_privileged_commands (
         content => epp('cis_security_hardening/rules/common/auditd_priv_commands.epp', {
             data => $privlist
         }),
+        notify  => Exec['reload auditd rules priv cmds'],
       }
+    }
+
+    $cmd = "auditctl -R ${rules_file}"
+    exec { 'reload auditd rules priv cmds':
+      refreshonly => true,
+      command     => $cmd,
+      path        => ['/sbin', '/usr/sbin', '/bin', '/usr/bin'],
     }
   }
 }

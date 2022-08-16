@@ -22,12 +22,12 @@ class cis_security_hardening::rules::cups (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    $ensure =  $facts['os']['family'].downcase() ? {
+    $ensure =  $facts['osfamily'].downcase() ? {
       'suse'  => 'absent',
       default => 'purged',
     }
 
-    case  $facts['os']['name'].downcase() {
+    case $facts['os']['name'].downcase() {
       'ubuntu', 'sles': {
         ensure_packages(['cups'], {
             ensure => $ensure,
