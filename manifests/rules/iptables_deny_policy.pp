@@ -35,6 +35,7 @@ class cis_security_hardening::rules::iptables_deny_policy (
   Enum['drop', 'accept'] $forward_policy = 'drop',
 ) {
   if $enforce {
+    include cis_security_hardening::rules::iptables_save
     firewallchain { 'OUTPUT:filter:IPv4':
       ensure => present,
       policy => $output_policy,

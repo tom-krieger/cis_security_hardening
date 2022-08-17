@@ -24,6 +24,7 @@ class cis_security_hardening::rules::iptables_open_ports (
   Hash $firewall_rules = {},
 ) {
   if $enforce {
+    include cis_security_hardening::rules::iptables_save
     if(empty($firewall_rules)) {
       $policy = fact('cis_security_hardening.iptables.policy')
       if  $policy != undef {

@@ -7,8 +7,8 @@ describe 'cis_security_hardening::rules::iptables_save' do
     context "on #{os}" do
       let(:facts) { os_facts }
 
-      it { 
-        is_expected.to compile 
+      it {
+        is_expected.to compile
 
         if os_facts[:operatingsystem].casecmp('rocky').zero?
           is_expected.to contain_exec('save iptables rules')

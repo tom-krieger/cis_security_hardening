@@ -20,6 +20,7 @@ class cis_security_hardening::rules::iptables_outbound_established (
   Boolean $enforce = false,
 ) {
   if $enforce {
+    include cis_security_hardening::rules::iptables_save
     firewall { '004 accept outbound tcp state new, established':
       chain  => 'OUTPUT',
       proto  => 'tcp',

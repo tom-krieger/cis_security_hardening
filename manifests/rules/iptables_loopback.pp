@@ -22,6 +22,7 @@ class cis_security_hardening::rules::iptables_loopback (
   Boolean $enforce = false,
 ) {
   if $enforce {
+    include cis_security_hardening::rules::iptables_save
     firewall { '001 accept all incoming traffic to local interface':
       chain   => 'INPUT',
       proto   => 'all',
