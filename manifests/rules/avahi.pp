@@ -23,6 +23,11 @@ class cis_security_hardening::rules::avahi (
   Boolean $enforce = false,
 ) {
   if $enforce {
+    $ensure = $facts['osfamily'].downcase() ? {
+      'suse'  => 'absent',
+      default => 'purged'
+    }
+
     case $facts['operatingsystem'].downcase {
       'redhat', 'centos': {
         if $facts['operatingsystemmajrelease'] >= '8' {
@@ -51,7 +56,7 @@ class cis_security_hardening::rules::avahi (
             enable => false,
         })
         ensure_packages(['avahi-autoipd', 'avahi'], {
-            ensure => absent,
+            ensure => $ensure,
         })
       }
       'ubuntu': {
@@ -64,7 +69,7 @@ class cis_security_hardening::rules::avahi (
             enable => false,
         })
         ensure_packages(['avahi-daemon'], {
-            ensure => purged,
+            ensure => $ensure,
         })
       }
       'debian': {
@@ -83,7 +88,7 @@ class cis_security_hardening::rules::avahi (
             enable => false,
         })
         ensure_packages(['avahi-autoipd', 'avahi'], {
-            ensure => absent,
+            ensure => $ensure,
         })
       }
       default: {

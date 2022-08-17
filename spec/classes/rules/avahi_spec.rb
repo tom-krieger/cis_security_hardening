@@ -54,12 +54,12 @@ describe 'cis_security_hardening::rules::avahi' do
                 )
               is_expected.to contain_package('avahi-autoipd')
                 .with(
-                  'ensure' => 'absent',
+                  'ensure' => 'purged',
                 )
 
               is_expected.to contain_package('avahi')
                 .with(
-                  'ensure' => 'absent',
+                  'ensure' => 'purged',
                 )
             elsif os_facts[:operatingsystem].casecmp('ubuntu').zero?
 
