@@ -35,11 +35,6 @@ cis_security_hardening::benchmark::rocky::8:
     software_updates:
       level1:
         - yum_gpgcheck
-    sudo_config:
-      level1:
-        - sudo_installed
-        - sudo_use_pty
-        - sudo_log
     filesystem_integrety:
       level1:
         - aide_installed
@@ -220,6 +215,12 @@ cis_security_hardening::benchmark::rocky::8:
         - sshd_max_startups
         - sshd_max_sessions
         - sshd_crypto_policy
+    configure_privilege_escalation:
+      level1:
+        - sudo_installed
+        - sudo_use_pty
+        - sudo_log
+        - restrict_su
     configure_authselect:
       level1:
         - authselect_profile

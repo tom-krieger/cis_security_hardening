@@ -56,7 +56,7 @@ class cis_security_hardening::rules::restrict_su (
       }
 
       exec { "${user}_wheel":
-        command => "usermod -G ${sudo_group} ${user}",  #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
+        command => "usermod -G ${sudo_group} ${user}",  #lint:ignore:security_class_or_define_parameter_in_exec
         unless  => "grep ${sudo_group} /etc/group | grep ${user}",
         path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
       }

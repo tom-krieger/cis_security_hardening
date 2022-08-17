@@ -38,16 +38,19 @@ class cis_security_hardening::rules::iptables_deny_policy (
     firewallchain { 'OUTPUT:filter:IPv4':
       ensure => present,
       policy => $output_policy,
+      notify => Class['cis_security_hardening::rules::iptables_save'],
     }
 
     firewallchain { 'FORWARD:filter:IPv4':
       ensure => present,
       policy => $forward_policy,
+      notify => Class['cis_security_hardening::rules::iptables_save'],
     }
 
     firewallchain { 'INPUT:filter:IPv4':
       ensure => present,
       policy => $input_policy,
+      notify => Class['cis_security_hardening::rules::iptables_save'],
     }
   }
 }

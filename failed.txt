@@ -1,15 +1,11 @@
 RuleScan statusLast passed on
-1.6.1.6 Ensure no unconfined services exist	
+1.6.1.6 Ensure no unconfined services exist	(ok)
 
-1.8.5 Ensure automatic mounting of removable media is disabled	(ok)
+3.4.3.2.3 Ensure iptables rules exist for all open ports	(ok)
 
-2.1.2 Ensure chrony is configured	(ok)
+3.4.3.2.4 Ensure iptables default deny firewall policy	(ok)
 
-3.4.3.2.3 Ensure iptables rules exist for all open ports	
-
-3.4.3.2.4 Ensure iptables default deny firewall policy	
-
-3.4.3.2.5 Ensure iptables rules are saved	
+3.4.3.2.5 Ensure iptables rules are saved	(ok)
 
 4.1.3.4 Ensure events that modify date and time information are collected	
 
@@ -21,12 +17,12 @@ RuleScan statusLast passed on
 
 4.1.3.13 Ensure file deletion events by users are collected	
 
-5.3.4 Ensure users must provide password for escalation	
+5.3.4 Ensure users must provide password for escalation	(ok)
 
-5.3.7 Ensure access to the su command is restricted	
+5.3.7 Ensure access to the su command is restricted	(ok)
 
-5.5.1 Ensure password creation requirements are configured	
+5.5.1 Ensure password creation requirements are configured	(??)
 
-5.5.2 Ensure lockout for failed password attempts is configured	
+5.5.2 Ensure lockout for failed password attempts is configured	(??)
 
-5.5.3 Ensure password reuse is limited	
+5.5.3 Ensure password reuse is limited	(??)
