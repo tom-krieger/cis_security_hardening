@@ -54,24 +54,20 @@ class cis_security_hardening::rules::auditd_conf_perms (
   String $mode     = '0640',
 ) {
   if $enforce {
-    if
-        has_key($facts, 'cis_security_hardening') and
-        has_key($facts['cis_security_hardening'], 'auditd') and
-        has_key($facts['cis_security_hardening']['auditd'], 'config_files')
-    {
+    $dir = dirname($cis_security_hardening::rules::auditd_init::rules_file)
+    $rules_file = "${dir}/cis_security_hardening_priv_cmds.rules"
+    $conf_files = fact('cis_security_hardening.auditd.config_files')
+
+    unless $conf_files == undef {
       $facts['cis_security_hardening']['auditd']['config_files'].each |$conf| {
-
-        if $conf != $cis_security_hardening::rules::auditd_init::rules_file {
-
+        if $conf != $cis_security_hardening::rules::auditd_init::rules_file and $conf != $rules_file {
           file { $conf:
             ensure => file,
             owner  => $user,
             group  => $group,
             mode   => $mode,
           }
-
         }
-
       }
     }
   }
