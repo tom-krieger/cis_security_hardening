@@ -29,10 +29,6 @@ class cis_security_hardening::rules::auditd_actions (
       undef => '1000',
       default => fact('cis_security_hardening.auditd.uid_min'),
     }
-    $uid = fact('cis_security_hardening.auditd.uid_min') ? {
-      undef => '1000',
-      default => fact('cis_security_hardening.auditd.uid_min'),
-    }
     case $facts['operatingsystem'].downcase() {
       'redhat', 'centos', 'almalinux', 'rocky': {
         if $facts['operatingsystemmajrelease'] >= '8' {
