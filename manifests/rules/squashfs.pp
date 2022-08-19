@@ -22,7 +22,7 @@ class cis_security_hardening::rules::squashfs (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    if $facts['operatingsystem'].downcase() == 'rocky' {
+    if $facts['operatingsystem'].downcase() == 'rocky' or $facts['operatingsystem'].downcase() == 'almalinux' {
       kmod::install { 'squashfs':
         command => '/bin/false',
       }
