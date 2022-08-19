@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure packet redirect sending is disabled (Automated)
+#    Ensure packet redirect sending is disabled 
 #
 # ICMP Redirects are used to send routing information to other hosts. As a host itself does not act 
 # as a router (in a host only configuration), there is no need to send redirects.

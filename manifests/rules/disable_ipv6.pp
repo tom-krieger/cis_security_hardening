@@ -1,5 +1,5 @@
 # @summary 
-#    Disable IPv6 (Manual)
+#    Disable IPv6 
 #
 # Although IPv6 has many advantages over IPv4, not all organizations have IPv6 or dual stack configurations implemented.
 #

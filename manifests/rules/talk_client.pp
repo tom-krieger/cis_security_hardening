@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure talk client is not installed (Automated)
+#    Ensure talk client is not installed 
 #
 # The talk software makes it possible for users to send and receive messages across systems 
 # through a terminal session. The talk client, which allows initialization of talk sessions, 

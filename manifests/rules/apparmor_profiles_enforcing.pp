@@ -1,5 +1,5 @@
 # @summary
-#    Ensure all AppArmor Profiles are in enforce or complain mode (Automated)
+#    Ensure all AppArmor Profiles are in enforce or complain mode 
 #
 # AppArmor profiles define what resources applications are able to access.
 #

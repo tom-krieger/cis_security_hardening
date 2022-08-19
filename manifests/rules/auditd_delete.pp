@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure file deletion events by users are collected (Automated)
+#    Ensure file deletion events by users are collected 
 #
 # Monitor the use of system calls associated with the deletion or renaming of files and file 
 # attributes. This configuration statement sets up monitoring for the unlink (remove a file), 
@@ -25,17 +25,25 @@ class cis_security_hardening::rules::auditd_delete (
   Boolean $enforce                 = false,
 ) {
   if $enforce {
+    $auid = $facts['operatingsystem'].downcase() ? {
+      'rocky' => 'unset',
+      default => '4294967295',
+    }
+    $uid = fact('cis_security_hardening.auditd.uid_min') ? {
+      undef => '1000',
+      default => fact('cis_security_hardening.auditd.uid_min'),
+    }
     concat::fragment { 'watch deletes rule 1':
       order   => '31',
       target  => $cis_security_hardening::rules::auditd_init::rules_file,
-      content => '-a always,exit -F arch=b32 -S unlink -S unlinkat -S rename -S renameat -F auid>=1000 -F auid!=4294967295 -k delete',
+      content => "-a always,exit -F arch=b32 -S unlink -S unlinkat -S rename -S renameat -F auid>=${uid} -F auid!=${auid} -k delete",
     }
     if  $facts['architecture'] == 'x86_64' or
     $facts['architecture'] == 'amd64' {
       concat::fragment { 'watch deletes rule 2':
         order   => '32',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,
-        content => '-a always,exit -F arch=b64 -S unlink -S unlinkat -S rename -S renameat -F auid>=1000 -F auid!=4294967295 -k delete',
+        content => "-a always,exit -F arch=b64 -S unlink -S unlinkat -S rename -S renameat -F auid>=${uid} -F auid!=${auid} -k delete",
       }
     }
   }

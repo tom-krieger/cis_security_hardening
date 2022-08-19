@@ -6,7 +6,7 @@ enforce_options = [true, false]
 arch_options = ['x86_64', 'i686']
 
 describe 'cis_security_hardening::rules::auditd_access' do
-  on_supported_os.each do |os, _os_facts|
+  on_supported_os.each do |os, os_facts|
     enforce_options.each do |enforce|
       arch_options.each do |arch|
         context "on #{os} with enforce = #{enforce} and arch = #{arch}" do
@@ -24,17 +24,15 @@ describe 'cis_security_hardening::rules::auditd_access' do
             EOF
           end
           let(:facts) do
-            {
-              osfamily: 'RedHat',
-              operatingsystem: 'CentOS',
-              operatingsystemmajrelease: '7',
+            os_facts.merge!(
               architecture: arch.to_s,
               cis_security_hardening: {
                 auditd: {
+                  uid_min: '1000',
                   access: false,
                 },
               },
-            }
+            )
           end
           let(:params) do
             {
@@ -46,16 +44,21 @@ describe 'cis_security_hardening::rules::auditd_access' do
             is_expected.to compile
 
             if enforce
+              auid = if os_facts[:operatingsystem].casecmp('rocky').zero?
+                       'unset'
+                     else
+                       '4294967295'
+                     end
               is_expected.to contain_concat__fragment('watch access rule 1')
                 .with(
                   'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-a always,exit -F arch=b32 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=4294967295 -k access',
+                  'content' => "-a always,exit -F arch=b32 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=#{auid} -k access",
                   'order'   => '11',
                 )
               is_expected.to contain_concat__fragment('watch access rule 2')
                 .with(
                   'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-a always,exit -F arch=b32 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -k access',
+                  'content' => "-a always,exit -F arch=b32 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=#{auid} -k access",
                   'order'   => '12',
                 )
 
@@ -63,13 +66,13 @@ describe 'cis_security_hardening::rules::auditd_access' do
                 is_expected.to contain_concat__fragment('watch access rule 3')
                   .with(
                     'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                    'content' => '-a always,exit -F arch=b64 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=4294967295 -k access',
+                    'content' => "-a always,exit -F arch=b64 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=#{auid} -k access",
                     'order'   => '13',
                   )
                 is_expected.to contain_concat__fragment('watch access rule 4')
                   .with(
                     'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                    'content' => '-a always,exit -F arch=b64 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -k access',
+                    'content' => "-a always,exit -F arch=b64 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=#{auid} -k access",
                     'order'   => '14',
                   )
               else

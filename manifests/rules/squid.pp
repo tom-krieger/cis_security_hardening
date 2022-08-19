@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure HTTP Proxy Server is not enabled (Automated)
+#    Ensure HTTP Proxy Server is not enabled 
 #
 # Squid is a standard proxy server used in many distributions and environments.
 #

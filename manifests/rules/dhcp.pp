@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure DHCP Server is not enabled (Automated)
+#    Ensure DHCP Server is not enabled 
 #
 # The Dynamic Host Configuration Protocol (DHCP) is a service that allows machines to be dynamically assigned IP addresses.
 #

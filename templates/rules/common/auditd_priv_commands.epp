@@ -1,5 +1,4 @@
-<%- $data.each |$part, $rules| { -%>
-<%- $rules.each |$rule| { -%>
-<%= $rule %>
+<%- $data.each |$cmd| { -%>
+-a always,exit -S all -F path=<%= $cmd %> -F perm=x -F auid>=1000 -F auid!=-1 -F key=privileged
 <% } -%>
-<% } -%>
+

@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure loopback traffic is configured (Automated)
+#    Ensure loopback traffic is configured 
 #
 # Configure the loopback interface to accept traffic. Configure all other interfaces to deny traffic 
 # to the loopback network.

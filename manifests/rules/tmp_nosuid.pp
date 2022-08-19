@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure nosuid option set on /tmp partition (Automated)    
+#    Ensure nosuid option set on /tmp partition     
 #
 # The nosuid mount option specifies that the filesystem cannot contain setuid files.
 #

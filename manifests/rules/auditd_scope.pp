@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure changes to system administration scope (sudoers) is collected (Automated)
+#    Ensure changes to system administration scope (sudoers) is collected 
 #
 # Monitor scope changes for system administrations. If the system has been properly configured 
 # to force system administrators to log in as themselves first and then use the sudo command to 

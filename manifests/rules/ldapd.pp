@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure LDAP server is not enabled (Automated)
+#    Ensure LDAP server is not enabled 
 #
 # The Lightweight Directory Access Protocol (LDAP) was introduced as a replacement for NIS/YP. It 
 # is a service that provides a method for looking up information from a central database.

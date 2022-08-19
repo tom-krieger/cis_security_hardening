@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure kernel module loading and unloading is collected (Automated)
+#    Ensure kernel module loading and unloading is collected 
 #
 # Monitor the loading and unloading of kernel modules. The programs insmod (install a kernel module), 
 # rmmod (remove a kernel module), and modprobe (a more sophisticated program to load and unload modules, 
@@ -45,8 +45,7 @@ class cis_security_hardening::rules::auditd_modules (
       content => '-w /sbin/modprobe -p x -k modules',
     }
 
-    if  $facts['architecture'] == 'x86_64' or
-    $facts['architecture'] == 'amd64' {
+    if  $facts['architecture'] == 'x86_64' or $facts['architecture'] == 'amd64' {
       concat::fragment { 'watch modules rule 4':
         order   => '74',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,

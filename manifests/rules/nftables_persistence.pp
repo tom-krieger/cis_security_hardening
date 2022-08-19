@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure nftables rules are permanent (Automated)
+#    Ensure nftables rules are permanent 
 #
 # nftables is a subsystem of the Linux kernel providing filtering and classification of 
 # network packets/datagrams/frames.

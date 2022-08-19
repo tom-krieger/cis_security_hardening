@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure IP forwarding is disabled (Automated)
+#    Ensure IP forwarding is disabled 
 #
 # The net.ipv4.ip_forward flag is used to tell the system whether it can forward packets or not.
 #
@@ -24,7 +24,7 @@ class cis_security_hardening::rules::disable_ip_forwarding (
       'net.ipv4.ip_forward':
         value => 0,
     }
-    if  $facts['operatingsystem'].downcase() == 'sles' and fact('network6') != undef {
+    if  fact('network6') != undef {
       Sysctl {
         'net.ipv6.conf.all.forwarding':
           value => 0,

@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure base chains exist (Automated)
+#    Ensure base chains exist 
 #
 # Chains are containers for rules. They exist in two kinds, base chains and regular chains. A base chain is an 
 # entry point for packets from the networking stack, a regular chain may be used as jump target and is used 

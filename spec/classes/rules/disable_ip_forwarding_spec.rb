@@ -29,7 +29,7 @@ describe 'cis_security_hardening::rules::disable_ip_forwarding' do
                 'value' => 0,
               )
 
-            if os_facts[:operatingsystem].casecmp('sles').zero? && os_facts.key?('network6')
+            if os_facts.key?('network6')
               is_expected.to contain_sysctl('net.ipv6.conf.all.forwarding')
                 .with(
                   'value' => 0,

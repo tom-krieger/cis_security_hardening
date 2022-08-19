@@ -54,7 +54,7 @@ class cis_security_hardening::rules::crypto_policy (
 
     if  $enforce and $policy != $crypto_policy {
       exec { "set crypto policy to ${crypto_policy} (current: ${policy})":
-        command => "update-crypto-policies --set ${crypto_policy}", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
+        command => "update-crypto-policies --set ${crypto_policy}", #lint:ignore:security_class_or_define_parameter_in_exec 
         path    => ['/sbin', '/usr/sbin', '/bin', '/usr/bin'],
         notify  => Reboot['after_run'],
       }

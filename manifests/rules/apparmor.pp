@@ -1,5 +1,5 @@
 # @summary
-#    Ensure AppArmor is installed (Automated)
+#    Ensure AppArmor is installed 
 #
 # AppArmor provides Mandatory Access Controls.
 #

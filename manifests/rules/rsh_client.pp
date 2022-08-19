@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure rsh client is not installed (Automated)
+#    Ensure rsh client is not installed 
 #
 # The rsh package contains the client commands for the rsh services.
 #

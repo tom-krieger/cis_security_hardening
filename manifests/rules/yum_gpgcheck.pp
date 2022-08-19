@@ -20,12 +20,21 @@
 class cis_security_hardening::rules::yum_gpgcheck (
   Boolean $enforce = false,
 ) {
-  if $enforce {
+  if $enforce and $facts['osfamily'].downcase() == 'redhat' {
     file_line { 'yum_gpgcheck':
       ensure => present,
       path   => '/etc/yum.conf',
       line   => 'gpgcheck=1',
       match  => '^gpgcheck',
+    }
+
+    if $facts['operatingsystemmajrelease'] > '7' {
+      file_line { 'yum_gpgcheck dnf':
+        ensure => present,
+        path   => '/etc/dnf/dnf.conf',
+        line   => 'gpgcheck=1',
+        match  => '^gpgcheck',
+      }
     }
   }
 }

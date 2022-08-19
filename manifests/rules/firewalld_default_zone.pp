@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure default zone is set (Automated)
+#    Ensure default zone is set 
 #
 # A firewall zone defines the trust level for a connection, interface or source address binding. This is a one 
 # to many relation, which means that a connection, interface or source can only be part of one zone, but a zone 

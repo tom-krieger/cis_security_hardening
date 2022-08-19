@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure SSH AllowTcpForwarding is disabled (Automated)
+#    Ensure SSH AllowTcpForwarding is disabled 
 #
 # SSH port forwarding is a mechanism in SSH for tunneling application ports from the client to the server, 
 # or servers to clients. It can be used for adding encryption to legacy applications, going through firewalls, 

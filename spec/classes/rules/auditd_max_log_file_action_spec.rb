@@ -12,6 +12,7 @@ describe 'cis_security_hardening::rules::auditd_max_log_file_action' do
           os_facts.merge!(
             cis_security_hardening: {
               auditd: {
+                uid_min: '1000',
                 'max_log_file' => 'none',
               },
             },

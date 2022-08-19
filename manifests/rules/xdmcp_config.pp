@@ -1,5 +1,5 @@
 # @summary
-#    Ensure XDCMP is not enabled (Automated)
+#    Ensure XDCMP is not enabled 
 #
 # X Display Manager Control Protocol (XDMCP) is designed to provide authenticated access to display 
 # management services for remote displays
@@ -24,10 +24,16 @@ class cis_security_hardening::rules::xdmcp_config (
   Boolean $enforce = false,
 ) {
   $xdcmp = fact('cis_security_hardening.xdcmp')
+
   if  $enforce and $xdcmp != undef and $xdcmp {
+    $file = $facts['os']['name'].downcase() ? {
+      'rocky' => '/etc/gdm/custom.conf',
+      default => '/etc/gdm3/custom.conf',
+    }
+
     file_line { 'remove enable':
       ensure            => absent,
-      path              => '/etc/gdm3/custom.conf',
+      path              => $file,
       match             => 'Enable=true',
       match_for_absence => true,
     }

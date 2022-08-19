@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure SELinux policy is configured (Automated)
+#    Ensure SELinux policy is configured 
 #
 # Configure SELinux to meet or exceed the default targeted policy, which constrains daemons and system software only.
 #

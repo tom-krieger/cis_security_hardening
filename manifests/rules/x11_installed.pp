@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure X Window System is not installed (Automated)
+#    Ensure X Window System is not installed 
 #
 # The X Window System provides a Graphical User Interface (GUI) where users can have multiple 
 # windows in which to run programs and various add on. The X Windows system is typically used 

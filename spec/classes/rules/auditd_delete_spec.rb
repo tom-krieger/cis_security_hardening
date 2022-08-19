@@ -28,6 +28,7 @@ describe 'cis_security_hardening::rules::auditd_delete' do
               architecture: arch.to_s,
               cis_security_hardening: {
                 auditd: {
+                  uid_min: '1000',
                   delete: false,
                 },
               },
@@ -43,11 +44,16 @@ describe 'cis_security_hardening::rules::auditd_delete' do
             is_expected.to compile
 
             if enforce
+              auid = if os_facts[:operatingsystem].casecmp('rocky').zero?
+                       'unset'
+                     else
+                       '4294967295'
+                     end
               is_expected.to contain_concat__fragment('watch deletes rule 1')
                 .with(
                   'order' => '31',
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-a always,exit -F arch=b32 -S unlink -S unlinkat -S rename -S renameat -F auid>=1000 -F auid!=4294967295 -k delete',
+                  'content' => "-a always,exit -F arch=b32 -S unlink -S unlinkat -S rename -S renameat -F auid>=1000 -F auid!=#{auid} -k delete",
                 )
 
               if ['x86_64', 'amd64'].include?(arch)
@@ -55,7 +61,7 @@ describe 'cis_security_hardening::rules::auditd_delete' do
                   .with(
                     'order' => '32',
                     'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                    'content' => '-a always,exit -F arch=b64 -S unlink -S unlinkat -S rename -S renameat -F auid>=1000 -F auid!=4294967295 -k delete',
+                    'content' => "-a always,exit -F arch=b64 -S unlink -S unlinkat -S rename -S renameat -F auid>=1000 -F auid!=#{auid} -k delete",
                   )
 
               else

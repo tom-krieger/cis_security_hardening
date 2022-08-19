@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure DNS Server is not installed (Automated)
+#    Ensure DNS Server is not installed 
 #
 # The Domain Name System (DNS) is a hierarchical naming system that maps names to IP addresses for 
 # computers, services and other resources connected to a network.

@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure telnet client is not installed (Automated)
+#    Ensure telnet client is not installed 
 #
 # The telnet package contains the telnet client, which allows users to start connections to other 
 # systems via the telnet protocol.

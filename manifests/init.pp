@@ -11,32 +11,23 @@
 #    The benchmark profile to use. Currently only server profiles are supported.
 #
 # @param level
-#    The CIS Benchmark server security level
-#
-# @param benchmarktype
-#    Select between CIS and STIG benchmarks. Default is 'CIS'.
+#    The CIS Benchmark server security level. Higher levels include all rules of lover levels. Therefore level1 rules are all included
+#    in the level2 rules and stig includes level1 nd level 2 rules.
 #
 # @param update_postrun_command
 #    Update Puppet agent post run command
-#
 # @param fact_upload_command
 #    Command to use to upload facts to Puppet master
-#
 # @param exclude_dirs_sticky_ww
 #    Araay of directories to exclude from the search for world writable directories with sticky bit
-#
 # @param auditd_suid_include
 #    Directories to search for suid and sgid programs. Can not be set together with auditd_suid_exclude
-#
 # @param auditd_suid_exclude
 #    Directories to exclude from search for suid and sgid programs. Can not be set together with auditd_suid_include
-#
 # @param auditd_rules_fact_file
 #    The file where to store the facts for auditd rules
-#
 # @param time_until_reboot
 #    Time to wait until system is rebooted if required. Time in seconds.
-#
 # @param verbose_logging
 #    Print various info messages
 #
@@ -44,8 +35,7 @@
 #   include cis_security_hardening
 class cis_security_hardening (
   Enum['server'] $profile            = 'server',
-  Enum['1', '2'] $level              = '2',
-  Enum['cis', 'stig'] $benchmarktype = 'cis',
+  Enum['1', '2', 'stig'] $level      = '2',
   Array $exclude_dirs_sticky_ww      = [],
   Boolean $update_postrun_command    = true,
   String $fact_upload_command        = '/usr/share/cis_security_hardening/bin/fact_upload.sh',
@@ -75,10 +65,7 @@ class cis_security_hardening (
     default  => $facts['operatingsystemmajrelease'],
   }
 
-  $key = $benchmarktype ? {
-    default => "cis_security_hardening::benchmark::${os}::${os_vers}",
-    'stig'  => "cis_security_hardening::benchmark::${os}::${os_vers}::stig",
-  }
+  $key = "cis_security_hardening::benchmark::${os}::${os_vers}"
   $benchmark = lookup($key, undef, undef, {})
 
   if has_key($benchmark, 'bundles') {
@@ -93,10 +80,15 @@ class cis_security_hardening (
         false => [],
       }
 
-      if $level == '2' {
-        $rules = concat($level1, $level2)
-      } else {
-        $rules = $level1
+      $stig = has_key($bundle_data, 'stig') ? {
+        true => $bundle_data['stig'],
+        false => [],
+      }
+
+      $rules = $level ? {
+        '1' => $level1,
+        '2' => concat($level1, $level2),
+        'stig' => concat($level1, $level2, $stig)
       }
 
       if $verbose_logging {

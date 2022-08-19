@@ -29,10 +29,15 @@ describe 'cis_security_hardening::rules::cups' do
               else
                 is_expected.to contain_package('cups')
                   .with(
-                      'ensure' => 'purged',
-                    )
+                    'ensure' => 'purged',
+                  )
               end
 
+            elsif os_facts[:operatingsystem].casecmp('rocky').zero?
+              is_expected.to contain_package('cups')
+                .with(
+                  'ensure' => 'purged',
+                )
             else
               is_expected.to contain_service('cups')
                 .with(

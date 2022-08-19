@@ -1,5 +1,5 @@
 # @summary 
-#     Ensure loopback traffic is configured (Automated)
+#     Ensure loopback traffic is configured 
 #
 # Configure the loopback interface to accept traffic. Configure all other interfaces to deny traffic to the 
 # loopback network (127.0.0.0/8).
@@ -22,17 +22,20 @@ class cis_security_hardening::rules::iptables_loopback (
   Boolean $enforce = false,
 ) {
   if $enforce {
+    include cis_security_hardening::rules::iptables_save
     firewall { '001 accept all incoming traffic to local interface':
       chain   => 'INPUT',
       proto   => 'all',
       iniface => 'lo',
       action  => 'accept',
+      notify  => Class['cis_security_hardening::rules::iptables_save'],
     }
     firewall { '002 accept all outgoing traffic to local interface':
       chain    => 'OUTPUT',
       proto    => 'all',
       outiface => 'lo',
       action   => 'accept',
+      notify   => Class['cis_security_hardening::rules::iptables_save'],
     }
 
     firewall { '003 drop all traffic to lo 127.0.0.1/8':
@@ -40,6 +43,7 @@ class cis_security_hardening::rules::iptables_loopback (
       proto  => 'all',
       source => '127.0.0.1/8',
       action => 'drop',
+      notify => Class['cis_security_hardening::rules::iptables_save'],
     }
   }
 }

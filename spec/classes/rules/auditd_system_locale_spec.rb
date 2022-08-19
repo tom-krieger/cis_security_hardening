@@ -28,6 +28,7 @@ describe 'cis_security_hardening::rules::auditd_system_locale' do
               architecture: arch.to_s,
               cis_security_hardening: {
                 auditd: {
+                  uid_min: '1000',
                   'system-locale' => false,
                 },
               },
@@ -84,6 +85,15 @@ describe 'cis_security_hardening::rules::auditd_system_locale' do
                     'order' => '135',
                     'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
                     'content' => '-w /etc/sysconfig/network -p wa -k system-locale',
+                  )
+              end
+
+              if os_facts[:operatingsystem].casecmp('rocky').zero?
+                is_expected.to contain_concat__fragment('watch network environment rule 6')
+                  .with(
+                    'order' => '135',
+                    'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
+                    'content' => '-w /etc/sysconfig/network-scripts/ -p wa -k system-locale',
                   )
               end
 

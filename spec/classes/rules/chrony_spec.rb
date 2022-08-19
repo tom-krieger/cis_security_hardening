@@ -12,10 +12,12 @@ describe 'cis_security_hardening::rules::chrony' do
         let(:params) do
           {
             'enforce' => enforce,
-            'ntp_servers' => [
-              { 'hostname' => '10.10.10.1' },
-              { 'hostname' => '10.10.10.2' },
-            ],
+            'ntp_servers' => {
+              '10.10.10.1' => ['iburst', 'maxpoll 17'],
+              '10.10.10.2' => ['iburst', 'maxpoll 17'],
+            },
+            'makestep_seconds' => 1,
+            'makestep_updates' => -1,
           }
         end
 
@@ -25,10 +27,12 @@ describe 'cis_security_hardening::rules::chrony' do
           if enforce
             is_expected.to contain_class('chrony')
               .with(
-                'servers' => [
-                  { 'hostname' => '10.10.10.1' },
-                  { 'hostname' => '10.10.10.2' },
-                ],
+                'servers' => {
+                  '10.10.10.1' => ['iburst', 'maxpoll 17'],
+                  '10.10.10.2' => ['iburst', 'maxpoll 17'],
+                },
+                'makestep_seconds' => 1,
+                'makestep_updates' => -1,
               )
 
             if os_facts[:operatingsystem].casecmp('ubuntu').zero?
@@ -36,10 +40,21 @@ describe 'cis_security_hardening::rules::chrony' do
                 .with(
                   'ensure' => 'purged',
                 )
+            elsif os_facts[:operatingsystem].casecmp('rocky').zero?
+              is_expected.to contain_file('/etc/sysconfig/chronyd')
+                .with(
+                  'ensure'  => 'file',
+                  'owner'   => 'root',
+                  'group'   => 'root',
+                  'mode'    => '0644',
+                  'content' => 'OPTIONS="-u chrony"',
+                )
+
             end
           else
             is_expected.not_to contain_class('chrony')
             is_expected.not_to contain_package('ntp')
+            is_expected.not_to contain_file('/etc/sysconfig/chronyd')
           end
         }
       end

@@ -29,7 +29,7 @@ class cis_security_hardening::rules::auditd_init (
       ensure         => present,
       owner          => 'root',
       group          => 'root',
-      mode           => '0644',
+      mode           => '0640',
       ensure_newline => true,
       notify         => [Exec['reload auditd rules'], Reboot['after_run']],
     }

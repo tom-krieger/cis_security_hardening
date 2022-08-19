@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure permissions on /etc/crontab are configured (Automated)
+#    Ensure permissions on /etc/crontab are configured 
 #
 # The /etc/crontab file is used by cron to control its own jobs. The commands in this item make sure that root 
 # is the user and group owner of the file and that only the owner can access the file.

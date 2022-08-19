@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure net-snmp is not installed (Automated)
+#    Ensure net-snmp is not installed 
 #
 # Simple Network Management Protocol (SNMP) is a widely used protocol for monitoring the health and welfare 
 # of network equipment, computer equipment and devices like UPSs.

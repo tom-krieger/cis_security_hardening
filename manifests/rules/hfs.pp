@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure mounting of hfs filesystems is disabled (Automated)
+#    Ensure mounting of hfs filesystems is disabled 
 #
 # The hfs filesystem type is a hierarchical filesystem that allows you to mount 
 # Mac OS filesystems.

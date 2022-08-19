@@ -1,4 +1,4 @@
-# @summary 
+# @summary
 #    Ensure system administrator actions (sudolog) are collected (Automated)
 #
 # Monitor the sudo log file. If the system has been properly configured to disable the use 
@@ -25,6 +25,10 @@ class cis_security_hardening::rules::auditd_actions (
   Boolean $enforce                 = false,
 ) {
   if $enforce {
+    $uid = fact('cis_security_hardening.auditd.uid_min') ? {
+      undef => '1000',
+      default => fact('cis_security_hardening.auditd.uid_min'),
+    }
     case $facts['operatingsystem'].downcase() {
       'redhat', 'centos', 'almalinux', 'rocky': {
         if $facts['operatingsystemmajrelease'] >= '8' {
@@ -34,36 +38,34 @@ class cis_security_hardening::rules::auditd_actions (
             content => '-w /var/log/sudo.log -p wa -k actions',
           }
         } else {
-          if  $facts['architecture'] == 'x86_64' or
-          $facts['architecture'] == 'amd64' {
+          if  $facts['architecture'] == 'x86_64' or $facts['architecture'] == 'amd64' {
             concat::fragment { 'watch admin actions rule 1':
               order   => 21,
               target  => $cis_security_hardening::rules::auditd_init::rules_file,
-              content => '-a exit,always -F arch=b64 -C euid!=uid -F euid=0 -Fauid>=1000 -F auid!=4294967295 -S execve -k actions',
+              content => "-a exit,always -F arch=b64 -C euid!=uid -F euid=0 -F auid>=${uid} -F auid!=4294967295 -S execve -k actions",
             }
           }
 
           concat::fragment { 'watch admin actions rule 2':
             order   => 22,
             target  => $cis_security_hardening::rules::auditd_init::rules_file,
-            content => '-a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -F auid>=1000 -F auid!=-1 -F key=actions',
+            content => "-a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -F auid>=${uid} -F auid!=-1 -F key=actions",
           }
         }
       }
       'ubuntu': {
-        if  $facts['architecture'] == 'x86_64' or
-        $facts['architecture'] == 'amd64' {
+        if  $facts['architecture'] == 'x86_64' or $facts['architecture'] == 'amd64' {
           concat::fragment { 'watch admin actions rule 1':
             order   => 21,
             target  => $cis_security_hardening::rules::auditd_init::rules_file,
-            content => '-a exit,always -F arch=b64 -C euid!=uid -F euid=0 -Fauid>=1000 -F auid!=4294967295 -S execve -k actions',
+            content => "-a exit,always -F arch=b64 -C euid!=uid -F euid=0 -F auid>=${uid} -F auid!=4294967295 -S execve -k actions",
           }
         }
 
         concat::fragment { 'watch admin actions rule 2':
           order   => 22,
           target  => $cis_security_hardening::rules::auditd_init::rules_file,
-          content => '-a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -F auid>=1000 -F auid!=-1 -F key=actions',
+          content => "-a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -F auid>=${uid} -F auid!=-1 -F key=actions",
         }
       }
       'debian', 'suse': {

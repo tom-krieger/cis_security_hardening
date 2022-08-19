@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure rsyslog default file permissions configured (Automated)
+#    Ensure rsyslog default file permissions configured 
 #
 # rsyslog will create logfiles that do not already exist on the system. This setting controls what permissions 
 # will be applied to these newly created files.

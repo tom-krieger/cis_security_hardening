@@ -20,8 +20,7 @@ describe 'cis_security_hardening::rules::avahi' do
 
           if enforce
 
-            if os_facts[:operatingsystem].casecmp('redhat').zero? || os_facts[:operatingsystem].casecmp('centos').zero? ||
-               os_facts[:operatingsystem].casecmp('almalinux').zero? || os_facts[:operatingsystem].casecmp('rocky').zero?
+            if os_facts[:operatingsystem].casecmp('redhat').zero? || os_facts[:operatingsystem].casecmp('centos').zero?
 
               if os_facts[:operatingsystemmajrelease] < '8'
                 is_expected.to contain_service('avahi-daemon')
@@ -42,6 +41,26 @@ describe 'cis_security_hardening::rules::avahi' do
                   )
               end
 
+            elsif os_facts[:operatingsystem].casecmp('almalinux').zero? || os_facts[:operatingsystem].casecmp('rocky').zero?
+              is_expected.to contain_service('avahi-daemon.socket')
+                .with(
+                  'ensure' => 'stopped',
+                  'enable' => false,
+                )
+              is_expected.to contain_service('avahi-daemon.service')
+                .with(
+                  'ensure' => 'stopped',
+                  'enable' => false,
+                )
+              is_expected.to contain_package('avahi-autoipd')
+                .with(
+                  'ensure' => 'purged',
+                )
+
+              is_expected.to contain_package('avahi')
+                .with(
+                  'ensure' => 'purged',
+                )
             elsif os_facts[:operatingsystem].casecmp('ubuntu').zero?
 
               is_expected.to contain_service('avahi-daemon.socket')

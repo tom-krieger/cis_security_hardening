@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure only strong Ciphers are used (Automated)
+#    Ensure only strong Ciphers are used 
 #
 # This variable limits the ciphers that SSH can use during communication.
 #

@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure SCTP is disabled (Manual)
+#    Ensure SCTP is disabled 
 #
 # The Stream Control Transmission Protocol (SCTP) is a transport layer protocol used to support 
 # message oriented communication, with several streams of messages in one connection. It serves 

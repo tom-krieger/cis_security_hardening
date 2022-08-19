@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure noexec option set on /tmp partition (Automated)
+#    Ensure noexec option set on /tmp partition 
 #
 # The noexec mount option specifies that the filesystem cannot contain executable binaries.
 #

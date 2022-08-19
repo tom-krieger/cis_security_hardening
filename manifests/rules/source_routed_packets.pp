@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure source routed packets are not accepted (Automated)
+#    Ensure source routed packets are not accepted 
 #
 # In networking, source routing allows a sender to partially or fully specify the route packets 
 # take through a network. In contrast, non-source routed packets travel a path determined by 

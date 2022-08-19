@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure NIS Server is not enabled (Automated)
+#    Ensure NIS Server is not enabled 
 #
 # The Network Information Service (NIS) (formally known as Yellow Pages) is a client-server directory 
 # service protocol for distributing system configuration files. The NIS server is a collection of 

@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure sticky bit is set on all world-writable directories (Automated)
+#    Ensure sticky bit is set on all world-writable directories 
 #
 # Setting the sticky bit on world writable directories prevents users from deleting or renaming files in 
 # that directory that are not owned by them.

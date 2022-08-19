@@ -63,7 +63,7 @@ describe 'cis_security_hardening::rules::auditd_actions' do
                       .with(
                         'order' => '21',
                         'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                        'content' => '-a exit,always -F arch=b64 -C euid!=uid -F euid=0 -Fauid>=1000 -F auid!=4294967295 -S execve -k actions',
+                        'content' => '-a exit,always -F arch=b64 -C euid!=uid -F euid=0 -F auid>=1000 -F auid!=4294967295 -S execve -k actions',
                       )
                   end
 
@@ -82,7 +82,7 @@ describe 'cis_security_hardening::rules::auditd_actions' do
                     .with(
                       'order' => '21',
                       'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                      'content' => '-a exit,always -F arch=b64 -C euid!=uid -F euid=0 -Fauid>=1000 -F auid!=4294967295 -S execve -k actions',
+                      'content' => '-a exit,always -F arch=b64 -C euid!=uid -F euid=0 -F auid>=1000 -F auid!=4294967295 -S execve -k actions',
                     )
                 end
 

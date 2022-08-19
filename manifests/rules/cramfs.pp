@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure mounting of cramfs filesystems is disabled (Automated)
+#    Ensure mounting of cramfs filesystems is disabled 
 #
 # The cramfs filesystem type is a compressed read-only Linux filesystem embedded in small 
 # footprint systems. A cramfs image can be used without having to first decompress the image.
@@ -21,8 +21,15 @@ class cis_security_hardening::rules::cramfs (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    kmod::install { 'cramfs':
-      command => '/bin/true',
+    if $facts['operatingsystem'].downcase() == 'rocky' {
+      kmod::install { 'cramfs':
+        command => '/bin/false',
+      }
+      kmod::blacklist { 'cramfs': }
+    } else {
+      kmod::install { 'cramfs':
+        command => '/bin/true',
+      }
     }
   }
 }

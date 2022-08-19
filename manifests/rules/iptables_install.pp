@@ -1,5 +1,5 @@
 # @summary
-#    Ensure iptables is installed (Automated)
+#    Ensure iptables is installed 
 #
 # iptables allows configuration of the IPv4 tables in the linux kernel and the rules stored within them. 
 # Most firewall configuration utilities operate as a front end to iptables.
@@ -27,14 +27,18 @@ class cis_security_hardening::rules::iptables_install (
   if $enforce {
     if fact('network6') != undef {
       if  $configure_ip6tables == false {
-        $params = {}
+        $params = {
+          ensure_v6 => 'stopped',
+        }
       } else {
         $params = {
           ensure_v6 => 'running',
         }
       }
     } else {
-      $params = {}
+      $params = {
+        ensure_v6 => 'stopped',
+      }
     }
 
     if(!defined(Class['firewall'])) {

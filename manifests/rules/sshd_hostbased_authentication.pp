@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure SSH HostbasedAuthentication is disabled (Automated)
+#    Ensure SSH HostbasedAuthentication is disabled 
 #
 # The HostbasedAuthentication parameter specifies if authentication is allowed through trusted hosts via the user 
 # of .rhosts , or /etc/hosts.equiv , along with successful public key client host authentication. This option only 

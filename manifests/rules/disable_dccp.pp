@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure DCCP is disabled (Manual)
+#    Ensure DCCP is disabled 
 #
 # The Datagram Congestion Control Protocol (DCCP) is a transport layer protocol that supports 
 # streaming media and telephony. DCCP provides a way to gain access to congestion control, without 

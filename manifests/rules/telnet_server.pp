@@ -1,5 +1,5 @@
 # @summary
-#    Ensure telnet-server is not installed (Automated)
+#    Ensure telnet-server is not installed 
 #
 # The telnet-server package contains the telnet daemon, which accepts connections from users from 
 # other systems via the telnet protocol.
@@ -27,13 +27,19 @@ class cis_security_hardening::rules::telnet_server (
       default => 'purged',
     }
 
+    $pkgs = $facts['operatingsystem'].downcase() ? {
+      'ubuntu' => 'telnetd',
+      'debian' => 'telnetd',
+      default  => 'telnet-server'
+    }
+
     unless $facts['operatingsystem'].downcase() == 'sles' {
       ensure_resource('service', ['telnet'], {
           ensure => stopped,
           enable => false,
       })
     }
-    ensure_packages(['telnet-server'], {
+    ensure_packages($pkgs, {
         ensure => $ensure,
     })
   }

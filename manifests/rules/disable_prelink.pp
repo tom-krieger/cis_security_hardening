@@ -1,5 +1,5 @@
 # @summary
-#    Ensure prelink is disabled (Automated)
+#    Ensure prelink is disabled 
 #
 # prelinkis a program that modifies ELF shared libraries and ELF dynamically linked binaries 
 # in such a way that the time needed for the dynamic linker to perform relocations at startup 

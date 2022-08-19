@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure NIS Client is not installed (Automated)
+#    Ensure NIS Client is not installed 
 #
 # The Network Information Service (NIS), formerly known as Yellow Pages, is a client-server 
 ## directory service protocol used to distribute system configuration files. The NIS client 

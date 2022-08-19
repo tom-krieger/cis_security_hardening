@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure logging is configured (Manual)
+#    Ensure logging is configured 
 #
 # The /etc/rsyslog.conf and /etc/rsyslog.d/*.conf files specifies rules for logging and which files are to be used to 
 # log certain classes of messages.

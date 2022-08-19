@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure message of the day is configured properly (Automated)
+#    Ensure message of the day is configured properly 
 #
 # The contents of the /etc/motd file are displayed to users after login and function as a message of the day 
 # for authenticated users. Unix-based systems have typically displayed information about the OS release and 

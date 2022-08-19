@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure cron daemon is enabled and running (Automated)
+#    Ensure cron daemon is enabled and running 
 #
 # The cron daemon is used to execute batch jobs on the system.
 #

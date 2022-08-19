@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure Reverse Path Filtering is enabled (Automated)
+#    Ensure Reverse Path Filtering is enabled 
 #
 # Setting net.ipv4.conf.all.rp_filter and net.ipv4.conf.default.rp_filter to 1 forces 
 # the Linux kernel to utilize reverse path filtering on a received packet to determine 

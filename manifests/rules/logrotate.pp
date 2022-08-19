@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure logrotate is configured (Manual)
+#    Ensure logrotate is configured 
 #
 # The system includes the capability of rotating log files regularly to avoid filling up the 
 # system with logs or making the logs unmanageable large. The file /etc/logrotate.d/syslog is 
@@ -29,7 +29,8 @@ class cis_security_hardening::rules::logrotate (
 ) {
   if $enforce {
     class { 'logrotate':
-      config => {
+      create_base_rules => false,
+      config            => {
         dateext      => true,
         compress     => true,
         rotate       => 7,

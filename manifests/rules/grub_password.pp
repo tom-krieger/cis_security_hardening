@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure bootloader password is set (Automated)
+#    Ensure bootloader password is set 
 #
 # Setting the boot loader password will require that anyone rebooting the system must enter a password 
 # before being able to set command line boot parameters

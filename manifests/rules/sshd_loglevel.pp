@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure SSH LogLevel is set to INFO (Automated)
+#    Ensure SSH LogLevel is set to INFO 
 #
 # The INFO parameter specifies that login and logout activity will be logged. 
 #

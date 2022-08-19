@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure SSH LoginGraceTime is set to one minute or less (Automated)
+#    Ensure SSH LoginGraceTime is set to one minute or less 
 #
 # The LoginGraceTime parameter specifies the time allowed for successful authentication to the SSH server. 
 # The longer the Grace period is the more open unauthenticated connections can exist. Like other session 

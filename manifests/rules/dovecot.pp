@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure IMAP and POP3 server is not enabled (Automated)
+#    Ensure IMAP and POP3 server is not enabled 
 #
 # dovecot is an open source IMAP and POP3 server for Linux based systems.
 #

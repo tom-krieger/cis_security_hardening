@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure Avahi Server is not enabled (Automated)
+#    Ensure Avahi Server is not enabled 
 #
 # Avahi is a free zeroconf implementation, including a system for multicast DNS/DNS-SD service discovery. 
 # Avahi allows programs to publish and discover services and hosts running on a local network with no specific 
@@ -23,8 +23,13 @@ class cis_security_hardening::rules::avahi (
   Boolean $enforce = false,
 ) {
   if $enforce {
+    $ensure = $facts['osfamily'].downcase() ? {
+      'suse'  => 'absent',
+      default => 'purged'
+    }
+
     case $facts['operatingsystem'].downcase {
-      'redhat', 'centos', 'almalinux', 'rocky': {
+      'redhat', 'centos': {
         if $facts['operatingsystemmajrelease'] >= '8' {
           ensure_resource('service', ['avahi-daemon.socket'], {
               ensure => 'stopped',
@@ -41,6 +46,19 @@ class cis_security_hardening::rules::avahi (
           })
         }
       }
+      'almalinux', 'rocky': {
+        ensure_resource('service', ['avahi-daemon.socket'], {
+            ensure => 'stopped',
+            enable => false,
+        })
+        ensure_resource('service', ['avahi-daemon.service'], {
+            ensure => 'stopped',
+            enable => false,
+        })
+        ensure_packages(['avahi-autoipd', 'avahi'], {
+            ensure => $ensure,
+        })
+      }
       'ubuntu': {
         ensure_resource('service', ['avahi-daemon.socket'], {
             ensure => 'stopped',
@@ -51,7 +69,7 @@ class cis_security_hardening::rules::avahi (
             enable => false,
         })
         ensure_packages(['avahi-daemon'], {
-            ensure => purged,
+            ensure => $ensure,
         })
       }
       'debian': {
@@ -70,7 +88,7 @@ class cis_security_hardening::rules::avahi (
             enable => false,
         })
         ensure_packages(['avahi-autoipd', 'avahi'], {
-            ensure => absent,
+            ensure => $ensure,
         })
       }
       default: {
