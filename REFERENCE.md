@@ -872,7 +872,7 @@ Check a mount option
 Alias of
 
 ```puppet
-Pattern[/^[\/a-zA-Z0-9\,]+$/]
+Pattern[/^[\/a-zA-Z0-9\,\,]+$/]
 ```
 
 ### <a name="cis_security_hardeningmountpoint"></a>`Cis_security_hardening::Mountpoint`
@@ -1087,7 +1087,7 @@ Check users own their home directories.
 
 ### <a name="cleanup_old_stuff"></a>`cleanup_old_stuff`
 
-Cleanup old files from (previous) cis module
+Cleanup old files from (previous) (previous) cis module
 
 **Supports noop?** false
 
