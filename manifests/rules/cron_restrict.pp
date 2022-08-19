@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure cron is restricted to authorized users (Automated)
+#    Ensure cron is restricted to authorized users 
 #
 # If cron is installed in the system, configure /etc/cron.allow to allow specific users to use these services. 
 # If /etc/cron.allow does not exist, then /etc/cron.deny is checked. Any user not specifically defined in those 

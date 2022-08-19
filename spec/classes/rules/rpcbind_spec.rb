@@ -62,6 +62,10 @@ describe 'cis_security_hardening::rules::rpcbind' do
                   'ensure' => 'stopped',
                   'enable' => false,
                 )
+              is_expected.to contain_package('rpcbind')
+                .with(
+                  'ensure' => 'absent',
+                )
             end
           else
             is_expected.not_to contain_service('rpcbind.socket')

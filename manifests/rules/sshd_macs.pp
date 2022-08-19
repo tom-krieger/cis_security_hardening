@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure only approved MAC algorithms are used (Automated)
+#    Ensure only approved MAC algorithms are used 
 #
 # This variable limits the types of MAC algorithms that SSH can use during communication.
 #

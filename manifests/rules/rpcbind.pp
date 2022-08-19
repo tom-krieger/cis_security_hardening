@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure rpcbind is not installed or the rpcbind services are masked (Automated)
+#    Ensure rpcbind is not installed or the rpcbind services are masked 
 #
 # The rpcbind utility maps RPC services to the ports on which they listen. RPC processes notify rpcbind 
 # when they start, registering the ports they are listening on and the RPC program numbers they expect to 
@@ -68,6 +68,9 @@ class cis_security_hardening::rules::rpcbind (
         ensure_resource('service', ['rpcbind.socket', 'rpcbind'], {
             ensure => 'stopped',
             enable => false,
+        })
+        ensure_packages(['rpcbind'], {
+            ensure => absent,
         })
       }
     }

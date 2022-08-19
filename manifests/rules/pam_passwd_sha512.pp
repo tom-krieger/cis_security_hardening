@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure password hashing algorithm is SHA-512 (Automated)
+#    Ensure password hashing algorithm is SHA-512 
 #
 # The commands below change password encryption from md5 to sha512 (a much stronger hashing algorithm). All 
 # existing accounts will need to perform a password change to upgrade the stored hashes to the new algorithm.

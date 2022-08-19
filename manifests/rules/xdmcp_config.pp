@@ -1,5 +1,5 @@
 # @summary
-#    Ensure XDCMP is not enabled (Automated)
+#    Ensure XDCMP is not enabled 
 #
 # X Display Manager Control Protocol (XDMCP) is designed to provide authenticated access to display 
 # management services for remote displays

@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure mounting of cramfs filesystems is disabled (Automated)
+#    Ensure mounting of cramfs filesystems is disabled 
 #
 # The cramfs filesystem type is a compressed read-only Linux filesystem embedded in small 
 # footprint systems. A cramfs image can be used without having to first decompress the image.

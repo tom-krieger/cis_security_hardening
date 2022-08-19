@@ -40,6 +40,10 @@ describe 'cis_security_hardening::rules::nfs_utils' do
                   'ensure' => 'stopped',
                   'enable' => false,
                 )
+              is_expected.to contain_package('nfs-utils')
+                .with(
+                  'ensure' => 'absent',
+                )
             end
           else
             is_expected.not_to contain_service('nfs-server')

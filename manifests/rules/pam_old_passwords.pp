@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure password reuse is limited (Automated)
+#    Ensure password reuse is limited 
 #
 # The /etc/security/opasswd file stores the users' old passwords and can be checked to ensure that users 
 # are not recycling recent passwords.

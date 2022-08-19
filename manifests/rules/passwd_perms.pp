@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure permissions on /etc/passwd are configured (Automated)
+#    Ensure permissions on /etc/passwd are configured 
 #
 # The /etc/passwd file contains user account information that is used by many system utilities and therefore must be readable 
 # for these utilities to operate.

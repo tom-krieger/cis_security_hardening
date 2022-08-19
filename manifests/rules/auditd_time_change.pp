@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure events that modify date and time information are collected (Automated)
+#    Ensure events that modify date and time information are collected 
 #
 # Capture events where the system date and/or time has been modified. The parameters in this section are set to 
 # determine if the adjtimex (tune kernel clock), settimeofday (Set time, using timeval and timezone structures) 

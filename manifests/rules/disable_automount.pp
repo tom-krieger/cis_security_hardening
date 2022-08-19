@@ -1,5 +1,5 @@
 # @summary 
-#    Disable Automounting (Automated)
+#    Disable Automounting 
 #
 # autofs allows automatic mounting of devices, typically including CD/DVDs and USB drives.
 #

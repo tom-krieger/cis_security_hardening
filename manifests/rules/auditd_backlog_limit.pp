@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure audit_backlog_limit is sufficient (Automated)
+#    Ensure audit_backlog_limit is sufficient 
 #
 # The backlog limit has a default setting of 64
 #

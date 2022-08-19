@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure a Firewall package is installed (Automated)
+#    Ensure a Firewall package is installed 
 #
 # firewalld is a firewall management tool for Linux operating systems. It provides firewall features by 
 # acting as a front-end for the Linux kernel's netfilter framework via the iptables backend or provides 

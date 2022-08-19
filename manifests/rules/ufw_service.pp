@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure ufw service is enabled (Automated)
+#    Ensure ufw service is enabled 
 #
 # Uncomplicated Firewall (ufw) is a frontend for iptables. ufw provides a framework for managing netfilter, 
 # as well as a command-line and available graphical user interface for manipulating the firewall.

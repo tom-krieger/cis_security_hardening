@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure rsyslog is configured to send logs to a remote log host (Automated)
+#    Ensure rsyslog is configured to send logs to a remote log host 
 #
 # The rsyslog utility supports the ability to send logs it gathers to a remote log host running syslogd(8) or 
 # to receive messages from remote hosts, reducing administrative overhead.

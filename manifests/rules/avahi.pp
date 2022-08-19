@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure Avahi Server is not enabled (Automated)
+#    Ensure Avahi Server is not enabled 
 #
 # Avahi is a free zeroconf implementation, including a system for multicast DNS/DNS-SD service discovery. 
 # Avahi allows programs to publish and discover services and hosts running on a local network with no specific 

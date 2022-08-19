@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure minimum days between password changes is 7 or more (Automated)
+#    Ensure minimum days between password changes is 7 or more 
 #
 # The PASS_MIN_DAYS parameter in /etc/login.defs allows an administrator to prevent users from changing 
 # their password until a minimum number of days have passed since the last time the user changed their 

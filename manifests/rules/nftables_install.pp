@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure nftables is installed (Automated)
+#    Ensure nftables is installed 
 #
 # nftables provides a new in-kernel packet classification framework that is based on a 
 # network-specific Virtual Machine (VM) and a new nft userspace command line tool. nftables 

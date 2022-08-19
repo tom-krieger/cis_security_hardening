@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure mounting of hfsplus filesystems is disabled (Automated)
+#    Ensure mounting of hfsplus filesystems is disabled 
 #
 # The hfsplus filesystem type is a hierarchical filesystem designed to replace hfs 
 # that allows you to mount Mac OS filesystems.s a hierarchical filesystem that 

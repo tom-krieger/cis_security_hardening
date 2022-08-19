@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure suspicious packets are logged (Automated)
+#    Ensure suspicious packets are logged 
 #
 # When enabled, this feature logs packets with un-routable source addresses to the kernel log.
 #

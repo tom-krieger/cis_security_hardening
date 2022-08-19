@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure password hashing algorithm is SHA-512 (Automated)
+#    Ensure password hashing algorithm is SHA-512 
 #
 # Login passwords are hashed and stored in the /etc/shadow file.
 #

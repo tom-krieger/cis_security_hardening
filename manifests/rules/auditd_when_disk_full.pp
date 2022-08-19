@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure system is disabled when audit logs are full (Automated)
+#    Ensure system is disabled when audit logs are full 
 #
 # The auditd daemon can be configured to halt the system when the audit logs are full.
 #

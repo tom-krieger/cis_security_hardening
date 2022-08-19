@@ -1,5 +1,5 @@
 # @summary
-#    Ensure system administrator actions (sudolog) are collected (Automated)
+#    Ensure system administrator actions (sudolog) are collected 
 #
 # Monitor the sudo log file. If the system has been properly configured to disable the use 
 # of the su command and force all administrators to have to log in first and then use sudo 

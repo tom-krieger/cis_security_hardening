@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure permissions on /etc/gshadow are configured (Automated)
+#    Ensure permissions on /etc/gshadow are configured 
 #
 # The /etc/gshadow file is used to store the information about groups that is critical to 
 # the security of those accounts, such as the hashed password and other security information.

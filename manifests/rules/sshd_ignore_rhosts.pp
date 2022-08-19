@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure SSH IgnoreRhosts is enabled (Automated)
+#    Ensure SSH IgnoreRhosts is enabled 
 #
 # The IgnoreRhosts parameter specifies that .rhosts and .shosts files will not be used in RhostsRSAAuthentication 
 # or HostbasedAuthentication .

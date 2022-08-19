@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure a table exists (Automated)
+#    Ensure a table exists 
 #
 # Tables hold chains. Each table only has one address family and only applies to packets of this family. 
 # Tables can have one of five families.

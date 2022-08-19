@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure network interfaces are assigned to appropriate zone (Manual)
+#    Ensure network interfaces are assigned to appropriate zone 
 #
 # firewall zones define the trust level of network connections or interfaces.
 #

@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure auditd is installed (Automated)
+#    Ensure auditd is installed 
 #
 # auditd is the userspace component to the Linux Auditing System. It's responsible for writing audit 
 # records to the disk.

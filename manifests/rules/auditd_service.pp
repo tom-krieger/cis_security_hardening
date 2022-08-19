@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure auditd service is enabled (Automated).
+#    Ensure auditd service is enabled .
 #
 # Turn on the auditd daemon to record system events.
 #

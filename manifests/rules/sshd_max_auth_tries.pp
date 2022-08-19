@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure SSH MaxAuthTries is set to 4 or less (Automated)
+#    Ensure SSH MaxAuthTries is set to 4 or less 
 #
 # The MaxAuthTries parameter specifies the maximum number of authentication attempts permitted per connection. 
 # When the login failure count reaches half the number, error messages will be written to the syslog file 

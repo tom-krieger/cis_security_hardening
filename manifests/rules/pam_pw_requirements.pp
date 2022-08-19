@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure password creation requirements are configured (Automated)
+#    Ensure password creation requirements are configured 
 #
 # The pam_pwquality.so module checks the strength of passwords. It performs checks such as making sure a password is not a 
 # dictionary word, it is a certain length, contains a mix of characters (e.g. alphabet, numeric, other) and more. The 

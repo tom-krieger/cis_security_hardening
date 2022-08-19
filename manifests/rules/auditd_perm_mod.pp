@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure discretionary access control permission modification events are collected (Automated)
+#    Ensure discretionary access control permission modification events are collected 
 #
 # Monitor changes to file permissions, attributes, ownership and group. The parameters in this section track 
 # changes for system calls that affect file permissions and attributes. The chmod , fchmod and fchmodat system 

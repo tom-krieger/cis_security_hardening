@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure TCP SYN Cookies is enabled (Automated)
+#    Ensure TCP SYN Cookies is enabled 
 #
 # When tcp_syncookies is set, the kernel will handle TCP SYN packets normally until the half-open 
 # connection queue is full, at which time, the SYN cookie functionality kicks in. SYN cookies work 

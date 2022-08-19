@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure at is restricted to authorized users (Automated)
+#    Ensure at is restricted to authorized users 
 #
 # If at is installed in the system, configure /etc/at.allow to allow specific users to use 
 # these services. If /etc/at.allow does not exist, then /etc/at.deny is checked. Any user 

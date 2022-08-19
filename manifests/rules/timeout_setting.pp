@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure default user shell timeout is configured (Automated)
+#    Ensure default user shell timeout is configured 
 #
 # The default TMOUT determines the shell timeout for users. The TMOUT value is measured in seconds.
 #

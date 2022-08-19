@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure FTP Server is not enabled (Automated)
+#    Ensure FTP Server is not enabled 
 #
 # The File Transfer Protocol (FTP) provides networked computers with the ability to transfer files.
 #

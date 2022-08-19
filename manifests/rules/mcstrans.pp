@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure the MCS Translation Service (mcstrans) is not installed (Automated)
+#    Ensure the MCS Translation Service (mcstrans) is not installed 
 #
 # The mcstransd daemon provides category label information to client processes requesting 
 # information. The label translations are defined in /etc/selinux/targeted/setrans.conf

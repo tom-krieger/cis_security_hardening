@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure firewalld service is enabled and running (Automated)
+#    Ensure firewalld service is enabled and running 
 #
 # Ensure that the firewalld service is enabled to protect your system
 #

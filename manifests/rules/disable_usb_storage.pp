@@ -1,5 +1,5 @@
 # @summary 
-#    Disable USB Storage (Automated)
+#    Disable USB Storage 
 #
 # USB storage provides a means to transfer and store files insuring persistence and availability of the files 
 # independent of network connection status. Its popularity and utility has led to USB-based malware being a 

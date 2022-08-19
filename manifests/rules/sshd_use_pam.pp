@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure SSH PAM is enabled (Automated)
+#    Ensure SSH PAM is enabled 
 #
 # UsePAM Enables the Pluggable Authentication Module interface. If set to “yes” this will 
 # enable PAM authentication using ChallengeResponseAuthentication and PasswordAuthentication 

@@ -1,5 +1,5 @@
 # @summary 
-#     Ensure default deny firewall policy (Automated)
+#     Ensure default deny firewall policy 
 #
 # A default deny all policy on connections ensures that any unconfigured network usage will be rejected.
 #

@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure the audit configuration is immutable (Automated)
+#    Ensure the audit configuration is immutable 
 #
 # Set system audit so that audit rules cannot be modified with auditctl . Setting the flag "-e 2" 
 # forces audit to be put in immutable mode. Audit changes can only be made on system reboot.

@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure ufw is installed (Automated)
+#    Ensure ufw is installed 
 #
 # The Uncomplicated Firewall (ufw) is a frontend for iptables and is particularly well-suited for 
 # host-based firewalls. ufw provides a framework for managing netfilter, as well as a command-line 

@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure gpgcheck is globally activated (Automated)
+#    Ensure gpgcheck is globally activated 
 #
 # The gpgcheck option, found in the main section of the /etc/zypp/zypp.conf and individual 
 # /etc/zypp/repos.d/*.repo files determine if an RPM package's signature is checked prior 

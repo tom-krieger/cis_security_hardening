@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure unnecessary services and ports are not accepted (Manual)
+#    Ensure unnecessary services and ports are not accepted 
 #
 # Services and ports can be accepted or explicitly rejected or dropped by a zone.
 #

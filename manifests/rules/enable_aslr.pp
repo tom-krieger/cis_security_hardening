@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure address space layout randomization (ASLR) is enabled (Automated)
+#    Ensure address space layout randomization (ASLR) is enabled 
 #
 # Address space layout randomization (ASLR) is an exploit mitigation technique which randomly 
 # arranges the address space of key data areas of a process.

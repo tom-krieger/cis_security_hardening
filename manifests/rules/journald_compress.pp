@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure journald is configured to compress large log files (Automated)
+#    Ensure journald is configured to compress large log files 
 #
 # The journald system includes the capability of compressing overly large files to avoid filling up 
 # the system with logs or making the logs unmanageably large.

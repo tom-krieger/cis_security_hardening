@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure firewall rules exist for all open ports (Manual)
+#    Ensure firewall rules exist for all open ports 
 #
 # Any ports that have been opened on non-loopback addresses need firewall rules to govern traffic.
 #

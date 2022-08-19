@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure mounting of freevxfs filesystems is disabled (Automated)
+#    Ensure mounting of freevxfs filesystems is disabled 
 #
 # The freevxfs filesystem type is a free version of the Veritas type filesystem. 
 # This is the primary filesystem type for HP-UX operating systems.

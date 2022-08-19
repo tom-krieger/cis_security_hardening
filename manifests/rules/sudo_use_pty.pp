@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure sudo commands use pty (Automated)
+#    Ensure sudo commands use pty 
 #
 # sudo can be configured to run only from a psuedo-pty
 #

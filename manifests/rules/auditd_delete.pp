@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure file deletion events by users are collected (Automated)
+#    Ensure file deletion events by users are collected 
 #
 # Monitor the use of system calls associated with the deletion or renaming of files and file 
 # attributes. This configuration statement sets up monitoring for the unlink (remove a file), 

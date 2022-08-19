@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure use of privileged commands is collected (Automated)
+#    Ensure use of privileged commands is collected 
 #
 # Monitor privileged programs (those that have the setuid and/or setgid bit set on execution) to 
 # determine if unprivileged users are running these commands.

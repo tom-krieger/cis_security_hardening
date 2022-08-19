@@ -1,4 +1,4 @@
-# @summary 
+# @summary
 #    Ensure loging delay after failed logon attempt
 #
 # The operating system must enforce a delay of at least 4 seconds between logon prompts 

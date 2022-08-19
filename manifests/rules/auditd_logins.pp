@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure login and logout events are collected (Automated)
+#    Ensure login and logout events are collected 
 #
 # Monitor login and logout events. The parameters below track changes to files associated with login/logout events. 
 # The file /var/log/lastlog maintain records of the last time a user successfully logged in. The /var/run/failock 

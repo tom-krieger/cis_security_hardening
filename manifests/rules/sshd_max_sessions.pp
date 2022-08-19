@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure SSH MaxSessions is set to 4 or less (Automated)
+#    Ensure SSH MaxSessions is set to 4 or less 
 #
 # The MaxSessions parameter specifies the maximum number of open sessions permitted from a given connection.
 #

@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure successful file system mounts are collected (Automated)
+#    Ensure successful file system mounts are collected 
 #
 # Monitor the use of the mount system call. The mount (and umount ) system call controls the 
 # mounting and unmounting of file systems. The parameters below configure the system to create 

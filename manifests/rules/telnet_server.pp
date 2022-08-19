@@ -1,5 +1,5 @@
 # @summary
-#    Ensure telnet-server is not installed (Automated)
+#    Ensure telnet-server is not installed 
 #
 # The telnet-server package contains the telnet daemon, which accepts connections from users from 
 # other systems via the telnet protocol.

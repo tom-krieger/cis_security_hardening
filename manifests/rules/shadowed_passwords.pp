@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure accounts in /etc/passwd use shadowed passwords (Automated)
+#    Ensure accounts in /etc/passwd use shadowed passwords 
 #
 # Local accounts can uses shadowed passwords. With shadowed passwords, The passwords are saved in shadow 
 # password file, /etc/shadow, encrypted by a salted one-way hash. Accounts with a shadowed password have 

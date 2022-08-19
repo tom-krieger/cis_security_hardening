@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure SSH warning banner is configured (Automated)
+#    Ensure SSH warning banner is configured 
 #
 # The Banner parameter specifies a file whose contents must be sent to the remote user before authentication is permitted. 
 # By default, no banner is displayed.

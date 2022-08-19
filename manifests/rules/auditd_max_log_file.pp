@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure audit log storage size is configured (Manual)
+#    Ensure audit log storage size is configured 
 #
 # Configure the maximum size of the audit log file. Once the log reaches the maximum size, it will be 
 # rotated and a new log file will be started.

@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure IP forwarding is disabled (Automated)
+#    Ensure IP forwarding is disabled 
 #
 # The net.ipv4.ip_forward flag is used to tell the system whether it can forward packets or not.
 #

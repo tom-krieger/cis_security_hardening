@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure outbound and established connections are configured (Manual)
+#    Ensure outbound and established connections are configured 
 #
 # Configure the firewall rules for new outbound, and established connections.
 #

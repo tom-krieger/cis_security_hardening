@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure permissions on all logfiles are configured (Automated)
+#    Ensure permissions on all logfiles are configured 
 #
 # Log files stored in /var/log/ contain logged information from many services on the system, 
 # or on log hosts others as well.

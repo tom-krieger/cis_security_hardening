@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure events that modify user/group information are collected (Automated)
+#    Ensure events that modify user/group information are collected 
 #
 # Record events affecting the group , passwd (user IDs), shadow and gshadow (passwords) or /etc/security/opasswd 
 # (old passwords, based on remember parameter in the PAM configuration) files. The parameters in this section 

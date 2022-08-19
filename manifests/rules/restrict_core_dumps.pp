@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure core dumps are restricted (Automated)
+#    Ensure core dumps are restricted 
 
 #
 # A core dump is the memory of an executable program. It is generally used to determine why a 

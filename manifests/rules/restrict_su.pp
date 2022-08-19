@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure access to the su command is restricted (Automated)
+#    Ensure access to the su command is restricted 
 #
 # The su command allows a user to run a command or shell as another user. The program has been superseded 
 # by sudo , which allows for more granular control over privileged access. Normally, the su command can be 

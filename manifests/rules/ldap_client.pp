@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure LDAP client is not installed (Automated)
+#    Ensure LDAP client is not installed 
 #
 # The Lightweight Directory Access Protocol (LDAP) was introduced as a replacement for NIS/YP. 
 # It is a service that provides a method for looking up information from a central database.

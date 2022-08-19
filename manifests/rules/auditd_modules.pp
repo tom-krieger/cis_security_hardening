@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure kernel module loading and unloading is collected (Automated)
+#    Ensure kernel module loading and unloading is collected 
 #
 # Monitor the loading and unloading of kernel modules. The programs insmod (install a kernel module), 
 # rmmod (remove a kernel module), and modprobe (a more sophisticated program to load and unload modules, 

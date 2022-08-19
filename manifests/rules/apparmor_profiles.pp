@@ -1,5 +1,5 @@
 # @summary
-#    Ensure all AppArmor Profiles are enforcing (Automated)
+#    Ensure all AppArmor Profiles are enforcing 
 #
 # AppArmor profiles define what resources applications are able to access.
 #

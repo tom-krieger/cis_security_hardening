@@ -15,9 +15,9 @@ describe 'cis_security_hardening::rules::pam_mfa' do
     EOF
   end
 
-  on_supported_os.each do |_os, os_facts|
+  on_supported_os.each do |os, os_facts|
     enforce_options.each do |enforce|
-      context 'on RedHat' do
+      context "on #{os} with enforce = #{enforce}" do
         let(:facts) { os_facts }
         let(:params) do
           {

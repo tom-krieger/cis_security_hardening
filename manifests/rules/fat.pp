@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure mounting of FAT filesystems is disabled (Automated)
+#    Ensure mounting of FAT filesystems is disabled 
 #
 # The FAT filesystem format is primarily used on older windows systems and portable 
 # USB drives or flash modules. It comes in three types FAT12 , FAT16 , and FAT32 all 

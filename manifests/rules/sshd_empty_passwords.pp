@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure SSH PermitEmptyPasswords is disabled (Automated)
+#    Ensure SSH PermitEmptyPasswords is disabled 
 #
 # The PermitEmptyPasswords parameter specifies if the SSH server allows login to accounts with 
 # empty password strings.

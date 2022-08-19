@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure default user umask is configured (Automated)
+#    Ensure default user umask is configured 
 #
 # The default umask determines the permissions of files created by users. The user creating the 
 # file has the discretion of making their files and directories readable by others via the chmod 

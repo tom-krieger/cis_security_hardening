@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure mounting of udf filesystems is disabled (Automated)
+#    Ensure mounting of udf filesystems is disabled 
 #
 # The udf filesystem type is the universal disk format used to implement ISO/IEC 
 # 13346 and ECMA-167 specifications. This is an open vendor filesystem type for data 

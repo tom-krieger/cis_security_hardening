@@ -1,5 +1,5 @@
 # @summary 
-#     Ensure rsyslog Service is enabled (Automated)
+#     Ensure rsyslog Service is enabled 
 #
 # Once the rsyslog package is installed it needs to be activated.
 #

@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure mounting of squashfs filesystems is disabled (Automated)
+#    Ensure mounting of squashfs filesystems is disabled 
 #
 # The squashfs filesystem type is a compressed read-only Linux filesystem embedded in 
 # small footprint systems (similar to cramfs ). A squashfs image can be used without 

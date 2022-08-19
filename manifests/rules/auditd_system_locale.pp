@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure events that modify the system's network environment are collected (Automated)
+#    Ensure events that modify the system's network environment are collected 
 #
 # Record changes to network environment files or system calls. The below parameters monitor the sethostname 
 # (set the systems host name) or setdomainname (set the systems domainname) system calls, and write an audit 

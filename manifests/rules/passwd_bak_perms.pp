@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure permissions on /etc/group- are configured (Automated)
+#    Ensure permissions on /etc/group- are configured 
 #
 # The /etc/group- file contains a backup list of all the valid groups defined in the system. 
 # 

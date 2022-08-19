@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure unsuccessful unauthorized file access attempts are collected (Automated)
+#    Ensure unsuccessful unauthorized file access attempts are collected 
 #
 # Monitor for unsuccessful attempts to access files. The parameters below are associated with 
 # system calls that control creation ( creat ), opening ( open , openat ) and truncation 

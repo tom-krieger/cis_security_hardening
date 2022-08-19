@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure permissions on bootloader config are configured (Automated)
+#    Ensure permissions on bootloader config are configured 
 #
 # The grub configuration file contains information on boot settings and passwords for unlocking boot 
 # options. The grub configuration is usually located at /boot/grub2/grub.cfg and linked as /etc/grub2.cfg. 
