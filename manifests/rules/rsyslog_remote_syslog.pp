@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure remote rsyslog messages are only accepted on designated log hosts. (Manual)
+#    Ensure remote rsyslog messages are only accepted on designated log hosts. 
 #
 # By default, rsyslog does not listen for log messages coming in from remote systems. The ModLoad tells rsyslog 
 # to load the imtcp.so module so it can listen over a network via TCP. The InputTCPServerRun option instructs 

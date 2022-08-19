@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure SSH Idle Timeout Interval is configured (Automated)
+#    Ensure SSH Idle Timeout Interval is configured 
 #
 # The two options ClientAliveInterval and ClientAliveCountMax control the timeout of ssh sessions. When 
 # the ClientAliveInterval variable is set, ssh sessions that have no activity for the specified length 

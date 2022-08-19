@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure firewall rules exist for all open ports (Automated)
+#    Ensure firewall rules exist for all open ports 
 #
 # Any ports that have been opened on non-loopback addresses need firewall rules to govern traffic.
 #
@@ -24,6 +24,7 @@ class cis_security_hardening::rules::iptables_open_ports (
   Hash $firewall_rules = {},
 ) {
   if $enforce {
+    include cis_security_hardening::rules::iptables_save
     if(empty($firewall_rules)) {
       $policy = fact('cis_security_hardening.iptables.policy')
       if  $policy != undef {
@@ -40,12 +41,14 @@ class cis_security_hardening::rules::iptables_open_ports (
           dport  => 22,
           state  => 'NEW',
           action => 'accept',
+          notify => Class['cis_security_hardening::rules::iptables_save'],
         }
       }
     } else {
       $firewall_rules.each | String $rulename, Hash $data | {
         firewall { $rulename:
-          * => $data,
+          *      => $data,
+          notify => Class['cis_security_hardening::rules::iptables_save'],
         }
       }
     }

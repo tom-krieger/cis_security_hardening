@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure mounting of jffs2 filesystems is disabled (Automated)
+#    Ensure mounting of jffs2 filesystems is disabled 
 #
 # The jffs2 (journaling flash filesystem 2) filesystem type is a log-structured 
 # filesystem used in flash memory devices.

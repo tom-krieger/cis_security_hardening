@@ -1,5 +1,5 @@
 # @summary
-#    Ensure SELinux is installed (Automated)
+#    Ensure SELinux is installed 
 #
 # SELinux provides Mandatory Access Controls.
 #

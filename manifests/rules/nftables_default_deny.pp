@@ -1,5 +1,5 @@
 # @summary 
-#     Ensure default deny firewall policy (Automated)
+#     Ensure default deny firewall policy 
 #
 # Base chain policy is the default verdict that will be applied to packets reaching the end of the chain.
 #

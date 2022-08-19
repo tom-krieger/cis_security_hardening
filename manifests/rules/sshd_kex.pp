@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure only strong Key Exchange algorithms are used (Automated)
+#    Ensure only strong Key Exchange algorithms are used 
 #
 # Key exchange is any method in cryptography by which cryptographic keys are exchanged between two parties, allowing 
 # use of a cryptographic algorithm. If the sender and receiver wish to exchange encrypted messages, each must be 

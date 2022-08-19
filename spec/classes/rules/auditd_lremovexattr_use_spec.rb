@@ -29,6 +29,7 @@ describe 'cis_security_hardening::rules::auditd_lremovexattr_use' do
               architecture: arch.to_s,
               cis_security_hardening: {
                 auditd: {
+                  uid_min: '1000',
                   auditing_process: 'none',
                 },
               },

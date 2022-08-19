@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure permissions on /etc/issue.net are configured (Manual)
+#    Ensure permissions on /etc/issue.net are configured 
 #
 # The contents of the /etc/issue.net file are displayed to users prior to login for 
 # remote connections from configured services.

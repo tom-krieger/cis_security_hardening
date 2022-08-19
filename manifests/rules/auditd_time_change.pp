@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure events that modify date and time information are collected (Automated)
+#    Ensure events that modify date and time information are collected 
 #
 # Capture events where the system date and/or time has been modified. The parameters in this section are set to 
 # determine if the adjtimex (tune kernel clock), settimeofday (Set time, using timeval and timezone structures) 
@@ -23,34 +23,48 @@ class cis_security_hardening::rules::auditd_time_change (
   Boolean $enforce                 = false,
 ) {
   if $enforce {
-    concat::fragment { 'watch for date-time-change rule 1':
-      order   => '121',
-      target  => $cis_security_hardening::rules::auditd_init::rules_file,
-      content => '-a always,exit -F arch=b32 -S adjtimex -S settimeofday -S stime -k time-change',
-    }
-    concat::fragment { 'watch for date-time-change rule 2':
-      order   => '122',
-      target  => $cis_security_hardening::rules::auditd_init::rules_file,
-      content => '-a always,exit -F arch=b32 -S clock_settime -k time-change',
-    }
-    concat::fragment { 'watch for date-time-change rule 3':
-      order   => '123',
-      target  => $cis_security_hardening::rules::auditd_init::rules_file,
-      content => '-w /etc/localtime -p wa -k time-change',
-      notify  => [Exec['reload auditd rules'], Reboot['after_run']],
-    }
-
-    if  $facts['architecture'] == 'x86_64' or
-    $facts['architecture'] == 'amd64' {
-      concat::fragment { 'watch for date-time-change rule 4':
-        order   => '124',
+    if $facts['os']['name'].downcase() == 'rocky' {
+      concat::fragment { 'watch for date-time-change rule 1':
+        order   => '121',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,
-        content => '-a always,exit -F arch=b64 -S adjtimex -S settimeofday -k time-change',
+        content => '-a always,exit -F arch=b32 -S adjtimex,settimeofday,clock_settime -k time-change',
       }
-      concat::fragment { 'watch for date-time-change rule 5':
-        order   => '125',
+      if  $facts['architecture'] == 'x86_64' or $facts['architecture'] == 'amd64' {
+        concat::fragment { 'watch for date-time-change rule 2':
+          order   => '122',
+          target  => $cis_security_hardening::rules::auditd_init::rules_file,
+          content => '-a always,exit -F arch=b64 -S adjtimex,settimeofday,clock_settime -k time-change',
+        }
+      }
+    } else {
+      concat::fragment { 'watch for date-time-change rule 1':
+        order   => '121',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,
-        content => '-a always,exit -F arch=b64 -S clock_settime -k time-change',
+        content => '-a always,exit -F arch=b32 -S adjtimex -S settimeofday -S stime -k time-change',
+      }
+      concat::fragment { 'watch for date-time-change rule 2':
+        order   => '122',
+        target  => $cis_security_hardening::rules::auditd_init::rules_file,
+        content => '-a always,exit -F arch=b32 -S clock_settime -k time-change',
+      }
+      concat::fragment { 'watch for date-time-change rule 3':
+        order   => '123',
+        target  => $cis_security_hardening::rules::auditd_init::rules_file,
+        content => '-w /etc/localtime -p wa -k time-change',
+        notify  => [Exec['reload auditd rules'], Reboot['after_run']],
+      }
+
+      if  $facts['architecture'] == 'x86_64' or $facts['architecture'] == 'amd64' {
+        concat::fragment { 'watch for date-time-change rule 4':
+          order   => '124',
+          target  => $cis_security_hardening::rules::auditd_init::rules_file,
+          content => '-a always,exit -F arch=b64 -S adjtimex -S settimeofday -k time-change',
+        }
+        concat::fragment { 'watch for date-time-change rule 5':
+          order   => '125',
+          target  => $cis_security_hardening::rules::auditd_init::rules_file,
+          content => '-a always,exit -F arch=b64 -S clock_settime -k time-change',
+        }
       }
     }
   }

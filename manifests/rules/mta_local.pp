@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure mail transfer agent is configured for local-only mode (Automated)
+#    Ensure mail transfer agent is configured for local-only mode 
 #
 # Mail Transfer Agents (MTA), such as sendmail and Postfix, are used to listen for incoming mail 
 # and transfer the messages to the appropriate user or mail server. If the system is not intended 

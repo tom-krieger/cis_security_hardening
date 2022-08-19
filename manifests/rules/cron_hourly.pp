@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure permissions on /etc/cron.hourly are configured (Automated)
+#    Ensure permissions on /etc/cron.hourly are configured 
 #
 # This directory contains system cron jobs that need to run on an hourly basis. The files in this 
 # directory cannot be manipulated by the crontab command, but are instead edited by system administrators 

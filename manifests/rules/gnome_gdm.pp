@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure GDM login banner is configured (Automated)
+#    Ensure GDM login banner is configured 
 #
 # GDM is the GNOME Display Manager which handles graphical login for GNOME based systems.
 #

@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure TIPC is disabled (Manual)
+#    Ensure TIPC is disabled 
 #
 # The Transparent Inter-Process Communication (TIPC) protocol is designed to provide 
 # communication between cluster nodes.

@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure system accounts aresecured (Automated)
+#    Ensure system accounts aresecured 
 #
 # There are a number of accounts provided with Red Hat 7 that are used to manage applications and are not 
 # intended to provide an interactive shell.

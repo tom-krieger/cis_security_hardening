@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure SSH PermitUserEnvironment is disabled (Automated)
+#    Ensure SSH PermitUserEnvironment is disabled 
 #
 # The PermitUserEnvironment option allows users to present environment options to the ssh daemon.
 #

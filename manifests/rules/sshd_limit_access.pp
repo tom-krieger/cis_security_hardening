@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure SSH access is limited (Automated)
+#    Ensure SSH access is limited 
 #
 # There are several options available to limit which users and group can access the system via SSH. It is recommended that at least 
 # one of the following options be leveraged:

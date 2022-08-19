@@ -25,10 +25,14 @@ class cis_security_hardening::rules::auditd_lsetxattr_use (
   Boolean $enforce = false,
 ) {
   if $enforce {
+    $uid = fact('cis_security_hardening.auditd.uid_min') ? {
+      undef => '1000',
+      default => fact('cis_security_hardening.auditd.uid_min'),
+    }
     concat::fragment { 'watch lsetxattr command rule 1':
       order   => '148',
       target  => $cis_security_hardening::rules::auditd_init::rules_file,
-      content => '-a always,exit -F arch=b32 -S lsetxattr -F auid>=1000 -F auid!=-1 -k perm_mod',
+      content => "-a always,exit -F arch=b32 -S lsetxattr -F auid>=${uid} -F auid!=-1 -k perm_mod",
     }
 
     concat::fragment { 'watch lsetxattr command rule 2':
@@ -41,7 +45,7 @@ class cis_security_hardening::rules::auditd_lsetxattr_use (
       concat::fragment { 'watch lsetxattr command rule 3':
         order   => '150',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,
-        content => '-a always,exit -F arch=b64 -S lsetxattr -F auid>=1000 -F auid!=-1 -k perm_mod',
+        content => "-a always,exit -F arch=b64 -S lsetxattr -F auid>=${uid} -F auid!=-1 -k perm_mod",
       }
 
       concat::fragment { 'watch lsetxattr command rule 4':

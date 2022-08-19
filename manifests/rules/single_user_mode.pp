@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure authentication required for single user mode (Automated)
+#    Ensure authentication required for single user mode 
 #
 # Single user mode (rescue mode) is used for recovery when the system detects an issue during boot 
 # or by manual selection from the bootloader.

@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure ntp is configured (Automated)
+#    Ensure ntp is configured 
 #
 # ntp is a daemon which implements the Network Time Protocol (NTP). It is designed to synchronize system 
 # clocks across a variety of systems and use a source that is highly accurate. More information on NTP can 

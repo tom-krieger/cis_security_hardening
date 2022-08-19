@@ -1,5 +1,5 @@
 # @summary
-#    Ensure GNOME Display Manager is removed (Manual)
+#    Ensure GNOME Display Manager is removed 
 #
 # The GNOME Display Manager (GDM) is a program that manages graphical display servers and handles graphical user logins.
 #

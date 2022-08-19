@@ -27,6 +27,7 @@ describe 'cis_security_hardening::rules::auditd_identity' do
             os_facts.merge!(
               cis_security_hardening: {
                 auditd: {
+                  uid_min: '1000',
                   identity: false,
                 },
               },

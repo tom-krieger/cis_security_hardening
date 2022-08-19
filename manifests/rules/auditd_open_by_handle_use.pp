@@ -25,29 +25,33 @@ class cis_security_hardening::rules::auditd_open_by_handle_use (
   Boolean $enforce = false,
 ) {
   if $enforce {
+    $uid = fact('cis_security_hardening.auditd.uid_min') ? {
+      undef => '1000',
+      default => fact('cis_security_hardening.auditd.uid_min'),
+    }
     concat::fragment { 'watch open_by_handle_at command rule 1':
       order   => '168',
       target  => $cis_security_hardening::rules::auditd_init::rules_file,
-      content => '-a always,exit -F arch=b32 -S open_by_handle_at -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -k perm_access',
+      content => "-a always,exit -F arch=b32 -S open_by_handle_at -F exit=-EPERM -F auid>=${uid} -F auid!=4294967295 -k perm_access",
     }
 
     concat::fragment { 'watch open_by_handle_at command rule 2':
       order   => '169',
       target  => $cis_security_hardening::rules::auditd_init::rules_file,
-      content => '-a always,exit -F arch=b32 -S open_by_handle_at -F exit=-EACCES -F auid>=1000 -F auid!=4294967295 -k perm_access',
+      content => "-a always,exit -F arch=b32 -S open_by_handle_at -F exit=-EACCES -F auid>=${uid} -F auid!=4294967295 -k perm_access",
     }
 
     if  $facts['architecture'] == 'x86_64' or $facts['architecture'] == 'amd64' {
       concat::fragment { 'watch open_by_handle_at command rule 3':
         order   => '170',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,
-        content => '-a always,exit -F arch=b64 -S open_by_handle_at -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -k perm_access',
+        content => "-a always,exit -F arch=b64 -S open_by_handle_at -F exit=-EPERM -F auid>=${uid} -F auid!=4294967295 -k perm_access",
       }
 
       concat::fragment { 'watch open_by_handle_at command rule 4':
         order   => '171',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,
-        content => '-a always,exit -F arch=b64 -S open_by_handle_at -F exit=-EACCES -F auid>=1000 -F auid!=4294967295 -k perm_access',
+        content => "-a always,exit -F arch=b64 -S open_by_handle_at -F exit=-EACCES -F auid>=${uid} -F auid!=4294967295 -k perm_access",
       }
     }
   }

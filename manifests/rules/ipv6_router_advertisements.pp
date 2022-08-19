@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure IPv6 router advertisements are not accepted (Manual)
+#    Ensure IPv6 router advertisements are not accepted 
 #
 # This setting disables the system's ability to accept IPv6 router advertisements.
 #

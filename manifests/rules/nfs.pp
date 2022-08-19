@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure NFS is not enabled (Automated)
+#    Ensure NFS is not enabled 
 #
 # The Network File System (NFS) is one of the first and most widely distributed file systems in the UNIX 
 # environment. It provides the ability for systems to mount file systems of other servers through the network.

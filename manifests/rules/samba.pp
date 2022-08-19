@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure Samba is not installed (Automated)
+#    Ensure Samba is not installed 
 #
 # The Samba daemon allows system administrators to configure their Linux systems to share file 
 # systems and directories with Windows desktops. Samba will advertise the file systems and 

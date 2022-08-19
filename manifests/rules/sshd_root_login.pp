@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure SSH root login is disabled (Automated)
+#    Ensure SSH root login is disabled 
 #
 # The PermitRootLogin parameter specifies if the root user can log in using ssh(1). The default is no.
 #

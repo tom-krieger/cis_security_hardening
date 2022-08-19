@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure rsyslog or syslog-ng is installed (Automated)
+#    Ensure rsyslog or syslog-ng is installed 
 #
 # The rsyslog and syslog-ng software are recommended replacements to the original syslogd daemon which 
 # provide improvements over syslogd , such as connection-oriented (i.e. TCP) transmission of logs, the 

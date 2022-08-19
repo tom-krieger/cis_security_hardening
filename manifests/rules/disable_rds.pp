@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure RDS is disabled (Manual)
+#    Ensure RDS is disabled 
 #
 # The Reliable Datagram Sockets (RDS) protocol is a transport layer protocol designed to provide 
 # low-latency, high-bandwidth communications between cluster nodes. It was developed by the 

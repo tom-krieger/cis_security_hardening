@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure permissions on /etc/group are configured (Automated)
+#    Ensure permissions on /etc/group are configured 
 #
 # The /etc/group file contains a list of all the valid groups defined in the system. The command below 
 # allows read/write access for root and read access for everyone else.

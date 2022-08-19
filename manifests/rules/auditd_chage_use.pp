@@ -23,10 +23,14 @@ class cis_security_hardening::rules::auditd_chage_use (
   Boolean $enforce = false,
 ) {
   if $enforce {
+    $uid = fact('cis_security_hardening.auditd.uid_min') ? {
+      undef => '1000',
+      default => fact('cis_security_hardening.auditd.uid_min'),
+    }
     concat::fragment { 'watch chage command rule 1':
       order   => '183',
       target  => $cis_security_hardening::rules::auditd_init::rules_file,
-      content => '-a always,exit -F path=/usr/bin/chage -F perm=x -F auid>=1000 -F auid!=4294967295 -k privileged-chage',
+      content => "-a always,exit -F path=/usr/bin/chage -F perm=x -F auid>=${uid} -F auid!=4294967295 -k privileged-chage",
     }
   }
 }

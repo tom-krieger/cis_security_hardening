@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure iptables are flushed (Manual)
+#    Ensure iptables are flushed 
 #
 # nftables is a replacement for iptables, ip6tables, ebtables and arptables
 #

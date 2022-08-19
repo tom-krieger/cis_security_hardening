@@ -1,5 +1,5 @@
 # @summary
-#    Ensure AppArmor is enabled in the bootloader configuration (Automated)
+#    Ensure AppArmor is enabled in the bootloader configuration 
 #
 # Configure AppArmor to be enabled at boot time and verify that it has not been 
 # overwritten by the bootloader boot parameters.

@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure sudo is installed (Automated)
+#    Ensure sudo is installed 
 #
 # sudo allows a permitted user to execute a command as the superuser or another user, as specified by the 
 # security policy. The invoking user's real (not effective) user ID is used to determine the user name 

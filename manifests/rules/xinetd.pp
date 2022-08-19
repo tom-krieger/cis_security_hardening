@@ -1,5 +1,5 @@
 # @summary
-#    Ensure xinetd is not installed (Automated)
+#    Ensure xinetd is not installed 
 #
 # The eXtended InterNET Daemon ( xinetd ) is an open source super daemon that replaced the original inetd 
 # daemon. The xinetd daemon listens for well known services and dispatches the appropriate daemon to properly 

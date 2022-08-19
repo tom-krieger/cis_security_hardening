@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure journald is configured to write logfiles to persistent disk (Automated)
+#    Ensure journald is configured to write logfiles to persistent disk 
 #
 # Data from journald may be stored in volatile memory or persisted locally on the server. Logs in memory 
 # will be lost upon a system reboot. By persisting logs to local disk on the server they are protected 

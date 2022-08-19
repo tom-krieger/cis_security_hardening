@@ -25,7 +25,7 @@ class cis_security_hardening::rules::opensc_pkcs11 (
 ) {
   if $enforce {
     ensure_packages(['opensc-pkcs11'], {
-      ensure => present,
+        ensure => present,
     })
   }
 }

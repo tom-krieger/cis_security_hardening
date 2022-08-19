@@ -41,11 +41,16 @@ describe 'cis_security_hardening::rules::auditd_chcon_use' do
           is_expected.to compile
 
           if enforce
+            auid = if os_facts[:operatingsystem].casecmp('rocky').zero?
+                     'unset'
+                   else
+                     '4294967295'
+                   end
             is_expected.to contain_concat__fragment('watch chcon command rule 1')
               .with(
                 'order'   => '176',
                 'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                'content' => '-a always,exit -F path=/usr/bin/chcon -F perm=x -F auid>=1000 -F auid!=4294967295 -k perm_chng',
+                'content' => "-a always,exit -F path=/usr/bin/chcon -F perm=x -F auid>=1000 -F auid!=#{auid} -k perm_chng",
               )
           else
             is_expected.not_to contain_concat__fragment('watch chcon command rule 1')

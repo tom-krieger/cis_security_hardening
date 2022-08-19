@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure chrony is configured (Automated)
+#    Ensure chrony is configured 
 #
 # chrony is a daemon which implements the Network Time Protocol (NTP) is designed to synchronize system 
 # clocks across a variety of systems and use a source that is highly accurate. More information on chrony 
@@ -43,10 +43,24 @@ class cis_security_hardening::rules::chrony (
       makestep_updates => $makestep_updates,
     }
 
-    if $facts['operatingsystem'].downcase() == 'ubuntu' {
-      ensure_packages(['ntp'], {
-          ensure => purged,
-      })
+    case $facts['os']['name'].downcase() {
+      'ubuntu': {
+        ensure_packages(['ntp'], {
+            ensure => purged,
+        })
+      }
+      'rocky': {
+        file { '/etc/sysconfig/chronyd':
+          ensure  => file,
+          owner   => 'root',
+          group   => 'root',
+          mode    => '0644',
+          content => 'OPTIONS="-u chrony"',
+        }
+      }
+      default: {
+        # nothing to do
+      }
     }
   }
 }

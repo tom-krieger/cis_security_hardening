@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure default group for the root account is GID 0 (Automated)
+#    Ensure default group for the root account is GID 0 
 #
 # The usermod command can be used to specify which group the root user belongs to. This affects 
 # permissions of files that are created by the root user.

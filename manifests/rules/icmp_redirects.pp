@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure ICMP redirects are not accepted (Automated)
+#    Ensure ICMP redirects are not accepted 
 #
 # ICMP redirect messages are packets that convey routing information and tell your host 
 # (acting as a router) to send packets via an alternate path. It is a way of allowing an 

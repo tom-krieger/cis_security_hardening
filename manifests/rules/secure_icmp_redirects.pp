@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure secure ICMP redirects are not accepted (Automated)
+#    Ensure secure ICMP redirects are not accepted 
 #
 # Secure ICMP redirects are the same as ICMP redirects, except they come from gateways listed 
 # on the default gateway list. It is assumed that these gateways are known to your system, and 

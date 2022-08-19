@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure nodev option set on /tmp partition (Automated)
+#    Ensure nodev option set on /tmp partition 
 #
 # The nodev mount option specifies that the filesystem cannot contain special devices.
 #

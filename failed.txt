@@ -1,22 +1,28 @@
+RuleScan statusLast passed on
+1.6.1.6 Ensure no unconfined services exist	(ok)
 
-1.5.7 Ensure FIPS mode is enabled	(not tested)
+3.4.3.2.3 Ensure iptables rules exist for all open ports	(ok)
 
-2.1.20 Ensure Endpoint Security for Linux Threat Prevention is installed	(not tested)
+3.4.3.2.4 Ensure iptables default deny firewall policy	(ok)
 
-4.1.4.1 Ensure audit log files are not read or write-accessible by unauthorized users	(false positive)
+3.4.3.2.5 Ensure iptables rules are saved	(ok)
 
-4.1.4.4 Ensure the audit log directory is 0750 or more restrictive	(false positive)
+4.1.3.4 Ensure events that modify date and time information are collected	
 
-4.2.1.7 Ensure remote access methods are monitored	
+4.1.3.5 Ensure events that modify the system's network environment are collected	
 
-4.2.5 Ensure permissions on all logfiles are configured	(ok)
+4.1.3.7 Ensure unsuccessful file access attempts are collected	
 
-5.4.19 Ensure Personal Identity Verification credentials are electronically verified	 (ok)
+4.1.3.9 Ensure discretionary access control permission modification events are collected	
 
-5.4.20 Ensure PKI local cache of revocation data	(ok)
+4.1.3.13 Ensure file deletion events by users are collected	
 
-5.5.7 Ensure default user shell timeout is 600 seconds or less	(false positive)
+5.3.4 Ensure users must provide password for escalation	(ok)
 
-5.8 Ensure /etc/ssl/certs only contains certificate files whose sha256 fingerprint match the fingerprint of DoD PKI-established certificate authorities	(ok)
+5.3.7 Ensure access to the su command is restricted	(ok)
 
-6.1.17 Ensure system command files are group-owned by root	(false positive)
+5.5.1 Ensure password creation requirements are configured	(??)
+
+5.5.2 Ensure lockout for failed password attempts is configured	(??)
+
+5.5.3 Ensure password reuse is limited	(??)

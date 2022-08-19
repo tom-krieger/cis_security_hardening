@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure lockout for failed password attempts is configured (Automated)
+#    Ensure lockout for failed password attempts is configured 
 #
 # Lock out users after n unsuccessful consecutive login attempts. The first sets of changes are made to the PAM 
 # configuration files. The second set of changes are applied to the program specific PAM configuration file. The 
@@ -52,8 +52,7 @@ class cis_security_hardening::rules::pam_lockout (
         $services.each | $service | {
           $pf_file = "${pf_path}/${service}"
 
-          if  $facts['operatingsystemmajrelease'] > '7' and
-          $pf_path != '' {
+          if  $facts['operatingsystemmajrelease'] > '7' and $pf_path != '' {
             file_line { "update pam lockout ${service}":
               path   => $pf_file,
               line   => "auth         required                                     pam_faillock.so preauth silent deny=${attempts} unlock_time=${lockouttime}  {include if \"with-faillock\"}", #lint:ignore:140chars
@@ -67,7 +66,7 @@ class cis_security_hardening::rules::pam_lockout (
           exec { 'configure faillock':
             command => "authconfig --faillockargs=\"preauth silent audit deny=${attempts} unlock_time=${lockouttime}\" --enablefaillock --updateall", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
             path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-            onlyif  => "test -z \"\$(grep -E \"auth\\s+required\\s+pam_faillock.so.*deny=${attempts} unlock_time=${lockouttime}\" /etc/pam.d/system-auth /etc/pam.d/password-auth)\"", #lint:ignore:140chars
+            onlyif  => "test -z \"\$(grep -E \"auth\\s+required\\s+pam_faillock.so.*deny=${attempts}\\s+unlock_time=${lockouttime}\" /etc/pam.d/system-auth /etc/pam.d/password-auth)\"", #lint:ignore:140chars
           }
         }
       }

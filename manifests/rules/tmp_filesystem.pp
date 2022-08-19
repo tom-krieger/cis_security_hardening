@@ -1,5 +1,5 @@
 # @summary 
-#   Ensure /tmp is configured (Automated)
+#   Ensure /tmp is configured 
 #
 # The /tmp directory is a world-writable directory used for temporary storage by all users and some applications.
 #

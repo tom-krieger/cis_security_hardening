@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure HTTP server is not enabled (Automated)
+#    Ensure HTTP server is not enabled 
 #
 # HTTP or web servers provide the ability to host web site content.
 #

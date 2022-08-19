@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure SSH MaxStartups is configured (Automated)
+#    Ensure SSH MaxStartups is configured 
 #
 # The MaxStartups parameter specifies the maximum number of concurrent unauthenticated connections 
 # to the SSH daemon.

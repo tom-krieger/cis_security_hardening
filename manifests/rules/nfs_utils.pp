@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure nfs-utils is not installed or the nfs-server service is masked (Automated)
+#    Ensure nfs-utils is not installed or the nfs-server service is masked 
 #
 # The Network File System (NFS) is one of the first and most widely distributed file systems in the UNIX 
 # environment. It provides the ability for systems to mount file systems of other servers through the network.
@@ -24,15 +24,26 @@ class cis_security_hardening::rules::nfs_utils (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    if $facts['operatingsystem'].downcase() == 'sles' {
-      ensure_packages(['nfs-utils', 'nfs-kernel-server'], {
-          ensure => absent,
-      })
-    } else {
-      ensure_resource('service', 'nfs-server', {
-          ensure => stopped,
-          enable => false,
-      })
+    case $facts['os']['name'].downcase() {
+      'sles': {
+        ensure_packages(['nfs-utils', 'nfs-kernel-server'], {
+            ensure => absent,
+        })
+      }
+      'rocky': {
+        ensure_packages(['nfs-utils'], {
+            ensure => absent,
+        })
+      }
+      default: {
+        ensure_resource('service', 'nfs-server', {
+            ensure => stopped,
+            enable => false,
+        })
+        ensure_packages(['nfs-utils'], {
+            ensure => absent,
+        })
+      }
     }
   }
 }

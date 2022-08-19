@@ -23,10 +23,14 @@ class cis_security_hardening::rules::auditd_unix_update_use (
   Boolean $enforce = false,
 ) {
   if $enforce {
+    $uid = fact('cis_security_hardening.auditd.uid_min') ? {
+      undef => '1000',
+      default => fact('cis_security_hardening.auditd.uid_min'),
+    }
     concat::fragment { 'watch unix_update command rule 1':
       order   => '181',
       target  => $cis_security_hardening::rules::auditd_init::rules_file,
-      content => '-a always,exit -F path=/sbin/unix_update -F perm=x -F auid>=1000 -F auid!=4294967295 -k privileged-unix-update',
+      content => "-a always,exit -F path=/sbin/unix_update -F perm=x -F auid>=${uid} -F auid!=4294967295 -k privileged-unix-update",
     }
   }
 }

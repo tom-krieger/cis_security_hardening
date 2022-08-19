@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure nftables service is enabled (Automated)
+#    Ensure nftables service is enabled 
 #
 # The nftables service allows for the loading of nftables rulesets during boot, or starting of the nftables service.
 #

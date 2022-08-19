@@ -115,11 +115,11 @@ cis_security_hardening::benchmark::sles::15:
         - disable_sctp
     configure_firewalld:
       level1:
-        -  firewalld_install
-        -  firewalld_service
-        -  firewalld_default_zone
-        -  firewalld_interfaces
-        -  firewalld_ports_services
+        - firewalld_install
+        - firewalld_service
+        - firewalld_default_zone
+        - firewalld_interfaces
+        - firewalld_ports_services
     configure_nftables:
       level1:
         - nftables_install

@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure audit logs are not automatically deleted (Automated)
+#    Ensure audit logs are not automatically deleted 
 #
 # The max_log_file_action setting determines how to handle the audit log file reaching the max file 
 # size. A value of keep_logs will rotate the logs but never delete old logs.

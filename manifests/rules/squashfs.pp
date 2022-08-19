@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure mounting of squashfs filesystems is disabled (Automated)
+#    Ensure mounting of squashfs filesystems is disabled 
 #
 # The squashfs filesystem type is a compressed read-only Linux filesystem embedded in 
 # small footprint systems (similar to cramfs ). A squashfs image can be used without 
@@ -22,8 +22,15 @@ class cis_security_hardening::rules::squashfs (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    kmod::install { 'squashfs':
-      command => '/bin/true',
+    if $facts['operatingsystem'].downcase() == 'rocky' {
+      kmod::install { 'squashfs':
+        command => '/bin/false',
+      }
+      kmod::blacklist { 'squashfs': }
+    } else {
+      kmod::install { 'squashfs':
+        command => '/bin/true',
+      }
     }
   }
 }

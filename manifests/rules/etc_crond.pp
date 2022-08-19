@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure permissions on /etc/cron.d are configured (Automated)
+#    Ensure permissions on /etc/cron.d are configured 
 #
 # The /etc/cron.d directory contains system cron jobs that need to run in a similar manner to the hourly, 
 # daily weekly and monthly jobs from /etc/crontab , but require more granular control as to when they run. 

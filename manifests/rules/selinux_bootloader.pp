@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure SELinux is not disabled in bootloader configuration (Automated)
+#    Ensure SELinux is not disabled in bootloader configuration 
 #
 # Configure SELINUX to be enabled at boot time and verify that it has not been overwritten by the grub boot parameters.
 #

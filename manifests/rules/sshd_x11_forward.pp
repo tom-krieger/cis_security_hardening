@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure SSH X11 forwarding is disabled (Automated)
+#    Ensure SSH X11 forwarding is disabled 
 #
 # The X11Forwarding parameter provides the ability to tunnel X11 traffic through the connection to enable remote 
 # graphic connections.

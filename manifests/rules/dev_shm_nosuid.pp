@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure nosuid option set on /dev/shm partition (Automated)
+#    Ensure nosuid option set on /dev/shm partition 
 #
 # The nosuid mount option specifies that the filesystem cannot contain setuid files.
 #

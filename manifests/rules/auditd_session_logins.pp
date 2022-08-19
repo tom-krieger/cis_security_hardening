@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure session initiation information is collected (Automated)
+#    Ensure session initiation information is collected 
 #
 # Monitor session initiation events. The parameters in this section track changes to the files 
 # associated with session events. The file /var/run/utmp file tracks all currently logged in users. 

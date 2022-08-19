@@ -14,6 +14,14 @@ hierarchy:
     paths:
       - "cis/cis_centos_8_params.yaml"
       - "cis/cis_centos_8_rules.yaml"
+  - name: "AlmaLinux 8 Benchmark"
+    paths:
+      - "cis/cis_almalinux_8_params.yaml"
+      - "cis/cis_almalinux_8_rules.yaml"
+  - name: "Rocky 8 Benchmark"
+    paths:
+      - "cis/cis_rocky_8_params.yaml"
+      - "cis/cis_rocky_8_rules.yaml"
   - name: "Ubuntu 18.04 Benchmark"
     paths:
       - "cis/cis_ubuntu_18.04_params.yaml"

@@ -26,6 +26,7 @@ describe 'cis_security_hardening::rules::auditd_ssh_agent_use' do
           os_facts.merge!(
             cis_security_hardening: {
               auditd: {
+                uid_min: '1000',
                 auditing_process: 'none',
               },
             },

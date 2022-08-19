@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure journald is configured to send logs to rsyslog (Automated)
+#    Ensure journald is configured to send logs to rsyslog 
 #
 # Data from journald may be stored in volatile memory or persisted locally on the server. Utilities #
 # exist to accept remote export of journald logs, however, use of the rsyslog service provides a consistent 

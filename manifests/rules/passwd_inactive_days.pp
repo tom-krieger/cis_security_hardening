@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure inactive password lock is 30 days or less (Automated)
+#    Ensure inactive password lock is 30 days or less 
 #
 # User accounts that have been inactive for over a given period of time can be automatically disabled. 
 # It is recommended that accounts that are inactive for 30 days after password expiration be disabled.

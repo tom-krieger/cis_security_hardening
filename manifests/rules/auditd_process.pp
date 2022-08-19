@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure auditing for processes that start prior to auditd is enabled (Automated)
+#    Ensure auditing for processes that start prior to auditd is enabled 
 #
 # Configure grub so that processes that are capable of being audited can be audited even if they start up 
 # prior to auditd startup.

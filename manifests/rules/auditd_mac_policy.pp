@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure events that modify the system's Mandatory Access Controls are collected (Automated)
+#    Ensure events that modify the system's Mandatory Access Controls are collected 
 #
 # Monitor SELinux mandatory access controls. The parameters below monitor any write access (potential additional, 
 # deletion or modification of files in the directory) or attribute changes to the /etc/selinux or directory.

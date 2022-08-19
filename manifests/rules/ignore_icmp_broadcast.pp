@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure broadcast ICMP requests are ignored (Automated)
+#    Ensure broadcast ICMP requests are ignored 
 #
 # Setting net.ipv4.icmp_echo_ignore_broadcasts to 1 will cause the system to ignore all ICMP echo 
 # and timestamp requests to broadcast and multicast addresses.
