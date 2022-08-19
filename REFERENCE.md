@@ -14,6 +14,10 @@
 * [`cis_security_hardening::rules::auditd_privileged_priv_change`](#cis_security_hardeningrulesauditd_privileged_priv_change): Ensure successful and unsuccessful uses of the su command are collected
 * [`cis_security_hardening::rules::auditd_sudo_use`](#cis_security_hardeningrulesauditd_sudo_use): Ensure successful and unsuccessful uses of the sudo command are recorded
 * [`cis_security_hardening::rules::mfetp`](#cis_security_hardeningrulesmfetp): Ensure Endpoint Security for Linux Threat Prevention is installed
+* [`cis_security_hardening::rules::auditd_log_perms`](#cis_security_hardeningrulesauditd_log_perms): Ensure audit log files are not read or write-accessible by unauthorized users
+* [`cis_security_hardening::rules::auditd_privileged_priv_change`](#cis_security_hardeningrulesauditd_privileged_priv_change): Ensure successful and unsuccessful uses of the su command are collected
+* [`cis_security_hardening::rules::auditd_sudo_use`](#cis_security_hardeningrulesauditd_sudo_use): Ensure successful and unsuccessful uses of the sudo command are recorded
+* [`cis_security_hardening::rules::mfetp`](#cis_security_hardeningrulesmfetp): Ensure Endpoint Security for Linux Threat Prevention is installed
 * [`cis_security_hardening::services`](#cis_security_hardeningservices): Services
 * [`cis_security_hardening::sticky_world_writable_cron`](#cis_security_hardeningsticky_world_writable_cron): Create cron job for searching world writable dir3ctories with sticky bit
 
@@ -93,6 +97,7 @@ audited
 * `cis_security_hardening::rules::avahi`: Ensure Avahi Server is not enabled
 * `cis_security_hardening::rules::bind`: Ensure DNS Server is not installed
 * `cis_security_hardening::rules::chrony`: Ensure chrony is configured
+* `cis_security_hardening::rules::chrony_sync_to_authritative`: Ensure system clocks are synchronize to the authoritative time source when the time difference is greater than one second
 * `cis_security_hardening::rules::cramfs`: Ensure mounting of cramfs filesystems is disabled
 * `cis_security_hardening::rules::cron_daily`: Ensure permissions on /etc/cron.daily are configured
 * `cis_security_hardening::rules::cron_hourly`: Ensure permissions on /etc/cron.hourly are configured
@@ -102,7 +107,9 @@ audited
 * `cis_security_hardening::rules::crond_service`: Ensure cron daemon is enabled and running
 * `cis_security_hardening::rules::crontab`: Ensure permissions on /etc/crontab are configured
 * `cis_security_hardening::rules::crtl_alt_del`: Ensure the Ctrl-Alt-Delete key sequence is disabled
+* `cis_security_hardening::rules::crtl_alt_del`: Ensure the Ctrl-Alt-Delete key sequence is disabled
 * `cis_security_hardening::rules::crypto_policy`: Ensure system-wide crypto policy is FUTURE or FIPS (Scored)
+* `cis_security_hardening::rules::ctrl_alt_del_graphical`: Ensure the graphical user Ctrl-Alt-Delete key sequence is disabled
 * `cis_security_hardening::rules::ctrl_alt_del_graphical`: Ensure the graphical user Ctrl-Alt-Delete key sequence is disabled
 * `cis_security_hardening::rules::cups`: Ensure CUPS is not enabled
 * `cis_security_hardening::rules::dev_shm`: Ensure /dev/shm is configured
@@ -128,6 +135,7 @@ audited
 * `cis_security_hardening::rules::etc_crond`: Ensure permissions on /etc/cron.d are configured
 * `cis_security_hardening::rules::fat`: Ensure mounting of FAT filesystems is disabled
 * `cis_security_hardening::rules::fips_bootloader`: Ensure FIPS mode is enabled
+* `cis_security_hardening::rules::fips_bootloader`: Ensure FIPS mode is enabled
 * `cis_security_hardening::rules::firewalld_default_zone`: Ensure default zone is set
 * `cis_security_hardening::rules::firewalld_install`: Ensure a Firewall package is installed
 * `cis_security_hardening::rules::firewalld_interfaces`: Ensure network interfaces are assigned to appropriate zone
@@ -136,6 +144,7 @@ audited
 * `cis_security_hardening::rules::freevxfs`: Ensure mounting of freevxfs filesystems is disabled
 * `cis_security_hardening::rules::ftp`: Ensure FTP Server is not installed
 * `cis_security_hardening::rules::gdm_auto_mount`: Ensure automatic mounting of removable media is disabled
+* `cis_security_hardening::rules::gdm_lock_enabled`: Ensure user's session lock is enabled
 * `cis_security_hardening::rules::gdm_lock_enabled`: Ensure user's session lock is enabled
 * `cis_security_hardening::rules::gnome_gdm`
 * `cis_security_hardening::rules::gnome_gdm_package`: Ensure GNOME Display Manager is removed
@@ -349,6 +358,14 @@ Ensure vlock is installed
 * [`check_for_forward_files`](#check_for_forward_files): Check users users have no .forward files.
 * [`check_for_nertrc_files`](#check_for_nertrc_files): Check users have no .netrc files.
 * [`check_for_rhosts_files`](#check_for_rhosts_files): Check users have no .rhosts files.
+* [`check_auditd_dirs_and_files`](#check_auditd_dirs_and_files): Check auditd directory and file permissions.
+* [`check_for_duplicate_gids`](#check_for_duplicate_gids): Check no duplicate GIDs exist.
+* [`check_for_duplicate_group_names`](#check_for_duplicate_group_names): Check no duplicate group names exist.
+* [`check_for_duplicate_uids`](#check_for_duplicate_uids): Check no duplicate UIDs exist.
+* [`check_for_duplicate_user_names`](#check_for_duplicate_user_names): Check no duplicate user names exist.
+* [`check_for_forward_files`](#check_for_forward_files): Check users users have no .forward files.
+* [`check_for_nertrc_files`](#check_for_nertrc_files): Check users have no .netrc files.
+* [`check_for_rhosts_files`](#check_for_rhosts_files): Check users have no .rhosts files.
 * [`check_inactive_passwd_lock`](#check_inactive_passwd_lock): Check inactive password lock is 30 days or less.
 * [`check_pass_max_days`](#check_pass_max_days): Check password expiration is 365 days or less.
 * [`check_pass_min_days`](#check_pass_min_days): Check minimum days between password changes is configured.
@@ -357,13 +374,21 @@ Ensure vlock is installed
 * [`check_shadow_group_is_empty`](#check_shadow_group_is_empty): Check shadow group is empty.
 * [`check_shell_timeout`](#check_shell_timeout): Check default user shell timeout is 600 seconds or less.
 * [`check_stig_cert_fingerprints`](#check_stig_cert_fingerprints): Check if all certificates match DoD fingerprints.
+* [`check_root_path_integrety`](#check_root_path_integrety): Check root PATH Integrity.
+* [`check_shadow_group_is_empty`](#check_shadow_group_is_empty): Check shadow group is empty.
+* [`check_shell_timeout`](#check_shell_timeout): Check default user shell timeout is 600 seconds or less.
+* [`check_stig_cert_fingerprints`](#check_stig_cert_fingerprints): Check if all certificates match DoD fingerprints.
 * [`check_system_accounts_secured`](#check_system_accounts_secured): Check system accounts are secured.
+* [`check_uid_0_files`](#check_uid_0_files): Check root is the only UID 0 account.
+* [`check_user_home_dirs_exist`](#check_user_home_dirs_exist): Check all users' home directories exist.
 * [`check_uid_0_files`](#check_uid_0_files): Check root is the only UID 0 account.
 * [`check_user_home_dirs_exist`](#check_user_home_dirs_exist): Check all users' home directories exist.
 * [`check_user_last_passwd_in_past`](#check_user_last_passwd_in_past): Check all users last password change date is in the past.
 * [`check_users_dot_files`](#check_users_dot_files): Check users' dot files are not group or world writable.
 * [`check_users_own_home_dirs`](#check_users_own_home_dirs): Check users own their home directories.
-* [`cleanup_old_stuff`](#cleanup_old_stuff): Cleanup old files from (previous) cis module
+* [`check_users_dot_files`](#check_users_dot_files): Check users' dot files are not group or world writable.
+* [`check_users_own_home_dirs`](#check_users_own_home_dirs): Check users own their home directories.
+* [`cleanup_old_stuff`](#cleanup_old_stuff): Cleanup old files from (previous) (previous) cis module
 * [`find_ungrouped_files_dirs`](#find_ungrouped_files_dirs): Find ungrouped files and directories.
 * [`find_unowned_files_dirs`](#find_unowned_files_dirs): Find unowned files and directories.
 * [`find_world_writable_files`](#find_world_writable_files): Find world writable files.
@@ -412,9 +437,10 @@ Default value: `'server'`
 
 ##### <a name="level"></a>`level`
 
-Data type: `Enum['1', '2', 'stig']`
+Data type: `Enum['1', '2', 'stig', 'stig']`
 
 The CIS Benchmark server security level. Higher levels include all rules of lover levels. Therefore level1 rules are all included
+in the level2 rules and stig includes level1 nd level 2 rules.. Higher levels include all rules of lover levels. Therefore level1 rules are all included
 in the level2 rules and stig includes level1 nd level 2 rules.
 
 Default value: `'2'`
@@ -513,6 +539,200 @@ Update Puppet agent's postrun command.
 Data type: `String`
 
 Command to use for fact upload.
+
+### <a name="cis_security_hardeningrulesauditd_log_perms"></a>`cis_security_hardening::rules::auditd_log_perms`
+
+The operating system must be configured so that audit log files are not read or write- accessible by unauthorized users.
+
+The operating system must be configured to permit only authorized users ownership of the audit log files.
+
+The operating system must permit only authorized groups ownership of the audit log files.
+
+Rationale:
+Unauthorized disclosure of audit records can reveal system and configuration data to attackers, thus compromising its confidentiality.
+
+Audit information includes all information (e.g., audit records, audit settings, audit reports) needed to successfully audit
+operating system activity.
+
+Satisfies: SRG-OS-000057-GPOS-00027, SRG-OS-000058-GPOS-00028
+
+Unauthorized disclosure of audit records can reveal system and configuration data to attackers, thus compromising its confidentiality.
+
+Audit information includes all information (e.g., audit records, audit settings, audit reports) needed to successfully audit
+operating system activity.
+
+Satisfies: SRG-OS-000057-GPOS-00027, SRG-OS-000058-GPOS-00028, SRG-OS-000059- GPOS-00029
+
+Unauthorized disclosure of audit records can reveal system and configuration data to attackers, thus compromising its confidentiality.
+
+Audit information includes all information (e.g., audit records, audit settings, audit reports) needed to successfully audit
+operating system activity.
+
+Satisfies: SRG-OS-000057-GPOS-00027, SRG-OS-000058-GPOS-00028, SRG-OS-000059- GPOS-00029
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_log_perms':
+  enforce => true,
+  user => 'root',
+  group => 'root',
+  mode => '0600',
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_log_perms` class:
+
+* [`enforce`](#enforce)
+* [`user`](#user)
+* [`group`](#group)
+* [`mode`](#mode)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+##### <a name="user"></a>`user`
+
+Data type: `String`
+
+User who owns the audit logfiles.
+
+Default value: `'root'`
+
+##### <a name="group"></a>`group`
+
+Data type: `String`
+
+Group who owns the audit logfiles.
+
+Default value: `'root'`
+
+##### <a name="mode"></a>`mode`
+
+Data type: `String`
+
+Access permissions for the auditd logfiles.
+
+Default value: `'0600'`
+
+### <a name="cis_security_hardeningrulesauditd_privileged_priv_change"></a>`cis_security_hardening::rules::auditd_privileged_priv_change`
+
+The operating system must generate audit records for successful/unsuccessful uses of the su command.
+
+Rationale:
+Without generating audit records that are specific to the security and mission needs of the organization,
+it would be difficult to establish, correlate, and investigate the events relating to an incident or identify
+those responsible for one.
+
+Audit records can be generated from various components within the information system (e.g., module or policy filter).
+
+@ api private
+
+#### Examples
+
+##### 
+
+```puppet
+class 8 'cis_security_hardening::rules::auditd_privileged_priv_change':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_privileged_priv_change` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_sudo_use"></a>`cis_security_hardening::rules::auditd_sudo_use`
+
+The operating system must generate audit records for successful/unsuccessful uses of the sudo command.
+
+Rationale:
+Without generating audit records that are specific to the security and mission needs of the organization, it would
+be difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible
+for one.
+
+Audit records can be generated from various components within the information system (e.g., module or policy filter).
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_sudo_use':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_sudo_use` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesmfetp"></a>`cis_security_hardening::rules::mfetp`
+
+The operating system must deploy Endpoint Security for Linux Threat Prevention (ENSLTP).
+
+Rationale:
+Without the use of automated mechanisms to scan for security flaws on a continuous and/or periodic basis, the
+operating system or other system components may remain vulnerable to the exploits presented by undetected software
+flaws.
+
+To support this requirement, the operating system may have an integrated solution incorporating continuous scanning
+using HBSS and periodic scanning using other tools, as specified in the requirement.
+
+ @api private
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::mfetp':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::mfetp` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
 
 ### <a name="cis_security_hardeningrulesauditd_log_perms"></a>`cis_security_hardening::rules::auditd_log_perms`
 
@@ -985,6 +1205,62 @@ Check users have no .rhosts files.
 
 **Supports noop?** false
 
+### <a name="check_auditd_dirs_and_files"></a>`check_auditd_dirs_and_files`
+
+Check auditd directory and file permissions.
+
+**Supports noop?** false
+
+#### Parameters
+
+##### `audit_dir`
+
+Data type: `String`
+
+Directory containing auditd log files.
+
+### <a name="check_for_duplicate_gids"></a>`check_for_duplicate_gids`
+
+Check no duplicate GIDs exist.
+
+**Supports noop?** false
+
+### <a name="check_for_duplicate_group_names"></a>`check_for_duplicate_group_names`
+
+Check no duplicate group names exist.
+
+**Supports noop?** false
+
+### <a name="check_for_duplicate_uids"></a>`check_for_duplicate_uids`
+
+Check no duplicate UIDs exist.
+
+**Supports noop?** false
+
+### <a name="check_for_duplicate_user_names"></a>`check_for_duplicate_user_names`
+
+Check no duplicate user names exist.
+
+**Supports noop?** false
+
+### <a name="check_for_forward_files"></a>`check_for_forward_files`
+
+Check users users have no .forward files.
+
+**Supports noop?** false
+
+### <a name="check_for_nertrc_files"></a>`check_for_nertrc_files`
+
+Check users have no .netrc files.
+
+**Supports noop?** false
+
+### <a name="check_for_rhosts_files"></a>`check_for_rhosts_files`
+
+Check users have no .rhosts files.
+
+**Supports noop?** false
+
 ### <a name="check_inactive_passwd_lock"></a>`check_inactive_passwd_lock`
 
 Check inactive password lock is 30 days or less.
@@ -1049,9 +1325,53 @@ Check if all certificates match DoD fingerprints.
 
 **Supports noop?** false
 
+### <a name="check_root_path_integrety"></a>`check_root_path_integrety`
+
+Check root PATH Integrity.
+
+**Supports noop?** false
+
+### <a name="check_shadow_group_is_empty"></a>`check_shadow_group_is_empty`
+
+Check shadow group is empty.
+
+**Supports noop?** false
+
+### <a name="check_shell_timeout"></a>`check_shell_timeout`
+
+Check default user shell timeout is 600 seconds or less.
+
+**Supports noop?** false
+
+#### Parameters
+
+##### `tmout`
+
+Data type: `Integer`
+
+Maximal timeout setting.
+
+### <a name="check_stig_cert_fingerprints"></a>`check_stig_cert_fingerprints`
+
+Check if all certificates match DoD fingerprints.
+
+**Supports noop?** false
+
 ### <a name="check_system_accounts_secured"></a>`check_system_accounts_secured`
 
 Check system accounts are secured.
+
+**Supports noop?** false
+
+### <a name="check_uid_0_files"></a>`check_uid_0_files`
+
+Check root is the only UID 0 account.
+
+**Supports noop?** false
+
+### <a name="check_user_home_dirs_exist"></a>`check_user_home_dirs_exist`
+
+Check all users' home directories exist.
 
 **Supports noop?** false
 
@@ -1085,9 +1405,21 @@ Check users own their home directories.
 
 **Supports noop?** false
 
+### <a name="check_users_dot_files"></a>`check_users_dot_files`
+
+Check users' dot files are not group or world writable.
+
+**Supports noop?** false
+
+### <a name="check_users_own_home_dirs"></a>`check_users_own_home_dirs`
+
+Check users own their home directories.
+
+**Supports noop?** false
+
 ### <a name="cleanup_old_stuff"></a>`cleanup_old_stuff`
 
-Cleanup old files from (previous) cis module
+Cleanup old files from (previous) (previous) cis module
 
 **Supports noop?** false
 

@@ -23,5 +23,13 @@ def read_auditd_data
                         val.strip.to_s
                       end
 
+  cmd = 'find /etc/audit/ /etc/audit/rules.d -type f 2>/dev/null'
+  conf_raw = Facter::Core::Execution.exec(cmd).split("\n")
+  auditd['config_files'] = conf_raw.uniq
+
+  cmd = 'find /var/log/audit/ -maxdepth 1 -type f 2>/dev/null'
+  files_raw = Facter::Core::Execution.exec(cmd).split("\n")
+  auditd['log_files'] = files_raw.uniq
+
   auditd
 end
