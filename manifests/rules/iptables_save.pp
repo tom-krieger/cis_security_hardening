@@ -8,7 +8,7 @@
 #
 # @api private
 class cis_security_hardening::rules::iptables_save {
-  if $facts['operatingsystem'].downcase() == 'rocky' {
+  if $facts['operatingsystem'].downcase() == 'rocky' or $facts['operatingsystem'].downcase() == 'almalinux' {
     exec { 'save iptables rules':
       command => 'service iptables save',
       path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],

@@ -4,7 +4,7 @@ require 'spec_helper'
 require 'pp'
 
 mpts = ['/dev/shm', '/home', '/tmp', '/var/tmp', '/var', '/var/log', '/var/log/audit']
-opts = ['nodev', 'noexec', 'nosuid', 'usrquota', 'grpquota']
+opts = ['nodev', 'noexec', 'nosuid', 'usrquota', 'grpquota', 'quota']
 
 mpts.each do |mpt|
   opts.each do |opt|

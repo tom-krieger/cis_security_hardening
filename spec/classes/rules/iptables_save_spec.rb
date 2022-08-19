@@ -10,7 +10,7 @@ describe 'cis_security_hardening::rules::iptables_save' do
       it {
         is_expected.to compile
 
-        if os_facts[:operatingsystem].casecmp('rocky').zero?
+        if os_facts[:operatingsystem].casecmp('rocky').zero? || os_facts[:operatingsystem].casecmp('almalinux').zero?
           is_expected.to contain_exec('save iptables rules')
             .with(
               'command' => 'service iptables save',

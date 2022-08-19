@@ -21,7 +21,7 @@ class cis_security_hardening::rules::cramfs (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    if $facts['operatingsystem'].downcase() == 'rocky' {
+    if $facts['os']['name'].downcase() == 'rocky' or $facts['os']['name'].downcase() == 'almalinux' {
       kmod::install { 'cramfs':
         command => '/bin/false',
       }
