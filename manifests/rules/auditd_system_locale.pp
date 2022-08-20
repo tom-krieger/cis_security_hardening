@@ -32,17 +32,31 @@ class cis_security_hardening::rules::auditd_system_locale (
   Boolean $enforce                 = false,
 ) {
   if $enforce {
+    $os = fact('operatingsystem') ? {
+      undef   => 'unknown',
+      default => fact('operatingsystem').downcase()
+    }
     if  $facts['architecture'] == 'x86_64' or $facts['architecture'] == 'amd64' {
+      $content_rule7 = $os ? {
+        'almalinux' => '-a always,exit -F arch=b64 -S sethostname,setdomainname -k system-locale',
+        'rocky'     => '-a always,exit -F arch=b64 -S sethostname,setdomainname -k system-locale',
+        default     => '-a always,exit -F arch=b64 -S sethostname -S setdomainname -k system-locale',
+      }
       concat::fragment { 'watch network environment rule 7':
         order   => '130',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,
-        content => '-a always,exit -F arch=b64 -S sethostname,setdomainname -k system-locale',
+        content => $content_rule7,
       }
+    }
+    $content_rule1 = $os ? {
+      'almalinux' => '-a always,exit -F arch=b32 -S sethostname,setdomainname -k system-locale',
+      'rocky'     => '-a always,exit -F arch=b32 -S sethostname,setdomainname -k system-locale',
+      default     => '-a always,exit -F arch=b32 -S sethostname -S setdomainname -k system-locale',
     }
     concat::fragment { 'watch network environment rule 1':
       order   => '131',
       target  => $cis_security_hardening::rules::auditd_init::rules_file,
-      content => '-a always,exit -F arch=b32 -S sethostname,setdomainname -k system-locale',
+      content => $content_rule1,
     }
     concat::fragment { 'watch network environment rule 2':
       order   => '132',

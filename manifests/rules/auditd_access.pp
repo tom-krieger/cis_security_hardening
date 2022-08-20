@@ -35,29 +35,55 @@ class cis_security_hardening::rules::auditd_access (
       undef => '1000',
       default => fact('cis_security_hardening.auditd.uid_min'),
     }
+    $os = fact('operatingsystem') ? {
+      undef   => 'unknown',
+      default => fact('operatingsystem').downcase()
+    }
+
+    $content_rule1 = $os ? {
+      'almalinux' => "-a always,exit -F arch=b32 -S creat,open,openat,truncate,ftruncate -F exit=-EACCES -F auid>=${uid} -F auid!=${auid} -k access", #lint:ignore:140chars
+      'rocky'     => "-a always,exit -F arch=b32 -S creat,open,openat,truncate,ftruncate -F exit=-EACCES -F auid>=${uid} -F auid!=${auid} -k access", #lint:ignore:140chars
+      default     => "-a always,exit -F arch=b32 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EACCES -F auid>=${uid} -F auid!=${auid} -k access", #lint:ignore:140chars
+    }
+
+    $content_rule2 = $os ? {
+      'almalinux' => "-a always,exit -F arch=b32 -S creat,open,openat,truncate,ftruncate -F exit=-EPERM -F auid>=${uid} -F auid!=${auid} -k access", #lint:ignore:140chars
+      'rocky'     => "-a always,exit -F arch=b32 -S creat,open,openat,truncate,ftruncate -F exit=-EPERM -F auid>=${uid} -F auid!=${auid} -k access", #lint:ignore:140chars
+      default     => "-a always,exit -F arch=b32 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EPERM -F auid>=${uid} -F auid!=${auid} -k access", #lint:ignore:140chars
+    }
 
     concat::fragment { 'watch access rule 1':
       target  => $cis_security_hardening::rules::auditd_init::rules_file,
-      content => "-a always,exit -F arch=b32 -S creat,open,openat,truncate,ftruncate -F exit=-EACCES -F auid>=${uid} -F auid!=${auid} -k access", #lint:ignore:140chars
+      content => $content_rule1,
       order   => '11',
     }
 
     concat::fragment { 'watch access rule 2':
       target  => $cis_security_hardening::rules::auditd_init::rules_file,
-      content => "-a always,exit -F arch=b32 -S creat,open,openat,truncate,ftruncate -F exit=-EPERM -F auid>=${uid} -F auid!=${auid} -k access", #lint:ignore:140chars
+      content => $content_rule2,
       order   => '12',
     }
 
     if $facts['architecture'] == 'x86_64' or $facts['architecture'] == 'amd64' {
+      $content_rule3 = $os ? {
+        'almalinux' => "-a always,exit -F arch=b64 -S creat,open,openat,truncate,ftruncate -F exit=-EACCES -F auid>=${uid} -F auid!=${auid} -k access", #lint:ignore:140chars
+        'rocky'     => "-a always,exit -F arch=b64 -S creat,open,openat,truncate,ftruncate -F exit=-EACCES -F auid>=${uid} -F auid!=${auid} -k access", #lint:ignore:140chars
+        default     => "-a always,exit -F arch=b64 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EACCES -F auid>=${uid} -F auid!=${auid} -k access", #lint:ignore:140chars
+      }
+      $content_rule4 = $os ? {
+        'almalinux' => "-a always,exit -F arch=b64 -S creat,open,openat,truncate,ftruncate -F exit=-EPERM -F auid>=${uid} -F auid!=${auid} -k access",  #lint:ignore:140chars
+        'rocky'     => "-a always,exit -F arch=b64 -S creat,open,openat,truncate,ftruncate -F exit=-EPERM -F auid>=${uid} -F auid!=${auid} -k access",  #lint:ignore:140chars
+        default     => "-a always,exit -F arch=b64 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EPERM -F auid>=${uid} -F auid!=${auid} -k access", #lint:ignore:140chars
+      }
       concat::fragment { 'watch access rule 3':
         target  => $cis_security_hardening::rules::auditd_init::rules_file,
-        content => "-a always,exit -F arch=b64 -S creat,open,openat,truncate,ftruncate -F exit=-EACCES -F auid>=${uid} -F auid!=${auid} -k access", #lint:ignore:140chars
+        content => $content_rule3,
         order   => '13',
       }
 
       concat::fragment { 'watch access rule 4':
         target  => $cis_security_hardening::rules::auditd_init::rules_file,
-        content => "-a always,exit -F arch=b64 -S creat,open,openat,truncate,ftruncate -F exit=-EPERM -F auid>=${uid} -F auid!=${auid} -k access", #lint:ignore:140chars
+        content => $content_rule4,
         order   => '14',
       }
     }

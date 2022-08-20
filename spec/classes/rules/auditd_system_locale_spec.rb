@@ -44,11 +44,16 @@ describe 'cis_security_hardening::rules::auditd_system_locale' do
             is_expected.to compile
 
             if enforce
+              content_rule1 = if os_facts[:operatingsystem].casecmp('almalinux').zero? || os_facts[:operatingsystem].casecmp('rocky').zero?
+                                '-a always,exit -F arch=b32 -S sethostname,setdomainname -k system-locale'
+                              else
+                                '-a always,exit -F arch=b32 -S sethostname -S setdomainname -k system-locale'
+                              end
               is_expected.to contain_concat__fragment('watch network environment rule 1')
                 .with(
                   'order' => '131',
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-a always,exit -F arch=b32 -S sethostname,setdomainname -k system-locale',
+                  'content' => content_rule1,
                 )
 
               is_expected.to contain_concat__fragment('watch network environment rule 2')
@@ -98,10 +103,15 @@ describe 'cis_security_hardening::rules::auditd_system_locale' do
               end
 
               if ['x86_64', 'amd64'].include?(arch)
+                content_rule7 = if os_facts[:operatingsystem].casecmp('almalinux').zero? || os_facts[:operatingsystem].casecmp('rocky').zero?
+                                  '-a always,exit -F arch=b64 -S sethostname,setdomainname -k system-locale'
+                                else
+                                  '-a always,exit -F arch=b64 -S sethostname -S setdomainname -k system-locale'
+                                end
                 is_expected.to contain_concat__fragment('watch network environment rule 7')
                   .with(
                     'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                    'content' => '-a always,exit -F arch=b64 -S sethostname,setdomainname -k system-locale',
+                    'content' => content_rule7,
                   )
               else
                 is_expected.not_to contain_concat__fragment('watch network environment rule 7')

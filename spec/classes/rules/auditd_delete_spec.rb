@@ -49,19 +49,31 @@ describe 'cis_security_hardening::rules::auditd_delete' do
                      else
                        '4294967295'
                      end
+              content_rule1 = if os_facts[:operatingsystem].casecmp('rocky').zero? || os_facts[:operatingsystem].casecmp('almalinux').zero?
+                                "-a always,exit -F arch=b32 -S unlink,unlinkat,rename,renameat -F auid>=1000 -F auid!=#{auid} -k delete"
+                              else
+                                "-a always,exit -F arch=b32 -S unlink -S unlinkat -S rename -S renameat -F auid>=1000 -F auid!=#{auid} -k delete"
+                              end
+
               is_expected.to contain_concat__fragment('watch deletes rule 1')
                 .with(
                   'order' => '31',
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => "-a always,exit -F arch=b32 -S unlink,unlinkat,rename,renameat -F auid>=1000 -F auid!=#{auid} -k delete",
+                  'content' => content_rule1,
                 )
 
               if ['x86_64', 'amd64'].include?(arch)
+                content_rule2 = if os_facts[:operatingsystem].casecmp('rocky').zero? || os_facts[:operatingsystem].casecmp('almalinux').zero?
+                                  "-a always,exit -F arch=b64 -S unlink,unlinkat,rename,renameat -F auid>=1000 -F auid!=#{auid} -k delete"
+                                else
+                                  "-a always,exit -F arch=b64 -S unlink -S unlinkat -S rename -S renameat -F auid>=1000 -F auid!=#{auid} -k delete"
+                                end
+
                 is_expected.to contain_concat__fragment('watch deletes rule 2')
                   .with(
                     'order' => '32',
                     'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                    'content' => "-a always,exit -F arch=b64 -S unlink,unlinkat,rename,renameat -F auid>=1000 -F auid!=#{auid} -k delete",
+                    'content' => content_rule2,
                   )
 
               else

@@ -44,30 +44,43 @@ describe 'cis_security_hardening::rules::auditd_perm_mod' do
             is_expected.to compile
 
             if enforce
-              auid = if os_facts[:operatingsystem].casecmp('rocky').zero? || os_facts[:operatingsystem].casecmp('almalinux').zero?
-                'unset'
+              if os_facts[:operatingsystem].casecmp('rocky').zero? || os_facts[:operatingsystem].casecmp('almalinux').zero?
+                auid = 'unset'
+                content_rule1 = "-a always,exit -F arch=b32 -S chmod,fchmod,fchmodat -F auid>=1000 -F auid!=#{auid} -k perm_mod"
+                content_rule2 = "-a always,exit -F arch=b32 -S chown,fchown,fchownat,lchown -F auid>=1000 -F auid!=#{auid} -k perm_mod"
+                content_rule3 = "-a always,exit -F arch=b32 -S setxattr,lsetxattr,fsetxattr,removexattr,lremovexattr,fremovexattr -F auid>=1000 -F auid!=#{auid} -k perm_mod"
+                content_rule4 = "-a always,exit -F arch=b64 -S chmod,fchmod,fchmodat -F auid>=1000 -F auid!=#{auid} -k perm_mod"
+                content_rule5 = "-a always,exit -F arch=b64 -S chown,fchown,fchownat,lchown -F auid>=1000 -F auid!=#{auid} -k perm_mod"
+                content_rule6 = "-a always,exit -F arch=b64 -S setxattr,lsetxattr,fsetxattr,removexattr,lremovexattr,fremovexattr -F auid>=1000 -F auid!=#{auid} -k perm_mod"
               else
-                '4294967295'
+                auid = '4294967295'
+                content_rule1 = "-a always,exit -F arch=b32 -S chmod -S fchmod -S fchmodat -F auid>=1000 -F auid!=#{auid} -k perm_mod"
+                content_rule2 = "-a always,exit -F arch=b32 -S chown -S fchown -S fchownat -S lchown -F auid>=1000 -F auid!=#{auid} -k perm_mod"
+                content_rule3 = "-a always,exit -F arch=b32 -S setxattr -S lsetxattr -S fsetxattr -S removexattr -S lremovexattr -S fremovexattr -F auid>=1000 -F auid!=#{auid} -k perm_mod"
+                content_rule4 = "-a always,exit -F arch=b64 -S chmod -S fchmod -S fchmodat -F auid>=1000 -F auid!=#{auid} -k perm_mod"
+                content_rule5 = "-a always,exit -F arch=b64 -S chown -S fchown -S fchownat -S lchown -F auid>=1000 -F auid!=#{auid} -k perm_mod"
+                content_rule6 = "-a always,exit -F arch=b64 -S setxattr -S lsetxattr -S fsetxattr -S removexattr -S lremovexattr -S fremovexattr -F auid>=1000 -F auid!=#{auid} -k perm_mod"
               end
+
               is_expected.to contain_concat__fragment('watch perm mod rule 1')
                 .with(
                   'order' => '91',
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => "-a always,exit -F arch=b32 -S chmod,fchmod,fchmodat -F auid>=1000 -F auid!=#{auid} -k perm_mod",
+                  'content' => content_rule1,
                 )
 
               is_expected.to contain_concat__fragment('watch perm mod rule 2')
                 .with(
                   'order' => '92',
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => "-a always,exit -F arch=b32 -S chown,fchown,fchownat,lchown -F auid>=1000 -F auid!=#{auid} -k perm_mod",
+                  'content' => content_rule2,
                 )
 
               is_expected.to contain_concat__fragment('watch perm mod rule 3')
                 .with(
                   'order' => '93',
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => "-a always,exit -F arch=b32 -S setxattr,lsetxattr,fsetxattr,removexattr,lremovexattr,fremovexattr -F auid>=1000 -F auid!=#{auid} -k perm_mod",
+                  'content' => content_rule3,
                 )
 
               if ['x86_64', 'amd64'].include?(arch)
@@ -75,21 +88,21 @@ describe 'cis_security_hardening::rules::auditd_perm_mod' do
                   .with(
                     'order' => '94',
                     'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                    'content' => "-a always,exit -F arch=b64 -S chmod,fchmod,fchmodat -F auid>=1000 -F auid!=#{auid} -k perm_mod",
+                    'content' => content_rule4,
                   )
 
                 is_expected.to contain_concat__fragment('watch perm mod rule 5')
                   .with(
                     'order' => '95',
                     'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                    'content' => "-a always,exit -F arch=b64 -S chown,fchown,fchownat,lchown -F auid>=1000 -F auid!=#{auid} -k perm_mod",
+                    'content' => content_rule5,
                   )
 
                 is_expected.to contain_concat__fragment('watch perm mod rule 6')
                   .with(
                     'order' => '96',
                     'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                    'content' => "-a always,exit -F arch=b64 -S setxattr,lsetxattr,fsetxattr,removexattr,lremovexattr,fremovexattr -F auid>=1000 -F auid!=#{auid} -k perm_mod",
+                    'content' => content_rule6,
                   )
 
               else
