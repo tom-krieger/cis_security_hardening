@@ -48,7 +48,7 @@ describe 'cis_security_hardening::rules::auditd_system_locale' do
                 .with(
                   'order' => '131',
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-a always,exit -F arch=b32 -S sethostname -S setdomainname -k system-locale',
+                  'content' => '-a always,exit -F arch=b32 -S sethostname,setdomainname -k system-locale',
                 )
 
               is_expected.to contain_concat__fragment('watch network environment rule 2')
@@ -93,7 +93,7 @@ describe 'cis_security_hardening::rules::auditd_system_locale' do
                   .with(
                     'order' => '135',
                     'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                    'content' => '-w /etc/sysconfig/network-scripts/ -p wa -k system-locale',
+                    'content' => '-w /etc/sysconfig/network-scripts -p wa -k system-locale',
                   )
               end
 
@@ -101,7 +101,7 @@ describe 'cis_security_hardening::rules::auditd_system_locale' do
                 is_expected.to contain_concat__fragment('watch network environment rule 7')
                   .with(
                     'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                    'content' => '-a always,exit -F arch=b64 -S sethostname -S setdomainname -k system-locale',
+                    'content' => '-a always,exit -F arch=b64 -S sethostname,setdomainname -k system-locale',
                   )
               else
                 is_expected.not_to contain_concat__fragment('watch network environment rule 7')

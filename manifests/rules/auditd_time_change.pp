@@ -27,11 +27,17 @@ class cis_security_hardening::rules::auditd_time_change (
       undef   => 'unknown',
       default => fact('os.name').downcase()
     }
-    if $os == 'rocky' or $os == 'almalinux'{
+    if $os == 'rocky' or $os == 'almalinux' {
       concat::fragment { 'watch for date-time-change rule 1':
         order   => '121',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,
         content => '-a always,exit -F arch=b32 -S adjtimex,settimeofday,clock_settime -k time-change',
+      }
+      concat::fragment { 'watch for date-time-change rule 3':
+        order   => '123',
+        target  => $cis_security_hardening::rules::auditd_init::rules_file,
+        content => '-w /etc/localtime -p wa -k time-change',
+        notify  => [Exec['reload auditd rules'], Reboot['after_run']],
       }
       if  $facts['architecture'] == 'x86_64' or $facts['architecture'] == 'amd64' {
         concat::fragment { 'watch for date-time-change rule 2':

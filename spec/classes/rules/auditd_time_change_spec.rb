@@ -50,6 +50,12 @@ describe 'cis_security_hardening::rules::auditd_time_change' do
                     'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
                     'content' => '-a always,exit -F arch=b32 -S adjtimex,settimeofday,clock_settime -k time-change',
                   )
+                is_expected.to contain_concat__fragment('watch for date-time-change rule 3')
+                  .with(
+                    'order' => '123',
+                    'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
+                    'content' => '-w /etc/localtime -p wa -k time-change',
+                  )
                 if ['x86_64', 'amd64'].include?(arch)
                   is_expected.to contain_concat__fragment('watch for date-time-change rule 2')
                     .with(

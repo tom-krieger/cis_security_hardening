@@ -36,13 +36,13 @@ class cis_security_hardening::rules::auditd_system_locale (
       concat::fragment { 'watch network environment rule 7':
         order   => '130',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,
-        content => '-a always,exit -F arch=b64 -S sethostname -S setdomainname -k system-locale',
+        content => '-a always,exit -F arch=b64 -S sethostname,setdomainname -k system-locale',
       }
     }
     concat::fragment { 'watch network environment rule 1':
       order   => '131',
       target  => $cis_security_hardening::rules::auditd_init::rules_file,
-      content => '-a always,exit -F arch=b32 -S sethostname -S setdomainname -k system-locale',
+      content => '-a always,exit -F arch=b32 -S sethostname,setdomainname -k system-locale',
     }
     concat::fragment { 'watch network environment rule 2':
       order   => '132',
@@ -77,7 +77,7 @@ class cis_security_hardening::rules::auditd_system_locale (
       concat::fragment { 'watch network environment rule 6':
         order   => '135',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,
-        content => '-w /etc/sysconfig/network-scripts/ -p wa -k system-locale',
+        content => '-w /etc/sysconfig/network-scripts -p wa -k system-locale',
       }
     }
   }

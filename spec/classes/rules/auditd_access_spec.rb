@@ -52,13 +52,13 @@ describe 'cis_security_hardening::rules::auditd_access' do
               is_expected.to contain_concat__fragment('watch access rule 1')
                 .with(
                   'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => "-a always,exit -F arch=b32 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=#{auid} -k access",
+                  'content' => "-a always,exit -F arch=b32 -S creat -S open,openat,truncate,ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=#{auid} -k access",
                   'order'   => '11',
                 )
               is_expected.to contain_concat__fragment('watch access rule 2')
                 .with(
                   'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => "-a always,exit -F arch=b32 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=#{auid} -k access",
+                  'content' => "-a always,exit -F arch=b32 -S creat -S open,openat,truncate,ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=#{auid} -k access",
                   'order'   => '12',
                 )
 
@@ -66,13 +66,13 @@ describe 'cis_security_hardening::rules::auditd_access' do
                 is_expected.to contain_concat__fragment('watch access rule 3')
                   .with(
                     'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                    'content' => "-a always,exit -F arch=b64 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=#{auid} -k access",
+                    'content' => "-a always,exit -F arch=b64 -S creat -S open,openat,truncate,ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=#{auid} -k access",
                     'order'   => '13',
                   )
                 is_expected.to contain_concat__fragment('watch access rule 4')
                   .with(
                     'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                    'content' => "-a always,exit -F arch=b64 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=#{auid} -k access",
+                    'content' => "-a always,exit -F arch=b64 -S creat -S open,openat,truncate,ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=#{auid} -k access",
                     'order'   => '14',
                   )
               else
