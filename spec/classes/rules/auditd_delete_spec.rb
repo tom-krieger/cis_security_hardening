@@ -53,7 +53,7 @@ describe 'cis_security_hardening::rules::auditd_delete' do
                 .with(
                   'order' => '31',
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => "-a always,exit -F arch=b32 -S unlink -S unlinkat -S rename -S renameat -F auid>=1000 -F auid!=#{auid} -k delete",
+                  'content' => "-a always,exit -F arch=b32 -S unlink,unlinkat,rename,renameat -F auid>=1000 -F auid!=#{auid} -k delete",
                 )
 
               if ['x86_64', 'amd64'].include?(arch)
@@ -61,7 +61,7 @@ describe 'cis_security_hardening::rules::auditd_delete' do
                   .with(
                     'order' => '32',
                     'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                    'content' => "-a always,exit -F arch=b64 -S unlink -S unlinkat -S rename -S renameat -F auid>=1000 -F auid!=#{auid} -k delete",
+                    'content' => "-a always,exit -F arch=b64 -S unlink,unlinkat,rename,renameat -F auid>=1000 -F auid!=#{auid} -k delete",
                   )
 
               else
