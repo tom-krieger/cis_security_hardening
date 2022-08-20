@@ -1,28 +1,53 @@
-RuleScan statusLast passed on
-1.6.1.6 Ensure no unconfined services exist	(ok)
+fail: 1.5.1 Ensure core dump storage is disabled
+fail: 1.5.2 Ensure core dump backtraces are disabled
+fail: 1.6.1.6 Ensure no unconfined services exist
+fail: 2.1.2 Ensure chrony is configured
+fail: 2.2.4 Ensure CUPS is not installed
+fail: 3.4.2.3 Ensure iptables-services not installed with nftables
+fail: 3.4.2.7 Ensure nftables loopback traffic is configured
+fail: 3.4.2.11 Ensure nftables rules are permanent
+fail: 3.4.3.1.2 Ensure nftables is not installed with iptables
+fail: 3.4.3.2.3 Ensure iptables rules exist for all open ports
+fail: 4.1.3.4 Ensure events that modify date and time information are collected
+fail: 4.1.3.5 Ensure events that modify the system's network environment are collected
+fail: 4.1.3.7 Ensure unsuccessful file access attempts are collected
+fail: 4.1.3.9 Ensure discretionary access control permission modification events are collected
+fail: 4.1.3.13 Ensure file deletion events by users are collected
+fail: 5.3.4 Ensure users must provide password for escalation
+fail: 5.5.1 Ensure password creation requirements are configured
+fail: 5.5.2 Ensure lockout for failed password attempts is configured
+fail: 5.5.3 Ensure password reuse is limited
 
-3.4.3.2.3 Ensure iptables rules exist for all open ports	(ok)
 
-3.4.3.2.4 Ensure iptables default deny firewall policy	(ok)
 
-3.4.3.2.5 Ensure iptables rules are saved	(ok)
+tk11.home.tom-krieger.de	
+3.1.2 CIS CentOS Linux 7
+	centos_7_home_profile (Level 2 - Server)	99 %	Aug 19, 2022 9:26 AM
+    
+tk12.home.tom-krieger.de	
+3.1.2 CIS CentOS Linux 7
+	
+Level 1 - Server
+	95 %	Aug 17, 2022 7:38 PM
 
-4.1.3.4 Ensure events that modify date and time information are collected	
+tk13.home.tom-krieger.de	
+3.1.2 CIS CentOS Linux 7
+	centos_7_home_profile (Level 2 - Server)	54 %	Aug 17, 2022 7:39 PM
 
-4.1.3.5 Ensure events that modify the system's network environment are collected	
+tk14.home.tom-krieger.de	
+2.1.0 CIS Ubuntu Linux 18.04 LTS
+	ubuntu_18.04_home_profile (Level 2 - Server)	95 %	Aug 17, 2022 7:40 PM
 
-4.1.3.7 Ensure unsuccessful file access attempts are collected	
+tk15.home.tom-krieger.de	
+1.0.0 CIS Debian Linux 10
+	
+Level 2 - Server
+	47 %	Aug 17, 2022 8:45 PM
 
-4.1.3.9 Ensure discretionary access control permission modification events are collected	
+tk16.home.tom-krieger.de	
+1.1.0 CIS Ubuntu Linux 20.04 LTS
+	ubuntu_20.04_home_www (Level 2 - Server)	97 %	Aug 17, 2022 7:39 PM
 
-4.1.3.13 Ensure file deletion events by users are collected	
-
-5.3.4 Ensure users must provide password for escalation	(ok)
-
-5.3.7 Ensure access to the su command is restricted	(ok)
-
-5.5.1 Ensure password creation requirements are configured	(??)
-
-5.5.2 Ensure lockout for failed password attempts is configured	(??)
-
-5.5.3 Ensure password reuse is limited	(??)
+tk18.home.tom-krieger.de	
+1.0.0 CIS Rocky Linux 8
+	rocky_8_iptables (Level 2 - Server)	96 %	Aug 17, 2022 7:38 PM

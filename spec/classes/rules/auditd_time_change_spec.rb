@@ -43,7 +43,7 @@ describe 'cis_security_hardening::rules::auditd_time_change' do
             is_expected.to compile
 
             if enforce
-              if os_facts[:operatingsystem].casecmp('rocky').zero?
+              if os_facts[:operatingsystem].casecmp('rocky').zero? || os_facts[:operatingsystem].casecmp('almalinux').zero?
                 is_expected.to contain_concat__fragment('watch for date-time-change rule 1')
                   .with(
                     'order' => '121',

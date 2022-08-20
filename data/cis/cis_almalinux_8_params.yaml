@@ -409,6 +409,8 @@ cis_security_hardening::rules::pam_pw_requirements::ocredit: -1
 cis_security_hardening::rules::pam_pw_requirements::lcredit: -1
 cis_security_hardening::rules::pam_pw_requirements::minclass: -1
 cis_security_hardening::rules::pam_pw_requirements::retry: 3
+cis_security_hardening::rules::pam_pw_requirements::dictcheck: false
+cis_security_hardening::rules::pam_pw_requirements::difok: 0
 cis_security_hardening::rules::pam_lockout::enforce: true
 cis_security_hardening::rules::pam_lockout::attempts: 3
 cis_security_hardening::rules::pam_lockout::lockouttime: 300
@@ -443,4 +445,3 @@ cis_security_hardening::rules::passwd_bak_perms::enforce: true
 cis_security_hardening::rules::group_bak_perms::enforce: true
 cis_security_hardening::rules::shadow_bak_perms::enforce: true
 cis_security_hardening::rules::gshadow_bak_perms::enforce: true
-

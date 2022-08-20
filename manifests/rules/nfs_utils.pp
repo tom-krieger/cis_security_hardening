@@ -30,7 +30,7 @@ class cis_security_hardening::rules::nfs_utils (
             ensure => absent,
         })
       }
-      'rocky': {
+      'rocky', 'almalinux': {
         ensure_packages(['nfs-utils'], {
             ensure => absent,
         })

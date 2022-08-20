@@ -33,7 +33,7 @@ class cis_security_hardening::rules::cups (
             ensure => $ensure,
         })
       }
-      'rocky': {
+      'rocky', 'almalinux': {
         ensure_packages(['cups'], {
             ensure => $ensure,
         })

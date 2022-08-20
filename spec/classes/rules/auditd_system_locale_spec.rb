@@ -88,7 +88,7 @@ describe 'cis_security_hardening::rules::auditd_system_locale' do
                   )
               end
 
-              if os_facts[:operatingsystem].casecmp('rocky').zero?
+              if os_facts[:operatingsystem].casecmp('rocky').zero? || os_facts[:operatingsystem].casecmp('almalinux').zero?
                 is_expected.to contain_concat__fragment('watch network environment rule 6')
                   .with(
                     'order' => '135',

@@ -73,7 +73,7 @@ class cis_security_hardening::rules::auditd_system_locale (
       }
     }
 
-    if $facts['operatingsystem'].downcase() == 'rocky' {
+    if $facts['operatingsystem'].downcase() == 'rocky' or $facts['operatingsystem'].downcase() == 'almalinux' {
       concat::fragment { 'watch network environment rule 6':
         order   => '135',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,

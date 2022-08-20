@@ -54,7 +54,7 @@ class cis_security_hardening::rules::rpcbind (
             ensure => absent,
         })
       }
-      'rocky': {
+      'rocky', 'almalinux': {
         ensure_packages(['rpcbind'], {
             ensure => absent,
         })

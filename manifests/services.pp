@@ -11,15 +11,15 @@
 class cis_security_hardening::services (
   Integer $time_until_reboot = 60,
 ) {
-  if(has_key($facts, 'os')) {
-    $rel = $facts['operatingsystemmajrelease']
-  } else {
-    $rel = ''
+  $rel = fact('os') ? {
+    undef   => '',
+    default => fact('operatingsystemmajrelease')
   }
-  if (
-    ($rel <= '6') and
-    ($facts['osfamily'] == 'RedHat')
-  ) {
+  $osfamily = fact('osfamily') ? {
+    undef   => 'unknown',
+    default => fact('osfamily').downcase()
+  }
+  if ($rel <= '6') and ($osfamily == 'redhat') {
     exec { 'reload-sshd':
       command     => 'service sshd reload',
       path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],

@@ -40,7 +40,7 @@ describe 'cis_security_hardening::rules::rpcbind' do
                   'ensure' => 'stopped',
                   'enable' => false,
                 )
-            elsif os_facts[:operatingsystem].casecmp('rocky').zero?
+            elsif os_facts[:operatingsystem].casecmp('rocky').zero? || os_facts[:operatingsystem].casecmp('almalinux').zero?
               is_expected.to contain_service('rpcbind.socket')
                 .with(
                   'ensure' => 'stopped',

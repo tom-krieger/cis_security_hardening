@@ -22,7 +22,11 @@ class cis_security_hardening::rules::aide_installed (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    case $facts['operatingsystem'].downcase() {
+    $os = fact('operatingsystem') ? {
+      undef   => 'unknown',
+      default => fact('operatingsystem').downcase()
+    }
+    case $os {
       'ubuntu', 'debian': {
         ensure_packages(['aide', 'aide-common'], {
             ensure => installed,

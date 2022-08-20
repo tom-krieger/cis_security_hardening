@@ -58,11 +58,18 @@ class cis_security_hardening (
     fact_upload_command    => $fact_upload_command,
   }
 
-  $os = $facts['operatingsystem'].downcase()
+  $os = fact('operatingsystem') ? {
+    undef   => 'unknown',
+    default => fact('operatingsystem').downcase()
+  }
 
+  $os_maj = fact('operatingsystemmajrelease') ? {
+    undef   => 'unknown',
+    default => fact('operatingsystemmajrelease'),
+  }
   $os_vers = $os ? {
-    'ubuntu' => split($facts['operatingsystemmajrelease'], '[.]')[0],
-    default  => $facts['operatingsystemmajrelease'],
+    'ubuntu' => split($os_maj, '[.]')[0],
+    default  => $os_maj,
   }
 
   $key = "cis_security_hardening::benchmark::${os}::${os_vers}"

@@ -23,7 +23,11 @@ class cis_security_hardening::rules::auditd_time_change (
   Boolean $enforce                 = false,
 ) {
   if $enforce {
-    if $facts['os']['name'].downcase() == 'rocky' {
+    $os = fact('os.name') ? {
+      undef   => 'unknown',
+      default => fact('os.name').downcase()
+    }
+    if $os == 'rocky' or $os == 'almalinux'{
       concat::fragment { 'watch for date-time-change rule 1':
         order   => '121',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,

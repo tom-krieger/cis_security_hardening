@@ -28,8 +28,9 @@ class cis_security_hardening::rules::auditd_setfacl_use (
       default => fact('cis_security_hardening.auditd.uid_min'),
     }
     $auid = $facts['operatingsystem'].downcase() ? {
-      'rocky' => 'unset',
-      default => '4294967295',
+      'rocky'     => 'unset',
+      'almalinux' => 'unset',
+      default     => '4294967295',
     }
     concat::fragment { 'watch setfacl command rule 1':
       order   => '178',
