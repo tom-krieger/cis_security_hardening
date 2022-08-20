@@ -122,6 +122,24 @@ cis_security_hardening::benchmark::almalinux::8:
           - disable_dccp
           - disable_sctp
           - disable_wireless
+    configure_nftables:
+      level1:
+        - nftables_install
+        - nftables_flush_iptables
+        - nftables_table
+        - nftables_base_chains
+        - nftables_loopback
+        - nftables_outbound_established
+        - nftables_default_deny
+        - nftables_service
+        - nftables_persistence
+    configure_firewalld:
+      level1:
+        - firewalld_install
+        - firewalld_service
+        - firewalld_default_zone
+        - firewalld_interfaces
+        - firewalld_ports_services
     configure_iptables:
       level1:
         - iptables_install

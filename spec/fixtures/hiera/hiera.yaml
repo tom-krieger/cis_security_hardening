@@ -10,10 +10,6 @@ hierarchy:
     paths:
       - "cis/cis_centos_7_params.yaml"
       - "cis/cis_centos_7_rules.yaml"
-  - name: "CentOS 8 Benchmark"
-    paths:
-      - "cis/cis_centos_8_params.yaml"
-      - "cis/cis_centos_8_rules.yaml"
   - name: "AlmaLinux 8 Benchmark"
     paths:
       - "cis/cis_almalinux_8_params.yaml"
