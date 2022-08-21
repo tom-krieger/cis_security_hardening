@@ -2,7 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
-## Release 0.5.7
+## Release 0.6.0
+
+First published release indludein:
 
 * Added Ubuntu 20.04 STIG benchmark
 * Added Rocky 8 benchmark
@@ -10,4 +12,15 @@ All notable changes to this project will be documented in this file.
 
 ## Release 0.5.6
 
-Initial release
+Unpublished release with the following benchmarks:
+
+* CentOS 7
+* Debian 10
+* Ubuntu 18.04
+* Ubuntu 20.04
+* Suse Linux 12
+* Suse Linux 15
+
+## Release 0.1.0
+
+Initial unpublished code transfered from my security_baseline module.

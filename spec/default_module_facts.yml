@@ -1,3 +1,4 @@
+augeasversion: "2.4.1"
 cis_security_hardening:
   accounts:
     no_shell_nologin: []

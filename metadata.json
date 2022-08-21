@@ -1,6 +1,6 @@
 {
   "name": "tomkrieger-cis_security_hardening",
-  "version": "0.5.6",
+  "version": "0.6.0",
   "author": "Thomas Krieger",
   "summary": "Secure your systems according to CIS benchmarks",
   "license": "Apache-2.0",
