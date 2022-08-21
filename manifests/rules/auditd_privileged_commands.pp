@@ -24,6 +24,15 @@ class cis_security_hardening::rules::auditd_privileged_commands (
     $dir = dirname($cis_security_hardening::rules::auditd_init::rules_file)
     $rules_file = "${dir}/cis_security_hardening_priv_cmds.rules"
     $privlist = fact('cis_security_hardening.auditd.priv-cmds-list')
+    $uid = fact('cis_security_hardening.auditd.uid_min') ? {
+      undef   => '1000',
+      default => fact('cis_security_hardening.auditd.uid_min'),
+    }
+    $auid = $facts['operatingsystem'].downcase() ? {
+      'rocky'     => 'unset',
+      'almalinux' => 'unset',
+      default     => '4294967295',
+    }
     unless $privlist == undef {
       file { $rules_file:
         ensure  => file,
@@ -31,7 +40,9 @@ class cis_security_hardening::rules::auditd_privileged_commands (
         group   => 'root',
         mode    => '0640',
         content => epp('cis_security_hardening/rules/common/auditd_priv_commands.epp', {
-            data => $privlist
+            data => $privlist,
+            uid  => $uid,
+            auid => $auid
         }),
         notify  => Exec['reload auditd rules priv cmds'],
       }
