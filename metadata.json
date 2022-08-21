@@ -6,7 +6,7 @@
   "license": "Apache-2.0",
   "source": "https://github.com/tom-krieger/cis_security_hardening.git",
   "project_page": "https://github.com/tom-krieger/cis_security_hardening",
-  "issues_url": "https://github.com/tom-krieger/cis_security_harden",
+  "issues_url": "https://github.com/tom-krieger/cis_security_hardening/issues",
   "dependencies": [
     {
       "name": "puppetlabs-stdlib",
