@@ -23,13 +23,20 @@ class cis_security_hardening::rules::selinux_state (
   Boolean $enforce                       = false,
   Enum['enforcing', 'permissive'] $state = 'enforcing',
 ) {
+  require cis_security_hardening
+
   if $enforce {
+    $notify = $cis_security_hardening::auto_reboot ? {
+      true  => Reboot['after_run'],
+      false => [],
+    }
+
     ensure_resource('file', '/etc/selinux/config', {
         ensure => present,
         owner  => 'root',
         group  => 'root',
         mode   => '0644',
-        notify => Reboot['after_run']
+        notify => $notify
     })
 
     file_line { 'selinux_enforce':
@@ -37,7 +44,7 @@ class cis_security_hardening::rules::selinux_state (
       line     => "SELINUX=${state}",
       match    => 'SELINUX=',
       multiple => true,
-      notify   => Reboot['after_run'],
+      notify   => $notify,
     }
   }
 }

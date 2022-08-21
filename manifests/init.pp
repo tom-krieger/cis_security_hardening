@@ -58,8 +58,6 @@ class cis_security_hardening (
     fact_upload_command    => $fact_upload_command,
   }
 
-  include cis_security_hardening::reboot
-
   $os = fact('operatingsystem') ? {
     undef   => 'unknown',
     default => fact('operatingsystem').downcase()
@@ -124,7 +122,7 @@ class cis_security_hardening (
     }
   } else {
     echo { 'no bundles':
-      message  => "No bundles found, enforcing nothing. (${key})",
+      message  => "No bundles found, enforcing nothing. (key = ${key})",
       loglevel => 'warning',
       withpath => false,
     }

@@ -23,12 +23,11 @@ class cis_security_hardening::rules::auditd_init (
   Boolean $enforce                 = false,
   Integer $buffer_size             = 8192,
   Stdlib::Absolutepath $rules_file = '/etc/audit/rules.d/cis_security_hardening.rules',
-  Boolean $auto_reboot             = $cis_security_hardening::auto_reboot,
 ) {
   if $enforce {
-    $notify = $auto_reboot ? {
+    $notify = $cis_security_hardening::auto_reboot ? {
       true  => [Exec['reload auditd rules'], Reboot['after_run']],
-      false => [Exec['reload auditd rules'], Echo['reboot required']],
+      false => Exec['reload auditd rules'],
     }
 
     concat { $rules_file:
