@@ -24,12 +24,12 @@
 #    Directories to search for suid and sgid programs. Can not be set together with auditd_suid_exclude
 # @param auditd_suid_exclude
 #    Directories to exclude from search for suid and sgid programs. Can not be set together with auditd_suid_include
-# @param auditd_rules_fact_file
-#    The file where to store the facts for auditd rules
 # @param time_until_reboot
 #    Time to wait until system is rebooted if required. Time in seconds.
 # @param verbose_logging
 #    Print various info messages
+# @param auto_reboot
+#    If set to false no automatic reboots will be done.
 #
 # @example
 #   include cis_security_hardening
@@ -41,8 +41,8 @@ class cis_security_hardening (
   String $fact_upload_command        = '/usr/share/cis_security_hardening/bin/fact_upload.sh',
   Array $auditd_suid_include         = ['/usr'],
   Array $auditd_suid_exclude         = [],
-  String $auditd_rules_fact_file     = '/opt/puppetlabs/facter/facts.d/cis_security_hardening_auditd.yaml',
   Integer $time_until_reboot         = 120,
+  Boolean $auto_reboot               = true,
   Boolean $verbose_logging           = false,
 ) {
   class { 'cis_security_hardening::services':
@@ -57,6 +57,8 @@ class cis_security_hardening (
     update_postrun_command => $update_postrun_command,
     fact_upload_command    => $fact_upload_command,
   }
+
+  include cis_security_hardening::reboot
 
   $os = fact('operatingsystem') ? {
     undef   => 'unknown',
@@ -108,6 +110,15 @@ class cis_security_hardening (
 
       $rules.each |$rule| {
         $class = "cis_security_hardening::rules::${rule}"
+
+        if $verbose_logging {
+          echo { "Applying ${class}":
+            message  => "Applying ${class}",
+            loglevel => 'info',
+            withpath => false,
+          }
+        }
+
         include $class
       }
     }

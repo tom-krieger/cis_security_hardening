@@ -37,7 +37,7 @@ class cis_security_hardening::rules::crypto_policy (
   Boolean $enforce                                           = false,
   Enum['FUTURE', 'FIPS', 'LEGACY', 'DEFAULT'] $crypto_policy = 'FUTURE',
 ) {
-  if  (
+  if (
     $facts['operatingsystem'].downcase() == 'centos' or
     $facts['operatingsystem'].downcase() == 'almalinux' or
     $facts['operatingsystem'].downcase() == 'rocky'
