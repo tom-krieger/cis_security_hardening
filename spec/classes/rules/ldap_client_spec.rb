@@ -20,7 +20,7 @@ describe 'cis_security_hardening::rules::ldap_client' do
 
           if enforce
 
-            if os_facts[:operatingsystem].casecmp('ubuntu').zero?
+            if os_facts[:operatingsystem].casecmp('ubuntu').zero? || os_facts[:operatingsystem].casecmp('debian').zero?
               is_expected.to contain_package('ldap-utils')
                 .with(
                   'ensure' => 'purged',

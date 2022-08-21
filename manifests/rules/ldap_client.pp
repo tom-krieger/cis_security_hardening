@@ -23,6 +23,7 @@ class cis_security_hardening::rules::ldap_client (
   if $enforce {
     $pkg = $facts['operatingsystem'].downcase() ? {
       'ubuntu' => 'ldap-utils',
+      'debian' => 'ldap-utils',
       'sles'   => 'openldap2-clients',
       default  => 'openldap-clients',
     }
