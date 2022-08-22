@@ -14,6 +14,9 @@
 # @param selinux_policy
 #    SELinux policy
 #
+# @param auto_reboot
+#    Trigger a reboot if this rule creates a change. Defaults to true.
+#
 # @example
 #   class { 'cis_security_hardening::rules::selinux_policy':
 #       enforce => true,
@@ -24,21 +27,27 @@
 class cis_security_hardening::rules::selinux_policy (
   Boolean $enforce       = false,
   String $selinux_policy = 'targeted',
+  Boolean $auto_reboot   = true,
 ) {
   if $enforce {
+    $notify = $auto_reboot ? {
+      true  => Reboot['after_run'],
+      false => [],
+    }
+
     ensure_resource('file', '/etc/selinux/config', {
         ensure => present,
         owner  => 'root',
         group  => 'root',
         mode   => '0644',
-        notify => Reboot['after_run']
+        notify => $notify
     })
 
     file_line { 'selinux_targeted':
       path   => '/etc/selinux/config',
       line   => "SELINUXTYPE=${selinux_policy}",
       match  => '^SELINUXTYPE=',
-      notify => Reboot['after_run'],
+      notify => $notify,
     }
   }
 }

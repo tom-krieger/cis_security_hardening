@@ -61,7 +61,7 @@ The benchmarks can be found at [CIS Benchmarks Website](https://www.cisecurity.o
 
 ## Setup
 
-It is highly recommended to have the complete security baseline definition written in Hira definitions. This enables you to have different security baselines for groups of servers, environments or even special single servers.
+It is highly recommended to have the complete security baseline definition written in Hiera definitions. This enables you to have different security baselines for groups of servers, environments or even special single servers.
 
 ### What cis_security_hardening affects
 
@@ -121,9 +121,16 @@ Hiera data:
 
 ```hiera
 ---
-cis_security_hardening::os::centos::os_version: '7'
-cis_security_hardening::os::centos::benchmark_version: '3.0.0'
-cis_security_hardening::level: '2'
+cis_security_hardening::profile: server
+cis_security_hardening::level: "2"
+cis_security_hardening::time_until_reboot: 60
+cis_security_hardening::exclude_dirs_sticky_ww: []
+cis_security_hardening::update_postrun_command: true
+cis_security_hardening::fact_upload_command: "/usr/share/cis_security_hardening/bin/fact_upload.sh"
+cis_security_hardening::auditd_suid_exclude: []
+cis_security_hardening::auditd_suid_include:
+  - "/usr"
+cis_security_hardening::verbose_logging: false
 
 cis_security_hardening::rules::cramfs::enforce: true
 cis_security_hardening::rules::squashfs::enforce: true
@@ -131,16 +138,19 @@ cis_security_hardening::rules::fat::enforce: false
 cis_security_hardening::rules::udf::enforce: true
 ```
 
-The `data` folder contains files names `*_param.yaml` which contain all configurable options for each benchmark. You also can look into the reference documentation. 
+The `data` folder contains files names `*_param.yaml` which contain all configurable options for each benchmark. You also can look into the reference documentation.
+
 ## Reference
 
 See [REFERENCE.md](https://github.com/tom-krieger/cis_security_hardening/blob/master/REFERENCE.md)
 
 ## Limitations
 
-Currently the module is tested with RedHat 6, 7, 8, CentOS 6, 7, 8, Suse SLES 12, Debian 9 (partly tested) and Ubuntu 18.04 (partially tested). Other OSes may work but there's no guarantee. If you need your own rules please create Puppet modules and call them from the security baseline module. See [extend the security baseline](#extend-the-security-baseline).
+Currently the module is tested with RedHat 7, 8, CentOS 8, Suse SLES 12, Debian 10, Ubuntu 18.04 and Ubuntu 20.04. Other OSes may work but there's no guarantee. If you need your own rules please create Puppet modules and call them from the security baseline module. See [extend the security baseline](#extend-the-security-baseline).
 
 More testing is needed as for every supported OS there are different setups in the wild and some of them might not be covered.
+
+For a list of supported OSes please look into the `metadata.json` file.
 
 ### Auditd
 
@@ -152,22 +162,29 @@ SELinux and AppArmor are - if configured - activated while this module is applie
 
 ### Automatic reboot
 
-Automatic reboots might be *dangerous* as servers would be rebooted if one of the classes subscribed for reboot takes any action. But some changes need a reboot, e. g. enabling SELinux or changing auditd rules. As servers in production environments may not be rebooted you have to choose if you will allow reboots by settings a global parameter *cis_security_hardening::reboot* and you can add a parameter reboot to each rule.
+Automatic reboots might be *dangerous* as servers would be rebooted if one of the classes subscribed for reboot takes any action. But some changes need a reboot, e. g. enabling SELinux or changing auditd rules. As servers in production environments may not be rebooted you have to choose if you will allow reboots by settings a parameter *auto_reboot*. You can choose this for each rule triggering a reboot to be able to decide, which reboots are important enough to trigger an automatic reboot. The *auto_reboot* parameter is available for all rules which can trigger a reboot. Currently the following rules trigger reboots:
 
-The global *reboot* parameter enables or disables reboots regardless of the settings rules have. The *reboot* parameter given with a rule will subscribe the class implementing the rule to the reboot module. If the rule takes any action a reboot will be triggered.
+* auditd_init
+* crypto_policy
+* selinux_policy
+* selinux_state
 
-The reboot timeout will shedule a reboot within the given time after applying the catalogue finished.
+The default value for *auto_reboot* is `true` and can easily be changed by setting it to false in the Hier configuration of this module.
+
+The global parameter `time_until_reboot` sets the waiting time until the reboot will be performed. On Linux systems you can cancel this reboot with the `shutdown -c` command. But keep in mind that canceling the reboot won't activate some changes.
+
+Hiera example:
 
 ```hiera
 ---
-cis_security_hardening::reboot: true
 cis_security_hardening::reboot_timeout: 120
+
+cis_security_hardening::rules::selinux_policy::auto_reboot: true
 ```
 
 ### Suse SLES 12 and 15
 
-The compliance tules have been implemented without or very limited testing. Please report problems or creste pull requests to improve
-the Suse SLES compliance code.
+The compliance rules have been implemented without or very limited testing. Please report problems or create pull requests to improve the Suse SLES compliance code.
 
 ### Issues with CISCAT scanner
 
@@ -179,7 +196,7 @@ the Suse SLES compliance code.
 
 ## Credits
 
-This project is highly inspired by the [fervid/secure_linux_cis](https://forge.puppet.com/fervid/secure_linux_cis) module from Puppet Forge.
+This project is highly inspired by the [fervid/secure_linux_cis](https://forge.puppet.com/fervid/secure_linux_cis) module from Puppet Forge and uses my [security_baseline](https://forge.puppet.com/modules/tomkrieger/security_baseline) module as basis.
 
 ## Development
 

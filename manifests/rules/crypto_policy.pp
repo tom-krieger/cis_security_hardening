@@ -24,7 +24,10 @@
 #    Enforce the rule or just test and log
 #
 # @param crypto_policy
-#    he crypto policy to set in enforce mode.
+#    The crypto policy to set in enforce mode.
+#
+# @param auto_reboot
+#    Trigger a reboot if this rule creates a change. Defaults to true.
 #
 # @example
 #   class { 'cis_security_hardening::rules::crypto_policy':
@@ -36,12 +39,18 @@
 class cis_security_hardening::rules::crypto_policy (
   Boolean $enforce                                           = false,
   Enum['FUTURE', 'FIPS', 'LEGACY', 'DEFAULT'] $crypto_policy = 'FUTURE',
+  Boolean $auto_reboot                                       = true,
 ) {
-  if  (
-    $facts['operatingsystem'].downcase() == 'centos' or
-    $facts['operatingsystem'].downcase() == 'almalinux' or
-    $facts['operatingsystem'].downcase() == 'rocky'
-  ) and $facts['operatingsystemmajrelease'] >= '8' {
+  $notify = $auto_reboot ? {
+    true  => Reboot['after_run'],
+    false => [],
+  }
+
+  if (
+    $facts['os']['name'].downcase() == 'centos' or
+    $facts['os']['name'].downcase() == 'almalinux' or
+    $facts['os']['name'].downcase() == 'rocky'
+  ) and $facts['os']['release']['major'] >= '8' {
     $policy = fact('cis_security_hardening.crypto_policy.policy') == undef ? {
       true    => 'undefined',
       default => fact('cis_security_hardening.crypto_policy.policy'),
@@ -56,7 +65,7 @@ class cis_security_hardening::rules::crypto_policy (
       exec { "set crypto policy to ${crypto_policy} (current: ${policy})":
         command => "update-crypto-policies --set ${crypto_policy}", #lint:ignore:security_class_or_define_parameter_in_exec 
         path    => ['/sbin', '/usr/sbin', '/bin', '/usr/bin'],
-        notify  => Reboot['after_run'],
+        notify  => $notify,
       }
 
       if($crypto_policy == 'FUTURE' or $crypto_policy == 'DEFAULT') {
@@ -72,7 +81,7 @@ class cis_security_hardening::rules::crypto_policy (
         exec { "set FIPS to ${enable}":
           command => "fips-mode-setup --${enable}", #lint:ignore:security_class_or_define_parameter_in_exec
           path    => ['/sbin', '/usr/sbin', '/bin', '/usr/bin'],
-          notify  => Reboot['after_run'],
+          notify  => $notify,
         }
       }
     }

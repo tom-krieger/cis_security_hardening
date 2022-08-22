@@ -20,48 +20,47 @@ class cis_security_hardening::rules::iptables_outbound_established (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    include cis_security_hardening::rules::iptables_save
     firewall { '004 accept outbound tcp state new, established':
       chain  => 'OUTPUT',
       proto  => 'tcp',
       state  => ['NEW', 'ESTABLISHED'],
       action => 'accept',
-      notify => Class['cis_security_hardening::rules::iptables_save'],
+      notify => Exec['save iptables rules'],
     }
     firewall { '005 accept outbound udp state new, established':
       chain  => 'OUTPUT',
       proto  => 'udp',
       state  => ['NEW', 'ESTABLISHED'],
       action => 'accept',
-      notify => Class['cis_security_hardening::rules::iptables_save'],
+      notify => Exec['save iptables rules'],
     }
     firewall { '006 accept outbound icmp state new, established':
       chain  => 'OUTPUT',
       proto  => 'icmp',
       state  => ['NEW', 'ESTABLISHED'],
       action => 'accept',
-      notify => Class['cis_security_hardening::rules::iptables_save'],
+      notify => Exec['save iptables rules'],
     }
     firewall { '007 accept inbound tcp state established':
       chain  => 'INPUT',
       proto  => 'tcp',
       state  => 'ESTABLISHED',
       action => 'accept',
-      notify => Class['cis_security_hardening::rules::iptables_save'],
+      notify => Exec['save iptables rules'],
     }
     firewall { '008 accept inbound udp state established':
       chain  => 'INPUT',
       proto  => 'udp',
       state  => 'ESTABLISHED',
       action => 'accept',
-      notify => Class['cis_security_hardening::rules::iptables_save'],
+      notify => Exec['save iptables rules'],
     }
     firewall { '009 accept inbound icmp state established':
       chain  => 'INPUT',
       proto  => 'icmp',
       state  => 'ESTABLISHED',
       action => 'accept',
-      notify => Class['cis_security_hardening::rules::iptables_save'],
+      notify => Exec['save iptables rules'],
     }
   }
 }

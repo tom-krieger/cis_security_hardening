@@ -35,23 +35,22 @@ class cis_security_hardening::rules::iptables_deny_policy (
   Enum['drop', 'accept'] $forward_policy = 'drop',
 ) {
   if $enforce {
-    include cis_security_hardening::rules::iptables_save
     firewallchain { 'OUTPUT:filter:IPv4':
       ensure => present,
       policy => $output_policy,
-      notify => Class['cis_security_hardening::rules::iptables_save'],
+      notify => Exec['save iptables rules'],
     }
 
     firewallchain { 'FORWARD:filter:IPv4':
       ensure => present,
       policy => $forward_policy,
-      notify => Class['cis_security_hardening::rules::iptables_save'],
+      notify => Exec['save iptables rules'],
     }
 
     firewallchain { 'INPUT:filter:IPv4':
       ensure => present,
       policy => $input_policy,
-      notify => Class['cis_security_hardening::rules::iptables_save'],
+      notify => Exec['save iptables rules'],
     }
   }
 }

@@ -12,6 +12,9 @@
 # @param state
 #    SELinux state to set
 #
+# @param auto_reboot
+#    Trigger a reboot if this rule creates a change. Defaults to true.
+#
 # @example
 #   class { 'cis_security_hardening::rules::selinux_state':
 #       enforce => true,
@@ -22,14 +25,20 @@
 class cis_security_hardening::rules::selinux_state (
   Boolean $enforce                       = false,
   Enum['enforcing', 'permissive'] $state = 'enforcing',
+  Boolean $auto_reboot                   = true,
 ) {
   if $enforce {
+    $notify = $auto_reboot ? {
+      true  => Reboot['after_run'],
+      false => [],
+    }
+
     ensure_resource('file', '/etc/selinux/config', {
         ensure => present,
         owner  => 'root',
         group  => 'root',
         mode   => '0644',
-        notify => Reboot['after_run']
+        notify => $notify
     })
 
     file_line { 'selinux_enforce':
@@ -37,7 +46,7 @@ class cis_security_hardening::rules::selinux_state (
       line     => "SELINUX=${state}",
       match    => 'SELINUX=',
       multiple => true,
-      notify   => Reboot['after_run'],
+      notify   => $notify,
     }
   }
 }

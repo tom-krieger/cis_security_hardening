@@ -37,7 +37,6 @@ class cis_security_hardening::rules::auditd_time_change (
         order   => '123',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,
         content => '-w /etc/localtime -p wa -k time-change',
-        notify  => [Exec['reload auditd rules'], Reboot['after_run']],
       }
       if  $facts['architecture'] == 'x86_64' or $facts['architecture'] == 'amd64' {
         concat::fragment { 'watch for date-time-change rule 2':
@@ -61,7 +60,6 @@ class cis_security_hardening::rules::auditd_time_change (
         order   => '123',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,
         content => '-w /etc/localtime -p wa -k time-change',
-        notify  => [Exec['reload auditd rules'], Reboot['after_run']],
       }
 
       if  $facts['architecture'] == 'x86_64' or $facts['architecture'] == 'amd64' {
