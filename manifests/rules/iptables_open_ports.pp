@@ -24,7 +24,6 @@ class cis_security_hardening::rules::iptables_open_ports (
   Hash $firewall_rules = {},
 ) {
   if $enforce {
-    include cis_security_hardening::rules::iptables_save
     if(empty($firewall_rules)) {
       $policy = fact('cis_security_hardening.iptables.policy')
       if  $policy != undef {
@@ -41,14 +40,14 @@ class cis_security_hardening::rules::iptables_open_ports (
           dport  => 22,
           state  => 'NEW',
           action => 'accept',
-          notify => Class['cis_security_hardening::rules::iptables_save'],
+          notify => Exec['save iptables rules'],
         }
       }
     } else {
       $firewall_rules.each | String $rulename, Hash $data | {
         firewall { $rulename:
           *      => $data,
-          notify => Class['cis_security_hardening::rules::iptables_save'],
+          notify => Exec['save iptables rules'],
         }
       }
     }

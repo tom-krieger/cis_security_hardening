@@ -28,8 +28,6 @@
 #    Time to wait until system is rebooted if required. Time in seconds.
 # @param verbose_logging
 #    Print various info messages
-# @param auto_reboot
-#    If set to false no automatic reboots will be done.
 #
 # @example
 #   include cis_security_hardening
@@ -42,7 +40,6 @@ class cis_security_hardening (
   Array $auditd_suid_include         = ['/usr'],
   Array $auditd_suid_exclude         = [],
   Integer $time_until_reboot         = 120,
-  Boolean $auto_reboot               = true,
   Boolean $verbose_logging           = false,
 ) {
   class { 'cis_security_hardening::services':

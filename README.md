@@ -152,16 +152,24 @@ SELinux and AppArmor are - if configured - activated while this module is applie
 
 ### Automatic reboot
 
-Automatic reboots might be *dangerous* as servers would be rebooted if one of the classes subscribed for reboot takes any action. But some changes need a reboot, e. g. enabling SELinux or changing auditd rules. As servers in production environments may not be rebooted you have to choose if you will allow reboots by settings a global parameter *cis_security_hardening::reboot* and you can add a parameter reboot to each rule.
+Automatic reboots might be *dangerous* as servers would be rebooted if one of the classes subscribed for reboot takes any action. But some changes need a reboot, e. g. enabling SELinux or changing auditd rules. As servers in production environments may not be rebooted you have to choose if you will allow reboots by settings a parameter *auto_reboot*. You can choose this for each rule triggering a reboot to be able to decide, which reboots are important enough to trigger an automatic reboot. The *auto_reboot* parameter is available for all rules which can trigger a reboot. Currently the following rules trigger reboots:
 
-The global *reboot* parameter enables or disables reboots regardless of the settings rules have. The *reboot* parameter given with a rule will subscribe the class implementing the rule to the reboot module. If the rule takes any action a reboot will be triggered.
+* auditd_init
+* crypto_policy
+* selinux_policy
+* selinux_state
 
-The reboot timeout will shedule a reboot within the given time after applying the catalogue finished.
+The default value for *auto_reboot* is `true` and can easily be changed by setting it to false in the Hier configuration of this module.
+
+The global parameter `time_until_reboot` sets the waiting time until the reboot will be performed. On Linux systems you can cancel this reboot with the `shutdown -c` command. But keep in mind that canceling the reboot won't activate some changes.
+
+Hiera example:
 
 ```hiera
 ---
-cis_security_hardening::reboot: true
 cis_security_hardening::reboot_timeout: 120
+
+cis_security_hardening::rules::selinux_policy::auto_reboot: true
 ```
 
 ### Suse SLES 12 and 15

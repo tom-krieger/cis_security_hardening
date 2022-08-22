@@ -225,7 +225,7 @@ cis_security_hardening::rules::ip6tables_open_ports::firewall_rules: {}
 cis_security_hardening::rules::auditd_init::enforce: true
 cis_security_hardening::rules::auditd_init::buffer_size: 8192
 cis_security_hardening::rules::auditd_init::rules_file: /etc/audit/rules.d/cis_security_hardening.rules
-cis_security_hardening::rules::auditd_init::split_files: false
+cis_security_hardening::rules::auditd_init::auto_reboot: true
 cis_security_hardening::rules::auditd_package::enforce: true
 cis_security_hardening::rules::auditd_package::packages: 
   - audit 

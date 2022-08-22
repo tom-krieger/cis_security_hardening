@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.6.1
+
+Enable configuration of automatic reboots for each rule triggering such a reboot.
+
 ## Release 0.6.0
 
 First published release indludein:

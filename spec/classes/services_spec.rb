@@ -61,6 +61,14 @@ describe 'cis_security_hardening::services' do
             'refreshonly' => true,
           )
 
+        is_expected.to contain_exec('save iptables rules')
+          .with(
+              'command'    => 'service iptables save',
+              'path'       => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+              'unless'     => 'test -z "$(grep -e AlmaLinux -e Rocky /etc/redhat-release 2>/dev/null)"',
+              'refreshonly' => true,
+            )
+
         is_expected.to contain_reboot('after_run')
           .with(
             'timeout' => 60,

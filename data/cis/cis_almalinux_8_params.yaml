@@ -67,8 +67,10 @@ cis_security_hardening::rules::selinux::enforce: false
 cis_security_hardening::rules::selinux_bootloader::enforce: true
 cis_security_hardening::rules::selinux_policy::enforce: true
 cis_security_hardening::rules::selinux_policy::selinux_polixy: targeted
+cis_security_hardening::rules::selinux_policy::auto_reboot: true
 cis_security_hardening::rules::selinux_state::enforce: true
 cis_security_hardening::rules::selinux_state::state: permissive
+cis_security_hardening::rules::selinux_state::auto_reboot: true
 cis_security_hardening::rules::setroubleshoot::enforce: true
 cis_security_hardening::rules::mcstrans::enforce: true
 
@@ -103,6 +105,7 @@ cis_security_hardening::rules::xdmcp_config::enforce: true
 cis_security_hardening::rules::gdm_auto_mount::enforce: true
 cis_security_hardening::rules::crypto_policy::enforce: true
 cis_security_hardening::rules::crypto_policy::crypto_policy: FUTURE
+cis_security_hardening::rules::crypto_policy::auto_reboot: true
 
 cis_security_hardening::rules::xinetd::enforce: true
 
@@ -256,7 +259,7 @@ cis_security_hardening::rules::disable_wireless::enforce: true
 cis_security_hardening::rules::auditd_init::enforce: true
 cis_security_hardening::rules::auditd_init::buffer_size: 8192
 cis_security_hardening::rules::auditd_init::rules_file: /etc/audit/rules.d/cis_security_hardening.rules
-cis_security_hardening::rules::auditd_init::split_files: false
+cis_security_hardening::rules::auditd_init::auto_reboot: true
 cis_security_hardening::rules::auditd_package::enforce: true
 cis_security_hardening::rules::auditd_package::packages: 
   - audit

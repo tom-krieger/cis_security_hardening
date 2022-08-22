@@ -12,6 +12,9 @@
 # @param rules_file
 #    File to write the rules into.
 #
+# @param auto_reboot
+#    Trigger a reboot if this rule creates a change. Defaults to true.
+#
 # @example
 #   class { 'cis_security_hardening::rules::auditd_init':
 #       enforce => true,
@@ -23,9 +26,10 @@ class cis_security_hardening::rules::auditd_init (
   Boolean $enforce                 = false,
   Integer $buffer_size             = 8192,
   Stdlib::Absolutepath $rules_file = '/etc/audit/rules.d/cis_security_hardening.rules',
+  Boolean $auto_reboot             = true,
 ) {
   if $enforce {
-    $notify = $cis_security_hardening::auto_reboot ? {
+    $notify = $auto_reboot ? {
       true  => [Exec['reload auditd rules'], Reboot['after_run']],
       false => Exec['reload auditd rules'],
     }

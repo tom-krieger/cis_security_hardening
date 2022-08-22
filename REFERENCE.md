@@ -164,7 +164,6 @@ audited
 * `cis_security_hardening::rules::iptables_loopback`: Ensure loopback traffic is configured
 * `cis_security_hardening::rules::iptables_open_ports`: Ensure firewall rules exist for all open ports
 * `cis_security_hardening::rules::iptables_outbound_established`: Ensure outbound and established connections are configured
-* `cis_security_hardening::rules::iptables_save`: Save iptables rules
 * `cis_security_hardening::rules::ipv6_router_advertisements`: Ensure IPv6 router advertisements are not accepted
 * `cis_security_hardening::rules::issue_net_perms`: Ensure permissions on /etc/issue.net are configured
 * `cis_security_hardening::rules::issue_perms`: Ensure permissions on /etc/issue are configured
@@ -398,7 +397,6 @@ The following parameters are available in the `cis_security_hardening` class:
 * [`exclude_dirs_sticky_ww`](#exclude_dirs_sticky_ww)
 * [`auditd_suid_include`](#auditd_suid_include)
 * [`auditd_suid_exclude`](#auditd_suid_exclude)
-* [`auditd_rules_fact_file`](#auditd_rules_fact_file)
 * [`time_until_reboot`](#time_until_reboot)
 * [`verbose_logging`](#verbose_logging)
 
@@ -458,14 +456,6 @@ Data type: `Array`
 Directories to exclude from search for suid and sgid programs. Can not be set together with auditd_suid_include
 
 Default value: `[]`
-
-##### <a name="auditd_rules_fact_file"></a>`auditd_rules_fact_file`
-
-Data type: `String`
-
-The file where to store the facts for auditd rules
-
-Default value: `'/opt/puppetlabs/facter/facts.d/cis_security_hardening_auditd.yaml'`
 
 ##### <a name="time_until_reboot"></a>`time_until_reboot`
 

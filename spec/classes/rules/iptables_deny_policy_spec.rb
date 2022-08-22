@@ -7,7 +7,11 @@ enforce_options = [true, false]
 describe 'cis_security_hardening::rules::iptables_deny_policy' do
   let(:pre_condition) do
     <<-EOF
-    class { 'cis_security_hardening::rules::iptables_save':
+    exec { 'save iptables rules':
+      command    => 'service iptables save',
+      path       => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+      unless     => 'test -z "$(grep -e AlmaLinux -e Rocky /etc/redhat-release 2>/dev/null)"',
+      refreshonly => true,
     }
     EOF
   end

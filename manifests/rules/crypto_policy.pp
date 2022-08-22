@@ -26,6 +26,9 @@
 # @param crypto_policy
 #    The crypto policy to set in enforce mode.
 #
+# @param auto_reboot
+#    Trigger a reboot if this rule creates a change. Defaults to true.
+#
 # @example
 #   class { 'cis_security_hardening::rules::crypto_policy':
 #       enforce => true,
@@ -36,8 +39,9 @@
 class cis_security_hardening::rules::crypto_policy (
   Boolean $enforce                                           = false,
   Enum['FUTURE', 'FIPS', 'LEGACY', 'DEFAULT'] $crypto_policy = 'FUTURE',
+  Boolean $auto_reboot                                       = true,
 ) {
-  $notify = $cis_security_hardening::auto_reboot ? {
+  $notify = $auto_reboot ? {
     true  => Reboot['after_run'],
     false => [],
   }

@@ -63,6 +63,13 @@ class cis_security_hardening::services (
     refreshonly => true,
   }
 
+  exec { 'save iptables rules':
+    command     => 'service iptables save',
+    path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+    unless      => 'test -z "$(grep -e AlmaLinux -e Rocky /etc/redhat-release 2>/dev/null)"',
+    refreshonly => true,
+  }
+
   reboot { 'after_run':
     timeout => $time_until_reboot,
     message => 'forced reboot by Puppet',

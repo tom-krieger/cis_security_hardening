@@ -6,28 +6,19 @@ enforce_options = [true, false]
 reboot_options = [true, false]
 
 describe 'cis_security_hardening::rules::auditd_init' do
-
-  let(:pre_condition) do
-    <<-EOF
-    echo { 'reboot required':
-      message  => 'Automatic reboots are disabled. Please make sure to reboot as soon as possible!',
-      loglevel => 'warning',
-      withpath => false,
-    }
-
-    reboot { 'after_run':
-      timeout => 60,
-      message => 'forced reboot by Puppet',
-      apply   => 'finished',
-    }
-
-    EOF
-  end
-
   on_supported_os.each do |os, os_facts|
     enforce_options.each do |enforce|
       reboot_options.each do |reboot|
         context "on #{os} with enforce = #{enforce} and reboot = #{reboot}" do
+          let(:pre_condition) do
+            <<-EOF
+            reboot { 'after_run':
+              timeout => 60,
+              message => 'forced reboot by Puppet',
+              apply   => 'finished',
+            }
+            EOF
+          end
           let(:facts) { os_facts }
           let(:params) do
             {
@@ -61,7 +52,7 @@ describe 'cis_security_hardening::rules::auditd_init' do
                     'mode'   => '0640',
                     'ensure_newline' => true,
                   )
-                  .that_notifies(['Exec[reload auditd rules]', 'Echo[reboot required]'])
+                  .that_notifies(['Exec[reload auditd rules]'])
               end
 
               is_expected.to contain_concat__fragment('auditd init delete rules')
