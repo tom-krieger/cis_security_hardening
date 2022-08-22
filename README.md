@@ -61,7 +61,7 @@ The benchmarks can be found at [CIS Benchmarks Website](https://www.cisecurity.o
 
 ## Setup
 
-It is highly recommended to have the complete security baseline definition written in Hira definitions. This enables you to have different security baselines for groups of servers, environments or even special single servers.
+It is highly recommended to have the complete security baseline definition written in Hiera definitions. This enables you to have different security baselines for groups of servers, environments or even special single servers.
 
 ### What cis_security_hardening affects
 
@@ -121,9 +121,16 @@ Hiera data:
 
 ```hiera
 ---
-cis_security_hardening::os::centos::os_version: '7'
-cis_security_hardening::os::centos::benchmark_version: '3.0.0'
-cis_security_hardening::level: '2'
+cis_security_hardening::profile: server
+cis_security_hardening::level: "2"
+cis_security_hardening::time_until_reboot: 60
+cis_security_hardening::exclude_dirs_sticky_ww: []
+cis_security_hardening::update_postrun_command: true
+cis_security_hardening::fact_upload_command: "/usr/share/cis_security_hardening/bin/fact_upload.sh"
+cis_security_hardening::auditd_suid_exclude: []
+cis_security_hardening::auditd_suid_include:
+  - "/usr"
+cis_security_hardening::verbose_logging: false
 
 cis_security_hardening::rules::cramfs::enforce: true
 cis_security_hardening::rules::squashfs::enforce: true
@@ -131,16 +138,19 @@ cis_security_hardening::rules::fat::enforce: false
 cis_security_hardening::rules::udf::enforce: true
 ```
 
-The `data` folder contains files names `*_param.yaml` which contain all configurable options for each benchmark. You also can look into the reference documentation. 
+The `data` folder contains files names `*_param.yaml` which contain all configurable options for each benchmark. You also can look into the reference documentation.
+
 ## Reference
 
 See [REFERENCE.md](https://github.com/tom-krieger/cis_security_hardening/blob/master/REFERENCE.md)
 
 ## Limitations
 
-Currently the module is tested with RedHat 6, 7, 8, CentOS 6, 7, 8, Suse SLES 12, Debian 9 (partly tested) and Ubuntu 18.04 (partially tested). Other OSes may work but there's no guarantee. If you need your own rules please create Puppet modules and call them from the security baseline module. See [extend the security baseline](#extend-the-security-baseline).
+Currently the module is tested with RedHat 7, 8, CentOS 8, Suse SLES 12, Debian 10, Ubuntu 18.04 and Ubuntu 20.04. Other OSes may work but there's no guarantee. If you need your own rules please create Puppet modules and call them from the security baseline module. See [extend the security baseline](#extend-the-security-baseline).
 
 More testing is needed as for every supported OS there are different setups in the wild and some of them might not be covered.
+
+For a list of supported OSes please look into the `metadata.json` file.
 
 ### Auditd
 
@@ -174,8 +184,7 @@ cis_security_hardening::rules::selinux_policy::auto_reboot: true
 
 ### Suse SLES 12 and 15
 
-The compliance tules have been implemented without or very limited testing. Please report problems or creste pull requests to improve
-the Suse SLES compliance code.
+The compliance rules have been implemented without or very limited testing. Please report problems or create pull requests to improve the Suse SLES compliance code.
 
 ### Issues with CISCAT scanner
 
@@ -187,7 +196,7 @@ the Suse SLES compliance code.
 
 ## Credits
 
-This project is highly inspired by the [fervid/secure_linux_cis](https://forge.puppet.com/fervid/secure_linux_cis) module from Puppet Forge.
+This project is highly inspired by the [fervid/secure_linux_cis](https://forge.puppet.com/fervid/secure_linux_cis) module from Puppet Forge and uses my [security_baseline](https://forge.puppet.com/modules/tomkrieger/security_baseline) module as basis.
 
 ## Development
 
