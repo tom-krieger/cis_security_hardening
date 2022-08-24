@@ -37,11 +37,12 @@ class cis_security_hardening (
   Array $exclude_dirs_sticky_ww             = [],
   Array $auditd_dirs_to_include             = ['/usr'],
   Boolean $update_postrun_command           = true,
-  Stdlib::Absolutepath $base_dir            = '/usr/share/cis_security_hardening',
   Stdlib::Absolutepath $fact_upload_command = "${base_dir}/bin/fact_upload.sh",
   Integer $time_until_reboot                = 120,
   Boolean $verbose_logging                  = false,
 ) {
+  $base_dir            = '/usr/share/cis_security_hardening'
+
   class { 'cis_security_hardening::services':
     time_until_reboot => $time_until_reboot,
   }
