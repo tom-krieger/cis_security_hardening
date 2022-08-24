@@ -25,7 +25,7 @@ class cis_security_hardening::auditd_cron (
   Integer $start_time_minute              = 37,
   Integer $start_time_hour                = 3,
   Enum['0','2','4','6','8'] $cron_repeat  = '0',
-  Stdlib::Absolutepath $output_file       = '/opt/puppetlabs/facter/facts.d/cis_security_hardening_auditd_priv_cmds.yaml',
+  Stdlib::Absolutepath $output_file       = '/usr/share/cis_security_hardening/data/auditd_priv_cmds.txt',
   Stdlib::Absolutepath $script            = '/usr/share/cis_security_hardening/bin/auditd_priv_cmds.sh',
 ) {
   if ! empty($dirs_to_include) {
