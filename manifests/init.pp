@@ -16,8 +16,6 @@
 #
 # @param update_postrun_command
 #    Update Puppet agent post run command
-# @param base_dir
-#    The base directory where all scripts and so on go.
 # @param fact_upload_command
 #    Command to use to upload facts to Puppet master
 # @param exclude_dirs_sticky_ww

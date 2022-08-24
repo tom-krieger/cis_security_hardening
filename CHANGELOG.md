@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.6.2
+
+Use a cronjob to find `suid` and `sgid` binaries to create auditd rules for these binaries.
+
 ## Release 0.6.1
 
 Enable configuration of automatic reboots for each rule triggering such a reboot.
