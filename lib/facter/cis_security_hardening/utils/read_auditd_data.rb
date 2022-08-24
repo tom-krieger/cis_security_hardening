@@ -3,9 +3,13 @@
 def read_auditd_data
   auditd = {}
 
-  cmd = 'find /usr -xdev \\( -perm -4000 -o -perm -2000 \\) -type f'
-  priv_cmds = Facter::Core::Execution.exec(cmd).split("\n")
-  auditd['priv-cmds-list'] = priv_cmds.uniq.sort
+  files = []
+  if File.exist?('/usr/share/cis_security_hardening/data/auditd_priv_cmds.txt')
+    text = File.open('/usr/share/cis_security_hardening/data/auditd_priv_cmds.txt').read
+    text.gsub!(%r{\r\n?}, "\n")
+    files = text.split("\n")
+  end
+  auditd['priv-cmds-list'] = files
 
   cmd = 'find /etc/audit/ /etc/audit/rules.d -type f 2>/dev/null'
   conf_raw = Facter::Core::Execution.exec(cmd).split("\n")

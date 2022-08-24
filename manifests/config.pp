@@ -5,6 +5,8 @@
 #
 # @param update_postrun_command
 #    Update Puppet agent's postrun command.
+# @param base_dir
+#    Directory where all files go to.
 # @param fact_upload_command
 #    Command to use for fact upload.
 #
@@ -12,37 +14,38 @@
 #   include cis_security_hardening::config
 class cis_security_hardening::config (
   Boolean $update_postrun_command,
-  String $fact_upload_command,
+  Stdlib::Absolutepath $base_dir,
+  Stdlib::Absolutepath $fact_upload_command,
 ) {
-  file { '/usr/share/cis_security_hardening':
+  file { $base_dir:
     ensure => directory,
     owner  => 'root',
     group  => 'root',
     mode   => '0700',
   }
 
-  file { '/usr/share/cis_security_hardening/logs':
+  file { "${base_dir}/logs":
     ensure => directory,
     owner  => 'root',
     group  => 'root',
     mode   => '0700',
   }
 
-  file { '/usr/share/cis_security_hardening/data':
+  file { "${base_dir}/data":
     ensure => directory,
     owner  => 'root',
     group  => 'root',
     mode   => '0700',
   }
 
-  file { '/usr/share/cis_security_hardening/bin':
+  file { "${base_dir}/bin":
     ensure => directory,
     owner  => 'root',
     group  => 'root',
     mode   => '0700',
   }
 
-  file { '/usr/share/cis_security_hardening/bin/fact_upload.sh':
+  file { "${base_dir}/bin/fact_upload.sh":
     ensure  => file,
     content => epp('cis_security_hardening/fact_upload.sh.epp', {
     }),

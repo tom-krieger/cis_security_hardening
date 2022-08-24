@@ -9,6 +9,7 @@
 #### Public Classes
 
 * [`cis_security_hardening`](#cis_security_hardening): Security baseline enforcement
+* [`cis_security_hardening::auditd_cron`](#cis_security_hardeningauditd_cron): Create a cron job to search privileged commands for auditd
 * [`cis_security_hardening::config`](#cis_security_hardeningconfig): Configure the module
 * [`cis_security_hardening::rules::auditd_log_perms`](#cis_security_hardeningrulesauditd_log_perms): Ensure audit log files are not read or write-accessible by unauthorized users
 * [`cis_security_hardening::rules::auditd_privileged_priv_change`](#cis_security_hardeningrulesauditd_privileged_priv_change): Ensure successful and unsuccessful uses of the su command are collected
@@ -396,8 +397,7 @@ The following parameters are available in the `cis_security_hardening` class:
 * [`update_postrun_command`](#update_postrun_command)
 * [`fact_upload_command`](#fact_upload_command)
 * [`exclude_dirs_sticky_ww`](#exclude_dirs_sticky_ww)
-* [`auditd_suid_include`](#auditd_suid_include)
-* [`auditd_suid_exclude`](#auditd_suid_exclude)
+* [`auditd_dirs_to_include`](#auditd_dirs_to_include)
 * [`time_until_reboot`](#time_until_reboot)
 * [`verbose_logging`](#verbose_logging)
 
@@ -428,11 +428,11 @@ Default value: ``true``
 
 ##### <a name="fact_upload_command"></a>`fact_upload_command`
 
-Data type: `String`
+Data type: `Stdlib::Absolutepath`
 
 Command to use to upload facts to Puppet master
 
-Default value: `'/usr/share/cis_security_hardening/bin/fact_upload.sh'`
+Default value: `"${base_dir}/bin/fact_upload.sh"`
 
 ##### <a name="exclude_dirs_sticky_ww"></a>`exclude_dirs_sticky_ww`
 
@@ -442,21 +442,13 @@ Araay of directories to exclude from the search for world writable directories w
 
 Default value: `[]`
 
-##### <a name="auditd_suid_include"></a>`auditd_suid_include`
+##### <a name="auditd_dirs_to_include"></a>`auditd_dirs_to_include`
 
 Data type: `Array`
 
-Directories to search for suid and sgid programs. Can not be set together with auditd_suid_exclude
+Directories to search for privileged commands to create auditd rules.
 
 Default value: `['/usr']`
-
-##### <a name="auditd_suid_exclude"></a>`auditd_suid_exclude`
-
-Data type: `Array`
-
-Directories to exclude from search for suid and sgid programs. Can not be set together with auditd_suid_include
-
-Default value: `[]`
 
 ##### <a name="time_until_reboot"></a>`time_until_reboot`
 
@@ -473,6 +465,79 @@ Data type: `Boolean`
 Print various info messages
 
 Default value: ``false``
+
+### <a name="cis_security_hardeningauditd_cron"></a>`cis_security_hardening::auditd_cron`
+
+Auditd rules can monitor privileged command use. As filesystems cn be huge and searching
+the relevant commands can be time consuming this cron job will create a custom fact to
+provide the auditd rule with appriate imput.
+
+#### Examples
+
+##### 
+
+```puppet
+include cis_security_hardening::auditd_cron
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::auditd_cron` class:
+
+* [`dirs_to_include`](#dirs_to_include)
+* [`start_time_minute`](#start_time_minute)
+* [`start_time_hour`](#start_time_hour)
+* [`cron_repeat`](#cron_repeat)
+* [`output_file`](#output_file)
+* [`script`](#script)
+
+##### <a name="dirs_to_include"></a>`dirs_to_include`
+
+Data type: `Array`
+
+A list of directories to search
+
+Default value: `['/usr']`
+
+##### <a name="start_time_minute"></a>`start_time_minute`
+
+Data type: `Integer`
+
+The minute to start the cronjob
+
+Default value: `37`
+
+##### <a name="start_time_hour"></a>`start_time_hour`
+
+Data type: `Integer`
+
+The hour to run the cronjob
+
+Default value: `3`
+
+##### <a name="cron_repeat"></a>`cron_repeat`
+
+Data type: `Enum['0','2','4','6','8']`
+
+Interval to repeat the cronjob in hours. 0 means run only once a day.
+
+Default value: `'0'`
+
+##### <a name="output_file"></a>`output_file`
+
+Data type: `Stdlib::Absolutepath`
+
+File to write fact data.
+
+Default value: `'/usr/share/cis_security_hardening/data/auditd_priv_cmds.txt'`
+
+##### <a name="script"></a>`script`
+
+Data type: `Stdlib::Absolutepath`
+
+Filename of the script to riun from cron.
+
+Default value: `'/usr/share/cis_security_hardening/bin/auditd_priv_cmds.sh'`
 
 ### <a name="cis_security_hardeningconfig"></a>`cis_security_hardening::config`
 
@@ -491,6 +556,7 @@ include cis_security_hardening::config
 The following parameters are available in the `cis_security_hardening::config` class:
 
 * [`update_postrun_command`](#update_postrun_command)
+* [`base_dir`](#base_dir)
 * [`fact_upload_command`](#fact_upload_command)
 
 ##### <a name="update_postrun_command"></a>`update_postrun_command`
@@ -499,9 +565,15 @@ Data type: `Boolean`
 
 Update Puppet agent's postrun command.
 
+##### <a name="base_dir"></a>`base_dir`
+
+Data type: `Stdlib::Absolutepath`
+
+Directory where all files go to.
+
 ##### <a name="fact_upload_command"></a>`fact_upload_command`
 
-Data type: `String`
+Data type: `Stdlib::Absolutepath`
 
 Command to use for fact upload.
 
@@ -755,7 +827,7 @@ Default value: `[]`
 
 ##### <a name="filename"></a>`filename`
 
-Data type: `String`
+Data type: `Stdlib::Absolutepath`
 
 The file to write data to
 
@@ -763,7 +835,7 @@ Default value: `'/usr/share/cis_security_hardening/data/world-writable-files.txt
 
 ##### <a name="script"></a>`script`
 
-Data type: `String`
+Data type: `Stdlib::Absolutepath`
 
 The script to run
 

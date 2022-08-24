@@ -15,9 +15,9 @@
 # @example
 #   include cis_security_hardening::sticky_world_writable_cron
 class cis_security_hardening::sticky_world_writable_cron (
-  Array $dirs_to_exclude = [],
-  String $filename       = '/usr/share/cis_security_hardening/data/world-writable-files.txt',
-  String $script         = '/usr/share/cis_security_hardening/bin/sticy-world-writable.sh',
+  Array $dirs_to_exclude               = [],
+  Stdlib::Absolutepath $filename       = '/usr/share/cis_security_hardening/data/world-writable-files.txt',
+  Stdlib::Absolutepath $script         = '/usr/share/cis_security_hardening/bin/sticy-world-writable.sh',
 ) {
   file { $script:
     ensure  => file,

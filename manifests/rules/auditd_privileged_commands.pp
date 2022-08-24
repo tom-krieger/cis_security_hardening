@@ -10,15 +10,18 @@
 #
 # @param enforce
 #    Sets rule enforcement. If set to true, code will be exeuted to bring the system into a comliant state.
+# @param auto_reboot
+#    Trigger a reboot if this rule creates a change. Defaults to true.
 #
 # @example
 #   class { 'cis_security_hardening::rules::auditd_privileged_commands':
-#             enforce => true,
+#        enforce => true,
 #   }
 #
 # @api private
 class cis_security_hardening::rules::auditd_privileged_commands (
   Boolean $enforce                 = false,
+  Boolean $auto_reboot             = true,
 ) {
   if $enforce {
     $dir = dirname($cis_security_hardening::rules::auditd_init::rules_file)
@@ -28,31 +31,26 @@ class cis_security_hardening::rules::auditd_privileged_commands (
       undef   => '1000',
       default => fact('cis_security_hardening.auditd.uid_min'),
     }
-    $auid = $facts['operatingsystem'].downcase() ? {
+    $auid = $facts['os']['name'].downcase() ? {
       'rocky'     => 'unset',
       'almalinux' => 'unset',
       default     => '4294967295',
     }
+
+    file { $rules_file:
+      ensure => absent,
+    }
+
     unless $privlist == undef {
-      file { $rules_file:
-        ensure  => file,
-        owner   => 'root',
-        group   => 'root',
-        mode    => '0640',
+      concat::fragment { 'priv. commands rules':
+        target  => $cis_security_hardening::rules::auditd_init::rules_file,
         content => epp('cis_security_hardening/rules/common/auditd_priv_commands.epp', {
             data => $privlist,
             uid  => $uid,
             auid => $auid
         }),
-        notify  => Exec['reload auditd rules priv cmds'],
+        order   => '350',
       }
-    }
-
-    $cmd = "auditctl -R ${rules_file}"
-    exec { 'reload auditd rules priv cmds':
-      refreshonly => true,
-      command     => $cmd,
-      path        => ['/sbin', '/usr/sbin', '/bin', '/usr/bin'],
     }
   }
 }
