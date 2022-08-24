@@ -41,7 +41,7 @@ class cis_security_hardening (
   Integer $time_until_reboot                = 120,
   Boolean $verbose_logging                  = false,
 ) {
-  $base_dir            = '/usr/share/cis_security_hardening'
+  $base_dir = '/usr/share/cis_security_hardening'
 
   class { 'cis_security_hardening::services':
     time_until_reboot => $time_until_reboot,
