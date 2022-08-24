@@ -50,24 +50,12 @@ describe 'cis_security_hardening::rules::auditd_privileged_commands' do
                   'order'   => '350',
                 )
                 
-              # is_expected.to contain_file('/etc/audit/rules.d/cis_security_hardening_priv_cmds.rules')
-              #   .with(
-              #     'ensure'  => 'file',
-              #     'owner'   => 'root',
-              #     'group'   => 'root',
-              #     'mode'    => '0640',
-              #   )
-              #   .that_notifies('Exec[reload auditd rules priv cmds]')
-
-              # is_expected.to contain_exec('reload auditd rules priv cmds')
-              #   .with(
-              #     'refreshonly' => true,
-              #     'command'     => 'auditctl -R /etc/audit/rules.d/cis_security_hardening_priv_cmds.rules',
-              #     'path'        => ['/sbin', '/usr/sbin', '/bin', '/usr/bin'],
-              #   )
+              is_expected.to contain_file('/etc/audit/rules.d/cis_security_hardening_priv_cmds.rules')
+                .with(
+                  'ensure'  => 'absent',
+                )
             else
               is_expected.not_to contain_concat__fragment('priv. commands rules')
-              # is_expected.not_to contain_exec('reload auditd rules priv cmds')
             end
           }
         end

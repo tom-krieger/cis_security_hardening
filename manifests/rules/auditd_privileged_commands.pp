@@ -10,19 +10,22 @@
 #
 # @param enforce
 #    Sets rule enforcement. If set to true, code will be exeuted to bring the system into a comliant state.
+# @param auto_reboot
+#    Trigger a reboot if this rule creates a change. Defaults to true.
 #
 # @example
 #   class { 'cis_security_hardening::rules::auditd_privileged_commands':
-#             enforce => true,
+#        enforce => true,
 #   }
 #
 # @api private
 class cis_security_hardening::rules::auditd_privileged_commands (
   Boolean $enforce                 = false,
+  Boolean $auto_reboot             = true,
 ) {
   if $enforce {
-    # $dir = dirname($cis_security_hardening::rules::auditd_init::rules_file)
-    # $rules_file = "${dir}/cis_security_hardening_priv_cmds.rules"
+    $dir = dirname($cis_security_hardening::rules::auditd_init::rules_file)
+    $rules_file = "${dir}/cis_security_hardening_priv_cmds.rules"
     $privlist = fact('cis_security_hardening.auditd.priv-cmds-list')
     $uid = fact('cis_security_hardening.auditd.uid_min') ? {
       undef   => '1000',
@@ -32,6 +35,10 @@ class cis_security_hardening::rules::auditd_privileged_commands (
       'rocky'     => 'unset',
       'almalinux' => 'unset',
       default     => '4294967295',
+    }
+
+    file { $rules_file:
+      ensure => absent,
     }
 
     unless $privlist == undef {
