@@ -49,7 +49,7 @@ describe 'cis_security_hardening::rules::auditd_privileged_commands' do
                   'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
                   'order'   => '350',
                 )
-                
+
               is_expected.to contain_file('/etc/audit/rules.d/cis_security_hardening_priv_cmds.rules')
                 .with(
                   'ensure'  => 'absent',

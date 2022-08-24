@@ -17,8 +17,8 @@ describe 'cis_security_hardening::auditd_cron' do
         }
       end
 
-      it { 
-        is_expected.to compile 
+      it {
+        is_expected.to compile
 
         is_expected.to contain_file('/etc/cron.d/auditd_priv_commands.cron')
           .with(
