@@ -33,7 +33,7 @@ class cis_security_hardening::rules::pam_cached_auth (
       path    => '/etc/sssd/conf.d/cis.conf',
       line    => 'offline_credentials_expiration = 1',
       match   => '^#?offline_credentials_expiration',
-      require => File['/etc/sssd/conf.d/cis.conf']
+      require => File['/etc/sssd/conf.d/cis.conf'],
     }
   }
 }

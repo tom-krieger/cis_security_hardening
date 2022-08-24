@@ -275,6 +275,7 @@ audited
 * `cis_security_hardening::rules::sticky_world_writeable_files`: Ensure sticky bit is set on all world-writable directories
 * `cis_security_hardening::rules::sudo_installed`: Ensure sudo is installed
 * `cis_security_hardening::rules::sudo_log`: Ensure sudo log file exists
+* `cis_security_hardening::rules::sudo_timeout`: Ensure sudo authentication timeout is configured correctly
 * `cis_security_hardening::rules::sudo_use_pty`: Ensure sudo commands use pty
 * `cis_security_hardening::rules::system_cmd_group`: Ensure system command files are group-owned by root
 * `cis_security_hardening::rules::systemd_timesyncd`: Ensure systemd-timesyncd is configured (Not Scored)

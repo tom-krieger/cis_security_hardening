@@ -238,6 +238,7 @@ cis_security_hardening::benchmark::rocky::8:
         - sudo_installed
         - sudo_use_pty
         - sudo_log
+        - sudo_timeout
         - restrict_su
     configure_authselect:
       level1:

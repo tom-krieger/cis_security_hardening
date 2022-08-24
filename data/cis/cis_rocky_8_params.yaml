@@ -52,6 +52,8 @@ cis_security_hardening::rules::yum_gpgcheck::enforce: true
 cis_security_hardening::rules::sudo_installed::enforce: true
 cis_security_hardening::rules::sudo_use_pty::enforce: true
 cis_security_hardening::rules::sudo_log::enforce: true
+cis_security_hardening::rules::sudo_timeout::enforce: true
+cis_security_hardening::rules::sudo_timeout::timeout: 5
 
 cis_security_hardening::rules::aide_installed::enforce: true
 cis_security_hardening::rules::aide_regular_checks::enforce: true
