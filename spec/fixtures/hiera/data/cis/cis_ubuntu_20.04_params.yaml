@@ -255,6 +255,7 @@ cis_security_hardening::rules::auditd_session_logins::enforce: true
 cis_security_hardening::rules::auditd_perm_mod::enforce: true
 cis_security_hardening::rules::auditd_access::enforce: true
 cis_security_hardening::rules::auditd_privileged_commands::enforce: true
+cis_security_hardening::rules::auditd_privileged_commands::auto_reboot: true
 cis_security_hardening::rules::auditd_mounts::enforce: true
 cis_security_hardening::rules::auditd_delete::enforce: true
 cis_security_hardening::rules::auditd_scope::enforce: true
