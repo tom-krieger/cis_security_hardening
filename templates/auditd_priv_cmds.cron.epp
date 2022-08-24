@@ -1,4 +1,4 @@
-<%- if $cron_repeat == 0 { %>
+<%- if $cron_repeat == '0' { %>
 <%= $minute %> <%= $hour %> * * * <%= $script %>
 <%- } else { %>
 <%= $minute %> <%= $hour %>/<%= $cron_repeat %> * * * <%= $script %>
