@@ -16,14 +16,14 @@
 #
 # @param update_postrun_command
 #    Update Puppet agent post run command
+# @param base_dir
+#    The base directory where all scripts and so on go.
 # @param fact_upload_command
 #    Command to use to upload facts to Puppet master
 # @param exclude_dirs_sticky_ww
 #    Araay of directories to exclude from the search for world writable directories with sticky bit
-# @param auditd_suid_include
-#    Directories to search for suid and sgid programs. Can not be set together with auditd_suid_exclude
-# @param auditd_suid_exclude
-#    Directories to exclude from search for suid and sgid programs. Can not be set together with auditd_suid_include
+# @param auditd_dirs_to_include
+#    Directories to search for privileged commands to create auditd rules.
 # @param time_until_reboot
 #    Time to wait until system is rebooted if required. Time in seconds.
 # @param verbose_logging
@@ -32,15 +32,15 @@
 # @example
 #   include cis_security_hardening
 class cis_security_hardening (
-  Enum['server'] $profile            = 'server',
-  Enum['1', '2', 'stig'] $level      = '2',
-  Array $exclude_dirs_sticky_ww      = [],
-  Boolean $update_postrun_command    = true,
-  String $fact_upload_command        = '/usr/share/cis_security_hardening/bin/fact_upload.sh',
-  Array $auditd_suid_include         = ['/usr'],
-  Array $auditd_suid_exclude         = [],
-  Integer $time_until_reboot         = 120,
-  Boolean $verbose_logging           = false,
+  Enum['server'] $profile                   = 'server',
+  Enum['1', '2', 'stig'] $level             = '2',
+  Array $exclude_dirs_sticky_ww             = [],
+  Array $auditd_dirs_to_include             = ['/usr'],
+  Boolean $update_postrun_command           = true,
+  Stdlib::Absolutepath $base_dir            = '/usr/share/cis_security_hardening',
+  Stdlib::Absolutepath $fact_upload_command = "${base_dir}/bin/fact_upload.sh",
+  Integer $time_until_reboot                = 120,
+  Boolean $verbose_logging                  = false,
 ) {
   class { 'cis_security_hardening::services':
     time_until_reboot => $time_until_reboot,
@@ -48,9 +48,18 @@ class cis_security_hardening (
 
   class { 'cis_security_hardening::sticky_world_writable_cron':
     dirs_to_exclude => $exclude_dirs_sticky_ww,
+    filename        => "${base_dir}/data/world-writable-files.txt",
+    script          => "${base_dir}/bin/sticy-world-writable.sh",
+  }
+
+  class { 'cis_security_hardening::auditd_cron':
+    dirs_to_include => $auditd_dirs_to_include,
+    output_file     => "${base_dir}/data/auditd_priv_cmds.txt",
+    script          => "${base_dir}/bin/auditd_priv_cmds.sh",
   }
 
   class { 'cis_security_hardening::config':
+    base_dir               => $base_dir,
     update_postrun_command => $update_postrun_command,
     fact_upload_command    => $fact_upload_command,
   }

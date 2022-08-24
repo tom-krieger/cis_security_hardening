@@ -21,8 +21,8 @@ describe 'cis_security_hardening' do
           is_expected.to compile.with_all_deps
           is_expected.to contain_class('cis_security_hardening::services')
           is_expected.to contain_class('cis_security_hardening::config')
+          is_expected.to contain_class('cis_security_hardening::auditd_cron')
 
-          # if os_facts[:operatingsystem].downcase != 'ubuntu' && os_facts[:operatingsystem].downcase != 'centos'
           unless os_facts[:operatingsystem].casecmp('ubuntu').zero? ||
                  os_facts[:operatingsystem].casecmp('debian').zero? ||
                  os_facts[:operatingsystem].casecmp('centos').zero? ||

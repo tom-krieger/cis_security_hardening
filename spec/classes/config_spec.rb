@@ -12,6 +12,7 @@ describe 'cis_security_hardening::config' do
         let(:params) do
           {
             'update_postrun_command' => postrun,
+            'base_dir'               => '/usr/share/cis_security_hardening',
             'fact_upload_command'    => '/usr/share/cis_security_hardening/bin/fact_upload.sh',
           }
         end
