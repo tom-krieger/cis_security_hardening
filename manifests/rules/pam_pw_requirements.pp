@@ -162,26 +162,37 @@ class cis_security_hardening::rules::pam_pw_requirements (
             if $pf_path != '' {
               $pf_file = "${pf_path}/${service}"
 
-              exec { "update authselect config enforce for root ${service}":
-                command => "sed -ri 's/^\\s*(password\\s+requisite\\s+pam_pwquality.so\\s+)(.*)$/\\1\\2 enforce-for-root/' ${pf_file}", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
-                path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                onlyif  => "test -z \"\$(grep -E '^\\s*password\\s+requisite\\s+pam_pwquality.so\\s+.*enforce-for-root\\s*.*\$' ${pf_file})\"", #lint:ignore:140chars
-                notify  => Exec['authselect-apply-changes'],
+              Pam { 'target test':
+                ensure    => present,
+                service   => $service,
+                type      => 'password',
+                control   => 'requisite',
+                module    => 'pam_pwquality.so',
+                arguments => ['try_first_pass', "retry=${retry}",'enforce-for-root',"remember=${cis_security_hardening::rules::pam_old_passwords::oldpasswords}"], #lint:ignore:140chars
+                target    => $pf_path,
+                notify    => Exec['authselect-apply-changes'],
               }
 
-              exec { "update authselect config retry ${service}":
-                command => "sed -ri '/pwquality/s/retry=\\S+/retry=${retry}/' ${pf_file}", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
-                path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                onlyif  => "test -z \"\$(grep -E '^\\s*password\\s+requisite\\s+pam_pwquality.so\\s+.*\\s+retry=\\S+\\s*.*\$' ${pf_file})\"", #lint:ignore:140chars
-                notify  => Exec['authselect-apply-changes'],
-              }
+              # exec { "update authselect config enforce for root ${service}":
+              #   command => "sed -ri 's/^\\s*(password\\s+requisite\\s+pam_pwquality.so\\s+)(.*)$/\\1\\2 enforce-for-root/' ${pf_file}", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
+              #   path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+              #   onlyif  => "test -z \"\$(grep -E '^\\s*password\\s+requisite\\s+pam_pwquality.so\\s+.*enforce-for-root\\s*.*\$' ${pf_file})\"", #lint:ignore:140chars
+              #   notify  => Exec['authselect-apply-changes'],
+              # }
 
-              exec { "update authselect config retry (2) ${service}":
-                command => "sed -ri 's/^\\s*(password\\s+requisite\\s+pam_pwquality.so\\s+)(.*)$/\\1\\2 retry=${retry}/' ${pf_file}", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
-                path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                onlyif  => "test -z \"\$(grep -E '^\\s*password\\s+requisite\\s+pam_pwquality.so\\s+.*\\s+retry=\\S+\\s*.*\$' ${pf_file})\"", #lint:ignore:140chars
-                notify  => Exec['authselect-apply-changes'],
-              }
+              # exec { "update authselect config retry ${service}":
+              #   command => "sed -ri '/pwquality/s/retry=\\S+/retry=${retry}/' ${pf_file}", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
+              #   path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+              #   onlyif  => "test -z \"\$(grep -E '^\\s*password\\s+requisite\\s+pam_pwquality.so\\s+.*\\s+retry=\\S+\\s*.*\$' ${pf_file})\"", #lint:ignore:140chars
+              #   notify  => Exec['authselect-apply-changes'],
+              # }
+
+              # exec { "update authselect config retry (2) ${service}":
+              #   command => "sed -ri 's/^\\s*(password\\s+requisite\\s+pam_pwquality.so\\s+)(.*)$/\\1\\2 retry=${retry}/' ${pf_file}", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
+              #   path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+              #   onlyif  => "test -z \"\$(grep -E '^\\s*password\\s+requisite\\s+pam_pwquality.so\\s+.*\\s+retry=\\S+\\s*.*\$' ${pf_file})\"", #lint:ignore:140chars
+              #   notify  => Exec['authselect-apply-changes'],
+              # }
             }
           } elsif($facts['operatingsystemmajrelease'] == '7') {
             Pam { "pam-${service}-requisite":
