@@ -162,7 +162,7 @@ class cis_security_hardening::rules::pam_pw_requirements (
             if $pf_path != '' {
               $pf_file = "${pf_path}/${service}"
 
-              Pam { 'target test':
+              Pam { "authselect configure pw requirements in ${service}":
                 ensure    => present,
                 service   => $service,
                 type      => 'password',

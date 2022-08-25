@@ -51,7 +51,7 @@ class cis_security_hardening::rules::pam_old_passwords (
               $real_arguments = ["remember=${oldpasswords}", 'shadow', 'try_first_pass', 'use_authtok']
             }
 
-            Pam { 'target test':
+            Pam { 'authselect configure password reuse in system-auth':
               ensure    => present,
               service   => 'system-auth',
               type      => 'password',
