@@ -46,9 +46,10 @@ class cis_security_hardening::rules::pam_old_passwords (
             $pf_file = "${pf_path}/system-auth"
 
             if $cis_security_hardening::rules::pam_passwd_sha512::enforce {
-              $real_arguments = ['sha512', "remember=${oldpasswords}", 'shadow', 'try_first_pass', 'use_authtok']
+              $real_arguments = ['sha512', "remember=${oldpasswords}", 'shadow', 'try_first_pass',
+              'use_authtok','{if not "without-nullok":nullok}']
             } else {
-              $real_arguments = ["remember=${oldpasswords}", 'shadow', 'try_first_pass', 'use_authtok']
+              $real_arguments = ["remember=${oldpasswords}", 'shadow', 'try_first_pass', 'use_authtok','{if not "without-nullok":nullok}']
             }
 
             Pam { 'authselect configure password reuse in system-auth':
