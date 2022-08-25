@@ -50,12 +50,10 @@ def facts_redhat(os, distid, release)
 
     avail_features = []
     val = Facter::Core::Execution.exec("/usr/bin/authselect list-features custom/#{authselect['profile']}")
-    opts = val.split("\n").each do |opt|
-      avail_features.push(opt)
-    end
-    pp avail_features
+    avail_features = val.split("\n")
     authselect['available_features'] = avail_features
-    
+    pp authselect['available_features']
+
     cis_security_hardening['authselect'] = authselect
   end
 
