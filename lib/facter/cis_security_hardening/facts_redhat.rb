@@ -48,11 +48,13 @@ def facts_redhat(os, distid, release)
     val = Facter::Core::Execution.exec('grep with-faillock /etc/authselect/authselect.conf')
     authselect['faillock_global'] = check_value_string(val, 'none')
 
-    avail_features = []
     val = Facter::Core::Execution.exec("/usr/bin/authselect list-features custom/#{authselect['profile']}")
-    avail_features = val.split("\n")
-    authselect['available_features'] = avail_features
-    pp authselect['available_features']
+    authselect['available_features'] = if val.nil? || val.empty?
+                                         []
+                                       else
+                                         val.split("\n")
+                                       end
+    pp authselect
 
     cis_security_hardening['authselect'] = authselect
   end
