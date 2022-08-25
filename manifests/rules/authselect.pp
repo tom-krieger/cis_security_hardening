@@ -45,15 +45,27 @@ class cis_security_hardening::rules::authselect (
       returns => [0, 1],
     }
 
+    $available_features = fact('cis_security_hardening.authselect.available_features') ? {
+      undef   => [],
+      default => fact('cis_security_hardening.authselect.available_features'),
+    }
     $profile_options.each |$opt| {
       unless $opt =~ /^[0-9a-zA-Z\-_\.]+$/ {
         fail("Illegal profile option: ${opt}")
       }
 
-      exec { "enable feature ${opt}":
-        command => "authselect enable-feature ${opt}",
-        path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-        onlyif  => ["test -d /etc/authselect/custom/${custom_profile}", "test -z \"$(authselect current | grep '${opt}')\""],
+      if $opt in $available_features {
+        exec { "enable feature ${opt}":
+          command => "authselect enable-feature ${opt}",
+          path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+          onlyif  => ["test -d /etc/authselect/custom/${custom_profile}", "test -z \"$(authselect current | grep '${opt}')\""],
+        }
+      } else {
+        echo { "unavailable feature ${opt}":
+          message "authselect: unavailable feature ${opt}",
+          level    => 'warning',
+          withpath => false,
+        }
       }
     }
   }
