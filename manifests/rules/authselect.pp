@@ -68,5 +68,16 @@ class cis_security_hardening::rules::authselect (
         }
       }
     }
+
+    Pam { 'target test':
+      # password\\s+requisite\\s+pam_pwquality.so\\s+)(.*)$/\\1\\2 enforce-for-root
+      ensure    => present,
+      service   => 'system-auth',
+      type      => 'password',
+      control   => 'requisite',
+      module    => 'pam_pwquality.so',
+      arguments => ['try_first_pass', 'retry=3','enforce-for-root'],
+      target    => '/etc/authselect/custom/cis/system-auth',
+    }
   }
 }
