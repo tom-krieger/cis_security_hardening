@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure system-wide crypto policy is FUTURE or FIPS (Scored)
+#    Ensure system-wide crypto policy is FUTURE or FIPS 
 #
 # The system-wide crypto-policies followed by the crypto core components allow consistently deprecating 
 # and disabling algorithms system-wide.
