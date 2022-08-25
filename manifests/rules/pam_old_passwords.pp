@@ -45,30 +45,12 @@ class cis_security_hardening::rules::pam_old_passwords (
           if $pf_path != '' {
             $pf_file = "${pf_path}/system-auth"
 
-            if $cis_security_hardening::rules::pam_passwd_sha512::enforce {
-              $real_arguments = ['sha512', "remember=${oldpasswords}", 'shadow', 'try_first_pass',
-              'use_authtok','{if not "without-nullok":nullok}']
-            } else {
-              $real_arguments = ["remember=${oldpasswords}", 'shadow', 'try_first_pass', 'use_authtok','{if not "without-nullok":nullok}']
+            exec { 'update authselect config for old passwords':
+              command => "sed -ri 's/^\\s*(password\\s+(requisite|sufficient)\\s+(pam_pwquality\\.so|pam_unix\\.so)\\s+)(.*)(remember=\\S+\\s*)(.*)$/\\1\\4 remember=${oldpasswords} \\6/' ${pf_file} || sed -ri 's/^\\s*(password\\s+(requisite|sufficient)\\s+(pam_pwquality\\.so|pam_unix\\.so)\\s+)(.*)$/\\1\\4 remember=${oldpasswords}/' ${pf_file}", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars lint:ignore:security_password_variable_in_exec
+              path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+              onlyif  => "test -z '\$(grep -E '^\\s*password\\s+(sufficient\\s+pam_unix|requi(red|site)\\s+pam_pwhistory).so\\s+ ([^#]+\\s+)*remember=\\S+\s*.*\$' ${pf_file})'", #lint:ignore:140chars
+              notify  => Exec['authselect-apply-changes'],
             }
-
-            Pam { 'authselect configure password reuse in system-auth':
-              ensure    => present,
-              service   => 'system-auth',
-              type      => 'password',
-              control   => 'sufficient',
-              module    => 'pam_unix.so',
-              arguments => $real_arguments,
-              target    => $pf_file,
-              notify    => Exec['authselect-apply-changes'],
-            }
-
-            # exec { 'update authselect config for old passwords':
-            #   command => "sed -ri 's/^\\s*(password\\s+(requisite|sufficient)\\s+(pam_pwquality\\.so|pam_unix\\.so)\\s+)(.*)(remember=\\S+\\s*)(.*)$/\\1\\4 remember=${oldpasswords} \\6/' ${pf_file} || sed -ri 's/^\\s*(password\\s+(requisite|sufficient)\\s+(pam_pwquality\\.so|pam_unix\\.so)\\s+)(.*)$/\\1\\4 remember=${oldpasswords}/' ${pf_file}", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars lint:ignore:security_password_variable_in_exec
-            #   path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-            #   onlyif  => "test -z '\$(grep -E '^\\s*password\\s+(sufficient\\s+pam_unix|requi(red|site)\\s+pam_pwhistory).so\\s+ ([^#]+\\s+)*remember=\\S+\s*.*\$' ${pf_file})'", #lint:ignore:140chars
-            #   notify  => Exec['authselect-apply-changes'],
-            # }
           }
         } else {
           $sha512 = lookup('cis_security_hardening::rules::pam_passwd_sha512::enforce')

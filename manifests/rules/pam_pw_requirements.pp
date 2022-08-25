@@ -71,6 +71,8 @@ class cis_security_hardening::rules::pam_pw_requirements (
   Integer $difok     = 0,
 ) {
   if $enforce {
+    require cis_security_hardening::rules::pam_old_passwords
+
     $services = [
       'system-auth',
       'password-auth',
