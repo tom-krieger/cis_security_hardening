@@ -169,7 +169,7 @@ class cis_security_hardening::rules::pam_pw_requirements (
                 control   => 'requisite',
                 module    => 'pam_pwquality.so',
                 arguments => ['try_first_pass', "retry=${retry}",'enforce-for-root',"remember=${cis_security_hardening::rules::pam_old_passwords::oldpasswords}"], #lint:ignore:140chars
-                target    => $pf_path,
+                target    => $pf_file,
                 notify    => Exec['authselect-apply-changes'],
               }
 
