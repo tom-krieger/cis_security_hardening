@@ -18,7 +18,6 @@ def facts_redhat(os, distid, release)
     val = Facter::Core::Execution.exec('/usr/bin/authselect current | grep "Profile ID: custom/"')
     authselect['profile'] = if val.nil? || val.empty?
                               'none'
-                            # elsif val.match?(%r{No existing configuration detected})
                             elsif val.include?('No existing configuration detected')
                               'none'
                             else
@@ -32,7 +31,6 @@ def facts_redhat(os, distid, release)
 
     val = Facter::Core::Execution.exec('/usr/bin/authselect current')
     options = []
-    profile_id = ''
     unless val.nil? || val.empty?
       val.split("\n").each do |line|
         next unless line.match?(%r{^\-})
@@ -50,7 +48,7 @@ def facts_redhat(os, distid, release)
     val = Facter::Core::Execution.exec('grep with-faillock /etc/authselect/authselect.conf')
     authselect['faillock_global'] = check_value_string(val, 'none')
     avail_features = []
-    val = Facter::Core::Execution.exec("/usr/bin/authselect list-features #{authselect['profile']}")
+    val = Facter::Core::Execution.exec("/usr/bin/authselect list-features custom/#{authselect['profile']}")
     opts = val.split("\n").each do |opt|
       avail_features.push(opt)
     end
