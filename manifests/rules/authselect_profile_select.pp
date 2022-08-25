@@ -40,9 +40,8 @@ class cis_security_hardening::rules::authselect_profile_select (
     }
 
     $options = join($profile_options, ' ')
-    $cmd = "authselect select custom/${custom_profile} ${options} -f"
     exec { 'select authselect profile':
-      command => $cmd,
+      command => "authselect select custom/${custom_profile} ${options} -f",   #lint:ignore:security_class_or_define_parameter_in_exec
       path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
       onlyif  => ["test -d /etc/authselect/custom/${custom_profile}",
       "test -z \"$(authselect current | grep 'custom/${custom_profile}')\""],
