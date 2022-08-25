@@ -32,20 +32,29 @@ def facts_redhat(os, distid, release)
 
     val = Facter::Core::Execution.exec('/usr/bin/authselect current')
     options = []
+    profile_id = ''
     unless val.nil? || val.empty?
       val.split("\n").each do |line|
         next unless line.match?(%r{^\-})
+
         m = line.match(%r{^\-\s*(?<option>[a-zA-Z0-9\-_]*)})
         unless m.nil?
           options.push(m[:option])
         end
       end
     end
+
     authselect['current_options'] = options
     val = Facter::Core::Execution.exec('/usr/bin/authselect current | grep with-faillock')
     authselect['faillock'] = check_value_string(val, 'none')
     val = Facter::Core::Execution.exec('grep with-faillock /etc/authselect/authselect.conf')
     authselect['faillock_global'] = check_value_string(val, 'none')
+    avail_features = []
+    val = Facter::Core::Execution.exec("/usr/bin/authselect list-features #{authselect['profile']}")
+    opts = val.split("\n").each do |opt|
+      avail_features.push(opt)
+    end
+    
     cis_security_hardening['authselect'] = authselect
   end
 
