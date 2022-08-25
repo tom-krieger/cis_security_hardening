@@ -62,7 +62,7 @@ class cis_security_hardening::rules::authselect (
         }
       } else {
         echo { "unavailable feature ${opt}":
-          message "authselect: unavailable feature ${opt}",
+          message  => "authselect: unavailable feature ${opt}",
           level    => 'warning',
           withpath => false,
         }
