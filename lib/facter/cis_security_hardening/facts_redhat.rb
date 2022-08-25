@@ -49,11 +49,10 @@ def facts_redhat(os, distid, release)
     authselect['faillock_global'] = check_value_string(val, 'none')
     avail_features = []
     val = Facter::Core::Execution.exec("/usr/bin/authselect list-features custom/#{authselect['profile']}")
-    pp val
     opts = val.split("\n").each do |opt|
       avail_features.push(opt)
     end
-    
+    authselect['available_features'] = avail_features
     cis_security_hardening['authselect'] = authselect
   end
 
