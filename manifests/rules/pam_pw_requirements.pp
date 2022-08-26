@@ -182,7 +182,7 @@ class cis_security_hardening::rules::pam_pw_requirements (
               type      => 'password',
               control   => 'requisite',
               module    => 'pam_pwquality.so',
-              arguments => ['try_first_pass', 'retry=3'],
+              arguments => ['try_first_pass', "retry=${retry}"],
             }
           } else {
             Pam { "pam-${service}-requisite":

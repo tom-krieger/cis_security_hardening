@@ -242,7 +242,7 @@ cis_security_hardening::benchmark::rocky::8:
         - restrict_su
     configure_authselect:
       level1:
-      - authselect
+        - authselect
         # - authselect_profile
         # - authselect_profile_select
         # - authselect_with_faillock
