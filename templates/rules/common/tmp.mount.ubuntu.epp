@@ -24,4 +24,4 @@ Type=tmpfs
 Options=mode=1777,strictatime,,<%- if $size > 0 { -%>size=<%= $size %>G,<%- } -%>nosuid,nodev,noexec
 
 [Install]
-WantedBy=local-fs.targe
+WantedBy=local-fs.target
