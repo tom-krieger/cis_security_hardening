@@ -2,6 +2,37 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.7.0
+
+This release changes the authselect compliance rules. If you use Rocky Linux 8 or Alma Linux 8 please change your Hiera configuration. All `authselect` related stuff is consolidated into one rule file. This makes a change in your Hiera configuration necessary. The old configuration looks like this:
+
+```hiera
+cis_security_hardening::rules::authselect_profile::enforce: true
+cis_security_hardening::rules::authselect_profile::custom_profile: cis
+cis_security_hardening::rules::authselect_profile::base_profile: minimal
+cis_security_hardening::rules::authselect_profile_select::enforce: true
+cis_security_hardening::rules::authselect_profile_select::custom_profile: cis
+cis_security_hardening::rules::authselect_profile_select::profile_options:
+  - with-faillock
+  - without-nullok
+  - with-sudo
+cis_security_hardening::rules::authselect_with_faillock::enforce: true
+```
+
+This should be changed into this configuration:
+
+```hiera
+cis_security_hardening::rules::authselect::enforce: true
+cis_security_hardening::rules::authselect::custom_profile: cis
+cis_security_hardening::rules::authselect::base_profile: sssd
+cis_security_hardening::rules::authselect::profile_options:
+  - with-faillock
+  - without-nullok
+  - with-sudo
+```
+
+This release introduces a fact containing all available features for the slected `authselect` profile. nIf you add a profile option not available a waring message is printed and the configured option will be ignored.
+
 ## Release 0.6.2
 
 Use a cronjob to find `suid` and `sgid` binaries to create auditd rules for these binaries.

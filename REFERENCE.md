@@ -88,9 +88,10 @@ audited
 * `cis_security_hardening::rules::auditd_user_emulation`: Ensure actions as another user are always logged
 * `cis_security_hardening::rules::auditd_usermod_use`: Ensure successful and unsuccessful attempts to use the usermod command are recorded
 * `cis_security_hardening::rules::auditd_when_disk_full`: Ensure system is disabled when audit logs are full
-* `cis_security_hardening::rules::authselect_profile`: Create custom authselect profile (Scored)
-* `cis_security_hardening::rules::authselect_profile_select`: Select authselect profile (Scored)
-* `cis_security_hardening::rules::authselect_with_faillock`: Ensure authselect includes with-faillock (Scored)
+* `cis_security_hardening::rules::authselect`: Create custom authselect profile
+* `cis_security_hardening::rules::authselect_profile`: Create custom authselect profile
+* `cis_security_hardening::rules::authselect_profile_select`: Select authselect profile
+* `cis_security_hardening::rules::authselect_with_faillock`: Ensure authselect includes with-faillock
 * `cis_security_hardening::rules::avahi`: Ensure Avahi Server is not enabled
 * `cis_security_hardening::rules::bind`: Ensure DNS Server is not installed
 * `cis_security_hardening::rules::chrony`: Ensure chrony is configured
@@ -103,7 +104,7 @@ audited
 * `cis_security_hardening::rules::crond_service`: Ensure cron daemon is enabled and running
 * `cis_security_hardening::rules::crontab`: Ensure permissions on /etc/crontab are configured
 * `cis_security_hardening::rules::crtl_alt_del`: Ensure the Ctrl-Alt-Delete key sequence is disabled
-* `cis_security_hardening::rules::crypto_policy`: Ensure system-wide crypto policy is FUTURE or FIPS (Scored)
+* `cis_security_hardening::rules::crypto_policy`: Ensure system-wide crypto policy is FUTURE or FIPS
 * `cis_security_hardening::rules::ctrl_alt_del_graphical`: Ensure the graphical user Ctrl-Alt-Delete key sequence is disabled
 * `cis_security_hardening::rules::cups`: Ensure CUPS is not enabled
 * `cis_security_hardening::rules::dev_shm`: Ensure /dev/shm is configured
@@ -251,7 +252,7 @@ audited
 * `cis_security_hardening::rules::sshd_banner`
 * `cis_security_hardening::rules::sshd_ciphers`: Ensure only strong Ciphers are used
 * `cis_security_hardening::rules::sshd_config_permissions`: Ensure permissions on /etc/ssh/sshd_config are configured
-* `cis_security_hardening::rules::sshd_crypto_policy`: Ensure system-wide crypto policy is not over-ridden (Scored)
+* `cis_security_hardening::rules::sshd_crypto_policy`: Ensure system-wide crypto policy is not over-ridden
 * `cis_security_hardening::rules::sshd_empty_passwords`: Ensure SSH PermitEmptyPasswords is disabled
 * `cis_security_hardening::rules::sshd_hostbased_authentication`: Ensure SSH HostbasedAuthentication is disabled
 * `cis_security_hardening::rules::sshd_ignore_rhosts`: Ensure SSH IgnoreRhosts is enabled
@@ -292,7 +293,7 @@ audited
 * `cis_security_hardening::rules::tmp_noexec`: Ensure noexec option set on /tmp partition
 * `cis_security_hardening::rules::tmp_nosuid`: Ensure nosuid option set on /tmp partition
 * `cis_security_hardening::rules::udf`: Ensure mounting of udf filesystems is disabled
-* `cis_security_hardening::rules::ufw_default_deny`: Ensure default deny firewall policy (Scored)
+* `cis_security_hardening::rules::ufw_default_deny`: Ensure default deny firewall policy
 * `cis_security_hardening::rules::ufw_install`: Ensure ufw is installed
 * `cis_security_hardening::rules::ufw_loopback`: Ensure loopback traffic is configured
 * `cis_security_hardening::rules::ufw_open_ports`: Ensure firewall rules exist for all open ports
@@ -318,7 +319,7 @@ Ensure vlock is installed
 * `cis_security_hardening::rules::x11_installed`: Ensure X Window System is not installed
 * `cis_security_hardening::rules::xdmcp_config`: Ensure XDCMP is not enabled
 * `cis_security_hardening::rules::xinetd`: Ensure xinetd is not installed
-* `cis_security_hardening::rules::yum_gpgcheck`: Ensure gpgcheck is globally activated (Scored)
+* `cis_security_hardening::rules::yum_gpgcheck`: Ensure gpgcheck is globally activated
 * `cis_security_hardening::rules::zypper_gpgcheck`: Ensure gpgcheck is globally activated
 
 ### Defined types
