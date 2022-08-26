@@ -13,6 +13,7 @@ describe 'cis_security_hardening::rules::tmp_nodev' do
             mountpoints: {
               '/tmp': {
                 available: '1.85 GiB',
+                device: '/dev/sda4',
               },
             },
           }

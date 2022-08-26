@@ -19,10 +19,16 @@
 class cis_security_hardening::rules::tmp_noexec (
   Boolean $enforce = false,
 ) {
-  if ($enforce) and has_key($facts['mountpoints'], '/tmp') {
-    cis_security_hardening::set_mount_options { '/tmp-noexec':
-      mountpoint   => '/tmp',
-      mountoptions => 'noexec',
+  if ($enforce) {
+    $mps = fact('mountpoints') ? {
+      undef   => {},
+      default => fact('mountpoints')
+    }
+    if has_key($mps, '/tmp') and has_key($mps['/tmp'], 'device') and $mps['/tmp']['device'] != 'tmpfs' {
+      cis_security_hardening::set_mount_options { '/tmp-noexec':
+        mountpoint   => '/tmp',
+        mountoptions => 'noexec',
+      }
     }
   }
 }
