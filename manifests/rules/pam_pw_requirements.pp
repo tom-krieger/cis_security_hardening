@@ -170,7 +170,8 @@ class cis_security_hardening::rules::pam_pw_requirements (
                 type      => 'password',
                 control   => 'requisite',
                 module    => 'pam_pwquality.so',
-                arguments => ['try_first_pass', "retry=${retry}",'enforce-for-root',"remember=${cis_security_hardening::rules::pam_old_passwords::oldpasswords}"], #lint:ignore:140chars
+                arguments => ['try_first_pass', "retry=${retry}",'enforce-for-root','local_users_only',
+                "remember=${cis_security_hardening::rules::pam_old_passwords::oldpasswords}"],
                 target    => $pf_file,
                 notify    => Exec['authselect-apply-changes'],
               }
