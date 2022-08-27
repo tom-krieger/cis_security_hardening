@@ -1,0 +1,6 @@
+{
+  "description": "Check for unconfined services.",
+  "input_method": "environment",
+  "parameters": {
+  }
+}
