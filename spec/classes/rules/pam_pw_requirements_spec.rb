@@ -149,51 +149,30 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                     'match'  => '^#?minclass',
                   )
 
-                is_expected.to contain_exec('update authselect config enforce for root system-auth')
+                is_expected.to contain_pam('authselect configure pw requirements in system-auth')
                   .with(
-                    'command' => "sed -ri 's/^\\s*(password\\s+requisite\\s+pam_pwquality.so\\s+)(.*)$/\\1\\2 enforce-for-root/' /etc/authselect/custom/testprofile/system-auth",
-                    'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                    'onlyif'  => "test -z \"\$(grep -E '^\\s*password\\s+requisite\\s+pam_pwquality.so\\s+.*enforce-for-root\\s*.*\$' /etc/authselect/custom/testprofile/system-auth)\"",
+                    'ensure'    => 'present',
+                    'service'   => 'system-auth',
+                    'type'      => 'password',
+                    'control'   => 'requisite',
+                    'module'    => 'pam_pwquality.so',
+                    'arguments' => ['try_first_pass', 'retry=3', 'enforce-for-root', 'local_users_only', 'remember=5'],
+                    'target'    => '/etc/authselect/custom/testprofile/system-auth',
                   )
                   .that_notifies('Exec[authselect-apply-changes]')
 
-                is_expected.to contain_exec('update authselect config retry system-auth')
+                is_expected.to contain_pam('authselect configure pw requirements in password-auth')
                   .with(
-                    'command' => "sed -ri '/pwquality/s/retry=\\S+/retry=3/' /etc/authselect/custom/testprofile/system-auth",
-                    'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                    'onlyif'  => "test -z \"\$(grep -E '^\\s*password\\s+requisite\\s+pam_pwquality.so\\s+.*\\s+retry=\\S+\\s*.*\$' /etc/authselect/custom/testprofile/system-auth)\"",
+                    'ensure'    => 'present',
+                    'service'   => 'password-auth',
+                    'type'      => 'password',
+                    'control'   => 'requisite',
+                    'module'    => 'pam_pwquality.so',
+                    'arguments' => ['try_first_pass', 'retry=3', 'enforce-for-root', 'local_users_only', 'remember=5'],
+                    'target'    => '/etc/authselect/custom/testprofile/password-auth',
                   )
                   .that_notifies('Exec[authselect-apply-changes]')
 
-                is_expected.to contain_exec('update authselect config retry (2) system-auth')
-                  .with(
-                    'command' => "sed -ri 's/^\\s*(password\\s+requisite\\s+pam_pwquality.so\\s+)(.*)$/\\1\\2 retry=3/' /etc/authselect/custom/testprofile/system-auth",
-                    'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                    'onlyif'  => "test -z \"\$(grep -E '^\\s*password\\s+requisite\\s+pam_pwquality.so\\s+.*\\s+retry=\\S+\\s*.*\$' /etc/authselect/custom/testprofile/system-auth)\"",
-                  )
-
-                is_expected.to contain_exec('update authselect config enforce for root password-auth')
-                  .with(
-                    'command' => "sed -ri 's/^\\s*(password\\s+requisite\\s+pam_pwquality.so\\s+)(.*)$/\\1\\2 enforce-for-root/' /etc/authselect/custom/testprofile/password-auth",
-                    'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                    'onlyif'  => "test -z \"\$(grep -E '^\\s*password\\s+requisite\\s+pam_pwquality.so\\s+.*enforce-for-root\\s*.*\$' /etc/authselect/custom/testprofile/password-auth)\"",
-                  )
-                  .that_notifies('Exec[authselect-apply-changes]')
-
-                is_expected.to contain_exec('update authselect config retry password-auth')
-                  .with(
-                    'command' => "sed -ri '/pwquality/s/retry=\\S+/retry=3/' /etc/authselect/custom/testprofile/password-auth",
-                    'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                    'onlyif'  => "test -z \"\$(grep -E '^\\s*password\\s+requisite\\s+pam_pwquality.so\\s+.*\\s+retry=\\S+\\s*.*\$' /etc/authselect/custom/testprofile/password-auth)\"",
-                  )
-                  .that_notifies('Exec[authselect-apply-changes]')
-
-                is_expected.to contain_exec('update authselect config retry (2) password-auth')
-                  .with(
-                    'command' => "sed -ri 's/^\\s*(password\\s+requisite\\s+pam_pwquality.so\\s+)(.*)$/\\1\\2 retry=3/' /etc/authselect/custom/testprofile/password-auth",
-                    'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                    'onlyif'  => "test -z \"\$(grep -E '^\\s*password\\s+requisite\\s+pam_pwquality.so\\s+.*\\s+retry=\\S+\\s*.*\$' /etc/authselect/custom/testprofile/password-auth)\"",
-                  )
               end
 
             elsif os_facts[:osfamily].casecmp('debian').zero?

@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure default deny firewall policy (Scored)
+#    Ensure default deny firewall policy 
 #
 # A default deny policy on connections ensures that any unconfigured network usage will be rejected.
 #

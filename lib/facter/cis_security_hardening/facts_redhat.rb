@@ -18,7 +18,6 @@ def facts_redhat(os, distid, release)
     val = Facter::Core::Execution.exec('/usr/bin/authselect current | grep "Profile ID: custom/"')
     authselect['profile'] = if val.nil? || val.empty?
                               'none'
-                            # elsif val.match?(%r{No existing configuration detected})
                             elsif val.include?('No existing configuration detected')
                               'none'
                             else
@@ -35,17 +34,27 @@ def facts_redhat(os, distid, release)
     unless val.nil? || val.empty?
       val.split("\n").each do |line|
         next unless line.match?(%r{^\-})
+
         m = line.match(%r{^\-\s*(?<option>[a-zA-Z0-9\-_]*)})
         unless m.nil?
           options.push(m[:option])
         end
       end
     end
+
     authselect['current_options'] = options
     val = Facter::Core::Execution.exec('/usr/bin/authselect current | grep with-faillock')
     authselect['faillock'] = check_value_string(val, 'none')
     val = Facter::Core::Execution.exec('grep with-faillock /etc/authselect/authselect.conf')
     authselect['faillock_global'] = check_value_string(val, 'none')
+
+    val = Facter::Core::Execution.exec("/usr/bin/authselect list-features custom/#{authselect['profile']}")
+    authselect['available_features'] = if val.nil? || val.empty?
+                                         []
+                                       else
+                                         val.split("\n")
+                                       end
+
     cis_security_hardening['authselect'] = authselect
   end
 
@@ -135,43 +144,6 @@ def facts_redhat(os, distid, release)
   cis_security_hardening['iptables'] = read_iptables_rules('4')
   if release > '6'
     cis_security_hardening['ip6tables'] = read_iptables_rules('6')
-  end
-
-  # get authselect information
-  if File.exist?('/usr/bin/authselect')
-    authselect = {}
-    val = Facter::Core::Execution.exec('/usr/bin/authselect current | grep "Profile ID: custom/"')
-    authselect['profile'] = if val.nil? || val.empty?
-                              'none'
-                            # elsif val.match?(%r{No existing configuration detected})
-                            elsif val.include?('No existing configuration detected')
-                              'none'
-                            else
-                              m = val.match(%r{Profile ID: custom\/(?<profile>\w*)})
-                              if m.nil?
-                                'none'
-                              else
-                                m[:profile]
-                              end
-                            end
-
-    val = Facter::Core::Execution.exec('/usr/bin/authselect current')
-    options = []
-    unless val.nil? || val.empty?
-      val.split("\n").each do |line|
-        next unless line.match?(%r{^\-})
-        m = line.match(%r{^\-\s*(?<option>[a-zA-Z0-9\-_]*)})
-        unless m.nil?
-          options.push(m[:option])
-        end
-      end
-    end
-    authselect['current_options'] = options
-    val = Facter::Core::Execution.exec('/usr/bin/authselect current | grep with-faillock')
-    authselect['faillock'] = check_value_string(val, 'none')
-    val = Facter::Core::Execution.exec('grep with-faillock /etc/authselect/authselect.conf')
-    authselect['faillock_global'] = check_value_string(val, 'none')
-    cis_security_hardening['authselect'] = authselect
   end
 
   # collect accounts data

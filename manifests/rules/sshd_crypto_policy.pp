@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure system-wide crypto policy is not over-ridden (Scored)
+#    Ensure system-wide crypto policy is not over-ridden 
 #
 # System-wide Crypto policy can be over-ridden or opted out of for openSSH.
 #

@@ -1,5 +1,5 @@
 # @summary 
-#    Ensure gpgcheck is globally activated (Scored)
+#    Ensure gpgcheck is globally activated 
 #
 # The gpgcheck option, found in the main section of the /etc/yum.conf and individual /etc/yum/repos.d/* 
 # files determines if an RPM package's signature is checked prior to its installation.

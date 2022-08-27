@@ -34,7 +34,15 @@ class cis_security_hardening::rules::pam_old_passwords (
 
     case $facts['osfamily'].downcase() {
       'redhat': {
+        $sha512 = lookup('cis_security_hardening::rules::pam_passwd_sha512::enforce')
+        if $sha512 {
+          $real_arguments = ['sha512', "remember=${oldpasswords}", 'shadow', 'try_first_pass', 'use_authtok']
+        } else {
+          $real_arguments = ["remember=${oldpasswords}", 'shadow', 'try_first_pass', 'use_authtok']
+        }
+
         $profile = fact('cis_security_hardening.authselect.profile')
+
         if $profile != undef and $profile != 'none' {
           $pf_path = "/etc/authselect/custom/${profile}"
         } else {
@@ -53,13 +61,6 @@ class cis_security_hardening::rules::pam_old_passwords (
             }
           }
         } else {
-          $sha512 = lookup('cis_security_hardening::rules::pam_passwd_sha512::enforce')
-          if $sha512 {
-            $real_arguments = ['sha512', "remember=${oldpasswords}", 'shadow', 'try_first_pass', 'use_authtok']
-          } else {
-            $real_arguments = ["remember=${oldpasswords}", 'shadow', 'try_first_pass', 'use_authtok']
-          }
-
           $services.each | $service | {
             Pam { "pam-${service}-sufficient":
               ensure    => present,
@@ -70,6 +71,18 @@ class cis_security_hardening::rules::pam_old_passwords (
               arguments => $real_arguments,
               position  => 'after *[type="password" and module="pam_unix.so" and control="requisite"]',
             }
+          }
+        }
+        if ($facts['operatingsystem'].downcase() == 'almalinux' or $facts['operatingsystem'].downcase() == 'rocky') and (!empty($pf_path)) {
+          Pam { 'pam-_unix_sufficient':
+            ensure    => present,
+            service   => 'system-auth',
+            type      => 'password',
+            control   => 'sufficient',
+            module    => 'pam_unix.so',
+            arguments => $real_arguments,
+            target    => $pf_file,
+            notify    => Exec['authselect-apply-changes'],
           }
         }
       }
