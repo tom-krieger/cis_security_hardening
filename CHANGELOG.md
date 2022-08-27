@@ -4,34 +4,40 @@ All notable changes to this project will be documented in this file.
 
 ## Release 0.7.0
 
-This release changes the authselect compliance rules. If you use Rocky Linux 8 or Alma Linux 8 please change your Hiera configuration. All `authselect` related stuff is consolidated into one rule file. This makes a change in your Hiera configuration necessary. The old configuration looks like this:
+> This release contains some breaking changes to how `authselect` is configured. Please check your configuration and test before using in production environments.
 
-```hiera
-cis_security_hardening::rules::authselect_profile::enforce: true
-cis_security_hardening::rules::authselect_profile::custom_profile: cis
-cis_security_hardening::rules::authselect_profile::base_profile: minimal
-cis_security_hardening::rules::authselect_profile_select::enforce: true
-cis_security_hardening::rules::authselect_profile_select::custom_profile: cis
-cis_security_hardening::rules::authselect_profile_select::profile_options:
-  - with-faillock
-  - without-nullok
-  - with-sudo
-cis_security_hardening::rules::authselect_with_faillock::enforce: true
-```
+Please review the following changes before updating to this version module:
 
-This should be changed into this configuration:
+* This release changes the authselect compliance rules. If you use Rocky Linux 8 or Alma Linux 8 please change your Hiera configuration. All `authselect` related stuff is consolidated into one rule file. This makes a change in your Hiera configuration necessary. The old configuration looks like this:
 
-```hiera
-cis_security_hardening::rules::authselect::enforce: true
-cis_security_hardening::rules::authselect::custom_profile: cis
-cis_security_hardening::rules::authselect::base_profile: sssd
-cis_security_hardening::rules::authselect::profile_options:
-  - with-faillock
-  - without-nullok
-  - with-sudo
-```
+  ```hiera
+  cis_security_hardening::rules::authselect_profile::enforce: true
+  cis_security_hardening::rules::authselect_profile::custom_profile: cis
+  cis_security_hardening::rules::authselect_profile::base_profile: minimal
+  cis_security_hardening::rules::authselect_profile_select::enforce: true
+  cis_security_hardening::rules::authselect_profile_select::custom_profile: cis
+  cis_security_hardening::rules::authselect_profile_select::profile_options:
+    - with-faillock
+    - without-nullok
+    - with-sudo
+  cis_security_hardening::rules::authselect_with_faillock::enforce: true
+  ```
 
-This release introduces a fact containing all available features for the slected `authselect` profile. nIf you add a profile option not available a waring message is printed and the configured option will be ignored.
+  This should be changed into this configuration:
+
+  ```hiera
+  cis_security_hardening::rules::authselect::enforce: true
+  cis_security_hardening::rules::authselect::custom_profile: cis
+  cis_security_hardening::rules::authselect::base_profile: sssd
+  cis_security_hardening::rules::authselect::profile_options:
+    - with-faillock
+    - without-nullok
+    - with-sudo
+  ```
+
+* This release introduces a fact containing all available features for the slected `authselect` profile. nIf you add a profile option not available a waring message is printed and the configured option will be ignored.
+
+* The PAM configuration rules have been changed to work with `authselect`.
 
 ## Release 0.6.2
 

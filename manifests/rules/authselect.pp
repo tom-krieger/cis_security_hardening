@@ -16,6 +16,9 @@
 # @param base_profile
 #    Base profile to use for custom profile creation
 #
+# @param profile_options
+#    The authsselect feartures to enable.
+#
 # @example
 #   class { 'cis_security_hardening::rules::authselect_profile':   
 #             enforce => true,
