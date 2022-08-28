@@ -63,24 +63,34 @@ class cis_security_hardening::rules::pam_lockout (
         }
 
         if ($facts['operatingsystemmajrelease'] == '7') {
-          Pam { 'pam-auth-faillock-required':
-            ensure    => present,
-            service   => 'system-auth',
-            type      => 'auth',
-            control   => 'required',
-            module    => 'pam_faillock.so',
-            arguments => ['preauth', 'silent', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}"],
-            position  => 'after *[type="auth" and module="pam_env.so"]',
-          }
+          $services.each | $service | {
+            Pam { "pam-auth-faillock-required-${service}":
+              ensure    => present,
+              service   => $service,
+              type      => 'auth',
+              control   => 'required',
+              module    => 'pam_faillock.so',
+              arguments => ['preauth', 'silent', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}"],
+              position  => 'after *[type="auth" and module="pam_env.so"]',
+            }
 
-          Pam { 'pam-auth-faillock-required-2':
-            ensure    => present,
-            service   => 'system-auth',
-            type      => 'auth',
-            control   => '[default=die]',
-            module    => 'pam_faillock.so',
-            arguments => ['authfail', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}"],
-            position  => 'after *[type="auth" and module="pam_unix.so"]',
+            Pam { "pam-auth-faillock-required-2-${service}":
+              ensure    => present,
+              service   => $service,
+              type      => 'auth',
+              control   => '[default=die]',
+              module    => 'pam_faillock.so',
+              arguments => ['authfail', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}"],
+              position  => 'after *[type="auth" and module="pam_unix.so"]',
+            }
+
+            Pam { "account-faillock-${service}":
+              ensure  => present,
+              service => $service,
+              type    => 'account',
+              control => 'required',
+              module  => 'pam_faillock.so',
+            }
           }
           # exec { 'configure faillock':
           #   command => "authconfig --faillockargs=\"preauth silent audit deny=${attempts} unlock_time=${lockouttime}\" --enablefaillock --updateall", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
