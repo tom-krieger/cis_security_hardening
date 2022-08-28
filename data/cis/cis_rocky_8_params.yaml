@@ -68,7 +68,7 @@ cis_security_hardening::rules::enable_aslr::enforce: true
 cis_security_hardening::rules::selinux::enforce: false
 cis_security_hardening::rules::selinux_bootloader::enforce: true
 cis_security_hardening::rules::selinux_policy::enforce: true
-cis_security_hardening::rules::selinux_policy::selinux_polixy: targeted
+cis_security_hardening::rules::selinux_policy::selinux_policy: targeted
 cis_security_hardening::rules::selinux_policy::auto_reboot: true
 cis_security_hardening::rules::selinux_state::enforce: true
 cis_security_hardening::rules::selinux_state::state: permissive

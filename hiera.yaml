@@ -10,6 +10,10 @@ hierarchy:
     paths:
       - "cis/cis_centos_7_params.yaml"
       - "cis/cis_centos_7_rules.yaml"
+  - name: "Redhat 7 Benchmark"
+    paths:
+      - "cis/cis_redhat_7_params.yaml"
+      - "cis/cis_redhat_7_rules.yaml"
   - name: "AlmaLinux 8 Benchmark"
     paths:
       - "cis/cis_almalinux_8_params.yaml"
@@ -18,6 +22,10 @@ hierarchy:
     paths:
       - "cis/cis_rocky_8_params.yaml"
       - "cis/cis_rocky_8_rules.yaml"
+  - name: "Redhat 8 Benchmark"
+    paths:
+      - "cis/cis_redhat_8_params.yaml"
+      - "cis/cis_redhat_8_rules.yaml"
   - name: "Ubuntu 18.04 Benchmark"
     paths:
       - "cis/cis_ubuntu_18.04_params.yaml"

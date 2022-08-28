@@ -310,6 +310,8 @@ cis_security_hardening::rules::journald_compress::enforce: true
 cis_security_hardening::rules::journald_persistent::enforce: true
 cis_security_hardening::rules::logfile_permissions::enforce: true
 cis_security_hardening::rules::logrotate::enforce: true
+cis_security_hardening::rules::logrotate_configuration::enforce: true
+cis_security_hardening::rules::logrotate_configuration::permission: '0640'
 
 cis_security_hardening::rules::crond_service::enforce: true
 cis_security_hardening::rules::crond_service::uninstall_cron: false
@@ -426,5 +428,3 @@ cis_security_hardening::rules::passwd_bak_perms::enforce: true
 cis_security_hardening::rules::group_bak_perms::enforce: true
 cis_security_hardening::rules::shadow_bak_perms::enforce: true
 cis_security_hardening::rules::gshadow_bak_perms::enforce: true
-
-cis_security_hardening::rules::shadowed_passwords::enforce: true

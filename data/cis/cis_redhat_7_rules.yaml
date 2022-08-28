@@ -1,5 +1,5 @@
 ---
-cis_security_hardening::benchmark::centos::7:
+cis_security_hardening::benchmark::redhat::7:
   bundles:
     filesystem_config:
       level1:
@@ -26,11 +26,7 @@ cis_security_hardening::benchmark::centos::7:
     software_updates:
       level1:
         - yum_gpgcheck
-    sudo_config:
-      level1:
-        - sudo_installed
-        - sudo_use_pty
-        - sudo_log
+        - rhnsd
     filesystem_integrety:
       level1:
         - aide_installed
@@ -72,8 +68,6 @@ cis_security_hardening::benchmark::centos::7:
         - cups
         - dhcp
         - ldapd
-        - nfs_utils
-        - rpcbind
         - bind
         - vsftp
         - httpd
@@ -81,10 +75,12 @@ cis_security_hardening::benchmark::centos::7:
         - samba
         - squid
         - net_snmp
-        - mta_local
-        - rsyncd
         - nis
         - telnet_server
+        - mta_local
+        - nfs_utils
+        - rpcbind
+        - rsyncd
     service_clients:
       level1:
         - nis_client
@@ -195,6 +191,11 @@ cis_security_hardening::benchmark::centos::7:
         - etc_crond
         - cron_restrict
         - at_restrict
+    sudo_config:
+      level1:
+        - sudo_installed
+        - sudo_use_pty
+        - sudo_log
     configure_ssh:
       level1:
         - sshd_config_permissions

@@ -26,7 +26,7 @@ class cis_security_hardening::rules::gnome_gdm (
   $gnome_gdm = fact('cis_security_hardening.gnome_gdm')
   if  $enforce and $gnome_gdm != undef and $gnome_gdm {
     case $facts['operatingsystem'].downcase() {
-      'centos', 'almalinux', 'rocky': {
+      'redhat','centos', 'almalinux', 'rocky': {
         file { 'gdm':
           ensure  => file,
           path    => '/etc/dconf/profile/gdm',
@@ -44,6 +44,20 @@ class cis_security_hardening::rules::gnome_gdm (
           ensure  => file,
           path    => '/etc/dconf/db/gdm.d/01-banner-message',
           content => "[org/gnome/login-screen]\nbanner-message-enable=true\nbanner-message-text=\'Authorized uses only. All activity may be monitored and reported.\'", #lint:ignore:140chars
+          owner   => 'root',
+          group   => 'root',
+          mode    => '0644',
+          require => File['gdm'],
+          notify  => Exec['dconf-gdm-exec'],
+        }
+
+        file { 'login-screen':
+          ensure  => file,
+          path    => '/etc/dconf/db/gdm.d/00-login-screen',
+          content => "[org/gnome/login-screen]\ndisable-user-list=true",
+          owner   => 'root',
+          group   => 'root',
+          mode    => '0644',
           require => File['gdm'],
           notify  => Exec['dconf-gdm-exec'],
         }

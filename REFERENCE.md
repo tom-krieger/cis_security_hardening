@@ -219,6 +219,7 @@ audited
 * `cis_security_hardening::rules::pki_certs_validation`: Ensure certificates are validated by constructing a certification path to an accepted trust anchor
 * `cis_security_hardening::rules::restrict_core_dumps`: A core dump is the memory of an executable program. It is generally used to determine why a program aborted. It can also be used to glean con
 * `cis_security_hardening::rules::restrict_su`: Ensure access to the su command is restricted
+* `cis_security_hardening::rules::rhnsd`: Disable the rhnsd Daemon
 * `cis_security_hardening::rules::root_gid`: Ensure default group for the root account is GID 0
 * `cis_security_hardening::rules::rpcbind`: Ensure rpcbind is not installed or the rpcbind services are masked
 * `cis_security_hardening::rules::rsh_client`: Ensure rsh client is not installed
@@ -358,6 +359,7 @@ Ensure vlock is installed
 * [`check_stig_cert_fingerprints`](#check_stig_cert_fingerprints): Check if all certificates match DoD fingerprints.
 * [`check_system_accounts_secured`](#check_system_accounts_secured): Check system accounts are secured.
 * [`check_uid_0_files`](#check_uid_0_files): Check root is the only UID 0 account.
+* [`check_unconfines_services`](#check_unconfines_services): Check for unconfined services.
 * [`check_user_home_dirs_exist`](#check_user_home_dirs_exist): Check all users' home directories exist.
 * [`check_user_last_passwd_in_past`](#check_user_last_passwd_in_past): Check all users last password change date is in the past.
 * [`check_users_dot_files`](#check_users_dot_files): Check users' dot files are not group or world writable.
@@ -1119,6 +1121,12 @@ Check system accounts are secured.
 ### <a name="check_uid_0_files"></a>`check_uid_0_files`
 
 Check root is the only UID 0 account.
+
+**Supports noop?** false
+
+### <a name="check_unconfines_services"></a>`check_unconfines_services`
+
+Check for unconfined services.
 
 **Supports noop?** false
 

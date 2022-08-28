@@ -59,6 +59,7 @@ cis_security_hardening::benchmark::centos::7:
         - issue_perms
         - issue_net_perms
         - gnome_gdm
+        - xdmcp_config
     inetd_services:
       level1:
         - xinetd
@@ -94,6 +95,7 @@ cis_security_hardening::benchmark::centos::7:
     unused_network_protocols:
       level2:
         - disable_ipv6
+        - disable_wireless
     network_parameters_host:
       level1:
         - disable_ip_forwarding
@@ -113,24 +115,24 @@ cis_security_hardening::benchmark::centos::7:
       level2:
         - disable_dccp
         - disable_sctp
-    configure_firewalld:
-      level1:
-        - firewalld_install
-        - firewalld_service
-        - firewalld_default_zone
-        - firewalld_interfaces
-        - firewalld_ports_services
-    configure_nftables:
-      level1:
-        - nftables_install
-        - nftables_flush_iptables
-        - nftables_table
-        - nftables_base_chains
-        - nftables_loopback
-        - nftables_outbound_established
-        - nftables_default_deny
-        - nftables_service
-        - nftables_persistence
+    # configure_firewalld:
+    #   level1:
+    #     - firewalld_install
+    #     - firewalld_service
+    #     - firewalld_default_zone
+    #     - firewalld_interfaces
+    #     - firewalld_ports_services
+    # configure_nftables:
+    #   level1:
+    #     - nftables_install
+    #     - nftables_flush_iptables
+    #     - nftables_table
+    #     - nftables_base_chains
+    #     - nftables_loopback
+    #     - nftables_outbound_established
+    #     - nftables_default_deny
+    #     - nftables_service
+    #     - nftables_persistence
     configure_iptables:
       level1:
         - iptables_install

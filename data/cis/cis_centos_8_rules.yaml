@@ -1,36 +1,40 @@
 ---
-cis_security_hardening::benchmark::centos::7:
+cis_security_hardening::benchmark::centos::8:
   bundles:
     filesystem_config:
       level1:
         - cramfs
+        - squashfs
         - udf
         - tmp_filesystem
-        - tmp_noexec
         - tmp_nodev
         - tmp_nosuid
+        - tmp_noexec
+        - var_nodev
+        - var_noexec
+        - var_nosuid
+        - var_tmp_nodev
+        - var_tmp_nosuid
+        - var_tmp_noexec
+        - var_log_nodev
+        - var_log_noexec
+        - var_log_nosuid
+        - var_log_audit_nodev
+        - var_log_audit_noexec
+        - var_log_audit_nosuid
+        - home_nodev
+        - home_nosuid
+        - home_usrquota
+        - home_grpquota
         - dev_shm
         - dev_shm_noexec
         - dev_shm_nodev
         - dev_shm_nosuid
-        - var_tmp_noexec
-        - var_tmp_nodev
-        - var_tmp_nosuid
-        - home_nodev
-        - sticky_world_writeable_files
         - disable_automount
         - disable_usb_storage
-      level2:
-        - squashfs
-        - fat
     software_updates:
       level1:
         - yum_gpgcheck
-    sudo_config:
-      level1:
-        - sudo_installed
-        - sudo_use_pty
-        - sudo_log
     filesystem_integrety:
       level1:
         - aide_installed
@@ -44,7 +48,6 @@ cis_security_hardening::benchmark::centos::7:
       level1:
         - restrict_core_dumps
         - enable_aslr
-        - disable_prelink
     mandatory_access_control:
       level1:
         - selinux
@@ -59,43 +62,46 @@ cis_security_hardening::benchmark::centos::7:
         - issue_perms
         - issue_net_perms
         - gnome_gdm
+        - gnome_gdm_package
+        - gdm_auto_mount
         - xdmcp_config
-    inetd_services:
-      level1:
-        - xinetd
-    special_purpose_services:
+        - crypto_policy
+    time_synchronization:
       level1:
         - chrony
         - ntpd
+    special_purpose_services:
+      level1:
+        - xinetd
         - x11_installed
-        - avahi
-        - cups
-        - dhcp
-        - ldapd
-        - nfs_utils
-        - rpcbind
-        - bind
-        - vsftp
-        - httpd
-        - dovecot
-        - samba
-        - squid
-        - net_snmp
-        - mta_local
         - rsyncd
+        - avahi
+        - net_snmp
+        - squid
+        - samba
+        - dovecot
+        - httpd
+        - vsftp
+        - ftp
+        - bind
+        - nfs
+        - rpcbind
+        - ldapd
+        - dhcp
+        - cups
         - nis
+        - mta_local
+        - tftp_server
         - telnet_server
+        - nfs_utils
     service_clients:
       level1:
         - nis_client
-        - rsh_client
-        - talk_client
         - telnet_client
         - ldap_client
-    unused_network_protocols:
-      level2:
-        - disable_ipv6
-        - disable_wireless
+        - rsh_client
+        - talk_client
+        - tftp_client
     network_parameters_host:
       level1:
         - disable_ip_forwarding
@@ -113,15 +119,9 @@ cis_security_hardening::benchmark::centos::7:
         - ipv6_router_advertisements
     uncommon_network_protocols:
       level2:
-        - disable_dccp
-        - disable_sctp
-    configure_firewalld:
-      level1:
-        - firewalld_install
-        - firewalld_service
-        - firewalld_default_zone
-        - firewalld_interfaces
-        - firewalld_ports_services
+          - disable_dccp
+          - disable_sctp
+          - disable_wireless
     configure_nftables:
       level1:
         - nftables_install
@@ -133,6 +133,13 @@ cis_security_hardening::benchmark::centos::7:
         - nftables_default_deny
         - nftables_service
         - nftables_persistence
+    configure_firewalld:
+      level1:
+        - firewalld_install
+        - firewalld_service
+        - firewalld_default_zone
+        - firewalld_interfaces
+        - firewalld_ports_services
     configure_iptables:
       level1:
         - iptables_install
@@ -146,30 +153,39 @@ cis_security_hardening::benchmark::centos::7:
         - ip6tables_loopback
         - ip6tables_outbound_established
         - ip6tables_open_ports
+    unused_network_protocols:
+      level2:
+        - disable_ipv6
     configure_accounting:
       level2:
         - auditd_init
         - auditd_package
         - auditd_service
         - auditd_process
+        - auditd_backlog_limit
         - auditd_max_log_file
         - auditd_max_log_file_action
         - auditd_when_disk_full
-        - auditd_backlog_limit
-        - auditd_time_change
-        - auditd_identity
-        - auditd_system_locale
-        - auditd_mac_policy
+        - auditd_scope
+        - auditd_user_emulation
         - auditd_logins
         - auditd_session_logins
+        - auditd_time_change
+        - auditd_mac_policy
+        - auditd_system_locale
         - auditd_perm_mod
         - auditd_access
-        - auditd_privileged_commands
+        - auditd_identity
         - auditd_mounts
+        - auditd_privileged_commands
         - auditd_delete
-        - auditd_scope
-        - auditd_actions
         - auditd_modules
+        - auditd_actions
+        - auditd_chcon_use
+        - auditd_setfacl_use
+        - auditd_chacl_use
+        - auditd_usermod_use
+        - auditd_kernel_modules
         - auditd_immutable
     configure_logging:
       level1:
@@ -198,9 +214,9 @@ cis_security_hardening::benchmark::centos::7:
     configure_ssh:
       level1:
         - sshd_config_permissions
+        - sshd_limit_access
         - sshd_private_keys
         - sshd_public_keys
-        - sshd_limit_access
         - sshd_loglevel
         - sshd_x11_forward
         - sshd_max_auth_tries
@@ -209,9 +225,6 @@ cis_security_hardening::benchmark::centos::7:
         - sshd_root_login
         - sshd_empty_passwords
         - sshd_user_environment
-        - sshd_ciphers
-        - sshd_macs
-        - sshd_kex
         - sshd_timeouts
         - sshd_login_gracetime
         - sshd_banner
@@ -219,12 +232,23 @@ cis_security_hardening::benchmark::centos::7:
         - sshd_tcp_forwarding
         - sshd_max_startups
         - sshd_max_sessions
+        - sshd_crypto_policy
+    configure_privilege_escalation:
+      level1:
+        - sudo_installed
+        - sudo_use_pty
+        - sudo_log
+        - sudo_timeout
+        - restrict_su
+    configure_authselect:
+      level1:
+        - authselect
     configure_pam:
       level1:
         - pam_pw_requirements
         - pam_lockout
-        - pam_passwd_sha512
         - pam_old_passwords
+        - pam_passwd_sha512
     configure_user_accounts:
       level1:
         - passwd_expiration
@@ -232,10 +256,9 @@ cis_security_hardening::benchmark::centos::7:
         - passwd_warn_days
         - passwd_inactive_days
         - shell_nologin
-        - root_gid
         - timeout_setting
+        - root_gid
         - umask_setting
-        - restrict_su
     system_file_permissions:
       level1:
         - passwd_perms
@@ -246,7 +269,3 @@ cis_security_hardening::benchmark::centos::7:
         - group_bak_perms
         - shadow_bak_perms
         - gshadow_bak_perms
-    configure_user_groups:
-      level1:
-        - shadowed_passwords
-

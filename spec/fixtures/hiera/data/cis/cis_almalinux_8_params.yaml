@@ -68,7 +68,7 @@ cis_security_hardening::rules::enable_aslr::enforce: true
 cis_security_hardening::rules::selinux::enforce: false
 cis_security_hardening::rules::selinux_bootloader::enforce: true
 cis_security_hardening::rules::selinux_policy::enforce: true
-cis_security_hardening::rules::selinux_policy::selinux_polixy: targeted
+cis_security_hardening::rules::selinux_policy::selinux_policy: targeted
 cis_security_hardening::rules::selinux_policy::auto_reboot: true
 cis_security_hardening::rules::selinux_state::enforce: true
 cis_security_hardening::rules::selinux_state::state: permissive
@@ -194,7 +194,7 @@ cis_security_hardening::rules::nftables_table::enforce: false
 cis_security_hardening::rules::nftables_table::nftables_default_table: default
 cis_security_hardening::rules::nftables_base_chains::enforce: false
 cis_security_hardening::rules::nftables_base_chains::table: default
-cis_security_hardening::rules::nftables_loopback::enforce: falstruee
+cis_security_hardening::rules::nftables_loopback::enforce: false
 cis_security_hardening::rules::nftables_loopback::table: default
 cis_security_hardening::rules::nftables_outbound_established::enforce: false
 cis_security_hardening::rules::nftables_outbound_established::table: default

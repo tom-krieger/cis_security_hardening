@@ -58,7 +58,7 @@ cis_security_hardening::rules::disable_prelink::enforce: true
 cis_security_hardening::rules::selinux::enforce: false
 cis_security_hardening::rules::selinux_bootloader::enforce: true
 cis_security_hardening::rules::selinux_policy::enforce: true
-cis_security_hardening::rules::selinux_policy::selinux_polixy: targeted
+cis_security_hardening::rules::selinux_policy::selinux_policy: targeted
 cis_security_hardening::rules::selinux_policy::auto_reboot: true
 cis_security_hardening::rules::selinux_state::enforce: true
 cis_security_hardening::rules::selinux_state::state: permissive
@@ -89,6 +89,7 @@ cis_security_hardening::rules::motd_perms::content: |
 cis_security_hardening::rules::issue_perms::enforce: true
 cis_security_hardening::rules::issue_net_perms::enforce: true
 cis_security_hardening::rules::gnome_gdm::enforce: true
+cis_security_hardening::rules::xdmcp_config::enforce: true
 
 cis_security_hardening::rules::xinetd::enforce: true
 

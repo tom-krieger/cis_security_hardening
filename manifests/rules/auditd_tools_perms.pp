@@ -46,7 +46,6 @@ class cis_security_hardening::rules::auditd_tools_perms (
 ) {
   if $enforce {
     $tools.each |$tool| {
-
       file { $tool:
         ensure => file,
         owner  => $user,

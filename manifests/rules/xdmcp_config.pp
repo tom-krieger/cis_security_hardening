@@ -27,8 +27,11 @@ class cis_security_hardening::rules::xdmcp_config (
 
   if  $enforce and $xdcmp != undef and $xdcmp {
     $file = $facts['os']['name'].downcase() ? {
-      'rocky' => '/etc/gdm/custom.conf',
-      default => '/etc/gdm3/custom.conf',
+      'rocky'     => '/etc/gdm/custom.conf',
+      'almalinux' => '/etc/gdm/custom.conf',
+      'redhat'    => '/etc/gdm/custom.conf',
+      'centos'    => '/etc/gdm/custom.conf',
+      default     => '/etc/gdm3/custom.conf',
     }
 
     file_line { 'remove enable':

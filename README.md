@@ -37,7 +37,7 @@ A security baseline describes how servers in your environment are setup with a s
 
 A security baseline can be based on a CIS benchmark but can include more rules specific to your environment. But depending on server classes not all rules of a CIS benchmark will be used. Sometimes the benchmarks contain different ways to achieve a goal, e.g. with RedHat 8 you can use firewalld, iptables or nftables to setup a firewall. Surely it makes no sense to have all of them running in parallel. So it is your task to define a security baseline to define which tool to use or which settings to use.
 
-> For this module level 1 and level 2 server tests from the CIS benchmarks below are taken into account. For the STIG benchmarks there's a third level `stig` available as STIG benchmarks are more strict than level 2.
+> For this module level 1 and level 2 server tests from the CIS benchmarks below are taken into account. For the STIG benchmarks there's a third level `stig` available as STIG benchmarks are more strict than level 2 is.
 
 ## CIS Benchmark Reference
 
@@ -47,12 +47,12 @@ The code of this security hardening module is based on the following CIS Benchma
 |--------------|--------------------------------------------------------------|---------|------------|
 | Suse SLES 12 | CIS SUSE Linux Enterprise 12 Benchmark                       | 3.1.0   | 01-24-2022 |
 | Suse SLES 15 | CIS SUSE Linux Enterprise 15 Benchmark                       | 1.1.1   | 09-17-2021 |
-| RedHat 7     | CIS Red Hat Enterprise Linux 7 Benchmark                     | 2.2.0   | 12-27-2017 |
-| RedHat 8     | CIS Red Hat Enterprise Linux 8 Benchmark                     | 1.0.0   | 09-30-2019 |
+| RedHat 7     | CIS Red Hat Enterprise Linux 7 Benchmark                     | 3.1.1   | 05-21-2021 |
+| RedHat 8     | CIS Red Hat Enterprise Linux 8 Benchmark                     | 2.0.0   | 02-23-2022 |
 | CentOS 7     | CIS CentOS Linux 7 Benchmark                                 | 3.1.2   | 08-31-2021 |
 | Ubuntu 18.04 | CIS Ubuntu Linux 18.04 LTS Benchmark                         | 2.0.1   | 01-03-2020 |
 | Ubuntu 20.04 | CIS Ubuntu Linux 20.04 LTS Benchmark                         | 1.1.0   | 03-31-2021 |
-| Ubunto 20.04 | CIS Ubuntu Linux 20.04 LTS STIG Benchmark                    | 1.0.0   | 26.07.2021 |
+| Ubuntu 20.04 | CIS Ubuntu Linux 20.04 LTS STIG Benchmark                    | 1.0.0   | 26.07.2021 |
 | Debian 10    | CIS Debian Linux 10 Benchmark                                | 1.0.0   | 02-13-2020 |
 | Alma Linux 8 | CIS Alma Linux OS 8 Benchmark                                | 2.0.0   | 05-31-2022 |
 | Rocky Linux 8| CIS Rocky Linux 8 Benchmark                                  | 1.0.0   | 03-29-2022 |

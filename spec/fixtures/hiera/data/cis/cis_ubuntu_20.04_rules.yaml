@@ -25,20 +25,30 @@ cis_security_hardening::benchmark::ubuntu::20:
         - sticky_world_writeable_files
         - disable_automount
         - disable_usb_storage
+    software_updates:
+      stig:
+        - apt_unused
     filesystem_integrety:
       level1:
         - aide_installed
         - aide_regular_checks
+      stig:
+        - aide_notify_admins
     boot_settings:
       level1:
-        - grub_password
         - grub_bootloader_config
+        - grub_password
         - single_user_mode
     process_hardening:
       level1:
         - enable_aslr
         - disable_prelink
         - restrict_core_dumps
+      stig:
+        - limits_maxlogins
+        - kdump_service
+        - fips_bootloader
+        - crtl_alt_del
     mandatory_access_control:
       level1:
         - apparmor
@@ -57,6 +67,9 @@ cis_security_hardening::benchmark::ubuntu::20:
         - xdmcp_config
       level2:
         - gnome_gdm_package
+      stig:
+        - gdm_lock_enabled
+        - ctrl_alt_del_graphical
     special_purpose_services:
       level1:
         - systemd_timesyncd
@@ -78,13 +91,20 @@ cis_security_hardening::benchmark::ubuntu::20:
         - mta_local
         - rsyncd
         - nis
+      stig: 
+        - timezone_utc_gmt
+        - telnet_server
+        - rsh_server
+        - mfetp
     service_clients:
       level1:
         - nis_client
         - rsh_client
         - talk_client
         - telnet_client
+
         - ldap_client
+        - rpcbind
     unused_network_protocols:
       level2:
         - disable_ipv6
@@ -118,17 +138,17 @@ cis_security_hardening::benchmark::ubuntu::20:
         - ufw_outbound
         - ufw_open_ports
         - ufw_default_deny
-    configure_nftables:
-      level1:
-        - nftables_install
-        - nftables_flush_iptables
-        - nftables_table
-        - nftables_base_chains
-        - nftables_loopback
-        - nftables_outbound_established
-        - nftables_default_deny
-        - nftables_service
-        - nftables_persistence
+    # configure_nftables:
+    #   level1:
+    #     - nftables_install
+    #     - nftables_flush_iptables
+    #     - nftables_table
+    #     - nftables_base_chains
+    #     - nftables_loopback
+    #     - nftables_outbound_established
+    #     - nftables_default_deny
+    #     - nftables_service
+    #     - nftables_persistence
     configure_iptables:
       level1:
         - iptables_install
@@ -167,6 +187,43 @@ cis_security_hardening::benchmark::ubuntu::20:
         - auditd_actions
         - auditd_modules
         - auditd_immutable
+      stig:
+        - auditd_remote
+        - auditd_privileged_priv_change
+        - auditd_chfn_use
+        - auditd_ssh_agent_use
+        - auditd_ssh_keysign_use
+        - auditd_setxattr_use
+        - auditd_lsetxattr_use
+        - auditd_fsetxattr_use
+        - auditd_removexattr_use
+        - auditd_fremovexattr_use
+        - auditd_lremovexattr_use
+        - auditd_open_by_handle_use
+        - auditd_sudo_use
+        - auditd_sudoedit_use
+        - auditd_chsh_use
+        - auditd_newgrp_use
+        - auditd_chcon_use
+        - auditd_apparmor_parser_use
+        - auditd_setfacl_use
+        - auditd_chacl_use
+        - auditd_passwd_use
+        - auditd_unix_update_use
+        - auditd_gpasswd_use
+        - auditd_chage_use
+        - auditd_usermod_use
+        - auditd_crontab_use
+        - auditd_pam_timestamp_check_use
+        - auditd_finit_module_use
+        - auditd_privileged_functions_use
+        - auditd_nonlocal_admin_access
+        - auditd_kmod_use
+        - auditd_fdisk_use
+        - auditd_log_perms
+        - auditd_log_dir_perms
+        - auditd_conf_perms
+        - auditd_tools_perms
     configure_logging:
       level1:
         - rsyslog_installed
@@ -180,6 +237,9 @@ cis_security_hardening::benchmark::ubuntu::20:
         - journald_persistent
         - logfile_permissions
         - logrotate
+        - logrotate_configuration
+      stig: 
+        - var_log_syslog_perms
     configure_job_schedulers:
       level1:
         - crond_service
@@ -220,12 +280,24 @@ cis_security_hardening::benchmark::ubuntu::20:
         - sshd_tcp_forwarding
         - sshd_max_startups
         - sshd_max_sessions
+      stig:
+        - sshd_install
+        - sshd_x11_use_localhost
     configure_pam:
       level1:
         - pam_pw_requirements
         - pam_lockout
         - pam_old_passwords
         - pam_passwd_sha512
+      stig:
+        - pam_pkcs11
+        - opensc_pkcs11
+        - pam_use_mappers
+        - pam_mfa
+        - pki_certs_validation
+        - pam_fail_delay
+        - pam_cached_auth
+        - pam_last_logon
     configure_user_accounts:
       level1:
         - passwd_min_days
@@ -237,6 +309,10 @@ cis_security_hardening::benchmark::ubuntu::20:
         - umask_setting
         - timeout_setting
         - restrict_su
+      stig:
+        - passwd_sha512
+        - vlock
+        - lock_root
     system_file_permissions:
       level1:
         - passwd_perms
@@ -250,4 +326,6 @@ cis_security_hardening::benchmark::ubuntu::20:
     configure_user_groups:
       level1:
         - shadowed_passwords
+      stig:
+        - system_cmd_group
         
