@@ -63,11 +63,30 @@ class cis_security_hardening::rules::pam_lockout (
         }
 
         if ($facts['operatingsystemmajrelease'] == '7') {
-          exec { 'configure faillock':
-            command => "authconfig --faillockargs=\"preauth silent audit deny=${attempts} unlock_time=${lockouttime}\" --enablefaillock --updateall", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
-            path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-            onlyif  => "test -z \"\$(grep -E \"auth\\s+required\\s+pam_faillock.so.*deny=${attempts}\\s+unlock_time=${lockouttime}\" /etc/pam.d/system-auth /etc/pam.d/password-auth)\"", #lint:ignore:140chars
+          Pam { 'pam-auth-faillock-required':
+            ensure    => present,
+            service   => 'system-auth',
+            type      => 'auth',
+            control   => 'required',
+            module    => 'pam_faillock.so',
+            arguments => ['preauth', 'silent', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}"],
+            position  => 'after *[type="auth" and module="pam_env.so"]',
           }
+
+          Pam { 'pam-auth-faillock-required-2':
+            ensure    => present,
+            service   => 'system-auth',
+            type      => 'auth',
+            control   => '[default=die]',
+            module    => 'pam_faillock.so',
+            arguments => ['authfail', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}"],
+            position  => 'after *[type="auth" and module="pam_unix.so"]',
+          }
+          # exec { 'configure faillock':
+          #   command => "authconfig --faillockargs=\"preauth silent audit deny=${attempts} unlock_time=${lockouttime}\" --enablefaillock --updateall", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
+          #   path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+          #   onlyif  => "test -z \"\$(grep -E \"auth\\s+required\\s+pam_faillock.so.*deny=${attempts}\\s+unlock_time=${lockouttime}\" /etc/pam.d/system-auth /etc/pam.d/password-auth)\"", #lint:ignore:140chars
+          # }
         }
       }
       'debian': {
