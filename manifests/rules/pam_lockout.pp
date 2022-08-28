@@ -64,16 +64,6 @@ class cis_security_hardening::rules::pam_lockout (
 
         if ($facts['operatingsystemmajrelease'] == '7') {
           $services.each | $service | {
-            Pam { "pam-auth-faillock-required-${service}":
-              ensure    => present,
-              service   => $service,
-              type      => 'auth',
-              control   => 'required',
-              module    => 'pam_faillock.so',
-              arguments => ['preauth', 'silent', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}"],
-              position  => 'after *[type="auth" and module="pam_env.so"]',
-            }
-
             Pam { "pam-auth-faillock-required-2-${service}":
               ensure    => present,
               service   => $service,
@@ -82,6 +72,17 @@ class cis_security_hardening::rules::pam_lockout (
               module    => 'pam_faillock.so',
               arguments => ['authfail', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}"],
               position  => 'after *[type="auth" and module="pam_unix.so"]',
+              before    => Pam["pam-auth-faillock-required-${service}"],
+            }
+
+            Pam { "pam-auth-faillock-required-${service}":
+              ensure    => present,
+              service   => $service,
+              type      => 'auth',
+              control   => 'required',
+              module    => 'pam_faillock.so',
+              arguments => ['preauth', 'silent', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}"],
+              position  => 'after *[type="auth" and module="pam_env.so"]',
             }
 
             Pam { "account-faillock-${service}":
