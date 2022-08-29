@@ -286,9 +286,9 @@ cis_security_hardening::rules::auditd_immutable::enforce: true
 cis_security_hardening::rules::auditd_remote::enforce: true
 cis_security_hardening::rules::auditd_remote::remote_server: 1.2.3.4
 cis_security_hardening::rules::auditd_privileged_priv_change::enforce: true
-cis_security_hardening::rules::auditd_chfn_use::enforcw: true
+cis_security_hardening::rules::auditd_chfn_use::enforce: true
 cis_security_hardening::rules::auditd_ssh_agent_use::enforce: true
-cis_security_hardening::rules::auditd_ssh_keysign::enforce: true
+enforcecis_security_hardening::rules::auditd_ssh_keysign_use::enforce: true
 cis_security_hardening::rules::auditd_setxattr_use::enforce: true
 cis_security_hardening::rules::auditd_lsetxattr_use::enforce: true
 cis_security_hardening::rules::auditd_fsetxattr_use::enforce: true
