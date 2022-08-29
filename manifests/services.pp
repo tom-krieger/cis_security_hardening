@@ -70,6 +70,12 @@ class cis_security_hardening::services (
     refreshonly => true,
   }
 
+  exec { 'authconfig-apply-changes':
+    command     => 'authconfig --updateall',
+    path        => ['/sbin','/usr/sbin'],
+    refreshonly => true,
+  }
+
   reboot { 'after_run':
     timeout => $time_until_reboot,
     message => 'forced reboot by Puppet',

@@ -69,6 +69,13 @@ describe 'cis_security_hardening::services' do
               'refreshonly' => true,
             )
 
+          is_expected.to contain_exec('save iptables rules')
+            .with(
+                'command'    => 'authconfig --updateall',
+                'path'       => ['/sbin', '/usr/sbin'],
+                'refreshonly' => true,
+              )
+
         is_expected.to contain_reboot('after_run')
           .with(
             'timeout' => 60,

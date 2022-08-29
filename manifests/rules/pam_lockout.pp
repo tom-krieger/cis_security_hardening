@@ -73,19 +73,19 @@ class cis_security_hardening::rules::pam_lockout (
               module           => 'pam_faillock.so',
               arguments        => ['authfail', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}"],
               position         => 'after *[type="auth" and module="pam_unix.so"]',
-              before           => Pam["pam-auth-faillock-required-${service}"],
+              # before           => Pam["pam-auth-faillock-required-${service}"],
             }
 
-            Pam { "pam-auth-faillock-required-${service}":
-              ensure           => present,
-              service          => $service,
-              type             => 'auth',
-              control          => 'required',
-              control_is_param => true,
-              module           => 'pam_faillock.so',
-              arguments        => ['preauth', 'silent', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}"],
-              position         => 'after *[type="auth" and module="pam_env.so"]',
-            }
+            # Pam { "pam-auth-faillock-required-${service}":
+            #   ensure           => present,
+            #   service          => $service,
+            #   type             => 'auth',
+            #   control          => 'required',
+            #   control_is_param => true,
+            #   module           => 'pam_faillock.so',
+            #   arguments        => ['preauth', 'silent', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}"],
+            #   position         => 'after *[type="auth" and module="pam_env.so"]',
+            # }
 
             Pam { "account-faillock-${service}":
               ensure  => present,
@@ -94,6 +94,15 @@ class cis_security_hardening::rules::pam_lockout (
               control => 'required',
               module  => 'pam_faillock.so',
             }
+          }
+
+          file_line { 'authconfig-sysconfig':
+            ensure             => present,
+            path               => '/etc/sysconfig/authconfig',
+            match              => 'FAILLOCKARGS=',
+            line               => "FAILLOCKARGS=\"preauth silent audit deny=${attempts} unlock_time=${lockouttime}\"",
+            append_on_no_match => true,
+            notify             => Exec['authconfig-apply-changes'],
           }
           # exec { 'configure faillock':
           #   command => "authconfig --faillockargs=\"preauth silent audit deny=${attempts} unlock_time=${lockouttime}\" --enablefaillock --updateall", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
