@@ -73,7 +73,7 @@ describe 'cis_security_hardening::rules::pam_lockout' do
                     'control'   => '[default=die]',
                     'control_is_param' => true,
                     'module'    => 'pam_faillock.so',
-                    'arguments' => ['authfail', 'audit', "deny=3", "unlock_time=900"],
+                    'arguments' => ['authfail', 'audit', 'deny=3', 'unlock_time=900'],
                     'position'  => 'after *[type="auth" and module="pam_unix.so"]',
                   )
 
@@ -97,11 +97,11 @@ describe 'cis_security_hardening::rules::pam_lockout' do
                     'control'   => '[default=die]',
                     'control_is_param' => true,
                     'module'    => 'pam_faillock.so',
-                    'arguments' => ['authfail', 'audit', "deny=3", "unlock_time=900"],
+                    'arguments' => ['authfail', 'audit', 'deny=3', 'unlock_time=900'],
                     'position'  => 'after *[type="auth" and module="pam_unix.so"]',
                   )
-                
-                is_expected.to contain_pam("account-faillock-system-auth")
+
+                is_expected.to contain_pam('account-faillock-system-auth')
                   .with(
                     'ensure'  => 'present',
                     'service' => 'system-auth',
@@ -110,7 +110,7 @@ describe 'cis_security_hardening::rules::pam_lockout' do
                     'module'  => 'pam_faillock.so',
                   )
 
-                is_expected.to contain_pam("account-faillock-password-auth")
+                is_expected.to contain_pam('account-faillock-password-auth')
                   .with(
                     'ensure'  => 'present',
                     'service' => 'password-auth',
@@ -118,7 +118,7 @@ describe 'cis_security_hardening::rules::pam_lockout' do
                     'control' => 'required',
                     'module'  => 'pam_faillock.so',
                   )
-              
+
                 is_expected.to contain_exec('configure faillock')
                   .with(
                     'command' => 'authconfig --faillockargs="preauth silent audit deny=3 unlock_time=900" --enablefaillock --updateall',
@@ -130,8 +130,8 @@ describe 'cis_security_hardening::rules::pam_lockout' do
               else
                 is_expected.not_to contain_pam('pam-auth-faillock-required')
                 is_expected.not_to contain_pam('pam-auth-faillock-required-2')
-                is_expected.not_to contain_pam("account-faillock-system-auth")
-                is_expected.not_to contain_pam("account-faillock-password-auth")
+                is_expected.not_to contain_pam('account-faillock-system-auth')
+                is_expected.not_to contain_pam('account-faillock-password-auth')
 
                 is_expected.to contain_file_line('update pam lockout system-auth')
                   .with(
@@ -208,8 +208,8 @@ describe 'cis_security_hardening::rules::pam_lockout' do
           else
             is_expected.not_to contain_pam('pam-auth-faillock-required')
             is_expected.not_to contain_pam('pam-auth-faillock-require-2')
-            is_expected.not_to contain_pam("account-faillock-system-auth")
-            is_expected.not_to contain_pam("account-faillock-password-auth")
+            is_expected.not_to contain_pam('account-faillock-system-auth')
+            is_expected.not_to contain_pam('account-faillock-password-auth')
             is_expected.not_to contain_pam('pam-common-auth-require-tally2')
             is_expected.not_to contain_pam('pam-common-account-requisite-deny')
             is_expected.not_to contain_pam('pam-common-account-require-tally2')
