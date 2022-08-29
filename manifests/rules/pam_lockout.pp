@@ -63,6 +63,12 @@ class cis_security_hardening::rules::pam_lockout (
         }
 
         if ($facts['operatingsystemmajrelease'] == '7') {
+          exec { 'configure faillock':
+            command => "authconfig --faillockargs=\"preauth silent audit deny=${attempts} unlock_time=${lockouttime}\" --enablefaillock --updateall", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
+            path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+            onlyif  => "test -z \"\$(grep -E \"auth\\s+required\\s+pam_faillock.so.*deny=${attempts}\\s+unlock_time=${lockouttime}\" /etc/pam.d/system-auth /etc/pam.d/password-auth)\"", #lint:ignore:140chars
+          }
+
           $services.each | $service | {
             Pam { "pam-auth-faillock-required-2-${service}":
               ensure           => present,
@@ -74,6 +80,7 @@ class cis_security_hardening::rules::pam_lockout (
               arguments        => ['authfail', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}"],
               position         => 'after *[type="auth" and module="pam_unix.so"]',
               # before           => Pam["pam-auth-faillock-required-${service}"],
+              require          => Exec['configure faillock'],
             }
 
             # Pam { "pam-auth-faillock-required-${service}":
@@ -95,20 +102,6 @@ class cis_security_hardening::rules::pam_lockout (
               module  => 'pam_faillock.so',
             }
           }
-
-          file_line { 'authconfig-sysconfig':
-            ensure             => present,
-            path               => '/etc/sysconfig/authconfig',
-            match              => 'FAILLOCKARGS=',
-            line               => "FAILLOCKARGS=\"preauth silent audit deny=${attempts} unlock_time=${lockouttime}\"",
-            append_on_no_match => true,
-            notify             => Exec['authconfig-apply-changes'],
-          }
-          # exec { 'configure faillock':
-          #   command => "authconfig --faillockargs=\"preauth silent audit deny=${attempts} unlock_time=${lockouttime}\" --enablefaillock --updateall", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
-          #   path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-          #   onlyif  => "test -z \"\$(grep -E \"auth\\s+required\\s+pam_faillock.so.*deny=${attempts}\\s+unlock_time=${lockouttime}\" /etc/pam.d/system-auth /etc/pam.d/password-auth)\"", #lint:ignore:140chars
-          # }
         }
       }
       'debian': {

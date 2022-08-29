@@ -119,12 +119,12 @@ describe 'cis_security_hardening::rules::pam_lockout' do
                     'module'  => 'pam_faillock.so',
                   )
               
-                # is_expected.to contain_exec('configure faillock')
-                #   .with(
-                #     'command' => 'authconfig --faillockargs="preauth silent audit deny=3 unlock_time=900" --enablefaillock --updateall',
-                #     'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                #     'onlyif'  => "test -z \"\$(grep -E \"auth\\s+required\\s+pam_faillock.so.*deny=3\\s+unlock_time=900\" /etc/pam.d/system-auth /etc/pam.d/password-auth)\"",
-                #   )
+                is_expected.to contain_exec('configure faillock')
+                  .with(
+                    'command' => 'authconfig --faillockargs="preauth silent audit deny=3 unlock_time=900" --enablefaillock --updateall',
+                    'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+                    'onlyif'  => "test -z \"\$(grep -E \"auth\\s+required\\s+pam_faillock.so.*deny=3\\s+unlock_time=900\" /etc/pam.d/system-auth /etc/pam.d/password-auth)\"",
+                  )
                 is_expected.not_to contain_file__line('update pam lockout system-auth')
                 is_expected.not_to contain_file__line('update pam lockout password-auth')
               else
