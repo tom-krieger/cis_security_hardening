@@ -118,17 +118,6 @@ cis_security_hardening::benchmark::debian::10:
         - ufw_outbound
         - ufw_open_ports
         - ufw_default_deny
-    # configure_nftables:
-    #   level1:
-    #     - nftables_install
-    #     - nftables_flush_iptables
-    #     - nftables_table
-    #     - nftables_base_chains
-    #     - nftables_loopback
-    #     - nftables_outbound_established
-    #     - nftables_default_deny
-    #     - nftables_service
-    #     - nftables_persistence
     configure_iptables:
       level1:
         - iptables_install
