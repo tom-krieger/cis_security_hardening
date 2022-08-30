@@ -49,7 +49,7 @@ class cis_security_hardening::rules::chrony (
             ensure => purged,
         })
       }
-      'rocky', 'almalinux': {
+      'rocky', 'almalinux','centos','redhat': {
         file { '/etc/sysconfig/chronyd':
           ensure  => file,
           owner   => 'root',
