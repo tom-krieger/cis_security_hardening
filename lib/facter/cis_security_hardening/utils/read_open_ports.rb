@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 def read_open_ports
-  open_ports = []
+  opports = []
   ss_cmd = ''
   cmds = ['/usr/sbin/ss', '/usr/bin/ss', '/bin/ss', '/sbin/ss']
   cmds.each do |cmd|
@@ -11,6 +11,7 @@ def read_open_ports
   end
 
   unless ss_cmd.empty?
+    
     val = Facter::Core::Execution.exec("#{ss_cmd} -4tuln")
     lines = if val.nil? || val.empty?
               []
@@ -24,10 +25,10 @@ def read_open_ports
       local = data[4].split(':')
       port = local[1].strip
       if local[0] != '127.0.0.1'
-        open_ports.push("#{proto}:#{port}")
+        opports.push("#{proto}:#{port}")
       end
     end
   end
 
-  open_ports
+  open_ports = opports.uniq
 end
