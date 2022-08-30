@@ -24,7 +24,9 @@ def read_open_ports
       proto = data[0].strip
       local = data[4].split(':')
       pp local
-      open_ports.push("#{proto}:#{local[0].strip!}")
+      port = local[1].strip
+      pp port
+      open_ports.push("#{proto}:#{port}")
     end
   end
 
