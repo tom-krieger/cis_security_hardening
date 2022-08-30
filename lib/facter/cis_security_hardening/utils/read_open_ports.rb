@@ -23,10 +23,10 @@ def read_open_ports
       data = line.split("\s")
       proto = data[0].strip
       local = data[4].split(':')
-      pp local
       port = local[1].strip
-      pp port
-      open_ports.push("#{proto}:#{port}")
+      if local[0] != '127.0.0.1'
+        open_ports.push("#{proto}:#{port}")
+      end
     end
   end
 
