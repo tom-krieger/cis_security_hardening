@@ -1,4 +1,4 @@
-# @summary A 
+# @summary
 #    Ensure vlock is installed
 #
 # The operating system must allow users to directly initiate a session lock for all connection types.
@@ -27,7 +27,7 @@ class cis_security_hardening::rules::vlock (
 ) {
   if $enforce {
     ensure_packages(['vlock'], {
-      ensure => present,
+        ensure => present,
     })
   }
 }

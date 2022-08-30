@@ -14,7 +14,6 @@
 * [`cis_security_hardening::rules::auditd_log_perms`](#cis_security_hardeningrulesauditd_log_perms): Ensure audit log files are not read or write-accessible by unauthorized users
 * [`cis_security_hardening::rules::auditd_privileged_priv_change`](#cis_security_hardeningrulesauditd_privileged_priv_change): Ensure successful and unsuccessful uses of the su command are collected
 * [`cis_security_hardening::rules::auditd_sudo_use`](#cis_security_hardeningrulesauditd_sudo_use): Ensure successful and unsuccessful uses of the sudo command are recorded
-* [`cis_security_hardening::rules::mfetp`](#cis_security_hardeningrulesmfetp): Ensure Endpoint Security for Linux Threat Prevention is installed
 * [`cis_security_hardening::services`](#cis_security_hardeningservices): Services
 * [`cis_security_hardening::sticky_world_writable_cron`](#cis_security_hardeningsticky_world_writable_cron): Create cron job for searching world writable dir3ctories with sticky bit
 
@@ -180,6 +179,7 @@ audited
 * `cis_security_hardening::rules::logrotate`: Ensure logrotate is configured
 * `cis_security_hardening::rules::logrotate_configuration`: Ensure logrotate assigns appropriate permissions
 * `cis_security_hardening::rules::mcstrans`: Ensure the MCS Translation Service (mcstrans) is not installed
+* `cis_security_hardening::rules::mfetp`: Ensure Endpoint Security for Linux Threat Prevention is installed
 * `cis_security_hardening::rules::motd_perms`: Ensure message of the day is configured properly
 * `cis_security_hardening::rules::mta_local`: Ensure mail transfer agent is configured for local-only mode
 * `cis_security_hardening::rules::net_snmp`: Ensure net-snmp is not installed
@@ -311,8 +311,7 @@ audited
 * `cis_security_hardening::rules::var_tmp_nodev`: Ensure nodev option set on /var/tmp partition
 * `cis_security_hardening::rules::var_tmp_noexec`: Ensure noexec option set on /var/tmp partition
 * `cis_security_hardening::rules::var_tmp_nosuid`: Ensure nosuid option set on /var/tmp partition
-* `cis_security_hardening::rules::vlock`: A
-Ensure vlock is installed
+* `cis_security_hardening::rules::vlock`: Ensure vlock is installed
 * `cis_security_hardening::rules::vsftp`: Ensure FTP Server is not enabled
 * `cis_security_hardening::rules::x11_installed`: Ensure X Window System is not installed
 * `cis_security_hardening::rules::xdmcp_config`: Ensure XDCMP is not enabled
@@ -730,44 +729,6 @@ The following parameters are available in the `cis_security_hardening::rules::au
 Data type: `Boolean`
 
 Enforce the rule.
-
-Default value: ``false``
-
-### <a name="cis_security_hardeningrulesmfetp"></a>`cis_security_hardening::rules::mfetp`
-
-The operating system must deploy Endpoint Security for Linux Threat Prevention (ENSLTP).
-
-Rationale:
-Without the use of automated mechanisms to scan for security flaws on a continuous and/or periodic basis, the
-operating system or other system components may remain vulnerable to the exploits presented by undetected software
-flaws.
-
-To support this requirement, the operating system may have an integrated solution incorporating continuous scanning
-using HBSS and periodic scanning using other tools, as specified in the requirement.
-
- @api private
-
-#### Examples
-
-##### 
-
-```puppet
-class { 'cis_security_hardening::rules::mfetp':
-  enforce => true,
-}
-```
-
-#### Parameters
-
-The following parameters are available in the `cis_security_hardening::rules::mfetp` class:
-
-* [`enforce`](#enforce)
-
-##### <a name="enforce"></a>`enforce`
-
-Data type: `Boolean`
-
-Enforce the rule
 
 Default value: ``false``
 
