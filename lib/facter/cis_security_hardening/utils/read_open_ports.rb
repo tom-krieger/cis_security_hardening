@@ -22,7 +22,7 @@ def read_open_ports
       next if line =~ %r{^Netid}
       data = line.split("\s+")
       proto = data[0]
-      local = data[4].slit(":")
+      local = data[4].split(":")
       open_ports.push("#{proto}:#{local[0]}")
     end
   end
