@@ -23,6 +23,7 @@ def read_open_ports
       data = line.split("\s")
       proto = data[0].strip
       local = data[4].split(':')
+      pp local
       open_ports.push("#{proto}:#{local[0].strip!}")
     end
   end
