@@ -21,11 +21,9 @@ def read_open_ports
     lines.each do |line|
       next if %r{^Netid}.match?(line)
       data = line.split("\s")
-      pp data
       proto = data[0].strip
       local = data[4].split(':')
-      pp local
-      open_ports.push("#{proto}:#{local[0]}")
+      open_ports.push("#{proto}:#{local[0].strip!}")
     end
   end
 
