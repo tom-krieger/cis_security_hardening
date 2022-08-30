@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 def read_open_ports
-  open_ports= []
+  open_ports = []
 
   cmd = if File.exist?('/usr/sbin/ss')
           '/usr/sbin/ss'
@@ -19,10 +19,11 @@ def read_open_ports
               val.split("\n")
             end
     lines.each do |line|
-      next if line =~ %r{^Netid}
+      next if %r{^Netid}.match?(line)
       data = line.split("\s+")
+      pp data
       proto = data[0]
-      #local = data[4].split(":")
+      local = data[4].split(':')
       pp local
       open_ports.push("#{proto}:#{local[0]}")
     end
