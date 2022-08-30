@@ -68,9 +68,9 @@ It is highly recommended to have the complete security baseline definition writt
 The *cis_security_hardening* module has a parameter `enforce` for each rule. If this parameter is set to true all necessary changes are made to make a server compliant to the security baseline rules. This can have severe impacts to the machines, especially if security settings are defined in a wrong way.
 > Please test your settings before rolling out to production environments.
 
-The module needs a base directory. The base directory `/usr/share/cis_security_hardening` is created by the module during the fist run. Some data is collected with cron jobs once a day as collecting this data is somewhat expensive and time consuming depending on the server size, e. g. searching als s-bit programs . Under the base directory there will be a directory `bin` where all scripts for gathering information are located.
+The module needs a base directory. The base directory `/usr/share/cis_security_hardening` is created by the module during the fist run. Some data is collected with cronjobs once a day as collecting this data is somewhat expensive and time consuming depending on the server size, e. g. searching als s-bit programs . Under the base directory there will be a directory `bin` where all scripts for gathering information are located.
 
-This module creates a larger fact `cis_security_hardening` to have all required information for applying the rules. Some information is collected with cron jobs once a day as these jobs might run for a long time (e. g. searching filesystems for s-bit programs).
+This module creates a larger fact `cis_security_hardening` to have all required information for applying the rules. Some information is collected with cronjobs once a day as these jobs might run for a long time (e. g. searching filesystems for s-bit programs).
 
 ### Setup Requirements
 
@@ -95,11 +95,15 @@ The `data` folder contains example Hiera definitions for various operation syste
 
 ### Cronjobs
 
-Gathering information can sometime consume a lot of time. Gathering those facts during Puppet runs would have a significat impact on the time consumed by a Puppet run. Therefore some facts are only gathered once a day using cron jobs. The `cis_security_hardening` module installes the following cron jobs to collect information and provide the information to the fact scripts creating the `cis_security_hardening` fact.
+Gathering information can sometime consume a lot of time. Gathering those facts during Puppet runs would have a significat impact on the time consumed by a Puppet run. Therefore some facts are only gathered once a day using cronjobs. The `cis_security_hardening` module installes the following cronjobs to collect information and provide the information to the fact scripts creating the `cis_security_hardening` fact.
 
 #### Cron /etc/cron.d/sticky-world-writebale.cron
 
-This cron job searches for world writable files with sticky bit.
+This cronjob searches for world writable files with sticky bit.
+
+#### /etc/cron.d/auditd_priv_commands.cron
+
+This cronjob searched privileged commands to be included into auditd rules.
 
 ## Usage
 
