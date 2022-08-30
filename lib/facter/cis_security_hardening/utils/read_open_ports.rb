@@ -16,7 +16,7 @@ def read_open_ports
     lines = if val.nil? || val.empty?
               []
             else
-              val.xplit("\n")
+              val.split("\n")
             end
     lines.each do |line|
       next if line =~ %r{^Netid}
