@@ -3,8 +3,16 @@
 def read_open_ports
   open_ports= []
 
-  if File.exist?('/usr/bin/ss')
-    val = Facter::Core::Execution.exec('/usr/bin/ss -4tuln')
+  cmd = if File.exists?('/usr/sbin/ss')
+          '/usr/sbin/ss'
+        elsif File.exists?('/usr/bin/ss')
+          '/usr/bin/ss'
+        else
+          ''
+        end
+
+  unless cmd.empty?
+    val = Facter::Core::Execution.exec("#{cmd} -4tuln")
     lines = if val.nil? || val.empty?
               []
             else
