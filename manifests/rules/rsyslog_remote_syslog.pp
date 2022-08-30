@@ -23,7 +23,7 @@
 #       is_loghost => false,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::rsyslog_remote_syslog (
   Boolean $enforce    = false,
   Boolean $is_loghost = false,

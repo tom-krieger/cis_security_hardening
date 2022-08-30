@@ -28,7 +28,7 @@
 #     mode => '0750',
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::auditd_log_dir_perms (
   Boolean $enforce = false,
   String $user     = 'root',

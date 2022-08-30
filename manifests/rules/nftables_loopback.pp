@@ -21,7 +21,7 @@
 #       table => 'default',
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::nftables_loopback (
   Boolean $enforce = false,
   String $table    = 'default',

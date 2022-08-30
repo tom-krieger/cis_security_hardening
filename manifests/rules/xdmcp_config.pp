@@ -19,7 +19,7 @@
 #       enforce => true,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::xdmcp_config (
   Boolean $enforce = false,
 ) {

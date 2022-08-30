@@ -30,7 +30,7 @@
 #       enforce => true,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::journald_rsyslog (
   Boolean $enforce = false,
 ) {

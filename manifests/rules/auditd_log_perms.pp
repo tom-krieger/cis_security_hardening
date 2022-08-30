@@ -45,6 +45,8 @@
 #     group => 'root',
 #     mode => '0600',
 #   }
+#
+# @api private
 class cis_security_hardening::rules::auditd_log_perms (
   Boolean $enforce = false,
   String $user     = 'root',

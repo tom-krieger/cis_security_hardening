@@ -16,7 +16,7 @@
 #     enforce => true,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::auditd_user_emulation (
   Boolean $enforce = false,
 ) {

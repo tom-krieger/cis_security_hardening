@@ -27,7 +27,7 @@
 #       enforce => true,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::net_snmp (
   Boolean $enforce = false,
 ) {

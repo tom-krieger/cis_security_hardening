@@ -21,7 +21,7 @@
 #       enforce => true,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::aide_regular_checks (
   Boolean $enforce = false,
   Integer $hour    = 0,

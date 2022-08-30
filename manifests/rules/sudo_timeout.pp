@@ -17,7 +17,7 @@
 #     enforce => true,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::sudo_timeout (
   Boolean $enforce = false,
   Integer $timeout = 5,

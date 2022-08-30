@@ -22,7 +22,7 @@
 #     enforce => true,
 #   }
 # 
-# @api private
+# @api public
 class cis_security_hardening::rules::system_cmd_group (
   Boolean $enforce   = false,
 ) {

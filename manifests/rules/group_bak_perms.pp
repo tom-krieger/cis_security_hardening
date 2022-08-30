@@ -15,7 +15,7 @@
 #       enforce => true,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::group_bak_perms (
   Boolean $enforce = false,
 ) {

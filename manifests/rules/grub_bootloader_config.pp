@@ -21,7 +21,7 @@
 # @example
 #   include cis_security_hardening::rules::grub_bootloader_config
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::grub_bootloader_config (
   Boolean $enforce = false,
 ) {

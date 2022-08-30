@@ -20,7 +20,7 @@
 #             backlog_limit => 8192,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::auditd_backlog_limit (
   Boolean $enforce       = false,
   Integer $backlog_limit = 8192,

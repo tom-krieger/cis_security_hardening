@@ -27,7 +27,7 @@
 #       forward_policy => 'drop',
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::iptables_deny_policy (
   Boolean $enforce                       = false,
   Enum['drop', 'accept'] $input_policy   = 'drop',

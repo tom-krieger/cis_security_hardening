@@ -18,7 +18,7 @@
 #     enforce =>,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::auditd_sudoedit_use (
   Boolean $enforce = false,
 ) {

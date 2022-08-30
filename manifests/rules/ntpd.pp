@@ -42,7 +42,7 @@
 #       }
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::ntpd (
   Boolean $enforce             = false,
   Array $ntp_servers           = [],

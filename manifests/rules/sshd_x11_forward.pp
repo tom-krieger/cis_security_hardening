@@ -17,7 +17,7 @@
 #       enforce => true,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::sshd_x11_forward (
   Boolean $enforce = false,
 ) {

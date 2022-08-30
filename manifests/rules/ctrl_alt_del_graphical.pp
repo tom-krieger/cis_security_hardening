@@ -17,7 +17,7 @@
 #     enforce => true,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::ctrl_alt_del_graphical (
   Boolean $enforce = false
 ) {

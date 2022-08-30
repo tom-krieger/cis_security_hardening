@@ -18,7 +18,7 @@
 #     enforce => true,
 #   }
 #
-# @api ptivate
+# @api private
 class cis_security_hardening::rules::auditd_sudo_use (
   Boolean $enforce = false,
 ) {

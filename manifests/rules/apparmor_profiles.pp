@@ -16,7 +16,7 @@
 #       enforce => true,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::apparmor_profiles (
   Boolean $enforce = false,
 ) {

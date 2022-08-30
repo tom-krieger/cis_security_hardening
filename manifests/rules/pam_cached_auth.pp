@@ -16,7 +16,7 @@
 #     enforce => true,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::pam_cached_auth (
   Boolean $enforce = false
 ) {

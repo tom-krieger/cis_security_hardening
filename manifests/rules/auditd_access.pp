@@ -21,7 +21,7 @@
 #       enforce => true,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::auditd_access (
   Boolean $enforce                 = false,
 ) {

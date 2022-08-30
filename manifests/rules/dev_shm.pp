@@ -22,7 +22,7 @@
 #       enforce => true,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::dev_shm (
   Boolean $enforce = false,
   Integer $size    = 0,

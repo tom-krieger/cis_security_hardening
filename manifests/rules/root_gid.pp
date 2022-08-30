@@ -20,7 +20,7 @@
 #       encrypted_root_password => 'encrypted password',
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::root_gid (
   Boolean $enforce                = false,
   String $encrypted_root_password = '',

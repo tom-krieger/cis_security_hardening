@@ -18,7 +18,7 @@
 #       enforce => true,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::disable_usb_storage (
   Boolean $enforce = false,
 ) {

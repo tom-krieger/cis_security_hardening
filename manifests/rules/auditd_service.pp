@@ -18,7 +18,7 @@
 # @example
 #   include cis_security_hardening::rules::auditd_service
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::auditd_service (
   Boolean $enforce = false,
 ) {

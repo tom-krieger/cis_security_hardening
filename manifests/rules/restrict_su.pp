@@ -27,7 +27,7 @@
 #       wheel_users => ['root'],
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::restrict_su (
   Boolean $enforce                         = false,
   Array $wheel_users                       = ['root'],

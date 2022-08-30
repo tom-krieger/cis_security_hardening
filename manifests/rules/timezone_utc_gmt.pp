@@ -23,7 +23,7 @@
 #     timezone => 'UTC'
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::timezone_utc_gmt (
   Boolean $enforce              = false,
   Enum['UTC', 'GMT'] $timezone  = 'UTC',

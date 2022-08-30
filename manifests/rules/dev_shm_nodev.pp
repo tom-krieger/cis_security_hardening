@@ -15,7 +15,7 @@
 #       enforce => true,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::dev_shm_nodev (
   Boolean $enforce = false,
 ) {

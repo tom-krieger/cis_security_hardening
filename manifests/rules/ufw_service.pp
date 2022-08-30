@@ -17,7 +17,7 @@
 #       log_level => 'info',
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::ufw_service (
   Boolean $enforce = false,
 ) {

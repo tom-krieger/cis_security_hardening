@@ -19,7 +19,7 @@
 #       enforce => true,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::issue_net_perms (
   Boolean $enforce = false,
   String $content  = '',

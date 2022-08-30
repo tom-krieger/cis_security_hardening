@@ -19,7 +19,7 @@
 #       zone_config => { 'public' => 'eth0' },
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::firewalld_interfaces (
   Boolean $enforce  = false,
   Hash $zone_config = {},
