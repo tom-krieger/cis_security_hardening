@@ -3,9 +3,9 @@
 def read_open_ports
   open_ports= []
 
-  cmd = if File.exists?('/usr/sbin/ss')
+  cmd = if File.exist?('/usr/sbin/ss')
           '/usr/sbin/ss'
-        elsif File.exists?('/usr/bin/ss')
+        elsif File.exist?('/usr/bin/ss')
           '/usr/bin/ss'
         else
           ''
