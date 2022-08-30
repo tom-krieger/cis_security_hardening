@@ -131,8 +131,7 @@ cis_security_hardening::time_until_reboot: 60
 cis_security_hardening::exclude_dirs_sticky_ww: []
 cis_security_hardening::update_postrun_command: true
 cis_security_hardening::fact_upload_command: "/usr/share/cis_security_hardening/bin/fact_upload.sh"
-cis_security_hardening::auditd_suid_exclude: []
-cis_security_hardening::auditd_suid_include:
+cis_security_hardening::auditd_dirs_to_include:
   - "/usr"
 cis_security_hardening::verbose_logging: false
 
@@ -142,7 +141,7 @@ cis_security_hardening::rules::fat::enforce: false
 cis_security_hardening::rules::udf::enforce: true
 ```
 
-The `data` folder contains files names `*_param.yaml` which contain all configurable options for each benchmark. You also can look into the reference documentation.
+The `data` folder contains files named `*_param.yaml` which contain all configurable options for each benchmark. You also can look into the reference documentation.
 
 ## Reference
 
