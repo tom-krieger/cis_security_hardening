@@ -2,17 +2,16 @@
 
 def read_open_ports
   open_ports = []
+  ss_cmd = ''
+  cmds = ['/usr/sbin/ss', '/usr/bin/ss', '/bin/ss', '/sbin/ss']
+  cmds.each do |cmd|
+    if File.exist?(cmd)
+      ss_cmd = cmd
+    end
+  end
 
-  cmd = if File.exist?('/usr/sbin/ss')
-          '/usr/sbin/ss'
-        elsif File.exist?('/usr/bin/ss')
-          '/usr/bin/ss'
-        else
-          ''
-        end
-
-  unless cmd.empty?
-    val = Facter::Core::Execution.exec("#{cmd} -4tuln")
+  unless ss_cmd.empty?
+    val = Facter::Core::Execution.exec("#{ss_cmd} -4tuln")
     lines = if val.nil? || val.empty?
               []
             else
