@@ -26,7 +26,7 @@
 #             base_profile => 'sssd',
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::authselect (
   Boolean $enforce                                        = false,
   Enum['sssd', 'nis', 'winbind', 'minimal'] $base_profile = 'sssd',

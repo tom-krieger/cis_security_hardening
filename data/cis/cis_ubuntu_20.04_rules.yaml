@@ -102,7 +102,6 @@ cis_security_hardening::benchmark::ubuntu::20:
         - rsh_client
         - talk_client
         - telnet_client
-
         - ldap_client
         - rpcbind
     unused_network_protocols:

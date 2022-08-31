@@ -25,7 +25,8 @@ describe 'cis_security_hardening::rules::gnome_gdm' do
         it {
           is_expected.to compile
 
-          if os_facts[:operatingsystem].casecmp('centos').zero? || os_facts[:operatingsystem].casecmp('almalinux').zero? || os_facts[:operatingsystem].casecmp('rocky').zero?
+          if os_facts[:operatingsystem].casecmp('centos').zero? || os_facts[:operatingsystem].casecmp('redhat').zero? ||
+             os_facts[:operatingsystem].casecmp('almalinux').zero? || os_facts[:operatingsystem].casecmp('rocky').zero?
 
             if enforce
               is_expected.to contain_file('gdm')
@@ -40,6 +41,18 @@ describe 'cis_security_hardening::rules::gnome_gdm' do
                   'ensure'  => 'file',
                   'path'    => '/etc/dconf/db/gdm.d/01-banner-message',
                   'content' => "[org/gnome/login-screen]\nbanner-message-enable=true\nbanner-message-text=\'Authorized uses only. All activity may be monitored and reported.\'",
+                )
+                .that_requires('File[gdm]')
+                .that_notifies('Exec[dconf-gdm-exec]')
+
+              is_expected.to contain_file('login-screen')
+                .with(
+                  'ensure'  => 'file',
+                  'path'    => '/etc/dconf/db/gdm.d/00-login-screen',
+                  'content' => "[org/gnome/login-screen]\ndisable-user-list=true",
+                  'owner'   => 'root',
+                  'group'   => 'root',
+                  'mode'    => '0644',
                 )
                 .that_requires('File[gdm]')
                 .that_notifies('Exec[dconf-gdm-exec]')
@@ -61,6 +74,7 @@ describe 'cis_security_hardening::rules::gnome_gdm' do
             else
               is_expected.not_to contain_file('gdm')
               is_expected.not_to contain_file('banner-login')
+              is_expected.not_to contain_file('login-screen')
               is_expected.not_to contain_exec('dconf-gdm-exec')
               is_expected.not_to contain_file('/etc/dconf/db/gdm.d')
             end

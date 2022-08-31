@@ -31,7 +31,7 @@
 #     enforce => true,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::lock_root (
   Boolean $enforce = false,
 ) {

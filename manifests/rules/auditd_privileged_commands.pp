@@ -18,7 +18,7 @@
 #        enforce => true,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::auditd_privileged_commands (
   Boolean $enforce                 = false,
   Boolean $auto_reboot             = true,

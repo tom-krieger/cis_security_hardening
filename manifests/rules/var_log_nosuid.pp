@@ -14,7 +14,7 @@
 #     enforce => true,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::var_log_nosuid (
   Boolean $enforce = false,
 ) {

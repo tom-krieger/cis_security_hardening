@@ -21,7 +21,7 @@
 #       uninstall_cron => false
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::crond_service (
   Boolean $enforce        = false,
   Boolean $uninstall_cron = false,

@@ -18,7 +18,7 @@
 #     enforce =A true,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::auditd_pam_timestamp_check_use (
   Boolean $enforce = false,
 ) {

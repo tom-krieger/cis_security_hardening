@@ -33,7 +33,7 @@
 #       enforce => true,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::nftables_default_deny (
   Boolean $enforce                                         = false,
   Enum['accept', 'reject', 'drop'] $default_policy_input   = 'drop',

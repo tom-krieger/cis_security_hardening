@@ -21,7 +21,7 @@
 #       enforce => true,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::pam_old_passwords (
   Boolean $enforce      = false,
   Integer $oldpasswords = 5,

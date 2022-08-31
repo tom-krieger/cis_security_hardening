@@ -18,7 +18,7 @@
 #     enforce => true,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::pam_fail_delay (
   Boolean $enforce = false,
   Integer $delay   = 4000000,

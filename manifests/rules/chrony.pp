@@ -29,7 +29,7 @@
 #     }
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::chrony (
   Boolean $enforce   = false,
   Hash $ntp_servers = {},
@@ -49,7 +49,7 @@ class cis_security_hardening::rules::chrony (
             ensure => purged,
         })
       }
-      'rocky', 'almalinux': {
+      'rocky', 'almalinux','centos','redhat': {
         file { '/etc/sysconfig/chronyd':
           ensure  => file,
           owner   => 'root',

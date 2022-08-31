@@ -20,7 +20,7 @@
 #       remote_log_host => '10.10.54.2',
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::rsyslog_remote_logs (
   Boolean $enforce        = false,
   String $remote_log_host = '',

@@ -46,7 +46,7 @@ describe 'cis_security_hardening::rules::auditd_ssh_keysign_use' do
               .with(
                 'order'   => '143',
                 'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                'content' => '-a always,exit -F path=/usr/lib/openssh/ssh-keysign -F perm=x -F auid>=1000 - F auid!=4294967295 -k privileged-ssh',
+                'content' => '-a always,exit -F path=/usr/lib/openssh/ssh-keysign -F perm=x -F auid>=1000 -F auid!=4294967295 -k privileged-ssh',
               )
           else
             is_expected.not_to contain_concat__fragment('watch ssh-agent command rule 1')

@@ -5,8 +5,7 @@ cis_security_hardening::level: '2'
 cis_security_hardening::exclude_dirs_sticky_ww: []
 cis_security_hardening::update_postrun_command: true
 cis_security_hardening::fact_upload_command: '/usr/share/cis_security_hardening/bin/fact_upload.sh'
-cis_security_hardening::auditd_suid_exclude: []
-cis_security_hardening::auditd_suid_include: 
+cis_security_hardening::auditd_dirs_to_include: 
   - '/usr'
 cis_security_hardening::auditd_rules_fact_file: '/opt/puppetlabs/facter/facts.d/cis_security_hardening_auditd.yaml'
 
@@ -17,7 +16,7 @@ cis_security_hardening::rules::hfs::enforce: true
 cis_security_hardening::rules::hfsplus::enforce: true
 cis_security_hardening::rules::udf::enforce: true
 cis_security_hardening::rules::tmp_filesystem::enforce: true
-cis_security_hardening::rules::tmp_filesystem::enable: false
+cis_security_hardening::rules::tmp_filesystem::enable: true
 cis_security_hardening::rules::tmp_filesystem::size: 0
 cis_security_hardening::rules::tmp_noexec::enforce: true
 cis_security_hardening::rules::tmp_nodev::enforce: true
@@ -309,6 +308,8 @@ cis_security_hardening::rules::journald_compress::enforce: true
 cis_security_hardening::rules::journald_persistent::enforce: true
 cis_security_hardening::rules::logfile_permissions::enforce: true
 cis_security_hardening::rules::logrotate::enforce: true
+cis_security_hardening::rules::logrotate_configuration::enforce: true
+cis_security_hardening::rules::logrotate_configuration::permission: '0640'
 
 cis_security_hardening::rules::crond_service::enforce: true
 cis_security_hardening::rules::crond_service::uninstall_cron: false

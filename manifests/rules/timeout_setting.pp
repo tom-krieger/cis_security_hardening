@@ -20,7 +20,7 @@
 #       default_timeout => 900,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::timeout_setting (
   Boolean $enforce         = false,
   Integer $default_timeout = 900,

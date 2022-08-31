@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.7.1
+
+* Added support for Redhat Linux 7 and 8
+* Updated documentation
+* several minor bug fixes
+
 ## Release 0.7.0
 
 > This release contains some breaking changes to how `authselect` is configured. Please check your configuration and test before using in production environments.

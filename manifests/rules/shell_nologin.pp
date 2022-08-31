@@ -22,7 +22,7 @@
 #       exclude => ['postgres'],
 #   }
 #
-# @api private 
+# @api public 
 class cis_security_hardening::rules::shell_nologin (
   Boolean $enforce = false,
   Array $exclude   = [],

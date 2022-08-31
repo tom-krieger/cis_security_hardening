@@ -19,7 +19,7 @@
 #       table => 'default',
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::nftables_outbound_established (
   Boolean $enforce                               = false,
   Cis_security_hardening::Numbers_letters $table = 'default',

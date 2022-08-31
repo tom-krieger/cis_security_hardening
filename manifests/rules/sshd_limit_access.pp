@@ -51,7 +51,7 @@
 #       deny_groups => ['group3'],
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::sshd_limit_access (
   Boolean $enforce            = false,
   Array[String] $allow_users  = [],

@@ -10,8 +10,7 @@ cis_security_hardening::system_file_permissions: '/usr/share/cis_security_harden
 
 cis_security_hardening::suid_fact_file: '/opt/puppetlabs/facter/facts.d/cis_security_hardening_suid_programs.yaml'
 cis_security_hardening::sgid_fact_file: '/opt/puppetlabs/facter/facts.d/cis_security_hardening_sgid_programs.yaml'
-cis_security_hardening::auditd_suid_exclude: []
-cis_security_hardening::auditd_suid_include: 
+cis_security_hardening::auditd_dirs_to_include: 
   - '/usr'
 cis_security_hardening::auditd_rules_fact_file: '/opt/puppetlabs/facter/facts.d/cis_security_hardening_auditd.yaml'
 
@@ -58,7 +57,7 @@ cis_security_hardening::rules::disable_prelink::enforce: true
 cis_security_hardening::rules::selinux::enforce: false
 cis_security_hardening::rules::selinux_bootloader::enforce: true
 cis_security_hardening::rules::selinux_policy::enforce: true
-cis_security_hardening::rules::selinux_policy::selinux_polixy: targeted
+cis_security_hardening::rules::selinux_policy::selinux_policy: targeted
 cis_security_hardening::rules::selinux_policy::auto_reboot: true
 cis_security_hardening::rules::selinux_state::enforce: true
 cis_security_hardening::rules::selinux_state::state: permissive
@@ -89,6 +88,7 @@ cis_security_hardening::rules::motd_perms::content: |
 cis_security_hardening::rules::issue_perms::enforce: true
 cis_security_hardening::rules::issue_net_perms::enforce: true
 cis_security_hardening::rules::gnome_gdm::enforce: true
+cis_security_hardening::rules::xdmcp_config::enforce: true
 
 cis_security_hardening::rules::xinetd::enforce: true
 

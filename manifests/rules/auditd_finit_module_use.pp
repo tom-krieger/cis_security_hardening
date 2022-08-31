@@ -20,7 +20,7 @@
 #     enforce => true,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::auditd_finit_module_use (
   Boolean $enforce = false,
 ) {

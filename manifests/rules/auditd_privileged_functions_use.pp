@@ -23,7 +23,7 @@
 #     enforce = true,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::auditd_privileged_functions_use (
   Boolean $enforce = false,
 ) {

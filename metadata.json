@@ -1,6 +1,6 @@
 {
   "name": "tomkrieger-cis_security_hardening",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "author": "Thomas Krieger",
   "summary": "Secure your systems according to CIS benchmarks",
   "license": "Apache-2.0",
@@ -102,6 +102,13 @@
       "operatingsystem": "CentOS",
       "operatingsystemrelease": [
         "7"
+      ]
+    },
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "7",
+        "8"
       ]
     },
     {

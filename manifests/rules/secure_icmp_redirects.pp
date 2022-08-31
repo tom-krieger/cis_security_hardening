@@ -18,7 +18,7 @@
 #       enforce => true,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::secure_icmp_redirects (
   Boolean $enforce = false,
 ) {

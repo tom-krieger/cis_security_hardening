@@ -5,8 +5,7 @@ cis_security_hardening::level: '2'
 cis_security_hardening::exclude_dirs_sticky_ww: []
 cis_security_hardening::update_postrun_command: true
 cis_security_hardening::fact_upload_command: '/usr/share/cis_security_hardening/bin/fact_upload.sh'
-cis_security_hardening::auditd_suid_exclude: []
-cis_security_hardening::auditd_suid_include: 
+cis_security_hardening::auditd_dirs_to_include: 
   - '/usr'
 cis_security_hardening::auditd_rules_fact_file: '/opt/puppetlabs/facter/facts.d/cis_security_hardening_auditd.yaml'
 
@@ -286,9 +285,9 @@ cis_security_hardening::rules::auditd_immutable::enforce: true
 cis_security_hardening::rules::auditd_remote::enforce: true
 cis_security_hardening::rules::auditd_remote::remote_server: 1.2.3.4
 cis_security_hardening::rules::auditd_privileged_priv_change::enforce: true
-cis_security_hardening::rules::auditd_chfn_use::enforcw: true
+cis_security_hardening::rules::auditd_chfn_use::enforce: true
 cis_security_hardening::rules::auditd_ssh_agent_use::enforce: true
-cis_security_hardening::rules::auditd_ssh_keysign::enforce: true
+enforcecis_security_hardening::rules::auditd_ssh_keysign_use::enforce: true
 cis_security_hardening::rules::auditd_setxattr_use::enforce: true
 cis_security_hardening::rules::auditd_lsetxattr_use::enforce: true
 cis_security_hardening::rules::auditd_fsetxattr_use::enforce: true

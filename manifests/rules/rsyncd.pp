@@ -14,7 +14,7 @@
 #       enforce => true,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::rsyncd (
   Boolean $enforce = false,
 ) {

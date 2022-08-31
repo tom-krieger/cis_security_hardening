@@ -22,7 +22,7 @@
 # @example
 #   include cis_security_hardening::rules::nis_client
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::nis_client (
   Boolean $enforce = false,
 ) {

@@ -22,7 +22,7 @@
 #     maxlogins => 5,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::limits_maxlogins (
   Boolean $enforce   = false,
   Integer $maxlogins = 10,

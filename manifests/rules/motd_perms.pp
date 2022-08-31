@@ -26,7 +26,7 @@
 #       enforce => true,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::motd_perms (
   Boolean $enforce = false,
   String $content  = '',

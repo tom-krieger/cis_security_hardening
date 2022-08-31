@@ -18,7 +18,7 @@
 #       enforce => true,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::samba (
   Boolean $enforce = false,
 ) {

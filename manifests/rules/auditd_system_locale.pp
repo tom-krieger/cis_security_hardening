@@ -27,7 +27,7 @@
 #             enforce => true,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::auditd_system_locale (
   Boolean $enforce                 = false,
 ) {

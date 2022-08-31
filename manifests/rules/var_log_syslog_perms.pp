@@ -30,7 +30,7 @@
 #     mode => '0640',
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::var_log_syslog_perms (
   Boolean $enforce = false,
   String $user     = 'syslog',

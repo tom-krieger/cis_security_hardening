@@ -32,7 +32,7 @@
 #             admin_space_left_action => 'halt',
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::auditd_when_disk_full (
   Boolean $enforce                = false,
   String $space_left_action       = 'email',

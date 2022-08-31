@@ -15,7 +15,7 @@
 #       enforce => true,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::iptables_outbound_established (
   Boolean $enforce = false,
 ) {

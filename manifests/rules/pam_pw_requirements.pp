@@ -57,7 +57,7 @@
 #       retry => 3,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::pam_pw_requirements (
   Boolean $enforce   = false,
   Integer $minlen    = 14,

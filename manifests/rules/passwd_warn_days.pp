@@ -21,7 +21,7 @@
 #       warn_pass_days => 7,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::passwd_warn_days (
   Boolean $enforce        = false,
   Integer $warn_pass_days = 7,

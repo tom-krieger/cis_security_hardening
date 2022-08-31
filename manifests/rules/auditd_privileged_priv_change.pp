@@ -18,7 +18,7 @@
 #     enforce => true,
 #   }
 #
-# @ api private
+# @api private
 class cis_security_hardening::rules::auditd_privileged_priv_change (
   Boolean $enforce = false,
 ) {

@@ -17,7 +17,7 @@
 #       enforce => true,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::sshd_private_keys (
   Boolean $enforce = false,
 ) {

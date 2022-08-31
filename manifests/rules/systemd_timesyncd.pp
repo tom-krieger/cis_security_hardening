@@ -40,7 +40,7 @@
 #       ntp_fallback_servers => ['3.de.pool.ntp.org'],
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::systemd_timesyncd (
   Boolean $enforce            = false,
   Boolean $fix_file_perms     = true,

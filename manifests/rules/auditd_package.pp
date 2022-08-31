@@ -20,7 +20,7 @@
 #             packages => ['audit', 'audit-libs'],
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::auditd_package (
   Boolean $enforce = false,
   Array $packages  = [],

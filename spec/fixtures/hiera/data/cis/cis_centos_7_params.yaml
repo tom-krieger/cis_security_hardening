@@ -2,11 +2,15 @@
 cis_security_hardening::profile: server
 cis_security_hardening::level: '2'
 
+cis_security_hardening::exclude_dirs_world_writeable: []
 cis_security_hardening::exclude_dirs_sticky_ww: []
 cis_security_hardening::update_postrun_command: true
 cis_security_hardening::fact_upload_command: '/usr/share/cis_security_hardening/bin/fact_upload.sh'
-cis_security_hardening::auditd_suid_exclude: []
-cis_security_hardening::auditd_suid_include: 
+cis_security_hardening::system_file_permissions: '/usr/share/cis_security_hardening/data/system-file-permissions.txt'
+
+cis_security_hardening::suid_fact_file: '/opt/puppetlabs/facter/facts.d/cis_security_hardening_suid_programs.yaml'
+cis_security_hardening::sgid_fact_file: '/opt/puppetlabs/facter/facts.d/cis_security_hardening_sgid_programs.yaml'
+cis_security_hardening::auditd_dirs_to_include: 
   - '/usr'
 cis_security_hardening::auditd_rules_fact_file: '/opt/puppetlabs/facter/facts.d/cis_security_hardening_auditd.yaml'
 
@@ -53,7 +57,7 @@ cis_security_hardening::rules::disable_prelink::enforce: true
 cis_security_hardening::rules::selinux::enforce: false
 cis_security_hardening::rules::selinux_bootloader::enforce: true
 cis_security_hardening::rules::selinux_policy::enforce: true
-cis_security_hardening::rules::selinux_policy::selinux_polixy: targeted
+cis_security_hardening::rules::selinux_policy::selinux_policy: targeted
 cis_security_hardening::rules::selinux_policy::auto_reboot: true
 cis_security_hardening::rules::selinux_state::enforce: true
 cis_security_hardening::rules::selinux_state::state: permissive
@@ -84,6 +88,7 @@ cis_security_hardening::rules::motd_perms::content: |
 cis_security_hardening::rules::issue_perms::enforce: true
 cis_security_hardening::rules::issue_net_perms::enforce: true
 cis_security_hardening::rules::gnome_gdm::enforce: true
+cis_security_hardening::rules::xdmcp_config::enforce: true
 
 cis_security_hardening::rules::xinetd::enforce: true
 
@@ -130,6 +135,7 @@ cis_security_hardening::rules::telnet_client::enforce: true
 cis_security_hardening::rules::ldap_client::enforce: true
 
 cis_security_hardening::rules::disable_ipv6::enforce: true
+cis_security_hardening::rules::disable_wireless::enforce: true
 
 cis_security_hardening::rules::disable_ip_forwarding::enforce: true
 cis_security_hardening::rules::disable_packet_redirect::enforce: true
@@ -160,24 +166,24 @@ cis_security_hardening::rules::firewalld_ports_services::expected_ports:
 cis_security_hardening::rules::firewalld_ports_services::expected_servives:
   - ssh
 
-cis_security_hardening::rules::nftables_install::enforce: false
-cis_security_hardening::rules::nftables_flush_iptables::enforce: false
-cis_security_hardening::rules::nftables_table::enforce: false
+cis_security_hardening::rules::nftables_install::enforce: true
+cis_security_hardening::rules::nftables_flush_iptables::enforce: true
+cis_security_hardening::rules::nftables_table::enforce: true
 cis_security_hardening::rules::nftables_table::nftables_default_table: default
-cis_security_hardening::rules::nftables_base_chains::enforce: false
+cis_security_hardening::rules::nftables_base_chains::enforce: true
 cis_security_hardening::rules::nftables_base_chains::table: default
-cis_security_hardening::rules::nftables_loopback::enforce: false
+cis_security_hardening::rules::nftables_loopback::enforce: true
 cis_security_hardening::rules::nftables_loopback::table: default
-cis_security_hardening::rules::nftables_outbound_established::enforce: false
+cis_security_hardening::rules::nftables_outbound_established::enforce: true
 cis_security_hardening::rules::nftables_outbound_established::table: default
-cis_security_hardening::rules::nftables_default_deny::enforce: false
+cis_security_hardening::rules::nftables_default_deny::enforce: true
 cis_security_hardening::rules::nftables_default_deny::default_policy_input: drop
 cis_security_hardening::rules::nftables_default_deny::default_policy_output: drop
 cis_security_hardening::rules::nftables_default_deny::default_policy_forward: drop
 cis_security_hardening::rules::nftables_default_deny::table: default
 cis_security_hardening::rules::nftables_default_deny::additional_rules: {}
-cis_security_hardening::rules::nftables_persistence::enforce: false
-cis_security_hardening::rules::nftables_service::enforce: false
+cis_security_hardening::rules::nftables_persistence::enforce: true
+cis_security_hardening::rules::nftables_service::enforce: true
 
 cis_security_hardening::bundles::centos::v7::configure_iptables::configure_ip6tables: false
 cis_security_hardening::rules::iptables_install::enforce: true
@@ -232,6 +238,7 @@ cis_security_hardening::rules::ip6tables_open_ports::firewall_rules: {}
 cis_security_hardening::rules::auditd_init::enforce: true
 cis_security_hardening::rules::auditd_init::buffer_size: 8192
 cis_security_hardening::rules::auditd_init::rules_file: /etc/audit/rules.d/cis_security_hardening.rules
+cis_security_hardening::rules::auditd_init::auto_reboot: true
 cis_security_hardening::rules::auditd_package::enforce: true
 cis_security_hardening::rules::auditd_package::packages: 
   - audit
@@ -345,7 +352,6 @@ cis_security_hardening::rules::sshd_max_auth_tries::max_auth_tries: 4
 cis_security_hardening::rules::sshd_ignore_rhosts::enforce: true
 cis_security_hardening::rules::sshd_hostbased_authentication::enforce: true
 cis_security_hardening::rules::sshd_root_login::enforce: true
-cis_security_hardening::rules::sshd_empty_passwords::enforce: true
 cis_security_hardening::rules::sshd_user_environment::enforce: true
 cis_security_hardening::rules::sshd_ciphers::enforce: true
 cis_security_hardening::rules::sshd_ciphers::ciphers:

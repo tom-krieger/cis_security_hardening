@@ -21,7 +21,7 @@
 #       table => 'default',
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::nftables_base_chains (
   Boolean $enforce                               = false,
   Cis_security_hardening::Numbers_letters $table = 'default',

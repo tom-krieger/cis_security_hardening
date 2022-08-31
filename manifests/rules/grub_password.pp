@@ -33,7 +33,7 @@
 #       grub_password_pbkdf2 => 'grub.pbkdf2.sha512.10000.943.......',
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::grub_password (
   Boolean $enforce             = false,
   String $grub_password_pbkdf2 = '',

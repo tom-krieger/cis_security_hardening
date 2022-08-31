@@ -34,7 +34,7 @@
 #       client_alive_count_max => 0,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::sshd_timeouts (
   Boolean $enforce                = false,
   Integer $client_alive_interval  = 300,

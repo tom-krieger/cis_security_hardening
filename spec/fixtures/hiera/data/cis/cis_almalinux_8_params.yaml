@@ -8,8 +8,7 @@ cis_security_hardening::fact_upload_command: '/usr/share/cis_security_hardening/
 cis_security_hardening::system_file_permissions: '/usr/share/cis_security_hardening/data/system-file-permissions.txt'
 cis_security_hardening::suid_fact_file: '/opt/puppetlabs/facter/facts.d/cis_security_hardening_suid_programs.yaml'
 cis_security_hardening::sgid_fact_file: '/opt/puppetlabs/facter/facts.d/cis_security_hardening_sgid_programs.yaml'
-cis_security_hardening::auditd_suid_exclude: []
-cis_security_hardening::auditd_suid_include: 
+cis_security_hardening::auditd_dirs_to_include: 
   - '/usr'
 cis_security_hardening::auditd_rules_fact_file: '/opt/puppetlabs/facter/facts.d/cis_security_hardening_auditd.yaml'
 
@@ -68,7 +67,7 @@ cis_security_hardening::rules::enable_aslr::enforce: true
 cis_security_hardening::rules::selinux::enforce: false
 cis_security_hardening::rules::selinux_bootloader::enforce: true
 cis_security_hardening::rules::selinux_policy::enforce: true
-cis_security_hardening::rules::selinux_policy::selinux_polixy: targeted
+cis_security_hardening::rules::selinux_policy::selinux_policy: targeted
 cis_security_hardening::rules::selinux_policy::auto_reboot: true
 cis_security_hardening::rules::selinux_state::enforce: true
 cis_security_hardening::rules::selinux_state::state: permissive
@@ -194,7 +193,7 @@ cis_security_hardening::rules::nftables_table::enforce: false
 cis_security_hardening::rules::nftables_table::nftables_default_table: default
 cis_security_hardening::rules::nftables_base_chains::enforce: false
 cis_security_hardening::rules::nftables_base_chains::table: default
-cis_security_hardening::rules::nftables_loopback::enforce: falstruee
+cis_security_hardening::rules::nftables_loopback::enforce: false
 cis_security_hardening::rules::nftables_loopback::table: default
 cis_security_hardening::rules::nftables_outbound_established::enforce: false
 cis_security_hardening::rules::nftables_outbound_established::table: default

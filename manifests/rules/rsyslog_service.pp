@@ -14,7 +14,7 @@
 #       enforce => true,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::rsyslog_service (
   Boolean $enforce = false,
 ) {

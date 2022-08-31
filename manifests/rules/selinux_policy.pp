@@ -23,7 +23,7 @@
 #       selinux_policy => 'targeted',
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::selinux_policy (
   Boolean $enforce       = false,
   String $selinux_policy = 'targeted',

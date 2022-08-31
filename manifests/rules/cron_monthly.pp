@@ -19,7 +19,7 @@
 #       enforce => true,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::cron_monthly (
   Boolean $enforce = false,
 ) {

@@ -16,7 +16,7 @@
 #     enforce => true,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::tftp_client (
   Boolean $enforce = false,
 ) {

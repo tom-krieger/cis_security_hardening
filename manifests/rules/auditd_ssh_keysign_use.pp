@@ -18,7 +18,7 @@
 #     enforce => true,
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::auditd_ssh_keysign_use (
   Boolean $enforce = false,
 ) {
@@ -30,7 +30,7 @@ class cis_security_hardening::rules::auditd_ssh_keysign_use (
     concat::fragment { 'watch ssh-keysign command rule 1':
       order   => '143',
       target  => $cis_security_hardening::rules::auditd_init::rules_file,
-      content => "-a always,exit -F path=/usr/lib/openssh/ssh-keysign -F perm=x -F auid>=${uid} - F auid!=4294967295 -k privileged-ssh",
+      content => "-a always,exit -F path=/usr/lib/openssh/ssh-keysign -F perm=x -F auid>=${uid} -F auid!=4294967295 -k privileged-ssh",
     }
   }
 }

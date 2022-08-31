@@ -243,9 +243,6 @@ cis_security_hardening::benchmark::rocky::8:
     configure_authselect:
       level1:
         - authselect
-        # - authselect_profile
-        # - authselect_profile_select
-        # - authselect_with_faillock
     configure_pam:
       level1:
         - pam_pw_requirements

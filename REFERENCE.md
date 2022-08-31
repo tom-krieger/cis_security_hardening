@@ -11,313 +11,313 @@
 * [`cis_security_hardening`](#cis_security_hardening): Security baseline enforcement
 * [`cis_security_hardening::auditd_cron`](#cis_security_hardeningauditd_cron): Create a cron job to search privileged commands for auditd
 * [`cis_security_hardening::config`](#cis_security_hardeningconfig): Configure the module
-* [`cis_security_hardening::rules::auditd_log_perms`](#cis_security_hardeningrulesauditd_log_perms): Ensure audit log files are not read or write-accessible by unauthorized users
-* [`cis_security_hardening::rules::auditd_privileged_priv_change`](#cis_security_hardeningrulesauditd_privileged_priv_change): Ensure successful and unsuccessful uses of the su command are collected
-* [`cis_security_hardening::rules::auditd_sudo_use`](#cis_security_hardeningrulesauditd_sudo_use): Ensure successful and unsuccessful uses of the sudo command are recorded
+* [`cis_security_hardening::rules::aide_installed`](#cis_security_hardeningrulesaide_installed): Ensure AIDE is installed
+* [`cis_security_hardening::rules::aide_notify_admins`](#cis_security_hardeningrulesaide_notify_admins): Ensure System Administrator are notified of changes to the baseline configuration or anomalies
+* [`cis_security_hardening::rules::aide_regular_checks`](#cis_security_hardeningrulesaide_regular_checks): Ensure filesystem integrity is regularly checked
+* [`cis_security_hardening::rules::apparmor`](#cis_security_hardeningrulesapparmor): Ensure AppArmor is installed
+* [`cis_security_hardening::rules::apparmor_bootloader`](#cis_security_hardeningrulesapparmor_bootloader): Ensure AppArmor is enabled in the bootloader configuration
+* [`cis_security_hardening::rules::apparmor_profiles`](#cis_security_hardeningrulesapparmor_profiles): Ensure all AppArmor Profiles are enforcing
+* [`cis_security_hardening::rules::apparmor_profiles_enforcing`](#cis_security_hardeningrulesapparmor_profiles_enforcing): Ensure all AppArmor Profiles are in enforce or complain mode
+* [`cis_security_hardening::rules::apt_unused`](#cis_security_hardeningrulesapt_unused): Ensure the Advance Package Tool removes all software components after updated versions have been installed
+* [`cis_security_hardening::rules::at_restrict`](#cis_security_hardeningrulesat_restrict): Ensure at is restricted to authorized users
+* [`cis_security_hardening::rules::auditd_access`](#cis_security_hardeningrulesauditd_access): Ensure unsuccessful unauthorized file access attempts are collected
+* [`cis_security_hardening::rules::auditd_actions`](#cis_security_hardeningrulesauditd_actions): Ensure system administrator actions (sudolog) are collected
+* [`cis_security_hardening::rules::auditd_apparmor_parser_use`](#cis_security_hardeningrulesauditd_apparmor_parser_use): Ensure successful and unsuccessful attempts to use the apparmor_parser command are recorded
+* [`cis_security_hardening::rules::auditd_backlog_limit`](#cis_security_hardeningrulesauditd_backlog_limit): Ensure audit_backlog_limit is sufficient
+* [`cis_security_hardening::rules::auditd_chacl_use`](#cis_security_hardeningrulesauditd_chacl_use): Ensure successful and unsuccessful attempts to use the chacl command are recorded
+* [`cis_security_hardening::rules::auditd_chage_use`](#cis_security_hardeningrulesauditd_chage_use): Ensure successful and unsuccessful attempts to use the chage command are recorded
+* [`cis_security_hardening::rules::auditd_chcon_use`](#cis_security_hardeningrulesauditd_chcon_use): Ensure successful and unsuccessful attempts to use the chcon command are recorded
+* [`cis_security_hardening::rules::auditd_chfn_use`](#cis_security_hardeningrulesauditd_chfn_use): Ensure successful and unsuccessful uses of the chfn command are collected
+* [`cis_security_hardening::rules::auditd_chsh_use`](#cis_security_hardeningrulesauditd_chsh_use): Ensure successful and unsuccessful attempts to use the chsh command are recorded
+* [`cis_security_hardening::rules::auditd_conf_perms`](#cis_security_hardeningrulesauditd_conf_perms): Ensure audit configuration files are 0640 or more restrictive and confibgure user and group
+* [`cis_security_hardening::rules::auditd_crontab_use`](#cis_security_hardeningrulesauditd_crontab_use): Ensure successful and unsuccessful attempts to use the crontab command are recorded
+* [`cis_security_hardening::rules::auditd_delete`](#cis_security_hardeningrulesauditd_delete): Ensure file deletion events by users are collected
+* [`cis_security_hardening::rules::auditd_fdisk_use`](#cis_security_hardeningrulesauditd_fdisk_use): Ensure successful and unsuccessful attempts to use the fdisk command are recorded
+* [`cis_security_hardening::rules::auditd_finit_module_use`](#cis_security_hardeningrulesauditd_finit_module_use): Ensure successful and unsuccessful uses of the finit_module syscall are recorded
+* [`cis_security_hardening::rules::auditd_fremovexattr_use`](#cis_security_hardeningrulesauditd_fremovexattr_use): Ensure successful and unsuccessful attempts to use the fremovexattr system call are recorded
+* [`cis_security_hardening::rules::auditd_fsetxattr_use`](#cis_security_hardeningrulesauditd_fsetxattr_use): Ensure successful and unsuccessful attempts to use the fsetxattr system call are recorded
+* [`cis_security_hardening::rules::auditd_gpasswd_use`](#cis_security_hardeningrulesauditd_gpasswd_use): Ensure successful and unsuccessful attempts to use the gpasswd command are recorded
+* [`cis_security_hardening::rules::auditd_identity`](#cis_security_hardeningrulesauditd_identity): Ensure events that modify user/group information are collected
+* [`cis_security_hardening::rules::auditd_immutable`](#cis_security_hardeningrulesauditd_immutable): Ensure the audit configuration is immutable
+* [`cis_security_hardening::rules::auditd_init`](#cis_security_hardeningrulesauditd_init): Initialize auditd rules file
+* [`cis_security_hardening::rules::auditd_kernel_modules`](#cis_security_hardeningrulesauditd_kernel_modules): Ensure kernel module loading unloading and modification is collected
+* [`cis_security_hardening::rules::auditd_kmod_use`](#cis_security_hardeningrulesauditd_kmod_use): Ensure successful and unsuccessful attempts to use the kmod command are recorded
+* [`cis_security_hardening::rules::auditd_log_dir_perms`](#cis_security_hardeningrulesauditd_log_dir_perms): Ensure the audit log directory is 0750 or more restrictive
+* [`cis_security_hardening::rules::auditd_logins`](#cis_security_hardeningrulesauditd_logins): Ensure login and logout events are collected
+* [`cis_security_hardening::rules::auditd_lremovexattr_use`](#cis_security_hardeningrulesauditd_lremovexattr_use): Ensure successful and unsuccessful attempts to use the lremovexattr system call are recorded
+* [`cis_security_hardening::rules::auditd_lsetxattr_use`](#cis_security_hardeningrulesauditd_lsetxattr_use): Ensure successful and unsuccessful attempts to use the lsetxattr system call are recorded
+* [`cis_security_hardening::rules::auditd_mac_policy`](#cis_security_hardeningrulesauditd_mac_policy): Ensure events that modify the system's Mandatory Access Controls are collected
+* [`cis_security_hardening::rules::auditd_max_log_file`](#cis_security_hardeningrulesauditd_max_log_file): Ensure audit log storage size is configured
+* [`cis_security_hardening::rules::auditd_max_log_file_action`](#cis_security_hardeningrulesauditd_max_log_file_action): Ensure audit logs are not automatically deleted
+* [`cis_security_hardening::rules::auditd_modules`](#cis_security_hardeningrulesauditd_modules): Ensure kernel module loading and unloading is collected
+* [`cis_security_hardening::rules::auditd_mounts`](#cis_security_hardeningrulesauditd_mounts): Ensure successful file system mounts are collected
+* [`cis_security_hardening::rules::auditd_newgrp_use`](#cis_security_hardeningrulesauditd_newgrp_use): Ensure successful and unsuccessful attempts to use the newgrp command are recorded
+* [`cis_security_hardening::rules::auditd_nonlocal_admin_access`](#cis_security_hardeningrulesauditd_nonlocal_admin_access): Ensure nonlocal administrative access events are collected
+* [`cis_security_hardening::rules::auditd_open_by_handle_use`](#cis_security_hardeningrulesauditd_open_by_handle_use): Ensure successful and unsuccessful uses of the open_by_handle_at system call are recorded
+* [`cis_security_hardening::rules::auditd_package`](#cis_security_hardeningrulesauditd_package): Ensure auditd is installed
+* [`cis_security_hardening::rules::auditd_pam_timestamp_check_use`](#cis_security_hardeningrulesauditd_pam_timestamp_check_use): Ensure successful and unsuccessful attempts to use the pam_timestamp_check command are recorded
+* [`cis_security_hardening::rules::auditd_passwd_use`](#cis_security_hardeningrulesauditd_passwd_use): Ensure successful and unsuccessful attempts to use the passwd command are recorded
+* [`cis_security_hardening::rules::auditd_perm_mod`](#cis_security_hardeningrulesauditd_perm_mod): Ensure discretionary access control permission modification events are collected
+* [`cis_security_hardening::rules::auditd_privileged_commands`](#cis_security_hardeningrulesauditd_privileged_commands): Ensure use of privileged commands is collected
+* [`cis_security_hardening::rules::auditd_privileged_functions_use`](#cis_security_hardeningrulesauditd_privileged_functions_use): Ensure execution of privileged functions is recorded
+* [`cis_security_hardening::rules::auditd_process`](#cis_security_hardeningrulesauditd_process): Ensure auditing for processes that start prior to auditd is enabled
+* [`cis_security_hardening::rules::auditd_remote`](#cis_security_hardeningrulesauditd_remote): Ensure audit event multiplexor is configured to off-load audit logs onto a different system or storage media from the system being
+audited
+* [`cis_security_hardening::rules::auditd_removexattr_use`](#cis_security_hardeningrulesauditd_removexattr_use): Ensure successful and unsuccessful attempts to use the removexattr system call are recorded
+* [`cis_security_hardening::rules::auditd_scope`](#cis_security_hardeningrulesauditd_scope): Ensure changes to system administration scope (sudoers) is collected
+* [`cis_security_hardening::rules::auditd_service`](#cis_security_hardeningrulesauditd_service): Ensure auditd service is enabled .
+* [`cis_security_hardening::rules::auditd_session_logins`](#cis_security_hardeningrulesauditd_session_logins): Ensure session initiation information is collected
+* [`cis_security_hardening::rules::auditd_setfacl_use`](#cis_security_hardeningrulesauditd_setfacl_use): Ensure successful and unsuccessful attempts to use the setfacl command are recorded
+* [`cis_security_hardening::rules::auditd_setxattr_use`](#cis_security_hardeningrulesauditd_setxattr_use): Ensure successful and unsuccessful attempts to use the setxattr system call are recorded
+* [`cis_security_hardening::rules::auditd_ssh_agent_use`](#cis_security_hardeningrulesauditd_ssh_agent_use): Ensure successful and unsuccessful uses of the ssh-agent command are collected
+* [`cis_security_hardening::rules::auditd_ssh_keysign_use`](#cis_security_hardeningrulesauditd_ssh_keysign_use): Ensure successful and unsuccessful uses of the ssh-keysign command are collected
+* [`cis_security_hardening::rules::auditd_sudoedit_use`](#cis_security_hardeningrulesauditd_sudoedit_use): Ensure successful and unsuccessful attempts to use the sudoedit command are recorded
+* [`cis_security_hardening::rules::auditd_system_locale`](#cis_security_hardeningrulesauditd_system_locale): Ensure events that modify the system's network environment are collected
+* [`cis_security_hardening::rules::auditd_time_change`](#cis_security_hardeningrulesauditd_time_change): Ensure events that modify date and time information are collected
+* [`cis_security_hardening::rules::auditd_tools_perms`](#cis_security_hardeningrulesauditd_tools_perms): Ensure audit tools are mode of 0755 or more restrictive and owned by the right user and group
+* [`cis_security_hardening::rules::auditd_unix_update_use`](#cis_security_hardeningrulesauditd_unix_update_use): Ensure successful and unsuccessful attempts to use the unix_update command are recorded
+* [`cis_security_hardening::rules::auditd_user_emulation`](#cis_security_hardeningrulesauditd_user_emulation): Ensure actions as another user are always logged
+* [`cis_security_hardening::rules::auditd_usermod_use`](#cis_security_hardeningrulesauditd_usermod_use): Ensure successful and unsuccessful attempts to use the usermod command are recorded
+* [`cis_security_hardening::rules::auditd_when_disk_full`](#cis_security_hardeningrulesauditd_when_disk_full): Ensure system is disabled when audit logs are full
+* [`cis_security_hardening::rules::authselect`](#cis_security_hardeningrulesauthselect): Create custom authselect profile (Scored)
+* [`cis_security_hardening::rules::avahi`](#cis_security_hardeningrulesavahi): Ensure Avahi Server is not enabled
+* [`cis_security_hardening::rules::bind`](#cis_security_hardeningrulesbind): Ensure DNS Server is not installed
+* [`cis_security_hardening::rules::chrony`](#cis_security_hardeningruleschrony): Ensure chrony is configured
+* [`cis_security_hardening::rules::cramfs`](#cis_security_hardeningrulescramfs): Ensure mounting of cramfs filesystems is disabled
+* [`cis_security_hardening::rules::cron_daily`](#cis_security_hardeningrulescron_daily): Ensure permissions on /etc/cron.daily are configured
+* [`cis_security_hardening::rules::cron_hourly`](#cis_security_hardeningrulescron_hourly): Ensure permissions on /etc/cron.hourly are configured
+* [`cis_security_hardening::rules::cron_monthly`](#cis_security_hardeningrulescron_monthly): Ensure permissions on /etc/cron.monthly are configured
+* [`cis_security_hardening::rules::cron_restrict`](#cis_security_hardeningrulescron_restrict): Ensure cron is restricted to authorized users
+* [`cis_security_hardening::rules::cron_weekly`](#cis_security_hardeningrulescron_weekly): Ensure permissions on /etc/cron.weekly are configured
+* [`cis_security_hardening::rules::crond_service`](#cis_security_hardeningrulescrond_service): Ensure cron daemon is enabled and running
+* [`cis_security_hardening::rules::crontab`](#cis_security_hardeningrulescrontab): Ensure permissions on /etc/crontab are configured
+* [`cis_security_hardening::rules::crtl_alt_del`](#cis_security_hardeningrulescrtl_alt_del): Ensure the Ctrl-Alt-Delete key sequence is disabled
+* [`cis_security_hardening::rules::crypto_policy`](#cis_security_hardeningrulescrypto_policy): Ensure system-wide crypto policy is FUTURE or FIPS
+* [`cis_security_hardening::rules::ctrl_alt_del_graphical`](#cis_security_hardeningrulesctrl_alt_del_graphical): Ensure the graphical user Ctrl-Alt-Delete key sequence is disabled
+* [`cis_security_hardening::rules::cups`](#cis_security_hardeningrulescups): Ensure CUPS is not enabled
+* [`cis_security_hardening::rules::dev_shm`](#cis_security_hardeningrulesdev_shm): Ensure /dev/shm is configured
+* [`cis_security_hardening::rules::dev_shm_nodev`](#cis_security_hardeningrulesdev_shm_nodev): Ensure nodev option set on /dev/shm partition
+* [`cis_security_hardening::rules::dev_shm_noexec`](#cis_security_hardeningrulesdev_shm_noexec): Ensure noexec option set on /dev/shm partition
+* [`cis_security_hardening::rules::dev_shm_nosuid`](#cis_security_hardeningrulesdev_shm_nosuid): Ensure nosuid option set on /dev/shm partition
+* [`cis_security_hardening::rules::dhcp`](#cis_security_hardeningrulesdhcp): Ensure DHCP Server is not enabled
+* [`cis_security_hardening::rules::disable_automount`](#cis_security_hardeningrulesdisable_automount): Disable Automounting
+* [`cis_security_hardening::rules::disable_dccp`](#cis_security_hardeningrulesdisable_dccp): Ensure DCCP is disabled
+* [`cis_security_hardening::rules::disable_ip_forwarding`](#cis_security_hardeningrulesdisable_ip_forwarding): Ensure IP forwarding is disabled
+* [`cis_security_hardening::rules::disable_ipv6`](#cis_security_hardeningrulesdisable_ipv6): Disable IPv6
+* [`cis_security_hardening::rules::disable_packet_redirect`](#cis_security_hardeningrulesdisable_packet_redirect): Ensure packet redirect sending is disabled
+* [`cis_security_hardening::rules::disable_prelink`](#cis_security_hardeningrulesdisable_prelink): Ensure prelink is disabled
+* [`cis_security_hardening::rules::disable_rds`](#cis_security_hardeningrulesdisable_rds): Ensure RDS is disabled
+* [`cis_security_hardening::rules::disable_sctp`](#cis_security_hardeningrulesdisable_sctp): Ensure SCTP is disabled
+* [`cis_security_hardening::rules::disable_tipc`](#cis_security_hardeningrulesdisable_tipc): Ensure TIPC is disabled
+* [`cis_security_hardening::rules::disable_usb_storage`](#cis_security_hardeningrulesdisable_usb_storage): Disable USB Storage
+* [`cis_security_hardening::rules::disable_wireless`](#cis_security_hardeningrulesdisable_wireless): Ensure wireless interfaces are disabled (Not Scored)
+* [`cis_security_hardening::rules::dovecot`](#cis_security_hardeningrulesdovecot): Ensure IMAP and POP3 server is not enabled
+* [`cis_security_hardening::rules::enable_aslr`](#cis_security_hardeningrulesenable_aslr): Ensure address space layout randomization (ASLR) is enabled
+* [`cis_security_hardening::rules::enable_reverse_path_filtering`](#cis_security_hardeningrulesenable_reverse_path_filtering): Ensure Reverse Path Filtering is enabled
+* [`cis_security_hardening::rules::enable_tcp_syn_cookies`](#cis_security_hardeningrulesenable_tcp_syn_cookies): Ensure TCP SYN Cookies is enabled
+* [`cis_security_hardening::rules::etc_crond`](#cis_security_hardeningrulesetc_crond): Ensure permissions on /etc/cron.d are configured
+* [`cis_security_hardening::rules::fat`](#cis_security_hardeningrulesfat): Ensure mounting of FAT filesystems is disabled
+* [`cis_security_hardening::rules::fips_bootloader`](#cis_security_hardeningrulesfips_bootloader): Ensure FIPS mode is enabled
+* [`cis_security_hardening::rules::firewalld_default_zone`](#cis_security_hardeningrulesfirewalld_default_zone): Ensure default zone is set
+* [`cis_security_hardening::rules::firewalld_install`](#cis_security_hardeningrulesfirewalld_install): Ensure a Firewall package is installed
+* [`cis_security_hardening::rules::firewalld_interfaces`](#cis_security_hardeningrulesfirewalld_interfaces): Ensure network interfaces are assigned to appropriate zone
+* [`cis_security_hardening::rules::firewalld_ports_services`](#cis_security_hardeningrulesfirewalld_ports_services): Ensure unnecessary services and ports are not accepted
+* [`cis_security_hardening::rules::firewalld_service`](#cis_security_hardeningrulesfirewalld_service): Ensure firewalld service is enabled and running
+* [`cis_security_hardening::rules::freevxfs`](#cis_security_hardeningrulesfreevxfs): Ensure mounting of freevxfs filesystems is disabled
+* [`cis_security_hardening::rules::ftp`](#cis_security_hardeningrulesftp): Ensure FTP Server is not installed
+* [`cis_security_hardening::rules::gdm_auto_mount`](#cis_security_hardeningrulesgdm_auto_mount): Ensure automatic mounting of removable media is disabled
+* [`cis_security_hardening::rules::gdm_lock_enabled`](#cis_security_hardeningrulesgdm_lock_enabled): Ensure user's session lock is enabled
+* [`cis_security_hardening::rules::gnome_gdm`](#cis_security_hardeningrulesgnome_gdm)
+* [`cis_security_hardening::rules::gnome_gdm_package`](#cis_security_hardeningrulesgnome_gdm_package): Ensure GNOME Display Manager is removed
+* [`cis_security_hardening::rules::group_bak_perms`](#cis_security_hardeningrulesgroup_bak_perms): Ensure permissions on /etc/group- are configured
+* [`cis_security_hardening::rules::group_perms`](#cis_security_hardeningrulesgroup_perms): Ensure permissions on /etc/group are configured
+* [`cis_security_hardening::rules::grub_bootloader_config`](#cis_security_hardeningrulesgrub_bootloader_config): Ensure permissions on bootloader config are configured
+* [`cis_security_hardening::rules::grub_password`](#cis_security_hardeningrulesgrub_password): Ensure bootloader password is set
+* [`cis_security_hardening::rules::gshadow_bak_perms`](#cis_security_hardeningrulesgshadow_bak_perms): Ensure permissions on /etc/gshadow- are configured
+* [`cis_security_hardening::rules::gshadow_perms`](#cis_security_hardeningrulesgshadow_perms): Ensure permissions on /etc/gshadow are configured
+* [`cis_security_hardening::rules::hfs`](#cis_security_hardeningruleshfs): Ensure mounting of hfs filesystems is disabled
+* [`cis_security_hardening::rules::hfsplus`](#cis_security_hardeningruleshfsplus): Ensure mounting of hfsplus filesystems is disabled
+* [`cis_security_hardening::rules::home_grpquota`](#cis_security_hardeningruleshome_grpquota): Ensure grpquota option set on /home partition
+* [`cis_security_hardening::rules::home_nodev`](#cis_security_hardeningruleshome_nodev): Ensure nodev option set on /home partition
+* [`cis_security_hardening::rules::home_nosuid`](#cis_security_hardeningruleshome_nosuid): Ensure nosuid option set on /home partition
+* [`cis_security_hardening::rules::home_usrquota`](#cis_security_hardeningruleshome_usrquota): Ensure usrquota option set on /home partition
+* [`cis_security_hardening::rules::httpd`](#cis_security_hardeningruleshttpd): Ensure HTTP server is not enabled
+* [`cis_security_hardening::rules::icmp_redirects`](#cis_security_hardeningrulesicmp_redirects): Ensure ICMP redirects are not accepted
+* [`cis_security_hardening::rules::ignore_bogus_icmp_responses`](#cis_security_hardeningrulesignore_bogus_icmp_responses): Ensure bogus ICMP responses are ignored
+* [`cis_security_hardening::rules::ignore_icmp_broadcast`](#cis_security_hardeningrulesignore_icmp_broadcast): Ensure broadcast ICMP requests are ignored
+* [`cis_security_hardening::rules::ip6tables_deny_policy`](#cis_security_hardeningrulesip6tables_deny_policy): Ensure default deny firewall policy
+* [`cis_security_hardening::rules::ip6tables_loopback`](#cis_security_hardeningrulesip6tables_loopback): Ensure loopback traffic is configured
+* [`cis_security_hardening::rules::ip6tables_open_ports`](#cis_security_hardeningrulesip6tables_open_ports): Ensure IPv6 firewall rules exist for all open ports
+* [`cis_security_hardening::rules::ip6tables_outbound_established`](#cis_security_hardeningrulesip6tables_outbound_established): Ensure outbound and established connections are configured
+* [`cis_security_hardening::rules::iptables_deny_policy`](#cis_security_hardeningrulesiptables_deny_policy): Ensure default deny firewall policy
+* [`cis_security_hardening::rules::iptables_install`](#cis_security_hardeningrulesiptables_install): Ensure iptables is installed
+* [`cis_security_hardening::rules::iptables_loopback`](#cis_security_hardeningrulesiptables_loopback): Ensure loopback traffic is configured
+* [`cis_security_hardening::rules::iptables_open_ports`](#cis_security_hardeningrulesiptables_open_ports): Ensure firewall rules exist for all open ports
+* [`cis_security_hardening::rules::iptables_outbound_established`](#cis_security_hardeningrulesiptables_outbound_established): Ensure outbound and established connections are configured
+* [`cis_security_hardening::rules::ipv6_router_advertisements`](#cis_security_hardeningrulesipv6_router_advertisements): Ensure IPv6 router advertisements are not accepted
+* [`cis_security_hardening::rules::issue_net_perms`](#cis_security_hardeningrulesissue_net_perms): Ensure permissions on /etc/issue.net are configured
+* [`cis_security_hardening::rules::issue_perms`](#cis_security_hardeningrulesissue_perms): Ensure permissions on /etc/issue are configured
+* [`cis_security_hardening::rules::jffs2`](#cis_security_hardeningrulesjffs2): Ensure mounting of jffs2 filesystems is disabled
+* [`cis_security_hardening::rules::journald_compress`](#cis_security_hardeningrulesjournald_compress): Ensure journald is configured to compress large log files
+* [`cis_security_hardening::rules::journald_persistent`](#cis_security_hardeningrulesjournald_persistent): Ensure journald is configured to write logfiles to persistent disk
+* [`cis_security_hardening::rules::journald_rsyslog`](#cis_security_hardeningrulesjournald_rsyslog): Ensure journald is configured to send logs to rsyslog
+* [`cis_security_hardening::rules::kdump_service`](#cis_security_hardeningruleskdump_service): Ensure kdump service is not enabled
+* [`cis_security_hardening::rules::ldap_client`](#cis_security_hardeningrulesldap_client): Ensure LDAP client is not installed
+* [`cis_security_hardening::rules::ldapd`](#cis_security_hardeningrulesldapd): Ensure LDAP server is not enabled
+* [`cis_security_hardening::rules::limits_maxlogins`](#cis_security_hardeningruleslimits_maxlogins): Ensure maxlogins is 10 or less
+* [`cis_security_hardening::rules::lock_root`](#cis_security_hardeningruleslock_root): Ensure root account is locked
+* [`cis_security_hardening::rules::log_suspicious_packets`](#cis_security_hardeningruleslog_suspicious_packets): Ensure suspicious packets are logged
+* [`cis_security_hardening::rules::logfile_permissions`](#cis_security_hardeningruleslogfile_permissions): Ensure permissions on all logfiles are configured
+* [`cis_security_hardening::rules::logrotate`](#cis_security_hardeningruleslogrotate): Ensure logrotate is configured
+* [`cis_security_hardening::rules::logrotate_configuration`](#cis_security_hardeningruleslogrotate_configuration): Ensure logrotate assigns appropriate permissions
+* [`cis_security_hardening::rules::mcstrans`](#cis_security_hardeningrulesmcstrans): Ensure the MCS Translation Service (mcstrans) is not installed
 * [`cis_security_hardening::rules::mfetp`](#cis_security_hardeningrulesmfetp): Ensure Endpoint Security for Linux Threat Prevention is installed
+* [`cis_security_hardening::rules::motd_perms`](#cis_security_hardeningrulesmotd_perms): Ensure message of the day is configured properly
+* [`cis_security_hardening::rules::mta_local`](#cis_security_hardeningrulesmta_local): Ensure mail transfer agent is configured for local-only mode
+* [`cis_security_hardening::rules::net_snmp`](#cis_security_hardeningrulesnet_snmp): Ensure net-snmp is not installed
+* [`cis_security_hardening::rules::nfs`](#cis_security_hardeningrulesnfs): Ensure NFS is not enabled
+* [`cis_security_hardening::rules::nfs_utils`](#cis_security_hardeningrulesnfs_utils): Ensure nfs-utils is not installed or the nfs-server service is masked
+* [`cis_security_hardening::rules::nftables_base_chains`](#cis_security_hardeningrulesnftables_base_chains): Ensure base chains exist
+* [`cis_security_hardening::rules::nftables_default_deny`](#cis_security_hardeningrulesnftables_default_deny): Ensure default deny firewall policy
+* [`cis_security_hardening::rules::nftables_flush_iptables`](#cis_security_hardeningrulesnftables_flush_iptables): Ensure iptables are flushed
+* [`cis_security_hardening::rules::nftables_install`](#cis_security_hardeningrulesnftables_install): Ensure nftables is installed
+* [`cis_security_hardening::rules::nftables_loopback`](#cis_security_hardeningrulesnftables_loopback): Ensure loopback traffic is configured
+* [`cis_security_hardening::rules::nftables_outbound_established`](#cis_security_hardeningrulesnftables_outbound_established): Ensure outbound and established connections are configured
+* [`cis_security_hardening::rules::nftables_persistence`](#cis_security_hardeningrulesnftables_persistence): Ensure nftables rules are permanent
+* [`cis_security_hardening::rules::nftables_service`](#cis_security_hardeningrulesnftables_service): Ensure nftables service is enabled
+* [`cis_security_hardening::rules::nftables_table`](#cis_security_hardeningrulesnftables_table): Ensure a table exists
+* [`cis_security_hardening::rules::nis`](#cis_security_hardeningrulesnis): Ensure NIS Server is not enabled
+* [`cis_security_hardening::rules::nis_client`](#cis_security_hardeningrulesnis_client): Ensure NIS Client is not installed
+* [`cis_security_hardening::rules::ntp_package`](#cis_security_hardeningrulesntp_package): Install ntp package
+* [`cis_security_hardening::rules::ntpd`](#cis_security_hardeningrulesntpd): Ensure ntp is configured
+* [`cis_security_hardening::rules::opensc_pkcs11`](#cis_security_hardeningrulesopensc_pkcs11): Ensure the opensc-pcks11 is installed
+* [`cis_security_hardening::rules::pam_cached_auth`](#cis_security_hardeningrulespam_cached_auth): Ensure PAM prohibits the use of cached authentications after one day
+* [`cis_security_hardening::rules::pam_fail_delay`](#cis_security_hardeningrulespam_fail_delay): Ensure loging delay after failed logon attempt
+* [`cis_security_hardening::rules::pam_last_logon`](#cis_security_hardeningrulespam_last_logon): Ensure last successful account logon is displayed upon logon
+* [`cis_security_hardening::rules::pam_lockout`](#cis_security_hardeningrulespam_lockout): Ensure lockout for failed password attempts is configured
+* [`cis_security_hardening::rules::pam_mfa`](#cis_security_hardeningrulespam_mfa): Ensure smart card logins for multifactor authentication for local and network access
+* [`cis_security_hardening::rules::pam_old_passwords`](#cis_security_hardeningrulespam_old_passwords): Ensure password reuse is limited
+* [`cis_security_hardening::rules::pam_passwd_sha512`](#cis_security_hardeningrulespam_passwd_sha512): Ensure password hashing algorithm is SHA-512
+* [`cis_security_hardening::rules::pam_pkcs11`](#cis_security_hardeningrulespam_pkcs11): Ensure the libpam-pkcs11 package is installed
+* [`cis_security_hardening::rules::pam_pw_requirements`](#cis_security_hardeningrulespam_pw_requirements): Ensure password creation requirements are configured
+* [`cis_security_hardening::rules::pam_use_mappers`](#cis_security_hardeningrulespam_use_mappers): Ensure authenticated identity is mapped to the user or group account for PKI-based authentication
+* [`cis_security_hardening::rules::passwd_bak_perms`](#cis_security_hardeningrulespasswd_bak_perms): Ensure permissions on /etc/group- are configured
+* [`cis_security_hardening::rules::passwd_expiration`](#cis_security_hardeningrulespasswd_expiration): Ensure password expiration is 365 days or less
+* [`cis_security_hardening::rules::passwd_inactive_days`](#cis_security_hardeningrulespasswd_inactive_days): Ensure inactive password lock is 30 days or less
+* [`cis_security_hardening::rules::passwd_min_days`](#cis_security_hardeningrulespasswd_min_days): Ensure minimum days between password changes is 7 or more
+* [`cis_security_hardening::rules::passwd_perms`](#cis_security_hardeningrulespasswd_perms): Ensure permissions on /etc/passwd are configured
+* [`cis_security_hardening::rules::passwd_sha512`](#cis_security_hardeningrulespasswd_sha512): Ensure ENCRYPT_METHOD is SHA512
+* [`cis_security_hardening::rules::passwd_warn_days`](#cis_security_hardeningrulespasswd_warn_days): Ensure password expiration warning days is 7 or more
+* [`cis_security_hardening::rules::pki_certs_validation`](#cis_security_hardeningrulespki_certs_validation): Ensure certificates are validated by constructing a certification path to an accepted trust anchor
+* [`cis_security_hardening::rules::restrict_core_dumps`](#cis_security_hardeningrulesrestrict_core_dumps): A core dump is the memory of an executable program. It is generally used to determine why a program aborted. It can also be used to glean con
+* [`cis_security_hardening::rules::restrict_su`](#cis_security_hardeningrulesrestrict_su): Ensure access to the su command is restricted
+* [`cis_security_hardening::rules::rhnsd`](#cis_security_hardeningrulesrhnsd): Disable the rhnsd Daemon
+* [`cis_security_hardening::rules::root_gid`](#cis_security_hardeningrulesroot_gid): Ensure default group for the root account is GID 0
+* [`cis_security_hardening::rules::rpcbind`](#cis_security_hardeningrulesrpcbind): Ensure rpcbind is not installed or the rpcbind services are masked
+* [`cis_security_hardening::rules::rsh_client`](#cis_security_hardeningrulesrsh_client): Ensure rsh client is not installed
+* [`cis_security_hardening::rules::rsh_server`](#cis_security_hardeningrulesrsh_server): Ensure rsh-server is not installed
+* [`cis_security_hardening::rules::rsyncd`](#cis_security_hardeningrulesrsyncd): Ensure rsync is not installed or the rsyncd service is masked
+* [`cis_security_hardening::rules::rsyslog_default_file_perms`](#cis_security_hardeningrulesrsyslog_default_file_perms): Ensure rsyslog default file permissions configured
+* [`cis_security_hardening::rules::rsyslog_installed`](#cis_security_hardeningrulesrsyslog_installed): Ensure rsyslog or syslog-ng is installed
+* [`cis_security_hardening::rules::rsyslog_logging`](#cis_security_hardeningrulesrsyslog_logging): Ensure logging is configured
+* [`cis_security_hardening::rules::rsyslog_remote_logs`](#cis_security_hardeningrulesrsyslog_remote_logs): Ensure rsyslog is configured to send logs to a remote log host
+* [`cis_security_hardening::rules::rsyslog_remote_syslog`](#cis_security_hardeningrulesrsyslog_remote_syslog): Ensure remote rsyslog messages are only accepted on designated log hosts.
+* [`cis_security_hardening::rules::rsyslog_service`](#cis_security_hardeningrulesrsyslog_service): Ensure rsyslog Service is enabled
+* [`cis_security_hardening::rules::samba`](#cis_security_hardeningrulessamba): Ensure Samba is not installed
+* [`cis_security_hardening::rules::secure_icmp_redirects`](#cis_security_hardeningrulessecure_icmp_redirects): Ensure secure ICMP redirects are not accepted
+* [`cis_security_hardening::rules::selinux`](#cis_security_hardeningrulesselinux): Ensure SELinux is installed
+* [`cis_security_hardening::rules::selinux_bootloader`](#cis_security_hardeningrulesselinux_bootloader): Ensure SELinux is not disabled in bootloader configuration
+* [`cis_security_hardening::rules::selinux_policy`](#cis_security_hardeningrulesselinux_policy): Ensure SELinux policy is configured
+* [`cis_security_hardening::rules::selinux_state`](#cis_security_hardeningrulesselinux_state): Ensure the SELinux state is enforcing or permissive
+* [`cis_security_hardening::rules::setroubleshoot`](#cis_security_hardeningrulessetroubleshoot): Ensure SETroubleshoot is not installed
+* [`cis_security_hardening::rules::shadow_bak_perms`](#cis_security_hardeningrulesshadow_bak_perms): Ensure permissions on /etc/shadow- are configured
+* [`cis_security_hardening::rules::shadow_encrypt_sha512`](#cis_security_hardeningrulesshadow_encrypt_sha512): Ensure password hashing algorithm is SHA-512
+* [`cis_security_hardening::rules::shadow_perms`](#cis_security_hardeningrulesshadow_perms): Ensure permissions on /etc/shadow are configured
+* [`cis_security_hardening::rules::shadowed_passwords`](#cis_security_hardeningrulesshadowed_passwords): Ensure accounts in /etc/passwd use shadowed passwords
+* [`cis_security_hardening::rules::shell_nologin`](#cis_security_hardeningrulesshell_nologin): Ensure system accounts aresecured
+* [`cis_security_hardening::rules::single_user_mode`](#cis_security_hardeningrulessingle_user_mode): Ensure authentication required for single user mode
+* [`cis_security_hardening::rules::source_routed_packets`](#cis_security_hardeningrulessource_routed_packets): Ensure source routed packets are not accepted
+* [`cis_security_hardening::rules::squashfs`](#cis_security_hardeningrulessquashfs): Ensure mounting of squashfs filesystems is disabled
+* [`cis_security_hardening::rules::squid`](#cis_security_hardeningrulessquid): Ensure HTTP Proxy Server is not enabled
+* [`cis_security_hardening::rules::sshd_banner`](#cis_security_hardeningrulessshd_banner)
+* [`cis_security_hardening::rules::sshd_ciphers`](#cis_security_hardeningrulessshd_ciphers): Ensure only strong Ciphers are used
+* [`cis_security_hardening::rules::sshd_config_permissions`](#cis_security_hardeningrulessshd_config_permissions): Ensure permissions on /etc/ssh/sshd_config are configured
+* [`cis_security_hardening::rules::sshd_crypto_policy`](#cis_security_hardeningrulessshd_crypto_policy): Ensure system-wide crypto policy is not over-ridden
+* [`cis_security_hardening::rules::sshd_empty_passwords`](#cis_security_hardeningrulessshd_empty_passwords): Ensure SSH PermitEmptyPasswords is disabled
+* [`cis_security_hardening::rules::sshd_hostbased_authentication`](#cis_security_hardeningrulessshd_hostbased_authentication): Ensure SSH HostbasedAuthentication is disabled
+* [`cis_security_hardening::rules::sshd_ignore_rhosts`](#cis_security_hardeningrulessshd_ignore_rhosts): Ensure SSH IgnoreRhosts is enabled
+* [`cis_security_hardening::rules::sshd_install`](#cis_security_hardeningrulessshd_install): Ensure SSH is installed and active
+* [`cis_security_hardening::rules::sshd_kex`](#cis_security_hardeningrulessshd_kex): Ensure only strong Key Exchange algorithms are used
+* [`cis_security_hardening::rules::sshd_limit_access`](#cis_security_hardeningrulessshd_limit_access): Ensure SSH access is limited
+* [`cis_security_hardening::rules::sshd_login_gracetime`](#cis_security_hardeningrulessshd_login_gracetime): Ensure SSH LoginGraceTime is set to one minute or less
+* [`cis_security_hardening::rules::sshd_loglevel`](#cis_security_hardeningrulessshd_loglevel): Ensure SSH LogLevel is set to INFO
+* [`cis_security_hardening::rules::sshd_macs`](#cis_security_hardeningrulessshd_macs): Ensure only approved MAC algorithms are used
+* [`cis_security_hardening::rules::sshd_max_auth_tries`](#cis_security_hardeningrulessshd_max_auth_tries): Ensure SSH MaxAuthTries is set to 4 or less
+* [`cis_security_hardening::rules::sshd_max_sessions`](#cis_security_hardeningrulessshd_max_sessions): Ensure SSH MaxSessions is set to 4 or less
+* [`cis_security_hardening::rules::sshd_max_startups`](#cis_security_hardeningrulessshd_max_startups): Ensure SSH MaxStartups is configured
+* [`cis_security_hardening::rules::sshd_private_keys`](#cis_security_hardeningrulessshd_private_keys): Ensure permissions on SSH private host key files are configured
+* [`cis_security_hardening::rules::sshd_public_keys`](#cis_security_hardeningrulessshd_public_keys): Ensure permissions on SSH public host key files are configured
+* [`cis_security_hardening::rules::sshd_root_login`](#cis_security_hardeningrulessshd_root_login): Ensure SSH root login is disabled
+* [`cis_security_hardening::rules::sshd_tcp_forwarding`](#cis_security_hardeningrulessshd_tcp_forwarding): Ensure SSH AllowTcpForwarding is disabled
+* [`cis_security_hardening::rules::sshd_timeouts`](#cis_security_hardeningrulessshd_timeouts): Ensure SSH Idle Timeout Interval is configured
+* [`cis_security_hardening::rules::sshd_use_pam`](#cis_security_hardeningrulessshd_use_pam): Ensure SSH PAM is enabled
+* [`cis_security_hardening::rules::sshd_user_environment`](#cis_security_hardeningrulessshd_user_environment): Ensure SSH PermitUserEnvironment is disabled
+* [`cis_security_hardening::rules::sshd_x11_forward`](#cis_security_hardeningrulessshd_x11_forward): Ensure SSH X11 forwarding is disabled
+* [`cis_security_hardening::rules::sshd_x11_use_localhost`](#cis_security_hardeningrulessshd_x11_use_localhost): Ensure X11UseLocalhost is enabled
+* [`cis_security_hardening::rules::sticky_world_writeable_files`](#cis_security_hardeningrulessticky_world_writeable_files): Ensure sticky bit is set on all world-writable directories
+* [`cis_security_hardening::rules::sudo_installed`](#cis_security_hardeningrulessudo_installed): Ensure sudo is installed
+* [`cis_security_hardening::rules::sudo_log`](#cis_security_hardeningrulessudo_log): Ensure sudo log file exists
+* [`cis_security_hardening::rules::sudo_timeout`](#cis_security_hardeningrulessudo_timeout): Ensure sudo authentication timeout is configured correctly
+* [`cis_security_hardening::rules::sudo_use_pty`](#cis_security_hardeningrulessudo_use_pty): Ensure sudo commands use pty
+* [`cis_security_hardening::rules::system_cmd_group`](#cis_security_hardeningrulessystem_cmd_group): Ensure system command files are group-owned by root
+* [`cis_security_hardening::rules::systemd_timesyncd`](#cis_security_hardeningrulessystemd_timesyncd): Ensure systemd-timesyncd is configured (Not Scored)
+* [`cis_security_hardening::rules::talk_client`](#cis_security_hardeningrulestalk_client): Ensure talk client is not installed
+* [`cis_security_hardening::rules::telnet_client`](#cis_security_hardeningrulestelnet_client): Ensure telnet client is not installed
+* [`cis_security_hardening::rules::telnet_server`](#cis_security_hardeningrulestelnet_server): Ensure telnet-server is not installed
+* [`cis_security_hardening::rules::tftp_client`](#cis_security_hardeningrulestftp_client): Ensure TFTP client is not installed
+* [`cis_security_hardening::rules::tftp_server`](#cis_security_hardeningrulestftp_server): Ensure TFTP Server is not installed
+* [`cis_security_hardening::rules::timeout_setting`](#cis_security_hardeningrulestimeout_setting): Ensure default user shell timeout is configured
+* [`cis_security_hardening::rules::timezone_utc_gmt`](#cis_security_hardeningrulestimezone_utc_gmt): Ensure system timezone is set to UTC or GMT
+* [`cis_security_hardening::rules::tmp_filesystem`](#cis_security_hardeningrulestmp_filesystem): Ensure /tmp is configured
+* [`cis_security_hardening::rules::tmp_nodev`](#cis_security_hardeningrulestmp_nodev): Ensure nodev option set on /tmp partition
+* [`cis_security_hardening::rules::tmp_noexec`](#cis_security_hardeningrulestmp_noexec): Ensure noexec option set on /tmp partition
+* [`cis_security_hardening::rules::tmp_nosuid`](#cis_security_hardeningrulestmp_nosuid): Ensure nosuid option set on /tmp partition
+* [`cis_security_hardening::rules::udf`](#cis_security_hardeningrulesudf): Ensure mounting of udf filesystems is disabled
+* [`cis_security_hardening::rules::ufw_default_deny`](#cis_security_hardeningrulesufw_default_deny): Ensure default deny firewall policy
+* [`cis_security_hardening::rules::ufw_install`](#cis_security_hardeningrulesufw_install): Ensure ufw is installed
+* [`cis_security_hardening::rules::ufw_loopback`](#cis_security_hardeningrulesufw_loopback): Ensure loopback traffic is configured
+* [`cis_security_hardening::rules::ufw_open_ports`](#cis_security_hardeningrulesufw_open_ports): Ensure firewall rules exist for all open ports
+* [`cis_security_hardening::rules::ufw_outbound`](#cis_security_hardeningrulesufw_outbound): Ensure outbound connections are configured (Not Scored)
+* [`cis_security_hardening::rules::ufw_service`](#cis_security_hardeningrulesufw_service): Ensure ufw service is enabled
+* [`cis_security_hardening::rules::umask_setting`](#cis_security_hardeningrulesumask_setting): Ensure default user umask is configured
+* [`cis_security_hardening::rules::var_log_audit_nodev`](#cis_security_hardeningrulesvar_log_audit_nodev): Ensure nodev option set on /var/log/audit partition
+* [`cis_security_hardening::rules::var_log_audit_noexec`](#cis_security_hardeningrulesvar_log_audit_noexec): Ensure noexec option set on /var/log/audit partition
+* [`cis_security_hardening::rules::var_log_audit_nosuid`](#cis_security_hardeningrulesvar_log_audit_nosuid): Ensure nosuid option set on /var/log/audit partition
+* [`cis_security_hardening::rules::var_log_nodev`](#cis_security_hardeningrulesvar_log_nodev): Ensure nodev option set on /var/log partition
+* [`cis_security_hardening::rules::var_log_noexec`](#cis_security_hardeningrulesvar_log_noexec): Ensure noexec option set on /var/log partition
+* [`cis_security_hardening::rules::var_log_nosuid`](#cis_security_hardeningrulesvar_log_nosuid): Ensure nosuid option set on /var/log partition
+* [`cis_security_hardening::rules::var_log_syslog_perms`](#cis_security_hardeningrulesvar_log_syslog_perms): Ensure /var/log/syslog is group-owned by adm, owned by syslog and has permissions 0640
+* [`cis_security_hardening::rules::var_nodev`](#cis_security_hardeningrulesvar_nodev): Ensure nodev option set on /var partition
+* [`cis_security_hardening::rules::var_noexec`](#cis_security_hardeningrulesvar_noexec): Ensure noexec option set on /var partition
+* [`cis_security_hardening::rules::var_nosuid`](#cis_security_hardeningrulesvar_nosuid): Ensure nosuid option set on /var partition
+* [`cis_security_hardening::rules::var_tmp_nodev`](#cis_security_hardeningrulesvar_tmp_nodev): Ensure nodev option set on /var/tmp partition
+* [`cis_security_hardening::rules::var_tmp_noexec`](#cis_security_hardeningrulesvar_tmp_noexec): Ensure noexec option set on /var/tmp partition
+* [`cis_security_hardening::rules::var_tmp_nosuid`](#cis_security_hardeningrulesvar_tmp_nosuid): Ensure nosuid option set on /var/tmp partition
+* [`cis_security_hardening::rules::vlock`](#cis_security_hardeningrulesvlock): Ensure vlock is installed
+* [`cis_security_hardening::rules::vsftp`](#cis_security_hardeningrulesvsftp): Ensure FTP Server is not enabled
+* [`cis_security_hardening::rules::x11_installed`](#cis_security_hardeningrulesx11_installed): Ensure X Window System is not installed
+* [`cis_security_hardening::rules::xdmcp_config`](#cis_security_hardeningrulesxdmcp_config): Ensure XDCMP is not enabled
+* [`cis_security_hardening::rules::xinetd`](#cis_security_hardeningrulesxinetd): Ensure xinetd is not installed
+* [`cis_security_hardening::rules::yum_gpgcheck`](#cis_security_hardeningrulesyum_gpgcheck): Ensure gpgcheck is globally activated
+* [`cis_security_hardening::rules::zypper_gpgcheck`](#cis_security_hardeningruleszypper_gpgcheck): Ensure gpgcheck is globally activated
 * [`cis_security_hardening::services`](#cis_security_hardeningservices): Services
 * [`cis_security_hardening::sticky_world_writable_cron`](#cis_security_hardeningsticky_world_writable_cron): Create cron job for searching world writable dir3ctories with sticky bit
 
 #### Private Classes
 
-* `cis_security_hardening::rules::aide_installed`: Ensure AIDE is installed
-* `cis_security_hardening::rules::aide_notify_admins`: Ensure System Administrator are notified of changes to the baseline configuration or anomalies
-* `cis_security_hardening::rules::aide_regular_checks`: Ensure filesystem integrity is regularly checked
-* `cis_security_hardening::rules::apparmor`: Ensure AppArmor is installed
-* `cis_security_hardening::rules::apparmor_bootloader`: Ensure AppArmor is enabled in the bootloader configuration
-* `cis_security_hardening::rules::apparmor_profiles`: Ensure all AppArmor Profiles are enforcing
-* `cis_security_hardening::rules::apparmor_profiles_enforcing`: Ensure all AppArmor Profiles are in enforce or complain mode
-* `cis_security_hardening::rules::apt_unused`: Ensure the Advance Package Tool removes all software components after updated versions have been installed
-* `cis_security_hardening::rules::at_restrict`: Ensure at is restricted to authorized users
-* `cis_security_hardening::rules::auditd_access`: Ensure unsuccessful unauthorized file access attempts are collected
-* `cis_security_hardening::rules::auditd_actions`: Ensure system administrator actions (sudolog) are collected
-* `cis_security_hardening::rules::auditd_apparmor_parser_use`: Ensure successful and unsuccessful attempts to use the apparmor_parser command are recorded
-* `cis_security_hardening::rules::auditd_backlog_limit`: Ensure audit_backlog_limit is sufficient
-* `cis_security_hardening::rules::auditd_chacl_use`: Ensure successful and unsuccessful attempts to use the chacl command are recorded
-* `cis_security_hardening::rules::auditd_chage_use`: Ensure successful and unsuccessful attempts to use the chage command are recorded
-* `cis_security_hardening::rules::auditd_chcon_use`: Ensure successful and unsuccessful attempts to use the chcon command are recorded
-* `cis_security_hardening::rules::auditd_chfn_use`: Ensure successful and unsuccessful uses of the chfn command are collected
-* `cis_security_hardening::rules::auditd_chsh_use`: Ensure successful and unsuccessful attempts to use the chsh command are recorded
-* `cis_security_hardening::rules::auditd_conf_perms`: Ensure audit configuration files are 0640 or more restrictive and confibgure user and group
-* `cis_security_hardening::rules::auditd_crontab_use`: Ensure successful and unsuccessful attempts to use the crontab command are recorded
-* `cis_security_hardening::rules::auditd_delete`: Ensure file deletion events by users are collected
-* `cis_security_hardening::rules::auditd_fdisk_use`: Ensure successful and unsuccessful attempts to use the fdisk command are recorded
-* `cis_security_hardening::rules::auditd_finit_module_use`: Ensure successful and unsuccessful uses of the finit_module syscall are recorded
-* `cis_security_hardening::rules::auditd_fremovexattr_use`: Ensure successful and unsuccessful attempts to use the fremovexattr system call are recorded
-* `cis_security_hardening::rules::auditd_fsetxattr_use`: Ensure successful and unsuccessful attempts to use the fsetxattr system call are recorded
-* `cis_security_hardening::rules::auditd_gpasswd_use`: Ensure successful and unsuccessful attempts to use the gpasswd command are recorded
-* `cis_security_hardening::rules::auditd_identity`: Ensure events that modify user/group information are collected
-* `cis_security_hardening::rules::auditd_immutable`: Ensure the audit configuration is immutable
-* `cis_security_hardening::rules::auditd_init`: Initialize auditd rules file
-* `cis_security_hardening::rules::auditd_kernel_modules`: Ensure kernel module loading unloading and modification is collected
-* `cis_security_hardening::rules::auditd_kmod_use`: Ensure successful and unsuccessful attempts to use the kmod command are recorded
-* `cis_security_hardening::rules::auditd_log_dir_perms`: Ensure the audit log directory is 0750 or more restrictive
-* `cis_security_hardening::rules::auditd_logins`: Ensure login and logout events are collected
-* `cis_security_hardening::rules::auditd_lremovexattr_use`: Ensure successful and unsuccessful attempts to use the lremovexattr system call are recorded
-* `cis_security_hardening::rules::auditd_lsetxattr_use`: Ensure successful and unsuccessful attempts to use the lsetxattr system call are recorded
-* `cis_security_hardening::rules::auditd_mac_policy`: Ensure events that modify the system's Mandatory Access Controls are collected
-* `cis_security_hardening::rules::auditd_max_log_file`: Ensure audit log storage size is configured
-* `cis_security_hardening::rules::auditd_max_log_file_action`: Ensure audit logs are not automatically deleted
-* `cis_security_hardening::rules::auditd_modules`: Ensure kernel module loading and unloading is collected
-* `cis_security_hardening::rules::auditd_mounts`: Ensure successful file system mounts are collected
-* `cis_security_hardening::rules::auditd_newgrp_use`: Ensure successful and unsuccessful attempts to use the newgrp command are recorded
-* `cis_security_hardening::rules::auditd_nonlocal_admin_access`: Ensure nonlocal administrative access events are collected
-* `cis_security_hardening::rules::auditd_open_by_handle_use`: Ensure successful and unsuccessful uses of the open_by_handle_at system call are recorded
-* `cis_security_hardening::rules::auditd_package`: Ensure auditd is installed
-* `cis_security_hardening::rules::auditd_pam_timestamp_check_use`: Ensure successful and unsuccessful attempts to use the pam_timestamp_check command are recorded
-* `cis_security_hardening::rules::auditd_passwd_use`: Ensure successful and unsuccessful attempts to use the passwd command are recorded
-* `cis_security_hardening::rules::auditd_perm_mod`: Ensure discretionary access control permission modification events are collected
-* `cis_security_hardening::rules::auditd_privileged_commands`: Ensure use of privileged commands is collected
-* `cis_security_hardening::rules::auditd_privileged_functions_use`: Ensure execution of privileged functions is recorded
-* `cis_security_hardening::rules::auditd_process`: Ensure auditing for processes that start prior to auditd is enabled
-* `cis_security_hardening::rules::auditd_remote`: Ensure audit event multiplexor is configured to off-load audit logs onto a different system or storage media from the system being
-audited
-* `cis_security_hardening::rules::auditd_removexattr_use`: Ensure successful and unsuccessful attempts to use the removexattr system call are recorded
-* `cis_security_hardening::rules::auditd_scope`: Ensure changes to system administration scope (sudoers) is collected
-* `cis_security_hardening::rules::auditd_service`: Ensure auditd service is enabled .
-* `cis_security_hardening::rules::auditd_session_logins`: Ensure session initiation information is collected
-* `cis_security_hardening::rules::auditd_setfacl_use`: Ensure successful and unsuccessful attempts to use the setfacl command are recorded
-* `cis_security_hardening::rules::auditd_setxattr_use`: Ensure successful and unsuccessful attempts to use the setxattr system call are recorded
-* `cis_security_hardening::rules::auditd_ssh_agent_use`: Ensure successful and unsuccessful uses of the ssh-agent command are collected
-* `cis_security_hardening::rules::auditd_ssh_keysign_use`: Ensure successful and unsuccessful uses of the ssh-keysign command are collected
-* `cis_security_hardening::rules::auditd_sudoedit_use`: Ensure successful and unsuccessful attempts to use the sudoedit command are recorded
-* `cis_security_hardening::rules::auditd_system_locale`: Ensure events that modify the system's network environment are collected
-* `cis_security_hardening::rules::auditd_time_change`: Ensure events that modify date and time information are collected
-* `cis_security_hardening::rules::auditd_tools_perms`: Ensure audit tools are mode of 0755 or more restrictive and owned by the right user and group
-* `cis_security_hardening::rules::auditd_unix_update_use`: Ensure successful and unsuccessful attempts to use the unix_update command are recorded
-* `cis_security_hardening::rules::auditd_user_emulation`: Ensure actions as another user are always logged
-* `cis_security_hardening::rules::auditd_usermod_use`: Ensure successful and unsuccessful attempts to use the usermod command are recorded
-* `cis_security_hardening::rules::auditd_when_disk_full`: Ensure system is disabled when audit logs are full
-* `cis_security_hardening::rules::authselect`: Create custom authselect profile (Scored)
-* `cis_security_hardening::rules::avahi`: Ensure Avahi Server is not enabled
-* `cis_security_hardening::rules::bind`: Ensure DNS Server is not installed
-* `cis_security_hardening::rules::chrony`: Ensure chrony is configured
-* `cis_security_hardening::rules::cramfs`: Ensure mounting of cramfs filesystems is disabled
-* `cis_security_hardening::rules::cron_daily`: Ensure permissions on /etc/cron.daily are configured
-* `cis_security_hardening::rules::cron_hourly`: Ensure permissions on /etc/cron.hourly are configured
-* `cis_security_hardening::rules::cron_monthly`: Ensure permissions on /etc/cron.monthly are configured
-* `cis_security_hardening::rules::cron_restrict`: Ensure cron is restricted to authorized users
-* `cis_security_hardening::rules::cron_weekly`: Ensure permissions on /etc/cron.weekly are configured
-* `cis_security_hardening::rules::crond_service`: Ensure cron daemon is enabled and running
-* `cis_security_hardening::rules::crontab`: Ensure permissions on /etc/crontab are configured
-* `cis_security_hardening::rules::crtl_alt_del`: Ensure the Ctrl-Alt-Delete key sequence is disabled
-* `cis_security_hardening::rules::crypto_policy`: Ensure system-wide crypto policy is FUTURE or FIPS
-* `cis_security_hardening::rules::ctrl_alt_del_graphical`: Ensure the graphical user Ctrl-Alt-Delete key sequence is disabled
-* `cis_security_hardening::rules::cups`: Ensure CUPS is not enabled
-* `cis_security_hardening::rules::dev_shm`: Ensure /dev/shm is configured
-* `cis_security_hardening::rules::dev_shm_nodev`: Ensure nodev option set on /dev/shm partition
-* `cis_security_hardening::rules::dev_shm_noexec`: Ensure noexec option set on /dev/shm partition
-* `cis_security_hardening::rules::dev_shm_nosuid`: Ensure nosuid option set on /dev/shm partition
-* `cis_security_hardening::rules::dhcp`: Ensure DHCP Server is not enabled
-* `cis_security_hardening::rules::disable_automount`: Disable Automounting
-* `cis_security_hardening::rules::disable_dccp`: Ensure DCCP is disabled
-* `cis_security_hardening::rules::disable_ip_forwarding`: Ensure IP forwarding is disabled
-* `cis_security_hardening::rules::disable_ipv6`: Disable IPv6
-* `cis_security_hardening::rules::disable_packet_redirect`: Ensure packet redirect sending is disabled
-* `cis_security_hardening::rules::disable_prelink`: Ensure prelink is disabled
-* `cis_security_hardening::rules::disable_rds`: Ensure RDS is disabled
-* `cis_security_hardening::rules::disable_sctp`: Ensure SCTP is disabled
-* `cis_security_hardening::rules::disable_tipc`: Ensure TIPC is disabled
-* `cis_security_hardening::rules::disable_usb_storage`: Disable USB Storage
-* `cis_security_hardening::rules::disable_wireless`: Ensure wireless interfaces are disabled (Not Scored)
-* `cis_security_hardening::rules::dovecot`: Ensure IMAP and POP3 server is not enabled
-* `cis_security_hardening::rules::enable_aslr`: Ensure address space layout randomization (ASLR) is enabled
-* `cis_security_hardening::rules::enable_reverse_path_filtering`: Ensure Reverse Path Filtering is enabled
-* `cis_security_hardening::rules::enable_tcp_syn_cookies`: Ensure TCP SYN Cookies is enabled
-* `cis_security_hardening::rules::etc_crond`: Ensure permissions on /etc/cron.d are configured
-* `cis_security_hardening::rules::fat`: Ensure mounting of FAT filesystems is disabled
-* `cis_security_hardening::rules::fips_bootloader`: Ensure FIPS mode is enabled
-* `cis_security_hardening::rules::firewalld_default_zone`: Ensure default zone is set
-* `cis_security_hardening::rules::firewalld_install`: Ensure a Firewall package is installed
-* `cis_security_hardening::rules::firewalld_interfaces`: Ensure network interfaces are assigned to appropriate zone
-* `cis_security_hardening::rules::firewalld_ports_services`: Ensure unnecessary services and ports are not accepted
-* `cis_security_hardening::rules::firewalld_service`: Ensure firewalld service is enabled and running
-* `cis_security_hardening::rules::freevxfs`: Ensure mounting of freevxfs filesystems is disabled
-* `cis_security_hardening::rules::ftp`: Ensure FTP Server is not installed
-* `cis_security_hardening::rules::gdm_auto_mount`: Ensure automatic mounting of removable media is disabled
-* `cis_security_hardening::rules::gdm_lock_enabled`: Ensure user's session lock is enabled
-* `cis_security_hardening::rules::gnome_gdm`
-* `cis_security_hardening::rules::gnome_gdm_package`: Ensure GNOME Display Manager is removed
-* `cis_security_hardening::rules::group_bak_perms`: Ensure permissions on /etc/group- are configured
-* `cis_security_hardening::rules::group_perms`: Ensure permissions on /etc/group are configured
-* `cis_security_hardening::rules::grub_bootloader_config`: Ensure permissions on bootloader config are configured
-* `cis_security_hardening::rules::grub_password`: Ensure bootloader password is set
-* `cis_security_hardening::rules::gshadow_bak_perms`: Ensure permissions on /etc/gshadow- are configured
-* `cis_security_hardening::rules::gshadow_perms`: Ensure permissions on /etc/gshadow are configured
-* `cis_security_hardening::rules::hfs`: Ensure mounting of hfs filesystems is disabled
-* `cis_security_hardening::rules::hfsplus`: Ensure mounting of hfsplus filesystems is disabled
-* `cis_security_hardening::rules::home_grpquota`: Ensure grpquota option set on /home partition
-* `cis_security_hardening::rules::home_nodev`: Ensure nodev option set on /home partition
-* `cis_security_hardening::rules::home_nosuid`: Ensure nosuid option set on /home partition
-* `cis_security_hardening::rules::home_usrquota`: Ensure usrquota option set on /home partition
-* `cis_security_hardening::rules::httpd`: Ensure HTTP server is not enabled
-* `cis_security_hardening::rules::icmp_redirects`: Ensure ICMP redirects are not accepted
-* `cis_security_hardening::rules::ignore_bogus_icmp_responses`: Ensure bogus ICMP responses are ignored
-* `cis_security_hardening::rules::ignore_icmp_broadcast`: Ensure broadcast ICMP requests are ignored
-* `cis_security_hardening::rules::ip6tables_deny_policy`: Ensure default deny firewall policy
-* `cis_security_hardening::rules::ip6tables_loopback`: Ensure loopback traffic is configured
-* `cis_security_hardening::rules::ip6tables_open_ports`: Ensure IPv6 firewall rules exist for all open ports
-* `cis_security_hardening::rules::ip6tables_outbound_established`: Ensure outbound and established connections are configured
-* `cis_security_hardening::rules::iptables_deny_policy`: Ensure default deny firewall policy
-* `cis_security_hardening::rules::iptables_install`: Ensure iptables is installed
-* `cis_security_hardening::rules::iptables_loopback`: Ensure loopback traffic is configured
-* `cis_security_hardening::rules::iptables_open_ports`: Ensure firewall rules exist for all open ports
-* `cis_security_hardening::rules::iptables_outbound_established`: Ensure outbound and established connections are configured
-* `cis_security_hardening::rules::ipv6_router_advertisements`: Ensure IPv6 router advertisements are not accepted
-* `cis_security_hardening::rules::issue_net_perms`: Ensure permissions on /etc/issue.net are configured
-* `cis_security_hardening::rules::issue_perms`: Ensure permissions on /etc/issue are configured
-* `cis_security_hardening::rules::jffs2`: Ensure mounting of jffs2 filesystems is disabled
-* `cis_security_hardening::rules::journald_compress`: Ensure journald is configured to compress large log files
-* `cis_security_hardening::rules::journald_persistent`: Ensure journald is configured to write logfiles to persistent disk
-* `cis_security_hardening::rules::journald_rsyslog`: Ensure journald is configured to send logs to rsyslog
-* `cis_security_hardening::rules::kdump_service`: Ensure kdump service is not enabled
-* `cis_security_hardening::rules::ldap_client`: Ensure LDAP client is not installed
-* `cis_security_hardening::rules::ldapd`: Ensure LDAP server is not enabled
-* `cis_security_hardening::rules::limits_maxlogins`: Ensure maxlogins is 10 or less
-* `cis_security_hardening::rules::lock_root`: Ensure root account is locked
-* `cis_security_hardening::rules::log_suspicious_packets`: Ensure suspicious packets are logged
-* `cis_security_hardening::rules::logfile_permissions`: Ensure permissions on all logfiles are configured
-* `cis_security_hardening::rules::logrotate`: Ensure logrotate is configured
-* `cis_security_hardening::rules::logrotate_configuration`: Ensure logrotate assigns appropriate permissions
-* `cis_security_hardening::rules::mcstrans`: Ensure the MCS Translation Service (mcstrans) is not installed
-* `cis_security_hardening::rules::motd_perms`: Ensure message of the day is configured properly
-* `cis_security_hardening::rules::mta_local`: Ensure mail transfer agent is configured for local-only mode
-* `cis_security_hardening::rules::net_snmp`: Ensure net-snmp is not installed
-* `cis_security_hardening::rules::nfs`: Ensure NFS is not enabled
-* `cis_security_hardening::rules::nfs_utils`: Ensure nfs-utils is not installed or the nfs-server service is masked
-* `cis_security_hardening::rules::nftables_base_chains`: Ensure base chains exist
-* `cis_security_hardening::rules::nftables_default_deny`: Ensure default deny firewall policy
-* `cis_security_hardening::rules::nftables_flush_iptables`: Ensure iptables are flushed
-* `cis_security_hardening::rules::nftables_install`: Ensure nftables is installed
-* `cis_security_hardening::rules::nftables_loopback`: Ensure loopback traffic is configured
-* `cis_security_hardening::rules::nftables_outbound_established`: Ensure outbound and established connections are configured
-* `cis_security_hardening::rules::nftables_persistence`: Ensure nftables rules are permanent
-* `cis_security_hardening::rules::nftables_service`: Ensure nftables service is enabled
-* `cis_security_hardening::rules::nftables_table`: Ensure a table exists
-* `cis_security_hardening::rules::nis`: Ensure NIS Server is not enabled
-* `cis_security_hardening::rules::nis_client`: Ensure NIS Client is not installed
-* `cis_security_hardening::rules::ntp_package`: Install ntp package
-* `cis_security_hardening::rules::ntpd`: Ensure ntp is configured
-* `cis_security_hardening::rules::opensc_pkcs11`: Ensure the opensc-pcks11 is installed
-* `cis_security_hardening::rules::pam_cached_auth`: Ensure PAM prohibits the use of cached authentications after one day
-* `cis_security_hardening::rules::pam_fail_delay`: Ensure loging delay after failed logon attempt
-* `cis_security_hardening::rules::pam_last_logon`: Ensure last successful account logon is displayed upon logon
-* `cis_security_hardening::rules::pam_lockout`: Ensure lockout for failed password attempts is configured
-* `cis_security_hardening::rules::pam_mfa`: Ensure smart card logins for multifactor authentication for local and network access
-* `cis_security_hardening::rules::pam_old_passwords`: Ensure password reuse is limited
-* `cis_security_hardening::rules::pam_passwd_sha512`: Ensure password hashing algorithm is SHA-512
-* `cis_security_hardening::rules::pam_pkcs11`: Ensure the libpam-pkcs11 package is installed
-* `cis_security_hardening::rules::pam_pw_requirements`: Ensure password creation requirements are configured
-* `cis_security_hardening::rules::pam_use_mappers`: Ensure authenticated identity is mapped to the user or group account for PKI-based authentication
-* `cis_security_hardening::rules::passwd_bak_perms`: Ensure permissions on /etc/group- are configured
-* `cis_security_hardening::rules::passwd_expiration`: Ensure password expiration is 365 days or less
-* `cis_security_hardening::rules::passwd_inactive_days`: Ensure inactive password lock is 30 days or less
-* `cis_security_hardening::rules::passwd_min_days`: Ensure minimum days between password changes is 7 or more
-* `cis_security_hardening::rules::passwd_perms`: Ensure permissions on /etc/passwd are configured
-* `cis_security_hardening::rules::passwd_sha512`: Ensure ENCRYPT_METHOD is SHA512
-* `cis_security_hardening::rules::passwd_warn_days`: Ensure password expiration warning days is 7 or more
-* `cis_security_hardening::rules::pki_certs_validation`: Ensure certificates are validated by constructing a certification path to an accepted trust anchor
-* `cis_security_hardening::rules::restrict_core_dumps`: A core dump is the memory of an executable program. It is generally used to determine why a program aborted. It can also be used to glean con
-* `cis_security_hardening::rules::restrict_su`: Ensure access to the su command is restricted
-* `cis_security_hardening::rules::root_gid`: Ensure default group for the root account is GID 0
-* `cis_security_hardening::rules::rpcbind`: Ensure rpcbind is not installed or the rpcbind services are masked
-* `cis_security_hardening::rules::rsh_client`: Ensure rsh client is not installed
-* `cis_security_hardening::rules::rsh_server`: Ensure rsh-server is not installed
-* `cis_security_hardening::rules::rsyncd`: Ensure rsync is not installed or the rsyncd service is masked
-* `cis_security_hardening::rules::rsyslog_default_file_perms`: Ensure rsyslog default file permissions configured
-* `cis_security_hardening::rules::rsyslog_installed`: Ensure rsyslog or syslog-ng is installed
-* `cis_security_hardening::rules::rsyslog_logging`: Ensure logging is configured
-* `cis_security_hardening::rules::rsyslog_remote_logs`: Ensure rsyslog is configured to send logs to a remote log host
-* `cis_security_hardening::rules::rsyslog_remote_syslog`: Ensure remote rsyslog messages are only accepted on designated log hosts.
-* `cis_security_hardening::rules::rsyslog_service`: Ensure rsyslog Service is enabled
-* `cis_security_hardening::rules::samba`: Ensure Samba is not installed
-* `cis_security_hardening::rules::secure_icmp_redirects`: Ensure secure ICMP redirects are not accepted
-* `cis_security_hardening::rules::selinux`: Ensure SELinux is installed
-* `cis_security_hardening::rules::selinux_bootloader`: Ensure SELinux is not disabled in bootloader configuration
-* `cis_security_hardening::rules::selinux_policy`: Ensure SELinux policy is configured
-* `cis_security_hardening::rules::selinux_state`: Ensure the SELinux state is enforcing or permissive
-* `cis_security_hardening::rules::setroubleshoot`: Ensure SETroubleshoot is not installed
-* `cis_security_hardening::rules::shadow_bak_perms`: Ensure permissions on /etc/shadow- are configured
-* `cis_security_hardening::rules::shadow_encrypt_sha512`: Ensure password hashing algorithm is SHA-512
-* `cis_security_hardening::rules::shadow_perms`: Ensure permissions on /etc/shadow are configured
-* `cis_security_hardening::rules::shadowed_passwords`: Ensure accounts in /etc/passwd use shadowed passwords
-* `cis_security_hardening::rules::shell_nologin`: Ensure system accounts aresecured
-* `cis_security_hardening::rules::single_user_mode`: Ensure authentication required for single user mode
-* `cis_security_hardening::rules::source_routed_packets`: Ensure source routed packets are not accepted
-* `cis_security_hardening::rules::squashfs`: Ensure mounting of squashfs filesystems is disabled
-* `cis_security_hardening::rules::squid`: Ensure HTTP Proxy Server is not enabled
-* `cis_security_hardening::rules::sshd_banner`
-* `cis_security_hardening::rules::sshd_ciphers`: Ensure only strong Ciphers are used
-* `cis_security_hardening::rules::sshd_config_permissions`: Ensure permissions on /etc/ssh/sshd_config are configured
-* `cis_security_hardening::rules::sshd_crypto_policy`: Ensure system-wide crypto policy is not over-ridden
-* `cis_security_hardening::rules::sshd_empty_passwords`: Ensure SSH PermitEmptyPasswords is disabled
-* `cis_security_hardening::rules::sshd_hostbased_authentication`: Ensure SSH HostbasedAuthentication is disabled
-* `cis_security_hardening::rules::sshd_ignore_rhosts`: Ensure SSH IgnoreRhosts is enabled
-* `cis_security_hardening::rules::sshd_install`: Ensure SSH is installed and active
-* `cis_security_hardening::rules::sshd_kex`: Ensure only strong Key Exchange algorithms are used
-* `cis_security_hardening::rules::sshd_limit_access`: Ensure SSH access is limited
-* `cis_security_hardening::rules::sshd_login_gracetime`: Ensure SSH LoginGraceTime is set to one minute or less
-* `cis_security_hardening::rules::sshd_loglevel`: Ensure SSH LogLevel is set to INFO
-* `cis_security_hardening::rules::sshd_macs`: Ensure only approved MAC algorithms are used
-* `cis_security_hardening::rules::sshd_max_auth_tries`: Ensure SSH MaxAuthTries is set to 4 or less
-* `cis_security_hardening::rules::sshd_max_sessions`: Ensure SSH MaxSessions is set to 4 or less
-* `cis_security_hardening::rules::sshd_max_startups`: Ensure SSH MaxStartups is configured
-* `cis_security_hardening::rules::sshd_private_keys`: Ensure permissions on SSH private host key files are configured
-* `cis_security_hardening::rules::sshd_public_keys`: Ensure permissions on SSH public host key files are configured
-* `cis_security_hardening::rules::sshd_root_login`: Ensure SSH root login is disabled
-* `cis_security_hardening::rules::sshd_tcp_forwarding`: Ensure SSH AllowTcpForwarding is disabled
-* `cis_security_hardening::rules::sshd_timeouts`: Ensure SSH Idle Timeout Interval is configured
-* `cis_security_hardening::rules::sshd_use_pam`: Ensure SSH PAM is enabled
-* `cis_security_hardening::rules::sshd_user_environment`: Ensure SSH PermitUserEnvironment is disabled
-* `cis_security_hardening::rules::sshd_x11_forward`: Ensure SSH X11 forwarding is disabled
-* `cis_security_hardening::rules::sshd_x11_use_localhost`: Ensure X11UseLocalhost is enabled
-* `cis_security_hardening::rules::sticky_world_writeable_files`: Ensure sticky bit is set on all world-writable directories
-* `cis_security_hardening::rules::sudo_installed`: Ensure sudo is installed
-* `cis_security_hardening::rules::sudo_log`: Ensure sudo log file exists
-* `cis_security_hardening::rules::sudo_timeout`: Ensure sudo authentication timeout is configured correctly
-* `cis_security_hardening::rules::sudo_use_pty`: Ensure sudo commands use pty
-* `cis_security_hardening::rules::system_cmd_group`: Ensure system command files are group-owned by root
-* `cis_security_hardening::rules::systemd_timesyncd`: Ensure systemd-timesyncd is configured (Not Scored)
-* `cis_security_hardening::rules::talk_client`: Ensure talk client is not installed
-* `cis_security_hardening::rules::telnet_client`: Ensure telnet client is not installed
-* `cis_security_hardening::rules::telnet_server`: Ensure telnet-server is not installed
-* `cis_security_hardening::rules::tftp_client`: Ensure TFTP client is not installed
-* `cis_security_hardening::rules::tftp_server`: Ensure TFTP Server is not installed
-* `cis_security_hardening::rules::timeout_setting`: Ensure default user shell timeout is configured
-* `cis_security_hardening::rules::timezone_utc_gmt`: Ensure system timezone is set to UTC or GMT
-* `cis_security_hardening::rules::tmp_filesystem`: Ensure /tmp is configured
-* `cis_security_hardening::rules::tmp_nodev`: Ensure nodev option set on /tmp partition
-* `cis_security_hardening::rules::tmp_noexec`: Ensure noexec option set on /tmp partition
-* `cis_security_hardening::rules::tmp_nosuid`: Ensure nosuid option set on /tmp partition
-* `cis_security_hardening::rules::udf`: Ensure mounting of udf filesystems is disabled
-* `cis_security_hardening::rules::ufw_default_deny`: Ensure default deny firewall policy
-* `cis_security_hardening::rules::ufw_install`: Ensure ufw is installed
-* `cis_security_hardening::rules::ufw_loopback`: Ensure loopback traffic is configured
-* `cis_security_hardening::rules::ufw_open_ports`: Ensure firewall rules exist for all open ports
-* `cis_security_hardening::rules::ufw_outbound`: Ensure outbound connections are configured (Not Scored)
-* `cis_security_hardening::rules::ufw_service`: Ensure ufw service is enabled
-* `cis_security_hardening::rules::umask_setting`: Ensure default user umask is configured
-* `cis_security_hardening::rules::var_log_audit_nodev`: Ensure nodev option set on /var/log/audit partition
-* `cis_security_hardening::rules::var_log_audit_noexec`: Ensure noexec option set on /var/log/audit partition
-* `cis_security_hardening::rules::var_log_audit_nosuid`: Ensure nosuid option set on /var/log/audit partition
-* `cis_security_hardening::rules::var_log_nodev`: Ensure nodev option set on /var/log partition
-* `cis_security_hardening::rules::var_log_noexec`: Ensure noexec option set on /var/log partition
-* `cis_security_hardening::rules::var_log_nosuid`: Ensure nosuid option set on /var/log partition
-* `cis_security_hardening::rules::var_log_syslog_perms`: Ensure /var/log/syslog is group-owned by adm, owned by syslog and has permissions 0640
-* `cis_security_hardening::rules::var_nodev`: Ensure nodev option set on /var partition
-* `cis_security_hardening::rules::var_noexec`: Ensure noexec option set on /var partition
-* `cis_security_hardening::rules::var_nosuid`: Ensure nosuid option set on /var partition
-* `cis_security_hardening::rules::var_tmp_nodev`: Ensure nodev option set on /var/tmp partition
-* `cis_security_hardening::rules::var_tmp_noexec`: Ensure noexec option set on /var/tmp partition
-* `cis_security_hardening::rules::var_tmp_nosuid`: Ensure nosuid option set on /var/tmp partition
-* `cis_security_hardening::rules::vlock`: A
-Ensure vlock is installed
-* `cis_security_hardening::rules::vsftp`: Ensure FTP Server is not enabled
-* `cis_security_hardening::rules::x11_installed`: Ensure X Window System is not installed
-* `cis_security_hardening::rules::xdmcp_config`: Ensure XDCMP is not enabled
-* `cis_security_hardening::rules::xinetd`: Ensure xinetd is not installed
-* `cis_security_hardening::rules::yum_gpgcheck`: Ensure gpgcheck is globally activated
-* `cis_security_hardening::rules::zypper_gpgcheck`: Ensure gpgcheck is globally activated
+* `cis_security_hardening::rules::auditd_log_perms`: Ensure audit log files are not read or write-accessible by unauthorized users
+* `cis_security_hardening::rules::auditd_privileged_priv_change`: Ensure successful and unsuccessful uses of the su command are collected
+* `cis_security_hardening::rules::auditd_sudo_use`: Ensure successful and unsuccessful uses of the sudo command are recorded
 
 ### Defined types
 
@@ -358,6 +358,7 @@ Ensure vlock is installed
 * [`check_stig_cert_fingerprints`](#check_stig_cert_fingerprints): Check if all certificates match DoD fingerprints.
 * [`check_system_accounts_secured`](#check_system_accounts_secured): Check system accounts are secured.
 * [`check_uid_0_files`](#check_uid_0_files): Check root is the only UID 0 account.
+* [`check_unconfines_services`](#check_unconfines_services): Check for unconfined services.
 * [`check_user_home_dirs_exist`](#check_user_home_dirs_exist): Check all users' home directories exist.
 * [`check_user_last_passwd_in_past`](#check_user_last_passwd_in_past): Check all users last password change date is in the past.
 * [`check_users_dot_files`](#check_users_dot_files): Check users' dot files are not group or world writable.
@@ -575,52 +576,728 @@ Data type: `Stdlib::Absolutepath`
 
 Command to use for fact upload.
 
-### <a name="cis_security_hardeningrulesauditd_log_perms"></a>`cis_security_hardening::rules::auditd_log_perms`
+### <a name="cis_security_hardeningrulesaide_installed"></a>`cis_security_hardening::rules::aide_installed`
 
-The operating system must be configured so that audit log files are not read or write- accessible by unauthorized users.
-
-The operating system must be configured to permit only authorized users ownership of the audit log files.
-
-The operating system must permit only authorized groups ownership of the audit log files.
+AIDE takes a snapshot of filesystem state including modification times, permissions, and file hashes
+which can then be used to compare against the current state of the filesystem to detect modifications
+to the system.
 
 Rationale:
-Unauthorized disclosure of audit records can reveal system and configuration data to attackers, thus compromising its confidentiality.
-
-Audit information includes all information (e.g., audit records, audit settings, audit reports) needed to successfully audit
-operating system activity.
-
-Satisfies: SRG-OS-000057-GPOS-00027, SRG-OS-000058-GPOS-00028
-
-Unauthorized disclosure of audit records can reveal system and configuration data to attackers, thus compromising its confidentiality.
-
-Audit information includes all information (e.g., audit records, audit settings, audit reports) needed to successfully audit
-operating system activity.
-
-Satisfies: SRG-OS-000057-GPOS-00027, SRG-OS-000058-GPOS-00028, SRG-OS-000059- GPOS-00029
-
-Unauthorized disclosure of audit records can reveal system and configuration data to attackers, thus compromising its confidentiality.
-
-Audit information includes all information (e.g., audit records, audit settings, audit reports) needed to successfully audit
-operating system activity.
-
-Satisfies: SRG-OS-000057-GPOS-00027, SRG-OS-000058-GPOS-00028, SRG-OS-000059- GPOS-00029
+By monitoring the filesystem state compromised files can be detected to prevent or limit the exposure
+of accidental or malicious misconfigurations or modified binaries.
 
 #### Examples
 
 ##### 
 
 ```puppet
-class { 'cis_security_hardening::rules::auditd_log_perms':
-  enforce => true,
-  user => 'root',
-  group => 'root',
-  mode => '0600',
+class { 'cis_security_hardening::rules::aide_installed':
+    enforce => true,
 }
 ```
 
 #### Parameters
 
-The following parameters are available in the `cis_security_hardening::rules::auditd_log_perms` class:
+The following parameters are available in the `cis_security_hardening::rules::aide_installed` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesaide_notify_admins"></a>`cis_security_hardening::rules::aide_notify_admins`
+
+The Ubuntu operating system must notify designated personnel if baseline configurations are changed
+in an unauthorized manner. The file integrity tool must notify the System Administrator when changes
+to the baseline configuration or anomalies
+
+Rationale:
+Unauthorized changes to the baseline configuration could make the system vulnerable to various attacks or
+allow unauthorized access to the operating system. Changes to operating system configurations can have
+unintended side effects, some of which may be relevant to security.
+
+Detecting such changes and providing an automated response can help avoid unintended, negative consequences
+that could ultimately affect the security state of the operating system. The operating system's IMO/ISSO
+and SAs must be notified via email and/or monitoring system trap when there is an unauthorized modification
+of a configuration item.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::aide_notify_admins':
+  enforce => true
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::aide_notify_admins` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesaide_regular_checks"></a>`cis_security_hardening::rules::aide_regular_checks`
+
+Periodic checking of the filesystem integrity is needed to detect changes to the filesystem.
+
+Rationale:
+Periodic file checking allows the system administrator to determine on a regular basis if critical
+files have been changed in an unauthorized fashion.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::aide_regular_checks':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::aide_regular_checks` class:
+
+* [`enforce`](#enforce)
+* [`hour`](#hour)
+* [`minute`](#minute)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="hour"></a>`hour`
+
+Data type: `Integer`
+
+Cron hour.
+
+Default value: `0`
+
+##### <a name="minute"></a>`minute`
+
+Data type: `Integer`
+
+Cron minute.
+
+Default value: `5`
+
+### <a name="cis_security_hardeningrulesapparmor"></a>`cis_security_hardening::rules::apparmor`
+
+AppArmor provides Mandatory Access Controls.
+
+Rationale:
+Without a Mandatory Access Control system installed only the default Discretionary
+Access Control system will be available.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::apparmor':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::apparmor` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesapparmor_bootloader"></a>`cis_security_hardening::rules::apparmor_bootloader`
+
+Configure AppArmor to be enabled at boot time and verify that it has not been
+overwritten by the bootloader boot parameters.
+
+Rationale:
+AppArmor must be enabled at boot time in your bootloader configuration to ensure
+that the controls it provides are not overridden.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::apparmor_bootloader':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::apparmor_bootloader` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesapparmor_profiles"></a>`cis_security_hardening::rules::apparmor_profiles`
+
+AppArmor profiles define what resources applications are able to access.
+
+Rationale:
+Security configuration requirements vary from site to site. Some sites may mandate a policy
+that is stricter than the default policy, which is perfectly acceptable. This item is intended
+to ensure that any policies that exist on the system are activated.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::apparmor_profiles':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::apparmor_profiles` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesapparmor_profiles_enforcing"></a>`cis_security_hardening::rules::apparmor_profiles_enforcing`
+
+AppArmor profiles define what resources applications are able to access.
+
+Rationale:
+Security configuration requirements vary from site to site. Some sites may mandate a policy that is stricter
+than the default policy, which is perfectly acceptable. This item is intended to ensure that any policies
+that exist on the system are activated.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::apparmor_profiles':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::apparmor_profiles_enforcing` class:
+
+* [`enforce`](#enforce)
+* [`mode`](#mode)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+##### <a name="mode"></a>`mode`
+
+Data type: `Enum['enforce', 'complain']`
+
+Run apparmor in complain or enforce mode.
+
+Default value: `'enforce'`
+
+### <a name="cis_security_hardeningrulesapt_unused"></a>`cis_security_hardening::rules::apt_unused`
+
+The Ubuntu operating system must be configured so that Advance Package Tool (APT) removes all software components
+after updated versions have been installed.
+
+Rationale:
+Previous versions of software components that are not removed from the information system after updates have been
+installed may be exploited by adversaries. Some information technology products may remove older versions of
+software automatically from the information system.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::apt_unused':
+  ensure => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::apt_unused` class:
+
+* [`enforce`](#enforce)
+* [`files`](#files)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce autoremove
+
+Default value: ``false``
+
+##### <a name="files"></a>`files`
+
+Data type: `Array`
+
+List of files to check
+
+Default value: `['/etc/apt/apt.conf.d/50unattended-upgrades']`
+
+### <a name="cis_security_hardeningrulesat_restrict"></a>`cis_security_hardening::rules::at_restrict`
+
+If at is installed in the system, configure /etc/at.allow to allow specific users to use
+these services. If /etc/at.allow does not exist, then /etc/at.deny is checked. Any user
+not specifically defined in those files is allowed to use at. By removing the file, only
+users in /etc/at.allow are allowed to use at.
+
+Note: Even though a given user is not listed in at.allow, at jobs can still be run as that user.
+The at.allow file only controls administrative access to the at command for scheduling and
+modifying at jobs.
+
+Rationale:
+On many systems, only the system administrator is authorized to schedule at jobs. Using the
+at.allow file to control who can run at jobs enforces this policy. It is easier to manage an
+allow list than a deny list. In a deny list, you could potentially add a user ID to the system
+and forget to add it to the deny files.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::at_restrict':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::at_restrict` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_access"></a>`cis_security_hardening::rules::auditd_access`
+
+Monitor for unsuccessful attempts to access files. The parameters below are associated with
+system calls that control creation ( creat ), opening ( open , openat ) and truncation
+( truncate , ftruncate ) of files. An audit log record will only be written if the user is a
+non- privileged user (auid >= 1000), is not a Daemon event (auid=4294967295) and if the
+system call returned EACCES (permission denied to the file) or EPERM (some other permanent
+error associated with the specific system call). All audit records will be tagged with the
+identifier "access."
+
+Rationale:
+Failed attempts to open, create or truncate files could be an indication that an individual
+or process is trying to gain unauthorized access to the system.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_access':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_access` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_actions"></a>`cis_security_hardening::rules::auditd_actions`
+
+Monitor the sudo log file. If the system has been properly configured to disable the use
+of the su command and force all administrators to have to log in first and then use sudo
+to execute privileged commands, then all administrator commands will be logged to /var/log/sudo.log.
+Any time a command is executed, an audit event will be triggered as the /var/log/sudo.log file will
+be opened for write and the executed administration command will be written to the log.
+
+Rationale:
+Changes in /var/log/sudo.log indicate that an administrator has executed a command or the log file
+itself has been tampered with. Administrators will want to correlate the events written to the audit
+trail with the records written to /var/log/sudo.log to verify if unauthorized commands have been executed.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_actions':
+          enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_actions` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Sets rule enforcement. If set to true, code will be exeuted to bring the system into a compliant state.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_apparmor_parser_use"></a>`cis_security_hardening::rules::auditd_apparmor_parser_use`
+
+he operating system must generate audit records for successful/unsuccessful uses of the apparmor_parser command.
+
+Rationale:
+Without generating audit records that are specific to the security and mission needs of the organization, it would
+be difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible
+for one.
+
+Audit records can be generated from various components within the information system (e.g., module or policy filter).
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_apparmor_parser_use':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_apparmor_parser_use` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_backlog_limit"></a>`cis_security_hardening::rules::auditd_backlog_limit`
+
+The backlog limit has a default setting of 64
+
+Rationale:
+during boot if audit=1, then the backlog will hold 64 records. If more that 64 records are
+created during boot, auditd records will be lost and potential malicious activity could go
+undetected.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_backlog_limit':
+          enforce => true,
+          backlog_limit => 8192,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_backlog_limit` class:
+
+* [`enforce`](#enforce)
+* [`backlog_limit`](#backlog_limit)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Sets rule enforcement. If set to true, code will be exeuted to bring the system into a comliant state.
+
+Default value: ``false``
+
+##### <a name="backlog_limit"></a>`backlog_limit`
+
+Data type: `Integer`
+
+Number of records in backlog
+
+Default value: `8192`
+
+### <a name="cis_security_hardeningrulesauditd_chacl_use"></a>`cis_security_hardening::rules::auditd_chacl_use`
+
+The operating system must generate audit records for successful/unsuccessful uses of the chacl command
+
+Rationale:
+Without generating audit records that are specific to the security and mission needs of the organization, it
+would be difficult to establish, correlate, and investigate the events relating to an incident or identify
+those responsible for one.
+
+Audit records can be generated from various components within the information system (e.g., module or policy filter).
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_chacl_use':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_chacl_use` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_chage_use"></a>`cis_security_hardening::rules::auditd_chage_use`
+
+The operating system must generate audit records for successful/unsuccessful uses of the chage command
+
+Rationale:
+Without generating audit records that are specific to the security and mission needs of the organization,
+it would be difficult to establish, correlate, and investigate the events relating to an incident or identify
+those responsible for one.
+
+Audit records can be generated from various components within the information system (e.g., module or policy filter).
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_chage_use':
+  enforce =A true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_chage_use` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_chcon_use"></a>`cis_security_hardening::rules::auditd_chcon_use`
+
+The operating system must generate audit records for successful/unsuccessful uses of the chcon command.
+
+Rationale:
+Without generating audit records that are specific to the security and mission needs of the organization, it
+would be difficult to establish, correlate, and investigate the events relating to an incident or identify
+those responsible for one.
+
+Audit records can be generated from various components within the information system (e.g., module or policy filter).
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_chcon_use':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_chcon_use` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_chfn_use"></a>`cis_security_hardening::rules::auditd_chfn_use`
+
+The operating system must generate audit records for successful/unsuccessful uses of the chfn command.
+
+Rationale:
+Without generating audit records that are specific to the security and mission needs of the organization,
+it would be difficult to establish, correlate, and investigate the events relating to an incident or identify
+those responsible for one.
+
+Audit records can be generated from various components within the information system (e.g., module or policy filter).
+
+#### Examples
+
+##### 
+
+```puppet
+class 'cis_security_hardening::rules::auditd_chfn_use':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_chfn_use` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_chsh_use"></a>`cis_security_hardening::rules::auditd_chsh_use`
+
+The operating system must generate audit records for successful/unsuccessful uses of the chsh command.
+
+Rationale:
+Without generating audit records that are specific to the security and mission needs of the organization,
+it would be difficult to establish, correlate, and investigate the events relating to an incident or identify
+those responsible for one.
+
+Audit records can be generated from various components within the information system (e.g., module or policy filter).
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_chsh_use':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_chsh_use` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_conf_perms"></a>`cis_security_hardening::rules::auditd_conf_perms`
+
+The operating system must be configured so that audit configuration files are not write- accessible by unauthorized users.
+
+The operating system must permit only authorized accounts to own the audit configuration files.
+
+The operating system must permit only authorized groups to own the audit configuration files.
+
+Rationale:
+Without the capability to restrict which roles and individuals can select which events are audited, unauthorized personnel
+may be able to prevent the auditing of critical events.
+
+Misconfigured audits may degrade the system's performance by overwhelming the audit log. Misconfigured audits may also
+make it more difficult to establish, correlate, and investigate the events relating to an incident or identify those
+responsible for one.
+
+Without the capability to restrict which roles and individuals can select which events are audited, unauthorized personnel
+may be able to prevent the auditing of critical events.
+
+Misconfigured audits may degrade the system's performance by overwhelming the audit log. Misconfigured audits may also make
+it more difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible
+for one.
+
+Without the capability to restrict which roles and individuals can select which events are audited, unauthorized personnel
+may be able to prevent the auditing of critical events.
+
+Misconfigured audits may degrade the system's performance by overwhelming the audit log. Misconfigured audits may also make
+it more difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible
+for one.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_conf_perms':
+  enforce => true,
+  user => 'root',
+  group => 'root',
+  mode => '0640',
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_conf_perms` class:
 
 * [`enforce`](#enforce)
 * [`user`](#user)
@@ -639,7 +1316,7 @@ Default value: ``false``
 
 Data type: `String`
 
-User who owns the audit logfiles.
+User owning the files.
 
 Default value: `'root'`
 
@@ -647,7 +1324,7 @@ Default value: `'root'`
 
 Data type: `String`
 
-Group who owns the audit logfiles.
+Group owning the files.
 
 Default value: `'root'`
 
@@ -655,13 +1332,13 @@ Default value: `'root'`
 
 Data type: `String`
 
-Access permissions for the auditd logfiles.
+File access permissions.
 
-Default value: `'0600'`
+Default value: `'0640'`
 
-### <a name="cis_security_hardeningrulesauditd_privileged_priv_change"></a>`cis_security_hardening::rules::auditd_privileged_priv_change`
+### <a name="cis_security_hardeningrulesauditd_crontab_use"></a>`cis_security_hardening::rules::auditd_crontab_use`
 
-The operating system must generate audit records for successful/unsuccessful uses of the su command.
+The operating system must generate audit records for successful/unsuccessful uses of the crontab command.
 
 Rationale:
 Without generating audit records that are specific to the security and mission needs of the organization,
@@ -670,21 +1347,19 @@ those responsible for one.
 
 Audit records can be generated from various components within the information system (e.g., module or policy filter).
 
-@ api private
-
 #### Examples
 
 ##### 
 
 ```puppet
-class 8 'cis_security_hardening::rules::auditd_privileged_priv_change':
+class { 'cis_security_hardening::rules::auditd_crontab_use':
   enforce => true,
 }
 ```
 
 #### Parameters
 
-The following parameters are available in the `cis_security_hardening::rules::auditd_privileged_priv_change` class:
+The following parameters are available in the `cis_security_hardening::rules::auditd_crontab_use` class:
 
 * [`enforce`](#enforce)
 
@@ -692,13 +1367,50 @@ The following parameters are available in the `cis_security_hardening::rules::au
 
 Data type: `Boolean`
 
-Enforce the rule
+Enforce the rule.
 
 Default value: ``false``
 
-### <a name="cis_security_hardeningrulesauditd_sudo_use"></a>`cis_security_hardening::rules::auditd_sudo_use`
+### <a name="cis_security_hardeningrulesauditd_delete"></a>`cis_security_hardening::rules::auditd_delete`
 
-The operating system must generate audit records for successful/unsuccessful uses of the sudo command.
+Monitor the use of system calls associated with the deletion or renaming of files and file
+attributes. This configuration statement sets up monitoring for the unlink (remove a file),
+unlinkat (remove a file attribute), rename (rename a file) and renameat (rename a file attribute)
+system calls and tags them with the identifier "delete".
+
+Rationale:
+Monitoring these calls from non-privileged users could provide a system administrator with evidence
+that inappropriate removal of files and file attributes associated with protected files is occurring.
+While this audit option will look at all events, system administrators will want to look for specific
+privileged files that are being deleted or altered.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_delete':
+          enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_delete` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Sets rule enforcement. If set to true, code will be exeuted to bring the system into a comliant state.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_fdisk_use"></a>`cis_security_hardening::rules::auditd_fdisk_use`
+
+The operating system must generate audit records when successful/unsuccessful attempts to use the fdisk command.
 
 Rationale:
 Without generating audit records that are specific to the security and mission needs of the organization, it would
@@ -712,14 +1424,14 @@ Audit records can be generated from various components within the information sy
 ##### 
 
 ```puppet
-class { 'cis_security_hardening::rules::auditd_sudo_use':
+class { 'cis_security_hardening::rules::auditd_fdisk_use':
   enforce => true,
 }
 ```
 
 #### Parameters
 
-The following parameters are available in the `cis_security_hardening::rules::auditd_sudo_use` class:
+The following parameters are available in the `cis_security_hardening::rules::auditd_fdisk_use` class:
 
 * [`enforce`](#enforce)
 
@@ -728,6 +1440,5335 @@ The following parameters are available in the `cis_security_hardening::rules::au
 Data type: `Boolean`
 
 Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_finit_module_use"></a>`cis_security_hardening::rules::auditd_finit_module_use`
+
+The operating system must generate audit records for successful/unsuccessful uses of the finit_module syscall.
+
+Rationale:
+Without generating audit records that are specific to the security and mission needs of the organization, it
+would be difficult to establish, correlate, and investigate the events relating to an incident or identify
+those responsible for one.
+
+Audit records can be generated from various components within the information system (e.g., module or policy filter).
+
+Satisfies: SRG-OS-000064-GPOS-00033, SRG-OS-000477-GPOS-00222
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_finit_module_use':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_finit_module_use` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_fremovexattr_use"></a>`cis_security_hardening::rules::auditd_fremovexattr_use`
+
+The operating system must generate audit records for any use of the fremovexattr system call.
+
+Rationale:
+Without generating audit records that are specific to the security and mission needs of the organization, it would be
+difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible
+for one.
+
+Audit records can be generated from various components within the information system (e.g., module or policy filter).
+
+Satisfies: SRG-OS-000064-GPOS-00033, SRG-OS-000462-GPOS-00206, SRG-OS-000466- GPOS-00210, SRG-OS-000365-GPOS-00152
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_fremovexattr_use':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_fremovexattr_use` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_fsetxattr_use"></a>`cis_security_hardening::rules::auditd_fsetxattr_use`
+
+The operating system must generate audit records for any use of the fsetxattr system call.
+
+Rationale:
+Without generating audit records that are specific to the security and mission needs of the organization, it would
+be difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible
+for one.
+
+Audit records can be generated from various components within the information system (e.g., module or policy filter).
+
+Satisfies: SRG-OS-000064-GPOS-00033, SRG-OS-000462-GPOS-00206
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_fsetxattr_use':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_fsetxattr_use` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_gpasswd_use"></a>`cis_security_hardening::rules::auditd_gpasswd_use`
+
+The operating system must generate audit records for successful/unsuccessful uses of the gpasswd command
+
+Rationale:
+Without generating audit records that are specific to the security and mission needs of the organization, it would
+be difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible
+for one.
+
+Audit records can be generated from various components within the information system (e.g., module or policy filter).
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_gpasswd_use':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_gpasswd_use` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_identity"></a>`cis_security_hardening::rules::auditd_identity`
+
+Record events affecting the group , passwd (user IDs), shadow and gshadow (passwords) or /etc/security/opasswd
+(old passwords, based on remember parameter in the PAM configuration) files. The parameters in this section
+will watch the files to see if they have been opened for write or have had attribute changes (e.g. permissions)
+and tag them with the identifier "identity" in the audit log file.
+
+Rationale:
+Unexpected changes to these files could be an indication that the system has been compromised and that an
+unauthorized user is attempting to hide their activities or compromise additional accounts.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_identity':
+          enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_identity` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Sets rule enforcement. If set to true, code will be exeuted to bring the system into a comliant state.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_immutable"></a>`cis_security_hardening::rules::auditd_immutable`
+
+Set system audit so that audit rules cannot be modified with auditctl . Setting the flag "-e 2"
+forces audit to be put in immutable mode. Audit changes can only be made on system reboot.
+
+Rationale:
+In immutable mode, unauthorized users cannot execute changes to the audit system to potentially
+hide malicious activity and then put the audit rules back. Users would most likely notice a
+system reboot and that could alert administrators of an attempt to make unauthorized audit changes.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_immutable':
+          enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_immutable` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Sets rule enforcement. If set to true, code will be exeuted to bring the system into a comliant state.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_init"></a>`cis_security_hardening::rules::auditd_init`
+
+Write inital rules for auditd
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_init':
+    enforce => true,
+    buffer_size => 8192,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_init` class:
+
+* [`enforce`](#enforce)
+* [`buffer_size`](#buffer_size)
+* [`rules_file`](#rules_file)
+* [`auto_reboot`](#auto_reboot)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="buffer_size"></a>`buffer_size`
+
+Data type: `Integer`
+
+Value for Buffer size in rules file header.
+
+Default value: `8192`
+
+##### <a name="rules_file"></a>`rules_file`
+
+Data type: `Stdlib::Absolutepath`
+
+File to write the rules into.
+
+Default value: `'/etc/audit/rules.d/cis_security_hardening.rules'`
+
+##### <a name="auto_reboot"></a>`auto_reboot`
+
+Data type: `Boolean`
+
+Trigger a reboot if this rule creates a change. Defaults to true.
+
+Default value: ``true``
+
+### <a name="cis_security_hardeningrulesauditd_kernel_modules"></a>`cis_security_hardening::rules::auditd_kernel_modules`
+
+Monitor the loading and unloading of kernel modules. All the loading / listing / dependency checking of modules is done by kmod
+via symbolic links.
+
+The following system calls control loading and unloading of modules:
+* init_module - load a module
+* finit_module - load a module (used when the overhead of using cryptographically signed modules to determine the authenticity
+  of a module can be avoided)
+* delete_module - delete a module
+* create_module - create a loadable module entry
+* query_module - query the kernel for various bits pertaining to modules
+
+Any execution of the loading and unloading module programs and system calls will trigger an audit record with an identifier of modules.
+
+Rationale:
+Monitoring the use of all the various ways to manipulate kernel module s could provide system administrators with evidence that
+an unauthorized change was made to a kernel module, possibly compromising the security of the system.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_kernel_modules':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_kernel_modules` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_kmod_use"></a>`cis_security_hardening::rules::auditd_kmod_use`
+
+The operating system must generate audit records when successful/unsuccessful attempts to use the kmod command.
+
+Rationale:
+Without generating audit records that are specific to the security and mission needs of the organization, it
+would be difficult to establish, correlate, and investigate the events relating to an incident or identify
+those responsible for one.
+
+Audit records can be generated from various components within the information system (e.g., module or
+policy filter).
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_kmod_use':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_kmod_use` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_log_dir_perms"></a>`cis_security_hardening::rules::auditd_log_dir_perms`
+
+The operating system must be configured so that the audit log directory is not write- accessible by unauthorized users.
+
+Rationale:
+If audit information were to become compromised, then forensic analysis and discovery of the true source of potentially
+malicious system activity is impossible to achieve.
+
+To ensure the veracity of audit information, the operating system must protect audit information from unauthorized
+deletion. This requirement can be achieved through multiple methods, which will depend upon system architecture and design.
+
+Audit information includes all information (e.g., audit records, audit settings, audit reports) needed to successfully
+audit information system activity.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_log_dir_perms':
+  enforce => true,
+  mode => '0750',
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_log_dir_perms` class:
+
+* [`enforce`](#enforce)
+* [`user`](#user)
+* [`group`](#group)
+* [`mode`](#mode)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+##### <a name="user"></a>`user`
+
+Data type: `String`
+
+The user to own the directory.
+
+Default value: `'root'`
+
+##### <a name="group"></a>`group`
+
+Data type: `String`
+
+The group to own the directory.
+
+Default value: `'root'`
+
+##### <a name="mode"></a>`mode`
+
+Data type: `String`
+
+Directory access permissions.
+
+Default value: `'0750'`
+
+### <a name="cis_security_hardeningrulesauditd_logins"></a>`cis_security_hardening::rules::auditd_logins`
+
+Monitor login and logout events. The parameters below track changes to files associated with login/logout events.
+The file /var/log/lastlog maintain records of the last time a user successfully logged in. The /var/run/failock
+directory maintains records of login failures via the pam_faillock module.
+
+Rationale:
+Monitoring login/logout events could provide a system administrator with information associated with brute force
+attacks against user logins.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_logins':
+          enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_logins` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Sets rule enforcement. If set to true, code will be exeuted to bring the system into a comliant state.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_lremovexattr_use"></a>`cis_security_hardening::rules::auditd_lremovexattr_use`
+
+The operating system must generate audit records for any use of the lremovexattr system call.
+
+Rationale:
+Without generating audit records that are specific to the security and mission needs of the organization, it
+would be difficult to establish, correlate, and investigate the events relating to an incident or identify
+those responsible for one.
+
+Audit records can be generated from various components within the information system (e.g., module or policy filter).
+
+Satisfies: SRG-OS-000064-GPOS-00033, SRG-OS-000462-GPOS-00206, SRG-OS-000466- GPOS-00210
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_llremovexattr_use':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_lremovexattr_use` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_lsetxattr_use"></a>`cis_security_hardening::rules::auditd_lsetxattr_use`
+
+The operating system must generate audit records for any use of the lsetxattr system call.
+
+Rationale:
+Without generating audit records that are specific to the security and mission needs of the organization, it would
+be difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible
+for one.
+
+Audit records can be generated from various components within the information system (e.g., module or policy filter).
+
+Satisfies: SRG-OS-000064-GPOS-00033, SRG-OS-000462-GPOS-00206
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_lsetxattr_use':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_lsetxattr_use` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_mac_policy"></a>`cis_security_hardening::rules::auditd_mac_policy`
+
+Monitor SELinux mandatory access controls. The parameters below monitor any write access (potential additional,
+deletion or modification of files in the directory) or attribute changes to the /etc/selinux or directory.
+
+Rationale:
+Changes to files in these directories could indicate that an unauthorized user is attempting to modify access
+controls and change security contexts, leading to a compromise of the system.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_mac_policy':
+          enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_mac_policy` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Sets rule enforcement. If set to true, code will be exeuted to bring the system into a comliant state.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_max_log_file"></a>`cis_security_hardening::rules::auditd_max_log_file`
+
+Configure the maximum size of the audit log file. Once the log reaches the maximum size, it will be
+rotated and a new log file will be started.
+
+Rationale:
+It is important that an appropriate size is determined for log files so that they do not impact the
+system and audit data is not lost.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_max_log_file':
+          enforce => true,
+          max_log_size => 32,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_max_log_file` class:
+
+* [`enforce`](#enforce)
+* [`max_log_size`](#max_log_size)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Sets rule enforcement. If set to true, code will be exeuted to bring the system into a comliant state.
+
+Default value: ``false``
+
+##### <a name="max_log_size"></a>`max_log_size`
+
+Data type: `Integer`
+
+Maximal log file size, defaults to 26 MB
+
+Default value: `16`
+
+### <a name="cis_security_hardeningrulesauditd_max_log_file_action"></a>`cis_security_hardening::rules::auditd_max_log_file_action`
+
+The max_log_file_action setting determines how to handle the audit log file reaching the max file
+size. A value of keep_logs will rotate the logs but never delete old logs.
+
+Rationale:
+In high security contexts, the benefits of maintaining a long audit history exceed the cost of storing
+the audit history.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_max_log_file_action':
+          enforce => true,
+          max_log_file_action => 'keep_logs',
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_max_log_file_action` class:
+
+* [`enforce`](#enforce)
+* [`max_log_file_action`](#max_log_file_action)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Sets rule enforcement. If set to true, code will be exeuted to bring the system into a comliant state.
+
+Default value: ``false``
+
+##### <a name="max_log_file_action"></a>`max_log_file_action`
+
+Data type: `String`
+
+Action to be taken of lofs reach max. size.
+
+Default value: `'keep_logs'`
+
+### <a name="cis_security_hardeningrulesauditd_modules"></a>`cis_security_hardening::rules::auditd_modules`
+
+Monitor the loading and unloading of kernel modules. The programs insmod (install a kernel module),
+rmmod (remove a kernel module), and modprobe (a more sophisticated program to load and unload modules,
+as well as some other features) control loading and unloading of modules. The init_module (load a module)
+and delete_module (delete a module) system calls control loading and unloading of modules. Any execution
+of the loading and unloading module programs and system calls will trigger an audit record with an
+identifier of "modules".
+
+Rationale:
+Monitoring the use of insmod , rmmod and modprobe could provide system administrators with evidence that
+an unauthorized user loaded or unloaded a kernel module, possibly compromising the security of the system.
+Monitoring of the init_module and delete_module system calls would reflect an unauthorized user attempting
+to use a different program to load and unload modules.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_modules':
+          enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_modules` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Sets rule enforcement. If set to true, code will be exeuted to bring the system into a comliant state.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_mounts"></a>`cis_security_hardening::rules::auditd_mounts`
+
+Monitor the use of the mount system call. The mount (and umount ) system call controls the
+mounting and unmounting of file systems. The parameters below configure the system to create
+an audit record when the mount system call is used by a non-privileged user
+
+Rationale:
+It is highly unusual for a non privileged user to mount file systems to the system. While tracking
+mount commands gives the system administrator evidence that external media may have been mounted (based
+on a review of the source of the mount and confirming it's an external media type), it does not
+conclusively indicate that data was exported to the media. System administrators who wish to determine
+if data were exported, would also have to track successful open , creat and truncate system calls requiring
+write access to a file under the mount point of the external media file system. This could give a fair
+indication that a write occurred. The only way to truly prove it, would be to track successful writes to the
+external media. Tracking write system calls could quickly fill up the audit log and is not recommended.
+Recommendations on configuration options to track data export to media is beyond the scope of this document.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_mounts':
+          enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_mounts` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Sets rule enforcement. If set to true, code will be exeuted to bring the system into a comliant state.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_newgrp_use"></a>`cis_security_hardening::rules::auditd_newgrp_use`
+
+The operating system must generate audit records for successful/unsuccessful uses of the newgrp command.
+
+Rationale:
+Without generating audit records that are specific to the security and mission needs of the organization,
+it would be difficult to establish, correlate, and investigate the events relating to an incident or identify
+those responsible for one.
+
+Audit records can be generated from various components within the information system (e.g., module or policy filter).
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_newgrp_use':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_newgrp_use` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_nonlocal_admin_access"></a>`cis_security_hardening::rules::auditd_nonlocal_admin_access`
+
+The operating system must generate audit records for privileged activities, nonlocal maintenance, diagnostic sessions
+and other system-level access.
+
+Rationale:
+If events associated with nonlocal administrative access or diagnostic sessions are not logged, a major tool for
+assessing and investigating attacks would not be available.
+
+This requirement addresses auditing-related issues associated with maintenance tools used specifically for
+diagnostic and repair actions on organizational information systems.
+
+Nonlocal maintenance and diagnostic activities are those activities conducted by individuals communicating through
+a network, either an external network (e.g., the internet) or an internal network. Local maintenance and diagnostic
+activities are those activities carried out by individuals physically present at the information system or information
+system component and not communicating across a network connection.
+
+This requirement applies to hardware/software diagnostic test equipment or tools. This requirement does not cover
+hardware/software components that may support information system maintenance, yet are a part of the system, for example,
+the software implementing "ping," "ls," "ipconfig," or the hardware and software implementing the monitoring port of an
+Ethernet switch.
+
+Satisfies: SRG-OS-000392-GPOS-00172, SRG-OS-000471-GPOS-00215
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_nonlocal_admin_access':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_nonlocal_admin_access` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_open_by_handle_use"></a>`cis_security_hardening::rules::auditd_open_by_handle_use`
+
+The operating system must generate audit records for successful/unsuccessful uses of the open_by_handle_at system call.
+
+Rationale:
+Without generating audit records that are specific to the security and mission needs of the organization, it would be
+difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible
+for one.
+
+Audit records can be generated from various components within the information system (e.g., module or policy filter).
+
+Satisfies: SRG-OS-000064-GPOS-00033, SRG-OS-000474-GPOS-00219
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_open_by_handle_use':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_open_by_handle_use` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_package"></a>`cis_security_hardening::rules::auditd_package`
+
+auditd is the userspace component to the Linux Auditing System. It's responsible for writing audit
+records to the disk.
+
+Rationale:
+The capturing of system events provides system administrators with information to allow them to
+determine if unauthorized access to their system is occurring.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_package':
+          enforce => true,
+          packages => ['audit', 'audit-libs'],
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_package` class:
+
+* [`enforce`](#enforce)
+* [`packages`](#packages)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Sets rule enforcementen. If set to true, code will be exeuted to bring the system into a comliant state.
+
+Default value: ``false``
+
+##### <a name="packages"></a>`packages`
+
+Data type: `Array`
+
+Packages for auditd to install
+
+Default value: `[]`
+
+### <a name="cis_security_hardeningrulesauditd_pam_timestamp_check_use"></a>`cis_security_hardening::rules::auditd_pam_timestamp_check_use`
+
+The operating system must generate audit records for successful/unsuccessful uses of the pam_timestamp_check command.
+
+Rationale:
+Without generating audit records that are specific to the security and mission needs of the organization, it would
+be difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible
+for one.
+
+Audit records can be generated from various components within the information system (e.g., module or policy filter).
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_pam_timestamp_check_use':
+  enforce =A true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_pam_timestamp_check_use` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_passwd_use"></a>`cis_security_hardening::rules::auditd_passwd_use`
+
+The operating system must generate audit records for successful/unsuccessful uses of the passwd command
+
+Rationale:
+Without generating audit records that are specific to the security and mission needs of the organization,
+it would be difficult to establish, correlate, and investigate the events relating to an incident or identify
+those responsible for one.
+
+Audit records can be generated from various components within the information system (e.g., module or policy filter).
+
+#### Examples
+
+##### 
+
+```puppet
+class  'cis_security_hardening::rules::auditd_passwd_use':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_passwd_use` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_perm_mod"></a>`cis_security_hardening::rules::auditd_perm_mod`
+
+Monitor changes to file permissions, attributes, ownership and group. The parameters in this section track
+changes for system calls that affect file permissions and attributes. The chmod , fchmod and fchmodat system
+calls affect the permissions associated with a file. The chown , fchown , fchownat and lchown system calls
+affect owner and group attributes on a file. The setxattr , lsetxattr , fsetxattr (set extended file attributes)
+and removexattr , lremovexattr , fremovexattr (remove extended file attributes) control extended file attributes.
+In all cases, an audit record will only be written for non-system user ids (auid >= 1000) and will ignore Daemon
+events (auid = 4294967295). All audit records will be tagged with the identifier "perm_mod."
+
+Rationale:
+Monitoring for changes in file attributes could alert a system administrator to activity that could indicate
+intruder activity or policy violation.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_perm_mod':
+          enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_perm_mod` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Sets rule enforcement. If set to true, code will be exeuted to bring the system into a comliant state.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_privileged_commands"></a>`cis_security_hardening::rules::auditd_privileged_commands`
+
+Monitor privileged programs (those that have the setuid and/or setgid bit set on execution) to
+determine if unprivileged users are running these commands.
+
+Rationale:
+Execution of privileged commands by non-privileged users could be an indication of someone trying
+to gain unauthorized access to the system.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_privileged_commands':
+     enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_privileged_commands` class:
+
+* [`enforce`](#enforce)
+* [`auto_reboot`](#auto_reboot)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Sets rule enforcement. If set to true, code will be exeuted to bring the system into a comliant state.
+
+Default value: ``false``
+
+##### <a name="auto_reboot"></a>`auto_reboot`
+
+Data type: `Boolean`
+
+Trigger a reboot if this rule creates a change. Defaults to true.
+
+Default value: ``true``
+
+### <a name="cis_security_hardeningrulesauditd_privileged_functions_use"></a>`cis_security_hardening::rules::auditd_privileged_functions_use`
+
+The operating system must prevent all software from executing at higher privilege levels than users executing
+the software and the audit system must be configured to audit the execution of privileged functions.
+
+Rationale:
+In certain situations, software applications/programs need to execute with elevated privileges to perform required
+functions. However, if the privileges required for execution are at a higher level than the privileges assigned to
+organizational users invoking such applications/programs, those users are indirectly provided with greater privileges
+than assigned by the organizations.
+
+Some programs and processes are required to operate at a higher privilege level and therefore should be excluded
+from the organization-defined software list after review.
+
+Satisfies: SRG-OS-000326-GPOS-00126, SRG-OS-000327-GPOS-00127
+
+#### Examples
+
+##### 
+
+```puppet
+class  'cis_security_hardening::rules::auditd_privileged_functions_use':
+  enforce = true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_privileged_functions_use` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_process"></a>`cis_security_hardening::rules::auditd_process`
+
+Configure grub so that processes that are capable of being audited can be audited even if they start up
+prior to auditd startup.
+
+Rationale:
+Audit events need to be captured on processes that start up prior to auditd, so that potential malicious
+activity cannot go undetected.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::sec_auditd_process':
+          enforce => true,
+}
+```
+
+##### 
+
+```puppet
+include cis_security_hardening::rules::auditd_process
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_process` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Sets rule enforcement. If set to true, code will be exeuted to bring the system into a comliant state.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_remote"></a>`cis_security_hardening::rules::auditd_remote`
+
+The operating system audit event multiplexor must be configured to off-load audit logs onto a different system or storage media from
+the system being audited.
+
+Rationale:
+Information stored in one location is vulnerable to accidental or incidental deletion or alteration.
+
+Off-loading is a common process in information systems with limited audit storage capacity.
+
+Satisfies: SRG-OS-000342-GPOS-00133, SRG-OS-000479-GPOS-00224
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_remote':
+  enforce => true,
+  remote_server => '1.2.3.4',
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_remote` class:
+
+* [`enforce`](#enforce)
+* [`remote_server`](#remote_server)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="remote_server"></a>`remote_server`
+
+Data type: `Stdlib::IP::Address`
+
+IP address of the remote server sending logs to.
+
+Default value: `'1.2.3.4'`
+
+### <a name="cis_security_hardeningrulesauditd_removexattr_use"></a>`cis_security_hardening::rules::auditd_removexattr_use`
+
+The operating system must generate audit records for any use of the removexattr system call.
+
+Rationale:
+Without generating audit records that are specific to the security and mission needs of the organization, it would be
+difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible
+for one.
+
+Audit records can be generated from various components within the information system (e.g., module or policy filter).
+
+Satisfies: SRG-OS-000064-GPOS-00033, SRG-OS-000462-GPOS-00206, SRG-OS-000466- GPOS-00210
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_removexattr_use':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_removexattr_use` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_scope"></a>`cis_security_hardening::rules::auditd_scope`
+
+Monitor scope changes for system administrations. If the system has been properly configured
+to force system administrators to log in as themselves first and then use the sudo command to
+execute privileged commands, it is possible to monitor changes in scope. The file /etc/sudoers
+will be written to when the file or its attributes have changed. The audit records will be tagged
+with the identifier "scope."
+
+Rationale:
+Changes in the /etc/sudoers file can indicate that an unauthorized change has been made to scope
+of system administrator activity.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_scope':
+          enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_scope` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Sets rule enforcement. If set to true, code will be exeuted to bring the system into a comliant state.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_service"></a>`cis_security_hardening::rules::auditd_service`
+
+Turn on the auditd daemon to record system events.
+
+Rationale:
+The capturing of system events provides system administrators with information to allow them to
+determine if unauthorized access to their system is occurring.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::sec_auditd_service':
+          enforce => true,
+}
+```
+
+##### 
+
+```puppet
+include cis_security_hardening::rules::auditd_service
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_service` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Sets rule enforcement. If set to true, code will be exeuted to bring the system into a comliant state.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_session_logins"></a>`cis_security_hardening::rules::auditd_session_logins`
+
+Monitor session initiation events. The parameters in this section track changes to the files
+associated with session events. The file /var/run/utmp file tracks all currently logged in users.
+All audit records will be tagged with the identifier "session." The /var/log/wtmp file tracks
+logins, logouts, shutdown, and reboot events. The file /var/log/btmp keeps track of failed login
+attempts and can be read by entering the command /usr/bin/last -f /var/log/btmp . All audit records
+will be tagged with the identifier "logins."
+
+Rationale:
+Monitoring these files for changes could alert a system administrator to logins occurring at unusual
+hours, which could indicate intruder activity (i.e. a user logging in at a time when they do not normally
+log in).
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_session_logins':
+          enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_session_logins` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Sets rule enforcement. If set to true, code will be exeuted to bring the system into a comliant state.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_setfacl_use"></a>`cis_security_hardening::rules::auditd_setfacl_use`
+
+The operating system must generate audit records for successful/unsuccessful uses of the setfacl command
+
+Rationale:
+Without generating audit records that are specific to the security and mission needs of the organization,
+it would be difficult to establish, correlate, and investigate the events relating to an incident or identify
+those responsible for one.
+
+Audit records can be generated from various components within the information system (e.g., module or policy filter).
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_setfacl_use':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_setfacl_use` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_setxattr_use"></a>`cis_security_hardening::rules::auditd_setxattr_use`
+
+The operating system must generate audit records for any use of the setxattr system call.
+
+Rationale:
+Without generating audit records that are specific to the security and mission needs of the organization, it would
+be difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible
+for one.
+
+Audit records can be generated from various components within the information system (e.g., module or policy filter).
+
+Satisfies: SRG-OS-000064-GPOS-00033, SRG-OS-000462-GPOS-00206
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_setxattr_use':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_setxattr_use` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_ssh_agent_use"></a>`cis_security_hardening::rules::auditd_ssh_agent_use`
+
+The operating system must generate audit records for successful/unsuccessful uses of the ssh-agent command.
+
+Rationale:
+Without generating audit records that are specific to the security and mission needs of the organization, it would
+be difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible
+for one.
+
+Audit records can be generated from various components within the information system (e.g., module or policy filter).
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_ssh_agent_use':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_ssh_agent_use` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_ssh_keysign_use"></a>`cis_security_hardening::rules::auditd_ssh_keysign_use`
+
+The operating system must generate audit records for successful/unsuccessful uses of the ssh-keysign command.
+
+Rationale:
+Without generating audit records that are specific to the security and mission needs of the organization, it
+would be difficult to establish, correlate, and investigate the events relating to an incident or identify
+those responsible for one.
+
+Audit records can be generated from various components within the information system (e.g., module or policy filter).
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_ssh_keysign_use':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_ssh_keysign_use` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_sudoedit_use"></a>`cis_security_hardening::rules::auditd_sudoedit_use`
+
+The operating system must generate audit records for successful/unsuccessful uses of the sudoedit command.
+
+Rationale:
+Without generating audit records that are specific to the security and mission needs of the organization, it would
+be difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible
+for one.
+
+Audit records can be generated from various components within the information system (e.g., module or policy filter).
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_sudoedit_use':
+  enforce =>,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_sudoedit_use` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_system_locale"></a>`cis_security_hardening::rules::auditd_system_locale`
+
+Record changes to network environment files or system calls. The below parameters monitor the sethostname
+(set the systems host name) or setdomainname (set the systems domainname) system calls, and write an audit
+event on system call exit. The other parameters monitor the /etc/issue and /etc/issue.net files (messages
+displayed pre- login), /etc/hosts (file containing host names and associated IP addresses),
+/etc/sysconfig/network file and /etc/sysconfig/network-scripts/ directory (containing network interface
+scripts and configurations).
+
+Rationale:
+Monitoring sethostname and setdomainname will identify potential unauthorized changes to host and domainname
+of a system. The changing of these names could potentially break security parameters that are set based on those
+names. The /etc/hosts file is monitored for changes in the file that can indicate an unauthorized intruder is
+trying to change machine associations with IP addresses and trick users and processes into connecting to
+unintended machines. Monitoring /etc/issue and /etc/issue.net is important, as intruders could put disinformation
+into those files and trick users into providing information to the intruder. Monitoring /etc/sysconfig/network
+and /etc/sysconfig/network-scripts/ is important as it can show if network interfaces or scripts are being modified
+in a way that can lead to the machine becoming unavailable or compromised. All audit records will be tagged with
+the identifier "system-locale."
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_system_locale':
+          enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_system_locale` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Sets rule enforcement. If set to true, code will be exeuted to bring the system into a comliant state.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_time_change"></a>`cis_security_hardening::rules::auditd_time_change`
+
+Capture events where the system date and/or time has been modified. The parameters in this section are set to
+determine if the adjtimex (tune kernel clock), settimeofday (Set time, using timeval and timezone structures)
+stime (using seconds since 1/1/1970) or clock_settime (allows for the setting of several internal clocks and
+timers) system calls have been executed and always write an audit record to the /var/log/audit.log file upon
+exit, tagging the records with the identifier "time-change"
+
+Rationale:
+Unexpected changes in system date and/or time could be a sign of malicious activity on the system.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_time_change':
+          enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_time_change` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Sets rule enforcement. If set to true, code will be exeuted to bring the system into a comliant state.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_tools_perms"></a>`cis_security_hardening::rules::auditd_tools_perms`
+
+The operating system must configure audit tools with a mode of 0755 or less permissive.
+
+Rationale:
+Protecting audit information also includes identifying and protecting the tools used to view and
+manipulate log data. Therefore, protecting audit tools is necessary to prevent unauthorized operation
+on audit information.
+
+Operating systems providing tools to interface with audit information will leverage user permissions
+and roles identifying the user accessing the tools and the corresponding rights the user enjoys in order
+to make access decisions regarding the access to audit tools.
+
+Audit tools include, but are not limited to, vendor-provided and open source audit tools needed to
+successfully view and manipulate audit information system activity and records. Audit tools include
+custom queries and report generators.
+
+Satisfies: SRG-OS-000256-GPOS-00097, SRG-OS-000257-GPOS-00098
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_tools_perms':
+  ensure => true,
+  user => 'root',
+  group => 'root',
+  mode => '0755',
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_tools_perms` class:
+
+* [`enforce`](#enforce)
+* [`user`](#user)
+* [`group`](#group)
+* [`mode`](#mode)
+* [`tools`](#tools)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+##### <a name="user"></a>`user`
+
+Data type: `String`
+
+User to own auditd tools.
+
+Default value: `'root'`
+
+##### <a name="group"></a>`group`
+
+Data type: `String`
+
+Group to own the auditd tools.
+
+Default value: `'root'`
+
+##### <a name="mode"></a>`mode`
+
+Data type: `String`
+
+Access permissions.
+
+Default value: `'0755'`
+
+##### <a name="tools"></a>`tools`
+
+Data type: `Array`
+
+List of tools to work with.
+
+Default value: `[]`
+
+### <a name="cis_security_hardeningrulesauditd_unix_update_use"></a>`cis_security_hardening::rules::auditd_unix_update_use`
+
+The operating system must generate audit records for successful/unsuccessful uses of the unix_update command
+
+Rationale:
+Without generating audit records that are specific to the security and mission needs of the organization, it
+would be difficult to establish, correlate, and investigate the events relating to an incident or identify
+those responsible for one.
+
+Audit records can be generated from various components within the information system (e.g., module or policy filter).
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_unix_update_use':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_unix_update_use` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_user_emulation"></a>`cis_security_hardening::rules::auditd_user_emulation`
+
+sudo provides users with temporary elevated privileges to perform operations, either as the superuser or another user.
+
+Rationale:
+Creating an audit log of users with temporary elevated privileges and the operation(s) they performed is essential to reporting.
+Administrators will want to correlate the events written to the audit trail with the records written to sudo's logfile to verify
+if unauthorized commands have been executed.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_user_emulation':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_user_emulation` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_usermod_use"></a>`cis_security_hardening::rules::auditd_usermod_use`
+
+The operating system must generate audit records for successful/unsuccessful uses of the usermod command.
+
+Rationale:
+Without generating audit records that are specific to the security and mission needs of the organization,
+it would be difficult to establish, correlate, and investigate the events relating to an incident or identify
+those responsible for one.
+
+Audit records can be generated from various components within the information system (e.g., module or policy filter).
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_usermod_use':
+  enforce =A true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_usermod_use` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesauditd_when_disk_full"></a>`cis_security_hardening::rules::auditd_when_disk_full`
+
+The auditd daemon can be configured to halt the system when the audit logs are full.
+
+Rationale:
+In high security contexts, the risk of detecting unauthorized access or nonrepudiation exceeds
+the benefit of the system's availability.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::auditd_when_disk_full':
+          enforce => true,
+          space_left_action => 'email',
+          action_mail_acct => 'root',
+          admin_space_left_action => 'halt',
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::auditd_when_disk_full` class:
+
+* [`enforce`](#enforce)
+* [`space_left_action`](#space_left_action)
+* [`action_mail_acct`](#action_mail_acct)
+* [`admin_space_left_action`](#admin_space_left_action)
+* [`disk_full_action`](#disk_full_action)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Sets rule enforcement. If set to true, code will be exeuted to bring the system into a comliant state.
+
+Default value: ``false``
+
+##### <a name="space_left_action"></a>`space_left_action`
+
+Data type: `String`
+
+What to do when space get low
+
+Default value: `'email'`
+
+##### <a name="action_mail_acct"></a>`action_mail_acct`
+
+Data type: `String`
+
+This option should contain a valid email address or alias. The default address is root. If the email address is not local to
+the machine, you must make sure you have email properly configured on your machine and network. Also, this option requires
+that /usr/lib/sendmail exists on the machine.
+
+Default value: `'root'`
+
+##### <a name="admin_space_left_action"></a>`admin_space_left_action`
+
+Data type: `String`
+
+This parameter tells the system what action to take when the system has detected that it is low on disk space.
+
+Default value: `'halt'`
+
+##### <a name="disk_full_action"></a>`disk_full_action`
+
+Data type: `String`
+
+Action to do when disk is full.
+
+Default value: `'SUSPEND'`
+
+### <a name="cis_security_hardeningrulesauthselect"></a>`cis_security_hardening::rules::authselect`
+
+A custom profile can be created by copying and customizing one of the default profiles. The default
+profiles include: sssd, winbind, or the nis.
+
+Rationale:
+A custom profile is required to customize many of the pam options.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::authselect_profile':
+          enforce => true,
+          custom_profile => 'testprofile',
+          base_profile => 'sssd',
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::authselect` class:
+
+* [`enforce`](#enforce)
+* [`custom_profile`](#custom_profile)
+* [`base_profile`](#base_profile)
+* [`profile_options`](#profile_options)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Sets rule enforcemt. If set to true, code will be exeuted to bring the system into a comliant state.
+
+Default value: ``false``
+
+##### <a name="custom_profile"></a>`custom_profile`
+
+Data type: `Cis_security_hardening::Numbers_letters`
+
+name of the custom profile to create
+
+Default value: `''`
+
+##### <a name="base_profile"></a>`base_profile`
+
+Data type: `Enum['sssd', 'nis', 'winbind', 'minimal']`
+
+Base profile to use for custom profile creation
+
+Default value: `'sssd'`
+
+##### <a name="profile_options"></a>`profile_options`
+
+Data type: `Array`
+
+The authsselect feartures to enable.
+
+Default value: `['with-faillock']`
+
+### <a name="cis_security_hardeningrulesavahi"></a>`cis_security_hardening::rules::avahi`
+
+Avahi is a free zeroconf implementation, including a system for multicast DNS/DNS-SD service discovery.
+Avahi allows programs to publish and discover services and hosts running on a local network with no specific
+configuration. For example, a user can plug a computer into a network and Avahi automatically finds printers
+to print to, files to look at and people to talk to, as well as network services running on the machine.
+
+Rationale:
+Automatic discovery of network services is not normally required for system functionality. It is recommended
+to disable the service to reduce the potential attack surface.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::avahi':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::avahi` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesbind"></a>`cis_security_hardening::rules::bind`
+
+The Domain Name System (DNS) is a hierarchical naming system that maps names to IP addresses for
+computers, services and other resources connected to a network.
+
+Rationale:
+Unless a system is specifically designated to act as a DNS server, it is recommended that the package
+be removed to reduce the potential attack surface.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::bind':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::bind` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningruleschrony"></a>`cis_security_hardening::rules::chrony`
+
+chrony is a daemon which implements the Network Time Protocol (NTP) is designed to synchronize system
+clocks across a variety of systems and use a source that is highly accurate. More information on chrony
+can be found at http://chrony.tuxfamily.org/. chrony can be configured to be a client and/or a server.
+
+Rationale:
+If chrony is in use on the system proper configuration is vital to ensuring time synchronization is working
+properly.
+This recommendation only applies if chrony is in use on the system.
+
+#### Examples
+
+##### 
+
+```puppet
+class ecurity_baseline::rules::common::sec_ntp_daemon_chrony {
+    enforce => true,
+    ntp_servers => ['server1', 'server2'],
+  }
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::chrony` class:
+
+* [`enforce`](#enforce)
+* [`ntp_servers`](#ntp_servers)
+* [`makestep_seconds`](#makestep_seconds)
+* [`makestep_updates`](#makestep_updates)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="ntp_servers"></a>`ntp_servers`
+
+Data type: `Hash`
+
+NTP servers to use, add config options per server
+
+Default value: `{}`
+
+##### <a name="makestep_seconds"></a>`makestep_seconds`
+
+Data type: `Integer`
+
+Threshold for adjusting system clock.
+
+Default value: `1`
+
+##### <a name="makestep_updates"></a>`makestep_updates`
+
+Data type: `Integer`
+
+Limit of clock updates since chronyd start.
+
+Default value: `3`
+
+### <a name="cis_security_hardeningrulescramfs"></a>`cis_security_hardening::rules::cramfs`
+
+The cramfs filesystem type is a compressed read-only Linux filesystem embedded in small
+footprint systems. A cramfs image can be used without having to first decompress the image.
+
+Rationale:
+Removing support for unneeded filesystem types reduces the local attack surface of the server.
+If this filesystem type is not needed, disable it.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::cramfs':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::cramfs` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulescron_daily"></a>`cis_security_hardening::rules::cron_daily`
+
+This directory contains system cron jobs that need to run on an daily basis. The files in this
+directory cannot be manipulated by the crontab command, but are instead edited by system administrators
+using a text editor. The commands below restrict read/write and search access to user and group root,
+preventing regular users from accessing this directory.
+
+Rationale:
+Granting write access to this directory for non-privileged users could provide them the means for gaining
+unauthorized elevated privileges. Granting read access to this directory could give an unprivileged user
+insight in how to gain elevated privileges or circumvent auditing controls.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::cron_daily':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::cron_daily` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulescron_hourly"></a>`cis_security_hardening::rules::cron_hourly`
+
+This directory contains system cron jobs that need to run on an hourly basis. The files in this
+directory cannot be manipulated by the crontab command, but are instead edited by system administrators
+using a text editor. The commands below restrict read/write and search access to user and group root,
+preventing regular users from accessing this directory.
+
+Rationale:
+Granting write access to this directory for non-privileged users could provide them the means for gaining
+unauthorized elevated privileges. Granting read access to this directory could give an unprivileged user
+insight in how to gain elevated privileges or circumvent auditing controls.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::cron_hourly':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::cron_hourly` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulescron_monthly"></a>`cis_security_hardening::rules::cron_monthly`
+
+This directory contains system cron jobs that need to run on an monthly basis. The files in this
+directory cannot be manipulated by the crontab command, but are instead edited by system administrators
+using a text editor. The commands below restrict read/write and search access to user and group root,
+preventing regular users from accessing this directory.
+
+Rationale:
+Granting write access to this directory for non-privileged users could provide them the means for gaining
+unauthorized elevated privileges. Granting read access to this directory could give an unprivileged user
+insight in how to gain elevated privileges or circumvent auditing controls.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'is_security_hardening::rules::common::cron_monthly':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::cron_monthly` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulescron_restrict"></a>`cis_security_hardening::rules::cron_restrict`
+
+If cron is installed in the system, configure /etc/cron.allow to allow specific users to use these services.
+If /etc/cron.allow does not exist, then /etc/cron.deny is checked. Any user not specifically defined in those
+files is allowed to use cron. By removing the file, only users in /etc/cron.allow are allowed to use cron.
+
+Note: Even though a given user is not listed in cron.allow, cron jobs can still be run as that user. The
+cron.allow file only controls administrative access to the crontab command for scheduling and modifying cron jobs.
+
+Rationale:
+On many systems, only the system administrator is authorized to schedule cron jobs. Using the cron.allow file to
+control who can run cron jobs enforces this policy. It is easier to manage an allow list than a deny list. In a deny
+list, you could potentially add a user ID to the system and forget to add it to the deny files..
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::cron_restrict':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::cron_restrict` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulescron_weekly"></a>`cis_security_hardening::rules::cron_weekly`
+
+This directory contains system cron jobs that need to run on an weekly basis. The files in this
+directory cannot be manipulated by the crontab command, but are instead edited by system administrators
+using a text editor. The commands below restrict read/write and search access to user and group root,
+preventing regular users from accessing this directory.
+
+Rationale:
+Granting write access to this directory for non-privileged users could provide them the means for gaining
+unauthorized elevated privileges. Granting read access to this directory could give an unprivileged user
+insight in how to gain elevated privileges or circumvent auditing controls.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::cron_weekly':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::cron_weekly` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulescrond_service"></a>`cis_security_hardening::rules::crond_service`
+
+The cron daemon is used to execute batch jobs on the system.
+
+Rationale:
+While there may not be user jobs that need to be run on the system, the system does have
+maintenance jobs that may include security monitoring that have to run. If another method
+for scheduling tasks is not being used, cron is used to execute them, and needs to be enabled
+and running.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::crond_service':
+    enforce => true,
+    uninstall_cron => false
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::crond_service` class:
+
+* [`enforce`](#enforce)
+* [`uninstall_cron`](#uninstall_cron)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="uninstall_cron"></a>`uninstall_cron`
+
+Data type: `Boolean`
+
+uninstall cron from the system
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulescrontab"></a>`cis_security_hardening::rules::crontab`
+
+The /etc/crontab file is used by cron to control its own jobs. The commands in this item make sure that root
+is the user and group owner of the file and that only the owner can access the file.
+
+Rationale:
+This file contains information on what system jobs are run by cron. Write access to these files could provide
+unprivileged users with the ability to elevate their privileges. Read access to these files could provide users
+with the ability to gain insight on system jobs that run on the system and could provide them a way to gain
+unauthorized privileged access.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::crontab':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::crontab` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulescrtl_alt_del"></a>`cis_security_hardening::rules::crtl_alt_del`
+
+The operating system must disable the x86 Ctrl-Alt-Delete key sequence.
+
+Rationale:
+A locally logged-on user who presses Ctrl-Alt-Delete, when at the console, can reboot the system. If accidentally
+pressed, as could happen in the case of a mixed OS environment, this can create the risk of short-term loss of
+availability of systems due to unintentional reboot.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::crtl_alt_del':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::crtl_alt_del` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulescrypto_policy"></a>`cis_security_hardening::rules::crypto_policy`
+
+The system-wide crypto-policies followed by the crypto core components allow consistently deprecating
+and disabling algorithms system-wide.
+The individual policy levels (DEFAULT, LEGACY, FUTURE, and FIPS) are included in the crypto-policies(7)
+package.
+
+Rationale:
+If the Legacy system-wide crypto policy is selected, it includes support for TLS 1.0, TLS 1.1, and SSH2 protocols
+or later. The algorithms DSA, 3DES, and RC4 are allowed, while RSA and Diffie-Hellman parameters are accepted if
+larger than 1023-bits.
+
+These legacy protocols and algorithms can make the system vulnerable to attacks, including those listed in RFC 7457.
+
+FUTURE: Is a conservative security level that is believed to withstand any near-term future attacks. This level does
+not allow the use of SHA-1 in signature algorithms. The RSA and Diffie-Hellman parameters are accepted if larger than
+3071 bits. The level provides at least 128-bit security.
+
+FIPS: Conforms to the FIPS 140-2 requirements. This policy is used internally by the fips-mode-setup(8) tool which can
+switch the system into the FIPS 140-2 compliance mode. The level provides at least 112-bit security
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::crypto_policy':
+    enforce => true,
+    crypto_policy = 'FUTURE',
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::crypto_policy` class:
+
+* [`enforce`](#enforce)
+* [`crypto_policy`](#crypto_policy)
+* [`auto_reboot`](#auto_reboot)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule or just test and log
+
+Default value: ``false``
+
+##### <a name="crypto_policy"></a>`crypto_policy`
+
+Data type: `Enum['FUTURE', 'FIPS', 'LEGACY', 'DEFAULT']`
+
+The crypto policy to set in enforce mode.
+
+Default value: `'FUTURE'`
+
+##### <a name="auto_reboot"></a>`auto_reboot`
+
+Data type: `Boolean`
+
+Trigger a reboot if this rule creates a change. Defaults to true.
+
+Default value: ``true``
+
+### <a name="cis_security_hardeningrulesctrl_alt_del_graphical"></a>`cis_security_hardening::rules::ctrl_alt_del_graphical`
+
+The operating system must disable the x86 Ctrl-Alt-Delete key sequence if a graphical user interface is installed.
+
+Rationale:
+A locally logged-on user who presses Ctrl-Alt-Delete, when at the console, can reboot the system. If accidentally
+pressed, as could happen in the case of a mixed OS environment, this can create the risk of short-term loss of
+availability of systems due to unintentional reboot. In the graphical environment, risk of unintentional reboot
+from the Ctrl-Alt-Delete sequence is reduced because the user will be prompted before any action is taken.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::ctrl_alt_del_graphical':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::ctrl_alt_del_graphical` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulescups"></a>`cis_security_hardening::rules::cups`
+
+The Common Unix Print System (CUPS) provides the ability to print to both local and network printers.
+A system running CUPS can also accept print jobs from remote systems and print them to local printers.
+It also provides a web based remote administration capability.
+
+Rationale:
+If the system does not need to print jobs or accept print jobs from other systems, it is recommended
+that CUPS be disabled to reduce the potential attack surface.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::cups':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::cups` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesdev_shm"></a>`cis_security_hardening::rules::dev_shm`
+
+/dev/shm is a traditional shared memory concept. One program will create a memory portion, which other processes
+(if permitted) can access. If /dev/shm is not configured, tmpfs will be mounted to /dev/shm by systemd.
+
+Rationale:
+Any user can upload and execute files inside the /dev/shm similar to the /tmp partition. Configuring /dev/shm allows an administrator
+to set the noexec option on the mount, making /dev/shm useless for an attacker to install executable code. It would also prevent an
+attacker from establishing a hardlink to a system setuid program and wait for it to be updated. Once the program was updated, the
+hardlink would be broken and the attacker would have his own copy of the program. If the program happened to have a security
+vulnerability, the attacker could continue to exploit the known flaw.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::dev_shm':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::dev_shm` class:
+
+* [`enforce`](#enforce)
+* [`size`](#size)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="size"></a>`size`
+
+Data type: `Integer`
+
+Size in GB
+
+Default value: `0`
+
+### <a name="cis_security_hardeningrulesdev_shm_nodev"></a>`cis_security_hardening::rules::dev_shm_nodev`
+
+The nodev mount option specifies that the filesystem cannot contain special devices.
+
+Rationale:
+Since the /dev/shm filesystem is not intended to support devices, set this option to ensure that users
+cannot attempt to create special devices in /dev/shm partitions.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::dev_shm_nodev':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::dev_shm_nodev` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesdev_shm_noexec"></a>`cis_security_hardening::rules::dev_shm_noexec`
+
+The noexec mount option specifies that the filesystem cannot contain executable binaries.
+
+Rationale:
+Setting this option on a file system prevents users from executing programs from shared memory.
+This deters users from introducing potentially malicious software on the system.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::dev_shm_noexec':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::dev_shm_noexec` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesdev_shm_nosuid"></a>`cis_security_hardening::rules::dev_shm_nosuid`
+
+The nosuid mount option specifies that the filesystem cannot contain setuid files.
+
+Rationale:
+Setting this option on a file system prevents users from introducing privileged programs onto
+the system and allowing non-root users to execute them.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::dev_shm_nosuid':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::dev_shm_nosuid` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesdhcp"></a>`cis_security_hardening::rules::dhcp`
+
+The Dynamic Host Configuration Protocol (DHCP) is a service that allows machines to be dynamically assigned IP addresses.
+
+Rationale:
+Unless a system is specifically set up to act as a DHCP server, it is recommended that this service be disabled
+to reduce the potential attack surface.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::dhcp':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::dhcp` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesdisable_automount"></a>`cis_security_hardening::rules::disable_automount`
+
+autofs allows automatic mounting of devices, typically including CD/DVDs and USB drives.
+
+Rationale:
+With automounting enabled anyone with physical access could attach a USB drive or disc and have its contents
+available in system even if they lacked permissions to mount it themselves.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::disable_automount':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::disable_automount` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesdisable_dccp"></a>`cis_security_hardening::rules::disable_dccp`
+
+The Datagram Congestion Control Protocol (DCCP) is a transport layer protocol that supports
+streaming media and telephony. DCCP provides a way to gain access to congestion control, without
+having to do it at the application layer, but does not provide in- sequence delivery.
+
+Rationale:
+If the protocol is not required, it is recommended that the drivers not be installed to reduce the
+potential attack surface.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::disable_dccp':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::disable_dccp` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesdisable_ip_forwarding"></a>`cis_security_hardening::rules::disable_ip_forwarding`
+
+The net.ipv4.ip_forward flag is used to tell the system whether it can forward packets or not.
+
+Rationale:
+Setting the flag to 0 ensures that a system with multiple interfaces (for example, a hard proxy),
+will never be able to forward packets, and therefore, never serve as a router.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::disable_ip_forwarding':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::disable_ip_forwarding` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesdisable_ipv6"></a>`cis_security_hardening::rules::disable_ipv6`
+
+Although IPv6 has many advantages over IPv4, not all organizations have IPv6 or dual stack configurations implemented.
+
+Rationale:
+If IPv6 or dual stack is not to be used, it is recommended that IPv6 be disabled to reduce the attack surface of the system.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::disable_ipv6':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::disable_ipv6` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesdisable_packet_redirect"></a>`cis_security_hardening::rules::disable_packet_redirect`
+
+ICMP Redirects are used to send routing information to other hosts. As a host itself does not act
+as a router (in a host only configuration), there is no need to send redirects.
+
+Rationale:
+An attacker could use a compromised host to send invalid ICMP redirects to other router devices in
+an attempt to corrupt routing and have users access a system set up by the attacker as opposed to
+a valid system.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::disable_packet_redirect':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::disable_packet_redirect` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesdisable_prelink"></a>`cis_security_hardening::rules::disable_prelink`
+
+prelinkis a program that modifies ELF shared libraries and ELF dynamically linked binaries
+in such a way that the time needed for the dynamic linker to perform relocations at startup
+significantly decreases.
+
+Rationale:
+The prelinking feature can interfere with the operation of AIDE, because it changes binaries.
+Prelinking can also increase the vulnerability of the system if a malicious user is able to
+compromise a common library such as libc.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::disable_prelink':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::disable_prelink` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesdisable_rds"></a>`cis_security_hardening::rules::disable_rds`
+
+The Reliable Datagram Sockets (RDS) protocol is a transport layer protocol designed to provide
+low-latency, high-bandwidth communications between cluster nodes. It was developed by the
+Oracle Corporation.
+
+Rationale:
+If the protocol is not being used, it is recommended that kernel module not be loaded, disabling
+the service to reduce the potential attack surface.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::disable_rds':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::disable_rds` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesdisable_sctp"></a>`cis_security_hardening::rules::disable_sctp`
+
+The Stream Control Transmission Protocol (SCTP) is a transport layer protocol used to support
+message oriented communication, with several streams of messages in one connection. It serves
+a similar function as TCP and UDP, incorporating features of both. It is message-oriented like
+UDP, and ensures reliable in-sequence transport of messages with congestion control like TCP.
+
+Rationale:
+If the protocol is not being used, it is recommended that kernel module not be loaded, disabling
+the service to reduce the potential attack surface.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::disable_sctp':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::disable_sctp` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesdisable_tipc"></a>`cis_security_hardening::rules::disable_tipc`
+
+The Transparent Inter-Process Communication (TIPC) protocol is designed to provide
+communication between cluster nodes.
+
+Rationale:
+If the protocol is not being used, it is recommended that kernel module not be loaded, disabling
+the service to reduce the potential attack surface.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::disable_tipc':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::disable_tipc` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesdisable_usb_storage"></a>`cis_security_hardening::rules::disable_usb_storage`
+
+USB storage provides a means to transfer and store files insuring persistence and availability of the files
+independent of network connection status. Its popularity and utility has led to USB-based malware being a
+simple and common means for network infiltration and a first step to establishing a persistent threat within
+a networked environment.
+
+Rationale:
+Restricting USB access on the system will decrease the physical attack surface for a device and diminish the
+possible vectors to introduce malware.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::disable_usb_storage':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::disable_usb_storage` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesdisable_wireless"></a>`cis_security_hardening::rules::disable_wireless`
+
+Wireless networking is used when wired networks are unavailable. Ubuntu contains a wireless tool kit
+to allow system administrators to configure and use wireless networks.
+
+Rationale:
+If wireless is not to be used, wireless devices can be disabled to reduce the potential attack surface.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::disable_wireless':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::disable_wireless` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule or just test and log
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesdovecot"></a>`cis_security_hardening::rules::dovecot`
+
+dovecot is an open source IMAP and POP3 server for Linux based systems.
+
+Rationale:
+Unless POP3 and/or IMAP servers are to be provided by this system, it is recommended that
+the service be disabled to reduce the potential attack surface.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::dovecot':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::dovecot` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesenable_aslr"></a>`cis_security_hardening::rules::enable_aslr`
+
+Address space layout randomization (ASLR) is an exploit mitigation technique which randomly
+arranges the address space of key data areas of a process.
+
+Rationale:
+Randomly placing virtual memory regions will make it difficult to write memory page exploits
+as the memory placement will be consistently shifting.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::enable_aslr':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::enable_aslr` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesenable_reverse_path_filtering"></a>`cis_security_hardening::rules::enable_reverse_path_filtering`
+
+Setting net.ipv4.conf.all.rp_filter and net.ipv4.conf.default.rp_filter to 1 forces
+the Linux kernel to utilize reverse path filtering on a received packet to determine
+if the packet was valid. Essentially, with reverse path filtering, if the return packet
+does not go out the same interface that the corresponding source packet came from, the
+packet is dropped (and logged if log_martians is set).
+
+Rationale:
+Setting these flags is a good way to deter attackers from sending your system bogus packets
+that cannot be responded to. One instance where this feature breaks down is if asymmetrical
+routing is employed. This would occur when using dynamic routing protocols (bgp, ospf, etc)
+on your system. If you are using asymmetrical routing on your system, you will not be able
+to enable this feature without breaking the routing.
+
+#### Examples
+
+##### 
+
+```puppet
+class cis_security_hardening::rules::enable_reverse_path_filtering {
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::enable_reverse_path_filtering` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesenable_tcp_syn_cookies"></a>`cis_security_hardening::rules::enable_tcp_syn_cookies`
+
+When tcp_syncookies is set, the kernel will handle TCP SYN packets normally until the half-open
+connection queue is full, at which time, the SYN cookie functionality kicks in. SYN cookies work
+by not using the SYN queue at all. Instead, the kernel simply replies to the SYN with a SYN|ACK,
+but will include a specially crafted TCP sequence number that encodes the source and destination
+IP address and port number and the time the packet was sent. A legitimate connection would send
+the ACK packet of the three way handshake with the specially crafted sequence number. This allows
+the system to verify that it has received a valid response to a SYN cookie and allow the connection,
+even though there is no corresponding SYN in the queue.
+
+Rationale:
+Attackers use SYN flood attacks to perform a denial of service attacked on a system by sending many
+SYN packets without completing the three way handshake. This will quickly use up slots in the kernel's
+half-open connection queue and prevent legitimate connections from succeeding. SYN cookies allow the
+system to keep accepting valid connections, even if under a denial of service attack.
+
+#### Examples
+
+##### 
+
+```puppet
+class cis_security_hardening::rules::enable_tcp_syn_cookies {
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::enable_tcp_syn_cookies` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesetc_crond"></a>`cis_security_hardening::rules::etc_crond`
+
+The /etc/cron.d directory contains system cron jobs that need to run in a similar manner to the hourly,
+daily weekly and monthly jobs from /etc/crontab , but require more granular control as to when they run.
+The files in this directory cannot be manipulated by the crontab command, but are instead edited by system
+administrators using a text editor. The commands below restrict read/write and search access to user and
+group root, preventing regular users from accessing this directory.
+
+Rationale:
+Granting write access to this directory for non-privileged users could provide them the means for gaining
+unauthorized elevated privileges. Granting read access to this directory could give an unprivileged user
+insight in how to gain elevated privileges or circumvent auditing controls.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::etc_crond':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::etc_crond` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesfat"></a>`cis_security_hardening::rules::fat`
+
+The FAT filesystem format is primarily used on older windows systems and portable
+USB drives or flash modules. It comes in three types FAT12 , FAT16 , and FAT32 all
+of which are supported by the vfat kernel module.
+
+Rationale:
+Removing support for unneeded filesystem types reduces the local attack surface of
+the system. If this filesystem type is not needed, disable it.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::fat':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::fat` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesfips_bootloader"></a>`cis_security_hardening::rules::fips_bootloader`
+
+The operating system must implement NIST FIPS-validated cryptography to protect classified information and for the following:
+to provision digital signatures, to generate cryptographic hashes, and to protect unclassified information requiring confidentiality
+and cryptographic protection in accordance with applicable federal laws, Executive Orders, directives, policies, regulations,
+and standards.
+
+Rationale:
+Use of weak or untested encryption algorithms undermines the purposes of utilizing encryption to protect data. The operating
+system must implement cryptographic modules adhering to the higher standards approved by the federal government since this
+provides assurance they have been tested and validated.
+Satisfies: SRG-OS-000396-GPOS-00176, SRG-OS-000478-GPOS-00223
+
+Impact:
+Enabling a FIPS mode on a pre-existing system involves a number of modifications to the Ubuntu operating system. Refer
+to the Ubuntu Server 18.04 FIPS 140-2 security policy document for instructions.
+Note: A subscription to the "Ubuntu Advantage" plan is required in order to obtain the FIPS Kernel cryptographic modules
+and enable FIPS.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::fips_bootloader':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::fips_bootloader` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesfirewalld_default_zone"></a>`cis_security_hardening::rules::firewalld_default_zone`
+
+A firewall zone defines the trust level for a connection, interface or source address binding. This is a one
+to many relation, which means that a connection, interface or source can only be part of one zone, but a zone
+can be used for many network connections, interfaces and sources.
+
+The default zone is the zone that is used for everything that is not explicitely bound/assigned to another zone.
+
+That means that if there is no zone assigned to a connection, interface or source, only the default zone is used.
+The default zone is not always listed as being used for an interface or source as it will be used for it either way.
+This depends on the manager of the interfaces.
+
+Connections handled by NetworkManager are listed as NetworkManager requests to add the zone binding for the
+interface used by the connection. Also interfaces under control of the network service are listed also because the
+service requests it.
+
+Rationale:
+Because the default zone is the zone that is used for everything that is not explicitly bound/assigned to another
+zone, it is important for the default zone to set
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::firewalld_default_zone':
+    enforce => true,
+    default_zone => 'private',
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::firewalld_default_zone` class:
+
+* [`enforce`](#enforce)
+* [`default_zone`](#default_zone)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="default_zone"></a>`default_zone`
+
+Data type: `Cis_security_hardening::Word`
+
+firewalld default zone
+
+### <a name="cis_security_hardeningrulesfirewalld_install"></a>`cis_security_hardening::rules::firewalld_install`
+
+firewalld is a firewall management tool for Linux operating systems. It provides firewall features by
+acting as a front-end for the Linux kernel's netfilter framework via the iptables backend or provides
+firewall features by acting as a front-end for the Linux kernel's netfilter framework via the nftables
+utility.
+
+firewalld replaces iptables as the default firewall management tool. Use the firewalld utility to
+configure a firewall for less complex firewalls. The utility is easy to use and covers the typical use
+cases scenario. FirewallD supports both IPv4 and IPv6 networks and can administer separate firewall
+zones with varying degrees of trust as defined in zone profiles.
+
+Note: Starting in v0.6.0, FirewallD added support for acting as a front-end for the Linux kernel's netfilter
+framework via the nftables userspace utility, acting as an alternative to the nft command line program.
+
+Rationale:
+A firewall utility is required to configure the Linux kernel's netfilter framework via the iptables or nftables
+back-end.
+The Linux kernel's netfilter framework host-based firewall can protect against threats originating from within
+a corporate network to include malicious mobile code and poorly configured software on a host.
+
+Note: Only one firewall utility should be installed and configured. FirewallD is dependent on the iptables
+package.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::firewalld_install':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::firewalld_install` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesfirewalld_interfaces"></a>`cis_security_hardening::rules::firewalld_interfaces`
+
+firewall zones define the trust level of network connections or interfaces.
+
+Rationale:
+A network interface not assigned to the appropriate zone can allow unexpected or undesired network
+traffic to be accepted on the interface
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::firewalld_interface':
+    enforce => true,
+    zone_config => { 'public' => 'eth0' },
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::firewalld_interfaces` class:
+
+* [`enforce`](#enforce)
+* [`zone_config`](#zone_config)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="zone_config"></a>`zone_config`
+
+Data type: `Hash`
+
+firewalld interface and zone config
+
+Default value: `{}`
+
+### <a name="cis_security_hardeningrulesfirewalld_ports_services"></a>`cis_security_hardening::rules::firewalld_ports_services`
+
+Services and ports can be accepted or explicitly rejected or dropped by a zone.
+
+For every zone, you can set a default behavior that handles incoming traffic that is not further specified.
+Such behavior is defined by setting the target of the zone. There are three options - default, ACCEPT,
+REJECT, and DROP.
+
+* ACCEPT - you accept all incoming packets except those disabled by a specific rule.
+* REJECT - you disable all incoming packets except those that you have allowed in
+  specific rules and the source machine is informed about the rejection.
+* DROP - you disable all incoming packets except those that you have allowed in
+specific rules and no information sent to the source machine.
+
+Rationale:
+To reduce the attack surface of a system, all services and ports should be blocked unless required
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::firewalld_ports_services':
+    enforce => true,
+    expected_services => ['ssh'],
+    expected_ports => ['25/tcp'],
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::firewalld_ports_services` class:
+
+* [`enforce`](#enforce)
+* [`expected_services`](#expected_services)
+* [`expected_ports`](#expected_ports)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="expected_services"></a>`expected_services`
+
+Data type: `Array`
+
+services to be configured in firewalld
+
+Default value: `[]`
+
+##### <a name="expected_ports"></a>`expected_ports`
+
+Data type: `Array`
+
+POrts to be configured in firewalld
+
+Default value: `[]`
+
+### <a name="cis_security_hardeningrulesfirewalld_service"></a>`cis_security_hardening::rules::firewalld_service`
+
+Ensure that the firewalld service is enabled to protect your system
+
+Rationale:
+firewalld (Dynamic Firewall Manager) tool provides a dynamically managed firewall. The tool enables network/firewall
+zones to define the trust level of network connections and/or interfaces. It has support both for IPv4 and IPv6 firewall
+settings. Also, it supports Ethernet bridges and allow you to separate between runtime and permanent configuration options.
+Finally, it supports an interface for services or applications to add firewall rules directly
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::firewalld_service':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::firewalld_service` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesfreevxfs"></a>`cis_security_hardening::rules::freevxfs`
+
+The freevxfs filesystem type is a free version of the Veritas type filesystem.
+This is the primary filesystem type for HP-UX operating systems.
+
+Rationale:
+Removing support for unneeded filesystem types reduces the local attack surface
+of the system. If this filesystem type is not needed, disable it.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::freevxfs':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::freevxfs` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesftp"></a>`cis_security_hardening::rules::ftp`
+
+FTP (File Transfer Protocol) is a traditional and widely used standard tool for transferring files between a server and clients
+over a network, especially where no authentication is necessary (permits anonymous users to connect to a server).
+Rationale:
+FTP does not protect the confidentiality of data or authentication credentials. It is recommended SFTP be used if file transfer is
+required. Unless there is a need to run the system as a FTP server (for example, to allow anonymous downloads), it is recommended that
+the package be removed to reduce the potential attack surface.
+
+#### Examples
+
+##### 
+
+```puppet
+class {'cis_security_hardening::rules::ftp':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::ftp` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesgdm_auto_mount"></a>`cis_security_hardening::rules::gdm_auto_mount`
+
+By default GNOME automatically mounts removable media when inserted as a convenience to the user.
+
+Rationale:
+With automounting enabled anyone with physical access could attach a USB drive or disc and have its contents
+available in system even if they lacked permissions to mount it themselves.
+
+Impact:
+The use of portable hard drives is very common for workstation users. If your organization allows the use of
+portable storage or media on workstations and physical access controls to workstations is considered adequate
+there is little value add in turning off automounting.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::gdm_auto_mount':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::gdm_auto_mount` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesgdm_lock_enabled"></a>`cis_security_hardening::rules::gdm_lock_enabled`
+
+The operating system must retain a user's session lock until that user reestablishes access using
+established identification and authentication procedures.
+
+Rationale:
+A session lock is a temporary action taken when a user stops work and moves away from the immediate
+physical vicinity of the information system but does not want to log out because of the temporary
+nature of the absence.
+
+#### Examples
+
+##### 
+
+```puppet
+class 'cis_security_hardening::rules::gdm_lock_enabled':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::gdm_lock_enabled` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesgnome_gdm"></a>`cis_security_hardening::rules::gnome_gdm`
+
+The cis_security_hardening::rules::gnome_gdm class.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::gnome_gdm':
+    enforce => true,
+}
+```
+
+##### 
+
+```puppet
+include cis_security_hardening::rules::gnome_gdm
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::gnome_gdm` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesgnome_gdm_package"></a>`cis_security_hardening::rules::gnome_gdm_package`
+
+The GNOME Display Manager (GDM) is a program that manages graphical display servers and handles graphical user logins.
+
+Rationale:
+If a Graphical User Interface (GUI) is not required, it should be removed to reduce the attack surface of the system.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::gnome_gdm_package':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::gnome_gdm_package` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesgroup_bak_perms"></a>`cis_security_hardening::rules::group_bak_perms`
+
+The /etc/group- file contains a backup list of all the valid groups defined in the system.
+
+Rationale:
+It is critical to ensure that the /etc/group- file is protected from unauthorized access. Although it is protected by
+default, the file permissions could be changed either inadvertently or through malicious actions.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::group_bak_perms':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::group_bak_perms` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesgroup_perms"></a>`cis_security_hardening::rules::group_perms`
+
+The /etc/group file contains a list of all the valid groups defined in the system. The command below
+allows read/write access for root and read access for everyone else.
+
+Rationale:
+The /etc/group file needs to be protected from unauthorized changes by non-privileged users, but needs
+to be readable as this information is used with many non-privileged programs.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::group_perms':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::group_perms` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesgrub_bootloader_config"></a>`cis_security_hardening::rules::grub_bootloader_config`
+
+The grub configuration file contains information on boot settings and passwords for unlocking boot
+options. The grub configuration is usually located at /boot/grub2/grub.cfg and linked as /etc/grub2.cfg.
+Additional settings can be found in the /boot/grub2/user.cfg file.
+
+Rationale:
+Setting the permissions to read and write for root only prevents non-root users from seeing the boot
+parameters or changing them. Non-root users who read the boot parameters may be able to identify
+weaknesses in security upon boot and be able to exploit them.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::grub_bootloader_config':
+    enforce => true,
+}
+```
+
+##### 
+
+```puppet
+include cis_security_hardening::rules::grub_bootloader_config
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::grub_bootloader_config` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesgrub_password"></a>`cis_security_hardening::rules::grub_password`
+
+Setting the boot loader password will require that anyone rebooting the system must enter a password
+before being able to set command line boot parameters
+
+Notes:
+* This recommendation is designed around the grub2 bootloader, if LILO or another bootloader is in use in
+   your environment enact equivalent settings. Replace `/boot/grub2/grub.cfg with the appropriate grub
+   configuration file for your environment
+* For older grub2 based systems:
+  o The superuser/user information and password should not be contained in the
+    /etc/grub.d/00_header file. The information can be placed in any /etc/grub.d file as long as that file
+    is incorporated into grub.cfg. The user may prefer to enter this data into a custom file, such as
+    /etc/grub.d/40_custom so it is not overwritten should the Grub package be updated.
+  o If placing the information in a custom file, do not include the "cat << EOF" and "EOF" lines as the content
+    is automatically added from these files.
+
+Rationale:
+Requiring a boot password upon execution of the boot loader will prevent an unauthorized user from entering boot
+parameters or changing the boot partition. This prevents users from weakening security (e.g. turning off SELinux
+at boot time).
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::grub_password':
+    enforce              => true,
+    grub_password_pbkdf2 => 'grub.pbkdf2.sha512.10000.943.......',
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::grub_password` class:
+
+* [`enforce`](#enforce)
+* [`grub_password_pbkdf2`](#grub_password_pbkdf2)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="grub_password_pbkdf2"></a>`grub_password_pbkdf2`
+
+Data type: `String`
+
+Encrypted grub password.
+
+Default value: `''`
+
+### <a name="cis_security_hardeningrulesgshadow_bak_perms"></a>`cis_security_hardening::rules::gshadow_bak_perms`
+
+The /etc/gshadow- file is used to store backup information about groups that is critical
+to the security of those accounts, such as the hashed password and other security information.
+
+Rationale:
+It is critical to ensure that the /etc/gshadow- file is protected from unauthorized access.
+Although it is protected by default, the file permissions could be changed either inadvertently
+or through malicious actions.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::gshadow_bak_perms':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::gshadow_bak_perms` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesgshadow_perms"></a>`cis_security_hardening::rules::gshadow_perms`
+
+The /etc/gshadow file is used to store the information about groups that is critical to
+the security of those accounts, such as the hashed password and other security information.
+
+Rationale:
+If attackers can gain read access to the /etc/gshadow file, they can easily run a password cracking
+program against the hashed password to break it. Other security information that is stored in the
+/etc/gshadow file (such as group administrators) could also be useful to subvert the group.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::gshadow_perms':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::gshadow_perms` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningruleshfs"></a>`cis_security_hardening::rules::hfs`
+
+The hfs filesystem type is a hierarchical filesystem that allows you to mount
+Mac OS filesystems.
+
+Rationale:
+Removing support for unneeded filesystem types reduces the local attack surface of
+the system. If this filesystem type is not needed, disable it.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::hfs':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::hfs` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningruleshfsplus"></a>`cis_security_hardening::rules::hfsplus`
+
+The hfsplus filesystem type is a hierarchical filesystem designed to replace hfs
+that allows you to mount Mac OS filesystems.s a hierarchical filesystem that
+allows you to mount Mac OS filesystems.
+
+Rationale:
+Removing support for unneeded filesystem types reduces the local attack surface of the
+system. If this filesystem type is not needed, disable it.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::hfsplus':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::hfsplus` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningruleshome_grpquota"></a>`cis_security_hardening::rules::home_grpquota`
+
+The grpquota mount option allows for the filesystem to have disk quotas configured.
+Rationale:
+To ensure the availability of disk space on /home, it is important to limit the impact a single user or
+group can cause for other users (or the wider system) by accidentally filling up the partition. Quotas
+can also be applied to inodes for filesystems where inode exhaustion is a concern.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::home_grpquota':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::home_grpquota` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce t5he rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningruleshome_nodev"></a>`cis_security_hardening::rules::home_nodev`
+
+The nodev mount option specifies that the filesystem cannot contain special devices.
+
+Rationale:
+Since the user partitions are not intended to support devices, set this option to ensure that users
+cannot attempt to create block or character special devices.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::home_nodev':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::home_nodev` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningruleshome_nosuid"></a>`cis_security_hardening::rules::home_nosuid`
+
+The nosuid mount option specifies that the filesystem cannot contain setuid files.
+
+Rationale:
+Since the /home filesystem is only intended for user file storage, set this option
+to ensure that users cannot create setuid files in /home.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::home_nosuid':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::home_nosuid` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningruleshome_usrquota"></a>`cis_security_hardening::rules::home_usrquota`
+
+The usrquota mount option allows for the filesystem to have disk quotas configured.
+
+Rationale:
+To ensure the availability of disk space on /home, it is important to limit the impact a single user or group can
+cause for other users (or the wider system) by accidentally filling up the partition. Quotas can also be applied
+to inodes for filesystems where inode exhaustion is a concern.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::home_usrquota':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::home_usrquota` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningruleshttpd"></a>`cis_security_hardening::rules::httpd`
+
+HTTP or web servers provide the ability to host web site content.
+
+Rationale:
+Unless there is a need to run the system as a web server, it is recommended that the service be
+disabled to reduce the potential attack surface.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::httpd':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::httpd` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesicmp_redirects"></a>`cis_security_hardening::rules::icmp_redirects`
+
+ICMP redirect messages are packets that convey routing information and tell your host
+(acting as a router) to send packets via an alternate path. It is a way of allowing an
+outside routing device to update your system routing tables. By setting net.ipv4.conf.all.accept_redirects
+to 0, the system will not accept any ICMP redirect messages, and therefore, won't allow outsiders to update
+the system's routing tables.
+
+Rationale:
+Attackers could use bogus ICMP redirect messages to maliciously alter the system routing tables and get
+them to send packets to incorrect networks and allow your system packets to be captured.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::icmp_redirects':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::icmp_redirects` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesignore_bogus_icmp_responses"></a>`cis_security_hardening::rules::ignore_bogus_icmp_responses`
+
+Setting icmp_ignore_bogus_error_responses to 1 prevents the kernel from logging bogus
+responses (RFC-1122 non-compliant) from broadcast reframes, keeping file systems from
+filling up with useless log messages.
+
+Rationale:
+Some routers (and some attackers) will send responses that violate RFC-1122 and attempt
+to fill up a log file system with many useless error messages.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::ignore_bogus_icmp_responses':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::ignore_bogus_icmp_responses` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesignore_icmp_broadcast"></a>`cis_security_hardening::rules::ignore_icmp_broadcast`
+
+Setting net.ipv4.icmp_echo_ignore_broadcasts to 1 will cause the system to ignore all ICMP echo
+and timestamp requests to broadcast and multicast addresses.
+
+Rationale:
+Accepting ICMP echo and timestamp requests with broadcast or multicast destinations for your
+network could be used to trick your host into starting (or participating) in a Smurf attack. A Smurf
+attack relies on an attacker sending large amounts of ICMP broadcast messages with a spoofed source
+address. All hosts receiving this message and responding would send echo-reply messages back to the
+spoofed address, which is probably not routable. If many hosts respond to the packets, the amount of
+traffic on the network could be significantly multiplied.
+
+#### Examples
+
+##### 
+
+```puppet
+class cis_security_hardening::rules::ignore_icmp_broadcast {
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::ignore_icmp_broadcast` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesip6tables_deny_policy"></a>`cis_security_hardening::rules::ip6tables_deny_policy`
+
+A default deny all policy on connections ensures that any unconfigured network usage will be rejected.
+
+Rationale:
+With a default accept policy the firewall will accept any packet that is not configured to be denied. It is easier
+to white list acceptable usage than to black list unacceptable usage.
+
+The default policy for the forward chain
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::ip6tables_deny_policy':
+    enforce => true,
+    input_policy => 'drop',
+    output_policy => 'accept',
+    forward_policy => 'drop',
+}
+```
+
+##### 
+
+```puppet
+include cis_security_hardening::rules::ip6tables_deny_policy
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::ip6tables_deny_policy` class:
+
+* [`enforce`](#enforce)
+* [`input_policy`](#input_policy)
+* [`output_policy`](#output_policy)
+* [`forward_policy`](#forward_policy)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="input_policy"></a>`input_policy`
+
+Data type: `Enum['drop', 'accept']`
+
+The default policy for the input chain
+
+Default value: `'drop'`
+
+##### <a name="output_policy"></a>`output_policy`
+
+Data type: `Enum['drop', 'accept']`
+
+The default policy for the output chain
+
+Default value: `'accept'`
+
+##### <a name="forward_policy"></a>`forward_policy`
+
+Data type: `Enum['drop', 'accept']`
+
+
+
+Default value: `'drop'`
+
+### <a name="cis_security_hardeningrulesip6tables_loopback"></a>`cis_security_hardening::rules::ip6tables_loopback`
+
+Configure the loopback interface to accept traffic. Configure all other interfaces to deny traffic to the
+loopback network (127.0.0.0/8).
+
+Rationale:
+Loopback traffic is generated between processes on machine and is typically critical to operation of the system. The
+loopback interface is the only place that loopback network (127.0.0.0/8) traffic should be seen, all other interfaces
+should ignore traffic on this network as an anti-spoofing measure.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::ip6tables_loopback':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::ip6tables_loopback` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesip6tables_open_ports"></a>`cis_security_hardening::rules::ip6tables_open_ports`
+
+Any ports that have been opened on non-loopback addresses need firewall rules to govern traffic.
+
+Rationale:
+Without a firewall rule configured for open ports default firewall policy will drop all packets to
+these ports.
+
+Notes:
+* Changing firewall settings while connected over network can result in being locked out of the system.
+* The remediation command opens up the port to traffic from all sources. Consult iptables documentation
+  and set any restrictions in compliance with site policy.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'ccis_security_hardening::rules::ip6tables_open_ports':
+    enforce => true,
+    firewall_rules => {},
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::ip6tables_open_ports` class:
+
+* [`enforce`](#enforce)
+* [`firewall_rules`](#firewall_rules)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="firewall_rules"></a>`firewall_rules`
+
+Data type: `Hash`
+
+Hash with al firewall rules
+
+Default value: `{}`
+
+### <a name="cis_security_hardeningrulesip6tables_outbound_established"></a>`cis_security_hardening::rules::ip6tables_outbound_established`
+
+Configure the firewall rules for new outbound, and established connections.
+
+Rationale:
+If rules are not in place for new outbound, and established connections all packets will be dropped
+by the default policy preventing network usage.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::ip6tables_outbound_established':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::ip6tables_outbound_established` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesiptables_deny_policy"></a>`cis_security_hardening::rules::iptables_deny_policy`
+
+A default deny all policy on connections ensures that any unconfigured network usage will be rejected.
+
+Rationale:
+With a default accept policy the firewall will accept any packet that is not configured to be denied. It is easier
+to white list acceptable usage than to black list unacceptable usage.
+
+The default policy for the forward chain
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::iptables_deny_policy':
+    enforce => true,
+    input_policy => 'drop',
+    output_policy => 'accept',
+    forward_policy => 'drop',
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::iptables_deny_policy` class:
+
+* [`enforce`](#enforce)
+* [`input_policy`](#input_policy)
+* [`output_policy`](#output_policy)
+* [`forward_policy`](#forward_policy)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="input_policy"></a>`input_policy`
+
+Data type: `Enum['drop', 'accept']`
+
+The default policy for the input chain
+
+Default value: `'drop'`
+
+##### <a name="output_policy"></a>`output_policy`
+
+Data type: `Enum['drop', 'accept']`
+
+The default policy for the output chain
+
+Default value: `'accept'`
+
+##### <a name="forward_policy"></a>`forward_policy`
+
+Data type: `Enum['drop', 'accept']`
+
+
+
+Default value: `'drop'`
+
+### <a name="cis_security_hardeningrulesiptables_install"></a>`cis_security_hardening::rules::iptables_install`
+
+iptables allows configuration of the IPv4 tables in the linux kernel and the rules stored within them.
+Most firewall configuration utilities operate as a front end to iptables.
+
+Rationale:
+iptables is required for firewall management and configuration.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::iptables_install':
+    enforce => true,
+    configure_ip6tables => false,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::iptables_install` class:
+
+* [`enforce`](#enforce)
+* [`configure_ip6tables`](#configure_ip6tables)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="configure_ip6tables"></a>`configure_ip6tables`
+
+Data type: `Boolean`
+
+Flag if ip6tables should be configured
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesiptables_loopback"></a>`cis_security_hardening::rules::iptables_loopback`
+
+Configure the loopback interface to accept traffic. Configure all other interfaces to deny traffic to the
+loopback network (127.0.0.0/8).
+
+Rationale:
+Loopback traffic is generated between processes on machine and is typically critical to operation of the system. The
+loopback interface is the only place that loopback network (127.0.0.0/8) traffic should be seen, all other interfaces
+should ignore traffic on this network as an anti-spoofing measure.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::iptables_loopback':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::iptables_loopback` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesiptables_open_ports"></a>`cis_security_hardening::rules::iptables_open_ports`
+
+Any ports that have been opened on non-loopback addresses need firewall rules to govern traffic.
+
+Rationale:
+Without a firewall rule configured for open ports default firewall policy will drop all packets to these ports.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::iptables_open_ports':
+    enforce => true,
+    firewall_rules => {},
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::iptables_open_ports` class:
+
+* [`enforce`](#enforce)
+* [`firewall_rules`](#firewall_rules)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="firewall_rules"></a>`firewall_rules`
+
+Data type: `Hash`
+
+Additional firewall rules to setup
+
+Default value: `{}`
+
+### <a name="cis_security_hardeningrulesiptables_outbound_established"></a>`cis_security_hardening::rules::iptables_outbound_established`
+
+Configure the firewall rules for new outbound, and established connections.
+
+Rationale:
+If rules are not in place for new outbound, and established connections all packets will be dropped
+by the default policy preventing network usage.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::iptables_outbound_established':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::iptables_outbound_established` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesipv6_router_advertisements"></a>`cis_security_hardening::rules::ipv6_router_advertisements`
+
+This setting disables the system's ability to accept IPv6 router advertisements.
+
+Rationale:
+It is recommended that systems not accept router advertisements as they could be tricked into routing
+traffic to compromised machines. Setting hard routes within the system (usually a single default route
+to a trusted router) protects the system from bad routes.
+
+#### Examples
+
+##### 
+
+```puppet
+class  { 'cis_security_hardening::rules::ipv6_router_advertisements':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::ipv6_router_advertisements` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesissue_net_perms"></a>`cis_security_hardening::rules::issue_net_perms`
+
+The contents of the /etc/issue.net file are displayed to users prior to login for
+remote connections from configured services.
+
+Rationale:
+If the /etc/issue.net file does not have the correct ownership it could be modified
+by unauthorized users with incorrect or misleading information.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::issue_net_perms':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::issue_net_perms` class:
+
+* [`enforce`](#enforce)
+* [`content`](#content)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="content"></a>`content`
+
+Data type: `String`
+
+The content to write into the file
+
+Default value: `''`
+
+### <a name="cis_security_hardeningrulesissue_perms"></a>`cis_security_hardening::rules::issue_perms`
+
+The contents of the /etc/issue file are displayed to users prior to login for local terminals.
+
+Rationale:
+If the /etc/issue file does not have the correct ownership it could be modified by unauthorized
+users with incorrect or misleading information.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::issue_perms':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::issue_perms` class:
+
+* [`enforce`](#enforce)
+* [`content`](#content)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="content"></a>`content`
+
+Data type: `String`
+
+The content to write into the file
+
+Default value: `''`
+
+### <a name="cis_security_hardeningrulesjffs2"></a>`cis_security_hardening::rules::jffs2`
+
+The jffs2 (journaling flash filesystem 2) filesystem type is a log-structured
+filesystem used in flash memory devices.
+
+Rationale:
+Removing support for unneeded filesystem types reduces the local attack surface
+of the system. If this filesystem type is not needed, disable it.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::jffs2':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::jffs2` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesjournald_compress"></a>`cis_security_hardening::rules::journald_compress`
+
+The journald system includes the capability of compressing overly large files to avoid filling up
+the system with logs or making the logs unmanageably large.
+
+Note: The main configuration file /etc/systemd/journald.conf is read before any of the custom *.conf files.
+If there are custom configs present, they override the main configuration parameters.
+
+Rationale:
+Uncompressed large files may unexpectedly fill a filesystem leading to resource unavailability. Compressing logs
+prior to write can prevent sudden, unexpected filesystem impacts.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::journald_compress':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::journald_compress` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesjournald_persistent"></a>`cis_security_hardening::rules::journald_persistent`
+
+Data from journald may be stored in volatile memory or persisted locally on the server. Logs in memory
+will be lost upon a system reboot. By persisting logs to local disk on the server they are protected
+from loss.
+
+Note: The main configuration file /etc/systemd/journald.conf is read before any of the custom *.conf
+files. If there are custom configs present, they override the main configuration parameters
+
+Rationale:
+Writing log data to disk will provide the ability to forensically reconstruct events which may have impacted
+the operations or security of a system even after a system crash or reboot.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::journald_persistent':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::journald_persistent` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesjournald_rsyslog"></a>`cis_security_hardening::rules::journald_rsyslog`
+
+Data from journald may be stored in volatile memory or persisted locally on the server. Utilities #
+exist to accept remote export of journald logs, however, use of the rsyslog service provides a consistent
+means of log collection and export.
+
+Notes:
+     * This recommendation assumes that recommendation 4.2.1.5, "Ensure rsyslog is configured to send logs
+       to a remote log host" has been implemented.
+     * The main configuration file /etc/systemd/journald.conf is read before any of the custom *.conf files. If
+       there are custom configs present, they override the main configuration parameters
+     * As noted in the journald man pages: journald logs may be exported to rsyslog either through the process
+       mentioned here, or through a facility like systemd- journald.service. There are trade-offs involved in each
+       implementation, where ForwardToSyslog will immediately capture all events (and forward to an external log
+       server, if properly configured), but may not capture all boot-up activities. Mechanisms such as
+       systemd-journald.service, on the other hand, will record bootup events, but may delay sending the information
+       to rsyslog, leading to the potential for log manipulation prior to export. Be aware of the limitations of all
+       tools employed to secure a system.
+
+Rationale:
+Storing log data on a remote host protects log integrity from local attacks. If an attacker gains root access on the
+local system, they could tamper with or remove log data that is stored on the local system.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::journald_rsyslog':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::journald_rsyslog` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningruleskdump_service"></a>`cis_security_hardening::rules::kdump_service`
+
+The operating system must disable kernel core dumps so that it can fail to a secure state if system initialization
+fails, shutdown fails or aborts fail.
+Rationale:
+Kernel core dumps may contain the full contents of system memory at the time of the crash. Kernel core dumps may
+consume a considerable amount of disk space and may result in denial of service by exhausting the available space
+on the target file system partition.
+
+#### Examples
+
+##### 
+
+```puppet
+class 'cis_security_hardening::rules::kdump_service':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::kdump_service` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesldap_client"></a>`cis_security_hardening::rules::ldap_client`
+
+The Lightweight Directory Access Protocol (LDAP) was introduced as a replacement for NIS/YP.
+It is a service that provides a method for looking up information from a central database.
+
+Rationale:
+If the system will not need to act as an LDAP client, it is recommended that the software
+be removed to reduce the potential attack surface.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::ldap_client':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::ldap_client` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesldapd"></a>`cis_security_hardening::rules::ldapd`
+
+The Lightweight Directory Access Protocol (LDAP) was introduced as a replacement for NIS/YP. It
+is a service that provides a method for looking up information from a central database.
+
+Rationale:
+If the system will not need to act as an LDAP server, it is recommended that the software be
+disabled to reduce the potential attack surface.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::ldapd':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::ldapd` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningruleslimits_maxlogins"></a>`cis_security_hardening::rules::limits_maxlogins`
+
+he operating system must limit the number of concurrent sessions to ten for all accounts and/or account types.
+
+Rationale:
+The Ubuntu operating system management includes the ability to control the number of users and user sessions that
+utilize an operating system. Limiting the number of allowed users and sessions per user is helpful in reducing the
+risks related to DoS attacks.
+This requirement addresses concurrent sessions for information system accounts and does not address concurrent
+sessions by single users via multiple system accounts. The maximum number of concurrent sessions should be defined
+based upon mission needs and the operational environment for each system.
+
+#### Examples
+
+##### 
+
+```puppet
+class 'cis_security_hardening::rules::limits_maxlogins':
+  enforce => true,
+  maxlogins => 5,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::limits_maxlogins` class:
+
+* [`enforce`](#enforce)
+* [`maxlogins`](#maxlogins)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="maxlogins"></a>`maxlogins`
+
+Data type: `Integer`
+
+Maximun logins to set.
+
+Default value: `10`
+
+### <a name="cis_security_hardeningruleslock_root"></a>`cis_security_hardening::rules::lock_root`
+
+The operating system must prevent direct login into the root account.
+
+Rationale:
+To assure individual accountability and prevent unauthorized access, organizational users must be individually
+identified and authenticated.
+
+A group authenticator is a generic account used by multiple individuals. Use of a group authenticator alone
+does not uniquely identify individual users. Examples of the group authenticator is the UNIX OS "root" user
+ccount, the Windows "Administrator" account, the "sa" account, or a "helpdesk" account.
+
+For example, the UNIX and Windows operating systems offer a 'switch user' capability allowing users to
+authenticate with their individual credentials and, when needed, 'switch' to the administrator role. This
+method provides for unique individual authentication prior to using a group authenticator.
+
+Users (and any processes acting on behalf of users) need to be uniquely identified and authenticated for all
+accesses other than those accesses explicitly identified and documented by the organization, which outlines
+specific user actions that can be performed on the operating system without identification or authentication.
+
+Requiring individuals to be authenticated with an individual authenticator prior to using a group authenticator
+allows for traceability of actions, as well as adding an additional level of protection of the actions that can
+be taken with group account knowledge.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::lock_root':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::lock_root` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningruleslog_suspicious_packets"></a>`cis_security_hardening::rules::log_suspicious_packets`
+
+When enabled, this feature logs packets with un-routable source addresses to the kernel log.
+
+Rationale:
+Enabling this feature and logging these packets allows an administrator to investigate the possibility
+that an attacker is sending spoofed packets to their system.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::log_suspicious_packets':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::log_suspicious_packets` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningruleslogfile_permissions"></a>`cis_security_hardening::rules::logfile_permissions`
+
+Log files stored in /var/log/ contain logged information from many services on the system,
+or on log hosts others as well.
+
+Rationale:
+It is important to ensure that log files have the correct permissions to ensure that sensitive
+data is archived and protected.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::logfile_permissions':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::logfile_permissions` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningruleslogrotate"></a>`cis_security_hardening::rules::logrotate`
+
+The system includes the capability of rotating log files regularly to avoid filling up the
+system with logs or making the logs unmanageable large. The file /etc/logrotate.d/syslog is
+the configuration file used to rotate log files created by syslog or rsyslog.
+
+Rationale:
+By keeping the log files smaller and more manageable, a system administrator can easily archive these files
+to another system and spend less time looking through inordinately large log files.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::logrotate':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::logrotate` class:
+
+* [`enforce`](#enforce)
+* [`su_user`](#su_user)
+* [`su_group`](#su_group)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="su_user"></a>`su_user`
+
+Data type: `String`
+
+User for logrotate.
+
+Default value: `'root'`
+
+##### <a name="su_group"></a>`su_group`
+
+Data type: `String`
+
+Group for logrotate.
+
+Default value: `'syslog'`
+
+### <a name="cis_security_hardeningruleslogrotate_configuration"></a>`cis_security_hardening::rules::logrotate_configuration`
+
+Log files contain logged information from many services on the system, or on log
+hosts others as well.
+
+Rationale:
+It is important to ensure that log files have the correct permissions to ensure
+that sensitive data is archived and protected.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::logrotate_configuration':
+    enforce => true,
+    permission => '640'
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::logrotate_configuration` class:
+
+* [`enforce`](#enforce)
+* [`permission`](#permission)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="permission"></a>`permission`
+
+Data type: `String`
+
+The file permission to use
+
+Default value: `'640'`
+
+### <a name="cis_security_hardeningrulesmcstrans"></a>`cis_security_hardening::rules::mcstrans`
+
+The mcstransd daemon provides category label information to client processes requesting
+information. The label translations are defined in /etc/selinux/targeted/setrans.conf
+
+Rationale:
+Since this service is not used very often, remove it to reduce the amount of potentially
+vulnerable code running on the system.
+
+#### Examples
+
+##### 
+
+```puppet
+class cis_security_hardening::rules::mcstrans {
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::mcstrans` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
 
 Default value: ``false``
 
@@ -743,8 +6784,6 @@ flaws.
 To support this requirement, the operating system may have an integrated solution incorporating continuous scanning
 using HBSS and periodic scanning using other tools, as specified in the requirement.
 
- @api private
-
 #### Examples
 
 ##### 
@@ -758,6 +6797,5588 @@ class { 'cis_security_hardening::rules::mfetp':
 #### Parameters
 
 The following parameters are available in the `cis_security_hardening::rules::mfetp` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesmotd_perms"></a>`cis_security_hardening::rules::motd_perms`
+
+The contents of the /etc/motd file are displayed to users after login and function as a message of the day
+for authenticated users. Unix-based systems have typically displayed information about the OS release and
+patch level upon logging in to the system. This information can be useful to developers who are developing
+software for a particular OS platform. If mingetty(8) supports the following options, they display operating
+system information: \m - machine architecture \r - operating system release \s - operating system
+name \v - operating system version
+
+Rationale:
+Warning messages inform users who are attempting to login to the system of their legal status regarding the
+system and must include the name of the organization that owns the system and any monitoring policies that are
+in place. Displaying OS and patch level information in login banners also has the side effect of providing
+detailed system information to attackers attempting to target specific exploits of a system. Authorized users
+can easily get this information by running the " uname -a " command once they have logged in.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::motd_perms':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::motd_perms` class:
+
+* [`enforce`](#enforce)
+* [`content`](#content)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="content"></a>`content`
+
+Data type: `String`
+
+The content to write into the file
+
+Default value: `''`
+
+### <a name="cis_security_hardeningrulesmta_local"></a>`cis_security_hardening::rules::mta_local`
+
+Mail Transfer Agents (MTA), such as sendmail and Postfix, are used to listen for incoming mail
+and transfer the messages to the appropriate user or mail server. If the system is not intended
+to be a mail server, it is recommended that the MTA be configured to only process local mail.
+
+Rationale:
+The software for all Mail Transfer Agents is complex and most have a long history of security issues.
+While it is important to ensure that the system can process local mail messages, it is not necessary to
+have the MTA's daemon listening on a port unless the server is intended to be a mail server that receives
+and processes mail from other systems.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::mta_local':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::mta_local` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesnet_snmp"></a>`cis_security_hardening::rules::net_snmp`
+
+Simple Network Management Protocol (SNMP) is a widely used protocol for monitoring the health and welfare
+of network equipment, computer equipment and devices like UPSs.
+
+Net-SNMP is a suite of applications used to implement SNMPv1 (RFC 1157), SNMPv2 (RFCs 1901-1908), and SNMPv3
+(RFCs 3411-3418) using both IPv4 and IPv6.
+
+Support for SNMPv2 classic (a.k.a. "SNMPv2 historic" - RFCs 1441-1452) was dropped with the 4.0 release of
+the UCD-snmp package.
+
+The Simple Network Management Protocol (SNMP) server is used to listen for SNMP commands from an SNMP management
+system, execute the commands or collect the information and then send results back to the requesting system.
+
+Rationale:
+The SNMP server can communicate using SNMPv1, which transmits data in the clear and does not require authentication
+to execute commands. SNMPv3 replaces the simple/clear text password sharing used in SNMPv2 with more securely encoded
+parameters. If the the SNMP service is not required, the net-snmp package should be removed to reduce the attack
+surface of the system.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::net_snmp':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::net_snmp` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesnfs"></a>`cis_security_hardening::rules::nfs`
+
+The Network File System (NFS) is one of the first and most widely distributed file systems in the UNIX
+environment. It provides the ability for systems to mount file systems of other servers through the network.
+
+Rationale:
+If the system does not export NFS shares, it is recommended that the NFS be disabled to reduce the remote attack
+surface.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::nfs':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::nfs` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesnfs_utils"></a>`cis_security_hardening::rules::nfs_utils`
+
+The Network File System (NFS) is one of the first and most widely distributed file systems in the UNIX
+environment. It provides the ability for systems to mount file systems of other servers through the network.
+
+Rationale:
+If the system does not require network shares, it is recommended that the nfs-utils package be removed to
+reduce the attack surface of the system.
+Note: many of the libvirt packages used by Enterprise Linux virtualization are dependent on the nfs-utils package.
+If the nfs-package is required as a dependency, the nfs-server should be disabled and masked to reduce the
+attack surface of the system.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::nfs_utils':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::nfs_utils` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesnftables_base_chains"></a>`cis_security_hardening::rules::nftables_base_chains`
+
+Chains are containers for rules. They exist in two kinds, base chains and regular chains. A base chain is an
+entry point for packets from the networking stack, a regular chain may be used as jump target and is used
+for better rule organization.
+
+Rationale:
+If a base chain doesn't exist with a hook for input, forward, and delete, packets that would flow through
+those chains will not be touched by nftables.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::nftables_base_chains':
+    enforce => true,
+    table => 'default',
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::nftables_base_chains` class:
+
+* [`enforce`](#enforce)
+* [`table`](#table)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="table"></a>`table`
+
+Data type: `Cis_security_hardening::Numbers_letters`
+
+nftable table to add rules
+
+Default value: `'default'`
+
+### <a name="cis_security_hardeningrulesnftables_default_deny"></a>`cis_security_hardening::rules::nftables_default_deny`
+
+Base chain policy is the default verdict that will be applied to packets reaching the end of the chain.
+
+Rationale:
+There are two policies: accept (Default) and drop. If the policy is set to accept, the firewall will
+accept any packet that is not configured to be denied and the packet will continue transversing the
+network stack.
+It is easier to white list acceptable usage than to black list unacceptable usage.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::nftables_default_deny':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::nftables_default_deny` class:
+
+* [`enforce`](#enforce)
+* [`default_policy_input`](#default_policy_input)
+* [`default_policy_forward`](#default_policy_forward)
+* [`default_policy_output`](#default_policy_output)
+* [`table`](#table)
+* [`additional_rules`](#additional_rules)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="default_policy_input"></a>`default_policy_input`
+
+Data type: `Enum['accept', 'reject', 'drop']`
+
+Default input policy
+
+Default value: `'drop'`
+
+##### <a name="default_policy_forward"></a>`default_policy_forward`
+
+Data type: `Enum['accept', 'reject', 'drop']`
+
+Default forward policy
+
+Default value: `'drop'`
+
+##### <a name="default_policy_output"></a>`default_policy_output`
+
+Data type: `Enum['accept', 'reject', 'drop']`
+
+Default output policy
+
+Default value: `'drop'`
+
+##### <a name="table"></a>`table`
+
+Data type: `Cis_security_hardening::Numbers_letters`
+
+nftable table to add rules
+
+Default value: `'default'`
+
+##### <a name="additional_rules"></a>`additional_rules`
+
+Data type: `Hash`
+
+additinals rules to add to te policy. Add an array with rules to teh hash. Hash key is the chain
+to add the rules.
+
+Default value: `{}`
+
+### <a name="cis_security_hardeningrulesnftables_flush_iptables"></a>`cis_security_hardening::rules::nftables_flush_iptables`
+
+nftables is a replacement for iptables, ip6tables, ebtables and arptables
+
+Rationale:
+It is possible to mix iptables and nftables. However, this increases complexity and also the chance to introduce
+errors. For simplicity flush out all iptables rules, and ensure it is not loaded.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::nftables_flush_iptables':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::nftables_flush_iptables` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce he rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesnftables_install"></a>`cis_security_hardening::rules::nftables_install`
+
+nftables provides a new in-kernel packet classification framework that is based on a
+network-specific Virtual Machine (VM) and a new nft userspace command line tool. nftables
+reuses the existing Netfilter subsystems such as the existing hook infrastructure, the
+connection tracking system, NAT, userspace queuing and logging subsystem.
+
+Notes:
+   * nftables is available in Linux kernel 3.13 and newer.
+   * Only one firewall utility should be installed and configured.
+
+Rationale:
+nftables is a subsystem of the Linux kernel that can protect against threats originating
+from within a corporate network to include malicious mobile code and poorly configured
+software on a host.
+
+  }
+
+#### Examples
+
+##### cis_security_hardening::rules::nftables_installcis_security_hardening::rules::avahi {
+
+```puppet
+enforce => true,
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::nftables_install` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesnftables_loopback"></a>`cis_security_hardening::rules::nftables_loopback`
+
+Configure the loopback interface to accept traffic. Configure all other interfaces to deny traffic
+to the loopback network.
+
+Rationale:
+Loopback traffic is generated between processes on machine and is typically critical to operation of
+the system. The loopback interface is the only place that loopback network traffic should be seen,
+all other interfaces should ignore traffic on this network as an anti- spoofing measure.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::nftables_loopback':
+    enforce => true,
+    table => 'default',
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::nftables_loopback` class:
+
+* [`enforce`](#enforce)
+* [`table`](#table)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="table"></a>`table`
+
+Data type: `String`
+
+nftable table to add rules
+
+Default value: `'default'`
+
+### <a name="cis_security_hardeningrulesnftables_outbound_established"></a>`cis_security_hardening::rules::nftables_outbound_established`
+
+Configure the firewall rules for new outbound, and established connections.
+
+Rationale:
+If rules are not in place for new outbound, and established connections all packets will be dropped
+by the default policy preventing network usage.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::nftables_outbound_established':
+    enforce => true,
+    table => 'default',
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::nftables_outbound_established` class:
+
+* [`enforce`](#enforce)
+* [`table`](#table)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="table"></a>`table`
+
+Data type: `Cis_security_hardening::Numbers_letters`
+
+nftable table to add rules
+
+Default value: `'default'`
+
+### <a name="cis_security_hardeningrulesnftables_persistence"></a>`cis_security_hardening::rules::nftables_persistence`
+
+nftables is a subsystem of the Linux kernel providing filtering and classification of
+network packets/datagrams/frames.
+The nftables service reads the /etc/sysconfig/nftables.conf file for a nftables file or
+files to include in the nftables ruleset.
+A nftables ruleset containing the input, forward, and output base chains allow network
+traffic to be filtered.
+
+Rationale:
+Changes made to nftables ruleset only affect the live system, you will also need to
+configure the nftables ruleset to apply on boot.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::nftables_persistence':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::nftables_persistence` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesnftables_service"></a>`cis_security_hardening::rules::nftables_service`
+
+The nftables service allows for the loading of nftables rulesets during boot, or starting of the nftables service.
+
+Rationale:
+The nftables service restores the nftables rules from the rules files referenced in the /etc/sysconfig/nftables.conf
+file durring boot or the starting of the nftables service
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::nftables_service':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::nftables_service` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesnftables_table"></a>`cis_security_hardening::rules::nftables_table`
+
+Tables hold chains. Each table only has one address family and only applies to packets of this family.
+Tables can have one of five families.
+
+Rationale:
+nftables doesn't have any default tables. Without a table being build, nftables will not filter
+network traffic.
+
+#### Examples
+
+##### 
+
+```puppet
+class  { 'cis_security_hardening::rules::nftables_table':
+    enforce => true,
+    nftables_default_table => 'default',
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::nftables_table` class:
+
+* [`enforce`](#enforce)
+* [`nftables_default_table`](#nftables_default_table)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="nftables_default_table"></a>`nftables_default_table`
+
+Data type: `Cis_security_hardening::Numbers_letters`
+
+Table to be created if none exists
+
+Default value: `'default'`
+
+### <a name="cis_security_hardeningrulesnis"></a>`cis_security_hardening::rules::nis`
+
+The Network Information Service (NIS) (formally known as Yellow Pages) is a client-server directory
+service protocol for distributing system configuration files. The NIS server is a collection of
+programs that allow for the distribution of configuration files.
+
+Rationale:
+The NIS service is inherently an insecure system that has been vulnerable to DOS attacks, buffer
+overflows and has poor authentication for querying NIS maps. NIS generally been replaced by such
+protocols as Lightweight Directory Access Protocol (LDAP). It is recommended that the service be
+disabled and other, more secure services be used.
+
+#### Examples
+
+##### 
+
+```puppet
+class cis_security_hardening::rules::nis {
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::nis` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesnis_client"></a>`cis_security_hardening::rules::nis_client`
+
+The Network Information Service (NIS), formerly known as Yellow Pages, is a client-server
+directory service protocol used to distribute system configuration files. The NIS client
+(ypbind) was used to bind a machine to an NIS server and receive the distributed configuration files.
+
+Rationale:
+The NIS service is inherently an insecure system that has been vulnerable to DOS attacks, buffer
+overflows and has poor authentication for querying NIS maps. NIS generally has been replaced by
+such protocols as Lightweight Directory Access Protocol (LDAP). It is recommended that the service
+be removed.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::nis_client':
+    enforce => true,
+}
+```
+
+##### 
+
+```puppet
+include cis_security_hardening::rules::nis_client
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::nis_client` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesntp_package"></a>`cis_security_hardening::rules::ntp_package`
+
+Install packages for chrony or ntp.
+
+class { 'cis_security_hardening::rules::ntp_package':
+  enforce => true,
+  pkg => 'ntp',
+  }
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::ntp_package` class:
+
+* [`enforce`](#enforce)
+* [`pkg`](#pkg)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="pkg"></a>`pkg`
+
+Data type: `Enum['ntp', 'chrony']`
+
+The ntp package to install
+
+Default value: `'ntp'`
+
+### <a name="cis_security_hardeningrulesntpd"></a>`cis_security_hardening::rules::ntpd`
+
+ntp is a daemon which implements the Network Time Protocol (NTP). It is designed to synchronize system
+clocks across a variety of systems and use a source that is highly accurate. More information on NTP can
+be found at http://www.ntp.org. ntp can be configured to be a client and/or a server.
+This recommendation only applies if ntp is in use on the system.
+
+Rationale:
+If ntp is in use on the system proper configuration is vital to ensuring time synchronization is working
+properly.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::ntp':
+    enforce => true,
+    ntp_daemon => 'ntp',
+    ntp_servers => ['server1', 'server2'],
+    }
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::ntpd` class:
+
+* [`enforce`](#enforce)
+* [`ntp_servers`](#ntp_servers)
+* [`ntp_restrict`](#ntp_restrict)
+* [`ntp_driftfile`](#ntp_driftfile)
+* [`ntp_statsdir`](#ntp_statsdir)
+* [`ntp_disable_monitor`](#ntp_disable_monitor)
+* [`ntp_burst`](#ntp_burst)
+* [`ntp_service_manage`](#ntp_service_manage)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="ntp_servers"></a>`ntp_servers`
+
+Data type: `Array`
+
+NTP servers to use, depends on the daemon used
+
+Default value: `[]`
+
+##### <a name="ntp_restrict"></a>`ntp_restrict`
+
+Data type: `Array`
+
+NTP daemon restrictions depending on the daemon used
+
+Default value: `[]`
+
+##### <a name="ntp_driftfile"></a>`ntp_driftfile`
+
+Data type: `String`
+
+Drift file for ntp daemon
+
+Default value: `''`
+
+##### <a name="ntp_statsdir"></a>`ntp_statsdir`
+
+Data type: `String`
+
+NTP stats dir
+
+Default value: `''`
+
+##### <a name="ntp_disable_monitor"></a>`ntp_disable_monitor`
+
+Data type: `Boolean`
+
+Disables the monitoring facility in NTP
+
+Default value: ``true``
+
+##### <a name="ntp_burst"></a>`ntp_burst`
+
+Data type: `Boolean`
+
+Specifies whether to enable the iburst option for every NTP peer.
+
+Default value: ``false``
+
+##### <a name="ntp_service_manage"></a>`ntp_service_manage`
+
+Data type: `Boolean`
+
+Manage ntp service
+
+Default value: ``true``
+
+### <a name="cis_security_hardeningrulesopensc_pkcs11"></a>`cis_security_hardening::rules::opensc_pkcs11`
+
+The operating system must accept Personal Identity Verification (PIV) credentials.
+
+Rationale:
+The use of PIV credentials facilitates standardization and reduces the risk of unauthorized
+access.
+
+DoD has mandated the use of the CAC to support identity management and personal authentication
+for systems covered under Homeland Security Presidential Directive (HSPD) 12, as well as making
+he CAC a primary component of layered protection for national security systems.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::opensc_pkcs11':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::opensc_pkcs11` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulespam_cached_auth"></a>`cis_security_hardening::rules::pam_cached_auth`
+
+The operating system must be configured such that Pluggable Authentication Module (PAM)
+prohibits the use of cached authentications after one day.
+
+Rationale:
+If cached authentication information is out-of-date, the validity of the authentication
+information may be questionable.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::pam_cached_auth':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::pam_cached_auth` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulespam_fail_delay"></a>`cis_security_hardening::rules::pam_fail_delay`
+
+The operating system must enforce a delay of at least 4 seconds between logon prompts
+following a failed logon attempt.
+
+Rationale:
+Limiting the number of logon attempts over a certain time interval reduces the chances
+that an unauthorized user may gain access to an account.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::pam_fail_delay':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::pam_fail_delay` class:
+
+* [`enforce`](#enforce)
+* [`delay`](#delay)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+##### <a name="delay"></a>`delay`
+
+Data type: `Integer`
+
+Delay between failed logins.
+
+Default value: `4000000`
+
+### <a name="cis_security_hardeningrulespam_last_logon"></a>`cis_security_hardening::rules::pam_last_logon`
+
+The operating system must display the date and time of the last successful account
+logon upon logon
+
+Rationale:
+Configuration settings are the set of parameters that can be changed in hardware, software,
+or firmware components of the system that affect the security posture and/or functionality of
+the system. Security-related parameters are those parameters impacting the security state of the
+system, including the parameters required to satisfy other security control requirements.
+Security-related parameters include, for example: registry settings; account, file, directory
+permission settings; and settings for functions, ports, protocols, services, and remote connections.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::pam_last_logon':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::pam_last_logon` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulespam_lockout"></a>`cis_security_hardening::rules::pam_lockout`
+
+Lock out users after n unsuccessful consecutive login attempts. The first sets of changes are made to the PAM
+configuration files. The second set of changes are applied to the program specific PAM configuration file. The
+second set of changes must be applied to each program that will lock out users. Check the documentation for each
+secondary program for instructions on how to configure them to work with PAM.
+
+Set the lockout number to the policy in effect at your site.
+
+Rationale:
+Locking out user IDs after n unsuccessful consecutive login attempts mitigates brute force password attacks against
+your systems.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::pam_lockout':
+    enforce => true,
+    lockouttime => 300,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::pam_lockout` class:
+
+* [`enforce`](#enforce)
+* [`attempts`](#attempts)
+* [`lockouttime`](#lockouttime)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="attempts"></a>`attempts`
+
+Data type: `Integer`
+
+Lock account after this number of failed logins
+
+Default value: `3`
+
+##### <a name="lockouttime"></a>`lockouttime`
+
+Data type: `Integer`
+
+Lockout the account for this number of seconds
+
+Default value: `900`
+
+### <a name="cis_security_hardeningrulespam_mfa"></a>`cis_security_hardening::rules::pam_mfa`
+
+The operating system must implement smart card logins for multifactor authentication for local
+and network access to privileged and non-privileged accounts.
+
+Rationale:
+Without the use of multifactor authentication, the ease of access to privileged functions is greatly increased.
+
+Multifactor authentication requires using two or more factors to achieve authentication. Factors include:
+1. something a user knows (e.g., password/PIN);
+2. something a user has (e.g., cryptographic identification device, token); and
+3. something a user is (e.g., biometric).
+
+A privileged account is defined as an information system account with authorizations of a privileged user.
+
+Network access is defined as access to an information system by a user (or a process acting on behalf of a
+user) communicating through a network (e.g., local area network, wide area network, or the internet).
+
+The DoD CAC with DoD-approved PKI is an example of multifactor authentication.
+
+Satisfies: SRG-OS-000105-GPOS-00052, SRG-OS-000106-GPOS-00053, SRG-OS-000107- GPOS-00054, SRG-OS-000108-GPOS-00055
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::pam_mfa':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::pam_mfa` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulespam_old_passwords"></a>`cis_security_hardening::rules::pam_old_passwords`
+
+The /etc/security/opasswd file stores the users' old passwords and can be checked to ensure that users
+are not recycling recent passwords.
+
+Rationale:
+Forcing users not to reuse their past 5 passwords make it less likely that an attacker will be able to
+guess the password.
+
+Note that these change only apply to accounts configured on the local system.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::pam_old_passwords':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::pam_old_passwords` class:
+
+* [`enforce`](#enforce)
+* [`oldpasswords`](#oldpasswords)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="oldpasswords"></a>`oldpasswords`
+
+Data type: `Integer`
+
+Number of old passwords to remember
+
+Default value: `5`
+
+### <a name="cis_security_hardeningrulespam_passwd_sha512"></a>`cis_security_hardening::rules::pam_passwd_sha512`
+
+The commands below change password encryption from md5 to sha512 (a much stronger hashing algorithm). All
+existing accounts will need to perform a password change to upgrade the stored hashes to the new algorithm.
+
+Rationale:
+The SHA-512 algorithm provides much stronger hashing than MD5, thus providing additional protection to the system by
+increasing the level of effort for an attacker to successfully determine passwords.
+
+Note that these change only apply to accounts configured on the local system.
+
+This rule is done together with sec_pam_old_passwords
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::pam_passwd_sha512':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::pam_passwd_sha512` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulespam_pkcs11"></a>`cis_security_hardening::rules::pam_pkcs11`
+
+The operating system must implement multifactor authentication for remote access to privileged
+accounts in such a way that one of the factors is provided by a device separate from the system
+gaining access.
+
+Rationale:
+Using an authentication device, such as a CAC or token that is separate from the information system,
+ensures that even if the information system is compromised, that compromise will not affect credentials
+stored on the authentication device.
+
+Multifactor solutions that require devices separate from information systems gaining access include,
+for example, hardware tokens providing time-based or challenge-response authenticators and smart cards
+such as the U.S. Government Personal Identity Verification card and the DoD Common Access Card.
+
+A privileged account is defined as an information system account with authorizations of a privileged user.
+
+Remote access is access to DoD nonpublic information systems by an authorized user (or an information
+system) communicating through an external, non-organization-controlled network. Remote access methods
+include, for example, dial-up, broadband, and wireless.
+
+This requirement only applies to components where this is specific to the function of the device or
+has the concept of an organizational user (e.g., VPN, proxy capability). This does not apply to authentication
+for the purpose of configuring the device itself (management).
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::pam_pkcs11':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::pam_pkcs11` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulespam_pw_requirements"></a>`cis_security_hardening::rules::pam_pw_requirements`
+
+The pam_pwquality.so module checks the strength of passwords. It performs checks such as making sure a password is not a
+dictionary word, it is a certain length, contains a mix of characters (e.g. alphabet, numeric, other) and more. The
+following are definitions of the pam_pwquality .so options.
+
+- try_first_pass - retrieve the password from a previous stacked PAM module. If not available, then prompt the user for a password.
+- retry=3 - Allow 3 tries before sending back a failure.
+
+The following options are set in the /etc/security/pwquality.conf file:
+- minlen = 14 - password must be 14 characters or more
+- dcredit = -1 - provide at least one digit
+- ucredit = -1 - provide at least one uppercase character
+- ocredit = -1 - provide at least one special character
+- lcredit = -1 - provide at least one lowercase character
+
+The settings shown above are one possible policy. Alter these values to conform to your own organization's password policies.
+
+Rationale:
+Strong passwords protect systems from being hacked through brute force methods.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::pam_pw_requirements':
+    enforce => true,
+    retry => 3,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::pam_pw_requirements` class:
+
+* [`enforce`](#enforce)
+* [`minlen`](#minlen)
+* [`dcredit`](#dcredit)
+* [`ucredit`](#ucredit)
+* [`ocredit`](#ocredit)
+* [`lcredit`](#lcredit)
+* [`minclass`](#minclass)
+* [`retry`](#retry)
+* [`dictcheck`](#dictcheck)
+* [`difok`](#difok)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="minlen"></a>`minlen`
+
+Data type: `Integer`
+
+Minimal password length
+
+Default value: `14`
+
+##### <a name="dcredit"></a>`dcredit`
+
+Data type: `Integer`
+
+Minimum number of digits a password must contain
+
+Default value: `-`
+
+##### <a name="ucredit"></a>`ucredit`
+
+Data type: `Integer`
+
+Minimum number of upper case characters a apassword mt contain
+
+Default value: `-`
+
+##### <a name="ocredit"></a>`ocredit`
+
+Data type: `Integer`
+
+Minimum number of special characters a password must contain
+
+Default value: `-`
+
+##### <a name="lcredit"></a>`lcredit`
+
+Data type: `Integer`
+
+Minimum number of lower case characters a password must contain
+
+Default value: `-`
+
+##### <a name="minclass"></a>`minclass`
+
+Data type: `Integer`
+
+Minimum to provide character classes (only used for Redhat 8, ignored in oler RedHat versios).
+Will be ignored if value is -1. Instead *credit values are used.
+
+Default value: `-`
+
+##### <a name="retry"></a>`retry`
+
+Data type: `Integer`
+
+allowed retries when password is wrong
+
+Default value: `3`
+
+##### <a name="dictcheck"></a>`dictcheck`
+
+Data type: `Boolean`
+
+Ensure passwords can not use dictonary words
+
+Default value: ``false``
+
+##### <a name="difok"></a>`difok`
+
+Data type: `Integer`
+
+Number of characters to change.
+
+Default value: `0`
+
+### <a name="cis_security_hardeningrulespam_use_mappers"></a>`cis_security_hardening::rules::pam_use_mappers`
+
+The operating system must map the authenticated identity to the user or group account for PKI-based
+authentication.
+
+Rationale:
+Without mapping the certificate used to authenticate to the user account, the ability to determine
+the identity of the individual user or group will not be available for forensic analysis.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::pam_use_mappers':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::pam_use_mappers` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulespasswd_bak_perms"></a>`cis_security_hardening::rules::passwd_bak_perms`
+
+The /etc/group- file contains a backup list of all the valid groups defined in the system.
+
+Rationale:
+It is critical to ensure that the /etc/group- file is protected from unauthorized access. Although it is protected by
+default, the file permissions could be changed either inadvertently or through malicious actions.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::passwd_bak_perms':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::passwd_bak_perms` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulespasswd_expiration"></a>`cis_security_hardening::rules::passwd_expiration`
+
+The PASS_MAX_DAYS parameter in /etc/login.defs allows an administrator to force passwords to expire once they reach a defined age.
+It is recommended that the PASS_MAX_DAYS parameter be set to less than or equal to 365 days.
+
+Rationale:
+The window of opportunity for an attacker to leverage compromised credentials or successfully compromise credentials via an online
+brute force attack is limited by the age of the password. Therefore, reducing the maximum age of a password also reduces an
+attacker's window of opportunity.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::passwd_expiration':
+    enforce => true,
+    max_pass_days => 50,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::passwd_expiration` class:
+
+* [`enforce`](#enforce)
+* [`max_pass_days`](#max_pass_days)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="max_pass_days"></a>`max_pass_days`
+
+Data type: `Integer`
+
+Password expires after days
+
+Default value: `90`
+
+### <a name="cis_security_hardeningrulespasswd_inactive_days"></a>`cis_security_hardening::rules::passwd_inactive_days`
+
+User accounts that have been inactive for over a given period of time can be automatically disabled.
+It is recommended that accounts that are inactive for 30 days after password expiration be disabled.
+
+Rationale:
+Inactive accounts pose a threat to system security since the users are not logging in to notice failed
+login attempts or other anomalies.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::passwd_inactive_days':
+    enforce => true,
+    inactive_pass_days => 20,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::passwd_inactive_days` class:
+
+* [`enforce`](#enforce)
+* [`inactive_pass_days`](#inactive_pass_days)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="inactive_pass_days"></a>`inactive_pass_days`
+
+Data type: `Integer`
+
+Days after an inactive account is locked
+
+Default value: `30`
+
+### <a name="cis_security_hardeningrulespasswd_min_days"></a>`cis_security_hardening::rules::passwd_min_days`
+
+The PASS_MIN_DAYS parameter in /etc/login.defs allows an administrator to prevent users from changing
+their password until a minimum number of days have passed since the last time the user changed their
+password. It is recommended that PASS_MIN_DAYS parameter be set to 7 or more days.
+
+Rationale:
+By restricting the frequency of password changes, an administrator can prevent users from repeatedly
+changing their password in an attempt to circumvent password reuse controls.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::passwd_min_days':
+    enforce => true,
+    min_pass_days => 7,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::passwd_min_days` class:
+
+* [`enforce`](#enforce)
+* [`min_pass_days`](#min_pass_days)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="min_pass_days"></a>`min_pass_days`
+
+Data type: `Integer`
+
+Minimum days between password changes
+
+Default value: `7`
+
+### <a name="cis_security_hardeningrulespasswd_perms"></a>`cis_security_hardening::rules::passwd_perms`
+
+The /etc/passwd file contains user account information that is used by many system utilities and therefore must be readable
+for these utilities to operate.
+
+Rationale:
+It is critical to ensure that the /etc/passwd file is protected from unauthorized write access. Although it is protected by
+default, the file permissions could be changed either inadvertently or through malicious actions.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::passwd_perms':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::passwd_perms` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulespasswd_sha512"></a>`cis_security_hardening::rules::passwd_sha512`
+
+The operating system must encrypt all stored passwords with a FIPS 140-2 approved cryptographic
+hashing algorithm.
+
+Rationale:
+Passwords need to be protected at all times, and encryption is the standard method for protecting
+passwords. If passwords are not encrypted, they can be plainly read (i.e., clear text) and easily
+compromised.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::passwd_sh512':
+  enforce => true
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::passwd_sha512` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulespasswd_warn_days"></a>`cis_security_hardening::rules::passwd_warn_days`
+
+The PASS_WARN_AGE parameter in /etc/login.defs allows an administrator to notify users that their
+password will expire in a defined number of days. It is recommended that the PASS_WARN_AGE
+parameter be set to 7 or more days.
+
+Rationale:
+Providing an advance warning that a password will be expiring gives users time to think of a secure
+password. Users caught unaware may choose a simple password or write it down where it may be discovered.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::passwd_warn_days':
+    enforce => true,
+    warn_pass_days => 7,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::passwd_warn_days` class:
+
+* [`enforce`](#enforce)
+* [`warn_pass_days`](#warn_pass_days)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="warn_pass_days"></a>`warn_pass_days`
+
+Data type: `Integer`
+
+Minimum dfays before a expiration warning is given.
+
+Default value: `7`
+
+### <a name="cis_security_hardeningrulespki_certs_validation"></a>`cis_security_hardening::rules::pki_certs_validation`
+
+The Ubuntu operating system, for PKI-based authentication, must validate certificates by constructing a
+certification path (which includes status information) to an accepted trust anchor.
+
+Rationale:
+Without path validation, an informed trust decision by the relying party cannot be made when
+presented with any certificate not already explicitly trusted.
+
+A trust anchor is an authoritative entity represented via a public key and associated data. It
+is used in the context of public key infrastructures, X.509 digital certificates, and DNSSEC.
+
+When there is a chain of trust, usually the top entity to be trusted becomes the trust anchor;
+it can be, for example, a Certification Authority (CA). A certification path starts with the
+subject certificate and proceeds through a number of intermediate certificates up to a trusted
+root certificate, typically issued by a trusted CA.
+
+This requirement verifies that a certification path to an accepted trust anchor is used for
+certificate validation and that the path includes status information. Path validation is necessary
+for a relying party to make an informed trust decision when presented with any certificate not already
+explicitly trusted. Status information for certification paths includes certificate revocation lists or
+online certificate status protocol responses. Validation of the certificate status information is out
+of scope for this requirement.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::pki_certs_validation':
+  enforce => tru,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::pki_certs_validation` class:
+
+* [`enforce`](#enforce)
+* [`cert_policy`](#cert_policy)
+* [`pkcs11_config`](#pkcs11_config)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+##### <a name="cert_policy"></a>`cert_policy`
+
+Data type: `String`
+
+Comma seperated list of policies.
+
+Default value: `'ca,signature,ocsp_on;'`
+
+##### <a name="pkcs11_config"></a>`pkcs11_config`
+
+Data type: `Optional[String]`
+
+Prepared config file to install. The file must be given in the 'puppet://modules/...' format.
+
+Default value: ``undef``
+
+### <a name="cis_security_hardeningrulesrestrict_core_dumps"></a>`cis_security_hardening::rules::restrict_core_dumps`
+
+A core dump is the memory of an executable program. It is generally used to determine why a
+program aborted. It can also be used to glean confidential information from a core file. The
+system provides the ability to set a soft limit for core dumps, but this can be overridden
+by the user.
+
+Rationale:
+Setting a hard limit on core dumps prevents users from overriding the soft variable. If core
+dumps are required, consider setting limits for user groups (see limits.conf(5) ). In addition,
+setting the fs.suid_dumpable variable to 0 will prevent setuid programs from dumping core.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::restrict_core_dumps':
+   enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::restrict_core_dumps` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesrestrict_su"></a>`cis_security_hardening::rules::restrict_su`
+
+The su command allows a user to run a command or shell as another user. The program has been superseded
+by sudo , which allows for more granular control over privileged access. Normally, the su command can be
+executed by any user. By uncommenting the pam_wheel.so statement in /etc/pam.d/su , the su command will
+only allow users in the wheel group to execute su.
+
+Rationale:
+Restricting the use of su , and using sudo in its place, provides system administrators better control of
+the escalation of user privileges to execute privileged commands. The sudo utility also provides a better
+logging and audit mechanism, as it can log each command executed via sudo , whereas su can only record that
+a user executed the su program.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::restrict_su':
+    enforce => true,
+    wheel_users => ['root'],
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::restrict_su` class:
+
+* [`enforce`](#enforce)
+* [`wheel_users`](#wheel_users)
+* [`sudo_group`](#sudo_group)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="wheel_users"></a>`wheel_users`
+
+Data type: `Array`
+
+Users to be added to the wheel group.
+
+Default value: `['root']`
+
+##### <a name="sudo_group"></a>`sudo_group`
+
+Data type: `Cis_security_hardening::Word`
+
+Group for sudo
+
+Default value: `'wheel'`
+
+### <a name="cis_security_hardeningrulesrhnsd"></a>`cis_security_hardening::rules::rhnsd`
+
+The rhnsd daemon polls the Red Hat Network web site for scheduled actions and, if there are, executes those actions.
+
+Rationale:
+Patch management policies may require that organizations test the impact of a patch before it is deployed in a production
+environment. Having patches automatically deployed could have a negative impact on the environment. It is best to not allow
+an action by default but only after appropriate consideration has been made. It is recommended that the service be disabled
+unless the risk is understood and accepted or you are running your own satellite .
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::rhnsd':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::rhnsd` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesroot_gid"></a>`cis_security_hardening::rules::root_gid`
+
+The usermod command can be used to specify which group the root user belongs to. This affects
+permissions of files that are created by the root user.
+
+Rationale:
+Using GID 0 for the root account helps prevent root -owned files from accidentally becoming
+accessible to non-privileged users.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::root_gid':
+    enforce => true,
+    encrypted_root_password => 'encrypted password',
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::root_gid` class:
+
+* [`enforce`](#enforce)
+* [`encrypted_root_password`](#encrypted_root_password)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="encrypted_root_password"></a>`encrypted_root_password`
+
+Data type: `String`
+
+The nre root password o be set (has to be encrypted as the OS needs it)
+
+Default value: `''`
+
+### <a name="cis_security_hardeningrulesrpcbind"></a>`cis_security_hardening::rules::rpcbind`
+
+The rpcbind utility maps RPC services to the ports on which they listen. RPC processes notify rpcbind
+when they start, registering the ports they are listening on and the RPC program numbers they expect to
+serve. The client system then contacts rpcbind on the server with a particular RPC program number. The
+rpcbind service redirects the client to the proper port number so it can communicate with the requested
+service.
+
+Portmapper is an RPC service, which always listens on tcp and udp 111, and is used to map other RPC
+services (such as nfs, nlockmgr, quotad, mountd, etc.) to their corresponding port number on the server.
+When a remote host makes an RPC call to that server, it first consults with portmap to determine where
+the RPC server is listening.
+
+Rationale:
+A small request (~82 bytes via UDP) sent to the Portmapper generates a large response (7x to 28x amplification),
+which makes it a suitable tool for DDoS attacks. If rpcbind is not required, it is recommended that the rpcbind
+package be removed to reduce the attack surface of the system.
+
+Note: many of the libvirt packages used by Enterprise Linux virtualization, and the nfs-utils package used for
+The Network File System (NFS) are dependent on the rpcbind package. If the rpcbind is required as a dependency,
+the services rpcbind.service and rpcbind.socket should be stopped and masked to reduce the attack surface of
+the system.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::rpcbind':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::rpcbind` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesrsh_client"></a>`cis_security_hardening::rules::rsh_client`
+
+The rsh package contains the client commands for the rsh services.
+
+Rationale:
+These legacy clients contain numerous security exposures and have been replaced with the more
+secure SSH package. Even if the server is removed, it is best to ensure the clients are also
+removed to prevent users from inadvertently attempting to use these commands and therefore
+exposing their credentials. Note that removing the rsh package removes the clients for rsh ,
+rcp and rlogin .
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::rsh_client':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::rsh_client` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesrsh_server"></a>`cis_security_hardening::rules::rsh_server`
+
+The operating system must not have the rsh-server package installed.
+
+Rationale:
+It is detrimental for operating systems to provide, or install by default, functionality exceeding requirements or
+mission objectives. These unnecessary capabilities or services are often overlooked and therefore may remain unsecured.
+They increase the risk to the platform by providing additional attack vectors.
+
+Operating systems are capable of providing a wide variety of functions and services. Some of the functions and services,
+provided by default, may not be necessary to support essential organizational operations (e.g., key missions, functions).
+
+Examples of non-essential capabilities include, but are not limited to, games, software packages, tools, and demonstration
+software, not related to requirements or providing a wide array of functionality not required for every mission, but which
+cannot be disabled.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::rsh_server':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::rsh_server` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesrsyncd"></a>`cis_security_hardening::rules::rsyncd`
+
+The rsyncd service can be used to synchronize files between systems over network links.
+
+Rationale:
+The rsyncd service presents a security risk as it uses unencrypted protocols for communication.
+
+#### Examples
+
+##### 
+
+```puppet
+class cis_security_hardening::rules::rsyncd {
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::rsyncd` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesrsyslog_default_file_perms"></a>`cis_security_hardening::rules::rsyslog_default_file_perms`
+
+rsyslog will create logfiles that do not already exist on the system. This setting controls what permissions
+will be applied to these newly created files.
+
+Rationale:
+It is important to ensure that log files have the correct permissions to ensure that sensitive data is
+archived and protected.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::rsyslog_default_file_perms':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::rsyslog_default_file_perms` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesrsyslog_installed"></a>`cis_security_hardening::rules::rsyslog_installed`
+
+The rsyslog and syslog-ng software are recommended replacements to the original syslogd daemon which
+provide improvements over syslogd , such as connection-oriented (i.e. TCP) transmission of logs, the
+option to log to database formats, and the encryption of log data en route to a central logging server.
+
+Rationale:
+The security enhancements of rsyslog and syslog-ng such as connection-oriented (i.e. TCP) transmission of
+logs, the option to log to database formats, and the encryption of log data en route to a central logging
+server) justify installing and configuring the package.
+
+#### Examples
+
+##### 
+
+```puppet
+class 'cis_security_hardening::rules::rsyslog_installed' {
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::rsyslog_installed` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesrsyslog_logging"></a>`cis_security_hardening::rules::rsyslog_logging`
+
+The /etc/rsyslog.conf and /etc/rsyslog.d/*.conf files specifies rules for logging and which files are to be used to
+log certain classes of messages.
+
+Rationale:
+A great deal of important security-related information is sent via rsyslog (e.g., successful and failed su attempts, f
+ailed login attempts, root login attempts, etc.).
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::rsyslog_logging':
+    enforce => true,
+    log_config => {
+      '*.emerg' => ':omusrmsg:*',
+    }
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::rsyslog_logging` class:
+
+* [`enforce`](#enforce)
+* [`log_config`](#log_config)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="log_config"></a>`log_config`
+
+Data type: `Hash`
+
+Logfiles to configure
+
+Default value: `{}`
+
+### <a name="cis_security_hardeningrulesrsyslog_remote_logs"></a>`cis_security_hardening::rules::rsyslog_remote_logs`
+
+The rsyslog utility supports the ability to send logs it gathers to a remote log host running syslogd(8) or
+to receive messages from remote hosts, reducing administrative overhead.
+
+Rationale:
+Storing log data on a remote host protects log integrity from local attacks. If an attacker gains root access
+on the local system, they could tamper with or remove log data that is stored on the local system
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::rsyslog_remote_logs':
+    enforce => true,
+    remote_log_host => '10.10.54.2',
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::rsyslog_remote_logs` class:
+
+* [`enforce`](#enforce)
+* [`remote_log_host`](#remote_log_host)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="remote_log_host"></a>`remote_log_host`
+
+Data type: `String`
+
+Remote syslog server to send logs to
+
+Default value: `''`
+
+### <a name="cis_security_hardeningrulesrsyslog_remote_syslog"></a>`cis_security_hardening::rules::rsyslog_remote_syslog`
+
+By default, rsyslog does not listen for log messages coming in from remote systems. The ModLoad tells rsyslog
+to load the imtcp.so module so it can listen over a network via TCP. The InputTCPServerRun option instructs
+rsyslogd to listen on the specified TCP port.
+
+Rationale:
+The guidance in the section ensures that remote log hosts are configured to only accept rsyslog data from hosts
+within the specified domain and that those systems that are not designed to be log hosts do not accept any remote
+rsyslog messages. This provides protection from spoofed log data and ensures that system administrators are
+reviewing reasonably complete syslog data in a central location.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::rsyslog_remote_syslog':
+    enforce => true,
+    is_loghost => false,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::rsyslog_remote_syslog` class:
+
+* [`enforce`](#enforce)
+* [`is_loghost`](#is_loghost)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="is_loghost"></a>`is_loghost`
+
+Data type: `Boolean`
+
+Flag if host is a remote log destination for rsyslog
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesrsyslog_service"></a>`cis_security_hardening::rules::rsyslog_service`
+
+Once the rsyslog package is installed it needs to be activated.
+
+Rationale:
+If the rsyslog service is not activated the system may default to the syslogd service or lack logging instead.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::rsyslog_service':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::rsyslog_service` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulessamba"></a>`cis_security_hardening::rules::samba`
+
+The Samba daemon allows system administrators to configure their Linux systems to share file
+systems and directories with Windows desktops. Samba will advertise the file systems and
+directories via the Small Message Block (SMB) protocol. Windows desktop users will be able to
+mount these directories and file systems as letter drives on their systems.
+
+Rationale:
+If there is no need to mount directories and file systems to Windows systems, then this service
+can be disabled to reduce the potential attack surface.
+
+#### Examples
+
+##### 
+
+```puppet
+class cis_security_hardening::rules::samba {
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::samba` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulessecure_icmp_redirects"></a>`cis_security_hardening::rules::secure_icmp_redirects`
+
+Secure ICMP redirects are the same as ICMP redirects, except they come from gateways listed
+on the default gateway list. It is assumed that these gateways are known to your system, and
+that they are likely to be secure.
+
+Rationale:
+It is still possible for even known gateways to be compromised. Setting
+net.ipv4.conf.all.secure_redirects to 0 protects the system from routing table updates by
+possibly compromised known gateways.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::secure_icmp_redirects':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::secure_icmp_redirects` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesselinux"></a>`cis_security_hardening::rules::selinux`
+
+SELinux provides Mandatory Access Controls.
+
+Rationale:
+Without a Mandatory Access Control system installed only the default Discretionary Access Control system
+will be available.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::selinux':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::selinux` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesselinux_bootloader"></a>`cis_security_hardening::rules::selinux_bootloader`
+
+Configure SELINUX to be enabled at boot time and verify that it has not been overwritten by the grub boot parameters.
+
+Rationale:
+SELinux must be enabled at boot time in your grub configuration to ensure that the controls it provides are not overridden.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::selinux_bootloader':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::selinux_bootloader` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesselinux_policy"></a>`cis_security_hardening::rules::selinux_policy`
+
+Configure SELinux to meet or exceed the default targeted policy, which constrains daemons and system software only.
+
+Rationale:
+Security configuration requirements vary from site to site. Some sites may mandate a policy that is
+stricter than the default policy, which is perfectly acceptable. This item is intended to ensure that
+at least the default recommendations are met.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::selinux_policy':
+    enforce => true,
+    selinux_policy => 'targeted',
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::selinux_policy` class:
+
+* [`enforce`](#enforce)
+* [`selinux_policy`](#selinux_policy)
+* [`auto_reboot`](#auto_reboot)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="selinux_policy"></a>`selinux_policy`
+
+Data type: `String`
+
+SELinux policy
+
+Default value: `'targeted'`
+
+##### <a name="auto_reboot"></a>`auto_reboot`
+
+Data type: `Boolean`
+
+Trigger a reboot if this rule creates a change. Defaults to true.
+
+Default value: ``true``
+
+### <a name="cis_security_hardeningrulesselinux_state"></a>`cis_security_hardening::rules::selinux_state`
+
+Set SELinux to enable when the system is booted.
+
+Rationale:
+SELinux must be enabled at boot time in to ensure that the controls it provides are in effect at all times.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::selinux_state':
+    enforce => true,
+    state => 'permissive',
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::selinux_state` class:
+
+* [`enforce`](#enforce)
+* [`state`](#state)
+* [`auto_reboot`](#auto_reboot)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="state"></a>`state`
+
+Data type: `Enum['enforcing', 'permissive']`
+
+SELinux state to set
+
+Default value: `'enforcing'`
+
+##### <a name="auto_reboot"></a>`auto_reboot`
+
+Data type: `Boolean`
+
+Trigger a reboot if this rule creates a change. Defaults to true.
+
+Default value: ``true``
+
+### <a name="cis_security_hardeningrulessetroubleshoot"></a>`cis_security_hardening::rules::setroubleshoot`
+
+The SETroubleshoot service notifies desktop users of SELinux denials through a user- friendly interface.
+The service provides important information around configuration errors, unauthorized intrusions, and other
+potential errors.
+
+Rationale:
+The SETroubleshoot service is an unnecessary daemon to have running on a server, especially if X Windows is disabled.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::setroubleshoot':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::setroubleshoot` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesshadow_bak_perms"></a>`cis_security_hardening::rules::shadow_bak_perms`
+
+The /etc/shadow- file is used to store backup information about user accounts that is critical to the security
+of those accounts, such as the hashed password and other security information.
+
+Rationale:
+It is critical to ensure that the /etc/shadow- file is protected from unauthorized access. Although it is
+protected by default, the file permissions could be changed either inadvertently or through malicious actions.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::shadow_bak_perms':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::shadow_bak_perms` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesshadow_encrypt_sha512"></a>`cis_security_hardening::rules::shadow_encrypt_sha512`
+
+Login passwords are hashed and stored in the /etc/shadow file.
+
+Note: These changes only apply to accounts configured on the local system.
+
+Rationale:
+The SHA-512 algorithm provides much stronger hashing than MD5, thus providing additional protection to the system
+by increasing the level of effort for an attacker to successfully determine passwords.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::shadow_encrypt_sha512':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::shadow_encrypt_sha512` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesshadow_perms"></a>`cis_security_hardening::rules::shadow_perms`
+
+The /etc/shadow file is used to store the information about user accounts that is critical to the security
+of those accounts, such as the hashed password and other security information.
+
+Rationale:
+If attackers can gain read access to the /etc/shadow file, they can easily run a password cracking program
+against the hashed password to break it. Other security information that is stored in the /etc/shadow
+file (such as expiration) could also be useful to subvert the user accounts.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::shadow_perms':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::shadow_perms` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesshadowed_passwords"></a>`cis_security_hardening::rules::shadowed_passwords`
+
+Local accounts can uses shadowed passwords. With shadowed passwords, The passwords are saved in shadow
+password file, /etc/shadow, encrypted by a salted one-way hash. Accounts with a shadowed password have
+an x in the second field in /etc/passwd.
+
+Rationale:
+The /etc/passwd file also contains information like user ID's and group ID's that are used by many system
+programs. Therefore, the /etc/passwd file must remain world readable. In spite of encoding the password
+with a randomly-generated one-way hash function, an attacker could still break the system if they got access
+to the /etc/passwd file. This can be mitigated by using shadowed passwords, thus moving the passwords in the
+/etc/passwd file to /etc/shadow. The /etc/shadow file is set so only root will be able to read and write. This
+helps mitigate the risk of an attacker gaining access to the encoded passwords with which to perform a dictionary
+attack.
+
+Notes:
+* All accounts must have passwords or be locked to prevent the account from being used by an unauthorized user.
+* A user account with an empty second field in /etc/passwd allows the account to be logged into by providing
+  only the username.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::shadowed_passwords':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::shadowed_passwords` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesshell_nologin"></a>`cis_security_hardening::rules::shell_nologin`
+
+There are a number of accounts provided with Red Hat 7 that are used to manage applications and are not
+intended to provide an interactive shell.
+
+Rationale:
+It is important to make sure that accounts that are not being used by regular users are prevented from
+being used to provide an interactive shell. By default Red Hat 7 sets the password field for these accounts
+to an invalid string, but it is also recommended that the shell field in the password file be set to /sbin/nologin .
+This prevents the account from potentially being used to run any commands.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::shell_nologin':
+    enforce => true,
+    exclude => ['postgres'],
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::shell_nologin` class:
+
+* [`enforce`](#enforce)
+* [`exclude`](#exclude)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="exclude"></a>`exclude`
+
+Data type: `Array`
+
+Shells to exclude.
+
+Default value: `[]`
+
+### <a name="cis_security_hardeningrulessingle_user_mode"></a>`cis_security_hardening::rules::single_user_mode`
+
+Single user mode (rescue mode) is used for recovery when the system detects an issue during boot
+or by manual selection from the bootloader.
+
+Rationale:
+Requiring authentication in single user mode (rescue mode) prevents an unauthorized user from
+rebooting the system into single user to gain root privileges without credentials.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::single_user_mode':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::single_user_mode` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulessource_routed_packets"></a>`cis_security_hardening::rules::source_routed_packets`
+
+In networking, source routing allows a sender to partially or fully specify the route packets
+take through a network. In contrast, non-source routed packets travel a path determined by
+routers in the network. In some cases, systems may not be routable or reachable from some
+locations (e.g. private addresses vs. Internet routable), and so source routed packets would
+need to be used.
+
+Rationale:
+Setting net.ipv4.conf.all.accept_source_route and net.ipv4.conf.default.accept_source_route to
+0 disables the system from accepting source routed packets. Assume this system was capable of
+routing packets to Internet routable addresses on one interface and private addresses on another
+interface. Assume that the private addresses were not routable to the Internet routable addresses
+and vice versa. Under normal routing circumstances, an attacker from the Internet routable
+addresses could not use the system as a way to reach the private address systems. If, however,
+source routed packets were allowed, they could be used to gain access to the private address systems
+as the route could be specified, rather than rely on routing protocols that did not allow this routing.
+
+#### Examples
+
+##### 
+
+```puppet
+class  { 'cis_security_hardening::rules::source_routed_packets':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::source_routed_packets` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulessquashfs"></a>`cis_security_hardening::rules::squashfs`
+
+The squashfs filesystem type is a compressed read-only Linux filesystem embedded in
+small footprint systems (similar to cramfs ). A squashfs image can be used without
+having to first decompress the image.
+
+Rationale:
+Removing support for unneeded filesystem types reduces the local attack surface of
+the system. If this filesystem type is not needed, disable it.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::squashfs'
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::squashfs` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulessquid"></a>`cis_security_hardening::rules::squid`
+
+Squid is a standard proxy server used in many distributions and environments.
+
+Rationale:
+If there is no need for a proxy server, it is recommended that the squid proxy be disabled to
+reduce the potential attack surface.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::squid':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::squid` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulessshd_banner"></a>`cis_security_hardening::rules::sshd_banner`
+
+The cis_security_hardening::rules::sshd_banner class.
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::sshd_banner` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulessshd_ciphers"></a>`cis_security_hardening::rules::sshd_ciphers`
+
+This variable limits the ciphers that SSH can use during communication.
+
+Rationale:
+Weak ciphers that are used for authentication to the cryptographic module cannot be relied upon to provide
+confidentiality or integrity, and system data may be compromised.
+
+The DES, Triple DES, and Blowfish ciphers, as used in SSH, have a birthday bound of approximately four billion blocks,
+which makes it easier for remote attackers to obtain cleartext data via a birthday attack against a long-duration
+encrypted session, aka a "Sweet32" attack.
+
+The RC4 algorithm, as used in the TLS protocol and SSL protocol, does not properly combine state data with key data
+during the initialization phase, which makes it easier for remote attackers to conduct plaintext-recovery attacks
+against the initial bytes of a stream by sniffing network traffic that occasionally relies on keys affected by the
+Invariance Weakness, and then using a brute-force approach involving LSB values, aka the "Bar Mitzvah" issue.
+
+The passwords used during an SSH session encrypted with RC4 can be recovered by an attacker who is able to capture and
+replay the session.
+
+Error handling in the SSH protocol; Client and Server, when using a block cipher algorithm in Cipher Block Chaining (CBC)
+mode, makes it easier for remote attackers to recover certain plaintext data from an arbitrary block of ciphertext in an
+SSH session via unknown vectors.
+
+The mm_newkeys_from_blob function in monitor_wrap.c, when an AES-GCM cipher is used, does not properly initialize memory
+for a MAC context data structure, which allows remote authenticated users to bypass intended ForceCommand and login-shell
+restrictions via packet data that provides a crafted callback address.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::sshd_ciphers':
+    enforce => true,
+    ciphers => ['a','b'],
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::sshd_ciphers` class:
+
+* [`enforce`](#enforce)
+* [`ciphers`](#ciphers)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="ciphers"></a>`ciphers`
+
+Data type: `Array`
+
+Ciphers to add to config
+
+Default value: `[]`
+
+### <a name="cis_security_hardeningrulessshd_config_permissions"></a>`cis_security_hardening::rules::sshd_config_permissions`
+
+The /etc/ssh/sshd_config file contains configuration specifications for sshd. The command below sets
+the owner and group of the file to root.
+
+Rationale:
+The /etc/ssh/sshd_config file needs to be protected from unauthorized changes by non-privileged users.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::sshd_config_permissions':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::sshd_config_permissions` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulessshd_crypto_policy"></a>`cis_security_hardening::rules::sshd_crypto_policy`
+
+System-wide Crypto policy can be over-ridden or opted out of for openSSH.
+
+Rationale:
+Over-riding or opting out of the system-wide crypto policy could allow for the use of
+less secure Ciphers, MACs, KexAlgoritms and GSSAPIKexAlgorithsm.
+
+#### Examples
+
+##### 
+
+```puppet
+class cis_security_hardening::rules::sshd_crypto_polic {
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::sshd_crypto_policy` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule or just test and log
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulessshd_empty_passwords"></a>`cis_security_hardening::rules::sshd_empty_passwords`
+
+The PermitEmptyPasswords parameter specifies if the SSH server allows login to accounts with
+empty password strings.
+
+Rationale:
+Disallowing remote shell access to accounts that have an empty password reduces the probability
+of unauthorized access to the system
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::sshd_empty_passwords':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::sshd_empty_passwords` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulessshd_hostbased_authentication"></a>`cis_security_hardening::rules::sshd_hostbased_authentication`
+
+The HostbasedAuthentication parameter specifies if authentication is allowed through trusted hosts via the user
+of .rhosts , or /etc/hosts.equiv , along with successful public key client host authentication. This option only
+applies to SSH Protocol Version 2.
+
+Rationale:
+Even though the .rhosts files are ineffective if support is disabled in /etc/pam.conf , disabling the ability to
+use .rhosts files in SSH provides an additional layer of protection .
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::sshd_hostbased_authentication':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::sshd_hostbased_authentication` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulessshd_ignore_rhosts"></a>`cis_security_hardening::rules::sshd_ignore_rhosts`
+
+The IgnoreRhosts parameter specifies that .rhosts and .shosts files will not be used in RhostsRSAAuthentication
+or HostbasedAuthentication .
+
+Rationale:
+Setting this parameter forces users to enter a password when authenticating with ssh.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::sshd_ignore_rhosts':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::sshd_ignore_rhosts` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulessshd_install"></a>`cis_security_hardening::rules::sshd_install`
+
+The operating system must use SSH to protect the confidentiality and integrity of transmitted information.
+
+Rationale:
+Without protection of the transmitted information, confidentiality and integrity may be compromised because
+unprotected communications can be intercepted and either read or altered.
+
+This requirement applies to both internal and external networks and all types of information system
+components from which information can be transmitted (e.g., servers, mobile devices, notebook computers,
+printers, copiers, scanners, and facsimile machines). Communication paths outside the physical protection of
+a controlled boundary are exposed to the possibility of interception and modification.
+
+Protecting the confidentiality and integrity of organizational information can be accomplished by physical
+means (e.g., employing physical distribution systems) or by logical means (e.g., employing cryptographic
+techniques). If physical means of protection are employed, then logical means (cryptography) do not have to
+be employed, and vice versa.
+
+Satisfies: SRG-OS-000423-GPOS-00187, SRG-OS-000425-GPOS-00189, SRG-OS-000426- GPOS-00190
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::sshd_install':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::sshd_install` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulessshd_kex"></a>`cis_security_hardening::rules::sshd_kex`
+
+Key exchange is any method in cryptography by which cryptographic keys are exchanged between two parties, allowing
+use of a cryptographic algorithm. If the sender and receiver wish to exchange encrypted messages, each must be
+equipped to encrypt messages to be sent and decrypt messages received
+
+Rationale:
+Key exchange methods that are considered weak should be removed. A key exchange method may be weak because too few
+bits are used, or the hashing algorithm is considered too weak. Using weak algorithms could expose connections to
+man-in-the-middle attacks.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::sshd_kex':
+    enforce => true,
+    kexs => ['a','b'],
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::sshd_kex` class:
+
+* [`enforce`](#enforce)
+* [`kexs`](#kexs)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="kexs"></a>`kexs`
+
+Data type: `Array`
+
+Key exchange methods to add to config
+
+Default value: `[]`
+
+### <a name="cis_security_hardeningrulessshd_limit_access"></a>`cis_security_hardening::rules::sshd_limit_access`
+
+There are several options available to limit which users and group can access the system via SSH. It is recommended that at least
+one of the following options be leveraged:
+
+AllowUsers
+The AllowUsers variable gives the system administrator the option of allowing specific users to ssh into the system. The list
+consists of space separated user names. Numeric user IDs are not recognized with this variable. If a system administrator wants
+to restrict user access further by only allowing the allowed users to log in from a particular host, the entry can be specified
+in the form of user@host.
+
+AllowGroups
+The AllowGroups variable gives the system administrator the option of allowing specific groups of users to ssh into the system.
+The list consists of space separated group names. Numeric group IDs are not recognized with this variable.
+
+DenyUsers
+The DenyUsers variable gives the system administrator the option of denying specific users to ssh into the system. The list
+consists of space separated user names. Numeric user IDs are not recognized with this variable. If a system administrator wants
+to restrict user access further by specifically denying a user's access from a particular host, the entry can be specified in
+the form of user@host.
+
+DenyGroups
+The DenyGroups variable gives the system administrator the option of denying specific groups of users to ssh into the system.
+The list consists of space separated group names. Numeric group IDs are not recognized with this variable.
+
+Rationale:
+Restricting which users can remotely access the system via SSH will help ensure that only authorized users access the system.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::sshd_limit_access':
+    enforce => true,
+    allow_users => ['user1', 'user2'],
+    deny_users => ['user3'],
+    allow_groups => ['group1','group2'],
+    deny_groups => ['group3'],
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::sshd_limit_access` class:
+
+* [`enforce`](#enforce)
+* [`allow_users`](#allow_users)
+* [`allow_groups`](#allow_groups)
+* [`deny_users`](#deny_users)
+* [`deny_groups`](#deny_groups)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="allow_users"></a>`allow_users`
+
+Data type: `Array[String]`
+
+Array with allowd users to connect by ssh
+
+Default value: `[]`
+
+##### <a name="allow_groups"></a>`allow_groups`
+
+Data type: `Array[String]`
+
+Array with unix groups allowed to connect by ssh
+
+Default value: `[]`
+
+##### <a name="deny_users"></a>`deny_users`
+
+Data type: `Array[String]`
+
+Array aith users not allowed to connect by ssh
+
+Default value: `[]`
+
+##### <a name="deny_groups"></a>`deny_groups`
+
+Data type: `Array[String]`
+
+Unix groups not allowed to connect by ssh
+
+Default value: `[]`
+
+### <a name="cis_security_hardeningrulessshd_login_gracetime"></a>`cis_security_hardening::rules::sshd_login_gracetime`
+
+The LoginGraceTime parameter specifies the time allowed for successful authentication to the SSH server.
+The longer the Grace period is the more open unauthenticated connections can exist. Like other session
+controls in this session the Grace Period should be limited to appropriate organizational limits to
+ensure the service is available for needed access.
+Rationale:
+Setting the LoginGraceTime parameter to a low number will minimize the risk of successful brute force attacks
+to the SSH server. It will also limit the number of concurrent unauthenticated connections While the recommended
+setting is 60 seconds (1 Minute), set the number based on site policy.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::sshd_login_gracetime':
+    enforce => true,
+    login_grace_time => 50,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::sshd_login_gracetime` class:
+
+* [`enforce`](#enforce)
+* [`login_grace_time`](#login_grace_time)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="login_grace_time"></a>`login_grace_time`
+
+Data type: `Integer`
+
+Time allowed for successful authentication
+
+Default value: `60`
+
+### <a name="cis_security_hardeningrulessshd_loglevel"></a>`cis_security_hardening::rules::sshd_loglevel`
+
+The INFO parameter specifies that login and logout activity will be logged.
+
+Rationale:
+SSH provides several logging levels with varying amounts of verbosity. DEBUG is specifically not recommended other
+than strictly for debugging SSH communications since it provides so much data that it is difficult to identify
+important security information. INFO level is the basic level that only records login activity of SSH users. In many
+situations, such as Incident Response, it is important to determine when a particular user was active on a system.
+The logout record can eliminate those users who disconnected, which helps narrow the field.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::sshd_loglevel':
+    enforce => true,
+    loglevel => 'INFO',
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::sshd_loglevel` class:
+
+* [`enforce`](#enforce)
+* [`log_level`](#log_level)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="log_level"></a>`log_level`
+
+Data type: `Enum['INFO', 'VERBOSE']`
+
+SSHD loglevel.
+
+Default value: `'INFO'`
+
+### <a name="cis_security_hardeningrulessshd_macs"></a>`cis_security_hardening::rules::sshd_macs`
+
+This variable limits the types of MAC algorithms that SSH can use during communication.
+
+Rationale:
+MD5 and 96-bit MAC algorithms are considered weak and have been shown to increase exploitability in SSH downgrade attacks.
+Weak algorithms continue to have a great deal of attention as a weak spot that can be exploited with expanded computing
+power. An attacker that breaks the algorithm could take advantage of a MiTM position to decrypt the SSH tunnel and capture
+credentials and information.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::sshd_macs':
+    enforce => true,
+    macs => ['a','b'],
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::sshd_macs` class:
+
+* [`enforce`](#enforce)
+* [`macs`](#macs)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="macs"></a>`macs`
+
+Data type: `Array`
+
+MAC algorithms to add to config
+
+Default value: `[]`
+
+### <a name="cis_security_hardeningrulessshd_max_auth_tries"></a>`cis_security_hardening::rules::sshd_max_auth_tries`
+
+The MaxAuthTries parameter specifies the maximum number of authentication attempts permitted per connection.
+When the login failure count reaches half the number, error messages will be written to the syslog file
+detailing the login failure.
+
+Rationale:
+Setting the MaxAuthTries parameter to a low number will minimize the risk of successful brute force attacks to
+the SSH server. While the recommended setting is 4, set the number based on site policy.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::sshd_max_auth_tries':
+    enforce => true,
+    max_auth_tries => 4,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::sshd_max_auth_tries` class:
+
+* [`enforce`](#enforce)
+* [`max_auth_tries`](#max_auth_tries)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="max_auth_tries"></a>`max_auth_tries`
+
+Data type: `Integer`
+
+Maximun number of failed authentication attempts
+
+Default value: `4`
+
+### <a name="cis_security_hardeningrulessshd_max_sessions"></a>`cis_security_hardening::rules::sshd_max_sessions`
+
+The MaxSessions parameter specifies the maximum number of open sessions permitted from a given connection.
+
+Rationale:
+To protect a system from denial of service due to a large number of concurrent sessions, use the rate
+limiting function of MaxSessions to protect availability of sshd logins and prevent overwhelming the daemon.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::sshd_max_sessions':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::sshd_max_sessions` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulessshd_max_startups"></a>`cis_security_hardening::rules::sshd_max_startups`
+
+The MaxStartups parameter specifies the maximum number of concurrent unauthenticated connections
+to the SSH daemon.
+
+Rationale:
+To protect a system from denial of service due to a large number of pending authentication connection
+attempts, use the rate limiting function of MaxStartups to protect availability of sshd logins and
+prevent overwhelming the daemon.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::sshd_max_startups':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::sshd_max_startups` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulessshd_private_keys"></a>`cis_security_hardening::rules::sshd_private_keys`
+
+An SSH private key is one of two files used in SSH public key authentication. In this authentication
+method, The possession of the private key is proof of identity. Only a private key that corresponds
+to a public key will be able to authenticate successfully. The private keys need to be stored and
+handled carefully, and no copies of the private key should be distributed.
+
+Rationale:
+If an unauthorized user obtains the private SSH host key file, the host could be impersonated.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::sshd_private_keys':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::sshd_private_keys` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulessshd_public_keys"></a>`cis_security_hardening::rules::sshd_public_keys`
+
+An SSH public key is one of two files used in SSH public key authentication. In this authentication method,
+a public key is a key that can be used for verifying digital signatures generated using a corresponding private
+key. Only a public key that corresponds to a private key will be able to authenticate successfully.
+
+Rationale:
+If a public host key file is modified by an unauthorized user, the SSH service may be compromised.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::sshd_public_keys':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::sshd_public_keys` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulessshd_root_login"></a>`cis_security_hardening::rules::sshd_root_login`
+
+The PermitRootLogin parameter specifies if the root user can log in using ssh(1). The default is no.
+
+Rationale:
+Disallowing root logins over SSH requires system admins to authenticate using their own individual account,
+then escalating to root via sudo or su . This in turn limits opportunity for non-repudiation and provides
+a clear audit trail in the event of a security incident
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::sshd_root_login':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::sshd_root_login` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulessshd_tcp_forwarding"></a>`cis_security_hardening::rules::sshd_tcp_forwarding`
+
+SSH port forwarding is a mechanism in SSH for tunneling application ports from the client to the server,
+or servers to clients. It can be used for adding encryption to legacy applications, going through firewalls,
+and some system administrators and IT professionals use it for opening backdoors into the internal network
+from their home machines
+
+Rationale:
+Leaving port forwarding enabled can expose the organization to security risks and backdoors.
+SSH connections are protected with strong encryption. This makes their contents invisible to most deployed
+network monitoring and traffic filtering solutions. This invisibility carries considerable risk potential if
+it is used for malicious purposes such as data exfiltration. Cybercriminals or malware could exploit SSH to
+hide their unauthorized communications, or to exfiltrate stolen data from the target network
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::sshd_tcp_forwarding':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::sshd_tcp_forwarding` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulessshd_timeouts"></a>`cis_security_hardening::rules::sshd_timeouts`
+
+The two options ClientAliveInterval and ClientAliveCountMax control the timeout of ssh sessions. When
+the ClientAliveInterval variable is set, ssh sessions that have no activity for the specified length
+of time are terminated. When the ClientAliveCountMax variable is set, sshd will send client alive
+messages at every ClientAliveInterval interval. When the number of consecutive client alive messages
+are sent with no response from the client, the ssh session is terminated. For example, if the
+ClientAliveInterval is set to 15 seconds and the ClientAliveCountMax is set to 3, the client ssh session
+will be terminated after 45 seconds of idle time.
+
+Rationale:
+Having no timeout value associated with a connection could allow an unauthorized user access to another user's
+ssh session (e.g. user walks away from their computer and doesn't lock the screen). Setting a timeout value at
+least reduces the risk of this happening.
+
+While the recommended setting is 300 seconds (5 minutes), set this timeout value based on site policy. The
+recommended setting for ClientAliveCountMax is 0. In this case, the client session will be terminated after
+5 minutes of idle time and no keepalive messages will be sent.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::sshd_timeouts':
+    enforce => true,
+    client_alive_interval => 200,
+    client_alive_count_max => 0,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::sshd_timeouts` class:
+
+* [`enforce`](#enforce)
+* [`client_alive_interval`](#client_alive_interval)
+* [`client_alive_count_max`](#client_alive_count_max)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="client_alive_interval"></a>`client_alive_interval`
+
+Data type: `Integer`
+
+The client alive imterval
+
+Default value: `300`
+
+##### <a name="client_alive_count_max"></a>`client_alive_count_max`
+
+Data type: `Integer`
+
+The client alive cout max
+
+Default value: `0`
+
+### <a name="cis_security_hardeningrulessshd_use_pam"></a>`cis_security_hardening::rules::sshd_use_pam`
+
+UsePAM Enables the Pluggable Authentication Module interface. If set to “yes” this will
+enable PAM authentication using ChallengeResponseAuthentication and PasswordAuthentication
+in addition to PAM account and session module processing for all authentication types.
+
+Rationale:
+When usePAM is set to yes, PAM runs through account and session types properly. This is
+important if you want to restrict access to services based off of IP, time or other factors
+of the account. Additionally, you can make sure users inherit certain environment variables
+on login or disallow access to the server
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::sshd_use_pam':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::sshd_use_pam` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulessshd_user_environment"></a>`cis_security_hardening::rules::sshd_user_environment`
+
+The PermitUserEnvironment option allows users to present environment options to the ssh daemon.
+
+Rationale:
+Permitting users the ability to set environment variables through the SSH daemon could potentially allow users to
+bypass security controls (e.g. setting an execution path that has ssh executing trojan'd programs)
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::sshd_user_environment':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::sshd_user_environment` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulessshd_x11_forward"></a>`cis_security_hardening::rules::sshd_x11_forward`
+
+The X11Forwarding parameter provides the ability to tunnel X11 traffic through the connection to enable remote
+graphic connections.
+
+Rationale:
+Disable X11 forwarding unless there is an operational requirement to use X11 applications directly. There is a small
+risk that the remote X11 servers of users who are logged in via SSH with X11 forwarding could be compromised by other
+users on the X11 server. Note that even if X11 forwarding is disabled, users can always install their own forwarders.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::sshd_x11_forward':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::sshd_x11_forward` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulessshd_x11_use_localhost"></a>`cis_security_hardening::rules::sshd_x11_use_localhost`
+
+The operating system SSH daemon must prevent remote hosts from connecting to the proxy display.
+
+Rationale:
+When X11 forwarding is enabled, there may be additional exposure to the server and client displays
+if the sshd proxy display is configured to listen on the wildcard address. By default, sshd binds
+the forwarding server to the loopback address and sets the hostname part of the DISPLAY environment
+variable to localhost. This prevents remote hosts from connecting to the proxy display.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::sshd_x11_use_localhost':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::sshd_x11_use_localhost` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulessticky_world_writeable_files"></a>`cis_security_hardening::rules::sticky_world_writeable_files`
+
+Setting the sticky bit on world writable directories prevents users from deleting or renaming files in
+that directory that are not owned by them.
+
+Rationale:
+This feature prevents the ability to delete or rename files in world writable directories (such as /tmp )
+that are owned by another user.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::sticky_world_writeable_files':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::sticky_world_writeable_files` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulessudo_installed"></a>`cis_security_hardening::rules::sudo_installed`
+
+sudo allows a permitted user to execute a command as the superuser or another user, as specified by the
+security policy. The invoking user's real (not effective) user ID is used to determine the user name
+with which to query the security policy.
+
+Rationale:
+sudo supports a plugin architecture for security policies and input/output logging. Third parties can
+develop and distribute their own policy and I/O logging plugins to work seamlessly with the sudo front
+end. The default security policy is sudoers, which is configured via the file /etc/sudoers.
+
+The security policy determines what privileges, if any, a user has to run sudo. The policy may require
+that users authenticate themselves with a password or another authentication mechanism. If authentication
+is required, sudo will exit if the user's password is not entered within a configurable time limit. This
+limit is policy-specific.
+
+@ param sudo_pkgs
+   The sudo packages to install.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::sudo_installed':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::sudo_installed` class:
+
+* [`enforce`](#enforce)
+* [`sudo_pkgs`](#sudo_pkgs)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="sudo_pkgs"></a>`sudo_pkgs`
+
+Data type: `Array`
+
+Sudo packages to install.
+
+Default value: `['sudo']`
+
+### <a name="cis_security_hardeningrulessudo_log"></a>`cis_security_hardening::rules::sudo_log`
+
+sudo can use a custom log file
+
+Rationale:
+A sudo log file simplifies auditing of sudo commands
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::sudo_log':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::sudo_log` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulessudo_timeout"></a>`cis_security_hardening::rules::sudo_timeout`
+
+sudo caches used credentials for a default of 5 minutes. This is for ease of use when there are multiple
+administrative tasks to perform. The timeout can be modified to suit local security policies.
+
+Rationale:
+Setting a timeout value reduces the window of opportunity for unauthorized privileged access to another user.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::sudo_timeout':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::sudo_timeout` class:
+
+* [`enforce`](#enforce)
+* [`timeout`](#timeout)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+##### <a name="timeout"></a>`timeout`
+
+Data type: `Integer`
+
+sudo timeout in minutes.
+
+Default value: `5`
+
+### <a name="cis_security_hardeningrulessudo_use_pty"></a>`cis_security_hardening::rules::sudo_use_pty`
+
+sudo can be configured to run only from a psuedo-pty
+
+Rationale:
+Attackers can run a malicious program using sudo which would fork a background process
+that remains even when the main program has finished executing.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::sudo_use_pty':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::sudo_use_pty` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulessystem_cmd_group"></a>`cis_security_hardening::rules::system_cmd_group`
+
+The operating system must have system commands group-owned by root.
+
+Rationale:
+If the Ubuntu operating system were to allow any user to make changes to software libraries, then
+those changes might be implemented without undergoing the appropriate testing and approvals that
+are part of a robust change management process.
+
+This requirement applies to Ubuntu operating systems with software libraries that are accessible and
+configurable, as in the case of interpreted languages. Software libraries also include privileged
+programs which execute with escalated privileges. Only qualified and authorized individuals must be
+allowed to obtain access to information system components for purposes of initiating changes, including
+upgrades and modifications.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::system_cmd_group':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::system_cmd_group` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulessystemd_timesyncd"></a>`cis_security_hardening::rules::systemd_timesyncd`
+
+systemd-timesyncd is a daemon that has been added for synchronizing the system clock across the network. It
+implements an SNTP client. In contrast to NTP implementations such as chrony or the NTP reference server this
+only implements a client side, and does not bother with the full NTP complexity, focusing only on querying time
+from one remote server and synchronizing the local clock to it. The daemon runs with minimal privileges, and
+has been hooked up with networkd to only operate when network connectivity is available. The daemon saves the
+current clock to disk every time a new NTP sync has been acquired, and uses this to possibly correct the system
+clock early at bootup, in order to accommodate for systems that lack an RTC such as the Raspberry Pi and embedded
+devices, and make sure that time monotonically progresses on these systems, even if it is not always correct. To
+make use of this daemon a new system user and group "systemd- timesync" needs to be created on installation of
+systemd.
+
+Note: The systemd-timesyncd service specifically implements only SNTP. This minimalistic service will set the system
+      clock for large offsets or slowly adjust it for smaller deltas. More complex use cases are not covered by
+      systemd-timesyncd.
+
+This recommendation only applies if timesyncd is in use on the system.
+
+Rationale:
+Proper configuration is vital to ensuring time synchronization is working properly.
+
+.   Flag if to fix file permissions.
+
+#### Examples
+
+##### 
+
+```puppet
+class cis_security_hardening::rules::systemd_timesyncd {
+    enforce => true,
+    ntp_servers => ['0.de.pool.ntp.org', '1.de.pool.ntp.org', '3.de.pool.ntp.org'],
+    ntp_fallback_servers => ['3.de.pool.ntp.org'],
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::systemd_timesyncd` class:
+
+* [`enforce`](#enforce)
+* [`ntp_servers`](#ntp_servers)
+* [`ntp_fallback_servers`](#ntp_fallback_servers)
+* [`fix_file_perms`](#fix_file_perms)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule or just test and log
+
+Default value: ``false``
+
+##### <a name="ntp_servers"></a>`ntp_servers`
+
+Data type: `Array`
+
+The ntp server to use for time synchonisation.
+
+Default value: `[]`
+
+##### <a name="ntp_fallback_servers"></a>`ntp_fallback_servers`
+
+Data type: `Array`
+
+The ntp fallbach server.
+
+Default value: `[]`
+
+##### <a name="fix_file_perms"></a>`fix_file_perms`
+
+Data type: `Boolean`
+
+
+
+Default value: ``true``
+
+### <a name="cis_security_hardeningrulestalk_client"></a>`cis_security_hardening::rules::talk_client`
+
+The talk software makes it possible for users to send and receive messages across systems
+through a terminal session. The talk client, which allows initialization of talk sessions,
+is installed by default.
+
+Rationale:
+The software presents a security risk as it uses unencrypted protocols for communication.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::talk_client':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::talk_client` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulestelnet_client"></a>`cis_security_hardening::rules::telnet_client`
+
+The telnet package contains the telnet client, which allows users to start connections to other
+systems via the telnet protocol.
+
+Rationale:
+The telnet protocol is insecure and unencrypted. The use of an unencrypted transmission medium
+could allow an unauthorized user to steal credentials. The ssh package provides an encrypted
+session and stronger security and is included in most Linux distributions.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::telnet_client':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::telnet_client` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulestelnet_server"></a>`cis_security_hardening::rules::telnet_server`
+
+The telnet-server package contains the telnet daemon, which accepts connections from users from
+other systems via the telnet protocol.
+
+Rationale:
+The telnet protocol is insecure and unencrypted. The use of an unencrypted transmission medium
+could allow a user with access to sniff network traffic the ability to steal credentials. The ssh
+package provides an encrypted session and stronger security.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::telnet_server':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::telnet_server` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulestftp_client"></a>`cis_security_hardening::rules::tftp_client`
+
+Trivial File Transfer Protocol (TFTP) is a simple protocol for ex changing files between two TCP/IP
+machines. TFTP servers allow connections from a TFTP Client for sending and receiving files.
+
+Rationale:
+TFTP does not have built-in encryption, access control or authentication. This makes it very easy for an attacker to exploit
+TFTP to gain access to files.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::tftp_client':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::tftp_client` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulestftp_server"></a>`cis_security_hardening::rules::tftp_server`
+
+Trivial File Transfer Protocol (TFTP) is a simple protocol for exchanging files between two TCP/IP machines. TFTP servers allow
+connections from a TFTP Client for sending and receiving files.
+
+Rationale:
+TFTP does not have built-in encryption, access control or authentication. This makes it very easy for an attacker to exploit
+TFTP to gain access to files.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::tftp_server':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::tftp_server` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulestimeout_setting"></a>`cis_security_hardening::rules::timeout_setting`
+
+The default TMOUT determines the shell timeout for users. The TMOUT value is measured in seconds.
+
+Rationale:
+Having no timeout value associated with a shell could allow an unauthorized user access to another user's
+shell session (e.g. user walks away from their computer and doesn't lock the screen). Setting a timeout
+value at least reduces the risk of this happening.
+
+#### Examples
+
+##### 
+
+```puppet
+class cis_security_hardening::rules::timeout_setting {
+    enforce => true,
+    default_timeout => 900,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::timeout_setting` class:
+
+* [`enforce`](#enforce)
+* [`default_timeout`](#default_timeout)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="default_timeout"></a>`default_timeout`
+
+Data type: `Integer`
+
+Default timeout to set
+
+Default value: `900`
+
+### <a name="cis_security_hardeningrulestimezone_utc_gmt"></a>`cis_security_hardening::rules::timezone_utc_gmt`
+
+The Ubuntu operating system must record time stamps for audit records that can be mapped to
+Coordinated Universal Time (UTC) or Greenwich Mean Time (GMT).
+
+Rationale:
+If time stamps are not consistently applied and there is no common time reference, it is difficult
+to perform forensic analysis.
+
+Time stamps generated by the operating system include date and time. Time is commonly expressed in
+Coordinated Universal Time (UTC), a modern continuation of Greenwich Mean Time (GMT), or local
+time with an offset from UTC.
+
+#### Examples
+
+##### 
+
+```puppet
+class  'cis_security_hardening::rules::timezone_utc_gmt':
+  enforce => true,
+  timezone => 'UTC'
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::timezone_utc_gmt` class:
+
+* [`enforce`](#enforce)
+* [`timezone`](#timezone)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+##### <a name="timezone"></a>`timezone`
+
+Data type: `Enum['UTC', 'GMT']`
+
+Timezone to set, allowed are UTC or GMT.
+
+Default value: `'UTC'`
+
+### <a name="cis_security_hardeningrulestmp_filesystem"></a>`cis_security_hardening::rules::tmp_filesystem`
+
+The /tmp directory is a world-writable directory used for temporary storage by all users and some applications.
+
+Rationale:
+Making /tmp its own file system allows an administrator to set the noexec option on the mount, making /tmp useless
+for an attacker to install executable code. It would also prevent an attacker from establishing a hardlink to a
+system setuid program and wait for it to be updated. Once the program was updated, the hardlink would be broken
+and the attacker would have his own copy of the program. If the program happened to have a security vulnerability,
+the attacker could continue to exploit the known flaw.
+
+This can be accomplished by either mounting tmpfs to /tmp, or creating a separate partition for /tmp.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::tmp_filesystem':
+    enforce => true,
+    size => '2G',
+    enable => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::tmp_filesystem` class:
+
+* [`enforce`](#enforce)
+* [`size`](#size)
+* [`enable`](#enable)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="size"></a>`size`
+
+Data type: `Integer`
+
+size of the /tmp filesyetem in GB
+
+Default value: `0`
+
+##### <a name="enable"></a>`enable`
+
+Data type: `Boolean`
+
+enable systemd service
+
+Default value: ``true``
+
+### <a name="cis_security_hardeningrulestmp_nodev"></a>`cis_security_hardening::rules::tmp_nodev`
+
+The nodev mount option specifies that the filesystem cannot contain special devices.
+
+Rationale:
+Since the /tmp filesystem is not intended to support devices, set this option to ensure that
+users cannot attempt to create block or character special devices in /tmp .
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::tmp_nodev':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::tmp_nodev` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulestmp_noexec"></a>`cis_security_hardening::rules::tmp_noexec`
+
+The noexec mount option specifies that the filesystem cannot contain executable binaries.
+
+Rationale:
+Since the /tmp filesystem is only intended for temporary file storage, set this option to ensure
+that users cannot run executable binaries from /tmp .
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::tmp_noexec':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::tmp_noexec` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulestmp_nosuid"></a>`cis_security_hardening::rules::tmp_nosuid`
+
+The nosuid mount option specifies that the filesystem cannot contain setuid files.
+
+Rationale:
+Since the /tmp filesystem is only intended for temporary file storage, set this option to ensure
+that users cannot create setuid files in /tmp .
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::tmp_nosuid':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::tmp_nosuid` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesudf"></a>`cis_security_hardening::rules::udf`
+
+The udf filesystem type is the universal disk format used to implement ISO/IEC
+13346 and ECMA-167 specifications. This is an open vendor filesystem type for data
+storage on a broad range of media. This filesystem type is necessary to support
+writing DVDs and newer optical disc formats.
+
+Rationale:
+Removing support for unneeded filesystem types reduces the local attack surface of the system.
+If this filesystem type is not needed, disable it.
+
+#### Examples
+
+##### 
+
+```puppet
+class is_security_hardening::rules::common::udf {
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::udf` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesufw_default_deny"></a>`cis_security_hardening::rules::ufw_default_deny`
+
+A default deny policy on connections ensures that any unconfigured network usage will be rejected.
+
+Rationale:
+With a default accept policy the firewall will accept any packet that is not configured to be denied.
+It is easier to white list acceptable usage than to black list unacceptable usage.
+
+#### Examples
+
+##### 
+
+```puppet
+class cis_security_hardening::rules::ufw_default_deny {
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::ufw_default_deny` class:
+
+* [`enforce`](#enforce)
+* [`default_incoming`](#default_incoming)
+* [`default_outgoing`](#default_outgoing)
+* [`default_routed`](#default_routed)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule or just test and log
+
+Default value: ``false``
+
+##### <a name="default_incoming"></a>`default_incoming`
+
+Data type: `Enum['allow', 'deny']`
+
+Default policy for incoming traffic
+
+Default value: `'allow'`
+
+##### <a name="default_outgoing"></a>`default_outgoing`
+
+Data type: `Enum['allow', 'deny']`
+
+Default policy for outgoing traffic
+
+Default value: `'allow'`
+
+##### <a name="default_routed"></a>`default_routed`
+
+Data type: `Enum['allow', 'deny']`
+
+Default policy for routed traffic
+
+Default value: `'allow'`
+
+### <a name="cis_security_hardeningrulesufw_install"></a>`cis_security_hardening::rules::ufw_install`
+
+The Uncomplicated Firewall (ufw) is a frontend for iptables and is particularly well-suited for
+host-based firewalls. ufw provides a framework for managing netfilter, as well as a command-line
+interface for manipulating the firewall
+
+Rationale:
+A firewall utility is required to configure the Linux kernel's netfilter framework via the
+iptables or nftables back-end.
+
+The Linux kernel's netfilter framework host-based firewall can protect against threats originating
+from within a corporate network to include malicious mobile code and poorly configured software
+on a host.
+
+Note: Only one firewall utility should be installed and configured. UFW is dependent on the
+iptables package
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::ufw_install':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::ufw_install` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesufw_loopback"></a>`cis_security_hardening::rules::ufw_loopback`
+
+Configure the loopback interface to accept traffic. Configure all other interfaces to deny traffic to the
+loopback network (127.0.0.0/8 for IPv4 and ::1/128 for IPv6).
+
+Rationale:
+Loopback traffic is generated between processes on machine and is typically critical to operation of the
+system. The loopback interface is the only place that loopback network (127.0.0.0/8 for IPv4 and ::1/128 for IPv6)
+traffic should be seen, all other interfaces should ignore traffic on this network as an anti-spoofing measure.
+
+#### Examples
+
+##### 
+
+```puppet
+class cis_security_hardening::rules::ufw_loopback {
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::ufw_loopback` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule or just test and log
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesufw_open_ports"></a>`cis_security_hardening::rules::ufw_open_ports`
+
+Any ports that have been opened on non-loopback addresses need firewall rules to govern traffic.
+
+Rationale:
+Without a firewall rule configured for open ports default firewall policy will drop all packets to these ports.
+
+#### Examples
+
+##### 
+
+```puppet
+class cis_security_hardening::rules::debian::sec_ufw_open_ports {
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::ufw_open_ports` class:
+
+* [`enforce`](#enforce)
+* [`firewall_rules`](#firewall_rules)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule or just test and log
+
+Default value: ``false``
+
+##### <a name="firewall_rules"></a>`firewall_rules`
+
+Data type: `Hash`
+
+Rules for inbound connections
+
+Default value: `{}`
+
+### <a name="cis_security_hardeningrulesufw_outbound"></a>`cis_security_hardening::rules::ufw_outbound`
+
+Configure the firewall rules for new outbound connections.
+
+Rationale:
+If rules are not in place for new outbound connections all packets will be dropped by the
+default policy preventing network usage.
+
+#### Examples
+
+##### 
+
+```puppet
+class cis_security_hardening::rules::ufw_outbound {
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::ufw_outbound` class:
+
+* [`enforce`](#enforce)
+* [`firewall_rules`](#firewall_rules)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule or just test and log
+
+Default value: ``false``
+
+##### <a name="firewall_rules"></a>`firewall_rules`
+
+Data type: `Hash`
+
+Rules for outbound connections
+
+Default value: `{}`
+
+### <a name="cis_security_hardeningrulesufw_service"></a>`cis_security_hardening::rules::ufw_service`
+
+Uncomplicated Firewall (ufw) is a frontend for iptables. ufw provides a framework for managing netfilter,
+as well as a command-line and available graphical user interface for manipulating the firewall.
+
+Ensure that the ufw service is enabled to protect your system.
+
+Rationale:
+The ufw service must be enabled and running in order for ufw to protect the system
+
+#### Examples
+
+##### 
+
+```puppet
+class cis_security_hardening::rules::ufw_service {
+    log_level => 'info',
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::ufw_service` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule or just test and log
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesumask_setting"></a>`cis_security_hardening::rules::umask_setting`
+
+The default umask determines the permissions of files created by users. The user creating the
+file has the discretion of making their files and directories readable by others via the chmod
+command. Users who wish to allow their files and directories to be readable by others by default
+may choose a different default umask by inserting the umask command into the standard shell
+configuration files ( .profile , .bashrc , etc.) in their home directories.
+
+Rationale:
+Setting a very secure default value for umask ensures that users make a conscious choice about their
+file permissions. A default umask setting of 077 causes files and directories created by users to not
+be readable by any other user on the system. A umask of 027 would make files and directories readable
+by users in the same Unix group, while a umask of 022 would make files readable by every user on the system.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::umask_setting':
+    enforce => true,
+    default_umask => '027',
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::umask_setting` class:
+
+* [`enforce`](#enforce)
+* [`default_umask`](#default_umask)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+##### <a name="default_umask"></a>`default_umask`
+
+Data type: `String`
+
+Default umask to set.
+
+Default value: `'027'`
+
+### <a name="cis_security_hardeningrulesvar_log_audit_nodev"></a>`cis_security_hardening::rules::var_log_audit_nodev`
+
+The nodev mount option specifies that the filesystem cannot contain special devices.
+
+Rationale:
+Since the /var/log/audit filesystem is not intended to support devices, set this option
+to ensure that users cannot create a block or character special devices in /var/log/audit.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::var_log_audit_nosuid':
+  enforde => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::var_log_audit_nodev` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesvar_log_audit_noexec"></a>`cis_security_hardening::rules::var_log_audit_noexec`
+
+The noexec mount option specifies that the filesystem cannot contain executable binaries.
+
+Rationale:
+Since the /var/log/audit filesystem is only intended for audit logs, set this option
+to ensure that users cannot run executable binaries from /var/log/audit.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::var_log_audit_noexec':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::var_log_audit_noexec` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesvar_log_audit_nosuid"></a>`cis_security_hardening::rules::var_log_audit_nosuid`
+
+The nosuid mount option specifies that the filesystem cannot contain setuid files.
+
+Rationale:
+Since the /var/log/audit filesystem is only intended for variable files such as logs,
+set this option to ensure that users cannot create setuid files in /var/log/audit.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::var_log_audit_nosuid':
+  enforde => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::var_log_audit_nosuid` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesvar_log_nodev"></a>`cis_security_hardening::rules::var_log_nodev`
+
+The nodev mount option specifies that the filesystem cannot contain special devices .
+
+Rationale:
+Since the /var/log filesystem is not intended to support devices, set this option to
+ensure that users cannot create a block or character special devices in /var/log.
+
+#### Examples
+
+##### 
+
+```puppet
+class { #cis_security_hardening::rules::var_log_noexec':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::var_log_nodev` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesvar_log_noexec"></a>`cis_security_hardening::rules::var_log_noexec`
+
+The noexec mount option specifies that the filesystem cannot contain executable binaries.
+
+Rationale:
+Since the /var/log filesystem is only intended for log files, set this option to ensure
+that users cannot run executable binaries from /var/log.
+
+#### Examples
+
+##### 
+
+```puppet
+class { #cis_security_hardening::rules::var_log_noexec':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::var_log_noexec` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesvar_log_nosuid"></a>`cis_security_hardening::rules::var_log_nosuid`
+
+The nosuid mount option specifies that the filesystem cannot contain setuid files.
+Rationale:
+Since the /var/log filesystem is only intended for log files, set this option to
+ensure that users cannot create setuid files in /var/log.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::var_log_nosuid':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::var_log_nosuid` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesvar_log_syslog_perms"></a>`cis_security_hardening::rules::var_log_syslog_perms`
+
+The operating system must configure the /var/log/syslog file to be group-owned by adm.
+
+Rationale:
+Only authorized personnel should be aware of errors and the details of the errors. Error messages
+are an indicator of an organization's operational state or can identify the operating system or
+platform. Additionally, Personally Identifiable Information (PII) and operational information must
+not be revealed through error messages to unauthorized personnel or their designated representatives.
+
+The structure and content of error messages must be carefully considered by the organization and development
+team. The extent to which the information system is able to identify and handle error conditions is guided
+by organizational policy and operational requirements.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::var_log_syslog_perms':
+  enforce => true,
+  user => 'syslog',
+  group => 'adm',
+  mode => '0640',
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::var_log_syslog_perms` class:
+
+* [`enforce`](#enforce)
+* [`user`](#user)
+* [`group`](#group)
+* [`mode`](#mode)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+##### <a name="user"></a>`user`
+
+Data type: `String`
+
+The user owning the file.
+
+Default value: `'syslog'`
+
+##### <a name="group"></a>`group`
+
+Data type: `String`
+
+The group owning the file.
+
+Default value: `'adm'`
+
+##### <a name="mode"></a>`mode`
+
+Data type: `String`
+
+The access permissions.
+
+Default value: `'0640'`
+
+### <a name="cis_security_hardeningrulesvar_nodev"></a>`cis_security_hardening::rules::var_nodev`
+
+The nodev mount option specifies that the filesystem cannot contain special devices.
+
+Rationale:
+Since the /var filesystem is not intended to support devices, set this option to ensure
+that users cannot create a block or character special devices in /var.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::var_nodev':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::var_nodev` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforcethe rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesvar_noexec"></a>`cis_security_hardening::rules::var_noexec`
+
+The noexec mount option specifies that the filesystem cannot contain executable binaries.
+
+Rationale:
+Since the /var filesystem is only intended for variable files such as logs, set this option
+to ensure that users cannot run executable binaries from /var.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::var_noexec':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::var_noexec` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesvar_nosuid"></a>`cis_security_hardening::rules::var_nosuid`
+
+The nosuid mount option specifies that the filesystem cannot contain setuid files.
+
+Rationale:
+Since the /var filesystem is only intended for variable files such as logs, set this
+option to ensure that users cannot create setuid files in /var.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::var_nosuid':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::var_nosuid` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesvar_tmp_nodev"></a>`cis_security_hardening::rules::var_tmp_nodev`
+
+The nodev mount option specifies that the filesystem cannot contain special devices.
+
+Rationale:
+Since the /var/tmp filesystem is not intended to support devices, set this option to ensure that
+users cannot attempt to create block or character special devices in /var/tmp .
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::var_tmp_nodev':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::var_tmp_nodev` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesvar_tmp_noexec"></a>`cis_security_hardening::rules::var_tmp_noexec`
+
+The noexec mount option specifies that the filesystem cannot contain executable binaries.
+
+Rationale:
+Since the /var/tmp filesystem is only intended for temporary file storage, set this option to
+ensure that users cannot run executable binaries from /var/tmp .
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::var_tmp_noexec':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::var_tmp_noexec` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesvar_tmp_nosuid"></a>`cis_security_hardening::rules::var_tmp_nosuid`
+
+The nosuid mount option specifies that the filesystem cannot contain setuid files.
+
+Rationale:
+Since the /var/tmp filesystem is only intended for temporary file storage, set this option to ensure
+that users cannot create setuid files in /var/tmp .
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::var_tmp_nosuid':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::var_tmp_nosuid` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesvlock"></a>`cis_security_hardening::rules::vlock`
+
+The operating system must allow users to directly initiate a session lock for all connection types.
+
+Rationale:
+A session lock is a temporary action taken when a user stops work and moves away from the immediate
+physical vicinity of the information system but does not want to log out because of the temporary
+nature of the absence.
+
+The session lock is implemented at the point where session activity can be determined. Rather than
+be forced to wait for a period of time to expire before the user session can be locked, the Ubuntu
+operating systems need to provide users with the ability to manually invoke a session lock so users
+may secure their session if they need to temporarily vacate the immediate physical vicinity.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::vlock':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::vlock` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesvsftp"></a>`cis_security_hardening::rules::vsftp`
+
+The File Transfer Protocol (FTP) provides networked computers with the ability to transfer files.
+
+Rationale:
+FTP does not protect the confidentiality of data or authentication credentials. It is recommended
+sftp be used if file transfer is required. Unless there is a need to run the system as a FTP server
+(for example, to allow anonymous downloads), it is recommended that the service be disabled to reduce
+the potential attack surface.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::vsftp':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::vsftp` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesx11_installed"></a>`cis_security_hardening::rules::x11_installed`
+
+The X Window System provides a Graphical User Interface (GUI) where users can have multiple
+windows in which to run programs and various add on. The X Windows system is typically used
+on workstations where users login, but not on servers where users typically do not login.
+
+Rationale:
+Unless your organization specifically requires graphical login access via X Windows, remove it
+to reduce the potential attack surface.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::x11_installed':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::x11_installed` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesxdmcp_config"></a>`cis_security_hardening::rules::xdmcp_config`
+
+X Display Manager Control Protocol (XDMCP) is designed to provide authenticated access to display
+management services for remote displays
+
+Rationale:
+XDMCP is inherently insecure.
+  * XDMCP is not a ciphered protocol. This may allow an attacker to capture keystrokes entered by a user
+  * XDMCP is vulnerable to man-in-the-middle attacks. This may allow an attacker to steal the credentials
+    of legitimate users by impersonating the XDMCP server.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::xdmcp_config':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::xdmcp_config` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesxinetd"></a>`cis_security_hardening::rules::xinetd`
+
+The eXtended InterNET Daemon ( xinetd ) is an open source super daemon that replaced the original inetd
+daemon. The xinetd daemon listens for well known services and dispatches the appropriate daemon to properly
+respond to service requests.
+
+Rationale:
+If there are no xinetd services required, it is recommended that the package be removed.
+
+#### Examples
+
+##### 
+
+```puppet
+class cis_security_hardening::rules::xinetd {
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::xinetd` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesyum_gpgcheck"></a>`cis_security_hardening::rules::yum_gpgcheck`
+
+The gpgcheck option, found in the main section of the /etc/yum.conf and individual /etc/yum/repos.d/*
+files determines if an RPM package's signature is checked prior to its installation.
+
+Rationale:
+It is important to ensure that an RPM's package signature is always checked prior to installation to
+ensure that the software is obtained from a trusted source.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::yum_gpgcheck':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::yum_gpgcheck` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningruleszypper_gpgcheck"></a>`cis_security_hardening::rules::zypper_gpgcheck`
+
+The gpgcheck option, found in the main section of the /etc/zypp/zypp.conf and individual
+/etc/zypp/repos.d/*.repo files determine if an RPM package's signature is checked prior
+to its installation.
+
+Rationale:
+It is important to ensure that an RPM's package signature is always checked prior to
+installation to ensure that the software is obtained from a trusted source.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::zypper_gpgcheck':
+    enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::zypper_gpgcheck` class:
 
 * [`enforce`](#enforce)
 
@@ -1119,6 +12740,12 @@ Check system accounts are secured.
 ### <a name="check_uid_0_files"></a>`check_uid_0_files`
 
 Check root is the only UID 0 account.
+
+**Supports noop?** false
+
+### <a name="check_unconfines_services"></a>`check_unconfines_services`
+
+Check for unconfined services.
 
 **Supports noop?** false
 

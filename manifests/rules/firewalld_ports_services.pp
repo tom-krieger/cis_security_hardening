@@ -32,7 +32,7 @@
 #       expected_ports => ['25/tcp'],
 #   }
 #
-# @api private
+# @api public
 class cis_security_hardening::rules::firewalld_ports_services (
   Boolean $enforce         = false,
   Array $expected_services = [],

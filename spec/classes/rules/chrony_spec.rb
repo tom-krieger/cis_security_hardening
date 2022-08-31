@@ -40,7 +40,8 @@ describe 'cis_security_hardening::rules::chrony' do
                 .with(
                   'ensure' => 'purged',
                 )
-            elsif os_facts[:operatingsystem].casecmp('rocky').zero? || os_facts[:operatingsystem].casecmp('almalinux').zero?
+            elsif os_facts[:operatingsystem].casecmp('rocky').zero? || os_facts[:operatingsystem].casecmp('almalinux').zero? ||
+                  os_facts[:operatingsystem].casecmp('redhst').zero? || os_facts[:operatingsystem].casecmp('centos').zero?
               is_expected.to contain_file('/etc/sysconfig/chronyd')
                 .with(
                   'ensure'  => 'file',
