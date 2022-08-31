@@ -11,7 +11,7 @@ def read_open_ports
   end
 
   unless ss_cmd.empty?
-    
+
     val = Facter::Core::Execution.exec("#{ss_cmd} -4tuln")
     lines = if val.nil? || val.empty?
               []
@@ -31,4 +31,5 @@ def read_open_ports
   end
 
   open_ports = opports.uniq
+  open_ports
 end
