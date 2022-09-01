@@ -22,14 +22,17 @@ class cis_security_hardening::rules::squashfs (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    if $facts['operatingsystem'].downcase() == 'rocky' or $facts['operatingsystem'].downcase() == 'almalinux' {
-      kmod::install { 'squashfs':
-        command => '/bin/false',
+    case $facts['os']['name'].downcase() {
+      'rocky', 'almalinux', 'redhat': {
+        kmod::install { 'squashfs':
+          command => '/bin/false',
+        }
+        kmod::blacklist { 'squashfs': }
       }
-      kmod::blacklist { 'squashfs': }
-    } else {
-      kmod::install { 'squashfs':
-        command => '/bin/true',
+      default: {
+        kmod::install { 'squashfs':
+          command => '/bin/true',
+        }
       }
     }
   }

@@ -18,7 +18,7 @@ describe 'cis_security_hardening::rules::cramfs' do
         it {
           is_expected.to compile
           if enforce
-            if os_facts[:operatingsystem].casecmp('rocky').zero? || os_facts[:operatingsystem].casecmp('almalinux').zero?
+            if os_facts[:operatingsystem].casecmp('rocky').zero? || os_facts[:operatingsystem].casecmp('almalinux').zero? || os_facts[:operatingsystem].casecmp('redhat').zero?
               is_expected.to contain_kmod__install('cramfs')
                 .with(
                   command: '/bin/false',
