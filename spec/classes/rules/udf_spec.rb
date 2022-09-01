@@ -27,13 +27,13 @@ describe 'cis_security_hardening::rules::udf' do
             elsif os_facts[:operatingsystem].casecmp('redhat').zero?
               if os_facts[:operatingsystemmajrelease] > '7'
                 is_expected.to contain_kmod__install('udf')
-                .with(
+                  .with(
                   command: '/bin/false',
                 )
-              is_expected.to contain_kmod__blacklist('udf')
+                is_expected.to contain_kmod__blacklist('udf')
               else
                 is_expected.to contain_kmod__install('udf')
-                .with(
+                  .with(
                   command: '/bin/true',
                 )
               end

@@ -27,13 +27,13 @@ describe 'cis_security_hardening::rules::squashfs' do
             elsif os_facts[:operatingsystem].casecmp('redhat').zero?
               if os_facts[:operatingsystemmajrelease] > '7'
                 is_expected.to contain_kmod__install('squashfs')
-                .with(
+                  .with(
                   command: '/bin/false',
                 )
-              is_expected.to contain_kmod__blacklist('squashfs')
+                is_expected.to contain_kmod__blacklist('squashfs')
               else
                 is_expected.to contain_kmod__install('squashfs')
-                .with(
+                  .with(
                   command: '/bin/true',
                 )
               end
