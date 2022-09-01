@@ -24,11 +24,23 @@ class cis_security_hardening::rules::udf (
 ) {
   if $enforce {
     case $facts['operatingsystem'].downcase() {
-      'rocky', 'almalinux', 'redhat': {
+      'rocky', 'almalinux': {
         kmod::install { 'udf':
           command => '/bin/false',
         }
         kmod::blacklist { 'udf': }
+      }
+      'redhat': {
+        if $facts['operatingsystemmajrelease'] > '7' {
+          kmod::install { 'udf':
+            command => '/bin/false',
+          }
+          kmod::blacklist { 'udf': }
+        } else {
+          kmod::install { 'udf':
+            command => '/bin/true',
+          }
+        }
       }
       default: {
         kmod::install { 'udf':

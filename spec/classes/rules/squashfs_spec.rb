@@ -18,12 +18,25 @@ describe 'cis_security_hardening::rules::squashfs' do
         it {
           is_expected.to compile
           if enforce
-            if os_facts[:operatingsystem].casecmp('rocky').zero? || os_facts[:operatingsystem].casecmp('almalinux').zero? || os_facts[:operatingsystem].casecmp('redhat').zero?
+            if os_facts[:operatingsystem].casecmp('rocky').zero? || os_facts[:operatingsystem].casecmp('almalinux').zero?
               is_expected.to contain_kmod__install('squashfs')
                 .with(
                   command: '/bin/false',
                 )
               is_expected.to contain_kmod__blacklist('squashfs')
+            elsif os_facts[:operatingsystem].casecmp('redhat').zero?
+              if os_facts[:operatingsystemmajrelease] > '7'
+                is_expected.to contain_kmod__install('squashfs')
+                .with(
+                  command: '/bin/false',
+                )
+              is_expected.to contain_kmod__blacklist('squashfs')
+              else
+                is_expected.to contain_kmod__install('squashfs')
+                .with(
+                  command: '/bin/true',
+                )
+              end
             else
               is_expected.to contain_kmod__install('squashfs')
                 .with(
