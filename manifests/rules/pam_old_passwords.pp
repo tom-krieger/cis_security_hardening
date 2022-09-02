@@ -58,6 +58,18 @@ class cis_security_hardening::rules::pam_old_passwords (
               path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
               onlyif  => "test -z '\$(grep -E '^\\s*password\\s+(sufficient\\s+pam_unix|requi(red|site)\\s+pam_pwhistory).so\\s+ ([^#]+\\s+)*remember=\\S+\s*.*\$' ${pf_file})'", #lint:ignore:140chars
               notify  => Exec['authselect-apply-changes'],
+              before  => Pam['pam-_unix_sufficient'],
+            }
+
+            Pam { 'pam-_unix_sufficient':
+              ensure    => present,
+              service   => 'system-auth',
+              type      => 'password',
+              control   => 'sufficient',
+              module    => 'pam_unix.so',
+              arguments => $real_arguments,
+              target    => $pf_file,
+              notify    => Exec['authselect-apply-changes'],
             }
           }
         } else {
@@ -73,18 +85,8 @@ class cis_security_hardening::rules::pam_old_passwords (
             }
           }
         }
-        if ($facts['operatingsystem'].downcase() == 'almalinux' or $facts['operatingsystem'].downcase() == 'rocky') and (!empty($pf_path)) {
-          Pam { 'pam-_unix_sufficient':
-            ensure    => present,
-            service   => 'system-auth',
-            type      => 'password',
-            control   => 'sufficient',
-            module    => 'pam_unix.so',
-            arguments => $real_arguments,
-            target    => $pf_file,
-            notify    => Exec['authselect-apply-changes'],
-          }
-        }
+        # # if ($facts['operatingsystem'].downcase() == 'almalinux' or $facts['operatingsystem'].downcase() == 'rocky') and (!empty($pf_path)) {
+        # }
       }
       'debian', 'suse': {
         Pam { 'pam-common-password-requisite-pwhistory':
