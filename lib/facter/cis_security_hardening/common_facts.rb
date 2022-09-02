@@ -8,6 +8,7 @@ require 'facter/cis_security_hardening/utils/check_value_string'
 require 'facter/cis_security_hardening/utils/read_sshd_config'
 require 'facter/cis_security_hardening/utils/check_value_integer'
 require 'facter/cis_security_hardening/utils/read_open_ports'
+require 'facter/cis_security_hardening/utils/read_nfs_filesystems'
 
 def common_facts(os, _distid, _release)
   facts = {}
@@ -121,6 +122,8 @@ def common_facts(os, _distid, _release)
   facts['logrotate_conf'] = logrotate_conf
 
   facts['open_ports'] = read_open_ports
+
+  facts['nfs_file_systems'] = read_nfs_filesystems
 
   facts
 end
