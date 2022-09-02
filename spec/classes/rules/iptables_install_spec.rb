@@ -50,6 +50,18 @@ describe 'cis_security_hardening::rules::iptables_install' do
                   'enable' => false,
                 )
 
+              if os_facts[:operatingsystem].casecmp('redhat').zero? && os_facts[:operatingsystemmajrelease] > '7'
+                is_expected.to contain_class('firewall')
+                  .with(
+                    'service_name' => ['iptables'],
+                    'service_name_v6' => 'ip6tables',
+                    'package_name' => ['iptables-services'],
+                    'ensure_v6' => 'stopped'
+                  )
+              else
+                is_expected.to contain_class('firewall')
+              end
+
             elsif os_facts[:operatingsystem].casecmp('ubuntu').zero?
 
               is_expected.to contain_package('ufw')

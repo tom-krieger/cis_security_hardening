@@ -41,7 +41,7 @@ class cis_security_hardening::rules::iptables_install (
       }
     }
 
-    if $facts['os']['name'].downcase() == 'redhat' and versioncmp($facts['os']['release']['full'], '8.0') >= 0 {
+    if $facts['os']['name'].downcase() == 'redhat' and $facts['os']['release']['major'] > '7' {
       $params_rh = {
         service_name => ['iptables'],
         service_name_v6 => 'ip6tables',
