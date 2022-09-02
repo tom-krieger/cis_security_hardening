@@ -2,8 +2,8 @@
 
 def read_nfs_filesystems
   nfs_file_systems = {}
-  if File.exist?('/etc/mtab')
-    val = Facter::Core::Execution.exec("grep ' nfs ' /etc/mtab")
+  if File.exist?('/etc/fstab')
+    val = Facter::Core::Execution.exec("grep ' nfs ' /etc/fstab")
     lines = if val.nil? || val.empty?
               []
             else
