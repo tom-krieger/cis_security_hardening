@@ -27,19 +27,31 @@ class cis_security_hardening::rules::iptables_install (
   if $enforce {
     if fact('network6') != undef {
       if  $configure_ip6tables == false {
-        $params = {
+        $params_ip6 = {
           ensure_v6 => 'stopped',
         }
       } else {
-        $params = {
+        $params_ip6 = {
           ensure_v6 => 'running',
         }
       }
     } else {
-      $params = {
+      $params_ip6 = {
         ensure_v6 => 'stopped',
       }
     }
+
+    if $facts['os']['name'].downcase() == 'redhat' and versioncmp($facts['os']['release']['full'], '8.0') >= 0 {
+      $params_rh = {
+        service_name => ['iptables'],
+        service_name_v6 => 'ip6tables',
+        package_name => ['iptables-services'],
+      }
+    } else {
+      $params_rh = {}
+    }
+
+    $params = merge($params_ip6, $params_rh)
 
     if(!defined(Class['firewall'])) {
       class { 'firewall':
@@ -51,24 +63,30 @@ class cis_security_hardening::rules::iptables_install (
       purge => true,
     }
 
-    case $facts['operatingsystem'].downcase() {
+    case $facts['os']['name'].downcase() {
       'redhat', 'centos', 'almalinux', 'rocky': {
-        if $facts['operatingsystemmajrelease'] < '8' {
+        if !defined(Package['nftables']) {
           ensure_packages(['nftables'], {
               ensure => purged,
           })
+        }
+        if ! defined(Service['nftables']) {
           ensure_resource('service', 'nftables', {
               enable => false,
               ensure => stopped,
           })
         }
-        ensure_packages(['firewalld'], {
-            ensure => purged,
-        })
-        ensure_resource('service', 'firewalld', {
-            enable => false,
-            ensure => stopped,
-        })
+        if !defined(Package['firewalld']) {
+          ensure_packages(['firewalld'], {
+              ensure => purged,
+          })
+        }
+        if !defined(Service['firewalld']) {
+          ensure_resource('service', 'firewalld', {
+              enable => false,
+              ensure => stopped,
+          })
+        }
       }
       'ubuntu', 'debian': {
         ensure_packages(['ufw', 'nftables'], {

@@ -28,29 +28,27 @@ describe 'cis_security_hardening::rules::iptables_install' do
             if os_facts[:operatingsystem].casecmp('redhat').zero? || os_facts[:operatingsystem].casecmp('centos').zero? ||
                os_facts[:operatingsystem].casecmp('almalinux').zero? || os_facts[:operatingsystem].casecmp('rocky').zero?
 
-              if os_facts[:operatingsystemmajrelease] < '8'
-                is_expected.to contain_package('nftables')
-                  .with(
-                    'ensure' => 'purged',
-                  )
+              is_expected.to contain_package('nftables')
+                .with(
+                  'ensure' => 'purged',
+                )
 
-                is_expected.to contain_package('firewalld')
-                  .with(
-                    'ensure' => 'purged',
-                  )
+              is_expected.to contain_package('firewalld')
+                .with(
+                  'ensure' => 'purged',
+                )
 
-                is_expected.to contain_service('nftables')
-                  .with(
-                    'ensure' => 'stopped',
-                    'enable' => false,
-                  )
+              is_expected.to contain_service('nftables')
+                .with(
+                  'ensure' => 'stopped',
+                  'enable' => false,
+                )
 
-                is_expected.to contain_service('firewalld')
-                  .with(
-                    'ensure' => 'stopped',
-                    'enable' => false,
-                  )
-              end
+              is_expected.to contain_service('firewalld')
+                .with(
+                  'ensure' => 'stopped',
+                  'enable' => false,
+                )
 
             elsif os_facts[:operatingsystem].casecmp('ubuntu').zero?
 
