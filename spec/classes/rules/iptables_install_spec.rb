@@ -56,7 +56,7 @@ describe 'cis_security_hardening::rules::iptables_install' do
                     'service_name' => ['iptables'],
                     'service_name_v6' => 'ip6tables',
                     'package_name' => ['iptables-services'],
-                    'ensure_v6' => 'stopped'
+                    'ensure_v6' => 'stopped',
                   )
               else
                 is_expected.to contain_class('firewall')

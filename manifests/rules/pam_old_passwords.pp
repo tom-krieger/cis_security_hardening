@@ -85,8 +85,6 @@ class cis_security_hardening::rules::pam_old_passwords (
             }
           }
         }
-        # # if ($facts['operatingsystem'].downcase() == 'almalinux' or $facts['operatingsystem'].downcase() == 'rocky') and (!empty($pf_path)) {
-        # }
       }
       'debian', 'suse': {
         Pam { 'pam-common-password-requisite-pwhistory':
