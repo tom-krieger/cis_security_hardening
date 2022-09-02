@@ -26,7 +26,7 @@
 #     enforce => true,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::fips_bootloader (
   Boolean $enforce = false,
 ) {

@@ -20,7 +20,7 @@
 #       enforce => true,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::ignore_icmp_broadcast (
   Boolean $enforce = false,
 ) {

@@ -19,7 +19,7 @@
 #       configure_ip6tables => false,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::iptables_install (
   Boolean $enforce             = false,
   Boolean $configure_ip6tables = false,

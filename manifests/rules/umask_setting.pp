@@ -25,7 +25,7 @@
 #       default_umask => '027',
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::umask_setting (
   Boolean $enforce      = false,
   String $default_umask = '027',

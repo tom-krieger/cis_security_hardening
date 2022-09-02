@@ -17,7 +17,7 @@
 #       enforce => true,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::vsftp (
   Boolean $enforce = false,
 ) {

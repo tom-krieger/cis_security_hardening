@@ -31,7 +31,7 @@
 #       default_zone => 'private',
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::firewalld_default_zone (
   Cis_security_hardening::Word $default_zone,
   Boolean $enforce = false,

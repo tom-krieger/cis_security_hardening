@@ -20,7 +20,7 @@
 #       nftables_default_table => 'default',
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::nftables_table (
   Boolean $enforce                                                = false,
   Cis_security_hardening::Numbers_letters $nftables_default_table = 'default',

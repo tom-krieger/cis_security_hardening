@@ -23,7 +23,7 @@
 #     remote_server => '1.2.3.4',
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::auditd_remote (
   Boolean $enforce                    = false,
   Stdlib::IP::Address $remote_server  = '1.2.3.4',

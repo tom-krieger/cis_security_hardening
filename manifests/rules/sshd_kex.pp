@@ -22,7 +22,7 @@
 #       kexs => ['a','b'],
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::sshd_kex (
   Boolean $enforce  = false,
   Array $kexs       = [],

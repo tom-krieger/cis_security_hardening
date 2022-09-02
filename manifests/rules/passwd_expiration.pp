@@ -21,7 +21,7 @@
 #       max_pass_days => 50,
 #   } 
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::passwd_expiration (
   Boolean $enforce       = false,
   Integer $max_pass_days = 90,

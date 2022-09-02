@@ -17,7 +17,7 @@
 #     enforce => true,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::sshd_x11_use_localhost (
   Boolean $enforce = false,
 ) {

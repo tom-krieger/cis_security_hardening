@@ -20,7 +20,7 @@
 #             max_log_file_action => 'keep_logs',
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::auditd_max_log_file_action (
   Boolean $enforce            = false,
   String $max_log_file_action = 'keep_logs',

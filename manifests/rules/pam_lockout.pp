@@ -27,7 +27,7 @@
 #       lockouttime => 300,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::pam_lockout (
   Boolean $enforce     = false,
   Integer $attempts    = 3,

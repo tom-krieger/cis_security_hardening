@@ -20,7 +20,7 @@
 #       enforce => true,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::etc_crond (
   Boolean $enforce = false,
 ) {

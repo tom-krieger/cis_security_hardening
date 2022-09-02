@@ -18,7 +18,7 @@
 #     enforce => true,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::auditd_crontab_use (
   Boolean $enforce = false,
 ) {

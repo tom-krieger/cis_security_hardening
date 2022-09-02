@@ -28,7 +28,7 @@
 #       enable => true,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::tmp_filesystem (
   Boolean $enforce = false,
   Integer $size    = 0,

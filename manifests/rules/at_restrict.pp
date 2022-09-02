@@ -24,7 +24,7 @@
 #       enforce => true,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::at_restrict (
   Boolean $enforce = false,
 ) {

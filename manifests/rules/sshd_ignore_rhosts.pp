@@ -15,7 +15,7 @@
 #       enforce => true,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::sshd_ignore_rhosts (
   Boolean $enforce = false,
 ) {

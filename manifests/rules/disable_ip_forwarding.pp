@@ -15,7 +15,7 @@
 #       enforce => true,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::disable_ip_forwarding (
   Boolean $enforce = false,
 ) {

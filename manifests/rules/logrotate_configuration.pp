@@ -19,7 +19,7 @@
 #       permission => '640'
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::logrotate_configuration (
   Boolean $enforce    = false,
   String $permission  = '640',

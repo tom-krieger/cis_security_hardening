@@ -22,7 +22,7 @@
 #       login_grace_time => 50,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::sshd_login_gracetime (
   Boolean $enforce          = false,
   Integer $login_grace_time = 60,

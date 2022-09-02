@@ -21,7 +21,7 @@
 #       min_pass_days => 7,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::passwd_min_days (
   Boolean $enforce       = false,
   Integer $min_pass_days = 7,

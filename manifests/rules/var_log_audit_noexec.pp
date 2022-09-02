@@ -15,7 +15,7 @@
 #     enforce => true,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::var_log_audit_noexec (
   Boolean $enforce = false,
 ) {

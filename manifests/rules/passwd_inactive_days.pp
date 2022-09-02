@@ -20,7 +20,7 @@
 #       inactive_pass_days => 20,
 #   }
 #
-# @api public 
+# @api private 
 class cis_security_hardening::rules::passwd_inactive_days (
   Boolean $enforce            = false,
   Integer $inactive_pass_days = 30,

@@ -35,7 +35,7 @@
 #     enforce => tru,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::pki_certs_validation (
   Boolean $enforce                = false,
   String $cert_policy             = 'ca,signature,ocsp_on;',

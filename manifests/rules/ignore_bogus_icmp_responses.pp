@@ -17,7 +17,7 @@
 #       enforce => true,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::ignore_bogus_icmp_responses (
   Boolean $enforce = false,
 ) {

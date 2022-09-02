@@ -21,7 +21,7 @@
 #       buffer_size => 8192,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::auditd_init (
   Boolean $enforce                 = false,
   Integer $buffer_size             = 8192,

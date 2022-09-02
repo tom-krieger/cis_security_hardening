@@ -20,7 +20,7 @@
 #             max_log_size => 32,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::auditd_max_log_file (
   Boolean $enforce      = false,
   Integer $max_log_size = 16,

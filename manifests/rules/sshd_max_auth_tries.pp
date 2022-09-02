@@ -21,7 +21,7 @@
 #       max_auth_tries => 4,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::sshd_max_auth_tries (
   Boolean $enforce        = false,
   Integer $max_auth_tries = 4,
