@@ -3,15 +3,10 @@
 def read_nfs_filesystems
   nfs_file_systems = {}
   if File.exist?('/etc/fstab')
-    val = Facter::Core::Execution.exec("grep -E \"\s+nfs\s+\" /etc/fstab")
-    lines = if val.nil? || val.empty?
-              []
-            else
-              val.split("\n")
-            end
+    lines = File.readlines('/etc/fstab')
     lines.each do |line|
       data = line.split("\s")
-      next if data.empty?
+      next if data.empty? || data[2] !~ %r{nfs}
       nfs_file_systems[data[1]] = {
         'device' => data[0],
         'mountoptions' => data[3]
