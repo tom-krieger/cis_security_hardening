@@ -43,6 +43,7 @@ describe 'cis_security_hardening::rules::pam_lockout' do
             'enforce' => enforce,
             'lockouttime' => 900,
             'attempts' => 3,
+            'lockout_root' => true,
           }
         end
 
@@ -53,18 +54,6 @@ describe 'cis_security_hardening::rules::pam_lockout' do
             if os_facts[:osfamily].casecmp('redhat').zero?
 
               if os_facts[:operatingsystemmajrelease] == '7'
-                # is_expected.to contain_pam('pam-auth-faillock-required-system-auth')
-                #   .with(
-                #     'ensure'    => 'present',
-                #     'service'   => 'system-auth',
-                #     'type'      => 'auth',
-                #     'control'   => 'required',
-                #     'control_is_param' => true,
-                #     'module'    => 'pam_faillock.so',
-                #     'arguments' => ['preauth', 'silent', 'audit', "deny=3", "unlock_time=900"],
-                #     'position'  => 'after *[type="auth" and module="pam_env.so"]',
-                #   )
-
                 is_expected.to contain_pam('pam-auth-faillock-required-2-system-auth')
                   .with(
                     'ensure'    => 'present',
@@ -76,18 +65,6 @@ describe 'cis_security_hardening::rules::pam_lockout' do
                     'arguments' => ['authfail', 'audit', 'deny=3', 'unlock_time=900'],
                     'position'  => 'after *[type="auth" and module="pam_unix.so"]',
                   )
-
-                # is_expected.to contain_pam('pam-auth-faillock-required-password-auth')
-                #   .with(
-                #     'ensure'    => 'present',
-                #     'service'   => 'password-auth',
-                #     'type'      => 'auth',
-                #     'control'   => 'required',
-                #     'control_is_param' => true,
-                #     'module'    => 'pam_faillock.so',
-                #     'arguments' => ['preauth', 'silent', 'audit', "deny=3", "unlock_time=900"],
-                #     'position'  => 'after *[type="auth" and module="pam_env.so"]',
-                #   )
 
                 is_expected.to contain_pam('pam-auth-faillock-required-2-password-auth')
                   .with(
@@ -121,7 +98,7 @@ describe 'cis_security_hardening::rules::pam_lockout' do
 
                 is_expected.to contain_exec('configure faillock')
                   .with(
-                    'command' => 'authconfig --faillockargs="preauth silent audit deny=3 unlock_time=900" --enablefaillock --updateall',
+                    'command' => 'authconfig --faillockargs="preauth silent audit even_deny_root deny=3 unlock_time=900" --enablefaillock --updateall',
                     'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
                     'onlyif'  => "test -z \"\$(grep -E \"auth\\s+required\\s+pam_faillock.so.*deny=3\\s+unlock_time=900\" /etc/pam.d/system-auth /etc/pam.d/password-auth)\"",
                   )

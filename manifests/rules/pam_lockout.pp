@@ -21,6 +21,9 @@
 # @param lockouttime
 #    Lockout the account for this number of seconds
 #
+# @param lockout_root
+#    Flag if root should be locked on failed logins.
+#
 # @example
 #   class { 'cis_security_hardening::rules::pam_lockout':
 #       enforce => true,
@@ -29,9 +32,10 @@
 #
 # @api private
 class cis_security_hardening::rules::pam_lockout (
-  Boolean $enforce     = false,
-  Integer $attempts    = 3,
-  Integer $lockouttime = 900,
+  Boolean $enforce      = false,
+  Integer $attempts     = 3,
+  Integer $lockouttime  = 900,
+  Boolean $lockout_root = false,
 ) {
   if $enforce {
     $services = [
@@ -63,8 +67,12 @@ class cis_security_hardening::rules::pam_lockout (
         }
 
         if ($facts['operatingsystemmajrelease'] == '7') {
+          $cmd = $lockout_root ? {
+            true  => "authconfig --faillockargs=\"preauth silent audit even_deny_root deny=${attempts} unlock_time=${lockouttime}\" --enablefaillock --updateall", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
+            false => "authconfig --faillockargs=\"preauth silent audit deny=${attempts} unlock_time=${lockouttime}\" --enablefaillock --updateall", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
+          }
           exec { 'configure faillock':
-            command => "authconfig --faillockargs=\"preauth silent audit deny=${attempts} unlock_time=${lockouttime}\" --enablefaillock --updateall", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
+            command => $cmd,
             path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
             onlyif  => "test -z \"\$(grep -E \"auth\\s+required\\s+pam_faillock.so.*deny=${attempts}\\s+unlock_time=${lockouttime}\" /etc/pam.d/system-auth /etc/pam.d/password-auth)\"", #lint:ignore:140chars
           }

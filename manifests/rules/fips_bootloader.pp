@@ -30,17 +30,17 @@
 class cis_security_hardening::rules::fips_bootloader (
   Boolean $enforce = false,
 ) {
-  if $enforce and ($facts['osfamily'].downcase() == 'debian' or $facts['osfamily'].downcase() == 'suse') {
+  if $enforce {
     kernel_parameter { 'fips':
       value  => '1',
       notify => Exec['fips-grub-config'],
     }
 
-    case $facts['osfamily'].downcase() {
+    case $facts['os']['family'].downcase() {
       'debian': {
         $cmd = 'update-grub'
       }
-      'suse': {
+      'suse', 'redhat': {
         $cmd = 'grub2-mkconfig -o /boot/grub2/grub.cfg'
       }
       default: {

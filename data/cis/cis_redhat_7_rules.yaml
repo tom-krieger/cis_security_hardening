@@ -23,10 +23,17 @@ cis_security_hardening::benchmark::redhat::7:
       level2:
         - squashfs
         - fat
+      stig:
+        - home_nosuid
+        - nfs_noexec
+        - nfs_nosuid
     software_updates:
       level1:
         - yum_gpgcheck
         - rhnsd
+      stig:
+        - yum_local_gpgcheck
+        - yum_clean_requirements
     filesystem_integrety:
       level1:
         - aide_installed
@@ -41,6 +48,13 @@ cis_security_hardening::benchmark::redhat::7:
         - restrict_core_dumps
         - enable_aslr
         - disable_prelink
+      stig:
+        - limits_maxlogins
+        - crtl_alt_del
+        - kdump_service
+        - dns
+        - dracut_fips
+        - fips_bootloader
     mandatory_access_control:
       level1:
         - selinux
@@ -54,8 +68,21 @@ cis_security_hardening::benchmark::redhat::7:
         - motd_perms
         - issue_perms
         - issue_net_perms
+    gdm:
+      level1:
         - gnome_gdm
         - xdmcp_config
+      stig:
+        - gdm_lock_enabled
+        - ctrl_alt_del_graphical
+        - gdm_mfa
+        - gdm_screensaver
+        - gdm_lock_delay
+        - gdm_autologin
+        - gdm_auto_mount
+    mfa:
+      stig:
+        - pam_pkcs11
     inetd_services:
       level1:
         - xinetd
@@ -81,6 +108,11 @@ cis_security_hardening::benchmark::redhat::7:
         - nfs_utils
         - rpcbind
         - rsyncd
+      stig:
+        - rsh_server
+        - tftp_server
+        - nfs_sec_opt
+        - mta_unrestriced_relay
     service_clients:
       level1:
         - nis_client
@@ -167,6 +199,37 @@ cis_security_hardening::benchmark::redhat::7:
         - auditd_actions
         - auditd_modules
         - auditd_immutable
+      stig:
+        - auditd_sending_errors
+        - auditd_remote
+        - auditd_remote_encrypt
+        - auditd_failure_processing
+        - auditd_remote_conf
+        - auditd_overflow_action
+        - auditd_remote_labeled
+        - auditd_passwd_use
+        - auditd_unix_checkpwd
+        - auditd_gpasswd_use
+        - auditd_chage_use
+        - auditd_chsh_use
+        - auditd_umount
+        - auditd_postdrop
+        - auditd_postqueue
+        - auditd_ssh_keysign_use
+        - auditd_crontab_use
+        - auditd_kernel_modules
+        - auditd_rmdir
+        - auditd_pam_timestamp_check_use
+        - auditd_finit_module_use
+        - auditd_privileged_functions_use
+        - auditd_semanage
+        - auditd_setsebool
+        - auditd_chcon_use
+        - auditd_userhelper
+        - auditd_sudo_use
+        - auditd_setfiles
+        - auditd_newgrp_use
+        - auditd_log_perms
     configure_logging:
       level1:
         - rsyslog_installed
@@ -196,6 +259,9 @@ cis_security_hardening::benchmark::redhat::7:
         - sudo_installed
         - sudo_use_pty
         - sudo_log
+      stig:
+        - sudo_timeout
+        - sudo_passwd_required
     configure_ssh:
       level1:
         - sshd_config_permissions
@@ -217,15 +283,31 @@ cis_security_hardening::benchmark::redhat::7:
         - sshd_login_gracetime
         - sshd_banner
         - sshd_use_pam
-        - sshd_tcp_forwarding
         - sshd_max_startups
         - sshd_max_sessions
+      level2:
+        - sshd_tcp_forwarding
+      stig: 
+        - sshd_install
+        - sshd_printlastlog
+        - sshd_ignore_user_known_hosts
+        - sshd_protocol
+        - sshd_gssapi
+        - sshd_kerberos
+        - sshd_strict_modes
+        - sshd_priv_separation
+        - sshd_compression
+        - sshd_x11_use_localhost
     configure_pam:
       level1:
         - pam_pw_requirements
         - pam_lockout
         - pam_passwd_sha512
         - pam_old_passwords
+      stig:
+        - pam_passwd
+        - pam_last_logon
+        - pki_certs_validation
     configure_user_accounts:
       level1:
         - passwd_expiration
@@ -237,16 +319,22 @@ cis_security_hardening::benchmark::redhat::7:
         - timeout_setting
         - umask_setting
         - restrict_su
+      stig:
+        - passwd_sha512
+        - inactive_password_lock
+        - login_fail_delay
+        - adm_crypt_style
+        - login_create_home
     system_file_permissions:
       level1:
         - passwd_perms
-        - shadow_perms
-        - group_perms
-        - gshadow_perms
         - passwd_bak_perms
-        - group_bak_perms
+        - shadow_perms
         - shadow_bak_perms
         - gshadow_bak_perms
+        - gshadow_perms
+        - group_perms
+        - group_bak_perms
     configure_user_groups:
       level1:
         - shadowed_passwords

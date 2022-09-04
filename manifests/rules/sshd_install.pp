@@ -33,12 +33,12 @@ class cis_security_hardening::rules::sshd_install (
 ) {
   if $enforce {
     ensure_packages(['ssh'], {
-      ensure => present,
+        ensure => present,
     })
 
     ensure_resource('service', 'sshd', {
-      enable => true,
-      ensure => running,
+        enable => true,
+        ensure => running,
     })
   }
 }

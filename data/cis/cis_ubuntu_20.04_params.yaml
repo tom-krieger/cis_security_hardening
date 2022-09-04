@@ -469,6 +469,7 @@ cis_security_hardening::rules::sshd_max_startups::enforce: true
 cis_security_hardening::rules::sshd_max_sessions::enforce: true
 cis_security_hardening::rules::sshd_install::enforce: true
 cis_security_hardening::rules::sshd_x11_use_localhost::enforce: true
+
 cis_security_hardening::rules::pam_mfa::enforce: true
 cis_security_hardening::rules::pki_certs_validation::enforce: true
 cis_security_hardening::rules::pki_certs_validation::cert_policy: 'ca,signature,ocsp_on,crl_auto;'

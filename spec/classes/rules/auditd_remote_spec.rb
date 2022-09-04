@@ -20,10 +20,15 @@ describe 'cis_security_hardening::rules::auditd_remote' do
           is_expected.to compile
 
           if enforce
+            file = if os_facts[:osfamily].casecmp('redhat').zero?
+                     '/etc/audisp/audisp-remote.conf'
+                   else
+                     '/etc/audisp/plugins.d/au-remote.conf'
+                   end
             is_expected.to contain_file_line('auditd log remote')
               .with(
                 'ensure'             => 'present',
-                'path'               => '/etc/audisp/plugins.d/au-remote.conf',
+                'path'               => file,
                 'line'               => 'active = yes',
                 'match'              => '^active =',
                 'append_on_no_match' => true,
@@ -32,7 +37,7 @@ describe 'cis_security_hardening::rules::auditd_remote' do
             is_expected.to contain_file_line('auditd log remote server')
               .with(
                 'ensure'             => 'present',
-                'path'               => '/etc/audisp/plugins.d/au-remote.conf',
+                'path'               => file,
                 'line'               => 'remote_server = 10.10.10.10',
                 'match'              => '^remote_server = 10.10.10.10',
                 'append_on_no_match' => true,

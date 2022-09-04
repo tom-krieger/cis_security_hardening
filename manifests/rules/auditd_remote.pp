@@ -29,9 +29,14 @@ class cis_security_hardening::rules::auditd_remote (
   Stdlib::IP::Address $remote_server  = '1.2.3.4',
 ) {
   if $enforce {
+    $file = $facts['os']['family'].downcase() ? {
+      'redhat' => '/etc/audisp/audisp-remote.conf',
+      default  => '/etc/audisp/plugins.d/au-remote.conf',
+    }
+
     file_line { 'auditd log remote':
       ensure             => present,
-      path               => '/etc/audisp/plugins.d/au-remote.conf',
+      path               => $file,
       line               => 'active = yes',
       match              => '^active =',
       append_on_no_match => true,
@@ -39,7 +44,7 @@ class cis_security_hardening::rules::auditd_remote (
 
     file_line { 'auditd log remote server':
       ensure             => present,
-      path               => '/etc/audisp/plugins.d/au-remote.conf',
+      path               => $file,
       line               => "remote_server = ${remote_server}",
       match              => "^remote_server = ${remote_server}",
       append_on_no_match => true,

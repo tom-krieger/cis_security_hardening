@@ -11,11 +11,13 @@
 * [`cis_security_hardening`](#cis_security_hardening): Security baseline enforcement
 * [`cis_security_hardening::auditd_cron`](#cis_security_hardeningauditd_cron): Create a cron job to search privileged commands for auditd
 * [`cis_security_hardening::config`](#cis_security_hardeningconfig): Configure the module
+* [`cis_security_hardening::rules::gdm_lock_delay`](#cis_security_hardeningrulesgdm_lock_delay): Ensure overriding the screensaver lock-delay setting is prevented
 * [`cis_security_hardening::services`](#cis_security_hardeningservices): Services
 * [`cis_security_hardening::sticky_world_writable_cron`](#cis_security_hardeningsticky_world_writable_cron): Create cron job for searching world writable dir3ctories with sticky bit
 
 #### Private Classes
 
+* `cis_security_hardening::rules::adm_crypt_style`: nsure user and group account administration utilities are configured to store only encrypted representations of passwords
 * `cis_security_hardening::rules::aide_installed`: Ensure AIDE is installed
 * `cis_security_hardening::rules::aide_notify_admins`: Ensure System Administrator are notified of changes to the baseline configuration or anomalies
 * `cis_security_hardening::rules::aide_regular_checks`: Ensure filesystem integrity is regularly checked
@@ -37,6 +39,7 @@
 * `cis_security_hardening::rules::auditd_conf_perms`: Ensure audit configuration files are 0640 or more restrictive and confibgure user and group
 * `cis_security_hardening::rules::auditd_crontab_use`: Ensure successful and unsuccessful attempts to use the crontab command are recorded
 * `cis_security_hardening::rules::auditd_delete`: Ensure file deletion events by users are collected
+* `cis_security_hardening::rules::auditd_failure_processing`: Ensure the auditing processing failures are handled.
 * `cis_security_hardening::rules::auditd_fdisk_use`: Ensure successful and unsuccessful attempts to use the fdisk command are recorded
 * `cis_security_hardening::rules::auditd_finit_module_use`: Ensure successful and unsuccessful uses of the finit_module syscall are recorded
 * `cis_security_hardening::rules::auditd_fremovexattr_use`: Ensure successful and unsuccessful attempts to use the fremovexattr system call are recorded
@@ -60,21 +63,32 @@
 * `cis_security_hardening::rules::auditd_newgrp_use`: Ensure successful and unsuccessful attempts to use the newgrp command are recorded
 * `cis_security_hardening::rules::auditd_nonlocal_admin_access`: Ensure nonlocal administrative access events are collected
 * `cis_security_hardening::rules::auditd_open_by_handle_use`: Ensure successful and unsuccessful uses of the open_by_handle_at system call are recorded
+* `cis_security_hardening::rules::auditd_overflow_action`: Ensure action is taken when audisp-remote buffer is full
 * `cis_security_hardening::rules::auditd_package`: Ensure auditd is installed
 * `cis_security_hardening::rules::auditd_pam_timestamp_check_use`: Ensure successful and unsuccessful attempts to use the pam_timestamp_check command are recorded
 * `cis_security_hardening::rules::auditd_passwd_use`: Ensure successful and unsuccessful attempts to use the passwd command are recorded
 * `cis_security_hardening::rules::auditd_perm_mod`: Ensure discretionary access control permission modification events are collected
+* `cis_security_hardening::rules::auditd_postdrop`: Ensure audit of postdrop command
+* `cis_security_hardening::rules::auditd_postqueue`: Ensure audit of postqueue command.
 * `cis_security_hardening::rules::auditd_privileged_commands`: Ensure use of privileged commands is collected
 * `cis_security_hardening::rules::auditd_privileged_functions_use`: Ensure execution of privileged functions is recorded
 * `cis_security_hardening::rules::auditd_privileged_priv_change`: Ensure successful and unsuccessful uses of the su command are collected
 * `cis_security_hardening::rules::auditd_process`: Ensure auditing for processes that start prior to auditd is enabled
 * `cis_security_hardening::rules::auditd_remote`: Ensure audit event multiplexor is configured to off-load audit logs onto a different system or storage media from the system being
 audited
+* `cis_security_hardening::rules::auditd_remote_conf`: Ensure off-load of audit logs.
+* `cis_security_hardening::rules::auditd_remote_encrypt`: Ensure audit logs on separate system are encrypted
+* `cis_security_hardening::rules::auditd_remote_labeled`: Ensure off-loaded audit logs are labeled.
 * `cis_security_hardening::rules::auditd_removexattr_use`: Ensure successful and unsuccessful attempts to use the removexattr system call are recorded
+* `cis_security_hardening::rules::auditd_rmdir`: Ensure audit of the rmdir syscall
 * `cis_security_hardening::rules::auditd_scope`: Ensure changes to system administration scope (sudoers) is collected
+* `cis_security_hardening::rules::auditd_semanage`: Ensure audit of semanage command
+* `cis_security_hardening::rules::auditd_sending_errors`: Ensure audit system action is defined for sending errors
 * `cis_security_hardening::rules::auditd_service`: Ensure auditd service is enabled .
 * `cis_security_hardening::rules::auditd_session_logins`: Ensure session initiation information is collected
 * `cis_security_hardening::rules::auditd_setfacl_use`: Ensure successful and unsuccessful attempts to use the setfacl command are recorded
+* `cis_security_hardening::rules::auditd_setfiles`: Ensure audit of setfiles command.
+* `cis_security_hardening::rules::auditd_setsebool`: Ensure audit of the setsebool command.
 * `cis_security_hardening::rules::auditd_setxattr_use`: Ensure successful and unsuccessful attempts to use the setxattr system call are recorded
 * `cis_security_hardening::rules::auditd_ssh_agent_use`: Ensure successful and unsuccessful uses of the ssh-agent command are collected
 * `cis_security_hardening::rules::auditd_ssh_keysign_use`: Ensure successful and unsuccessful uses of the ssh-keysign command are collected
@@ -83,8 +97,11 @@ audited
 * `cis_security_hardening::rules::auditd_system_locale`: Ensure events that modify the system's network environment are collected
 * `cis_security_hardening::rules::auditd_time_change`: Ensure events that modify date and time information are collected
 * `cis_security_hardening::rules::auditd_tools_perms`: Ensure audit tools are mode of 0755 or more restrictive and owned by the right user and group
+* `cis_security_hardening::rules::auditd_umount`: Ensure audit the umount command
+* `cis_security_hardening::rules::auditd_unix_checkpwd`: Ensure auditing of the unix_chkpwd command.
 * `cis_security_hardening::rules::auditd_unix_update_use`: Ensure successful and unsuccessful attempts to use the unix_update command are recorded
 * `cis_security_hardening::rules::auditd_user_emulation`: Ensure actions as another user are always logged
+* `cis_security_hardening::rules::auditd_userhelper`: Ensure audit of the userhelper command.
 * `cis_security_hardening::rules::auditd_usermod_use`: Ensure successful and unsuccessful attempts to use the usermod command are recorded
 * `cis_security_hardening::rules::auditd_when_disk_full`: Ensure system is disabled when audit logs are full
 * `cis_security_hardening::rules::authselect`: Create custom authselect profile (Scored)
@@ -119,7 +136,9 @@ audited
 * `cis_security_hardening::rules::disable_tipc`: Ensure TIPC is disabled
 * `cis_security_hardening::rules::disable_usb_storage`: Disable USB Storage
 * `cis_security_hardening::rules::disable_wireless`: Ensure wireless interfaces are disabled (Not Scored)
+* `cis_security_hardening::rules::dns`: Ensure DNS is servers are configured
 * `cis_security_hardening::rules::dovecot`: Ensure IMAP and POP3 server is not enabled
+* `cis_security_hardening::rules::dracut_fips`: Ensure NIST FIPS-validated cryptography is configured
 * `cis_security_hardening::rules::enable_aslr`: Ensure address space layout randomization (ASLR) is enabled
 * `cis_security_hardening::rules::enable_reverse_path_filtering`: Ensure Reverse Path Filtering is enabled
 * `cis_security_hardening::rules::enable_tcp_syn_cookies`: Ensure TCP SYN Cookies is enabled
@@ -134,7 +153,10 @@ audited
 * `cis_security_hardening::rules::freevxfs`: Ensure mounting of freevxfs filesystems is disabled
 * `cis_security_hardening::rules::ftp`: Ensure FTP Server is not installed
 * `cis_security_hardening::rules::gdm_auto_mount`: Ensure automatic mounting of removable media is disabled
+* `cis_security_hardening::rules::gdm_autologin`: Ensure automatic logon via GUI is not allowed
 * `cis_security_hardening::rules::gdm_lock_enabled`: Ensure user's session lock is enabled
+* `cis_security_hardening::rules::gdm_mfa`: Ensure users must authenticate users using MFA via a graphical user logon
+* `cis_security_hardening::rules::gdm_screensaver`: Ensure GNOME Screensaver period of inactivity is configured
 * `cis_security_hardening::rules::gnome_gdm`
 * `cis_security_hardening::rules::gnome_gdm_package`: Ensure GNOME Display Manager is removed
 * `cis_security_hardening::rules::group_bak_perms`: Ensure permissions on /etc/group- are configured
@@ -153,6 +175,7 @@ audited
 * `cis_security_hardening::rules::icmp_redirects`: Ensure ICMP redirects are not accepted
 * `cis_security_hardening::rules::ignore_bogus_icmp_responses`: Ensure bogus ICMP responses are ignored
 * `cis_security_hardening::rules::ignore_icmp_broadcast`: Ensure broadcast ICMP requests are ignored
+* `cis_security_hardening::rules::inactive_password_lock`: Ensure inactive password lock is 0 days
 * `cis_security_hardening::rules::ip6tables_deny_policy`: Ensure default deny firewall policy
 * `cis_security_hardening::rules::ip6tables_loopback`: Ensure loopback traffic is configured
 * `cis_security_hardening::rules::ip6tables_open_ports`: Ensure IPv6 firewall rules exist for all open ports
@@ -176,14 +199,20 @@ audited
 * `cis_security_hardening::rules::lock_root`: Ensure root account is locked
 * `cis_security_hardening::rules::log_suspicious_packets`: Ensure suspicious packets are logged
 * `cis_security_hardening::rules::logfile_permissions`: Ensure permissions on all logfiles are configured
+* `cis_security_hardening::rules::login_create_home`: Ensure upon user creation a home directory is assigned.
+* `cis_security_hardening::rules::login_fail_delay`: Ensure delay between logon prompts on failure
 * `cis_security_hardening::rules::logrotate`: Ensure logrotate is configured
 * `cis_security_hardening::rules::logrotate_configuration`: Ensure logrotate assigns appropriate permissions
 * `cis_security_hardening::rules::mcstrans`: Ensure the MCS Translation Service (mcstrans) is not installed
 * `cis_security_hardening::rules::mfetp`: Ensure Endpoint Security for Linux Threat Prevention is installed
 * `cis_security_hardening::rules::motd_perms`: Ensure message of the day is configured properly
 * `cis_security_hardening::rules::mta_local`: Ensure mail transfer agent is configured for local-only mode
+* `cis_security_hardening::rules::mta_unrestriced_relay`
 * `cis_security_hardening::rules::net_snmp`: Ensure net-snmp is not installed
 * `cis_security_hardening::rules::nfs`: Ensure NFS is not enabled
+* `cis_security_hardening::rules::nfs_noexec`: Ensure noexec option is configured for NFS.
+* `cis_security_hardening::rules::nfs_nosuid`: Ensure nosuid option is set for NFS
+* `cis_security_hardening::rules::nfs_sec_opt`: Ensure NFS is configured to use RPCSEC_GSS
 * `cis_security_hardening::rules::nfs_utils`: Ensure nfs-utils is not installed or the nfs-server service is masked
 * `cis_security_hardening::rules::nftables_base_chains`: Ensure base chains exist
 * `cis_security_hardening::rules::nftables_default_deny`: Ensure default deny firewall policy
@@ -205,6 +234,7 @@ audited
 * `cis_security_hardening::rules::pam_lockout`: Ensure lockout for failed password attempts is configured
 * `cis_security_hardening::rules::pam_mfa`: Ensure smart card logins for multifactor authentication for local and network access
 * `cis_security_hardening::rules::pam_old_passwords`: Ensure password reuse is limited
+* `cis_security_hardening::rules::pam_passwd`: Ensure system-auth is used when changing passwords
 * `cis_security_hardening::rules::pam_passwd_sha512`: Ensure password hashing algorithm is SHA-512
 * `cis_security_hardening::rules::pam_pkcs11`: Ensure the libpam-pkcs11 package is installed
 * `cis_security_hardening::rules::pam_pw_requirements`: Ensure password creation requirements are configured
@@ -249,12 +279,16 @@ audited
 * `cis_security_hardening::rules::squid`: Ensure HTTP Proxy Server is not enabled
 * `cis_security_hardening::rules::sshd_banner`
 * `cis_security_hardening::rules::sshd_ciphers`: Ensure only strong Ciphers are used
+* `cis_security_hardening::rules::sshd_compression`: Ensure SSH compressions setting is delayed
 * `cis_security_hardening::rules::sshd_config_permissions`: Ensure permissions on /etc/ssh/sshd_config are configured
 * `cis_security_hardening::rules::sshd_crypto_policy`: Ensure system-wide crypto policy is not over-ridden
 * `cis_security_hardening::rules::sshd_empty_passwords`: Ensure SSH PermitEmptyPasswords is disabled
+* `cis_security_hardening::rules::sshd_gssapi`: Ensure SSH does not permit GSSAPI
 * `cis_security_hardening::rules::sshd_hostbased_authentication`: Ensure SSH HostbasedAuthentication is disabled
 * `cis_security_hardening::rules::sshd_ignore_rhosts`: Ensure SSH IgnoreRhosts is enabled
+* `cis_security_hardening::rules::sshd_ignore_user_known_hosts`: Ensure SSH IgnoreUserKnownHosts is enabled
 * `cis_security_hardening::rules::sshd_install`: Ensure SSH is installed and active
+* `cis_security_hardening::rules::sshd_kerberos`: Ensure SSH does not permit Kerberos authentication
 * `cis_security_hardening::rules::sshd_kex`: Ensure only strong Key Exchange algorithms are used
 * `cis_security_hardening::rules::sshd_limit_access`: Ensure SSH access is limited
 * `cis_security_hardening::rules::sshd_login_gracetime`: Ensure SSH LoginGraceTime is set to one minute or less
@@ -263,9 +297,13 @@ audited
 * `cis_security_hardening::rules::sshd_max_auth_tries`: Ensure SSH MaxAuthTries is set to 4 or less
 * `cis_security_hardening::rules::sshd_max_sessions`: Ensure SSH MaxSessions is set to 4 or less
 * `cis_security_hardening::rules::sshd_max_startups`: Ensure SSH MaxStartups is configured
+* `cis_security_hardening::rules::sshd_printlastlog`: Ensure Printlastlog is enabled
+* `cis_security_hardening::rules::sshd_priv_separation`: Ensure SSH uses privilege separation
 * `cis_security_hardening::rules::sshd_private_keys`: Ensure permissions on SSH private host key files are configured
+* `cis_security_hardening::rules::sshd_protocol`: Ensure SSH Protocol is set to 2
 * `cis_security_hardening::rules::sshd_public_keys`: Ensure permissions on SSH public host key files are configured
 * `cis_security_hardening::rules::sshd_root_login`: Ensure SSH root login is disabled
+* `cis_security_hardening::rules::sshd_strict_modes`: Ensure SSH performs checks of home directory configuration files
 * `cis_security_hardening::rules::sshd_tcp_forwarding`: Ensure SSH AllowTcpForwarding is disabled
 * `cis_security_hardening::rules::sshd_timeouts`: Ensure SSH Idle Timeout Interval is configured
 * `cis_security_hardening::rules::sshd_use_pam`: Ensure SSH PAM is enabled
@@ -275,6 +313,7 @@ audited
 * `cis_security_hardening::rules::sticky_world_writeable_files`: Ensure sticky bit is set on all world-writable directories
 * `cis_security_hardening::rules::sudo_installed`: Ensure sudo is installed
 * `cis_security_hardening::rules::sudo_log`: Ensure sudo log file exists
+* `cis_security_hardening::rules::sudo_passwd_required`: Ensure users password required for privilege escalation when using sudo
 * `cis_security_hardening::rules::sudo_timeout`: Ensure sudo authentication timeout is configured correctly
 * `cis_security_hardening::rules::sudo_use_pty`: Ensure sudo commands use pty
 * `cis_security_hardening::rules::system_cmd_group`: Ensure system command files are group-owned by root
@@ -316,7 +355,9 @@ audited
 * `cis_security_hardening::rules::x11_installed`: Ensure X Window System is not installed
 * `cis_security_hardening::rules::xdmcp_config`: Ensure XDCMP is not enabled
 * `cis_security_hardening::rules::xinetd`: Ensure xinetd is not installed
+* `cis_security_hardening::rules::yum_clean_requirements`: Ensure removal of software components after update
 * `cis_security_hardening::rules::yum_gpgcheck`: Ensure gpgcheck is globally activated
+* `cis_security_hardening::rules::yum_local_gpgcheck`: Ensure software packages have been digitally signed by a Certificate Authority
 * `cis_security_hardening::rules::zypper_gpgcheck`: Ensure gpgcheck is globally activated
 
 ### Defined types
@@ -576,6 +617,49 @@ Data type: `Stdlib::Absolutepath`
 
 Command to use for fact upload.
 
+### <a name="cis_security_hardeningrulesgdm_lock_delay"></a>`cis_security_hardening::rules::gdm_lock_delay`
+
+The operating system must prevent a user from overriding the screensaver lock-delay setting for the graphical user interface.
+
+Rationale:
+A session time-out lock is a temporary action taken when a user stops work and moves away from the immediate physical vicinity
+of the information system but does not log out because of the temporary nature of the absence. Rather than relying on the user
+to manually lock their operating system session prior to vacating the vicinity, operating systems need to be able to identify
+when a user's session has idled and take action to initiate the session lock.
+
+The session lock is implemented at the point where session activity can be determined and/or controlled.
+
+#### Examples
+
+##### 
+
+```puppet
+include cis_security_hardening::rules::gdm_lock_delay
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::gdm_lock_delay` class:
+
+* [`enforce`](#enforce)
+* [`timeout`](#timeout)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+##### <a name="timeout"></a>`timeout`
+
+Data type: `Integer`
+
+Lock delay timeout.
+
+Default value: `900`
+
 ### <a name="cis_security_hardeningservices"></a>`cis_security_hardening::services`
 
 Several exec resources needed from multiple classes.
@@ -740,7 +824,7 @@ Check a mount option
 Alias of
 
 ```puppet
-Pattern[/^[\/a-zA-Z0-9]+$/]
+Pattern[/(^[\/a-zA-Z0-9]+$|^sec=[\/a-zA-Z0-9:]+$)/]
 ```
 
 ### <a name="cis_security_hardeningmountpoint"></a>`Cis_security_hardening::Mountpoint`

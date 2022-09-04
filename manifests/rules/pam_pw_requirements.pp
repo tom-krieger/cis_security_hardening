@@ -51,6 +51,12 @@
 # @param difok
 #    Number of characters to change.
 #
+# @param maxrepeat
+#    The maximum number of allowed consecutive same characters in the new password.
+#
+# @param maxclassrepeat
+#    The maximum number of allowed consecutive characters of the same class in the new password.
+#
 # @example
 #   class { 'cis_security_hardening::rules::pam_pw_requirements':
 #       enforce => true,
@@ -59,16 +65,18 @@
 #
 # @api private
 class cis_security_hardening::rules::pam_pw_requirements (
-  Boolean $enforce   = false,
-  Integer $minlen    = 14,
-  Integer $dcredit   = -1,
-  Integer $ucredit   = -1,
-  Integer $ocredit   = -1,
-  Integer $lcredit   = -1,
-  Integer $minclass  = -1,
-  Integer $retry     = 3,
-  Boolean $dictcheck = false,
-  Integer $difok     = 0,
+  Boolean $enforce        = false,
+  Integer $minlen         = 14,
+  Integer $dcredit        = -1,
+  Integer $ucredit        = -1,
+  Integer $ocredit        = -1,
+  Integer $lcredit        = -1,
+  Integer $minclass       = -1,
+  Integer $retry          = 3,
+  Boolean $dictcheck      = false,
+  Integer $difok          = 0,
+  Integer $maxrepeat      = 0,
+  Integer $maxclassrepeat = 0,
 ) {
   if $enforce {
     require cis_security_hardening::rules::pam_old_passwords
@@ -146,6 +154,26 @@ class cis_security_hardening::rules::pam_pw_requirements (
                 path               => '/etc/security/pwquality.conf',
                 line               => "difok = ${difok}",
                 match              => '^#?difok',
+                append_on_no_match => true,
+              }
+            }
+
+            if $maxrepeat > 0 {
+              file_line { 'pam maxrepeat':
+                ensure             => 'present',
+                path               => '/etc/security/pwquality.conf',
+                line               => "maxrepeat = ${maxrepeat}",
+                match              => '^#?maxrepeat',
+                append_on_no_match => true,
+              }
+            }
+
+            if $maxclassrepeat > 0 {
+              file_line { 'pam maxclassrepeat':
+                ensure             => 'present',
+                path               => '/etc/security/pwquality.conf',
+                line               => "maxclassrepeat = ${maxclassrepeat}",
+                match              => '^#?maxclassrepeat',
                 append_on_no_match => true,
               }
             }

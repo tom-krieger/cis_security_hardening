@@ -44,6 +44,8 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
             'retry' => 3,
             'dictcheck' => true,
             'difok' => 8,
+            'maxrepeat' => 3,
+            'maxclassrepeat' => 4,
           }
         end
 
@@ -118,6 +120,24 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                     'path'   => '/etc/security/pwquality.conf',
                     'line'   => 'difok = 8',
                     'match'  => '^#?difok',
+                    'append_on_no_match' => true,
+                  )
+
+                is_expected.to contain_file_line('pam maxrepeat')
+                  .with(
+                    'ensure' => 'present',
+                    'path'   => '/etc/security/pwquality.conf',
+                    'line'   => 'maxrepeat = 3',
+                    'match'  => '^#?maxrepeat',
+                    'append_on_no_match' => true,
+                  )
+
+                is_expected.to contain_file_line('pam maxclassrepeat')
+                  .with(
+                    'ensure' => 'present',
+                    'path'   => '/etc/security/pwquality.conf',
+                    'line'   => 'maxclassrepeat = 4',
+                    'match'  => '^#?maxclassrepeat',
                     'append_on_no_match' => true,
                   )
 

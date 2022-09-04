@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release v0.8.0
+
+* Added STIG benchmarks for RTeadhat 7 and 8
+
 ## Release 0.7.1
 
 * Added support for Redhat Linux 7 and 8

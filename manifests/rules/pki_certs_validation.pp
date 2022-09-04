@@ -43,7 +43,6 @@ class cis_security_hardening::rules::pki_certs_validation (
 ) {
   if $enforce {
     if $pkcs11_config == undef {
-
       $policy = fact('cis_security_hardening.pkcs11_config.policy')
       $match = "cert_policy\\s*=\\s*${policy};"
       $line = "    cert_policy = ${cert_policy}"
@@ -55,9 +54,7 @@ class cis_security_hardening::rules::pki_certs_validation (
         match    => $match,
         multiple => true,
       }
-
     } else {
-
       file { 'pkcs11_config prepared':
         ensure => file,
         source => $pkcs11_config,
@@ -65,7 +62,6 @@ class cis_security_hardening::rules::pki_certs_validation (
         group  => 'root',
         mode   => '0644',
       }
-
     }
   }
 }

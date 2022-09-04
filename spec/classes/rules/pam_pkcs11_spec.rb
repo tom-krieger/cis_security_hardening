@@ -23,8 +23,16 @@ describe 'cis_security_hardening::rules::pam_pkcs11' do
               .with(
                 'ensure' => 'present',
               )
+
+            if os_facts[:osfamily].casecmp('redhat').zero?
+              is_expected.to contain_package('esc')
+                .with(
+                  'ensure' => 'present',
+                )
+            end
           else
-            is_expected.not_to contain_package('libpam-pkcd11')
+            is_expected.not_to contain_package('libpam-pkcs11')
+            is_expected.not_to contain_package('esc')
           end
         }
       end
