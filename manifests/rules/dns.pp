@@ -34,21 +34,23 @@ class cis_security_hardening::rules::dns (
       line   => "hosts: ${nsswitch_entry}",
     }
 
-    file { '/etc/resolv.conf':
-      ensure  => file,
-      content => epp('cis_security_hardening/rules/common/resolv.conf.epp', {
-          dns_servers => $dns_servers,
-      }),
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0644',
-      notify  => Exec['resolv.conf immutable'],
-    }
+    unless empty($dns_servers) {
+      file { '/etc/resolv.conf':
+        ensure  => file,
+        content => epp('cis_security_hardening/rules/common/resolv.conf.epp', {
+            dns_servers => $dns_servers,
+        }),
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0644',
+        notify  => Exec['resolv.conf immutable'],
+      }
 
-    exec { 'resolv.conf immutable':
-      command     => 'chattr +i /etc/resolv.conf',
-      path        => ['/sbin','/usr/sbin','/bin','/usr/bin'],
-      refreshonly => true,
+      exec { 'resolv.conf immutable':
+        command     => 'chattr +i /etc/resolv.conf',
+        path        => ['/sbin','/usr/sbin','/bin','/usr/bin'],
+        refreshonly => true,
+      }
     }
   }
 }
