@@ -11,6 +11,8 @@ describe 'cis_security_hardening::rules::gdm_autologin' do
         let(:facts) do
           os_facts.merge!(
             cis_security_hardening: {
+              gnome_gdm_conf: false,
+              gnome_gdm: true,
               xdcmp: true,
             },
           )

@@ -22,7 +22,8 @@ class cis_security_hardening::rules::gdm_lock_delay (
   Boolean $enforce = false,
   Integer $timeout = 900,
 ) {
-  if $enforce {
+  $gnome_gdm = fact('cis_security_hardening.gnome_gdm')
+  if  $enforce and $gnome_gdm != undef and $gnome_gdm {
     exec { 'gdm lock delay':
       command => "gsettings set org.gnome.desktop.screensaver lock-delay ${timeout}", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
       path    => ['/bin', '/usr/bin'],

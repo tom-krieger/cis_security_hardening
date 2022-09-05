@@ -26,7 +26,8 @@
 class cis_security_hardening::rules::gdm_mfa (
   Boolean $enforce = false,
 ) {
-  if $enforce {
+  $gnome_gdm = fact('cis_security_hardening.gnome_gdm')
+  if  $enforce and $gnome_gdm != undef and $gnome_gdm {
     file { '/etc/dconf/db/local.d/00-defaults':
       ensure => file,
       owner  => 'root',

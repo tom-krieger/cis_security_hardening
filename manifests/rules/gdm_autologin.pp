@@ -18,7 +18,8 @@
 class cis_security_hardening::rules::gdm_autologin (
   Boolean $enforce = false,
 ) {
-  if  $enforce {
+  $gnome_gdm = fact('cis_security_hardening.gnome_gdm')
+  if  $enforce and $gnome_gdm != undef and $gnome_gdm {
     $file = $facts['os']['name'].downcase() ? {
       'rocky'     => '/etc/gdm/custom.conf',
       'almalinux' => '/etc/gdm/custom.conf',

@@ -30,7 +30,8 @@ class cis_security_hardening::rules::gdm_screensaver (
   Integer $timeout   = 900,
   Integer $lockdelay = 5,
 ) {
-  if $enforce {
+  $gnome_gdm = fact('cis_security_hardening.gnome_gdm')
+  if  $enforce and $gnome_gdm != undef and $gnome_gdm {
     exec { 'gdm screensaver enabled':
       command => "gsettings set org.gnome.desktop.session idle-delay \"unit32 ${timeout}\"", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
       path    => ['/bin', '/usr/bin'],
