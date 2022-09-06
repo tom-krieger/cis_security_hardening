@@ -272,7 +272,6 @@ cis_security_hardening::benchmark::redhat::8:
         - auditd_setsebool
         - auditd_unix_checkpwd
         - auditd_ssh_keysign_use
-        - auditd_setfacl_use
         - auditd_pam_timestamp_check_use
         - auditd_newgrp_use
         - auditd_init_module
