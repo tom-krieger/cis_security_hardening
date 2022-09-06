@@ -189,7 +189,7 @@ cis_security_hardening::rules::firewalld_interfaces::zone_config:
 cis_security_hardening::rules::firewalld_ports_services::enforce: false
 cis_security_hardening::rules::firewalld_ports_services::expected_ports:
   - 443
-cis_security_hardening::rules::firewalld_ports_services::expected_servives:
+cis_security_hardening::rules::firewalld_ports_services::expected_services:
   - ssh
 
 cis_security_hardening::rules::nftables_install::enforce: true
