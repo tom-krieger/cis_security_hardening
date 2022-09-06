@@ -32,7 +32,11 @@ class cis_security_hardening::rules::sshd_install (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    ensure_packages(['ssh'], {
+    $pkgs = $facts['osfamily'].downcase() ? {
+      'redhat' => ['openssh-server'],
+      default  => ['ssh']
+    }
+    ensure_packages($pkgs, {
         ensure => present,
     })
 

@@ -38,7 +38,7 @@ class cis_security_hardening::rules::pam_pkcs11 (
 ) {
   if $enforce {
     $pkgs = $facts['os']['family'].downcase() ? {
-      'redhat' => ['esc', 'pam-pkcs11'],
+      'redhat' => ['esc', 'pam_pkcs11'],
       default  => ['libpam-pkcs11'],
     }
     ensure_packages($pkgs, {

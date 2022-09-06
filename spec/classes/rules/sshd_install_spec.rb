@@ -19,10 +19,18 @@ describe 'cis_security_hardening::rules::sshd_install' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_package('ssh')
-              .with(
-                'ensure' => 'present',
-              )
+            if os_facts[:osfamily].casecmp('redhat').zero?
+              is_expected.to contain_package('openssh-server')
+                .with(
+                  'ensure' => 'present',
+                )
+            else
+              is_expected.to contain_package('ssh')
+                .with(
+                  'ensure' => 'present',
+                )
+            end
+
             is_expected.to contain_service('sshd')
               .with(
                 'enable' => true,
