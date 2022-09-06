@@ -259,7 +259,6 @@ cis_security_hardening::benchmark::redhat::8:
         - auditd_log_format
         - auditd_log_perms
         - auditd_log_dir_perms
-        - auditd_chcon_use
         - auditd_setxattr_use
         - auditd_ssh_agent_use
         - auditd_passwd_use
