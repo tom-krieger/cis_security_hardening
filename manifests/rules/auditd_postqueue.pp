@@ -30,7 +30,7 @@ class cis_security_hardening::rules::auditd_postqueue (
     concat::fragment { 'watch postqueue rule 1':
       order   => '209',
       target  => $cis_security_hardening::rules::auditd_init::rules_file,
-      content => "-a always,exit -F path=/usr/sbin/postqueue -F auid>=${uid} -F auid!=4294967295 - k privileged-postfix",
+      content => "-a always,exit -F path=/usr/sbin/postqueue -F auid>=${uid} -F auid!=4294967295 -k privileged-postfix",
     }
   }
 }

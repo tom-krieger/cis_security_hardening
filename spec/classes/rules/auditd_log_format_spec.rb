@@ -23,8 +23,8 @@ describe 'cis_security_hardening::rules::auditd_log_format' do
           }
         end
 
-        it { 
-          is_expected.to compile 
+        it {
+          is_expected.to compile
 
           if enforce
             is_expected.to contain_file_line('auditd_log_format')
