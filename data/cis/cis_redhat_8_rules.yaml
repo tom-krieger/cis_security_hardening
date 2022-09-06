@@ -131,7 +131,6 @@ cis_security_hardening::benchmark::redhat::8:
         - sendmail
         - rsh_server
         - debug_shell
-        - tftp_server
         - mta_unrestriced_relay
         - gssproxy
         - iprutils
