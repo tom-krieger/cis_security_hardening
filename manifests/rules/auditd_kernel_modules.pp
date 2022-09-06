@@ -45,8 +45,7 @@ class cis_security_hardening::rules::auditd_kernel_modules (
       target  => $cis_security_hardening::rules::auditd_init::rules_file,
       content => "-a always,exit -S all -F path=/usr/bin/kmod -F perm=x -F auid>=${uid} -F auid!=${auid} -F key=kernel_modules",
     }
-    if  $facts['architecture'] == 'x86_64' or
-    $facts['architecture'] == 'amd64' {
+    if  $facts['architecture'] == 'x86_64' or $facts['architecture'] == 'amd64' {
       concat::fragment { 'watch kernel modules rule 2':
         order   => '205',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,

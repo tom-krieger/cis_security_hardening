@@ -17,6 +17,7 @@
 
 #### Private Classes
 
+* `cis_security_hardening::rules::abrt`: Ensure automated bug reporting tools are not installed
 * `cis_security_hardening::rules::adm_crypt_style`: nsure user and group account administration utilities are configured to store only encrypted representations of passwords
 * `cis_security_hardening::rules::aide_installed`: Ensure AIDE is installed
 * `cis_security_hardening::rules::aide_notify_admins`: Ensure System Administrator are notified of changes to the baseline configuration or anomalies
@@ -39,6 +40,9 @@
 * `cis_security_hardening::rules::auditd_conf_perms`: Ensure audit configuration files are 0640 or more restrictive and confibgure user and group
 * `cis_security_hardening::rules::auditd_crontab_use`: Ensure successful and unsuccessful attempts to use the crontab command are recorded
 * `cis_security_hardening::rules::auditd_delete`: Ensure file deletion events by users are collected
+* `cis_security_hardening::rules::auditd_delete_module`: Ensure the operating system generates an audit record when there are successful/unsuccessful attempts to use the
+"delete_module" command
+* `cis_security_hardening::rules::auditd_disk_error`: Ensure the operating system takes the appropriate action when an audit processing failure occurs
 * `cis_security_hardening::rules::auditd_failure_processing`: Ensure the auditing processing failures are handled.
 * `cis_security_hardening::rules::auditd_fdisk_use`: Ensure successful and unsuccessful attempts to use the fdisk command are recorded
 * `cis_security_hardening::rules::auditd_finit_module_use`: Ensure successful and unsuccessful uses of the finit_module syscall are recorded
@@ -48,11 +52,15 @@
 * `cis_security_hardening::rules::auditd_identity`: Ensure events that modify user/group information are collected
 * `cis_security_hardening::rules::auditd_immutable`: Ensure the audit configuration is immutable
 * `cis_security_hardening::rules::auditd_init`: Initialize auditd rules file
+* `cis_security_hardening::rules::auditd_init_module`: Ensure the operating system generates an audit record when there are successful/unsuccessful attempts to use the "init_module" command
 * `cis_security_hardening::rules::auditd_kernel_modules`: Ensure kernel module loading unloading and modification is collected
 * `cis_security_hardening::rules::auditd_kmod_use`: Ensure successful and unsuccessful attempts to use the kmod command are recorded
+* `cis_security_hardening::rules::auditd_local_events`: Ensure the operating system's audit daemon is configured to include local events
 * `cis_security_hardening::rules::auditd_log_dir_perms`: Ensure the audit log directory is 0750 or more restrictive
+* `cis_security_hardening::rules::auditd_log_format`: Ensure the operating system's audit daemon is configured to resolve audit information before writing to disk
 * `cis_security_hardening::rules::auditd_log_perms`: Ensure audit log files are not read or write-accessible by unauthorized users
 * `cis_security_hardening::rules::auditd_logins`: Ensure login and logout events are collected
+* `cis_security_hardening::rules::auditd_loginuid_immutable`: Ensure the audit system prevents unauthorized changes to logon UIDs
 * `cis_security_hardening::rules::auditd_lremovexattr_use`: Ensure successful and unsuccessful attempts to use the lremovexattr system call are recorded
 * `cis_security_hardening::rules::auditd_lsetxattr_use`: Ensure successful and unsuccessful attempts to use the lsetxattr system call are recorded
 * `cis_security_hardening::rules::auditd_mac_policy`: Ensure events that modify the system's Mandatory Access Controls are collected
@@ -81,6 +89,7 @@ audited
 * `cis_security_hardening::rules::auditd_remote_labeled`: Ensure off-loaded audit logs are labeled.
 * `cis_security_hardening::rules::auditd_removexattr_use`: Ensure successful and unsuccessful attempts to use the removexattr system call are recorded
 * `cis_security_hardening::rules::auditd_rmdir`: Ensure audit of the rmdir syscall
+* `cis_security_hardening::rules::auditd_rsyslog_gnutls`: Ensure the operating system has the packages required for encrypting offloaded audit logs
 * `cis_security_hardening::rules::auditd_scope`: Ensure changes to system administration scope (sudoers) is collected
 * `cis_security_hardening::rules::auditd_semanage`: Ensure audit of semanage command
 * `cis_security_hardening::rules::auditd_sending_errors`: Ensure audit system action is defined for sending errors
@@ -90,16 +99,23 @@ audited
 * `cis_security_hardening::rules::auditd_setfiles`: Ensure audit of setfiles command.
 * `cis_security_hardening::rules::auditd_setsebool`: Ensure audit of the setsebool command.
 * `cis_security_hardening::rules::auditd_setxattr_use`: Ensure successful and unsuccessful attempts to use the setxattr system call are recorded
+* `cis_security_hardening::rules::auditd_space_left`: Ensure the operating system takes action when allocated audit record storage volume reaches 75 percent of the repository
+maximum audit record storage capacity
 * `cis_security_hardening::rules::auditd_ssh_agent_use`: Ensure successful and unsuccessful uses of the ssh-agent command are collected
 * `cis_security_hardening::rules::auditd_ssh_keysign_use`: Ensure successful and unsuccessful uses of the ssh-keysign command are collected
 * `cis_security_hardening::rules::auditd_sudo_use`: Ensure successful and unsuccessful uses of the sudo command are recorded
 * `cis_security_hardening::rules::auditd_sudoedit_use`: Ensure successful and unsuccessful attempts to use the sudoedit command are recorded
+* `cis_security_hardening::rules::auditd_sudoers`: Ensure the operating system generates audit records for all account creations, modifications, disabling, and termination
+events that affect "/etc/sudoers"
+* `cis_security_hardening::rules::auditd_sudoersd`: Ensure the operating system generates audit records for all account creations, modifications, disabling, and
+termination events that affect "/etc/sudoers.d/"
 * `cis_security_hardening::rules::auditd_system_locale`: Ensure events that modify the system's network environment are collected
 * `cis_security_hardening::rules::auditd_time_change`: Ensure events that modify date and time information are collected
 * `cis_security_hardening::rules::auditd_tools_perms`: Ensure audit tools are mode of 0755 or more restrictive and owned by the right user and group
 * `cis_security_hardening::rules::auditd_umount`: Ensure audit the umount command
 * `cis_security_hardening::rules::auditd_unix_checkpwd`: Ensure auditing of the unix_chkpwd command.
 * `cis_security_hardening::rules::auditd_unix_update_use`: Ensure successful and unsuccessful attempts to use the unix_update command are recorded
+* `cis_security_hardening::rules::auditd_usbguard`: Ensure the operating system enables Linux audit logging of the USBGuard daemon
 * `cis_security_hardening::rules::auditd_user_emulation`: Ensure actions as another user are always logged
 * `cis_security_hardening::rules::auditd_userhelper`: Ensure audit of the userhelper command.
 * `cis_security_hardening::rules::auditd_usermod_use`: Ensure successful and unsuccessful attempts to use the usermod command are recorded
@@ -107,6 +123,8 @@ audited
 * `cis_security_hardening::rules::authselect`: Create custom authselect profile (Scored)
 * `cis_security_hardening::rules::avahi`: Ensure Avahi Server is not enabled
 * `cis_security_hardening::rules::bind`: Ensure DNS Server is not installed
+* `cis_security_hardening::rules::boot_efi_nosuid`: Ensure the "/boot/efi" directory is mounted with the "nosuid" option
+* `cis_security_hardening::rules::boot_nosuid`: Ensure the "/boot" directory is mounted with the "nosuid" option.
 * `cis_security_hardening::rules::chrony`: Ensure chrony is configured
 * `cis_security_hardening::rules::cramfs`: Ensure mounting of cramfs filesystems is disabled
 * `cis_security_hardening::rules::cron_daily`: Ensure permissions on /etc/cron.daily are configured
@@ -120,12 +138,18 @@ audited
 * `cis_security_hardening::rules::crypto_policy`: Ensure system-wide crypto policy is FUTURE or FIPS
 * `cis_security_hardening::rules::ctrl_alt_del_graphical`: Ensure the graphical user Ctrl-Alt-Delete key sequence is disabled
 * `cis_security_hardening::rules::cups`: Ensure CUPS is not enabled
+* `cis_security_hardening::rules::debug_shell`: Ensure the operating system is configured to mask the debug- shell systemd service
 * `cis_security_hardening::rules::dev_shm`: Ensure /dev/shm is configured
 * `cis_security_hardening::rules::dev_shm_nodev`: Ensure nodev option set on /dev/shm partition
 * `cis_security_hardening::rules::dev_shm_noexec`: Ensure noexec option set on /dev/shm partition
 * `cis_security_hardening::rules::dev_shm_nosuid`: Ensure nosuid option set on /dev/shm partition
 * `cis_security_hardening::rules::dhcp`: Ensure DHCP Server is not enabled
+* `cis_security_hardening::rules::disable_atm`: Ensure ATM is disabled
 * `cis_security_hardening::rules::disable_automount`: Disable Automounting
+* `cis_security_hardening::rules::disable_bluetooth`: Ensure Bluetooth is disabled
+* `cis_security_hardening::rules::disable_can`: Ensure CAN is disabled
+* `cis_security_hardening::rules::disable_core_dumps`: Ensure the operating system disables the storing core dumps
+* `cis_security_hardening::rules::disable_coredump_socket`: Ensure the operating system is not configured to acquire, save, or process core dumps
 * `cis_security_hardening::rules::disable_dccp`: Ensure DCCP is disabled
 * `cis_security_hardening::rules::disable_ip_forwarding`: Ensure IP forwarding is disabled
 * `cis_security_hardening::rules::disable_ipv6`: Disable IPv6
@@ -143,6 +167,8 @@ audited
 * `cis_security_hardening::rules::enable_reverse_path_filtering`: Ensure Reverse Path Filtering is enabled
 * `cis_security_hardening::rules::enable_tcp_syn_cookies`: Ensure TCP SYN Cookies is enabled
 * `cis_security_hardening::rules::etc_crond`: Ensure permissions on /etc/cron.d are configured
+* `cis_security_hardening::rules::fapolicyd`: Ensure "fapolicyd" is installed
+* `cis_security_hardening::rules::fapolicyd_service`: Ensure "fapolicyd" is enabled and running
 * `cis_security_hardening::rules::fat`: Ensure mounting of FAT filesystems is disabled
 * `cis_security_hardening::rules::fips_bootloader`: Ensure FIPS mode is enabled
 * `cis_security_hardening::rules::firewalld_default_zone`: Ensure default zone is set
@@ -162,13 +188,18 @@ audited
 * `cis_security_hardening::rules::group_bak_perms`: Ensure permissions on /etc/group- are configured
 * `cis_security_hardening::rules::group_perms`: Ensure permissions on /etc/group are configured
 * `cis_security_hardening::rules::grub_bootloader_config`: Ensure permissions on bootloader config are configured
+* `cis_security_hardening::rules::grub_page_poison`: Ensure GRUB 2 is configured to enable page poisoning to mitigate use-after-free vulnerabilities
 * `cis_security_hardening::rules::grub_password`: Ensure bootloader password is set
+* `cis_security_hardening::rules::grub_slub_debug`: Ensure GRUB 2 is configured to enable poisoning of SLUB/SLAB objects to mitigate use-after-free vulnerabilities
+* `cis_security_hardening::rules::grub_vsyscall`: Ensure GRUB 2 is configured to disable vsyscalls
 * `cis_security_hardening::rules::gshadow_bak_perms`: Ensure permissions on /etc/gshadow- are configured
 * `cis_security_hardening::rules::gshadow_perms`: Ensure permissions on /etc/gshadow are configured
+* `cis_security_hardening::rules::gssproxy`: Ensure the gssproxy package has not been installed on the system
 * `cis_security_hardening::rules::hfs`: Ensure mounting of hfs filesystems is disabled
 * `cis_security_hardening::rules::hfsplus`: Ensure mounting of hfsplus filesystems is disabled
 * `cis_security_hardening::rules::home_grpquota`: Ensure grpquota option set on /home partition
 * `cis_security_hardening::rules::home_nodev`: Ensure nodev option set on /home partition
+* `cis_security_hardening::rules::home_noexec`: Ensure file systems that contain user home directories are mounted with the "noexec" option
 * `cis_security_hardening::rules::home_nosuid`: Ensure nosuid option set on /home partition
 * `cis_security_hardening::rules::home_usrquota`: Ensure usrquota option set on /home partition
 * `cis_security_hardening::rules::httpd`: Ensure HTTP server is not enabled
@@ -180,6 +211,7 @@ audited
 * `cis_security_hardening::rules::ip6tables_loopback`: Ensure loopback traffic is configured
 * `cis_security_hardening::rules::ip6tables_open_ports`: Ensure IPv6 firewall rules exist for all open ports
 * `cis_security_hardening::rules::ip6tables_outbound_established`: Ensure outbound and established connections are configured
+* `cis_security_hardening::rules::iprutils`: Ensure the iprutils package has not been installed on the system.
 * `cis_security_hardening::rules::iptables_deny_policy`: Ensure default deny firewall policy
 * `cis_security_hardening::rules::iptables_install`: Ensure iptables is installed
 * `cis_security_hardening::rules::iptables_loopback`: Ensure loopback traffic is configured
@@ -193,6 +225,8 @@ audited
 * `cis_security_hardening::rules::journald_persistent`: Ensure journald is configured to write logfiles to persistent disk
 * `cis_security_hardening::rules::journald_rsyslog`: Ensure journald is configured to send logs to rsyslog
 * `cis_security_hardening::rules::kdump_service`: Ensure kdump service is not enabled
+* `cis_security_hardening::rules::krb5_server`: Ensure the krb5-server package has not been installed on the system
+* `cis_security_hardening::rules::krb5_workstation`: Ensure the krb5-workstation package has not been installed on the system
 * `cis_security_hardening::rules::ldap_client`: Ensure LDAP client is not installed
 * `cis_security_hardening::rules::ldapd`: Ensure LDAP server is not enabled
 * `cis_security_hardening::rules::limits_maxlogins`: Ensure maxlogins is 10 or less
@@ -210,6 +244,7 @@ audited
 * `cis_security_hardening::rules::mta_unrestriced_relay`
 * `cis_security_hardening::rules::net_snmp`: Ensure net-snmp is not installed
 * `cis_security_hardening::rules::nfs`: Ensure NFS is not enabled
+* `cis_security_hardening::rules::nfs_nodev`: Ensure file systems being imported via NFS are mounted with the "nosuid" option.
 * `cis_security_hardening::rules::nfs_noexec`: Ensure noexec option is configured for NFS.
 * `cis_security_hardening::rules::nfs_nosuid`: Ensure nosuid option is set for NFS
 * `cis_security_hardening::rules::nfs_sec_opt`: Ensure NFS is configured to use RPCSEC_GSS
@@ -247,9 +282,12 @@ audited
 * `cis_security_hardening::rules::passwd_sha512`: Ensure ENCRYPT_METHOD is SHA512
 * `cis_security_hardening::rules::passwd_warn_days`: Ensure password expiration warning days is 7 or more
 * `cis_security_hardening::rules::pki_certs_validation`: Ensure certificates are validated by constructing a certification path to an accepted trust anchor
+* `cis_security_hardening::rules::policycoreutils`: Ensure the operating system has the policycoreutils package installed
+* `cis_security_hardening::rules::postmaster_alias`: Ensure administrators are notified if an audit processing failure occurrs by modifying "/etc/aliases"
 * `cis_security_hardening::rules::restrict_core_dumps`: A core dump is the memory of an executable program. It is generally used to determine why a program aborted. It can also be used to glean con
 * `cis_security_hardening::rules::restrict_su`: Ensure access to the su command is restricted
 * `cis_security_hardening::rules::rhnsd`: Disable the rhnsd Daemon
+* `cis_security_hardening::rules::rngd`: Ensure the operating system has enabled the hardware random number generator entropy gatherer service
 * `cis_security_hardening::rules::root_gid`: Ensure default group for the root account is GID 0
 * `cis_security_hardening::rules::rpcbind`: Ensure rpcbind is not installed or the rpcbind services are masked
 * `cis_security_hardening::rules::rsh_client`: Ensure rsh client is not installed
@@ -267,6 +305,7 @@ audited
 * `cis_security_hardening::rules::selinux_bootloader`: Ensure SELinux is not disabled in bootloader configuration
 * `cis_security_hardening::rules::selinux_policy`: Ensure SELinux policy is configured
 * `cis_security_hardening::rules::selinux_state`: Ensure the SELinux state is enforcing or permissive
+* `cis_security_hardening::rules::sendmail`: Ensure the sendmail package is not installed.
 * `cis_security_hardening::rules::setroubleshoot`: Ensure SETroubleshoot is not installed
 * `cis_security_hardening::rules::shadow_bak_perms`: Ensure permissions on /etc/shadow- are configured
 * `cis_security_hardening::rules::shadow_encrypt_sha512`: Ensure password hashing algorithm is SHA-512
@@ -302,8 +341,10 @@ audited
 * `cis_security_hardening::rules::sshd_private_keys`: Ensure permissions on SSH private host key files are configured
 * `cis_security_hardening::rules::sshd_protocol`: Ensure SSH Protocol is set to 2
 * `cis_security_hardening::rules::sshd_public_keys`: Ensure permissions on SSH public host key files are configured
+* `cis_security_hardening::rules::sshd_rekey_limit`: Ensure the SSH server is configured to force frequent session key renegotiation
 * `cis_security_hardening::rules::sshd_root_login`: Ensure SSH root login is disabled
 * `cis_security_hardening::rules::sshd_strict_modes`: Ensure SSH performs checks of home directory configuration files
+* `cis_security_hardening::rules::sshd_strong_rng`: Ensure the SSH server uses strong entropy
 * `cis_security_hardening::rules::sshd_tcp_forwarding`: Ensure SSH AllowTcpForwarding is disabled
 * `cis_security_hardening::rules::sshd_timeouts`: Ensure SSH Idle Timeout Interval is configured
 * `cis_security_hardening::rules::sshd_use_pam`: Ensure SSH PAM is enabled
@@ -329,6 +370,7 @@ audited
 * `cis_security_hardening::rules::tmp_nodev`: Ensure nodev option set on /tmp partition
 * `cis_security_hardening::rules::tmp_noexec`: Ensure noexec option set on /tmp partition
 * `cis_security_hardening::rules::tmp_nosuid`: Ensure nosuid option set on /tmp partition
+* `cis_security_hardening::rules::tuned`: Ensure the tuned package has not been installed on the system.
 * `cis_security_hardening::rules::udf`: Ensure mounting of udf filesystems is disabled
 * `cis_security_hardening::rules::ufw_default_deny`: Ensure default deny firewall policy
 * `cis_security_hardening::rules::ufw_install`: Ensure ufw is installed
@@ -337,6 +379,8 @@ audited
 * `cis_security_hardening::rules::ufw_outbound`: Ensure outbound connections are configured (Not Scored)
 * `cis_security_hardening::rules::ufw_service`: Ensure ufw service is enabled
 * `cis_security_hardening::rules::umask_setting`: Ensure default user umask is configured
+* `cis_security_hardening::rules::usbguard_package`: Ensure USBGuard is installed on the operating system
+* `cis_security_hardening::rules::usbguard_service`: Ensure the operating system has enabled the use of the USBGuard
 * `cis_security_hardening::rules::var_log_audit_nodev`: Ensure nodev option set on /var/log/audit partition
 * `cis_security_hardening::rules::var_log_audit_noexec`: Ensure noexec option set on /var/log/audit partition
 * `cis_security_hardening::rules::var_log_audit_nosuid`: Ensure nosuid option set on /var/log/audit partition

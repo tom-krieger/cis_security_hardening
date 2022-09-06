@@ -183,6 +183,13 @@ def facts_redhat(os, distid, release)
 
   cis_security_hardening[:x11] = x11
 
+  # check for abrt packages
+  abrt = {}
+  val = Facter::Core::Execution.exec('rpm -qa abrt*')
+  pkgs = val.split("\n")
+  abrt['packages'] = pkgs
+  cis_security_hardening[:abrt] = abrt
+
   # check systemd-coredump
   pkgs = Facter::Core::Execution.exec('rpm -q systemd-coredump 2>/dev/null')
   cis_security_hardening['systemd-coredump'] = if pkgs.nil? || pkgs.empty? || pkgs.include?('not installed')

@@ -44,6 +44,7 @@ describe 'cis_security_hardening::rules::pam_lockout' do
             'lockouttime' => 900,
             'attempts' => 3,
             'lockout_root' => true,
+            'lock_dir' => '/tmp/faillock',
           }
         end
 
@@ -127,11 +128,82 @@ describe 'cis_security_hardening::rules::pam_lockout' do
                   .that_notifies('Exec[authselect-apply-changes]')
               end
 
+              if os_facts[:operatingsystem].casecmp('redhat').zero? && os_facts[:operatingsystemmajrelease] >= '8'
+                is_expected.to contain_file_line('faillock_fail_interval')
+                  .with(
+                    'ensure'             => 'present',
+                    'path'               => '/etc/security/faillock.conf',
+                    'match'              => '^fail_interval =',
+                    'line'               => 'fail_interval = 900',
+                    'append_on_no_match' => true,
+                  )
+
+                is_expected.to contain_file_line('faillock_deny')
+                  .with(
+                    'ensure'             => 'present',
+                    'path'               => '/etc/security/faillock.conf',
+                    'match'              => '^deny =',
+                    'line'               => 'deny = 3',
+                    'append_on_no_match' => true,
+                  )
+
+                is_expected.to contain_file_line('faillock_fail_unlock_time')
+                  .with(
+                    'ensure'             => 'present',
+                    'path'               => '/etc/security/faillock.conf',
+                    'match'              => '^unlock_time =',
+                    'line'               => 'unlock_time = 900',
+                    'append_on_no_match' => true,
+                  )
+
+                is_expected.to contain_file_line('faillock_dir')
+                  .with(
+                    'ensure'             => 'present',
+                    'path'               => '/etc/security/faillock.conf',
+                    'match'              => '^dir =',
+                    'line'               => 'dir = /tmp/faillock',
+                    'append_on_no_match' => true,
+                  )
+
+                is_expected.to contain_file_line('faillock_silent')
+                  .with(
+                    'ensure'             => 'present',
+                    'path'               => '/etc/security/faillock.conf',
+                    'match'              => '^silent',
+                    'line'               => 'silent',
+                    'append_on_no_match' => true,
+                  )
+
+                is_expected.to contain_file_line('faillock_audit')
+                  .with(
+                    'ensure'             => 'present',
+                    'path'               => '/etc/security/faillock.conf',
+                    'match'              => '^audit',
+                    'line'               => 'audit',
+                    'append_on_no_match' => true,
+                  )
+
+                is_expected.to contain_file_line('faillock_even_deny_root')
+                  .with(
+                    'ensure'             => 'present',
+                    'path'               => '/etc/security/faillock.conf',
+                    'match'              => '^even_deny_root',
+                    'line'               => 'even_deny_root',
+                    'append_on_no_match' => true,
+                  )
+              end
+
             elsif os_facts[:osfamily].casecmp('debian').zero?
 
               is_expected.not_to contain_file__line('update pam lockout system-auth')
               is_expected.not_to contain_file__line('update pam lockout password-auth')
               is_expected.not_to contain_exec('configure faillock')
+              is_expected.not_to contain_file_line('faillock_fail_interval')
+              is_expected.not_to contain_file_line('faillock_deny')
+              is_expected.not_to contain_file_line('faillock_unlock_time')
+              is_expected.not_to contain_file_line('faillock_dir')
+              is_expected.not_to contain_file_line('faillock_silent')
+              is_expected.not_to contain_file_line('faillock_even_deny_root')
 
               is_expected.to contain_pam('pam-common-auth-require-tally2')
                 .with(
@@ -161,6 +233,13 @@ describe 'cis_security_hardening::rules::pam_lockout' do
                   'module'  => 'pam_tally2.so',
                 )
             elsif os_facts[:osfamily].casecmp('suse').zero?
+
+              is_expected.not_to contain_file_line('faillock_fail_interval')
+              is_expected.not_to contain_file_line('faillock_deny')
+              is_expected.not_to contain_file_line('faillock_unlock_time')
+              is_expected.not_to contain_file_line('faillock_dir')
+              is_expected.not_to contain_file_line('faillock_silent')
+              is_expected.not_to contain_file_line('faillock_even_deny_root')
 
               is_expected.to contain_pam('pam-auth-required')
                 .with(
@@ -201,6 +280,12 @@ describe 'cis_security_hardening::rules::pam_lockout' do
             is_expected.not_to contain_pam('pam_faillock authsucc password-auth')
             is_expected.not_to contain_file__line('update pam lockout system-auth')
             is_expected.not_to contain_file__line('update pam lockout password-auth')
+            is_expected.not_to contain_file_line('faillock_fail_interval')
+            is_expected.not_to contain_file_line('faillock_deny')
+            is_expected.not_to contain_file_line('faillock_unlock_time')
+            is_expected.not_to contain_file_line('faillock_dir')
+            is_expected.not_to contain_file_line('faillock_silent')
+            is_expected.not_to contain_file_line('faillock_even_deny_root')
           end
         }
       end

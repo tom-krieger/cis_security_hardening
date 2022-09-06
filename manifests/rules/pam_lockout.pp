@@ -24,6 +24,9 @@
 # @param lockout_root
 #    Flag if root should be locked on failed logins.
 #
+# @param lock_dir
+#    Faillock direcrory to use.
+#
 # @example
 #   class { 'cis_security_hardening::rules::pam_lockout':
 #       enforce => true,
@@ -32,10 +35,11 @@
 #
 # @api private
 class cis_security_hardening::rules::pam_lockout (
-  Boolean $enforce      = false,
-  Integer $attempts     = 3,
-  Integer $lockouttime  = 900,
-  Boolean $lockout_root = false,
+  Boolean $enforce               = false,
+  Integer $attempts              = 3,
+  Integer $lockouttime           = 900,
+  Boolean $lockout_root          = false,
+  Stdlib::Absolutepath $lock_dir = '/var/log/faillock',
 ) {
   if $enforce {
     $services = [
@@ -43,7 +47,7 @@ class cis_security_hardening::rules::pam_lockout (
       'password-auth',
     ]
 
-    case $facts['osfamily'].downcase() {
+    case $facts['os']['family'].downcase() {
       'redhat': {
         $profile = fact('cis_security_hardening.authselect.profile')
 
@@ -56,7 +60,7 @@ class cis_security_hardening::rules::pam_lockout (
         $services.each | $service | {
           $pf_file = "${pf_path}/${service}"
 
-          if  $facts['operatingsystemmajrelease'] > '7' and $pf_path != '' {
+          if  $facts['os']['release']['major'] > '7' and $pf_path != '' {
             file_line { "update pam lockout ${service}":
               path   => $pf_file,
               line   => "auth         required                                     pam_faillock.so preauth silent deny=${attempts} unlock_time=${lockouttime}  {include if \"with-faillock\"}", #lint:ignore:140chars
@@ -66,7 +70,7 @@ class cis_security_hardening::rules::pam_lockout (
           }
         }
 
-        if ($facts['operatingsystemmajrelease'] == '7') {
+        if ($facts['os']['release']['major'] == '7') {
           $cmd = $lockout_root ? {
             true  => "authconfig --faillockargs=\"preauth silent audit even_deny_root deny=${attempts} unlock_time=${lockouttime}\" --enablefaillock --updateall", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
             false => "authconfig --faillockargs=\"preauth silent audit deny=${attempts} unlock_time=${lockouttime}\" --enablefaillock --updateall", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
@@ -87,20 +91,8 @@ class cis_security_hardening::rules::pam_lockout (
               module           => 'pam_faillock.so',
               arguments        => ['authfail', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}"],
               position         => 'after *[type="auth" and module="pam_unix.so"]',
-              # before           => Pam["pam-auth-faillock-required-${service}"],
               require          => Exec['configure faillock'],
             }
-
-            # Pam { "pam-auth-faillock-required-${service}":
-            #   ensure           => present,
-            #   service          => $service,
-            #   type             => 'auth',
-            #   control          => 'required',
-            #   control_is_param => true,
-            #   module           => 'pam_faillock.so',
-            #   arguments        => ['preauth', 'silent', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}"],
-            #   position         => 'after *[type="auth" and module="pam_env.so"]',
-            # }
 
             Pam { "account-faillock-${service}":
               ensure  => present,
@@ -108,6 +100,66 @@ class cis_security_hardening::rules::pam_lockout (
               type    => 'account',
               control => 'required',
               module  => 'pam_faillock.so',
+            }
+          }
+        }
+
+        if $facts['os']['name'].downcase() == 'redhat' and $facts['os']['release']['major'] >= '8' {
+          file_line { 'faillock_fail_interval':
+            ensure             => present,
+            path               => '/etc/security/faillock.conf',
+            match              => '^fail_interval =',
+            line               => "fail_interval = ${lockouttime}",
+            append_on_no_match => true,
+          }
+
+          file_line { 'faillock_deny':
+            ensure             => present,
+            path               => '/etc/security/faillock.conf',
+            match              => '^deny =',
+            line               => "deny = ${attempts}",
+            append_on_no_match => true,
+          }
+
+          file_line { 'faillock_fail_unlock_time':
+            ensure             => present,
+            path               => '/etc/security/faillock.conf',
+            match              => '^unlock_time =',
+            line               => "unlock_time = ${lockouttime}",
+            append_on_no_match => true,
+          }
+
+          file_line { 'faillock_dir':
+            ensure             => present,
+            path               => '/etc/security/faillock.conf',
+            match              => '^dir =',
+            line               => "dir = ${lock_dir}",
+            append_on_no_match => true,
+          }
+
+          file_line { 'faillock_silent':
+            ensure             => present,
+            path               => '/etc/security/faillock.conf',
+            match              => '^silent',
+            line               => 'silent',
+            append_on_no_match => true,
+          }
+
+          file_line { 'faillock_audit':
+            ensure             => present,
+            path               => '/etc/security/faillock.conf',
+            match              => '^audit',
+            line               => 'audit',
+            append_on_no_match => true,
+          }
+
+          if $lockout_root {
+            file_line { 'faillock_even_deny_root':
+              ensure             => present,
+              path               => '/etc/security/faillock.conf',
+              match              => '^even_deny_root',
+              line               => 'even_deny_root',
+              append_on_no_match => true,
             }
           }
         }

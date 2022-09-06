@@ -42,7 +42,7 @@ describe 'cis_security_hardening::rules::auditd_remote_conf' do
                 'group'  => 'root',
                 'mode'   => '0644',
               )
-            
+
             is_expected.to contain_file_line('off-load-direction')
               .with(
                 'ensure' => 'present',

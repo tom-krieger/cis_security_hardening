@@ -43,7 +43,7 @@ cis_security_hardening::rules::yum_clean_requirements::enforce: true
 
 cis_security_hardening::rules::yum_gpgcheck::enforce: true
 cis_security_hardening::rules::rhnsd::enforce: true
-cis_security_hardening::rules::local_gpgcheck::enforce: true
+cis_security_hardening::rules::yum_local_gpgcheck::enforce: true
 
 cis_security_hardening::rules::aide_installed::enforce: true
 cis_security_hardening::rules::aide_regular_checks::enforce: true

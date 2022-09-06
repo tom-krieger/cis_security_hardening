@@ -38,5 +38,15 @@ class cis_security_hardening::rules::yum_local_gpgcheck (
       match              => '^localpkg_gpgcheck',
       append_on_no_match => true,
     }
+
+    if $facts['os']['release']['major'] >= '8' {
+      file_line { 'dnf_localpgk_gpgcheck':
+        ensure             => present,
+        path               => '/etc/dnf/dnf.conf',
+        line               => 'localpkg_gpgcheck=1',
+        match              => '^localpkg_gpgcheck',
+        append_on_no_match => true,
+      }
+    }
   }
 }
