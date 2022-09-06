@@ -25,9 +25,10 @@ class cis_security_hardening::rules::auditd_local_events (
 ) {
   if $enforce {
     file_line { 'auditd_local_events':
-      line  => 'local_events = yes',
-      path  => '/etc/audit/auditd.conf',
-      match => '^local_events',
+      line               => 'local_events = yes',
+      path               => '/etc/audit/auditd.conf',
+      match              => '^local_events',
+      append_on_no_match => true,
     }
   }
 }

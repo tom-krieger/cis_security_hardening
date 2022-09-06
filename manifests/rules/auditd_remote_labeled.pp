@@ -28,6 +28,12 @@ class cis_security_hardening::rules::auditd_remote_labeled (
   Enum['hostname','fqd','numeric'] $format = 'hostname',
 ) {
   if $enforce {
+    ensure_resource('file', '/etc/audisp/audispd.conf', {
+        ensure => file,
+        owner => 'root',
+        group => 'root',
+        mode => '0644,'
+    })
     file_line { 'name-format':
       ensure => present,
       path   => '/etc/audisp/audispd.conf',

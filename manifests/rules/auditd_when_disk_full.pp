@@ -42,24 +42,28 @@ class cis_security_hardening::rules::auditd_when_disk_full (
 ) {
   if $enforce {
     file_line { 'auditd_space_left_action':
-      line  => "space_left_action = ${space_left_action}",
-      path  => '/etc/audit/auditd.conf',
-      match => '^space_left_action',
+      line               => "space_left_action = ${space_left_action}",
+      path               => '/etc/audit/auditd.conf',
+      match              => '^space_left_action',
+      append_on_no_match => true,
     }
     file_line { 'auditd_action_mail_acct':
-      line  => "action_mail_acct = ${action_mail_acct}",
-      path  => '/etc/audit/auditd.conf',
-      match => '^action_mail_acct',
+      line               => "action_mail_acct = ${action_mail_acct}",
+      path               => '/etc/audit/auditd.conf',
+      match              => '^action_mail_acct',
+      append_on_no_match => true,
     }
     file_line { 'auditd_admin_space_left_action':
-      line  => "admin_space_left_action = ${admin_space_left_action}",
-      path  => '/etc/audit/auditd.conf',
-      match => '^admin_space_left_action',
+      line               => "admin_space_left_action = ${admin_space_left_action}",
+      path               => '/etc/audit/auditd.conf',
+      match              => '^admin_space_left_action',
+      append_on_no_match => true,
     }
     file_line { 'disk_full_action':
-      line  => "disk_full_action = ${disk_full_action}",
-      path  => '/etc/audit/auditd.conf',
-      match => '^disk_full_action',
+      line               => "disk_full_action = ${disk_full_action}",
+      path               => '/etc/audit/auditd.conf',
+      match              => '^disk_full_action',
+      append_on_no_match => true,
     }
   }
 }

@@ -27,9 +27,10 @@ class cis_security_hardening::rules::auditd_max_log_file_action (
 ) {
   if $enforce {
     file_line { 'auditd_max_log_file_action':
-      line  => "max_log_file_action = ${$max_log_file_action}",
-      path  => '/etc/audit/auditd.conf',
-      match => '^max_log_file_action',
+      line               => "max_log_file_action = ${$max_log_file_action}",
+      path               => '/etc/audit/auditd.conf',
+      match              => '^max_log_file_action',
+      append_on_no_match => true,
     }
   }
 }

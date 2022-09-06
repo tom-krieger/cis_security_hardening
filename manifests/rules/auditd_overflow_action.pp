@@ -27,6 +27,12 @@ class cis_security_hardening::rules::auditd_overflow_action (
   Enum['syslog','single','halt'] $action = 'syslog',
 ) {
   if $enforce {
+    ensure_resource('file', '/etc/audisp/audispd.conf', {
+        ensure => file,
+        owner => 'root',
+        group => 'root',
+        mode => '0644,'
+    })
     file_line { 'overflow-action':
       ensure => present,
       path   => '/etc/audisp/audispd.conf',

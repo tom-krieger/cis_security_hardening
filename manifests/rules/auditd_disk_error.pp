@@ -32,9 +32,10 @@ class cis_security_hardening::rules::auditd_disk_error (
 ) {
   if $enforce {
     file_line { 'auditd_disk_error_action':
-      line  => "disk_error_action = ${disk_error_action}",
-      path  => '/etc/audit/auditd.conf',
-      match => '^disk_error_action',
+      line               => "disk_error_action = ${disk_error_action}",
+      path               => '/etc/audit/auditd.conf',
+      match              => '^disk_error_action',
+      append_on_no_match => true,
     }
   }
 }

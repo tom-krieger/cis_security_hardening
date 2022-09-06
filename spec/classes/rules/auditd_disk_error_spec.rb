@@ -36,6 +36,7 @@ describe 'cis_security_hardening::rules::auditd_disk_error' do
                 'line'  => 'disk_error_action = HALT',
                 'path'  => '/etc/audit/auditd.conf',
                 'match' => '^disk_error_action',
+                'append_on_no_match' => true,
               )
           else
             is_expected.not_to contain_file_line('auditd_disk_error_action')

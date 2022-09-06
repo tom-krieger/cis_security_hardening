@@ -28,9 +28,10 @@ class cis_security_hardening::rules::auditd_log_format (
 ) {
   if $enforce {
     file_line { 'auditd_log_format':
-      line  => 'log_format = ENRICHED',
-      path  => '/etc/audit/auditd.conf',
-      match => '^log_format',
+      line               => 'log_format = ENRICHED',
+      path               => '/etc/audit/auditd.conf',
+      match              => '^log_format',
+      append_on_no_match => true,
     }
   }
 }

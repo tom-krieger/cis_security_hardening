@@ -36,6 +36,14 @@ describe 'cis_security_hardening::rules::auditd_remote_labeled' do
           is_expected.to compile
 
           if enforce
+            is_expected.to contain_file('/etc/audisp/audispd.conf')
+              .with(
+                'ensure' => 'file',
+                'owner' => 'root',
+                'group' => 'root',
+                'mode' => '0644,'
+              )
+
             is_expected.to contain_file_line('name-format')
               .with(
                 'ensure' => 'present',
@@ -47,6 +55,7 @@ describe 'cis_security_hardening::rules::auditd_remote_labeled' do
 
           else
             is_expected.not_to contain_file_line('name-format')
+            is_expected.not_to contain_file('/etc/audisp/audispd.conf')
           end
         }
       end

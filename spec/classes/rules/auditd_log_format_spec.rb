@@ -32,6 +32,7 @@ describe 'cis_security_hardening::rules::auditd_log_format' do
                 'line'  => 'log_format = ENRICHED',
                 'path'  => '/etc/audit/auditd.conf',
                 'match' => '^log_format',
+                'append_on_no_match' => true,
               )
           else
             is_expected.not_to contain_file_line('auditd_log_format')
