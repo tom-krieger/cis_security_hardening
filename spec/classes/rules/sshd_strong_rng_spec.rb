@@ -69,15 +69,10 @@ describe 'cis_security_hardening::rules::sshd_strong_rng' do
           is_expected.to compile
 
           if enforce
-            path = if os_facts[:operatingsystem] == 'SLES' && os_facts[:operatingsystemmajrelease] == '12'
-                     '/usr/etc/ssh/sshd_config'
-                   else
-                     '/etc/ssh/sshd_config'
-                   end
             is_expected.to contain_file_line('sshd_strong_rng')
               .with(
                 'ensure'             => 'present',
-                'path'               => path,
+                'path'               => '/etc/sysconfig/sshd',
                 'match'              => '^SSH_USE_STRONG_RNG=',
                 'line'               => 'SSH_USE_STRONG_RNG=32',
                 'append_on_no_match' => true,

@@ -29,13 +29,9 @@ class cis_security_hardening::rules::sshd_strong_rng (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    $path = ($facts['os']['name'] == 'SLES' and $facts['os']['release']['major'] == '12') ? {
-      true    => '/usr/etc/ssh/sshd_config',
-      default => '/etc/ssh/sshd_config',
-    }
     file_line { 'sshd_strong_rng':
       ensure             => present,
-      path               => $path,
+      path               => '/etc/sysconfig/sshd',
       match              => '^SSH_USE_STRONG_RNG=',
       line               => 'SSH_USE_STRONG_RNG=32',
       append_on_no_match => true,
