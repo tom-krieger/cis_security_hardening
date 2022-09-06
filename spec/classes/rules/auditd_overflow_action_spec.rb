@@ -41,7 +41,7 @@ describe 'cis_security_hardening::rules::auditd_overflow_action' do
                 'ensure' => 'file',
                 'owner' => 'root',
                 'group' => 'root',
-                'mode' => '0644,'
+                'mode' => '0644',
               )
 
             is_expected.to contain_file_line('overflow-action')

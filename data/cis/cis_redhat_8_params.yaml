@@ -299,6 +299,7 @@ cis_security_hardening::rules::auditd_package::enforce: true
 cis_security_hardening::rules::auditd_package::packages: 
   - audit
   - audit-libs
+  - audispd-plugins
   - usbguard
 cis_security_hardening::rules::auditd_service::enforce: true
 cis_security_hardening::rules::auditd_process::enforce: true
