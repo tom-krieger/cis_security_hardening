@@ -171,6 +171,7 @@ termination events that affect "/etc/sudoers.d/"
 * `cis_security_hardening::rules::enable_tcp_syn_cookies`: Ensure TCP SYN Cookies is enabled
 * `cis_security_hardening::rules::etc_crond`: Ensure permissions on /etc/cron.d are configured
 * `cis_security_hardening::rules::fapolicyd`: Ensure "fapolicyd" is installed
+* `cis_security_hardening::rules::fapolicyd_policy`: Ensure "fapolicyd" employs a deny-all, permit-by-exception policy
 * `cis_security_hardening::rules::fapolicyd_service`: Ensure "fapolicyd" is enabled and running
 * `cis_security_hardening::rules::fat`: Ensure mounting of FAT filesystems is disabled
 * `cis_security_hardening::rules::fips_bootloader`: Ensure FIPS mode is enabled

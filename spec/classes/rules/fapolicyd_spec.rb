@@ -19,15 +19,9 @@ describe 'cis_security_hardening::rules::fapolicyd' do
           is_expected.to compile
 
           if enforce
-            ensureval = if os_facts[:osfamily].casecmp('suse').zero?
-                          'absent'
-                        else
-                          'purged'
-                        end
-
             is_expected.to contain_package('fapolicyd')
               .with(
-                'ensure' => ensureval,
+                'ensure' => 'present',
               )
           else
             is_expected.not_to contain_package('fapolicyd')

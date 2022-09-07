@@ -35,13 +35,8 @@ class cis_security_hardening::rules::fapolicyd (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    $ensure = $facts['os']['family'].downcase() ? {
-      'suse'  => 'absent',
-      default => 'purged',
-    }
-
     ensure_packages(['fapolicyd'], {
-        ensure => $ensure,
+        ensure => 'installed',
     })
   }
 }

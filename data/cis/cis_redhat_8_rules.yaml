@@ -401,6 +401,7 @@ cis_security_hardening::benchmark::redhat::8:
         - login_create_home
         - krb5_workstation
         - fapolicyd
+        - fapolicyd_policy
         - fapolicyd_service
         - usbguard_package
         - usbguard_service
