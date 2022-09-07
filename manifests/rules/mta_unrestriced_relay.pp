@@ -23,7 +23,7 @@ class cis_security_hardening::rules::mta_unrestriced_relay (
     exec { 'restrict mail relay':
       command => 'postconf -e \'smtpd_client_restrictions = permit_mynetworks,reject\'',
       path    => ['/bin','/usr/bin','/sbin','/usr/sbin'],
-      onlyif  => 'test -z "$(postconf -n smtpd_client_restrictions | grep \'permit_mynetworks, reject\')"',
+      onlyif  => 'test -z "$(postconf -n smtpd_client_restrictions | grep \'permit_mynetworks,reject\')"',
     }
   }
 }

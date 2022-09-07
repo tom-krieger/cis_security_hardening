@@ -117,12 +117,10 @@ cis_security_hardening::benchmark::redhat::8:
     time_synchronization:
       level1:
         - chrony
-        - ntpd
     special_purpose_services:
       level1:
         - xinetd
         - x11_installed
-        - rsyncd
         - avahi
         - cups
         - dhcp
@@ -149,7 +147,6 @@ cis_security_hardening::benchmark::redhat::8:
         - sendmail
         - rsh_server
         - debug_shell
-        - tftp_server
         - mta_unrestriced_relay
         - gssproxy
         - iprutils
@@ -386,6 +383,7 @@ cis_security_hardening::benchmark::redhat::8:
         - login_create_home
         - krb5_workstation
         - fapolicyd
+        - fapolicyd_policy
         - fapolicyd_service
         - usbguard_package
         - usbguard_service

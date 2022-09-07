@@ -596,6 +596,9 @@ cis_security_hardening::rules::login_create_home::enforce: true
 cis_security_hardening::rules::krb5_workstation::enforce: true
 cis_security_hardening::rules::fapolicyd::enforce: true
 cis_security_hardening::rules::fapolicyd_service::enforce: true
+cis_security_hardening::rules::fapolicyd_policy::enforce: true
+cis_security_hardening::rules::fapolicyd_policy::permissive: '1'
+cis_security_hardening::rules::fapolicyd_policy::create_rules: true
 cis_security_hardening::rules::usbguard_package::enforce: true
 cis_security_hardening::rules::usbguard_service::enforce: true
 
