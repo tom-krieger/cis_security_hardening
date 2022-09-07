@@ -382,7 +382,7 @@ cis_security_hardening::benchmark::redhat::8:
       stig:
         - pam_passwd
         - pam_last_logon
-        - pki_certs_validation
+        # - pki_certs_validation
     configure_user_accounts:
       level1:
         - passwd_expiration

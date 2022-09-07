@@ -11,6 +11,8 @@
 * [`cis_security_hardening`](#cis_security_hardening): Security baseline enforcement
 * [`cis_security_hardening::auditd_cron`](#cis_security_hardeningauditd_cron): Create a cron job to search privileged commands for auditd
 * [`cis_security_hardening::config`](#cis_security_hardeningconfig): Configure the module
+* [`cis_security_hardening::rules::dac_on_hardlinks`](#cis_security_hardeningrulesdac_on_hardlinks): Ensure the operating system is configured to enable DAC on hardlinks
+* [`cis_security_hardening::rules::dac_on_symlinks`](#cis_security_hardeningrulesdac_on_symlinks): Ensure the operating system is configured to enable DAC on symlinks
 * [`cis_security_hardening::rules::gdm_lock_delay`](#cis_security_hardeningrulesgdm_lock_delay): Ensure overriding the screensaver lock-delay setting is prevented
 * [`cis_security_hardening::services`](#cis_security_hardeningservices): Services
 * [`cis_security_hardening::sticky_world_writable_cron`](#cis_security_hardeningsticky_world_writable_cron): Create cron job for searching world writable dir3ctories with sticky bit
@@ -160,6 +162,7 @@ termination events that affect "/etc/sudoers.d/"
 * `cis_security_hardening::rules::disable_tipc`: Ensure TIPC is disabled
 * `cis_security_hardening::rules::disable_usb_storage`: Disable USB Storage
 * `cis_security_hardening::rules::disable_wireless`: Ensure wireless interfaces are disabled (Not Scored)
+* `cis_security_hardening::rules::dmesg_restrict`: Ensure the operating system is configured to restrict access to the kernel message buffer
 * `cis_security_hardening::rules::dns`: Ensure DNS is servers are configured
 * `cis_security_hardening::rules::dovecot`: Ensure IMAP and POP3 server is not enabled
 * `cis_security_hardening::rules::dracut_fips`: Ensure NIST FIPS-validated cryptography is configured
@@ -176,6 +179,7 @@ termination events that affect "/etc/sudoers.d/"
 * `cis_security_hardening::rules::firewalld_interfaces`: Ensure network interfaces are assigned to appropriate zone
 * `cis_security_hardening::rules::firewalld_ports_services`: Ensure unnecessary services and ports are not accepted
 * `cis_security_hardening::rules::firewalld_service`: Ensure firewalld service is enabled and running
+* `cis_security_hardening::rules::firewire_core`: @summary#    Ensure the operating system disables the ability to load the firewire-core kernel module  The operating system must disable IEEE
 * `cis_security_hardening::rules::freevxfs`: Ensure mounting of freevxfs filesystems is disabled
 * `cis_security_hardening::rules::ftp`: Ensure FTP Server is not installed
 * `cis_security_hardening::rules::gdm_auto_mount`: Ensure automatic mounting of removable media is disabled
@@ -225,6 +229,8 @@ termination events that affect "/etc/sudoers.d/"
 * `cis_security_hardening::rules::journald_persistent`: Ensure journald is configured to write logfiles to persistent disk
 * `cis_security_hardening::rules::journald_rsyslog`: Ensure journald is configured to send logs to rsyslog
 * `cis_security_hardening::rules::kdump_service`: Ensure kdump service is not enabled
+* `cis_security_hardening::rules::kexec_load_disabled`: Ensure kernel image loading is disabled
+* `cis_security_hardening::rules::kptr_restrict`: Ensure the operating system restricts exposed kernel pointer addresses access
 * `cis_security_hardening::rules::krb5_server`: Ensure the krb5-server package has not been installed on the system
 * `cis_security_hardening::rules::krb5_workstation`: Ensure the krb5-workstation package has not been installed on the system
 * `cis_security_hardening::rules::ldap_client`: Ensure LDAP client is not installed
@@ -242,6 +248,7 @@ termination events that affect "/etc/sudoers.d/"
 * `cis_security_hardening::rules::motd_perms`: Ensure message of the day is configured properly
 * `cis_security_hardening::rules::mta_local`: Ensure mail transfer agent is configured for local-only mode
 * `cis_security_hardening::rules::mta_unrestriced_relay`
+* `cis_security_hardening::rules::net_bpf_jit_harden`: Ensure the operating system enables hardening for the BPF JIT
 * `cis_security_hardening::rules::net_snmp`: Ensure net-snmp is not installed
 * `cis_security_hardening::rules::nfs`: Ensure NFS is not enabled
 * `cis_security_hardening::rules::nfs_nodev`: Ensure file systems being imported via NFS are mounted with the "nosuid" option.
@@ -263,6 +270,7 @@ termination events that affect "/etc/sudoers.d/"
 * `cis_security_hardening::rules::ntp_package`: Install ntp package
 * `cis_security_hardening::rules::ntpd`: Ensure ntp is configured
 * `cis_security_hardening::rules::opensc_pkcs11`: Ensure the opensc-pcks11 is installed
+* `cis_security_hardening::rules::openssl_pkcs11`: Ensure the operating system has the packages required for multifactor authentication
 * `cis_security_hardening::rules::pam_cached_auth`: Ensure PAM prohibits the use of cached authentications after one day
 * `cis_security_hardening::rules::pam_fail_delay`: Ensure loging delay after failed logon attempt
 * `cis_security_hardening::rules::pam_last_logon`: Ensure last successful account logon is displayed upon logon
@@ -281,12 +289,16 @@ termination events that affect "/etc/sudoers.d/"
 * `cis_security_hardening::rules::passwd_perms`: Ensure permissions on /etc/passwd are configured
 * `cis_security_hardening::rules::passwd_sha512`: Ensure ENCRYPT_METHOD is SHA512
 * `cis_security_hardening::rules::passwd_warn_days`: Ensure password expiration warning days is 7 or more
+* `cis_security_hardening::rules::perf_event_paranoid`: .   Ensure the operating system is configured to prevent kernel profiling by unprivileged users  The operating system must prevent kernel pro
 * `cis_security_hardening::rules::pki_certs_validation`: Ensure certificates are validated by constructing a certification path to an accepted trust anchor
 * `cis_security_hardening::rules::policycoreutils`: Ensure the operating system has the policycoreutils package installed
 * `cis_security_hardening::rules::postmaster_alias`: Ensure administrators are notified if an audit processing failure occurrs by modifying "/etc/aliases"
+* `cis_security_hardening::rules::pti`: Ensure kernel page-table isolation is enabled
+* `cis_security_hardening::rules::ptrace_scope`: @summary#    Ensure the operating system restricts usage of ptrace to descendant processes  The operating system must restrict usage of ptrac
 * `cis_security_hardening::rules::restrict_core_dumps`: A core dump is the memory of an executable program. It is generally used to determine why a program aborted. It can also be used to glean con
 * `cis_security_hardening::rules::restrict_su`: Ensure access to the su command is restricted
 * `cis_security_hardening::rules::rhnsd`: Disable the rhnsd Daemon
+* `cis_security_hardening::rules::rng_tools`: Ensure the system has the packages required to enable the hardware random number generator entropy gatherer service
 * `cis_security_hardening::rules::rngd`: Ensure the operating system has enabled the hardware random number generator entropy gatherer service
 * `cis_security_hardening::rules::root_gid`: Ensure default group for the root account is GID 0
 * `cis_security_hardening::rules::rpcbind`: Ensure rpcbind is not installed or the rpcbind services are masked
@@ -370,6 +382,7 @@ termination events that affect "/etc/sudoers.d/"
 * `cis_security_hardening::rules::tmp_nodev`: Ensure nodev option set on /tmp partition
 * `cis_security_hardening::rules::tmp_noexec`: Ensure noexec option set on /tmp partition
 * `cis_security_hardening::rules::tmp_nosuid`: Ensure nosuid option set on /tmp partition
+* `cis_security_hardening::rules::tmux_package`: Ensure the "tmux" package installed
 * `cis_security_hardening::rules::tuned`: Ensure the tuned package has not been installed on the system.
 * `cis_security_hardening::rules::udf`: Ensure mounting of udf filesystems is disabled
 * `cis_security_hardening::rules::ufw_default_deny`: Ensure default deny firewall policy
@@ -379,8 +392,10 @@ termination events that affect "/etc/sudoers.d/"
 * `cis_security_hardening::rules::ufw_outbound`: Ensure outbound connections are configured (Not Scored)
 * `cis_security_hardening::rules::ufw_service`: Ensure ufw service is enabled
 * `cis_security_hardening::rules::umask_setting`: Ensure default user umask is configured
+* `cis_security_hardening::rules::unprivileged_bpf_disabled`: Ensure the operating system prevents privilege escalation through the kernel by disabling access to the bpf syscall
 * `cis_security_hardening::rules::usbguard_package`: Ensure USBGuard is installed on the operating system
 * `cis_security_hardening::rules::usbguard_service`: Ensure the operating system has enabled the use of the USBGuard
+* `cis_security_hardening::rules::user_namespaces`: Ensure the operating system disables the use of user namespaces
 * `cis_security_hardening::rules::var_log_audit_nodev`: Ensure nodev option set on /var/log/audit partition
 * `cis_security_hardening::rules::var_log_audit_noexec`: Ensure noexec option set on /var/log/audit partition
 * `cis_security_hardening::rules::var_log_audit_nosuid`: Ensure nosuid option set on /var/log/audit partition
@@ -660,6 +675,111 @@ Directory where all files go to.
 Data type: `Stdlib::Absolutepath`
 
 Command to use for fact upload.
+
+### <a name="cis_security_hardeningrulesdac_on_hardlinks"></a>`cis_security_hardening::rules::dac_on_hardlinks`
+
+The operating system must enable kernel parameters to enforce discretionary access control on hardlinks.
+
+Rationale:
+Discretionary Access Control (DAC) is based on the notion that individual users are "owners" of objects
+and therefore have discretion over who should be authorized to access the object and in which mode (e.g.,
+read or write). Ownership is usually acquired as a consequence of creating the object or via specified
+ownership assignment. DAC allows the owner to determine who will have access to objects they control. An
+example of DAC includes user-controlled file permissions.
+
+When discretionary access control policies are implemented, subjects are not constrained with regard to
+what actions they can take with information for which they have already been granted access. Thus, subjects
+that have been granted access to information are not prevented from passing (i.e., the subjects have the
+discretion to pass) the information to other subjects or objects. A subject that is constrained in its
+operation by Mandatory Access Control policies is still able to operate under the less rigorous constraints
+of this requirement. Thus, while Mandatory Access Control imposes constraints preventing a subject from passing
+information to another subject operating at a different sensitivity level, this requirement permits the subject
+to pass the information to any subject at the same sensitivity level. The policy is bounded by the information
+system boundary. Once the information is passed outside the control of the information system, additional means
+may be required to ensure the constraints remain in effect. While the older, more traditional definitions of
+discretionary access control require identity-based access control, that limitation is not required for this
+use of discretionary access control.
+
+By enabling the fs.protected_hardlinks kernel parameter, users can no longer create soft or hard links to files
+they do not own. Disallowing such hardlinks mitigate vulnerabilities based on insecure file system accessed by
+privileged programs, avoiding an exploitation vector exploiting unsafe use of open() or creat().
+
+Satisfies: SRG-OS-000312-GPOS-00122, SRG-OS-000312-GPOS-00123, SRG-OS-000312- GPOS-00124, SRG-OS-000324-GPOS-00125
+
+#### Examples
+
+##### 
+
+```puppet
+include cis_security_hardening::rules::dac_on_hardlinks
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::dac_on_hardlinks` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
+
+### <a name="cis_security_hardeningrulesdac_on_symlinks"></a>`cis_security_hardening::rules::dac_on_symlinks`
+
+The operating system must enable kernel parameters to enforce discretionary access control on symlinks.
+
+Rationale:
+Discretionary Access Control (DAC) is based on the notion that individual users are "owners" of objects and therefore have
+discretion over who should be authorized to access the object and in which mode (e.g., read or write). Ownership is usually
+acquired as a consequence of creating the object or via specified ownership assignment. DAC allows the owner to determine who
+will have access to objects they control. An example of DAC includes user-controlled file permissions.
+
+When discretionary access control policies are implemented, subjects are not constrained with regard to what actions they can
+take with information for which they have already been granted access. Thus, subjects that have been granted access to information
+are not prevented from passing (i.e., the subjects have the discretion to pass) the information to other subjects or objects. A subject
+that is constrained in its operation by Mandatory Access Control policies is still able to operate under the less rigorous constraints
+of this requirement. Thus, while Mandatory Access Control imposes constraints preventing a subject from passing information to another
+subject operating at a different sensitivity level, this requirement permits the subject to pass the information to any subject at the
+same sensitivity level. The policy is bounded by the information system boundary. Once the information is passed outside the control of
+the information system, additional means may be required to ensure the constraints remain in effect. While the older, more traditional
+definitions of discretionary access control require identity-based access control, that limitation is not required for this use of
+discretionary access control.
+
+By enabling the fs.protected_symlinks kernel parameter, symbolic links are permitted to be followed only when outside a sticky
+world-writable directory, or when the UID of the link and follower match, or when the directory owner matches the symlink's owner.
+
+Disallowing such symlinks helps mitigate vulnerabilities based on insecure file system accessed by privileged programs, avoiding an
+exploitation vector exploiting unsafe use of open() or creat().
+
+Satisfies: SRG-OS-000312-GPOS-00122, SRG-OS-000312-GPOS-00123, SRG-OS-000312- GPOS-00124, SRG-OS-000324-GPOS-00125
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::dac_on_symlinks':
+  enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::dac_on_symlinks` class:
+
+* [`enforce`](#enforce)
+
+##### <a name="enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule.
+
+Default value: ``false``
 
 ### <a name="cis_security_hardeningrulesgdm_lock_delay"></a>`cis_security_hardening::rules::gdm_lock_delay`
 
