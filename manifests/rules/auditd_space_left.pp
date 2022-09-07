@@ -28,7 +28,7 @@ class cis_security_hardening::rules::auditd_space_left (
     file_line { 'auditd_space_left':
       line               => "space_left = ${space_left}%",
       path               => '/etc/audit/auditd.conf',
-      match              => '^space_left',
+      match              => '^space_left =',
       append_on_no_match => true,
     }
   }

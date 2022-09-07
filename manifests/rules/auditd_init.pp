@@ -34,6 +34,13 @@ class cis_security_hardening::rules::auditd_init (
       false => Exec['reload auditd rules'],
     }
 
+    file { '/etc/audisp':
+      ensure => directory,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0755',
+    }
+
     concat { $rules_file:
       ensure         => present,
       owner          => 'root',

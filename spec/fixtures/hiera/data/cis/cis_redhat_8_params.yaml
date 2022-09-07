@@ -52,6 +52,22 @@ cis_security_hardening::rules::boot_efi_nosuid::enforce: true
 cis_security_hardening::rules::nfs_nodev::enforce: true
 cis_security_hardening::rules::nfs_noexec::enforce: true
 cis_security_hardening::rules::nfs_nosuid::enforce: true
+cis_security_hardening::rules::user_namespaces::enforce: true
+cis_security_hardening::rules::kexec_load_disabled::enforce: true
+cis_security_hardening::rules::dac_on_symlinks::enforce: true
+cis_security_hardening::rules::dac_on_hardlinks::enforce: true
+cis_security_hardening::rules::dmesg_restrict::enforce: true
+cis_security_hardening::rules::perf_event_paranoid::enforce: true
+cis_security_hardening::rules::openssl_pkcs11::enforce: true
+cis_security_hardening::rules::opensc_pkcs11::enforce: true
+cis_security_hardening::rules::pti::enforce: true
+cis_security_hardening::rules::unprivileged_bpf_disabled::enforce: true
+cis_security_hardening::rules::ptrace_scope::enforce: true
+cis_security_hardening::rules::kptr_restrict::enforce: true
+cis_security_hardening::rules::firewire_core::enforce: true
+cis_security_hardening::rules::rng_tools::enforce: true
+cis_security_hardening::rules::tmux_package::enforce: true
+cis_security_hardening::rules::net_bpf_jit_harden::enforce: true
 
 cis_security_hardening::rules::yum_gpgcheck::enforce: true
 cis_security_hardening::rules::yum_local_gpgcheck::enforce: true
@@ -299,6 +315,7 @@ cis_security_hardening::rules::auditd_package::enforce: true
 cis_security_hardening::rules::auditd_package::packages: 
   - audit
   - audit-libs
+  - audispd-plugins
   - usbguard
 cis_security_hardening::rules::auditd_service::enforce: true
 cis_security_hardening::rules::auditd_process::enforce: true

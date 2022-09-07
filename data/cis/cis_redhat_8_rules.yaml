@@ -42,6 +42,22 @@ cis_security_hardening::benchmark::redhat::8:
         - nfs_noexec
         - nfs_nosuid
         - home_noexec
+        - user_namespaces
+        - kexec_load_disabled
+        - dac_on_symlinks
+        - dac_on_hardlinks
+        - dmesg_restrict
+        - perf_event_paranoid
+        - openssl_pkcs11
+        - opensc_pkcs11
+        - pti
+        - unprivileged_bpf_disabled
+        - ptrace_scope
+        - kptr_restrict
+        - firewire_core
+        - rng_tools
+        - tmux_package
+        - net_bpf_jit_harden
     software_updates:
       level1:
         - yum_gpgcheck

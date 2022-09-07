@@ -55,6 +55,14 @@ describe 'cis_security_hardening::rules::auditd_init' do
                   .that_notifies(['Exec[reload auditd rules]'])
               end
 
+              is_expected.to contain_file('/etc/audisp')
+                .with(
+                  'ensure' => 'directory',
+                  'owner'  => 'root',
+                  'group'  => 'root',
+                  'mode'   => '0755',
+                )
+
               is_expected.to contain_concat__fragment('auditd init delete rules')
                 .with(
                   'order' => '01',
@@ -72,6 +80,7 @@ describe 'cis_security_hardening::rules::auditd_init' do
               is_expected.not_to contain_file('/etc/audit/rules.d/cis_security_hardening.rules')
               is_expected.not_to contain_concat__fragment('auditd init delete rules')
               is_expected.not_to contain_concat__fragment('auditd init set buffer')
+              is_expected.not_to contain_file('/etc/audisp')
             end
 
             is_expected.to contain_exec('reload auditd rules')

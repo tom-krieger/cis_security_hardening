@@ -42,6 +42,22 @@ cis_security_hardening::benchmark::redhat::8:
         - nfs_noexec
         - nfs_nosuid
         - home_noexec
+        - user_namespaces
+        - kexec_load_disabled
+        - dac_on_symlinks
+        - dac_on_hardlinks
+        - dmesg_restrict
+        - perf_event_paranoid
+        - openssl_pkcs11
+        - opensc_pkcs11
+        - pti
+        - unprivileged_bpf_disabled
+        - ptrace_scope
+        - kptr_restrict
+        - firewire_core
+        - rng_tools
+        - tmux_package
+        - net_bpf_jit_harden
     software_updates:
       level1:
         - yum_gpgcheck
@@ -244,7 +260,6 @@ cis_security_hardening::benchmark::redhat::8:
         - auditd_log_format
         - auditd_log_perms
         - auditd_log_dir_perms
-        - auditd_chcon_use
         - auditd_setxattr_use
         - auditd_ssh_agent_use
         - auditd_passwd_use
@@ -258,7 +273,6 @@ cis_security_hardening::benchmark::redhat::8:
         - auditd_setsebool
         - auditd_unix_checkpwd
         - auditd_ssh_keysign_use
-        - auditd_setfacl_use
         - auditd_pam_timestamp_check_use
         - auditd_newgrp_use
         - auditd_init_module
@@ -313,7 +327,6 @@ cis_security_hardening::benchmark::redhat::8:
         - sshd_login_gracetime
         - sshd_banner
         - sshd_use_pam
-        - sshd_tcp_forwarding
         - sshd_max_startups
         - sshd_max_sessions
         - sshd_crypto_policy
