@@ -12,6 +12,7 @@ describe 'cis_security_hardening::rules::inactive_password_lock' do
         let(:params) do
           {
             'enforce' => enforce,
+            'inactive_days' => 20,
           }
         end
 
@@ -24,7 +25,7 @@ describe 'cis_security_hardening::rules::inactive_password_lock' do
                 'ensure'             => 'present',
                 'path'               => '/etc/default/useradd',
                 'match'              => '^INACTIVE=',
-                'line'               => 'INACTIVE=0',
+                'line'               => 'INACTIVE=20',
                 'append_on_no_match' => true,
               )
           else

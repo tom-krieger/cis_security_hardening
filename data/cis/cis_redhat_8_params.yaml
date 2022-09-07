@@ -589,6 +589,7 @@ cis_security_hardening::rules::restrict_su::wheel_users:
   - root
 cis_security_hardening::rules::passwd_sha512::enforce: true
 cis_security_hardening::rules::inactive_password_lock::enforce: true
+cis_security_hardening::rules::inactive_password_lock::inactive_days: 30
 cis_security_hardening::rules::login_fail_delay::enforce: true
 cis_security_hardening::rules::login_fail_delay::fail_delay: 4
 cis_security_hardening::rules::adm_crypt_style::enforce: true

@@ -20,14 +20,15 @@
 #
 # @api private
 class cis_security_hardening::rules::inactive_password_lock (
-  Boolean $enforce = false,
+  Boolean $enforce       = false,
+  Integer $inactive_days = 30,
 ) {
   if $enforce {
     file_line { 'inactive password lock':
       ensure             => present,
       path               => '/etc/default/useradd',
       match              => '^INACTIVE=',
-      line               => 'INACTIVE=0',
+      line               => "INACTIVE=${inactive_days}",
       append_on_no_match => true,
     }
   }
