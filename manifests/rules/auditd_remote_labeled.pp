@@ -35,11 +35,12 @@ class cis_security_hardening::rules::auditd_remote_labeled (
         mode => '0644',
     })
     file_line { 'name-format':
-      ensure => present,
-      path   => '/etc/audisp/audispd.conf',
-      match  => '^name_format =',
-      line   => "name_format = ${format}",
-      notify => Service['auditd'],
+      ensure  => present,
+      path    => '/etc/audisp/audispd.conf',
+      match   => '^name_format =',
+      line    => "name_format = ${format}",
+      notify  => Service['auditd'],
+      require => File['/etc/audisp/audispd.conf'],
     }
   }
 }

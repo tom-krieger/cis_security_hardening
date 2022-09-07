@@ -191,6 +191,10 @@ cis_security_hardening::rules::selinux_policy::auto_reboot: true
 
 The compliance rules have been implemented without or very limited testing. Please report problems or create pull requests to improve the Suse SLES compliance code.
 
+### Redhat 8 STIG benchmark
+
+The Redhat 8 STIG benchmark contains many different configurations to the Redhat 8 benchmark. For the Redhat 8 STIG benchmark in this module, the configurations from the current Redhat 8 benchmark were used and extended by the additional configurations of the Redhat 8 STIG benchmark. For example, version 2.0.0 of the Redhat 8 benchmark recommends disabling the 'cramfs' module using `install /bin/false` and blacklisting the module. The Redhat 8 STIG benchmark gives the following configuration: `install /bin/true`. Blacklisting the module is not recommended.
+
 ### Issues with CISCAT scanner
 
 * CISCAT scanner for Ubuntu 20.04 LTS STIG false positives:

@@ -52,7 +52,7 @@ describe 'cis_security_hardening::rules::auditd_remote_labeled' do
                 'line'   => 'name_format = fqd',
               )
               .that_notifies('Service[auditd]')
-
+              .that_requires('File[/etc/audisp/audispd.conf]')
           else
             is_expected.not_to contain_file_line('name-format')
             is_expected.not_to contain_file('/etc/audisp/audispd.conf')

@@ -34,11 +34,12 @@ class cis_security_hardening::rules::auditd_overflow_action (
         mode => '0644',
     })
     file_line { 'overflow-action':
-      ensure => present,
-      path   => '/etc/audisp/audispd.conf',
-      match  => '^overflow_action =',
-      line   => "overflow_action = ${action}",
-      notify => Service['auditd'],
+      ensure  => present,
+      path    => '/etc/audisp/audispd.conf',
+      match   => '^overflow_action =',
+      line    => "overflow_action = ${action}",
+      notify  => Service['auditd'],
+      require => File['/etc/audisp/audispd.conf'],
     }
   }
 }

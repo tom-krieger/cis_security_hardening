@@ -52,6 +52,7 @@ describe 'cis_security_hardening::rules::auditd_overflow_action' do
                 'line'   => 'overflow_action = halt',
               )
               .that_notifies('Service[auditd]')
+              .that_requires('File[/etc/audisp/audispd.conf]')
 
           else
             is_expected.not_to contain_file_line('overflow-action')
