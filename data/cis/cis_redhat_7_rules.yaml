@@ -71,6 +71,7 @@ cis_security_hardening::benchmark::redhat::7:
     gdm:
       level1:
         - gnome_gdm
+        - gdm_auto_mount
         - xdmcp_config
       stig:
         - gdm_lock_enabled
@@ -79,7 +80,6 @@ cis_security_hardening::benchmark::redhat::7:
         - gdm_screensaver
         - gdm_lock_delay
         - gdm_autologin
-        - gdm_auto_mount
     mfa:
       stig:
         - pam_pkcs11

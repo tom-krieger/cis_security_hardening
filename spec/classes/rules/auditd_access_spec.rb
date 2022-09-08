@@ -52,7 +52,7 @@ describe 'cis_security_hardening::rules::auditd_access' do
 
               content_rule1 = if os_facts[:operatingsystem].casecmp('almalinux').zero? || os_facts[:operatingsystem].casecmp('rocky').zero?
                                 "-a always,exit -F arch=b32 -S creat,open,openat,truncate,ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=#{auid} -k access"
-                              elsif os_facts[:operatingsystem].casecmp('redhat').zero?
+                              elsif os_facts[:operatingsystem].casecmp('redhat').zero? && os_facts[:operatingsystemmajrelease] >= '8'
                                 "-a always,exit -F arch=b32 -S creat,open,openat,truncate,ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=#{auid} -k perm_access"
                               else
                                 "-a always,exit -F arch=b32 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=#{auid} -k access"
@@ -60,7 +60,7 @@ describe 'cis_security_hardening::rules::auditd_access' do
 
               content_rule2 = if os_facts[:operatingsystem].casecmp('almalinux').zero? || os_facts[:operatingsystem].casecmp('rocky').zero?
                                 "-a always,exit -F arch=b32 -S creat,open,openat,truncate,ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=#{auid} -k access"
-                              elsif os_facts[:operatingsystem].casecmp('redhat').zero?
+                              elsif os_facts[:operatingsystem].casecmp('redhat').zero? && os_facts[:operatingsystemmajrelease] >= '8'
                                 "-a always,exit -F arch=b32 -S creat,open,openat,truncate,ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=#{auid} -k perm_access"
                               else
                                 "-a always,exit -F arch=b32 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=#{auid} -k access"
@@ -82,7 +82,7 @@ describe 'cis_security_hardening::rules::auditd_access' do
               if ['x86_64', 'amd64'].include?(arch)
                 content_rule3 = if os_facts[:operatingsystem].casecmp('almalinux').zero? || os_facts[:operatingsystem].casecmp('rocky').zero?
                                   "-a always,exit -F arch=b64 -S creat,open,openat,truncate,ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=#{auid} -k access"
-                                elsif os_facts[:operatingsystem].casecmp('redhat').zero?
+                                elsif os_facts[:operatingsystem].casecmp('redhat').zero? && os_facts[:operatingsystemmajrelease] >= '8'
                                   "-a always,exit -F arch=b64 -S creat,open,openat,truncate,ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=#{auid} -k perm_access"
                                 else
                                   "-a always,exit -F arch=b64 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=#{auid} -k access"
@@ -90,7 +90,7 @@ describe 'cis_security_hardening::rules::auditd_access' do
 
                 content_rule4 = if os_facts[:operatingsystem].casecmp('almalinux').zero? || os_facts[:operatingsystem].casecmp('rocky').zero?
                                   "-a always,exit -F arch=b64 -S creat,open,openat,truncate,ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=#{auid} -k access"
-                                elsif os_facts[:operatingsystem].casecmp('redhat').zero?
+                                elsif os_facts[:operatingsystem].casecmp('redhat').zero? && os_facts[:operatingsystemmajrelease] >= '8'
                                   "-a always,exit -F arch=b64 -S creat,open,openat,truncate,ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=#{auid} -k perm_access"
                                 else
                                   "-a always,exit -F arch=b64 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=#{auid} -k access"
