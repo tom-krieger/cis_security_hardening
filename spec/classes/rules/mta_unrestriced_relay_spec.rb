@@ -22,7 +22,7 @@ describe 'cis_security_hardening::rules::mta_unrestriced_relay' do
               .with(
                 'command' => 'postconf -e \'smtpd_client_restrictions = permit_mynetworks,reject\'',
                 'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                'onlyif'  => 'test -z "$(postconf -n smtpd_client_restrictions | grep \'permit_mynetworks, reject\')"',
+                'onlyif'  => 'test -z "$(postconf -n smtpd_client_restrictions | grep \'permit_mynetworks,reject\')"',
               )
           else
             is_expected.not_to contain_exec('restrict mail relay')
