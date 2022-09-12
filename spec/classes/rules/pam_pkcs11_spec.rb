@@ -23,7 +23,7 @@ describe 'cis_security_hardening::rules::pam_pkcs11' do
               is_expected.to contain_package('esc')
                 .with(
                   'ensure' => 'present',
-                
+
                 )
               is_expected.to contain_package('pam_pkcs11')
                 .with(
@@ -31,7 +31,7 @@ describe 'cis_security_hardening::rules::pam_pkcs11' do
                 )
             else
               is_expected.to contain_package('libpam-pkcs11')
-              .with(
+                .with(
                 'ensure' => 'present',
               )
             end

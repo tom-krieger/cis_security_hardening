@@ -8,7 +8,6 @@ describe 'cis_security_hardening::rules::fapolicyd_policy' do
   on_supported_os.each do |os, os_facts|
     enforce_options.each do |enforce|
       context "on #{os} with enforce = #{enforce}" do
-        let(:facts) { os_facts }
         let(:facts) do
           os_facts.merge!(
             cis_security_hardening: {
@@ -26,8 +25,8 @@ describe 'cis_security_hardening::rules::fapolicyd_policy' do
           }
         end
 
-        it { 
-          is_expected.to compile 
+        it {
+          is_expected.to compile
 
           if enforce
             is_expected.to contain_file_line('fapolicyd_permissive')
@@ -35,7 +34,7 @@ describe 'cis_security_hardening::rules::fapolicyd_policy' do
                 'ensure'             => 'present',
                 'path'               => '/etc/fapolicyd/fapolicyd.conf',
                 'match'              => '^permissive =',
-                'line'               => "permissive = 1",
+                'line'               => 'permissive = 1',
                 'append_on_no_match' => true,
               )
             is_expected.to contain_concat('/etc/fapolicyd/fapolicyd.mounts')
