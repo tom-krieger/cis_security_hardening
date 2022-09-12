@@ -479,7 +479,7 @@ cis_security_hardening::rules::pam_pw_requirements::maxclassrepeat: 4
 cis_security_hardening::rules::pam_pw_requirements::retry: 3
 cis_security_hardening::rules::pam_lockout::enforce: true
 cis_security_hardening::rules::pam_lockout::attempts: 3
-cis_security_hardening::rules::pam_lockout::lockouttime: 300
+cis_security_hardening::rules::pam_lockout::lockouttime: 900
 cis_security_hardening::rules::pam_lockout::lockout_root: false
 cis_security_hardening::rules::pam_passwd_sha512::enforce: true
 cis_security_hardening::rules::pam_old_passwords::enforce: true
