@@ -395,16 +395,13 @@ cis_security_hardening::rules::sshd_max_startups::enforce: true
 cis_security_hardening::rules::sshd_max_sessions::enforce: true
 cis_security_hardening::rules::sshd_crypto_policy::enforce: true
 
-cis_security_hardening::rules::authselect_profile::enforce: true
-cis_security_hardening::rules::authselect_profile::custom_profile: 'cis'
-cis_security_hardening::rules::authselect_profile::base_profile: minimal
-cis_security_hardening::rules::authselect_profile_select::enforce: true
-cis_security_hardening::rules::authselect_profile_select::custom_profile: cis
-cis_security_hardening::rules::authselect_profile_select::profile_options:
+cis_security_hardening::rules::authselect::enforce: true
+cis_security_hardening::rules::authselect::base_profile: minimal
+cis_security_hardening::rules::authselect::custom_profile: cis
+cis_security_hardening::rules::authselect::profile_options:
   - with-sudo
   - with-faillock
   - without-nullok
-cis_security_hardening::rules::authselect_with_faillock::enforce: true
 
 cis_security_hardening::rules::pam_pw_requirements::enforce: true
 cis_security_hardening::rules::pam_pw_requirements::minlen: 14
