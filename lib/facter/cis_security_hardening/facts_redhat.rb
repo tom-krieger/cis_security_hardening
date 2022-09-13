@@ -13,6 +13,9 @@ require 'pp'
 def facts_redhat(os, distid, release)
   cis_security_hardening = common_facts(os, distid, release)
 
+  # check for dconf package
+  cis_security_hardening['dconf_package'] = check_package_installed('dconf')
+
   # get authselect config
   if File.exist?('/usr/bin/authselect')
     authselect = {}

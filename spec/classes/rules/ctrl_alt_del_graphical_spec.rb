@@ -8,7 +8,14 @@ describe 'cis_security_hardening::rules::ctrl_alt_del_graphical' do
   on_supported_os.each do |os, os_facts|
     enforce_options.each do |enforce|
       context "on #{os} with enforce = #{enforce}" do
-        let(:facts) { os_facts }
+        let(:facts) do
+          os_facts.merge!(
+            cis_security_hardening: {
+              gnome_gdm_conf: false,
+              gnome_gdm: true,
+            },
+          )
+        end
         let(:params) do
           {
             'enforce' => enforce,
