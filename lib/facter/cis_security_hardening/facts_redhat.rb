@@ -2,6 +2,7 @@
 
 require 'facter/cis_security_hardening/utils/check_package_installed'
 require 'facter/cis_security_hardening/utils/check_value_string'
+require 'facter/cis_security_hardening/utils/check_value_integer'
 require 'facter/cis_security_hardening/utils/read_file_stats'
 require 'facter/cis_security_hardening/utils/read_iptables_rules'
 require 'facter/cis_security_hardening/utils/read_firewalld_zone_iface'
@@ -15,6 +16,12 @@ def facts_redhat(os, distid, release)
   # get authselect config
   if File.exist?('/usr/bin/authselect')
     authselect = {}
+    val = Facter::Code::Execution.exec('authselect check >/dev/null 2>&1; echo $?')
+    authselect['check'] = if val.nil? || val.empty?
+                            0
+                          else
+                            check_value_integer(val, 0)
+                          end
     val = Facter::Core::Execution.exec('/usr/bin/authselect current | grep "Profile ID: custom/"')
     authselect['profile'] = if val.nil? || val.empty?
                               'none'
