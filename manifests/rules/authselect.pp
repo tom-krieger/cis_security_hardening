@@ -48,6 +48,19 @@ class cis_security_hardening::rules::authselect (
       require => Exec['create custom profile'],
     }
 
+    $check = fact('cis_security_hardening.authselect.check') ? {
+      undef   => 0,
+      default => fact('cis_security_hardening.authselect.check'),
+    }
+
+    if $check == 3 {
+      exec { 'fix authselect profile':
+        command => "authselect select custom/${custom_profile} -f",   #lint:ignore:security_class_or_define_parameter_in_exec
+        path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+        require => Exec['create custom profile'],
+      }
+    }
+
     $available_features = fact('cis_security_hardening.authselect.available_features') ? {
       undef   => [],
       default => fact('cis_security_hardening.authselect.available_features'),
