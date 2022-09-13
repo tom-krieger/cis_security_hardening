@@ -32,10 +32,15 @@ class cis_security_hardening::rules::auditd_chcon_use (
       undef => '1000',
       default => fact('cis_security_hardening.auditd.uid_min'),
     }
+    if $facts['os']['name'].downcase() == 'redhat' and $facts['os']['release']['major'] == '7' {
+      $rule1 = "-a always,exit -F path=/usr/bin/chcon -F auid>=${uid} -F auid!=4294967295 -k privileged-priv_change"
+    } else {
+      $rule1 = "-a always,exit -F path=/usr/bin/chcon -F perm=x -F auid>=${uid} -F auid!=${auid} -k perm_chng"
+    }
     concat::fragment { 'watch chcon command rule 1':
       order   => '176',
       target  => $cis_security_hardening::rules::auditd_init::rules_file,
-      content => "-a always,exit -F path=/usr/bin/chcon -F perm=x -F auid>=${uid} -F auid!=${auid} -k perm_chng",
+      content => $rule1,
     }
   }
 }

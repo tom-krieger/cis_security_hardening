@@ -29,7 +29,7 @@ class cis_security_hardening::rules::sshd_compression (
       ensure             => present,
       path               => $path,
       line               => 'Compression delayed',
-      match              => '^Compression.*',
+      match              => '^#?Compression.*',
       append_on_no_match => true,
       notify             => Exec['reload-sshd'],
     }

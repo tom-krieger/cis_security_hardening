@@ -79,7 +79,7 @@ describe 'cis_security_hardening::rules::sshd_compression' do
                 'ensure' => 'present',
                 'path'   => path,
                 'line'               => 'Compression delayed',
-                'match'              => '^Compression.*',
+                'match'              => '^#?Compression.*',
                 'append_on_no_match' => true,
               )
               .that_notifies('Exec[reload-sshd]')

@@ -13,6 +13,9 @@
 # @param content
 #    The content to write into the file
 #
+# @param file
+#    The file to be used as content. Give a Puppet file resource.
+#
 # @example
 #   class { 'cis_security_hardening::rules::issue_perms':
 #       enforce => true,
@@ -22,14 +25,29 @@
 class cis_security_hardening::rules::issue_perms (
   Boolean $enforce = false,
   String $content  = '',
+  String $file     = '',
 ) {
   if $enforce {
     $issue_link = fact('cis_security_hardening.etc_issue_link')
 
+    $data = $file ? {
+      '' => {
+        ensure  => present,
+        content => $content,
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0644',
+      },
+      default => {
+        ensure  => present,
+        source  => $file,
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0644',
+      },
+    }
 
-    unless  $facts['operatingsystem'] == 'SLES' and
-    $facts['operatingsystemmajrelease'] == '12' and
-    $issue_link {
+    unless  $facts['os']['name'] == 'SLES' and $facts['os']['release']['major'] == '12' and $issue_link {
       ensure_resource('file', '/etc/issue', {
           ensure  => present,
           content => $content,
