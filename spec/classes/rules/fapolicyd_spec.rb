@@ -30,7 +30,7 @@ describe 'cis_security_hardening::rules::fapolicyd' do
                 'ensure'             => 'present',
                 'path'               => '/etc/fapolicyd/fapolicyd.conf',
                 'match'              => '^gid = fapolicyd',
-                'line'               => "gid = users",
+                'line'               => 'gid = users',
                 'append_on_no_match' => true,
               )
               .that_requires('Package[fapolicyd]')

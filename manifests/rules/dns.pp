@@ -57,12 +57,11 @@ class cis_security_hardening::rules::dns (
       mode    => '0644',
       notify  => Exec['resolv.conf immutable'],
     }
-  }
 
-  exec { 'resolv.conf immutable':
-    command     => 'chattr +i /etc/resolv.conf',
-    path        => ['/sbin','/usr/sbin','/bin','/usr/bin'],
-    onlyif      => 'test -z "$(lsattr /etc/resolv.conf | cut -d '-' -f 5)"',
-    refreshonly => true,
+    exec { 'resolv.conf immutable':
+      command => 'chattr +i /etc/resolv.conf',
+      path    => ['/sbin','/usr/sbin','/bin','/usr/bin'],
+      onlyif  => 'test -z "$(lsattr /etc/resolv.conf | cut -d \'-\' -f 5)"',
+    }
   }
 }

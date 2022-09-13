@@ -13,7 +13,7 @@ describe 'cis_security_hardening::rules::dns' do
           {
             'enforce' => enforce,
             'nsswitch_entry' => 'files dns',
-            'dns_search' => ['test.com','example.com'],
+            'dns_search' => ['test.com', 'example.com'],
             'dns_domain' => 'example.com',
             'dns_servers' => ['8.8.8.8', '8.8.4.4'],
           }
@@ -44,7 +44,7 @@ describe 'cis_security_hardening::rules::dns' do
               .with(
                 'command'     => 'chattr +i /etc/resolv.conf',
                 'path'        => ['/sbin', '/usr/sbin', '/bin', '/usr/bin'],
-                'refreshonly' => true,
+                'onlyif'  => 'test -z "$(lsattr /etc/resolv.conf | cut -d \'-\' -f 5)"',
               )
           else
             is_expected.not_to contain_file_line('nsswitch dns')
