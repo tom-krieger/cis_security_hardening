@@ -16,7 +16,7 @@ def facts_redhat(os, distid, release)
   # get authselect config
   if File.exist?('/usr/bin/authselect')
     authselect = {}
-    val = Facter::Code::Execution.exec('authselect check >/dev/null 2>&1; echo $?')
+    val = Facter::Core::Execution.exec('authselect check >/dev/null 2>&1; echo $?')
     authselect['check'] = if val.nil? || val.empty?
                             0
                           else
