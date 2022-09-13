@@ -14,7 +14,10 @@
 #    The nsswitch.conf entry for dns.
 # @param dns_servers
 #    Array with dns servers to add into resolv.conf.
-#
+# @param dns_search
+#    DNS search entries.
+# @param dns_domain
+#    The DNS domain.
 # @example
 #   class { 'cis_security_hardening::rules::dns':
 #     enforce = true,
@@ -25,6 +28,8 @@ class cis_security_hardening::rules::dns (
   Boolean $enforce       = false,
   String $nsswitch_entry = 'files dns',
   Array $dns_servers     = [],
+  Array $dns_search      = [],
+  String $dns_domain     = '',
 ) {
   if $enforce {
     file_line { 'nsswitch dns':
@@ -34,23 +39,30 @@ class cis_security_hardening::rules::dns (
       line   => "hosts: ${nsswitch_entry}",
     }
 
-    unless empty($dns_servers) {
-      file { '/etc/resolv.conf':
-        ensure  => file,
-        content => epp('cis_security_hardening/rules/common/resolv.conf.epp', {
-            dns_servers => $dns_servers,
-        }),
-        owner   => 'root',
-        group   => 'root',
-        mode    => '0644',
-        notify  => Exec['resolv.conf immutable'],
-      }
-
-      exec { 'resolv.conf immutable':
-        command     => 'chattr +i /etc/resolv.conf',
-        path        => ['/sbin','/usr/sbin','/bin','/usr/bin'],
-        refreshonly => true,
-      }
+    if(empty($dns_search)) {
+      $real_dnssearch = ''
+    } else {
+      $real_dnssearch = join($dns_search, ' ')
     }
+
+    file { '/etc/resolv.conf':
+      ensure  => file,
+      content => epp('cis_security_hardening/rules/common/resolv.conf.epp', {
+          dnsservers => $dns_servers,
+          search     => $real_dnssearch,
+          dnsdomain  => $dns_domain,
+      }),
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+      notify  => Exec['resolv.conf immutable'],
+    }
+  }
+
+  exec { 'resolv.conf immutable':
+    command     => 'chattr +i /etc/resolv.conf',
+    path        => ['/sbin','/usr/sbin','/bin','/usr/bin'],
+    onlyif      => 'test -z "$(lsattr /etc/resolv.conf | cut -d '-' -f 5)"',
+    refreshonly => true,
   }
 }

@@ -13,6 +13,8 @@ describe 'cis_security_hardening::rules::dns' do
           {
             'enforce' => enforce,
             'nsswitch_entry' => 'files dns',
+            'dns_search' => ['test.com','example.com'],
+            'dns_domain' => 'example.com',
             'dns_servers' => ['8.8.8.8', '8.8.4.4'],
           }
         end

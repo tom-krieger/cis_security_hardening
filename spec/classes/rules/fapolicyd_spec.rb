@@ -12,6 +12,7 @@ describe 'cis_security_hardening::rules::fapolicyd' do
         let(:params) do
           {
             'enforce' => enforce,
+            'gid' => 'users',
           }
         end
 
@@ -23,6 +24,16 @@ describe 'cis_security_hardening::rules::fapolicyd' do
               .with(
                 'ensure' => 'present',
               )
+
+            is_expected.to contain_file_line('fix fapolicyd gid')
+              .with(
+                'ensure'             => 'present',
+                'path'               => '/etc/fapolicyd/fapolicyd.conf',
+                'match'              => '^gid = fapolicyd',
+                'line'               => "gid = users",
+                'append_on_no_match' => true,
+              )
+              .that_requires('Package[fapolicyd]')
           else
             is_expected.not_to contain_package('fapolicyd')
           end

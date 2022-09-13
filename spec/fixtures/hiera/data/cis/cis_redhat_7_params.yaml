@@ -56,6 +56,9 @@ cis_security_hardening::rules::ctrl_alt_del_graphical::enforce: true
 cis_security_hardening::rules::kdump_service::enforce: true
 cis_security_hardening::rules::dns::enforce: true
 cis_security_hardening::rules::dns::nsswitch_entry: 'files dns'
+cis_security_hardening::rules::dns::dns_domain: example.com
+cis_security_hardening::rules::dns::dns_search:
+  - example.com
 cis_security_hardening::rules::dns::dns_servers:
   - 8.8.8.8
   - 8.8.4.4

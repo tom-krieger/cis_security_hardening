@@ -33,10 +33,20 @@
 # @api private
 class cis_security_hardening::rules::fapolicyd (
   Boolean $enforce = false,
+  String $gid      = 'users',
 ) {
   if $enforce {
     ensure_packages(['fapolicyd'], {
         ensure => 'installed',
     })
+
+    file_line { 'fix fapolicyd gid':
+      ensure             => present,
+      path               => '/etc/fapolicyd/fapolicyd.conf',
+      match              => '^gid = fapolicyd',
+      line               => "gid = ${gid}",
+      append_on_no_match => true,
+      require            => Package['fapolicyd'],
+    }
   }
 }
