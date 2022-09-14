@@ -27,12 +27,20 @@ class cis_security_hardening::rules::auditd_remote_encrypt (
       default  => '/etc/audisp/plugins.d/au-remote.conf',
     }
 
+    ensure_resource('file', $file, {
+        ensure => file,
+        owner  => 'root',
+        group  => 'root',
+        mode   => '0644',
+    })
+
     file_line { 'auditd remote encrypt':
       ensure             => present,
       path               => $file,
       line               => 'enable_krb5 = yes',
       match              => '^enable_krb5 =',
       append_on_no_match => true,
+      require            => File[$file],
     }
   }
 }

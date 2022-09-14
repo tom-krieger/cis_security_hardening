@@ -34,12 +34,20 @@ class cis_security_hardening::rules::auditd_remote (
       default  => '/etc/audisp/plugins.d/au-remote.conf',
     }
 
+    ensure_resource('file', $file, {
+        ensure => file,
+        owner  => 'root',
+        group  => 'root',
+        mode   => '0644',
+    })
+
     file_line { 'auditd log remote':
       ensure             => present,
       path               => $file,
       line               => 'active = yes',
       match              => '^active =',
       append_on_no_match => true,
+      require            => File[$file],
     }
 
     file_line { 'auditd log remote server':
@@ -48,6 +56,7 @@ class cis_security_hardening::rules::auditd_remote (
       line               => "remote_server = ${remote_server}",
       match              => "^remote_server = ${remote_server}",
       append_on_no_match => true,
+      require            => File[$file],
     }
   }
 }

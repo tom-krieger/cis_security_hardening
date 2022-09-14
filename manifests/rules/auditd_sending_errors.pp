@@ -24,20 +24,25 @@ class cis_security_hardening::rules::auditd_sending_errors (
   Enum['syslog','single','halt'] $action = 'syslog',
 ) {
   if $enforce {
-    file { '/etc/audisp/audisp-remote.conf':
-      ensure => file,
-      owner  => 'root',
-      group  => 'root',
-      mode   => '0644',
+    $file = $facts['os']['family'].downcase() ? {
+      'redhat' => '/etc/audisp/audisp-remote.conf',
+      default  => '/etc/audisp/plugins.d/au-remote.conf',
     }
+
+    ensure_resource('file', $file, {
+        ensure => file,
+        owner  => 'root',
+        group  => 'root',
+        mode   => '0644',
+    })
 
     file_line { 'network-failure-action':
       ensure             => present,
-      path               => '/etc/audisp/audisp-remote.conf',
+      path               => $file,
       match              => '^network_failure_acrion =',
       line               => "network_failure_action = ${action}",
       append_on_no_match => true,
-      require            => File['/etc/audisp/audisp-remote.conf'],
+      require            => File[$file],
     }
   }
 }

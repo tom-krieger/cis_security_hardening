@@ -41,6 +41,18 @@ class cis_security_hardening::rules::auditd_when_disk_full (
   String $disk_full_action        = 'SUSPEND',
 ) {
   if $enforce {
+    $file = $facts['os']['family'].downcase() ? {
+      'redhat' => '/etc/audisp/audisp-remote.conf',
+      default  => '/etc/audisp/plugins.d/au-remote.conf',
+    }
+
+    ensure_resource('file', $file, {
+        ensure => file,
+        owner  => 'root',
+        group  => 'root',
+        mode   => '0644',
+    })
+
     file_line { 'auditd_space_left_action':
       line               => "space_left_action = ${space_left_action}",
       path               => '/etc/audit/auditd.conf',
@@ -64,6 +76,7 @@ class cis_security_hardening::rules::auditd_when_disk_full (
       path               => '/etc/audisp/audisp-remote.conf',
       match              => '^disk_full_action',
       append_on_no_match => true,
+      require            => File[$file],
     }
   }
 }
