@@ -79,7 +79,7 @@ describe 'cis_security_hardening::rules::sshd_hostbased_authentication' do
                 'ensure' => 'present',
                 'path'   => path,
                 'line'   => 'HostbasedAuthentication no',
-                'match'  => '^HostbasedAuthentication.*',
+                'match'  => '^#?HostbasedAuthentication.*',
               )
               .that_notifies('Exec[reload-sshd]')
           else

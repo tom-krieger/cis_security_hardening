@@ -79,7 +79,7 @@ describe 'cis_security_hardening::rules::sshd_priv_separation' do
                 'ensure' => 'present',
                 'path'   => path,
                 'line'               => 'UsePrivilegeSeparation sandbox',
-                'match'              => '^UsePrivilegeSeparation.*',
+                'match'              => '^#?UsePrivilegeSeparation.*',
                 'append_on_no_match' => true,
               )
               .that_notifies('Exec[reload-sshd]')

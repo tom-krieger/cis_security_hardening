@@ -28,7 +28,7 @@ class cis_security_hardening::rules::sshd_printlastlog (
       ensure             => present,
       path               => $path,
       line               => 'PrintLastLog yes',
-      match              => '^PrintLastLog.*',
+      match              => '^#?PrintLastLog.*',
       append_on_no_match => true,
       notify             => Exec['reload-sshd'],
     }

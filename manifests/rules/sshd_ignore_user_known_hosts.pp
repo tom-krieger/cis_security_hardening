@@ -28,7 +28,7 @@ class cis_security_hardening::rules::sshd_ignore_user_known_hosts (
       ensure             => present,
       path               => $path,
       line               => 'IgnoreUserKnownHosts yes',
-      match              => '^IgnoreUserKnownHosts.*',
+      match              => '^#?IgnoreUserKnownHosts.*',
       append_on_no_match => true,
       notify             => Exec['reload-sshd'],
     }

@@ -79,7 +79,7 @@ describe 'cis_security_hardening::rules::sshd_user_environment' do
                 'ensure' => 'present',
                 'path'   => path,
                 'line'   => 'PermitUserEnvironment no',
-                'match'  => '^PermitUserEnvironment.*',
+                'match'  => '^#?PermitUserEnvironment.*',
               )
               .that_notifies('Exec[reload-sshd]')
           else

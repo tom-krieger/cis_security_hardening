@@ -30,7 +30,7 @@ class cis_security_hardening::rules::sshd_max_startups (
       ensure             => present,
       path               => $path,
       line               => 'maxstartups 10:30:60',
-      match              => '^maxstartups.*',
+      match              => '^#?maxstartups.*',
       append_on_no_match => true,
       notify             => Exec['reload-sshd'],
     }

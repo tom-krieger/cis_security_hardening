@@ -79,7 +79,7 @@ describe 'cis_security_hardening::rules::sshd_gssapi' do
                 'ensure' => 'present',
                 'path'   => path,
                 'line'               => 'GSSAPIAuthentication no',
-                'match'              => '^GSSAPIAuthentication.*',
+                'match'              => '^#?GSSAPIAuthentication.*',
                 'append_on_no_match' => true,
               )
               .that_notifies('Exec[reload-sshd]')

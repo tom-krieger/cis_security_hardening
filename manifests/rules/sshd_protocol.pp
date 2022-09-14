@@ -30,7 +30,7 @@ class cis_security_hardening::rules::sshd_protocol (
       ensure             => present,
       path               => $path,
       line               => 'Protocol 2',
-      match              => '^Protocol.*',
+      match              => '^#?Protocol.*',
       append_on_no_match => true,
       notify             => Exec['reload-sshd'],
     }

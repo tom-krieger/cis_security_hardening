@@ -79,7 +79,7 @@ describe 'cis_security_hardening::rules::sshd_empty_passwords' do
                 'ensure' => 'present',
                 'path'   => path,
                 'line'   => 'PermitEmptyPasswords no',
-                'match'  => '^PermitEmptyPasswords.*',
+                'match'  => '^#?PermitEmptyPasswords.*',
               )
               .that_notifies('Exec[reload-sshd]')
           else

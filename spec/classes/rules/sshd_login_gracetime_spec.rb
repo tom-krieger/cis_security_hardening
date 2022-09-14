@@ -80,7 +80,7 @@ describe 'cis_security_hardening::rules::sshd_login_gracetime' do
                 'ensure' => 'present',
                 'path'   => path,
                 'line'   => 'LoginGraceTime 50',
-                'match'  => '^LoginGraceTime.*',
+                'match'  => '^#?LoginGraceTime.*',
               )
               .that_notifies('Exec[reload-sshd]')
           else

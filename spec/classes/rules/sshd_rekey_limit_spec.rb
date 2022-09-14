@@ -80,7 +80,7 @@ describe 'cis_security_hardening::rules::sshd_rekey_limit' do
                 'ensure' => 'present',
                 'path'   => path,
                 'line'   => 'RekeyLimit 2G 2h',
-                'match'  => '^RekeyLimit.*',
+                'match'  => '^#?RekeyLimit.*',
                 'append_on_no_match' => true,
               )
               .that_notifies('Exec[reload-sshd]')

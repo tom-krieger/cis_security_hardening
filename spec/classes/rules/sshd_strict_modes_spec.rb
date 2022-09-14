@@ -79,7 +79,7 @@ describe 'cis_security_hardening::rules::sshd_strict_modes' do
                 'ensure' => 'present',
                 'path'   => path,
                 'line'               => 'StrictModes yes',
-                'match'              => '^StrictModes.*',
+                'match'              => '^#?StrictModes.*',
                 'append_on_no_match' => true,
               )
               .that_notifies('Exec[reload-sshd]')

@@ -79,7 +79,7 @@ describe 'cis_security_hardening::rules::sshd_ignore_user_known_hosts' do
                 'ensure' => 'present',
                 'path'   => path,
                 'line'               => 'IgnoreUserKnownHosts yes',
-                'match'              => '^IgnoreUserKnownHosts.*',
+                'match'              => '^#?IgnoreUserKnownHosts.*',
                 'append_on_no_match' => true,
               )
               .that_notifies('Exec[reload-sshd]')

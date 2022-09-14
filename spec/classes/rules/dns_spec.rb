@@ -44,7 +44,7 @@ describe 'cis_security_hardening::rules::dns' do
               .with(
                 'command'     => 'chattr +i /etc/resolv.conf',
                 'path'        => ['/sbin', '/usr/sbin', '/bin', '/usr/bin'],
-                'onlyif'  => 'test -z "$(lsattr /etc/resolv.conf | cut -d \'-\' -f 5)"',
+                'onlyif' => 'test -z "$(lsattr /etc/resolv.conf | cut -d \'-\' -f 5)"',
               )
           else
             is_expected.not_to contain_file_line('nsswitch dns')

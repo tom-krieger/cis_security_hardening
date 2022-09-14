@@ -80,7 +80,7 @@ describe 'cis_security_hardening::rules::sshd_loglevel' do
                 'ensure' => 'present',
                 'path'   => path,
                 'line'   => 'LogLevel INFO',
-                'match'  => '^LogLevel.*',
+                'match'  => '^#?LogLevel.*',
               )
               .that_notifies('Exec[reload-sshd]')
           else

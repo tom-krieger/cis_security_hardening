@@ -30,7 +30,7 @@ class cis_security_hardening::rules::sshd_gssapi (
       ensure             => present,
       path               => $path,
       line               => 'GSSAPIAuthentication no',
-      match              => '^GSSAPIAuthentication.*',
+      match              => '^#?GSSAPIAuthentication.*',
       append_on_no_match => true,
       notify             => Exec['reload-sshd'],
     }

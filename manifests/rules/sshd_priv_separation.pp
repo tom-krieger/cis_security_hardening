@@ -28,7 +28,7 @@ class cis_security_hardening::rules::sshd_priv_separation (
       ensure             => present,
       path               => $path,
       line               => 'UsePrivilegeSeparation sandbox',
-      match              => '^UsePrivilegeSeparation.*',
+      match              => '^#?UsePrivilegeSeparation.*',
       append_on_no_match => true,
       notify             => Exec['reload-sshd'],
     }

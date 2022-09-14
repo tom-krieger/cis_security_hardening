@@ -73,7 +73,7 @@ describe 'cis_security_hardening::rules::sshd_strong_rng' do
               .with(
                 'ensure'             => 'present',
                 'path'               => '/etc/sysconfig/sshd',
-                'match'              => '^SSH_USE_STRONG_RNG=',
+                'match'              => '^#?SSH_USE_STRONG_RNG=',
                 'line'               => 'SSH_USE_STRONG_RNG=32',
                 'append_on_no_match' => true,
               )

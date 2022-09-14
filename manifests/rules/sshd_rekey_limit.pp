@@ -43,7 +43,7 @@ class cis_security_hardening::rules::sshd_rekey_limit (
       ensure             => present,
       path               => $path,
       line               => "RekeyLimit ${limit}",
-      match              => '^RekeyLimit.*',
+      match              => '^#?RekeyLimit.*',
       append_on_no_match => true,
       notify             => Exec['reload-sshd'],
     }

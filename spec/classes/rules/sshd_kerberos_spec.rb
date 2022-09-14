@@ -79,7 +79,7 @@ describe 'cis_security_hardening::rules::sshd_kerberos' do
                 'ensure' => 'present',
                 'path'   => path,
                 'line'               => 'KerberosAuthentication no',
-                'match'              => '^KerberosAuthentication.*',
+                'match'              => '^#?KerberosAuthentication.*',
                 'append_on_no_match' => true,
               )
               .that_notifies('Exec[reload-sshd]')

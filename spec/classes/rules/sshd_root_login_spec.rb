@@ -79,7 +79,7 @@ describe 'cis_security_hardening::rules::sshd_root_login' do
                 'ensure' => 'present',
                 'path'   => path,
                 'line'   => 'PermitRootLogin no',
-                'match'  => '^PermitRootLogin.*',
+                'match'  => '^#?PermitRootLogin.*',
               )
               .that_notifies('Exec[reload-sshd]')
           else

@@ -79,7 +79,7 @@ describe 'cis_security_hardening::rules::sshd_banner' do
                 'ensure' => 'present',
                 'path'   => path,
                 'line'   => 'Banner /etc/issue.net',
-                'match'  => '^Banner.*',
+                'match'  => '^#?Banner.*',
               )
               .that_notifies('Exec[reload-sshd]')
           else

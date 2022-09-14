@@ -79,7 +79,7 @@ describe 'cis_security_hardening::rules::sshd_use_pam' do
                 'ensure' => 'present',
                 'path'   => path,
                 'line'   => 'UsePAM yes',
-                'match'  => '^UsePAM.*',
+                'match'  => '^#?UsePAM.*',
                 'append_on_no_match' => true,
               )
               .that_notifies('Exec[reload-sshd]')

@@ -79,7 +79,7 @@ describe 'cis_security_hardening::rules::sshd_protocol' do
                 'ensure' => 'present',
                 'path'   => path,
                 'line'               => 'Protocol 2',
-                'match'              => '^Protocol.*',
+                'match'              => '^#?Protocol.*',
                 'append_on_no_match' => true,
               )
               .that_notifies('Exec[reload-sshd]')

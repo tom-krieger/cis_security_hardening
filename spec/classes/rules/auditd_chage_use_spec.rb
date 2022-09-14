@@ -57,7 +57,7 @@ describe 'cis_security_hardening::rules::auditd_chage_use' do
                   'content' => '-a always,exit -F path=/usr/bin/chage -F perm=x -F auid>=1000 -F auid!=4294967295 -k privileged-chage',
                 )
             end
-            
+
           else
             is_expected.not_to contain_concat__fragment('watch chage command rule 1')
           end
