@@ -12,6 +12,8 @@
 #
 # @param enforce
 #    Enforce the rule.
+# @param inactive_days
+#    Inactivr days.
 #
 # @example
 #   class { 'cis_security_hardening::rules::inactive_password_lock':

@@ -24,6 +24,8 @@
 #
 # @param enforce
 #    Enforce the rule.
+# @param gid
+#    The group fapolicyd should run. 
 #
 # @example
 #   class { 'cis_security_hardening::rules::fapolicyd':
