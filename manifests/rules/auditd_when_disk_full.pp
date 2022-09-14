@@ -61,7 +61,7 @@ class cis_security_hardening::rules::auditd_when_disk_full (
     }
     file_line { 'disk_full_action':
       line               => "disk_full_action = ${disk_full_action}",
-      path               => '/etc/audit/auditd.conf',
+      path               => '/etc/audisp/audisp-remote.conf',
       match              => '^disk_full_action',
       append_on_no_match => true,
     }

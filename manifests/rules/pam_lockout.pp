@@ -101,6 +101,14 @@ class cis_security_hardening::rules::pam_lockout (
               control => 'required',
               module  => 'pam_faillock.so',
             }
+
+            Pam { "disable-nullok-${service}":
+              ensure    => present,
+              service   => $service,
+              type      => 'auth',
+              module    => 'pam_unix.so',
+              arguments => ['try_first_pass'],
+            }
           }
         }
 

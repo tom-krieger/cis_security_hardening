@@ -468,6 +468,7 @@ cis_security_hardening::rules::sshd_kerberos::enforce: true
 cis_security_hardening::rules::sshd_strict_modes::enforce: true
 cis_security_hardening::rules::sshd_priv_separation::enforce: true
 cis_security_hardening::rules::sshd_compression::enforce: true
+cis_security_hardening::rules::sshd_compression::compression: no
 cis_security_hardening::rules::sshd_x11_use_localhost::enforce: true
 
 cis_security_hardening::rules::pam_pw_requirements::enforce: true

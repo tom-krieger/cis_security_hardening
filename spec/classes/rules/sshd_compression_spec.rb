@@ -62,6 +62,7 @@ describe 'cis_security_hardening::rules::sshd_compression' do
         let(:params) do
           {
             'enforce' => enforce,
+            'compression' => 'delayed',
           }
         end
 

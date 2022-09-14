@@ -18,7 +18,8 @@
 #
 # @api private
 class cis_security_hardening::rules::sshd_compression (
-  Boolean $enforce = false,
+  Boolean $enforce                  = false,
+  Enum['no','delayed'] $compression = 'no',
 ) {
   if $enforce {
     $path = ($facts['os']['name'] == 'SLES' and $facts['os']['release']['major'] == '12') ? {
@@ -28,7 +29,7 @@ class cis_security_hardening::rules::sshd_compression (
     file_line { 'sshd-compression':
       ensure             => present,
       path               => $path,
-      line               => 'Compression delayed',
+      line               => "Compression ${compression}",
       match              => '^#?Compression.*',
       append_on_no_match => true,
       notify             => Exec['reload-sshd'],

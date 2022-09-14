@@ -531,6 +531,7 @@ cis_security_hardening::rules::sshd_crypto_policy::enforce: true
 cis_security_hardening::rules::sshd_strong_rng::enforce: true
 cis_security_hardening::rules::sshd_strict_modes::enforce: true
 cis_security_hardening::rules::sshd_compression::enforce: true
+cis_security_hardening::rules::sshd_compression::compression: no
 cis_security_hardening::rules::sshd_ignore_user_known_hosts::enforce: true
 cis_security_hardening::rules::sshd_kerberos::enforce: true
 cis_security_hardening::rules::sshd_printlastlog::enforce: true
