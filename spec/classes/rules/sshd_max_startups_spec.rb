@@ -79,7 +79,7 @@ describe 'cis_security_hardening::rules::sshd_max_startups' do
                 'ensure' => 'present',
                 'path'   => path,
                 'line'               => 'MaxStartups 10:30:60',
-                'match'              => '^#?MaxS‚tartups.*',
+                'match'              => '^#?MaxStartups.*',
                 'append_on_no_match' => true,
               )
               .that_notifies('Exec[reload-sshd]')
