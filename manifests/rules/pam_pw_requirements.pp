@@ -86,97 +86,95 @@ class cis_security_hardening::rules::pam_pw_requirements (
       'password-auth',
     ]
 
-    case $facts['osfamily'].downcase() {
+    case $facts['os']['family'].downcase() {
       'redhat': {
-        if ($facts['operatingsystemmajrelease'] > '6') {
-          file_line { 'pam minlen':
+        file_line { 'pam minlen':
+          ensure             => 'present',
+          path               => '/etc/security/pwquality.conf',
+          line               => "minlen = ${minlen}",
+          match              => '^#?minlen',
+          append_on_no_match => true,
+        }
+
+        if ($minclass != -1) {
+          file_line { 'pam minclass':
             ensure             => 'present',
             path               => '/etc/security/pwquality.conf',
-            line               => "minlen = ${minlen}",
-            match              => '^#?minlen',
+            line               => "minclass = ${minclass}",
+            match              => '^#?minclass',
             append_on_no_match => true,
           }
+        }
 
-          if ($minclass != -1) and ($facts['operatingsystemmajrelease'] > '7') {
-            file_line { 'pam minclass':
-              ensure             => 'present',
-              path               => '/etc/security/pwquality.conf',
-              line               => "minclass = ${minclass}",
-              match              => '^#?minclass',
-              append_on_no_match => true,
-            }
-          } else {
-            file_line { 'pam dcredit':
-              ensure             => 'present',
-              path               => '/etc/security/pwquality.conf',
-              line               => "dcredit = ${dcredit}",
-              match              => '^#?dcredit',
-              append_on_no_match => true,
-            }
+        file_line { 'pam dcredit':
+          ensure             => 'present',
+          path               => '/etc/security/pwquality.conf',
+          line               => "dcredit = ${dcredit}",
+          match              => '^#?dcredit',
+          append_on_no_match => true,
+        }
 
-            file_line { 'pam ucredit':
-              ensure             => 'present',
-              path               => '/etc/security/pwquality.conf',
-              line               => "ucredit = ${ucredit}",
-              match              => '^#?ucredit',
-              append_on_no_match => true,
-            }
+        file_line { 'pam ucredit':
+          ensure             => 'present',
+          path               => '/etc/security/pwquality.conf',
+          line               => "ucredit = ${ucredit}",
+          match              => '^#?ucredit',
+          append_on_no_match => true,
+        }
 
-            file_line { 'pam ocredit':
-              ensure             => 'present',
-              path               => '/etc/security/pwquality.conf',
-              line               => "ocredit = ${ocredit}",
-              match              => '^#?ocredit',
-              append_on_no_match => true,
-            }
+        file_line { 'pam ocredit':
+          ensure             => 'present',
+          path               => '/etc/security/pwquality.conf',
+          line               => "ocredit = ${ocredit}",
+          match              => '^#?ocredit',
+          append_on_no_match => true,
+        }
 
-            file_line { 'pam lcredit':
-              ensure             => 'present',
-              path               => '/etc/security/pwquality.conf',
-              line               => "lcredit = ${lcredit}",
-              match              => '^#?lcredit',
-              append_on_no_match => true,
-            }
+        file_line { 'pam lcredit':
+          ensure             => 'present',
+          path               => '/etc/security/pwquality.conf',
+          line               => "lcredit = ${lcredit}",
+          match              => '^#?lcredit',
+          append_on_no_match => true,
+        }
 
-            if $dictcheck {
-              file_line { 'pam dictcheck':
-                ensure             => 'present',
-                path               => '/etc/security/pwquality.conf',
-                line               => 'dictcheck = 1',
-                match              => '^#?dictcheck',
-                append_on_no_match => true,
-              }
-            }
+        if $dictcheck {
+          file_line { 'pam dictcheck':
+            ensure             => 'present',
+            path               => '/etc/security/pwquality.conf',
+            line               => 'dictcheck = 1',
+            match              => '^#?dictcheck',
+            append_on_no_match => true,
+          }
+        }
 
-            if $difok != 0 {
-              file_line { 'pam difok':
-                ensure             => 'present',
-                path               => '/etc/security/pwquality.conf',
-                line               => "difok = ${difok}",
-                match              => '^#?difok',
-                append_on_no_match => true,
-              }
-            }
+        if $difok != 0 {
+          file_line { 'pam difok':
+            ensure             => 'present',
+            path               => '/etc/security/pwquality.conf',
+            line               => "difok = ${difok}",
+            match              => '^#?difok',
+            append_on_no_match => true,
+          }
+        }
 
-            if $maxrepeat > 0 {
-              file_line { 'pam maxrepeat':
-                ensure             => 'present',
-                path               => '/etc/security/pwquality.conf',
-                line               => "maxrepeat = ${maxrepeat}",
-                match              => '^#?maxrepeat',
-                append_on_no_match => true,
-              }
-            }
+        if $maxrepeat > 0 {
+          file_line { 'pam maxrepeat':
+            ensure             => 'present',
+            path               => '/etc/security/pwquality.conf',
+            line               => "maxrepeat = ${maxrepeat}",
+            match              => '^#?maxrepeat',
+            append_on_no_match => true,
+          }
+        }
 
-            if $maxclassrepeat > 0 {
-              file_line { 'pam maxclassrepeat':
-                ensure             => 'present',
-                path               => '/etc/security/pwquality.conf',
-                line               => "maxclassrepeat = ${maxclassrepeat}",
-                match              => '^#?maxclassrepeat',
-                append_on_no_match => true,
-              }
-            }
+        if $maxclassrepeat > 0 {
+          file_line { 'pam maxclassrepeat':
+            ensure             => 'present',
+            path               => '/etc/security/pwquality.conf',
+            line               => "maxclassrepeat = ${maxclassrepeat}",
+            match              => '^#?maxclassrepeat',
+            append_on_no_match => true,
           }
         }
 
@@ -188,7 +186,7 @@ class cis_security_hardening::rules::pam_pw_requirements (
         }
 
         $services.each | $service | {
-          if ($facts['operatingsystemmajrelease'] > '7') {
+          if ($facts['os']['release']['major'] > '7') {
             if $pf_path != '' {
               $pf_file = "${pf_path}/${service}"
 
@@ -204,7 +202,7 @@ class cis_security_hardening::rules::pam_pw_requirements (
                 notify    => Exec['authselect-apply-changes'],
               }
             }
-          } elsif($facts['operatingsystemmajrelease'] == '7') {
+          } elsif($facts['os']['release']['major'] == '7') {
             Pam { "pam-${service}-requisite":
               ensure    => present,
               service   => $service,
