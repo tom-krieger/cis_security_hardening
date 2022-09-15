@@ -25,6 +25,15 @@ describe 'cis_security_hardening::rules::fapolicyd' do
                 'ensure' => 'present',
               )
 
+            is_expected.to contain_file('/run/fapolicyd')
+              .with(
+                'ensure' => 'directory',
+                'owner' => 'fapolicyd',
+                'group' => 'users',
+                'mode' => '0755',
+              )
+              .that_requires('Package[fapolicyd]')
+
             is_expected.to contain_file_line('fix fapolicyd gid')
               .with(
                 'ensure'             => 'present',
@@ -36,6 +45,7 @@ describe 'cis_security_hardening::rules::fapolicyd' do
               .that_requires('Package[fapolicyd]')
           else
             is_expected.not_to contain_package('fapolicyd')
+            is_expected.not_to contain_file('/run/fapolicyd')
           end
         }
       end

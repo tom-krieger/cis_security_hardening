@@ -42,6 +42,14 @@ class cis_security_hardening::rules::fapolicyd (
         ensure => 'installed',
     })
 
+    file { '/run/fapolicyd':
+      ensure  => directory,
+      owner   => 'fapolicyd',
+      group   => $gid,
+      mode    => '0755',
+      require => Package['fapolicyd'],
+    }
+
     file_line { 'fix fapolicyd gid':
       ensure             => present,
       path               => '/etc/fapolicyd/fapolicyd.conf',

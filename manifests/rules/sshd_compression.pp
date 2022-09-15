@@ -10,6 +10,8 @@
 #
 # @param enforce
 #    Enforce the rule.
+# @param compression
+#    Compression type.
 #
 # @example
 #   class { 'cis_security_hardening::rules::sshd_compression':

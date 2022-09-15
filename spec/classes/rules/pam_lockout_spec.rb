@@ -97,7 +97,7 @@ describe 'cis_security_hardening::rules::pam_lockout' do
                     'module'  => 'pam_faillock.so',
                   )
 
-                is_expected.to contain_pam("disable-nullok-system-auth")
+                is_expected.to contain_pam('disable-nullok-system-auth')
                   .with(
                     'ensure'    => 'present',
                     'service'   => 'system-auth',
@@ -106,7 +106,7 @@ describe 'cis_security_hardening::rules::pam_lockout' do
                     'arguments' => ['try_first_pass'],
                   )
 
-                is_expected.to contain_pam("disable-nullok-password-auth")
+                is_expected.to contain_pam('disable-nullok-password-auth')
                   .with(
                     'ensure'    => 'present',
                     'service'   => 'password-auth',
@@ -128,8 +128,8 @@ describe 'cis_security_hardening::rules::pam_lockout' do
                 is_expected.not_to contain_pam('pam-auth-faillock-required-2')
                 is_expected.not_to contain_pam('account-faillock-system-auth')
                 is_expected.not_to contain_pam('account-faillock-password-auth')
-                is_expected.not_to contain_pam("disable-nullok-system-auth")
-                is_expected.not_to contain_pam("disable-nullok-password-auth")
+                is_expected.not_to contain_pam('disable-nullok-system-auth')
+                is_expected.not_to contain_pam('disable-nullok-password-auth')
 
                 is_expected.to contain_file_line('update pam lockout system-auth')
                   .with(
@@ -306,8 +306,8 @@ describe 'cis_security_hardening::rules::pam_lockout' do
             is_expected.not_to contain_file_line('faillock_dir')
             is_expected.not_to contain_file_line('faillock_silent')
             is_expected.not_to contain_file_line('faillock_even_deny_root')
-            is_expected.not_to contain_pam("disable-nullok-system-auth")
-            is_expected.not_to contain_pam("disable-nullok-password-auth")
+            is_expected.not_to contain_pam('disable-nullok-system-auth')
+            is_expected.not_to contain_pam('disable-nullok-password-auth')
           end
         }
       end
