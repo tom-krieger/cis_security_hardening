@@ -35,10 +35,10 @@ describe 'cis_security_hardening::rules::auditd_when_disk_full' do
 
           if enforce
             file = if os_facts[:osfamily].casecmp('redhat').zero?
-              '/etc/audisp/audisp-remote.conf'
-            else
-              '/etc/audisp/plugins.d/au-remote.conf'
-            end
+                     '/etc/audisp/audisp-remote.conf'
+                   else
+                     '/etc/audisp/plugins.d/au-remote.conf'
+                   end
             is_expected.to contain_file_line('auditd_space_left_action')
               .with(
                 'line'  => 'space_left_action = email',

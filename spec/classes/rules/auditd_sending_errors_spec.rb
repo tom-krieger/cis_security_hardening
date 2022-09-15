@@ -21,10 +21,10 @@ describe 'cis_security_hardening::rules::auditd_sending_errors' do
 
           if enforce
             file = if os_facts[:osfamily].casecmp('redhat').zero?
-              '/etc/audisp/audisp-remote.conf'
-            else
-              '/etc/audisp/plugins.d/au-remote.conf'
-            end
+                     '/etc/audisp/audisp-remote.conf'
+                   else
+                     '/etc/audisp/plugins.d/au-remote.conf'
+                   end
             is_expected.to contain_file(file)
               .with(
                 'ensure' => 'file',
