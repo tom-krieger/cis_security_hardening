@@ -20,7 +20,12 @@ describe 'cis_security_hardening::rules::auditd_sending_errors' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file('/etc/audisp/audisp-remote.conf')
+            file = if os_facts[:osfamily].casecmp('redhat').zero?
+              '/etc/audisp/audisp-remote.conf'
+            else
+              '/etc/audisp/plugins.d/au-remote.conf'
+            end
+            is_expected.to contain_file(file)
               .with(
                 'ensure' => 'file',
                 'owner'  => 'root',
@@ -31,7 +36,7 @@ describe 'cis_security_hardening::rules::auditd_sending_errors' do
             is_expected.to contain_file_line('network-failure-action')
               .with(
                 'ensure'             => 'present',
-                'path'               => '/etc/audisp/audisp-remote.conf',
+                'path'               => file,
                 'match'              => '^network_failure_acrion =',
                 'line'               => 'network_failure_action = halt',
                 'append_on_no_match' => true,
