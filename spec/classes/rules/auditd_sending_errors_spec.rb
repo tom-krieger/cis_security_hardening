@@ -41,7 +41,7 @@ describe 'cis_security_hardening::rules::auditd_sending_errors' do
                 'line'               => 'network_failure_action = halt',
                 'append_on_no_match' => true,
               )
-              .that_requires('File[/etc/audisp/audisp-remote.conf]')
+              .that_requires("File[#{file}]")
 
           else
             is_expected.not_to contain_file('/etc/audisp/audisp-remote.conf')
