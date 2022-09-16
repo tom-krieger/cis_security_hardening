@@ -48,13 +48,7 @@ class cis_security_hardening::rules::issue_perms (
     }
 
     unless  $facts['os']['name'] == 'SLES' and $facts['os']['release']['major'] == '12' and $issue_link {
-      ensure_resource('file', '/etc/issue', {
-          ensure  => present,
-          content => $content,
-          owner   => 'root',
-          group   => 'root',
-          mode    => '0644',
-      })
+      ensure_resource('file', '/etc/issue', $data)
     }
   }
 }
