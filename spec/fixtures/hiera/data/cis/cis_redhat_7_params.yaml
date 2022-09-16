@@ -43,7 +43,7 @@ cis_security_hardening::rules::yum_clean_requirements::enforce: true
 
 cis_security_hardening::rules::yum_gpgcheck::enforce: true
 cis_security_hardening::rules::rhnsd::enforce: true
-cis_security_hardening::rules::local_gpgcheck::enforce: true
+cis_security_hardening::rules::yum_local_gpgcheck::enforce: true
 
 cis_security_hardening::rules::aide_installed::enforce: true
 cis_security_hardening::rules::aide_regular_checks::enforce: true
@@ -468,8 +468,9 @@ cis_security_hardening::rules::sshd_kerberos::enforce: true
 cis_security_hardening::rules::sshd_strict_modes::enforce: true
 cis_security_hardening::rules::sshd_priv_separation::enforce: true
 cis_security_hardening::rules::sshd_compression::enforce: true
-cis_security_hardening::rules::sshd_compression::compression: no
+cis_security_hardening::rules::sshd_compression::compression: 'no'
 cis_security_hardening::rules::sshd_x11_use_localhost::enforce: true
+cis_security_hardening::rules::sshd_rsa_rhosts_authentication::enforce: true
 
 cis_security_hardening::rules::pam_pw_requirements::enforce: true
 cis_security_hardening::rules::pam_pw_requirements::minlen: 14
@@ -481,6 +482,7 @@ cis_security_hardening::rules::pam_pw_requirements::minclass: -1
 cis_security_hardening::rules::pam_pw_requirements::maxrepeat: 3
 cis_security_hardening::rules::pam_pw_requirements::maxclassrepeat: 4
 cis_security_hardening::rules::pam_pw_requirements::retry: 3
+cis_security_hardening::rules::pam_pw_requirements::difok: 0
 cis_security_hardening::rules::pam_lockout::enforce: true
 cis_security_hardening::rules::pam_lockout::attempts: 3
 cis_security_hardening::rules::pam_lockout::lockouttime: 900

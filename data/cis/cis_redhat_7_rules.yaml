@@ -298,6 +298,7 @@ cis_security_hardening::benchmark::redhat::7:
         - sshd_priv_separation
         - sshd_compression
         - sshd_x11_use_localhost
+        - sshd_rsa_rhosts_authentication
     configure_pam:
       level1:
         - pam_pw_requirements
