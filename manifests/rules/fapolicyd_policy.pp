@@ -64,7 +64,7 @@ class cis_security_hardening::rules::fapolicyd_policy (
       }
 
       $mps.each |$mp, $data| {
-        if $data['filesystem'] in ['tmpfs', 'ext4', 'ext3', 'xfs'] {
+        if $data['filesystem'] in ['tmpfs', 'ext4', 'ext3', 'xfs'] and $mp !~ /^\/run/ and $mp !~ /\/sys/ {
           concat::fragment { "mount-${mp}":
             content => "${mp}\n",
             target  => '/etc/fapolicyd/fapolicyd.mounts',
