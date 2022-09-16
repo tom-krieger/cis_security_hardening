@@ -61,7 +61,7 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                 .with(
                   'ensure'             => 'present',
                   'path'               => '/etc/security/pwquality.conf',
-                  'line'               => "minlen = 14",
+                  'line'               => 'minlen = 14',
                   'match'              => '^#?minlen',
                   'append_on_no_match' => true,
                 )
