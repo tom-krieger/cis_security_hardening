@@ -31,13 +31,21 @@ class cis_security_hardening::rules::pam_last_logon (
       $service = 'login'
     }
 
-    Pam { "pam-login-last-logon-${service}":
-      ensure    => present,
-      service   => $service,
-      type      => 'session',
-      control   => 'required',
-      module    => 'pam_lastlog.so',
-      arguments => ['showfailed'],
+    file_line { 'pam last logon':
+      ensure             => present,
+      path               => "/etc/oam.d/${service}",
+      match              => 'session\s+required\s+pam_lastlog.so',
+      line               => 'session        required        pamlastlog.so showfailed',
+      append_on_no_match => true,
     }
+
+    # Pam { "pam-login-last-logon-${service}":
+    #   ensure    => present,
+    #   service   => $service,
+    #   type      => 'session',
+    #   control   => 'required',
+    #   module    => 'pam_lastlog.so',
+    #   arguments => ['showfailed'],
+    # }
   }
 }
