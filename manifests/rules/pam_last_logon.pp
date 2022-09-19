@@ -25,24 +25,19 @@ class cis_security_hardening::rules::pam_last_logon (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    if $facts['operatingsystem'].downcase() == 'redhat' and $facts['operatingsystemmajrelease'] == '7' {
-      Pam { 'pam-login-last-logon':
-        ensure    => present,
-        service   => 'postlogin',
-        type      => 'session',
-        control   => 'required',
-        module    => 'pam_lastlog.so',
-        arguments => ['showfailed'],
-      }
+    if ($facts['os']['name'].downcase() == 'redhat') and ($facts['os']['release']['major'] == '7') {
+      $service = 'postlogin'
     } else {
-      Pam { 'pam-login-last-logon':
-        ensure    => present,
-        service   => 'login',
-        type      => 'session',
-        control   => 'required',
-        module    => 'pam_lastlog.so',
-        arguments => ['showfailed'],
-      }
+      $service = 'login'
+    }
+
+    Pam { "pam-login-last-logon-${service}":
+      ensure    => present,
+      service   => $service,
+      type      => 'session',
+      control   => 'required',
+      module    => 'pam_lastlog.so',
+      arguments => ['showfailed'],
     }
   }
 }

@@ -24,14 +24,14 @@ describe 'cis_security_hardening::rules::pam_last_logon' do
         it {
           is_expected.to compile
 
-          if enforce
-            service = if os_facts[:operatingsystem].casecmp('redhat').zero? && os_facts[:operatingsystemmajrelease] == '7'
-                        'postlogin'
-                      else
-                        'login'
-                      end
+          service = if os_facts[:operatingsystem].casecmp('redhat').zero? && os_facts[:operatingsystemmajrelease] == '7'
+            'postlogin'
+          else
+            'login'
+          end
 
-            is_expected.to contain_pam('pam-login-last-logon')
+          if enforce
+            is_expected.to contain_pam("pam-login-last-logon-#{service}")
               .with(
                 'ensure'    => 'present',
                 'service'   => service,
@@ -41,7 +41,7 @@ describe 'cis_security_hardening::rules::pam_last_logon' do
                 'arguments' => ['showfailed'],
               )
           else
-            is_expected.not_to contain_pam('pam-login-last-logon')
+            is_expected.not_to contain_pam("pam-login-last-logon-#{service}")
           end
         }
       end

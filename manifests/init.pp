@@ -26,6 +26,8 @@
 #    Time to wait until system is rebooted if required. Time in seconds.
 # @param verbose_logging
 #    Print various info messages
+# @param remove_authconfig
+#    remove yuthconfig package on Redhat 7 or similar OSes
 #
 # @example
 #   include cis_security_hardening
@@ -38,8 +40,19 @@ class cis_security_hardening (
   Stdlib::Absolutepath $fact_upload_command = "${base_dir}/bin/fact_upload.sh",
   Integer $time_until_reboot                = 120,
   Boolean $verbose_logging                  = false,
+  Boolean $remove_authconfig                = false,
 ) {
   $base_dir = '/usr/share/cis_security_hardening'
+
+  if $remove_authconfig and $facts['os']['family'].downcase() == 'redhat' and $facts['os']['release']['major'] == '7' {
+    $ensure = $facts['os']['family'].downcase() ? {
+      'suse'  => 'absent',
+      default => 'purged',
+    }
+    ensure_packages(['authconfig'], {
+        ensure => $ensure,
+    })
+  }
 
   class { 'cis_security_hardening::services':
     time_until_reboot => $time_until_reboot,
