@@ -6,6 +6,7 @@ require 'facter/cis_security_hardening/utils/check_value_integer'
 require 'facter/cis_security_hardening/utils/read_file_stats'
 require 'facter/cis_security_hardening/utils/read_iptables_rules'
 require 'facter/cis_security_hardening/utils/read_firewalld_zone_iface'
+require 'facter/cis_security_hardening/utils/read_grub_data'
 require 'pp'
 
 # frozen_string_literal: true
@@ -207,6 +208,9 @@ def facts_redhat(os, distid, release)
                                                else
                                                  'yes'
                                                end
+
+  # get grub data
+  cis_security_hardening['grub'] = read_grub_data
 
   # return results
   cis_security_hardening

@@ -25,10 +25,10 @@ describe 'cis_security_hardening::rules::pam_last_logon' do
           is_expected.to compile
 
           service = if os_facts[:operatingsystem].casecmp('redhat').zero? && os_facts[:operatingsystemmajrelease] == '7'
-            'postlogin'
-          else
-            'login'
-          end
+                      'postlogin'
+                    else
+                      'login'
+                    end
 
           if enforce
             is_expected.to contain_file_line('pam last logon')
@@ -40,7 +40,7 @@ describe 'cis_security_hardening::rules::pam_last_logon' do
                 'append_on_no_match' => true,
               )
           else
-            is_expected.not_to contain_pam("pam-login-last-logon")
+            is_expected.not_to contain_pam('pam-login-last-logon')
           end
         }
       end

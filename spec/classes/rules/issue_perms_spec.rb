@@ -42,7 +42,7 @@ describe 'cis_security_hardening::rules::issue_perms' do
                     'mode'   => '0644',
                   )
               end
-                
+
             else
               is_expected.not_to contain_file('/etc/issue')
             end
