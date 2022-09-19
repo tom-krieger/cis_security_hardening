@@ -33,7 +33,7 @@ class cis_security_hardening::rules::pam_last_logon (
 
     file_line { 'pam last logon':
       ensure             => present,
-      path               => "/etc/oam.d/${service}",
+      path               => "/etc/pam.d/${service}",
       match              => 'session\s+required\s+pam_lastlog.so',
       line               => 'session        required        pamlastlog.so showfailed',
       append_on_no_match => true,
