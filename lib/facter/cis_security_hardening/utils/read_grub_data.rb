@@ -5,7 +5,6 @@ require 'pp'
 def read_grub_data
   grub = {}
   lines = Facter::Core::Execution.exec('grep /boot /etc/mtab').split("\n")
-  pp lines
   boot_part = ''
   uuid = ''
   mp = ''
@@ -16,9 +15,6 @@ def read_grub_data
     data = line.split("\s")
     dev = data[0]
     mp = data[1]
-    pp dev
-    pp mp
-
     val = Facter::Core::Execution.exec("/sbin/blkid #{dev}")
     data = if val.nil? || val.empty?
              {}
@@ -31,7 +27,6 @@ def read_grub_data
 
   grub['boot_mountpoint'] = mp
   grub['boot_device'] = dev
-  grub['boot_part'] = boot_part
   grub['boot_part_uuid'] = uuid
 
   grub
