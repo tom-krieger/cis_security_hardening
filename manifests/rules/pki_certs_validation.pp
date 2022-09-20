@@ -47,12 +47,6 @@ class cis_security_hardening::rules::pki_certs_validation (
       $match = "\\s*cert_policy ="
       $line = "    cert_policy = ${cert_policy}"
 
-      echo { 'pkcs-debug':
-        message  => "pkcs policy ${policy} - match ${match} - replace ${line}",
-        loglevel => 'info',
-        withpath => false,
-      }
-
       file_line { 'pki certs validation':
         ensure             => present,
         path               => '/etc/pam_pkcs11/pam_pkcs11.conf',
