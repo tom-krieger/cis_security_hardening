@@ -36,6 +36,14 @@ class cis_security_hardening::rules::fips_bootloader (
       notify => Exec['fips-grub-config'],
     }
 
+    $boot_uuid = fact('cis_security_hardening.grub.boot_part_uuid')
+    if $boot_uuid != undef and $facts['operatingsystem'].downcase() == 'redhat' {
+      kernel_parameter { 'boot':
+        value  => $boot_uuid,
+        notify => Exec['fips-grub-config'],
+      }
+    }
+
     case $facts['os']['family'].downcase() {
       'debian': {
         $cmd = 'update-grub'
