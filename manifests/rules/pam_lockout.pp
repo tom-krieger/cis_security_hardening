@@ -21,6 +21,9 @@
 # @param lockouttime
 #    Lockout the account for this number of seconds
 #
+# @param fail_interval
+#    Time interval for failed login attempts counted for lockout.
+#
 # @param lockout_root
 #    Flag if root should be locked on failed logins.
 #
@@ -38,6 +41,7 @@ class cis_security_hardening::rules::pam_lockout (
   Boolean $enforce               = false,
   Integer $attempts              = 3,
   Integer $lockouttime           = 900,
+  Integer $fail_interval         = 0,
   Boolean $lockout_root          = false,
   Stdlib::Absolutepath $lock_dir = '/var/log/faillock',
 ) {
@@ -71,9 +75,13 @@ class cis_security_hardening::rules::pam_lockout (
         }
 
         if ($facts['os']['release']['major'] == '7') {
+          $fail = ($fail_interval > 0) ? {
+            true  => "fail_interval=${fail_interval} ",
+            false => '',
+          }
           $cmd = $lockout_root ? {
-            true  => "authconfig --faillockargs=\"preauth silent audit even_deny_root deny=${attempts} unlock_time=${lockouttime}\" --enablefaillock --updateall", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
-            false => "authconfig --faillockargs=\"preauth silent audit deny=${attempts} unlock_time=${lockouttime}\" --enablefaillock --updateall", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
+            true  => "authconfig --faillockargs=\"preauth silent audit even_deny_root deny=${attempts} ${fail}unlock_time=${lockouttime}\" --enablefaillock --updateall", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
+            false => "authconfig --faillockargs=\"preauth silent audit deny=${attempts} ${fail}unlock_time=${lockouttime}\" --enablefaillock --updateall", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
           }
           exec { 'configure faillock':
             command => $cmd,
