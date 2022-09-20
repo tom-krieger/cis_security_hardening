@@ -90,6 +90,10 @@ class cis_security_hardening::rules::pam_lockout (
           }
 
           $services.each | $service | {
+            $arguments = ($fail_interval > 0) ? {
+              true  => ['authfail', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}", $fail],
+              false => ['authfail', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}"],
+            }
             Pam { "pam-auth-faillock-required-2-${service}":
               ensure           => present,
               service          => $service,
@@ -97,7 +101,7 @@ class cis_security_hardening::rules::pam_lockout (
               control          => '[default=die]',
               control_is_param => true,
               module           => 'pam_faillock.so',
-              arguments        => ['authfail', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}"],
+              arguments        => $arguments,
               position         => 'after *[type="auth" and module="pam_unix.so"]',
               require          => Exec['configure faillock'],
             }
