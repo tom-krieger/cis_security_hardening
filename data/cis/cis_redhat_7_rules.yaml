@@ -308,6 +308,7 @@ cis_security_hardening::benchmark::redhat::7:
       stig:
         - pam_passwd
         - pam_last_logon
+        - sssd_mfa_services
         - pki_certs_validation
     configure_user_accounts:
       level1:

@@ -493,6 +493,8 @@ cis_security_hardening::rules::pam_old_passwords::oldpasswords: 5
 cis_security_hardening::rules::pam_old_passwords::sha512: true
 cis_security_hardening::rules::pam_passwd::enforce: true
 cis_security_hardening::rules::pam_last_logon::enforce: true
+cis_security_hardening::rules::sssd_mfa_services::enforce: true
+cis_security_hardening::rules::sssd_mfa_services::services: 'nss, pam'
 cis_security_hardening::rules::pki_certs_validation::enforce: true
 cis_security_hardening::rules::pki_certs_validation::cert_policy: 'ca, ocsp_on, signature;'
 
