@@ -75,16 +75,18 @@ class cis_security_hardening::rules::pam_lockout (
         }
 
         if ($facts['os']['release']['major'] == '7') {
-          $fail = ($fail_interval > 0) ? {
-            true  => "fail_interval=${fail_interval} ",
+          if ($fail_interval > 0) {
+            $fail = "fail_interval=${fail_interval} "
+          } else {
+            $fail = ''
+          }
+          $root_lockout = $lockout_root ? {
+            true  => 'even_deny_root ',
             false => '',
           }
-          $cmd = $lockout_root ? {
-            true  => "authconfig --faillockargs=\"preauth silent audit even_deny_root deny=${attempts} ${fail}unlock_time=${lockouttime}\" --enablefaillock --updateall", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
-            false => "authconfig --faillockargs=\"preauth silent audit deny=${attempts} ${fail}unlock_time=${lockouttime}\" --enablefaillock --updateall", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
-          }
+
           exec { 'configure faillock':
-            command => $cmd,
+            command => "authconfig --faillockargs=\"preauth silent audit ${root_lockout}deny=${attempts} ${fail}unlock_time=${lockouttime}\" --enablefaillock --updateall", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
             path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
             onlyif  => "test -z \"\$(grep -E \"auth\\s+required\\s+pam_faillock.so.*deny=${attempts}\\s+unlock_time=${lockouttime}\" /etc/pam.d/system-auth)\"", #lint:ignore:140chars
           }
