@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-def read__data
+def read_grub_data
   grub = {}
   lines = Facter::Core::Execution.exec('grep /boot /etc/mtab').split("\n")
   boot_part = ''

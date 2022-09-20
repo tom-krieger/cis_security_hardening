@@ -356,6 +356,7 @@ termination events that affect "/etc/sudoers.d/"
 * `cis_security_hardening::rules::sshd_public_keys`: Ensure permissions on SSH public host key files are configured
 * `cis_security_hardening::rules::sshd_rekey_limit`: Ensure the SSH server is configured to force frequent session key renegotiation
 * `cis_security_hardening::rules::sshd_root_login`: Ensure SSH root login is disabled
+* `cis_security_hardening::rules::sshd_rsa_rhosts_authentication`: Ensure RSA rhosts authentication is not allowed
 * `cis_security_hardening::rules::sshd_strict_modes`: Ensure SSH performs checks of home directory configuration files
 * `cis_security_hardening::rules::sshd_strong_rng`: Ensure the SSH server uses strong entropy
 * `cis_security_hardening::rules::sshd_tcp_forwarding`: Ensure SSH AllowTcpForwarding is disabled
@@ -500,6 +501,7 @@ The following parameters are available in the `cis_security_hardening` class:
 * [`auditd_dirs_to_include`](#auditd_dirs_to_include)
 * [`time_until_reboot`](#time_until_reboot)
 * [`verbose_logging`](#verbose_logging)
+* [`remove_authconfig`](#remove_authconfig)
 
 ##### <a name="profile"></a>`profile`
 
@@ -563,6 +565,14 @@ Default value: `120`
 Data type: `Boolean`
 
 Print various info messages
+
+Default value: ``false``
+
+##### <a name="remove_authconfig"></a>`remove_authconfig`
+
+Data type: `Boolean`
+
+remove yuthconfig package on Redhat 7 or similar OSes
 
 Default value: ``false``
 
@@ -1201,6 +1211,14 @@ Check all users last password change date is in the past.
 Check users' dot files are not group or world writable.
 
 **Supports noop?** false
+
+#### Parameters
+
+##### `stig`
+
+Data type: `Enum[y,n]`
+
+Check for strickter STIG permissions.
 
 ### <a name="check_users_own_home_dirs"></a>`check_users_own_home_dirs`
 
