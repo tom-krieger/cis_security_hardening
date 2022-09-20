@@ -44,11 +44,11 @@ class cis_security_hardening::rules::pki_certs_validation (
   if $enforce {
     if $pkcs11_config == '' {
       $policy = fact('cis_security_hardening.pkcs11_config.policy')
-      $match = "cert_policy\\s*=\\s*${policy};"
+      $match = "cert_policy\\s*=\\s*${cert_policy};"
       $line = "    cert_policy = ${cert_policy}"
 
       echo { 'pkcs-debug':
-        message  => "pkcs policy ${policy} - match ${match} - replace ${line}",
+        message  => "pkcs policy ${policy} - replace ${line}",
         loglevel => 'info',
         withpath => false,
       }
@@ -57,7 +57,7 @@ class cis_security_hardening::rules::pki_certs_validation (
         ensure   => present,
         path     => '/etc/pam_pkcs11/pam_pkcs11.conf',
         line     => $line,
-        match    => 'cert_policy =',
+        match    => $match,
         multiple => true,
       }
     } else {
