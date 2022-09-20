@@ -42,7 +42,7 @@ class cis_security_hardening::rules::pki_certs_validation (
   Optional[String] $pkcs11_config = '',
 ) {
   if $enforce {
-    if $pkcs11_config != '' {
+    if $pkcs11_config == '' {
       $policy = fact('cis_security_hardening.pkcs11_config.policy')
       $match = "cert_policy\\s*=\\s*${policy};"
       $line = "    cert_policy = ${cert_policy}"
@@ -61,7 +61,7 @@ class cis_security_hardening::rules::pki_certs_validation (
         multiple => true,
       }
     } else {
-      file { 'pkcs11_config prepared':
+      file { '/etc/pam_pkcs11/pam_pkcs11.conf':
         ensure => file,
         source => $pkcs11_config,
         owner  => 'root',
