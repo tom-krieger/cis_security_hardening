@@ -28,7 +28,7 @@
 # @param cert_policy
 #    Comma seperated list of policies.
 # @param pkcs11_config
-#    Prepared config file to install. The file must be given in the 'puppet://modules/...' format.
+#    Prepared config file to install. The file must be given in the 'puppet:///modules/...' format.
 #
 # @example
 #   class { 'cis_security_hardening::rules::pki_certs_validation':
@@ -39,7 +39,7 @@
 class cis_security_hardening::rules::pki_certs_validation (
   Boolean $enforce                = false,
   String $cert_policy             = 'ca,signature,ocsp_on;',
-  Optional[String] $pkcs11_config = undef,
+  Optional[String] $pkcs11_config,
 ) {
   if $enforce {
     if $pkcs11_config == undef {

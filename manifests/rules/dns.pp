@@ -45,17 +45,37 @@ class cis_security_hardening::rules::dns (
       $real_dnssearch = join($dns_search, ' ')
     }
 
+    if $facts['os']['selinux']['enabled'] {
+      $file_data = {
+        ensure  => file,
+        content => epp('cis_security_hardening/rules/common/resolv.conf.epp', {
+            dnsservers => $dns_servers,
+            search     => $real_dnssearch,
+            dnsdomain  => $dns_domain,
+        }),
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0644',
+        seltype => 'net_conf_t',
+        notify  => Exec['resolv.conf immutable'],
+      }
+    } else {
+      $file_data = {
+        ensure  => file,
+        content => epp('cis_security_hardening/rules/common/resolv.conf.epp', {
+            dnsservers => $dns_servers,
+            search     => $real_dnssearch,
+            dnsdomain  => $dns_domain,
+        }),
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0644',
+        notify  => Exec['resolv.conf immutable'],
+      }
+    }
+
     file { '/etc/resolv.conf':
-      ensure  => file,
-      content => epp('cis_security_hardening/rules/common/resolv.conf.epp', {
-          dnsservers => $dns_servers,
-          search     => $real_dnssearch,
-          dnsdomain  => $dns_domain,
-      }),
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0644',
-      notify  => Exec['resolv.conf immutable'],
+      * => $file_data,
     }
 
     exec { 'resolv.conf immutable':
