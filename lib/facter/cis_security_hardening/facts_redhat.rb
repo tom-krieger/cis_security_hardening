@@ -212,6 +212,9 @@ def facts_redhat(os, distid, release)
   # get grub data
   cis_security_hardening['grub'] = read_grub_data
 
+  # check if sssd is installed
+  cis_security_hardening['sssd'] = check_package_installed('sssd')
+  
   # return results
   cis_security_hardening
 end
