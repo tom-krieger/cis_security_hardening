@@ -44,11 +44,11 @@ class cis_security_hardening::rules::pki_certs_validation (
   if $enforce {
     if $pkcs11_config == '' {
       $policy = fact('cis_security_hardening.pkcs11_config.policy')
-      $match = "cert_policy\\s*=\\s*${cert_policy};"
+      $match = "cert_policy = ${cert_policy}"
       $line = "    cert_policy = ${cert_policy}"
 
       echo { 'pkcs-debug':
-        message  => "pkcs policy ${policy} - replace ${line}",
+        message  => "pkcs policy ${policy} - match ${match} - replace ${line}",
         loglevel => 'info',
         withpath => false,
       }
