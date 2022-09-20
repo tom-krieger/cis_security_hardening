@@ -90,6 +90,10 @@ class cis_security_hardening::rules::pam_lockout (
           }
 
           $services.each | $service | {
+            $arguments = ($fail_interval > 0) ? {
+              true  => ['authfail', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}", $fail],
+              false => ['authfail', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}"],
+            }
             Pam { "pam-auth-faillock-required-2-${service}":
               ensure           => present,
               service          => $service,
