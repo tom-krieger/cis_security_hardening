@@ -48,7 +48,7 @@ class cis_security_hardening::rules::pki_certs_validation (
       $line = "    cert_policy = ${cert_policy}"
 
       echo { 'pkcs-debug':
-        message  => "pkcs policy ${policy}, replace ${line}",
+        message  => "pkcs policy ${policy} - match ${match} - replace ${line}",
         loglevel => 'info',
         withpath => false,
       }
