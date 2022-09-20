@@ -38,5 +38,12 @@ class cis_security_hardening::rules::pam_last_logon (
       line               => 'session      required      pam_lastlog.so showfailed',
       append_on_no_match => true,
     }
+
+    file_line { 'pam last logon remove optional':
+      ensure            => absent,
+      path              => "/etc/pam.d/${service}",
+      match             => '^session\s+optional\s+pam_lastlog.so silent noupdate showfailed',
+      match_for_absence => true,
+    }
   }
 }
