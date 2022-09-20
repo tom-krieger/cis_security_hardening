@@ -44,7 +44,7 @@ class cis_security_hardening::rules::pki_certs_validation (
   if $enforce {
     if $pkcs11_config == '' {
       $policy = fact('cis_security_hardening.pkcs11_config.policy')
-      $match = "cert_policy = ${cert_policy}"
+      $match = "\\s*cert_policy ="
       $line = "    cert_policy = ${cert_policy}"
 
       echo { 'pkcs-debug':
