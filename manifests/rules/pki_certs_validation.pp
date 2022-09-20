@@ -49,7 +49,7 @@ class cis_security_hardening::rules::pki_certs_validation (
 
       echo { 'pkcs-debug':
         message  => "pkcs policy ${policy}, replace ${line}",
-        loglevel => 'debug',
+        loglevel => 'info',
         withpath => false,
       }
 
