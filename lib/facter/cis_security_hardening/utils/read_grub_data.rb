@@ -1,19 +1,31 @@
 # frozen_string_literal: true
 
+require 'pp'
+
 def read_grub_data
   grub = {}
   lines = Facter::Core::Execution.exec('grep /boot /etc/mtab').split("\n")
+  pp lines
   boot_part = ''
   uuid = ''
   mp = ''
   dev = ''
 
   lines.each do |line|
+    pp line
     data = line.split("\s")
     dev = data[0]
     mp = data[1]
-    val = Facter::Core::Execution.exec("blkid #{dev}").split("\n")
-    data = val.split("\s")
+    pp dev
+    pp mp
+
+    val = Facter::Core::Execution.exec("/sbin/blkid #{dev}")
+    data = if val.nil? || val.empty?
+             {}
+           else
+             val.split("\s")
+           end
+
     uuid = data[1]
   end
 
