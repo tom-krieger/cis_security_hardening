@@ -11,7 +11,6 @@ def read_grub_data
   dev = ''
 
   lines.each do |line|
-    pp line
     data = line.split("\s")
     dev = data[0]
     mp = data[1]
