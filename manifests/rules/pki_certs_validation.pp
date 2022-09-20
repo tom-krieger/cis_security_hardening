@@ -54,11 +54,12 @@ class cis_security_hardening::rules::pki_certs_validation (
       }
 
       file_line { 'pki certs validation':
-        ensure   => present,
-        path     => '/etc/pam_pkcs11/pam_pkcs11.conf',
-        line     => $line,
-        match    => $match,
-        multiple => true,
+        ensure             => present,
+        path               => '/etc/pam_pkcs11/pam_pkcs11.conf',
+        line               => $line,
+        match              => $match,
+        multiple           => true,
+        append_on_no_match => false,
       }
     } else {
       file { '/etc/pam_pkcs11/pam_pkcs11.conf':
