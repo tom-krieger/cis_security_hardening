@@ -193,7 +193,7 @@ The compliance rules have been implemented without or very limited testing. Plea
 
 ### Redhat 8 STIG benchmark
 
-The Redhat 8 STIG benchmark contains many different configurations to the Redhat 8 benchmark. For the Redhat 8 STIG benchmark in this module, the configurations from the current Redhat 8 benchmark were used and extended by the additional configurations of the Redhat 8 STIG benchmark. For example, version 2.0.0 of the Redhat 8 benchmark recommends disabling the 'cramfs' module using `install /bin/false` and blacklisting the module. The Redhat 8 STIG benchmark gives the following configuration: `install /bin/true`. Blacklisting the module is not recommended.
+The Redhat 8 STIG benchmark contains many different and in my opinion older configurations to the Redhat 8 benchmark. For the Redhat 8 STIG benchmark in this module, the configurations from the current Redhat 8 benchmark were used and extended by the additional configurations of the Redhat 8 STIG benchmark. For example, version 2.0.0 of the Redhat 8 benchmark recommends disabling the 'cramfs' module using `install /bin/false` and blacklisting the module. The Redhat 8 STIG benchmark gives the following configuration: `install /bin/true`. Blacklisting the module is not recommended.
 
 ### Issues with CISCAT scanner
 
@@ -203,13 +203,17 @@ The Redhat 8 STIG benchmark contains many different configurations to the Redhat
   * reports that audit log directory is not set 0750 or more restrictive but it is 0750
   * reports that not all system command files are group-owned by root but the check searches for all files and not only these not having permissions /2000
 
+* CISCAT scanner for Redhat 7 STIG false positives:
+  * nosuid flag on home directries partitions is reported as missing but is set
+  * Tests for NFS settings report `failed` but no NFS is used
+
 ## Credits
 
 This project is highly inspired by the [fervid/secure_linux_cis](https://forge.puppet.com/fervid/secure_linux_cis) module from Puppet Forge and uses my [security_baseline](https://forge.puppet.com/modules/tomkrieger/security_baseline) module as basis.
 
 ## Development
 
-Contributions are welcome in any form, pull requests, and issues should be filed via GitHub.
+Contributions are welcome in any form, pull requests and issues should be filed via GitHub.
 
 ## Changelog
 
