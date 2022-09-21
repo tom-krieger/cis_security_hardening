@@ -34,14 +34,14 @@ class cis_security_hardening::rules::pam_mfa_redhat (
     exec { 'enable smartcard':
       command => 'authconfig --enablesmartcard --smartcardaction=0 --update',
       path    => ['bin', '/usr/bin', '/sbin', '/usr/sbin'],
-      onlyif  => 'test -z "$(grep -E \"auth\s*\[success=done ignore=ignore default=die\] pam_pkcs11.so\" /etc/pam.d/smartcard-auth)"',
+      onlyif  => 'test -z "$(grep -E \"auth\\s*\[success=done ignore=ignore default=die\] pam_pkcs11.so\" /etc/pam.d/smartcard-auth)"',
       require => Package['dconf'],
     }
 
     exec { 'enable required smartcard':
       command => 'authconfig --enablerequiresmartcard --update',
       path    => ['bin', '/usr/bin', '/sbin', '/usr/sbin'],
-      onlyif  => 'test -z "$(grep -E \"auth\s*\[success=done ignore=ignore default=die\] pam_pkcs11.so\" /etc/pam.d/smartcard-auth)"',
+      onlyif  => 'test -z "$(grep -E \"auth\\s*\[success=done ignore=ignore default=die\] pam_pkcs11.so\" /etc/pam.d/smartcard-auth)"',
       require => [Package['dconf'], Exec['enable smartcard']],
     }
 
