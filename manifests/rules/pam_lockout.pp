@@ -108,7 +108,7 @@ class cis_security_hardening::rules::pam_lockout (
           }
 
           $services.each | $service | {
-            Pam { "pam-auth-faillock-required-2-${service}":
+            Pam { "pam-auth-faillock-required-${service}":
               ensure    => present,
               service   => $service,
               type      => 'auth',
