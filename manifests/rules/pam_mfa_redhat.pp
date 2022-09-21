@@ -45,21 +45,13 @@ class cis_security_hardening::rules::pam_mfa_redhat (
       require => [Package['dconf'], Exec['enable smartcard']],
     }
 
-    file_line { 'screensaver-lock-action':
-      ensure             => present,
-      path               => '/etc/pam_pkcs11/pkcs11_eventmgr.conf',
-      match              => "\s*#action = \"/usr/sbin/gdm-safe-restart\",",
-      line               => "\t\taction = \"/usr/sbin/gdm-safe-restart\",",
-      append_on_no_match => false,
-    }
-
     file_line { 'screensaver-lock':
       ensure             => present,
       path               => '/etc/pam_pkcs11/pkcs11_eventmgr.conf',
-      match              => "#\s*/usr/X11R6/bin/xscreensaver-command -lock",
-      line               => "\t\t          \"/usr/X11R6/bin/xscreensaveer-command -lock\";",
+      match              => "#\s*action = \"/usr/sbin/gdm-safe-restart\", \"/etc/pkcs11/lockhelper.sh -deactivate\";",
+      line               => "\t\taction = \"/usr/sbin/gdm-safe-restart\", \"/etc/pkcs11/lockhelper.sh -deactivate\", \"/usr/X11R6/bin/xscreensaveer-command -lock\";", #lint:ignore:140chars
       append_on_no_match => false,
-      require            => File_line['screensaver-lock-action'],
+      require            => Package['dconf'],
     }
   }
 }

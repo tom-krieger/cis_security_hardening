@@ -39,30 +39,20 @@ describe 'cis_security_hardening::rules::pam_mfa_redhat' do
                 'onlyif'  => 'test -z "$(grep -E \"auth\s*\[success=done ignore=ignore default=die\] pam_pkcs11.so\" /etc/pam.d/smartcard-auth)"',
               )
               .that_requires(['Package[dconf]','Exec[enable smartcard]'])
-        
-            is_expected.to contain_file_line('screensaver-lock-action')
-              .with(
-                'ensure'             => 'present',
-                'path'               => '/etc/pam_pkcs11/pkcs11_eventmgr.conf',
-                'match'              => "\s*#action = \"/usr/sbin/gdm-safe-restart\",",
-                'line'               => "\t\taction = \"/usr/sbin/gdm-safe-restart\",",
-                'append_on_no_match' => false,
-              )
 
             is_expected.to contain_file_line('screensaver-lock')
               .with(
                 'ensure'             => 'present',
                 'path'               => '/etc/pam_pkcs11/pkcs11_eventmgr.conf',
-                'match'              => "#\s*/usr/X11R6/bin/xscreensaver-command -lock",
-                'line'               => "\t\t          \"/usr/X11R6/bin/xscreensaveer-command -lock\";",
+                'match'              => "#\s*action = \"/usr/sbin/gdm-safe-restart\", \"/etc/pkcs11/lockhelper.sh -deactivate\";",
+                'line'               => "\t\taction = \"/usr/sbin/gdm-safe-restart\", \"/etc/pkcs11/lockhelper.sh -deactivate\", \"/usr/X11R6/bin/xscreensaveer-command -lock\";",
                 'append_on_no_match' => false,
               )
-              .that_requires('File_line[screensaver-lock-action]')
+              .that_requires('Package[dconf]')
           else
             is_expected.not_to contain_package('dconf')
             is_expected.not_to contain_exec('enable smartcard')
             is_expected.not_to contain_exec('enable required smartcard')
-            is_expected.not_to contain_file_line('screensaver-lock-action')
             is_expected.not_to contain_file_line('screensaver-lock')
           end
         }
