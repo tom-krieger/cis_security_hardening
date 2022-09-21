@@ -101,6 +101,14 @@ class cis_security_hardening::rules::pam_lockout (
             $real_arguments2 = $arguments2
           }
 
+          file_line { 'faillock args':
+            ensure             => present,
+            path               => '/etc/sysconfig/autchconfig',
+            match              => '^FAILLOCKARGS=',
+            line               => "FAILLOCKARGS=\"${arguments}\"",
+            append_on_no_match => true,
+          }
+
           $services.each | $service | {
             Pam { "pam-auth-faillock-required-${service}":
               ensure    => present,
