@@ -51,7 +51,7 @@ class cis_security_hardening::rules::pam_passwd_sha512 (
         } else {
           file_line { 'password algorithm sha512':
             ensure             => present,
-            path               => 'etc/sysconfig/authconfig',
+            path               => '/etc/sysconfig/authconfig',
             match              => '^PASSWDALGORITHM=',
             line               => 'PASSWDALGORITHM=sha512',
             append_on_no_match => true,
