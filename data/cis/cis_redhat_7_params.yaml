@@ -496,8 +496,11 @@ cis_security_hardening::rules::pam_passwd::enforce: true
 cis_security_hardening::rules::pam_last_logon::enforce: true
 cis_security_hardening::rules::sssd_mfa_services::enforce: true
 cis_security_hardening::rules::sssd_mfa_services::services: 'nss, pam'
+cis_security_hardening::rules::sssd_use_start_tls::enforce: true
+cis_security_hardening::rules::sssd_ldap_tls_reqcert::enforce: true
 cis_security_hardening::rules::pki_certs_validation::enforce: true
 cis_security_hardening::rules::pki_certs_validation::cert_policy: 'ca, ocsp_on, signature;'
+cis_security_hardening::rules::pam_mfa_redhat::enforce: true
 
 cis_security_hardening::rules::passwd_expiration::enforce: true
 cis_security_hardening::rules::passwd_expiration::max_pass_days: 90
