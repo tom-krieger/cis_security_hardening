@@ -105,7 +105,7 @@ class cis_security_hardening::rules::pam_lockout (
             ensure             => present,
             path               => '/etc/sysconfig/authconfig',
             match              => '^FAILLOCKARGS=',
-            line               => "FAILLOCKARGS=\"${join($real_arguments, ',')}\"",
+            line               => "FAILLOCKARGS=\"${join($real_arguments, ' ')}\"",
             append_on_no_match => true,
           }
 
