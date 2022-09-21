@@ -101,12 +101,22 @@ class cis_security_hardening::rules::pam_lockout (
             $real_arguments2 = $arguments2
           }
 
+          file_line { 'use pam access':
+            ensure             => present,
+            path               => '/etc/sysconfig/authconfig',
+            match              => '^USEPAMACCESS=',
+            line               => 'USEPAMACCESS=yes',
+            append_on_no_match => true,
+            notify             => Exec['authconfig-apply-changes'],
+          }
+
           file_line { 'faillock args':
             ensure             => present,
             path               => '/etc/sysconfig/authconfig',
             match              => '^FAILLOCKARGS=',
             line               => "FAILLOCKARGS=\"${join($real_arguments, ' ')}\"",
             append_on_no_match => true,
+            notify             => Exec['authconfig-apply-changes'],
           }
 
           $services.each | $service | {

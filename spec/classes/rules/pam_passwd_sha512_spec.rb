@@ -12,6 +12,12 @@ describe 'cis_security_hardening::rules::pam_passwd_sha512' do
       path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
       refreshonly => true,
     }
+
+    exec { 'authconfig-apply-changes':
+      command     => 'authconfig --updateall',
+      path        => ['/sbin','/usr/sbin'],
+      refreshonly => true,
+    }
     EOF
   end
 
@@ -56,6 +62,7 @@ describe 'cis_security_hardening::rules::pam_passwd_sha512' do
                     'line'               => 'PASSWDALGORITHM=sha512',
                     'append_on_no_match' => true,
                   )
+                  .that_notifies('Exec[authconfig-apply-changes]')
 
                 is_expected.to contain_pam('sha512-system-auth')
                   .with(

@@ -5,6 +5,22 @@ require 'spec_helper'
 enforce_options = [true, false]
 
 describe 'cis_security_hardening::rules::pam_mfa_redhat' do
+  let(:pre_condition) do
+    <<-EOF
+    exec { 'authselect-apply-changes':
+      command     => 'authselect apply-changes',
+      path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+      refreshonly => true,
+    }
+
+    exec { 'authconfig-apply-changes':
+      command     => 'authconfig --updateall',
+      path        => ['/sbin','/usr/sbin'],
+      refreshonly => true,
+    }
+    EOF
+  end
+
   on_supported_os.each do |os, os_facts|
     enforce_options.each do |enforce|
       context "on #{os} with enforce = #{enforce}" do
@@ -32,6 +48,7 @@ describe 'cis_security_hardening::rules::pam_mfa_redhat' do
                 'line'               => 'USESMARTCARD=yes',
                 'append_on_no_match' => true,
               )
+              .that_notifies('Exec[authconfig-apply-changes]')
 
             is_expected.to contain_file_line('authconfig-config-force-smartcard')
               .with(
@@ -41,6 +58,7 @@ describe 'cis_security_hardening::rules::pam_mfa_redhat' do
                 'line'               => 'FORCESMARTCARD=yes',
                 'append_on_no_match' => true,
               )
+              .that_notifies('Exec[authconfig-apply-changes]')
 
             is_expected.to contain_pam('pkcs11-system-auth')
               .with(

@@ -55,6 +55,7 @@ class cis_security_hardening::rules::pam_passwd_sha512 (
             match              => '^PASSWDALGORITHM=',
             line               => 'PASSWDALGORITHM=sha512',
             append_on_no_match => true,
+            notify             => Exec['authconfig-apply-changes'],
           }
 
           Pam { 'sha512-system-auth':

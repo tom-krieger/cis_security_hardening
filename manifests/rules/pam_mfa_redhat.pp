@@ -37,6 +37,7 @@ class cis_security_hardening::rules::pam_mfa_redhat (
       match              => '^USESMARTCARD=',
       line               => 'USESMARTCARD=yes',
       append_on_no_match => true,
+      notify             => Exec['authconfig-apply-changes'],
     }
 
     file_line { 'authconfig-config-force-smartcard':
@@ -45,6 +46,7 @@ class cis_security_hardening::rules::pam_mfa_redhat (
       match              => '^FORCESMARTCARD=',
       line               => 'FORCESMARTCARD=yes',
       append_on_no_match => true,
+      notify             => Exec['authconfig-apply-changes'],
     }
 
     Pam { 'pkcs11-system-auth':
