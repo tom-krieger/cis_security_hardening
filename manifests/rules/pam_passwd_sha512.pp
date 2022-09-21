@@ -64,7 +64,7 @@ class cis_security_hardening::rules::pam_passwd_sha512 (
             type      => 'password',
             control   => 'sufficient',
             module    => 'pam_unix.so',
-            arguments => ['shadow', 'try_first_pass', 'use_authtok'],
+            arguments => ['sha512', 'shadow', 'try_first_pass', 'use_authtok'],
           }
           Pam { 'sha512-password-auth':
             ensure    => present,
@@ -72,7 +72,7 @@ class cis_security_hardening::rules::pam_passwd_sha512 (
             type      => 'password',
             control   => 'sufficient',
             module    => 'pam_unix.so',
-            arguments => ['shadow', 'try_first_pass', 'use_authtok'],
+            arguments => ['sha512', 'shadow', 'try_first_pass', 'use_authtok'],
           }
           # exec { 'switch sha512 on':
           #   command => 'authconfig --passalgo=sha512 --updateall',
