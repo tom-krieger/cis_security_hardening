@@ -15,30 +15,65 @@ describe 'cis_security_hardening::rules::pam_mfa_redhat' do
           }
         end
 
-        it { 
-          is_expected.to compile 
+        it {
+          is_expected.to compile
 
           if enforce
             is_expected.to contain_package('dconf')
               .with(
                 'ensure' => 'present',
               )
-            
-            is_expected.to contain_exec('enable smartcard')
+
+            is_expected.to contain_file_line('authconfig-config-smartcard')
               .with(
-                'command' => 'authconfig --enablesmartcard --smartcardaction=0 --update',
-                'path'    => ['bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                'onlyif'  => 'test -z "$(grep -E \"auth\s*\[success=done ignore=ignore default=die\] pam_pkcs11.so\" /etc/pam.d/smartcard-auth)"',
+                'ensure'             => 'present',
+                'path'               => '/etc/sysconfig/authconfig',
+                'match'              => '^USESMARTCARD=',
+                'line'               => 'USESMARTCARD=yes',
+                'append_on_no_match' => true,
               )
-              .that_requires('Package[dconf]')
-            
-            is_expected.to contain_exec('enable required smartcard')
+
+            is_expected.to contain_file_line('authconfig-config-force-smartcard')
               .with(
-                'command' => 'authconfig --enablerequiresmartcard --update',
-                'path'    => ['bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                'onlyif'  => 'test -z "$(grep -E \"auth\s*\[success=done ignore=ignore default=die\] pam_pkcs11.so\" /etc/pam.d/smartcard-auth)"',
+                'ensure'             => 'present',
+                'path'               => '/etc/sysconfig/authconfig',
+                'match'              => '^FORCESMARTCARD=',
+                'line'               => 'FORCESMARTCARD=yes',
+                'append_on_no_match' => true,
               )
-              .that_requires(['Package[dconf]','Exec[enable smartcard]'])
+
+            is_expected.to contain_pam('pkcs11-system-auth')
+              .with(
+                'ensure'           => 'present',
+                'service'          => 'system-auth',
+                'type'             => 'auth',
+                'control'          => '[success=done ignore=ignore default=die]',
+                'control_is_param' => true,
+                'module'           => 'pam_pkcs11.so',
+                'arguments'        => ['nodebug', 'wait_for_card'],
+                'position'         => 'before *[type="auth" and module="pam_unix.so"]',
+              )
+
+            is_expected.to contain_pam('pkcs11-smartcard-auth-auth')
+              .with(
+                'ensure'           => 'present',
+                'service'          => 'smartcard-auth',
+                'type'             => 'auth',
+                'control'          => '[success=done ignore=ignore default=die]',
+                'control_is_param' => true,
+                'module'           => 'pam_pkcs11.so',
+                'arguments'        => ['nodebug', 'wait_for_card'],
+                'position'         => 'after *[type="auth" and module="pam_faillock.so"]',
+              )
+
+            is_expected.to contain_pam('pkcs11-smartcard-auth-password')
+              .with(
+                'ensure'  => 'present',
+                'service' => 'smartcard-auth',
+                'type'    => 'password',
+                'control' => 'required',
+                'module'  => 'pam_pkcs11.so',
+              )
 
             is_expected.to contain_file_line('screensaver-lock')
               .with(
@@ -51,8 +86,11 @@ describe 'cis_security_hardening::rules::pam_mfa_redhat' do
               .that_requires('Package[dconf]')
           else
             is_expected.not_to contain_package('dconf')
-            is_expected.not_to contain_exec('enable smartcard')
-            is_expected.not_to contain_exec('enable required smartcard')
+            is_expected.not_to contain_file_line('authconfig-config-smartcard')
+            is_expected.not_to contain_file_line('authconfig-config-force-smartcard')
+            is_expected.not_to contain_pam('pkcs11-system-auth')
+            is_expected.not_to contain_pam('pkcs11-smartcard-auth-auth')
+            is_expected.not_to contain_pam('pkcs11-smartcard-auth-password')
             is_expected.not_to contain_file_line('screensaver-lock')
           end
         }

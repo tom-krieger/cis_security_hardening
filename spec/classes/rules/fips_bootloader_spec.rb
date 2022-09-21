@@ -36,7 +36,7 @@ describe 'cis_security_hardening::rules::fips_bootloader' do
             if os_facts[:operatingsystem].casecmp('redhat').zero?
               is_expected.to contain_kernel_parameter('boot')
                 .with(
-                  'value'  => 'UUID="80ee5fdc-04ff-48c2-93ec-186903ced35f"',
+                  'value' => 'UUID="80ee5fdc-04ff-48c2-93ec-186903ced35f"',
                 )
                 .that_notifies('Exec[fips-grub-config]')
             end

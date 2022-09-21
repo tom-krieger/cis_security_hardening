@@ -46,7 +46,7 @@ describe 'cis_security_hardening::rules::pam_last_logon' do
                 'match'             => '^session\s+optional\s+pam_lastlog.so silent noupdate showfailed',
                 'match_for_absence' => true,
               )
-            
+
           else
             is_expected.not_to contain_pam('pam-login-last-logon')
             is_expected.not_to contain_file_line('pam last logon remove optional')

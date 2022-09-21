@@ -14,9 +14,9 @@ describe 'cis_security_hardening::rules::sssd_use_start_tls' do
             'enforce' => enforce,
           }
         end
-        
-        it { 
-          is_expected.to compile 
+
+        it {
+          is_expected.to compile
 
           if enforce
             is_expected.to contain_file('/etc/sssd/sssd.conf')
@@ -31,7 +31,7 @@ describe 'cis_security_hardening::rules::sssd_use_start_tls' do
                 'ensure' => 'present',
                 'path'   => '/etc/sssd/sssd.conf',
                 'match'  => '^ldap_id_use_start_tls =',
-                'line'   => "ldap_id_use_start_tls = true",
+                'line'   => 'ldap_id_use_start_tls = true',
               )
           else
             is_expected.not_to contain_file('/etc/sssd/sssd.conf')

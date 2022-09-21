@@ -214,10 +214,10 @@ def facts_redhat(os, distid, release)
 
   # check if sssd is installed
   cis_security_hardening['sssd'] = check_package_installed('sssd')
-  
+
   # read pkcs11 config
   cis_security_hardening['pkcs11_config'] = read_pam_pkcs11_conf
-  
+
   # return results
   cis_security_hardening
 end

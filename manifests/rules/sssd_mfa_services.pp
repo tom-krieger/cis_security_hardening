@@ -24,6 +24,8 @@
 #
 # @param enforce
 #    Enforce the rule.
+# @param services
+#    The comma separated ist of services.
 #
 # @example
 #   class { 'cis_security_hardening::rules::sssd_mfa_services':

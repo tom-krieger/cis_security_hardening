@@ -30,9 +30,9 @@ class cis_security_hardening::rules::pam_passwd_sha512 (
       'password-auth',
     ]
 
-    case $facts['os']['family'].downcase() {
+    case $facts['osfamily'].downcase() {
       'redhat': {
-        if $facts['os']['release']['major'] > '7' {
+        if $facts['operatingsystemmajrelease'] > '7' {
           $profile = fact('cis_security_hardening.authselect.profile')
           if $profile != undef and $profile != 'none' {
             $pf_path = "/etc/authselect/custom/${profile}"
@@ -57,7 +57,6 @@ class cis_security_hardening::rules::pam_passwd_sha512 (
             append_on_no_match => true,
           }
 
-          # password     sufficient    pam_unix.so sha512 shadow try_first_pass use_authtok
           Pam { 'sha512-system-auth':
             ensure    => present,
             service   => 'system-auth',
@@ -66,6 +65,7 @@ class cis_security_hardening::rules::pam_passwd_sha512 (
             module    => 'pam_unix.so',
             arguments => ['sha512', 'shadow', 'try_first_pass', 'use_authtok'],
           }
+
           Pam { 'sha512-password-auth':
             ensure    => present,
             service   => 'password-auth',
@@ -74,11 +74,6 @@ class cis_security_hardening::rules::pam_passwd_sha512 (
             module    => 'pam_unix.so',
             arguments => ['sha512', 'shadow', 'try_first_pass', 'use_authtok'],
           }
-          # exec { 'switch sha512 on':
-          #   command => 'authconfig --passalgo=sha512 --updateall',
-          #   path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-          #   onlyif  => 'test -z "$(grep -E "^password\\s+sufficient\\s+pam_unix.so.*sha512" /etc/pam.d/system-auth)"',
-          # }
         }
       }
       'debian': {

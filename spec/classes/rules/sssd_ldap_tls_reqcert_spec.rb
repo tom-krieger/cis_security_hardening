@@ -14,9 +14,9 @@ describe 'cis_security_hardening::rules::sssd_ldap_tls_reqcert' do
             'enforce' => enforce,
           }
         end
-        
-        it { 
-          is_expected.to compile 
+
+        it {
+          is_expected.to compile
 
           if enforce
             is_expected.to contain_file('/etc/sssd/sssd.conf')
@@ -31,7 +31,7 @@ describe 'cis_security_hardening::rules::sssd_ldap_tls_reqcert' do
                 'ensure' => 'present',
                 'path'   => '/etc/sssd/sssd.conf',
                 'match'  => '^ldap_tls_reqcert =',
-                'line'   => "ldap_tls_reqcert = demand",
+                'line'   => 'ldap_tls_reqcert = demand',
               )
           else
             is_expected.not_to contain_file('/etc/sssd/sssd.conf')

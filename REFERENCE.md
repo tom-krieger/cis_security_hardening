@@ -277,6 +277,7 @@ termination events that affect "/etc/sudoers.d/"
 * `cis_security_hardening::rules::pam_last_logon`: Ensure last successful account logon is displayed upon logon
 * `cis_security_hardening::rules::pam_lockout`: Ensure lockout for failed password attempts is configured
 * `cis_security_hardening::rules::pam_mfa`: Ensure smart card logins for multifactor authentication for local and network access
+* `cis_security_hardening::rules::pam_mfa_redhat`: Ensure multi-factor authentication is enable for users
 * `cis_security_hardening::rules::pam_old_passwords`: Ensure password reuse is limited
 * `cis_security_hardening::rules::pam_passwd`: Ensure system-auth is used when changing passwords
 * `cis_security_hardening::rules::pam_passwd_sha512`: Ensure password hashing algorithm is SHA-512
@@ -365,6 +366,9 @@ termination events that affect "/etc/sudoers.d/"
 * `cis_security_hardening::rules::sshd_user_environment`: Ensure SSH PermitUserEnvironment is disabled
 * `cis_security_hardening::rules::sshd_x11_forward`: Ensure SSH X11 forwarding is disabled
 * `cis_security_hardening::rules::sshd_x11_use_localhost`: Ensure X11UseLocalhost is enabled
+* `cis_security_hardening::rules::sssd_ldap_tls_reqcert`: Ensure ldap_tls_reqcert is set for LDAP.
+* `cis_security_hardening::rules::sssd_mfa_services`: Ensure multifactor authentication for access to privileged accounts
+* `cis_security_hardening::rules::sssd_use_start_tls`: Ensure ldap_id_use_start_tls is set for LDAP.
 * `cis_security_hardening::rules::sticky_world_writeable_files`: Ensure sticky bit is set on all world-writable directories
 * `cis_security_hardening::rules::sudo_installed`: Ensure sudo is installed
 * `cis_security_hardening::rules::sudo_log`: Ensure sudo log file exists

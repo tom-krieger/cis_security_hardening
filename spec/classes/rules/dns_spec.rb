@@ -28,7 +28,7 @@ describe 'cis_security_hardening::rules::dns' do
                 'ensure' => 'present',
                 'path'   => '/etc/nsswitch.conf',
                 'match'  => '^hosts:',
-                'line'   => 'hosts:       files dns',
+                'line'   => 'hosts:      files dns',
               )
 
             is_expected.to contain_file('/etc/resolv.conf')
