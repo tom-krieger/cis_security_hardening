@@ -85,12 +85,6 @@ class cis_security_hardening::rules::pam_lockout (
             false => '',
           }
 
-          # exec { 'configure faillock':
-          #   command => "authconfig --faillockargs=\"preauth silent audit ${root_lockout}deny=${attempts} ${fail}unlock_time=${lockouttime}\" --enablefaillock --updateall", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
-          #   path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-          #   onlyif  => "test -z \"\$(grep -E \"auth\\s+required\\s+pam_faillock.so.*deny=${attempts}\\s+unlock_time=${lockouttime}\" /etc/pam.d/system-auth)\"", #lint:ignore:140chars
-          # }
-
           if $fail_interval > 0 {
             $arguments = ['preauth', 'silent', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}", "fail_interval=${fail_interval}"]
             $arguments2 = ['authfail', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}", "fail_interval=${fail_interval}"]
