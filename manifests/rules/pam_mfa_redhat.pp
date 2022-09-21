@@ -31,18 +31,64 @@ class cis_security_hardening::rules::pam_mfa_redhat (
         ensure => installed,
     })
 
-    exec { 'enable smartcard':
-      command => 'authconfig --enablesmartcard --smartcardaction=0 --update',
-      path    => ['bin', '/usr/bin', '/sbin', '/usr/sbin'],
-      onlyif  => 'test -z "$(grep -E \"auth\\s*\[success=done ignore=ignore default=die\] pam_pkcs11.so\" /etc/pam.d/smartcard-auth)"',
-      require => Package['dconf'],
+    # exec { 'enable smartcard':
+    #   command => 'authconfig --enablesmartcard --smartcardaction=0 --update',
+    #   path    => ['bin', '/usr/bin', '/sbin', '/usr/sbin'],
+    #   onlyif  => 'test -z "$(grep -E \"auth\\s*\[success=done ignore=ignore default=die\] pam_pkcs11.so\" /etc/pam.d/smartcard-auth)"',
+    #   require => Package['dconf'],
+    # }
+
+    # exec { 'enable required smartcard':
+    #   command => 'authconfig --enablerequiresmartcard --update',
+    #   path    => ['bin', '/usr/bin', '/sbin', '/usr/sbin'],
+    #   onlyif  => 'test -z "$(grep -E \"auth\\s*\[success=done ignore=ignore default=die\] pam_pkcs11.so\" /etc/pam.d/smartcard-auth)"',
+    #   require => [Package['dconf'], Exec['enable smartcard']],
+    # }
+
+    file_line { 'authconfig-config-smartcard':
+      ensure             => present,
+      path               => '/etc/sysconfig/authconfig',
+      match              => '^USESMARTCARD=',
+      line               => 'USESMARTCARD=yes',
+      append_on_no_match => true,
     }
 
-    exec { 'enable required smartcard':
-      command => 'authconfig --enablerequiresmartcard --update',
-      path    => ['bin', '/usr/bin', '/sbin', '/usr/sbin'],
-      onlyif  => 'test -z "$(grep -E \"auth\\s*\[success=done ignore=ignore default=die\] pam_pkcs11.so\" /etc/pam.d/smartcard-auth)"',
-      require => [Package['dconf'], Exec['enable smartcard']],
+    file_line { 'authconfig-config-force-smartcard':
+      ensure             => present,
+      path               => '/etc/sysconfig/authconfig',
+      match              => '^FORCESMARTCARD=',
+      line               => 'FORCESMARTCARD=yes',
+      append_on_no_match => true,
+    }
+
+    Pam {
+      ensure           => present,
+      service          => 'system-auth',
+      type             => 'auth',
+      control          => '[success=done ignore=ignore default=die]',
+      control_is_param => true,
+      module           => 'pam_pkcs11.so',
+      arguments        => ['nodebug', 'wait_for_card'],
+      position         => 'before *[type="auth" and module="pam_unix.so"]',
+    }
+
+    Pam {
+      ensure => present,
+      service => 'smartcard-auth',
+      type => 'auth',
+      control          => '[success=done ignore=ignore default=die]',
+      control_is_param => true,
+      module           => 'pam_pkcs11.so',
+      arguments        => ['nodebug', 'wait_for_card'],
+      position         => 'after *[type="auth" and module="pam_faillock.so"]',
+    }
+
+    Pam {
+      ensure => present,
+      service => 'smartcard-auth',
+      type => 'password',
+      control => 'required',
+      module => 'pam_pkcs11.so',
     }
 
     file_line { 'screensaver-lock':
