@@ -103,7 +103,7 @@ class cis_security_hardening::rules::pam_lockout (
 
           file_line { 'faillock args':
             ensure             => present,
-            path               => '/etc/sysconfig/autchconfig',
+            path               => '/etc/sysconfig/authconfig',
             match              => '^FAILLOCKARGS=',
             line               => "FAILLOCKARGS=\"${arguments}\"",
             append_on_no_match => true,
