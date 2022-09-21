@@ -61,7 +61,7 @@ class cis_security_hardening::rules::pam_mfa_redhat (
       append_on_no_match => true,
     }
 
-    Pam {
+    Pam { 'pkcs11-system-auth':
       ensure           => present,
       service          => 'system-auth',
       type             => 'auth',
@@ -72,10 +72,10 @@ class cis_security_hardening::rules::pam_mfa_redhat (
       position         => 'before *[type="auth" and module="pam_unix.so"]',
     }
 
-    Pam {
-      ensure => present,
-      service => 'smartcard-auth',
-      type => 'auth',
+    Pam { 'pkcs11-smartcard-auth-auth':
+      ensure           => present,
+      service          => 'smartcard-auth',
+      type             => 'auth',
       control          => '[success=done ignore=ignore default=die]',
       control_is_param => true,
       module           => 'pam_pkcs11.so',
@@ -83,12 +83,12 @@ class cis_security_hardening::rules::pam_mfa_redhat (
       position         => 'after *[type="auth" and module="pam_faillock.so"]',
     }
 
-    Pam {
-      ensure => present,
+    Pam { 'pkcs11-smartcard-auth-password':
+      ensure  => present,
       service => 'smartcard-auth',
-      type => 'password',
+      type    => 'password',
       control => 'required',
-      module => 'pam_pkcs11.so',
+      module  => 'pam_pkcs11.so',
     }
 
     file_line { 'screensaver-lock':
