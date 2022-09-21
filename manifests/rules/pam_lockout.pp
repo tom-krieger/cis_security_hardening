@@ -110,15 +110,6 @@ class cis_security_hardening::rules::pam_lockout (
           }
 
           $services.each | $service | {
-            # Pam { "pam-auth-faillock-required-${service}":
-            #   ensure    => present,
-            #   service   => $service,
-            #   type      => 'auth',
-            #   control   => 'required',
-            #   module    => 'pam_faillock.so',
-            #   arguments => $real_arguments,
-            #   position  => 'after *[type="auth" and module="pam_faildelay.so"]',
-            # }
             Pam { "pam-auth-faillock-required-2-${service}":
               ensure           => present,
               service          => $service,
@@ -127,8 +118,7 @@ class cis_security_hardening::rules::pam_lockout (
               control_is_param => true,
               module           => 'pam_faillock.so',
               arguments        => $real_arguments2,
-              position         => 'after *[type="auth" and module="pam_unix.so"]',
-              # require          => Exec['configure faillock'],
+              position         => 'before *[type="auth" and module="pam_unix.so"]',
             }
 
             Pam { "account-faillock-${service}":

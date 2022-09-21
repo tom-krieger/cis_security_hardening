@@ -36,7 +36,7 @@ class cis_security_hardening::rules::dns (
       ensure => present,
       path   => '/etc/nsswitch.conf',
       match  => '^hosts:',
-      line   => "hosts: ${nsswitch_entry}",
+      line   => "hosts:\\t${nsswitch_entry}",
     }
 
     if(empty($dns_search)) {
