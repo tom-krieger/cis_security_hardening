@@ -87,18 +87,22 @@ class cis_security_hardening::rules::pam_lockout (
 
           if $fail_interval > 0 {
             $arguments = ['preauth', 'silent', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}", "fail_interval=${fail_interval}"]
+            $faillock_args = ['audit', "deny=${attempts}", "unlock_time=${lockouttime}", "fail_interval=${fail_interval}"]
             $arguments2 = ['authfail', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}", "fail_interval=${fail_interval}"]
           } else {
             $arguments = ['preauth', 'silent', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}"]
+            $faillock_args = ['audit', "deny=${attempts}", "unlock_time=${lockouttime}"]
             $arguments2 = ['authfail', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}"]
           }
 
           if $lockout_root {
             $real_arguments = concat($arguments, 'even_deny_root')
             $real_arguments2 = concat($arguments2, 'even_deny_root')
+            $real_faillock_args = concat($faillock_args, 'even_deny_root')
           } else {
             $real_arguments = $arguments
             $real_arguments2 = $arguments2
+            $real_faillock_args = $faillock_args
           }
 
           file_line { 'use pam access':
@@ -114,7 +118,7 @@ class cis_security_hardening::rules::pam_lockout (
             ensure             => present,
             path               => '/etc/sysconfig/authconfig',
             match              => '^FAILLOCKARGS=',
-            line               => "FAILLOCKARGS=\"${join($real_arguments, ' ')}\"",
+            line               => "FAILLOCKARGS=\"${join($real_faillock_args, ' ')}\"",
             append_on_no_match => true,
             notify             => Exec['authconfig-apply-changes'],
           }

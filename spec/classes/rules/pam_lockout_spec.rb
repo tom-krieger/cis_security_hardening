@@ -60,7 +60,7 @@ describe 'cis_security_hardening::rules::pam_lockout' do
                     'ensure'             => 'present',
                     'path'               => '/etc/sysconfig/authconfig',
                     'match'              => '^FAILLOCKARGS=',
-                    'line'               => 'FAILLOCKARGS="preauth silent audit deny=3 unlock_time=900 even_deny_root"',
+                    'line'               => 'FAILLOCKARGS="audit deny=3 unlock_time=900 even_deny_root"',
                     'append_on_no_match' => true,
                   )
                   .that_notifies('Exec[authconfig-apply-changes]')
