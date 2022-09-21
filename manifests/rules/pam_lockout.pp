@@ -81,20 +81,41 @@ class cis_security_hardening::rules::pam_lockout (
             $fail = ''
           }
           $root_lockout = $lockout_root ? {
-            true  => 'even_deny_root',
+            true  => 'even_deny_root ',
             false => '',
           }
 
-          exec { 'configure faillock':
-            command => "authconfig --faillockargs=\"preauth silent audit ${root_lockout}deny=${attempts} ${fail}unlock_time=${lockouttime}\" --enablefaillock --updateall", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
-            path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-            onlyif  => "test -z \"\$(grep -E \"auth\\s+required\\s+pam_faillock.so.*deny=${attempts}\\s+unlock_time=${lockouttime}\" /etc/pam.d/system-auth)\"", #lint:ignore:140chars
+          # exec { 'configure faillock':
+          #   command => "authconfig --faillockargs=\"preauth silent audit ${root_lockout}deny=${attempts} ${fail}unlock_time=${lockouttime}\" --enablefaillock --updateall", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
+          #   path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+          #   onlyif  => "test -z \"\$(grep -E \"auth\\s+required\\s+pam_faillock.so.*deny=${attempts}\\s+unlock_time=${lockouttime}\" /etc/pam.d/system-auth)\"", #lint:ignore:140chars
+          # }
+
+          if $fail_interval > 0 {
+            $arguments = ['preauth', 'silent', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}", "fail_interval=${fail_interval}"]
+            $arguments2 = ['authfail', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}", "fail_interval=${fail_interval}"]
+          } else {
+            $arguments = ['preauth', 'silent', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}"]
+            $arguments2 = ['authfail', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}"]
+          }
+
+          if $lockout_root {
+            $real_arguments = concat($arguments, 'even_deny_root')
+            $real_arguments2 = concat($arguments2, 'even_deny_root')
+          } else {
+            $real_arguments = $arguments
+            $real_arguments2 = $arguments2
           }
 
           $services.each | $service | {
-            $arguments = ($fail_interval > 0) ? {
-              true  => ['authfail', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}", "fail_interval=${fail_interval}"],
-              false => ['authfail', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}"],
+            Pam { "pam-auth-faillock-required-2-${service}":
+              ensure    => present,
+              service   => $service,
+              type      => 'auth',
+              control   => 'required',
+              module    => 'pam_faillock.so',
+              arguments => $real_arguments,
+              position  => 'after *[type="auth" and module="pam_faildelay.so"]',
             }
             Pam { "pam-auth-faillock-required-2-${service}":
               ensure           => present,
@@ -103,9 +124,9 @@ class cis_security_hardening::rules::pam_lockout (
               control          => '[default=die]',
               control_is_param => true,
               module           => 'pam_faillock.so',
-              arguments        => $arguments,
+              arguments        => $real_arguments2,
               position         => 'after *[type="auth" and module="pam_unix.so"]',
-              require          => Exec['configure faillock'],
+              # require          => Exec['configure faillock'],
             }
 
             Pam { "account-faillock-${service}":
