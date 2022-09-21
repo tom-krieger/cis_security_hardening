@@ -58,23 +58,23 @@ class cis_security_hardening::rules::pam_passwd_sha512 (
             notify             => Exec['authconfig-apply-changes'],
           }
 
-          Pam { 'sha512-system-auth':
-            ensure    => present,
-            service   => 'system-auth',
-            type      => 'password',
-            control   => 'sufficient',
-            module    => 'pam_unix.so',
-            arguments => ['sha512', 'shadow', 'try_first_pass', 'use_authtok'],
-          }
+          # Pam { 'sha512-system-auth':
+          #   ensure    => present,
+          #   service   => 'system-auth',
+          #   type      => 'password',
+          #   control   => 'sufficient',
+          #   module    => 'pam_unix.so',
+          #   arguments => ['sha512', 'shadow', 'try_first_pass', 'use_authtok'],
+          # }
 
-          Pam { 'sha512-password-auth':
-            ensure    => present,
-            service   => 'password-auth',
-            type      => 'password',
-            control   => 'sufficient',
-            module    => 'pam_unix.so',
-            arguments => ['sha512', 'shadow', 'try_first_pass', 'use_authtok'],
-          }
+          # Pam { 'sha512-password-auth':
+          #   ensure    => present,
+          #   service   => 'password-auth',
+          #   type      => 'password',
+          #   control   => 'sufficient',
+          #   module    => 'pam_unix.so',
+          #   arguments => ['sha512', 'shadow', 'try_first_pass', 'use_authtok'],
+          # }
         }
       }
       'debian': {

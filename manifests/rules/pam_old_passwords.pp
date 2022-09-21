@@ -88,6 +88,15 @@ class cis_security_hardening::rules::pam_old_passwords (
                 arguments => $real_arguments,
                 position  => 'after *[type="password" and module="pam_unix.so" and control="requisite"]',
               }
+
+              Pam { "pam-pwhistory-${service}":
+                ensure    => absent,
+                service   => $service,
+                type      => 'password',
+                control   => 'required',
+                module    => 'pam_pwhistory.so',
+                arguments => ["remember=${oldpasswords}"],
+              }
             } else {
               Pam { "pam-pwhistory-${service}":
                 ensure    => present,
