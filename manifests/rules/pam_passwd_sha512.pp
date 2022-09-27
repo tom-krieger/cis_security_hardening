@@ -50,7 +50,7 @@ class cis_security_hardening::rules::pam_passwd_sha512 (
           }
         } else {
           exec { 'authconfig-passalgo-sha512':
-            command     => 'authconfig --passalgo=sha512 --upfdateall',
+            command     => 'authconfig --passalgo=sha512 --updateall',
             path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
             refreshonly => true,
           }
