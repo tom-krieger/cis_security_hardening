@@ -23,7 +23,7 @@ describe 'cis_security_hardening::rules::adm_crypt_style' do
               .with(
                 'ensure'             => 'present',
                 'path'               => '/etc/libuser.conf',
-                'match'              => 'crypt_style =',
+                'match'              => '^#?crypt_style =',
                 'line'               => 'crypt_style = sha512',
                 'append_on_no_match' => true,
               )

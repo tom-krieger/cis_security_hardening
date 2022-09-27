@@ -213,9 +213,11 @@ class cis_security_hardening::rules::pam_lockout (
           }
         }
 
-        if $facts['os']['name'].downcase() == 'redhat' and $facts['os']['release']['major'] >= '8' {
-          
-        }
+        # if $facts['os']['name'].downcase() == 'redhat' and $facts['os']['release']['major'] >= '8' {
+
+        # } else {
+
+        # }
       }
       'debian': {
         if $lockouttime == 0 {
