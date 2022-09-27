@@ -49,13 +49,18 @@ class cis_security_hardening::rules::pam_passwd_sha512 (
             }
           }
         } else {
+          exec { 'authconfig-passalgo-sha512':
+            command     => 'authconfig --passalgo=sha512 --upfdateall',
+            path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+            refreshonly => true,
+          }
           file_line { 'password algorithm sha512':
             ensure             => present,
             path               => '/etc/sysconfig/authconfig',
             match              => '^PASSWDALGORITHM=',
             line               => 'PASSWDALGORITHM=sha512',
             append_on_no_match => true,
-            notify             => Exec['authconfig-apply-changes'],
+            notify             => Exec['authconfig-passalgo-sha512'],
           }
         }
       }

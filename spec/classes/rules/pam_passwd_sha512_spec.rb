@@ -62,27 +62,27 @@ describe 'cis_security_hardening::rules::pam_passwd_sha512' do
                     'line'               => 'PASSWDALGORITHM=sha512',
                     'append_on_no_match' => true,
                   )
-                  .that_notifies('Exec[authconfig-apply-changes]')
+                  .that_notifies('Exec[authconfig-passalgo-sha512]')
 
-                is_expected.to contain_pam('sha512-system-auth')
-                  .with(
-                    'ensure'    => 'present',
-                    'service'   => 'system-auth',
-                    'type'      => 'password',
-                    'control'   => 'sufficient',
-                    'module'    => 'pam_unix.so',
-                    'arguments' => ['sha512', 'shadow', 'try_first_pass', 'use_authtok'],
-                  )
+                # is_expected.to contain_pam('sha512-system-auth')
+                #   .with(
+                #     'ensure'    => 'present',
+                #     'service'   => 'system-auth',
+                #     'type'      => 'password',
+                #     'control'   => 'sufficient',
+                #     'module'    => 'pam_unix.so',
+                #     'arguments' => ['sha512', 'shadow', 'try_first_pass', 'use_authtok'],
+                #   )
 
-                is_expected.to contain_pam('sha512-password-auth')
-                  .with(
-                    'ensure'    => 'present',
-                    'service'   => 'password-auth',
-                    'type'      => 'password',
-                    'control'   => 'sufficient',
-                    'module'    => 'pam_unix.so',
-                    'arguments' => ['sha512', 'shadow', 'try_first_pass', 'use_authtok'],
-                  )
+                # is_expected.to contain_pam('sha512-password-auth')
+                #   .with(
+                #     'ensure'    => 'present',
+                #     'service'   => 'password-auth',
+                #     'type'      => 'password',
+                #     'control'   => 'sufficient',
+                #     'module'    => 'pam_unix.so',
+                #     'arguments' => ['sha512', 'shadow', 'try_first_pass', 'use_authtok'],
+                #   )
               else
                 is_expected.not_to contain_file_line('password algorithm sha512')
                 is_expected.not_to contain_pam('sha512-system-auth')
