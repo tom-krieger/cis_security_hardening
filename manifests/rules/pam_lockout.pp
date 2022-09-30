@@ -187,6 +187,7 @@ class cis_security_hardening::rules::pam_lockout (
             command     => "authconfig --faillockargs=\"${join($real_faillock_args, ' ')}\" --enablefaillock --updateall", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
             path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
             refreshonly => true,
+            notify      => Exec['authconfig-apply-changes'],
           }
 
           $services.each | $service | {
