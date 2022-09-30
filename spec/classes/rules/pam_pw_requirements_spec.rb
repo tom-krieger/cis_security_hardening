@@ -62,7 +62,7 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                   'ensure'             => 'present',
                   'path'               => '/etc/security/pwquality.conf',
                   'line'               => 'minlen = 14',
-                  'match'              => '^#?minlen',
+                  'match'              => '^#? ?minlen',
                   'append_on_no_match' => true,
                 )
 
@@ -71,7 +71,7 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                   'ensure' => 'present',
                   'path'   => '/etc/security/pwquality.conf',
                   'line'   => 'dcredit = -1',
-                  'match'  => '^#?dcredit',
+                  'match'  => '^#? ?dcredit',
                   'append_on_no_match' => true,
                 )
 
@@ -80,7 +80,7 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                   'ensure' => 'present',
                   'path'   => '/etc/security/pwquality.conf',
                   'line'   => 'ucredit = -1',
-                  'match'  => '^#?ucredit',
+                  'match'  => '^#? ?ucredit',
                   'append_on_no_match' => true,
                 )
 
@@ -89,7 +89,7 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                   'ensure' => 'present',
                   'path'   => '/etc/security/pwquality.conf',
                   'line'   => 'ocredit = -1',
-                  'match'  => '^#?ocredit',
+                  'match'  => '^#? ?ocredit',
                   'append_on_no_match' => true,
                 )
 
@@ -98,7 +98,7 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                   'ensure' => 'present',
                   'path'   => '/etc/security/pwquality.conf',
                   'line'   => 'lcredit = -1',
-                  'match'  => '^#?lcredit',
+                  'match'  => '^#? ?lcredit',
                   'append_on_no_match' => true,
                 )
 
@@ -107,7 +107,7 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                   'ensure' => 'present',
                   'path'   => '/etc/security/pwquality.conf',
                   'line'   => 'dictcheck = 1',
-                  'match'  => '^#?dictcheck',
+                  'match'  => '^#? ?dictcheck',
                   'append_on_no_match' => true,
                 )
 
@@ -116,7 +116,7 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                   'ensure' => 'present',
                   'path'   => '/etc/security/pwquality.conf',
                   'line'   => 'difok = 8',
-                  'match'  => '^#?difok',
+                  'match'  => '^#? ?difok',
                   'append_on_no_match' => true,
                 )
 
@@ -125,7 +125,7 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                   'ensure' => 'present',
                   'path'   => '/etc/security/pwquality.conf',
                   'line'   => 'maxrepeat = 3',
-                  'match'  => '^#?maxrepeat',
+                  'match'  => '^#? ?maxrepeat',
                   'append_on_no_match' => true,
                 )
 
@@ -134,7 +134,7 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                   'ensure' => 'present',
                   'path'   => '/etc/security/pwquality.conf',
                   'line'   => 'maxclassrepeat = 4',
-                  'match'  => '^#?maxclassrepeat',
+                  'match'  => '^#? ?maxclassrepeat',
                   'append_on_no_match' => true,
                 )
 
@@ -195,7 +195,7 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                     'ensure' => 'present',
                     'path'   => '/etc/security/pwquality.conf',
                     'line'   => 'dcredit = -1',
-                    'match'  => '^#?dcredit',
+                    'match'  => '^#? ?dcredit',
                     'append_on_no_match' => true,
                   )
 
@@ -204,7 +204,7 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                   'ensure' => 'present',
                   'path'   => '/etc/security/pwquality.conf',
                   'line'   => 'ucredit = -1',
-                  'match'  => '^#?ucredit',
+                  'match'  => '^#? ?ucredit',
                   'append_on_no_match' => true,
                 )
 
@@ -213,7 +213,7 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                   'ensure' => 'present',
                   'path'   => '/etc/security/pwquality.conf',
                   'line'   => 'ocredit = -1',
-                  'match'  => '^#?ocredit',
+                  'match'  => '^#? ?ocredit',
                   'append_on_no_match' => true,
                 )
 
@@ -222,7 +222,7 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                   'ensure' => 'present',
                   'path'   => '/etc/security/pwquality.conf',
                   'line'   => 'lcredit = -1',
-                  'match'  => '^#?lcredit',
+                  'match'  => '^#? ?lcredit',
                   'append_on_no_match' => true,
                 )
 
@@ -231,7 +231,7 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                   'ensure' => 'present',
                   'path'   => '/etc/security/pwquality.conf',
                   'line'   => 'minlen = 14',
-                  'match'  => '^#?minlen',
+                  'match'  => '^#? ?minlen',
                   'append_on_no_match' => true,
                 )
               is_expected.to contain_file_line('pam minclass')
@@ -239,7 +239,7 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                   'ensure' => 'present',
                   'path'   => '/etc/security/pwquality.conf',
                   'line'   => 'minclass = 4',
-                  'match'  => '^#?minclass',
+                  'match'  => '^#? ?minclass',
                   'append_on_no_match' => true,
                 )
 
@@ -248,7 +248,7 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                   'ensure' => 'present',
                   'path'   => '/etc/security/pwquality.conf',
                   'line'   => 'enforcing = 1',
-                  'match'  => '^#?enforcing',
+                  'match'  => '^#? ?enforcing',
                   'append_on_no_match' => true,
                 )
 
@@ -257,7 +257,7 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                 'ensure' => 'present',
                 'path'   => '/etc/security/pwquality.conf',
                 'line'   => 'dictcheck = 1',
-                'match'  => '^#dictcheck',
+                'match'  => '^#? ?dictcheck',
                 'append_on_no_match' => true,
               )
 
@@ -266,7 +266,7 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                   'ensure' => 'present',
                   'path'   => '/etc/security/pwquality.conf',
                   'line'   => 'difok = 8',
-                  'match'  => '^#?difok',
+                  'match'  => '^#? ?difok',
                   'append_on_no_match' => true,
                 )
 
