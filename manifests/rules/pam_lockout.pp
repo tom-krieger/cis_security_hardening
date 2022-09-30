@@ -147,11 +147,11 @@ class cis_security_hardening::rules::pam_lockout (
 
           if $fail_interval > 0 {
             $arguments = ['preauth', 'silent', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}", "fail_interval=${fail_interval}"]
-            $faillock_args = ['audit', "deny=${attempts}", "unlock_time=${lockouttime}", "fail_interval=${fail_interval}"]
+            $faillock_args = ['preauth', 'silent','audit', "deny=${attempts}", "unlock_time=${lockouttime}", "fail_interval=${fail_interval}"]
             $arguments2 = ['authfail', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}", "fail_interval=${fail_interval}"]
           } else {
             $arguments = ['preauth', 'silent', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}"]
-            $faillock_args = ['audit', "deny=${attempts}", "unlock_time=${lockouttime}"]
+            $faillock_args = ['preauth', 'silent','audit', "deny=${attempts}", "unlock_time=${lockouttime}"]
             $arguments2 = ['authfail', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}"]
           }
 
@@ -171,7 +171,7 @@ class cis_security_hardening::rules::pam_lockout (
             match              => '^USEPAMACCESS=',
             line               => 'USEPAMACCESS=yes',
             append_on_no_match => true,
-            notify             => Exec['authconfig-apply-changes'],
+            notify             => Exec['configure faillock'],
           }
 
           file_line { 'faillock args':
@@ -180,7 +180,13 @@ class cis_security_hardening::rules::pam_lockout (
             match              => '^FAILLOCKARGS=',
             line               => "FAILLOCKARGS=\"${join($real_faillock_args, ' ')}\"",
             append_on_no_match => true,
-            notify             => Exec['authconfig-apply-changes'],
+            notify             => Exec['configure faillock'],
+          }
+
+          exec { 'configure faillock':
+            command     => "authconfig --faillockargs=\"${real_faillock_args}\" --enablefaillock --updateall", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
+            path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+            refreshonly => true,
           }
 
           $services.each | $service | {
