@@ -147,7 +147,7 @@ class cis_security_hardening::rules::pam_lockout (
 
           if $fail_interval > 0 {
             $arguments = ['preauth', 'silent', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}", "fail_interval=${fail_interval}"]
-            $faillock_args = ['preauth', 'silent','audit', "deny=${attempts}", "unlock_time=${lockouttime}", "fail_interval=${fail_interval}"]
+            $faillock_args = ['preauth', 'silent','audit', "deny=${attempts}", "unlock_time=${lockouttime}", "fail_interval=${fail_interval}"] #lint:ignore:140chars
             $arguments2 = ['authfail', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}", "fail_interval=${fail_interval}"]
           } else {
             $arguments = ['preauth', 'silent', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}"]
@@ -184,7 +184,7 @@ class cis_security_hardening::rules::pam_lockout (
           }
 
           exec { 'configure faillock':
-            command     => "authconfig --faillockargs=\"${real_faillock_args}\" --enablefaillock --updateall", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
+            command     => "authconfig --faillockargs=\"${join($real_faillock_args, ' ')}\" --enablefaillock --updateall", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
             path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
             refreshonly => true,
           }
