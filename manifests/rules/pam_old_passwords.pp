@@ -42,7 +42,7 @@ class cis_security_hardening::rules::pam_old_passwords (
         if $sha512 {
           $real_arguments = ['sha512', "remember=${oldpasswords}", 'shadow', 'try_first_pass', 'use_authtok']
         } else {
-          $real_arguments = ["remember=${oldpasswords}", 'shadow', 'try_first_pass', 'use_authtok']
+          $real_arguments = ['md5', "remember=${oldpasswords}", 'shadow', 'try_first_pass', 'use_authtok']
         }
 
         $profile = fact('cis_security_hardening.authselect.profile')
@@ -89,14 +89,14 @@ class cis_security_hardening::rules::pam_old_passwords (
                 position  => 'after *[type="password" and module="pam_unix.so" and control="requisite"]',
               }
 
-              Pam { "pam-pwhistory-${service}":
-                ensure    => absent,
-                service   => $service,
-                type      => 'password',
-                control   => 'required',
-                module    => 'pam_pwhistory.so',
-                arguments => ["remember=${oldpasswords}"],
-              }
+              # Pam { "pam-pwhistory-${service}":
+              #   ensure    => absent,
+              #   service   => $service,
+              #   type      => 'password',
+              #   control   => 'required',
+              #   module    => 'pam_pwhistory.so',
+              #   arguments => ["remember=${oldpasswords}"],
+              # }
             } else {
               Pam { "pam-pwhistory-${service}":
                 ensure    => present,
