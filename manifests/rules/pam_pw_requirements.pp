@@ -92,7 +92,7 @@ class cis_security_hardening::rules::pam_pw_requirements (
           ensure             => 'present',
           path               => '/etc/security/pwquality.conf',
           line               => "minlen = ${minlen}",
-          match              => '^#?minlen',
+          match              => '^#? ?minlen',
           append_on_no_match => true,
         }
 
