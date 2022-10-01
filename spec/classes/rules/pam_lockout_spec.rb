@@ -113,7 +113,7 @@ describe 'cis_security_hardening::rules::pam_lockout' do
 
                 is_expected.to contain_exec('configure faillock')
                   .with(
-                    'command'     => "authconfig --faillockargs=\"preauth silent audit deny=3 unlock_time=900 even_deny_root\" --enablefaillock --update",
+                    'command'     => 'authconfig --faillockargs="preauth silent audit deny=3 unlock_time=900 even_deny_root" --enablefaillock --update',
                     'path'        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
                     'refreshonly' => true,
 
