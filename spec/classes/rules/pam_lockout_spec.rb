@@ -111,10 +111,20 @@ describe 'cis_security_hardening::rules::pam_lockout' do
                     'arguments' => ['try_first_pass'],
                   )
 
+                is_expected.to contain_exec('configure faillock')
+                  .with(
+                    'command'     => "authconfig --faillockargs=\"preauth silent audit deny=3 unlock_time=900 even_deny_root\" --enablefaillock --update",
+                    'path'        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+                    'refreshonly' => true,
+
+                  )
+                  .that_notifies('Exec[authconfig-apply-changes]')
+
                 is_expected.not_to contain_file__line('update pam lockout system-auth')
                 is_expected.not_to contain_file__line('update pam lockout password-auth')
               else
                 is_expected.not_to contain_pam('pam-auth-faillock-required')
+                is_expected.not_to contain_exec('configure faillock')
                 is_expected.not_to contain_pam('account-faillock-system-auth')
                 is_expected.not_to contain_pam('account-faillock-password-auth')
                 is_expected.not_to contain_pam('disable-nullok-system-auth')
@@ -296,6 +306,7 @@ describe 'cis_security_hardening::rules::pam_lockout' do
             is_expected.not_to contain_file_line('faillock_even_deny_root')
             is_expected.not_to contain_pam('disable-nullok-system-auth')
             is_expected.not_to contain_pam('disable-nullok-password-auth')
+            is_expected.not_to contain_exec('configure faillock')
           end
         }
       end

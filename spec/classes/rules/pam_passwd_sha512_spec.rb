@@ -64,29 +64,18 @@ describe 'cis_security_hardening::rules::pam_passwd_sha512' do
                   )
                   .that_notifies('Exec[authconfig-passalgo-sha512]')
 
-                # is_expected.to contain_pam('sha512-system-auth')
-                #   .with(
-                #     'ensure'    => 'present',
-                #     'service'   => 'system-auth',
-                #     'type'      => 'password',
-                #     'control'   => 'sufficient',
-                #     'module'    => 'pam_unix.so',
-                #     'arguments' => ['sha512', 'shadow', 'try_first_pass', 'use_authtok'],
-                #   )
+                is_expected.to contain_exec('authconfig-passalgo-sha512')
+                  .with(
+                    'command'     => 'authconfig --passalgo=sha512 --updateall',
+                    'path'        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+                    'refreshonly' => true,
+                  )
 
-                # is_expected.to contain_pam('sha512-password-auth')
-                #   .with(
-                #     'ensure'    => 'present',
-                #     'service'   => 'password-auth',
-                #     'type'      => 'password',
-                #     'control'   => 'sufficient',
-                #     'module'    => 'pam_unix.so',
-                #     'arguments' => ['sha512', 'shadow', 'try_first_pass', 'use_authtok'],
-                #   )
               else
                 is_expected.not_to contain_file_line('password algorithm sha512')
                 is_expected.not_to contain_pam('sha512-system-auth')
                 is_expected.not_to contain_pam('sha512-password-auth')
+                is_expected.not_to contain_exec('authconfig-passalgo-sha512')
 
                 is_expected.to contain_exec('update authselect config for sha512 system-auth')
                   .with(
@@ -128,6 +117,7 @@ describe 'cis_security_hardening::rules::pam_passwd_sha512' do
             is_expected.not_to contain_exec('update authselect config for sha512 password-auth')
             is_expected.not_to contain_exec('switch sha512 on')
             is_expected.not_to contain_pam('pam-common-password-unix')
+            is_expected.not_to contain_exec('authconfig-passalgo-sha512')
           end
         }
       end
