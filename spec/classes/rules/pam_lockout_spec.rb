@@ -60,7 +60,7 @@ describe 'cis_security_hardening::rules::pam_lockout' do
                     'ensure'             => 'present',
                     'path'               => '/etc/sysconfig/authconfig',
                     'match'              => '^FAILLOCKARGS=',
-                    'line'               => 'FAILLOCKARGS="audit deny=3 unlock_time=900 even_deny_root"',
+                    'line'               => 'FAILLOCKARGS="preauth silent audit deny=3 unlock_time=900 even_deny_root"',
                     'append_on_no_match' => true,
                   )
                   .that_notifies('Exec[authconfig-apply-changes]')
@@ -74,30 +74,6 @@ describe 'cis_security_hardening::rules::pam_lockout' do
                     'append_on_no_match' => true,
                   )
                   .that_notifies('Exec[authconfig-apply-changes]')
-
-                is_expected.to contain_pam('pam-auth-faillock-required-2-system-auth')
-                  .with(
-                    'ensure'    => 'present',
-                    'service'   => 'system-auth',
-                    'type'      => 'auth',
-                    'control'   => '[default=die]',
-                    'control_is_param' => true,
-                    'module'    => 'pam_faillock.so',
-                    'arguments' => ['authfail', 'audit', 'deny=3', 'unlock_time=900', 'even_deny_root'],
-                    'position'  => 'before *[type="auth" and module="pam_unix.so"]',
-                  )
-
-                is_expected.to contain_pam('pam-auth-faillock-required-2-password-auth')
-                  .with(
-                    'ensure'    => 'present',
-                    'service'   => 'password-auth',
-                    'type'      => 'auth',
-                    'control'   => '[default=die]',
-                    'control_is_param' => true,
-                    'module'    => 'pam_faillock.so',
-                    'arguments' => ['authfail', 'audit', 'deny=3', 'unlock_time=900', 'even_deny_root'],
-                    'position'  => 'before *[type="auth" and module="pam_unix.so"]',
-                  )
 
                 is_expected.to contain_pam('account-faillock-system-auth')
                   .with(
@@ -139,7 +115,6 @@ describe 'cis_security_hardening::rules::pam_lockout' do
                 is_expected.not_to contain_file__line('update pam lockout password-auth')
               else
                 is_expected.not_to contain_pam('pam-auth-faillock-required')
-                is_expected.not_to contain_pam('pam-auth-faillock-required-2')
                 is_expected.not_to contain_pam('account-faillock-system-auth')
                 is_expected.not_to contain_pam('account-faillock-password-auth')
                 is_expected.not_to contain_pam('disable-nullok-system-auth')
@@ -297,7 +272,6 @@ describe 'cis_security_hardening::rules::pam_lockout' do
 
           else
             is_expected.not_to contain_pam('pam-auth-faillock-required')
-            is_expected.not_to contain_pam('pam-auth-faillock-require-2')
             is_expected.not_to contain_pam('account-faillock-system-auth')
             is_expected.not_to contain_pam('account-faillock-password-auth')
             is_expected.not_to contain_pam('pam-common-auth-require-tally2')
