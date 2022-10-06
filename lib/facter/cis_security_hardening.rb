@@ -31,7 +31,7 @@ Facter.add(:cis_security_hardening) do
 
     end
 
-    ret¢['osname_lc'] = osfamily = Facter.value(:operatingsystem).downcase
+    ret¢['osname_lc'] = Facter.value(:operatingsystem).downcase
 
     ret
   end
