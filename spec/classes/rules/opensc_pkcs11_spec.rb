@@ -19,12 +19,20 @@ describe 'cis_security_hardening::rules::opensc_pkcs11' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_package('opensc-pkcs11')
-              .with(
-                'ensure' => 'present',
-              )
+            if os_facts[:operatingsystem].casecmp('redhat').zero?
+              is_expected.to contain_package('opensc')
+                .with(
+                  'ensure' => 'present',
+                )
+            else
+              is_expected.to contain_package('opensc-pkcs11')
+                .with(
+                  'ensure' => 'present',
+                )
+            end
           else
-            is_expected.not_to contain_package('opensc-pkcd11')
+            is_expected.not_to contain_package('opensc-pkcs11')
+            is_expected.not_to contain_package('opensc')
           end
         }
       end

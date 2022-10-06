@@ -46,12 +46,21 @@ describe 'cis_security_hardening::rules::auditd_chcon_use' do
                    else
                      '4294967295'
                    end
-            is_expected.to contain_concat__fragment('watch chcon command rule 1')
-              .with(
-                'order'   => '176',
-                'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                'content' => "-a always,exit -F path=/usr/bin/chcon -F perm=x -F auid>=1000 -F auid!=#{auid} -k perm_chng",
-              )
+            if os_facts[:operatingsystem].casecmp('redhat').zero? && os_facts[:operatingsystemmajrelease] == '7'
+              is_expected.to contain_concat__fragment('watch chcon command rule 1')
+                .with(
+                  'order'   => '176',
+                  'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
+                  'content' => "-a always,exit -F path=/usr/bin/chcon -F auid>=1000 -F auid!=#{auid} -k privileged-priv_change",
+                )
+            else
+              is_expected.to contain_concat__fragment('watch chcon command rule 1')
+                .with(
+                  'order'   => '176',
+                  'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
+                  'content' => "-a always,exit -F path=/usr/bin/chcon -F perm=x -F auid>=1000 -F auid!=#{auid} -k perm_chng",
+                )
+            end
           else
             is_expected.not_to contain_concat__fragment('watch chcon command rule 1')
           end

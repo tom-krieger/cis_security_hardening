@@ -33,14 +33,16 @@ describe 'cis_security_hardening::rules::tmp_filesystem' do
           filename = '/etc/systemd/system/tmp.mount'
 
           if enforce
-            is_expected.to contain_file(filename)
-              .with(
-                'ensure'  => 'file',
-                'owner'   => 'root',
-                'group'   => 'root',
-                'mode'    => '0644',
-              )
-              .that_notifies('Exec[systemd-daemon-reload]')
+            unless os_facts[:operatingsystem].casecmp('redhat').zero? && os_facts[:operatingsystemmajrelease] > '7'
+              is_expected.to contain_file(filename)
+                .with(
+                  'ensure'  => 'file',
+                  'owner'   => 'root',
+                  'group'   => 'root',
+                  'mode'    => '0644',
+                )
+                .that_notifies('Exec[systemd-daemon-reload]')
+            end
 
             is_expected.to contain_service('tmp.mount')
               .with(

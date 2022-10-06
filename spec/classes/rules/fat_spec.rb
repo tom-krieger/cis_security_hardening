@@ -20,7 +20,8 @@ describe 'cis_security_hardening::rules::fat' do
 
           if os_facts[:operatingsystem].casecmp('centos').zero? ||
              os_facts[:operatingsystem].casecmp('almalinux').zero? ||
-             os_facts[:operatingsystem].casecmp('rocky').zero?
+             os_facts[:operatingsystem].casecmp('rocky').zero? ||
+             os_facts[:operatingsystem].casecmp('redhat').zero?
 
             if os_facts[:operatingsystemmajrelease] == '7'
 

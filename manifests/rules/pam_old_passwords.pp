@@ -16,6 +16,9 @@
 # @param oldpasswords
 #    Number of old passwords to remember
 #
+# @param use_pam_unix
+#    Flag to determine if pam_unix or pam_pwhistory (false) is used on Redhat 7 systems.
+#
 # @example
 #   class { 'cis_security_hardening::rules::pam_old_passwords':
 #       enforce => true,
@@ -25,6 +28,7 @@
 class cis_security_hardening::rules::pam_old_passwords (
   Boolean $enforce      = false,
   Integer $oldpasswords = 5,
+  Boolean $use_pam_unix = true,
 ) {
   if $enforce {
     $services = [
@@ -32,13 +36,13 @@ class cis_security_hardening::rules::pam_old_passwords (
       'password-auth',
     ]
 
-    case $facts['osfamily'].downcase() {
+    case $facts['os']['family'].downcase() {
       'redhat': {
         $sha512 = lookup('cis_security_hardening::rules::pam_passwd_sha512::enforce')
         if $sha512 {
           $real_arguments = ['sha512', "remember=${oldpasswords}", 'shadow', 'try_first_pass', 'use_authtok']
         } else {
-          $real_arguments = ["remember=${oldpasswords}", 'shadow', 'try_first_pass', 'use_authtok']
+          $real_arguments = ['md5', "remember=${oldpasswords}", 'shadow', 'try_first_pass', 'use_authtok']
         }
 
         $profile = fact('cis_security_hardening.authselect.profile')
@@ -49,7 +53,7 @@ class cis_security_hardening::rules::pam_old_passwords (
           $pf_path = ''
         }
 
-        if ($facts['operatingsystemmajrelease'] > '7') {
+        if ($facts['os']['release']['major'] > '7') {
           if $pf_path != '' {
             $pf_file = "${pf_path}/system-auth"
 
@@ -74,14 +78,34 @@ class cis_security_hardening::rules::pam_old_passwords (
           }
         } else {
           $services.each | $service | {
-            Pam { "pam-${service}-sufficient":
-              ensure    => present,
-              service   => $service,
-              type      => 'password',
-              control   => 'sufficient',
-              module    => 'pam_unix.so',
-              arguments => $real_arguments,
-              position  => 'after *[type="password" and module="pam_unix.so" and control="requisite"]',
+            if $use_pam_unix {
+              Pam { "pam-${service}-sufficient":
+                ensure    => present,
+                service   => $service,
+                type      => 'password',
+                control   => 'sufficient',
+                module    => 'pam_unix.so',
+                arguments => $real_arguments,
+                position  => 'after *[type="password" and module="pam_unix.so" and control="requisite"]',
+              }
+
+              # Pam { "pam-pwhistory-${service}":
+              #   ensure    => absent,
+              #   service   => $service,
+              #   type      => 'password',
+              #   control   => 'required',
+              #   module    => 'pam_pwhistory.so',
+              #   arguments => ["remember=${oldpasswords}"],
+              # }
+            } else {
+              Pam { "pam-pwhistory-${service}":
+                ensure    => present,
+                service   => $service,
+                type      => 'password',
+                control   => 'required',
+                module    => 'pam_pwhistory.so',
+                arguments => ["remember=${oldpasswords}"],
+              }
             }
           }
         }

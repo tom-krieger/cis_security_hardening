@@ -28,26 +28,23 @@ fixtures:
       repo: "herculesteam/augeasproviders"
       ref: "2.2.1"
     augeasprovider_pam:
-      repo: "herculesteam/augeasproviders_pam"
-      ref: "2.2.1"
+      repo: "puppet/augeasproviders_pam"
+      ref: "3.0.1"
     augeasprovider_core:
-      repo: "herculesteam/augeasproviders_core"
-      ref: "2.5.0"
+      repo: "puppet/augeasproviders_core"
+      ref: "3.2.0"
     sysctl:
       repo: "herculesteam/augeasproviders_sysctl"
       ref: "2.3.1"
     augeasprovider_grub:
-      repo: "herculesteam/augeasproviders_grub"
-      ref: "3.1.0"
+      repo: "puppet/augeasproviders_grub"
+      ref: "4.0.0"
     augeasprovider_shellvar:
-      repo: "herculesteam/augeasproviders_shellvar"
-      ref: "3.1.0"
+      repo: "puppet/augeasproviders_shellvar"
+      ref: "5.0.0"
     augeasprovider_mounttab:
       repo: "herculesteam/augeasproviders_mounttab"
       ref: "2.1.1"
-    syslogng:
-      repo: "purplehazech/syslogng"
-      ref: "0.7.1"
     rsyslog:
       repo: "puppet/rsyslog"
       ref: "3.3.0"

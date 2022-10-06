@@ -28,7 +28,7 @@ class cis_security_hardening::rules::fat (
           command => '/bin/true',
         }
       }
-      'centos', 'almalinux', 'rocky': {
+      'centos', 'almalinux', 'rocky', 'redhat': {
         case $facts['operatingsystemmajrelease'] {
           '7': {
             kmod::install { 'fat':

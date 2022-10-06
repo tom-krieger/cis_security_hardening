@@ -27,10 +27,15 @@ class cis_security_hardening::rules::auditd_newgrp_use (
       undef => '1000',
       default => fact('cis_security_hardening.auditd.uid_min'),
     }
+    if $facts['os']['name'].downcase() == 'redhat' and $facts['os']['release']['major'] == '7' {
+      $rule1 = "-a always,exit -F path=/usr/bin/newgrp -F auid>=${uid} -F auid!=4294967295 -k privileged-priv_change"
+    } else {
+      $rule1 = "-a always,exit -F path=/usr/bin/newgrp -F perm=x -F auid>=${uid} -F auid!=4294967295 -k priv_cmd"
+    }
     concat::fragment { 'watch newgrp command rule 1':
       order   => '175',
       target  => $cis_security_hardening::rules::auditd_init::rules_file,
-      content => "-a always,exit -F path=/usr/bin/newgrp -F perm=x -F auid>=${uid} -F auid!=4294967295 -k priv_cmd",
+      content => $rule1,
     }
   }
 }

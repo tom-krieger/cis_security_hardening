@@ -27,10 +27,15 @@ class cis_security_hardening::rules::auditd_chage_use (
       undef => '1000',
       default => fact('cis_security_hardening.auditd.uid_min'),
     }
+    if $facts['os']['name'].downcase() == 'redhat' and $facts['os']['release']['major'] == '7' {
+      $rule1 = "-a always,exit -F path=/usr/bin/chage -F auid>=${uid} -F auid!=4294967295 -k privileged-chage"
+    } else {
+      $rule1 = "-a always,exit -F path=/usr/bin/chage -F perm=x -F auid>=${uid} -F auid!=4294967295 -k privileged-chage"
+    }
     concat::fragment { 'watch chage command rule 1':
       order   => '183',
       target  => $cis_security_hardening::rules::auditd_init::rules_file,
-      content => "-a always,exit -F path=/usr/bin/chage -F perm=x -F auid>=${uid} -F auid!=4294967295 -k privileged-chage",
+      content => $rule1,
     }
   }
 }

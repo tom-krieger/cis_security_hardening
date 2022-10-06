@@ -36,7 +36,7 @@ class cis_security_hardening::rules::sshd_loglevel (
       ensure => present,
       path   => $path,
       line   => "LogLevel ${log_level}",
-      match  => '^LogLevel.*',
+      match  => '^#?LogLevel.*',
       notify => Exec['reload-sshd'],
     }
   }

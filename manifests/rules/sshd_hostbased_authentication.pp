@@ -30,7 +30,7 @@ class cis_security_hardening::rules::sshd_hostbased_authentication (
       ensure => present,
       path   => $path,
       line   => 'HostbasedAuthentication no',
-      match  => '^HostbasedAuthentication.*',
+      match  => '^#?HostbasedAuthentication.*',
       notify => Exec['reload-sshd'],
     }
   }

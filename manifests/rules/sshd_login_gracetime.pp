@@ -36,7 +36,7 @@ class cis_security_hardening::rules::sshd_login_gracetime (
       ensure => present,
       path   => $path,
       line   => "LoginGraceTime ${login_grace_time}",
-      match  => '^LoginGraceTime.*',
+      match  => '^#?LoginGraceTime.*',
       notify => Exec['reload-sshd'],
     }
   }

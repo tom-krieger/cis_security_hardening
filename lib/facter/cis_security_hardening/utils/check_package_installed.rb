@@ -16,7 +16,7 @@ def check_package_installed(pkg, opts = '-q')
     opts = "#{opts} -l"
     val = Facter::Core::Execution.exec("dpkg #{opts} #{pkg} | grep ^ii")
   end
-  # if val.nil? || val.empty? || val =~ %r{not installed}
+
   if val.nil? || val.empty? || val.include?('not installed')
     false
   else

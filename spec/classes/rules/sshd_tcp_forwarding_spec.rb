@@ -79,7 +79,7 @@ describe 'cis_security_hardening::rules::sshd_tcp_forwarding' do
                 'ensure' => 'present',
                 'path'   => path,
                 'line'               => 'AllowTcpForwarding no',
-                'match'              => '^AllowTcpForwarding.*',
+                'match'              => '^#?AllowTcpForwarding.*',
                 'append_on_no_match' => true,
               )
               .that_notifies('Exec[reload-sshd]')

@@ -27,8 +27,8 @@ class cis_security_hardening::rules::sshd_max_sessions (
     file_line { 'sshd-max-sessions':
       ensure             => present,
       path               => $path,
-      line               => 'maxsessions 4',
-      match              => '^maxsessions.*',
+      line               => 'MaxSessions 4',
+      match              => '^#?MaxSessions.*',
       append_on_no_match => true,
       notify             => Exec['reload-sshd'],
     }

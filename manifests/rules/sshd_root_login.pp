@@ -29,7 +29,7 @@ class cis_security_hardening::rules::sshd_root_login (
       ensure => present,
       path   => $path,
       line   => 'PermitRootLogin no',
-      match  => '^PermitRootLogin.*',
+      match  => '^#?PermitRootLogin.*',
       notify => Exec['reload-sshd'],
     }
   }

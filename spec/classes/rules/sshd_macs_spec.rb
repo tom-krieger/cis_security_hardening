@@ -80,7 +80,7 @@ describe 'cis_security_hardening::rules::sshd_macs' do
                 'ensure' => 'present',
                 'path'   => path,
                 'line'   => 'MACs hmac-sha2-512,hmac-sha2-256',
-                'match'  => '^MACs.*',
+                'match'  => '^#?MACs.*',
               )
               .that_notifies('Exec[reload-sshd]')
           else

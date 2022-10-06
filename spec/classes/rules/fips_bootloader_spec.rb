@@ -8,7 +8,15 @@ describe 'cis_security_hardening::rules::fips_bootloader' do
   on_supported_os.each do |os, os_facts|
     enforce_options.each do |enforce|
       context "on #{os} with enforce = #{enforce}" do
-        let(:facts) { os_facts }
+        let(:facts) do
+          os_facts.merge!(
+            cis_security_hardening: {
+              grub: {
+                boot_part_uuid: 'UUID="80ee5fdc-04ff-48c2-93ec-186903ced35f"',
+              },
+            },
+          )
+        end
         let(:params) do
           {
             'enforce' => enforce,
@@ -19,6 +27,20 @@ describe 'cis_security_hardening::rules::fips_bootloader' do
           is_expected.to compile
 
           if enforce
+            is_expected.to contain_kernel_parameter('fips')
+              .with(
+                'value' => '1',
+              )
+              .that_notifies('Exec[fips-grub-config]')
+
+            if os_facts[:operatingsystem].casecmp('redhat').zero?
+              is_expected.to contain_kernel_parameter('boot')
+                .with(
+                  'value' => 'UUID="80ee5fdc-04ff-48c2-93ec-186903ced35f"',
+                )
+                .that_notifies('Exec[fips-grub-config]')
+            end
+
             if os_facts[:osfamily].casecmp('debian').zero?
               is_expected.to contain_exec('fips-grub-config')
                 .with(
@@ -27,12 +49,6 @@ describe 'cis_security_hardening::rules::fips_bootloader' do
                   'refreshonly' => true,
                 )
 
-              is_expected.to contain_kernel_parameter('fips')
-                .with(
-                  'value' => '1',
-                )
-                .that_notifies('Exec[fips-grub-config]')
-
             elsif os_facts[:osfamily].casecmp('suse').zero?
               is_expected.to contain_exec('fips-grub-config')
                 .with(
@@ -40,12 +56,6 @@ describe 'cis_security_hardening::rules::fips_bootloader' do
                   'path'        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
                   'refreshonly' => true,
                 )
-
-              is_expected.to contain_kernel_parameter('fips')
-                .with(
-                  'value' => '1',
-                )
-                .that_notifies('Exec[fips-grub-config]')
             end
           else
             is_expected.not_to contain_exec('fips-grub-config')

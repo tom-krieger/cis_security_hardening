@@ -28,7 +28,7 @@ class cis_security_hardening::rules::sshd_ignore_rhosts (
       ensure => present,
       path   => $path,
       line   => 'IgnoreRhosts yes',
-      match  => '^IgnoreRhosts.*',
+      match  => '^#?IgnoreRhosts.*',
       notify => Exec['reload-sshd'],
     }
   }

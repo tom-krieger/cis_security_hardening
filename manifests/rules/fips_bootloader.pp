@@ -30,17 +30,25 @@
 class cis_security_hardening::rules::fips_bootloader (
   Boolean $enforce = false,
 ) {
-  if $enforce and ($facts['osfamily'].downcase() == 'debian' or $facts['osfamily'].downcase() == 'suse') {
+  if $enforce {
     kernel_parameter { 'fips':
       value  => '1',
       notify => Exec['fips-grub-config'],
     }
 
-    case $facts['osfamily'].downcase() {
+    $boot_uuid = fact('cis_security_hardening.grub.boot_part_uuid')
+    if $boot_uuid != undef and $facts['operatingsystem'].downcase() == 'redhat' {
+      kernel_parameter { 'boot':
+        value  => $boot_uuid,
+        notify => Exec['fips-grub-config'],
+      }
+    }
+
+    case $facts['os']['family'].downcase() {
       'debian': {
         $cmd = 'update-grub'
       }
-      'suse': {
+      'suse', 'redhat': {
         $cmd = 'grub2-mkconfig -o /boot/grub2/grub.cfg'
       }
       default: {

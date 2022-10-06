@@ -48,7 +48,9 @@ The code of this security hardening module is based on the following CIS Benchma
 | Suse SLES 12 | CIS SUSE Linux Enterprise 12 Benchmark                       | 3.1.0   | 01-24-2022 |
 | Suse SLES 15 | CIS SUSE Linux Enterprise 15 Benchmark                       | 1.1.1   | 09-17-2021 |
 | RedHat 7     | CIS Red Hat Enterprise Linux 7 Benchmark                     | 3.1.1   | 05-21-2021 |
+| RedHat 7     | CIS Red Hat Enterprise Linux 7 STIG Benchmark                | 2.0.0   | 11-29-2021 |
 | RedHat 8     | CIS Red Hat Enterprise Linux 8 Benchmark                     | 2.0.0   | 02-23-2022 |
+| RedHat 8     | CIS Red Hat Enterprise Linux 8 STIG Benchmark                | 1.0.0   | 11-12-2021 |
 | CentOS 7     | CIS CentOS Linux 7 Benchmark                                 | 3.1.2   | 08-31-2021 |
 | Ubuntu 18.04 | CIS Ubuntu Linux 18.04 LTS Benchmark                         | 2.0.1   | 01-03-2020 |
 | Ubuntu 20.04 | CIS Ubuntu Linux 20.04 LTS Benchmark                         | 1.1.0   | 03-31-2021 |
@@ -189,6 +191,10 @@ cis_security_hardening::rules::selinux_policy::auto_reboot: true
 
 The compliance rules have been implemented without or very limited testing. Please report problems or create pull requests to improve the Suse SLES compliance code.
 
+### Redhat 8 STIG benchmark
+
+The Redhat 8 STIG benchmark contains many different and in my opinion older configurations to the Redhat 8 benchmark. For the Redhat 8 STIG benchmark in this module, the configurations from the current Redhat 8 benchmark were used and extended by the additional configurations of the Redhat 8 STIG benchmark. For example, version 2.0.0 of the Redhat 8 benchmark recommends disabling the 'cramfs' module using `install /bin/false` and blacklisting the module. The Redhat 8 STIG benchmark gives the following configuration: `install /bin/true`. Blacklisting the module is not recommended.
+
 ### Issues with CISCAT scanner
 
 * CISCAT scanner for Ubuntu 20.04 LTS STIG false positives:
@@ -197,13 +203,17 @@ The compliance rules have been implemented without or very limited testing. Plea
   * reports that audit log directory is not set 0750 or more restrictive but it is 0750
   * reports that not all system command files are group-owned by root but the check searches for all files and not only these not having permissions /2000
 
+* CISCAT scanner for Redhat 7 STIG false positives:
+  * nosuid flag on home directries partitions is reported as missing but is set
+  * Tests for NFS settings report `failed` but no NFS is used
+
 ## Credits
 
 This project is highly inspired by the [fervid/secure_linux_cis](https://forge.puppet.com/fervid/secure_linux_cis) module from Puppet Forge and uses my [security_baseline](https://forge.puppet.com/modules/tomkrieger/security_baseline) module as basis.
 
 ## Development
 
-Contributions are welcome in any form, pull requests, and issues should be filed via GitHub.
+Contributions are welcome in any form, pull requests and issues should be filed via GitHub.
 
 ## Changelog
 

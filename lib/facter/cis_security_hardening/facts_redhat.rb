@@ -2,9 +2,11 @@
 
 require 'facter/cis_security_hardening/utils/check_package_installed'
 require 'facter/cis_security_hardening/utils/check_value_string'
+require 'facter/cis_security_hardening/utils/check_value_integer'
 require 'facter/cis_security_hardening/utils/read_file_stats'
 require 'facter/cis_security_hardening/utils/read_iptables_rules'
 require 'facter/cis_security_hardening/utils/read_firewalld_zone_iface'
+require 'facter/cis_security_hardening/utils/read_grub_data'
 require 'pp'
 
 # frozen_string_literal: true
@@ -12,9 +14,18 @@ require 'pp'
 def facts_redhat(os, distid, release)
   cis_security_hardening = common_facts(os, distid, release)
 
+  # check for dconf package
+  cis_security_hardening['dconf_package'] = check_package_installed('dconf')
+
   # get authselect config
   if File.exist?('/usr/bin/authselect')
     authselect = {}
+    val = Facter::Core::Execution.exec('authselect check >/dev/null 2>&1; echo $?')
+    authselect['check'] = if val.nil? || val.empty?
+                            0
+                          else
+                            check_value_integer(val, 0)
+                          end
     val = Facter::Core::Execution.exec('/usr/bin/authselect current | grep "Profile ID: custom/"')
     authselect['profile'] = if val.nil? || val.empty?
                               'none'
@@ -183,6 +194,13 @@ def facts_redhat(os, distid, release)
 
   cis_security_hardening[:x11] = x11
 
+  # check for abrt packages
+  abrt = {}
+  val = Facter::Core::Execution.exec('rpm -qa abrt*')
+  pkgs = val.split("\n")
+  abrt['packages'] = pkgs
+  cis_security_hardening[:abrt] = abrt
+
   # check systemd-coredump
   pkgs = Facter::Core::Execution.exec('rpm -q systemd-coredump 2>/dev/null')
   cis_security_hardening['systemd-coredump'] = if pkgs.nil? || pkgs.empty? || pkgs.include?('not installed')
@@ -190,6 +208,15 @@ def facts_redhat(os, distid, release)
                                                else
                                                  'yes'
                                                end
+
+  # get grub data
+  cis_security_hardening['grub'] = read_grub_data
+
+  # check if sssd is installed
+  cis_security_hardening['sssd'] = check_package_installed('sssd')
+
+  # read pkcs11 config
+  cis_security_hardening['pkcs11_config'] = read_pam_pkcs11_conf
 
   # return results
   cis_security_hardening

@@ -79,7 +79,7 @@ describe 'cis_security_hardening::rules::sshd_x11_forward' do
                 'ensure' => 'present',
                 'path'   => path,
                 'line'   => 'X11Forwarding no',
-                'match'  => '^X11Forwarding.*',
+                'match'  => '^#?X11Forwarding.*',
               )
               .that_notifies('Exec[reload-sshd]')
           else

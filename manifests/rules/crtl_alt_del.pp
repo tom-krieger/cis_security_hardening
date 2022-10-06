@@ -27,5 +27,16 @@ class cis_security_hardening::rules::crtl_alt_del (
       onlyif  => 'test -z "$(systemctl status ctrl-alt-del.target | grep -i "Loaded: masked")"',
       notify  => Exec['systemd-daemon-reload'],
     }
+
+    if $facts['os']['name'].downcase() == 'redhat' and $facts['os']['release']['major'] >= '8' {
+      file_line { 'ctrl-alt-del-burst':
+        ensure             => present,
+        path               => '/etc/systemd/system.conf',
+        match              => '^CtrlAltDelBurstAction=',
+        line               => 'CtrlAltDelBurstAction=none',
+        append_on_no_match => true,
+        notify             => Exec['systemd-daemon-reload'],
+      }
+    }
   }
 }

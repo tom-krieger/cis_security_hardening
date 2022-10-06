@@ -78,8 +78,8 @@ describe 'cis_security_hardening::rules::sshd_max_sessions' do
               .with(
                 'ensure' => 'present',
                 'path'   => path,
-                'line'               => 'maxsessions 4',
-                'match'              => '^maxsessions.*',
+                'line'               => 'MaxSessions 4',
+                'match'              => '^#?MaxSessions.*',
                 'append_on_no_match' => true,
               )
               .that_notifies('Exec[reload-sshd]')

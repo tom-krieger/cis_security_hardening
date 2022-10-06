@@ -40,13 +40,17 @@ class cis_security_hardening::rules::auditd_kernel_modules (
       undef => '1000',
       default => fact('cis_security_hardening.auditd.uid_min'),
     }
+    if $facts['os']['name'].downcase() == 'redhat' and $facts['os']['release']['major'] == '7' {
+      $rule1 = "-a always,exit -S all -F path=/usr/bin/kmod -p x -F auid>=${uid} -F auid!=${auid} -k module-change"
+    } else {
+      $rule1 = "-a always,exit -S all -F path=/usr/bin/kmod -F perm=x -F auid>=${uid} -F auid!=${auid} -F key=kernel_modules"
+    }
     concat::fragment { 'watch kernel modules rule 1':
       order   => '204',
       target  => $cis_security_hardening::rules::auditd_init::rules_file,
-      content => "-a always,exit -S all -F path=/usr/bin/kmod -F perm=x -F auid>=${uid} -F auid!=${auid} -F key=kernel_modules",
+      content => $rule1,
     }
-    if  $facts['architecture'] == 'x86_64' or
-    $facts['architecture'] == 'amd64' {
+    if  $facts['architecture'] == 'x86_64' or $facts['architecture'] == 'amd64' {
       concat::fragment { 'watch kernel modules rule 2':
         order   => '205',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,

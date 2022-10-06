@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release v0.7.2
+
+* Added STIG benchmarks for Redhat 7 and 8
+* fixed incorrect publisher for chrony
+* changed augeasproviders core, pam, shellvar and grub to the new puppet modules
+* removed purplehazech-syslogng dependency
+
 ## Release 0.7.1
 
 * Added support for Redhat Linux 7 and 8

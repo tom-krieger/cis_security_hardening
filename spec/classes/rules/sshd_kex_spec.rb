@@ -80,7 +80,7 @@ describe 'cis_security_hardening::rules::sshd_kex' do
                 'ensure' => 'present',
                 'path'   => path,
                 'line'   => 'Kexalgorithms curve25519-sha256,ecdh-sha2-nistp256',
-                'match'  => '^Kexalgorithms.*',
+                'match'  => '^#?Kexalgorithms.*',
               )
               .that_notifies('Exec[reload-sshd]')
           else

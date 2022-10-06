@@ -34,7 +34,7 @@ class cis_security_hardening::rules::sshd_tcp_forwarding (
       ensure             => present,
       path               => $path,
       line               => 'AllowTcpForwarding no',
-      match              => '^AllowTcpForwarding.*',
+      match              => '^#?AllowTcpForwarding.*',
       append_on_no_match => true,
       notify             => Exec['reload-sshd'],
     }

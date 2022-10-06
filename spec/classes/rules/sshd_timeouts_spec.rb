@@ -81,7 +81,7 @@ describe 'cis_security_hardening::rules::sshd_timeouts' do
                 'ensure' => 'present',
                 'path'   => path,
                 'line'   => 'ClientAliveInterval 300',
-                'match'  => '^ClientAliveInterval.*',
+                'match'  => '^#?ClientAliveInterval.*',
               )
               .that_notifies('Exec[reload-sshd]')
 
@@ -90,7 +90,7 @@ describe 'cis_security_hardening::rules::sshd_timeouts' do
                 'ensure' => 'present',
                 'path'   => path,
                 'line'   => 'ClientAliveCountMax 0',
-                'match'  => '^ClientAliveCountMax.*',
+                'match'  => '^#?ClientAliveCountMax.*',
               )
               .that_notifies('Exec[reload-sshd]')
           else

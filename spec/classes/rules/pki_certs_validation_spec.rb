@@ -35,7 +35,7 @@ describe 'cis_security_hardening::rules::pki_certs_validation' do
                 'ensure' => 'present',
                 'path'   => '/etc/pam_pkcs11/pam_pkcs11.conf',
                 'line'   => '    cert_policy = ca,signature,ocsp_on;',
-                'match'  => 'cert_policy\s*=\s*ca,signature;',
+                'match'  => '\\s*cert_policy =',
                 'multiple' => true,
               )
           else

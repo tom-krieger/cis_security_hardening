@@ -26,7 +26,7 @@ class cis_security_hardening::rules::auditd_access (
   Boolean $enforce                 = false,
 ) {
   if $enforce {
-    $auid = $facts['operatingsystem'].downcase() ? {
+    $auid = $facts['os']['name'].downcase() ? {
       'rocky'     => 'unset',
       'almalinux' => 'unset',
       default     => '4294967295',
@@ -40,16 +40,19 @@ class cis_security_hardening::rules::auditd_access (
       default => fact('operatingsystem').downcase()
     }
 
-    $content_rule1 = $os ? {
-      'almalinux' => "-a always,exit -F arch=b32 -S creat,open,openat,truncate,ftruncate -F exit=-EACCES -F auid>=${uid} -F auid!=${auid} -k access", #lint:ignore:140chars
-      'rocky'     => "-a always,exit -F arch=b32 -S creat,open,openat,truncate,ftruncate -F exit=-EACCES -F auid>=${uid} -F auid!=${auid} -k access", #lint:ignore:140chars
-      default     => "-a always,exit -F arch=b32 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EACCES -F auid>=${uid} -F auid!=${auid} -k access", #lint:ignore:140chars
-    }
-
-    $content_rule2 = $os ? {
-      'almalinux' => "-a always,exit -F arch=b32 -S creat,open,openat,truncate,ftruncate -F exit=-EPERM -F auid>=${uid} -F auid!=${auid} -k access", #lint:ignore:140chars
-      'rocky'     => "-a always,exit -F arch=b32 -S creat,open,openat,truncate,ftruncate -F exit=-EPERM -F auid>=${uid} -F auid!=${auid} -k access", #lint:ignore:140chars
-      default     => "-a always,exit -F arch=b32 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EPERM -F auid>=${uid} -F auid!=${auid} -k access", #lint:ignore:140chars
+    case $os {
+      'almalinux', 'rocky': {
+        $content_rule1 = "-a always,exit -F arch=b32 -S creat,open,openat,truncate,ftruncate -F exit=-EACCES -F auid>=${uid} -F auid!=${auid} -k access" #lint:ignore:140chars
+        $content_rule2 = "-a always,exit -F arch=b32 -S creat,open,openat,truncate,ftruncate -F exit=-EPERM -F auid>=${uid} -F auid!=${auid} -k access" #lint:ignore:140chars
+        $content_rule3 = "-a always,exit -F arch=b64 -S creat,open,openat,truncate,ftruncate -F exit=-EACCES -F auid>=${uid} -F auid!=${auid} -k access" #lint:ignore:140chars
+        $content_rule4 = "-a always,exit -F arch=b64 -S creat,open,openat,truncate,ftruncate -F exit=-EPERM -F auid>=${uid} -F auid!=${auid} -k access"  #lint:ignore:140chars
+      }
+      default: {
+        $content_rule1 = "-a always,exit -F arch=b32 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EACCES -F auid>=${uid} -F auid!=${auid} -k access" #lint:ignore:140chars
+        $content_rule2 = "-a always,exit -F arch=b32 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EPERM -F auid>=${uid} -F auid!=${auid} -k access" #lint:ignore:140chars
+        $content_rule3 = "-a always,exit -F arch=b64 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EACCES -F auid>=${uid} -F auid!=${auid} -k access" #lint:ignore:140chars
+        $content_rule4 = "-a always,exit -F arch=b64 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EPERM -F auid>=${uid} -F auid!=${auid} -k access" #lint:ignore:140chars
+      }
     }
 
     concat::fragment { 'watch access rule 1':
@@ -65,16 +68,6 @@ class cis_security_hardening::rules::auditd_access (
     }
 
     if $facts['architecture'] == 'x86_64' or $facts['architecture'] == 'amd64' {
-      $content_rule3 = $os ? {
-        'almalinux' => "-a always,exit -F arch=b64 -S creat,open,openat,truncate,ftruncate -F exit=-EACCES -F auid>=${uid} -F auid!=${auid} -k access", #lint:ignore:140chars
-        'rocky'     => "-a always,exit -F arch=b64 -S creat,open,openat,truncate,ftruncate -F exit=-EACCES -F auid>=${uid} -F auid!=${auid} -k access", #lint:ignore:140chars
-        default     => "-a always,exit -F arch=b64 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EACCES -F auid>=${uid} -F auid!=${auid} -k access", #lint:ignore:140chars
-      }
-      $content_rule4 = $os ? {
-        'almalinux' => "-a always,exit -F arch=b64 -S creat,open,openat,truncate,ftruncate -F exit=-EPERM -F auid>=${uid} -F auid!=${auid} -k access",  #lint:ignore:140chars
-        'rocky'     => "-a always,exit -F arch=b64 -S creat,open,openat,truncate,ftruncate -F exit=-EPERM -F auid>=${uid} -F auid!=${auid} -k access",  #lint:ignore:140chars
-        default     => "-a always,exit -F arch=b64 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EPERM -F auid>=${uid} -F auid!=${auid} -k access", #lint:ignore:140chars
-      }
       concat::fragment { 'watch access rule 3':
         target  => $cis_security_hardening::rules::auditd_init::rules_file,
         content => $content_rule3,

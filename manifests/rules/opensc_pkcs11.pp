@@ -24,7 +24,12 @@ class cis_security_hardening::rules::opensc_pkcs11 (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    ensure_packages(['opensc-pkcs11'], {
+    $pkgs = $facts['operatingsystem'].downcase() ? {
+      'redhat' => ['opensc'],
+      default  => ['opensc-pkcs11'],
+    }
+
+    ensure_packages($pkgs, {
         ensure => present,
     })
   }

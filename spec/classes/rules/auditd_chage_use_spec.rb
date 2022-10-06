@@ -42,12 +42,22 @@ describe 'cis_security_hardening::rules::auditd_chage_use' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_concat__fragment('watch chage command rule 1')
-              .with(
-                'order'   => '183',
-                'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                'content' => '-a always,exit -F path=/usr/bin/chage -F perm=x -F auid>=1000 -F auid!=4294967295 -k privileged-chage',
-              )
+            if os_facts[:operatingsystem].casecmp('redhat').zero? && os_facts[:operatingsystemmajrelease] == '7'
+              is_expected.to contain_concat__fragment('watch chage command rule 1')
+                .with(
+                  'order'   => '183',
+                  'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
+                  'content' => '-a always,exit -F path=/usr/bin/chage -F auid>=1000 -F auid!=4294967295 -k privileged-chage',
+                )
+            else
+              is_expected.to contain_concat__fragment('watch chage command rule 1')
+                .with(
+                  'order'   => '183',
+                  'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
+                  'content' => '-a always,exit -F path=/usr/bin/chage -F perm=x -F auid>=1000 -F auid!=4294967295 -k privileged-chage',
+                )
+            end
+
           else
             is_expected.not_to contain_concat__fragment('watch chage command rule 1')
           end

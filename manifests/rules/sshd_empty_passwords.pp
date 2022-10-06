@@ -29,7 +29,7 @@ class cis_security_hardening::rules::sshd_empty_passwords (
       ensure => present,
       path   => $path,
       line   => 'PermitEmptyPasswords no',
-      match  => '^PermitEmptyPasswords.*',
+      match  => '^#?PermitEmptyPasswords.*',
       notify => Exec['reload-sshd'],
     }
   }
