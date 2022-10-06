@@ -34,10 +34,6 @@ hierarchy:
     paths:
       - "cis/cis_ubuntu_20.04_params.yaml"
       - "cis/cis_ubuntu_20.04_rules.yaml"
-  - name: "Ubuntu 20.04 STIG Benchmark"
-    paths:
-      - "stig/cis_ubuntu_20.04_params.yaml"
-      - "stig/cis_ubuntu_20.04_rules.yaml"
   - name: "Debian 10 Benchmark"
     paths:
       - "cis/cis_debian_10_params.yaml"
