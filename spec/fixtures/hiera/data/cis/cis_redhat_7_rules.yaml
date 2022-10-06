@@ -290,7 +290,11 @@ cis_security_hardening::benchmark::redhat::7:
       stig:
         - pam_passwd
         - pam_last_logon
+        - sssd_mfa_services
+        - sssd_use_start_tls
+        - sssd_ldap_tls_reqcert
         - pki_certs_validation
+        - pam_mfa_redhat
     configure_user_accounts:
       level1:
         - passwd_expiration

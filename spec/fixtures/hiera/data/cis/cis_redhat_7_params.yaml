@@ -486,6 +486,7 @@ cis_security_hardening::rules::pam_pw_requirements::difok: 0
 cis_security_hardening::rules::pam_lockout::enforce: true
 cis_security_hardening::rules::pam_lockout::attempts: 3
 cis_security_hardening::rules::pam_lockout::lockouttime: 900
+cis_security_hardening::rules::pam_lockout::fail_interval: 0
 cis_security_hardening::rules::pam_lockout::lockout_root: false
 cis_security_hardening::rules::pam_passwd_sha512::enforce: true
 cis_security_hardening::rules::pam_old_passwords::enforce: true
@@ -493,8 +494,13 @@ cis_security_hardening::rules::pam_old_passwords::oldpasswords: 5
 cis_security_hardening::rules::pam_old_passwords::sha512: true
 cis_security_hardening::rules::pam_passwd::enforce: true
 cis_security_hardening::rules::pam_last_logon::enforce: true
+cis_security_hardening::rules::sssd_mfa_services::enforce: true
+cis_security_hardening::rules::sssd_mfa_services::services: 'nss, pam'
+cis_security_hardening::rules::sssd_use_start_tls::enforce: true
+cis_security_hardening::rules::sssd_ldap_tls_reqcert::enforce: true
 cis_security_hardening::rules::pki_certs_validation::enforce: true
 cis_security_hardening::rules::pki_certs_validation::cert_policy: 'ca, ocsp_on, signature;'
+cis_security_hardening::rules::pam_mfa_redhat::enforce: true
 
 cis_security_hardening::rules::passwd_expiration::enforce: true
 cis_security_hardening::rules::passwd_expiration::max_pass_days: 90
