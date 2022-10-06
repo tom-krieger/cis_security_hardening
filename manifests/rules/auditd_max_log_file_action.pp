@@ -20,16 +20,17 @@
 #             max_log_file_action => 'keep_logs',
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::auditd_max_log_file_action (
   Boolean $enforce            = false,
   String $max_log_file_action = 'keep_logs',
 ) {
   if $enforce {
     file_line { 'auditd_max_log_file_action':
-      line  => "max_log_file_action = ${$max_log_file_action}",
-      path  => '/etc/audit/auditd.conf',
-      match => '^max_log_file_action',
+      line               => "max_log_file_action = ${$max_log_file_action}",
+      path               => '/etc/audit/auditd.conf',
+      match              => '^max_log_file_action',
+      append_on_no_match => true,
     }
   }
 }

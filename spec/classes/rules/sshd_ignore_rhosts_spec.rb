@@ -79,7 +79,7 @@ describe 'cis_security_hardening::rules::sshd_ignore_rhosts' do
                 'ensure' => 'present',
                 'path'   => path,
                 'line'   => 'IgnoreRhosts yes',
-                'match'  => '^IgnoreRhosts.*',
+                'match'  => '^#?IgnoreRhosts.*',
               )
               .that_notifies('Exec[reload-sshd]')
           else

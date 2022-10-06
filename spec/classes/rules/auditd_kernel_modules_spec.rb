@@ -48,12 +48,21 @@ describe 'cis_security_hardening::rules::auditd_kernel_modules' do
                      else
                        '4294967295'
                      end
-              is_expected.to contain_concat__fragment('watch kernel modules rule 1')
-                .with(
-                  'order' => '204',
-                  'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => "-a always,exit -S all -F path=/usr/bin/kmod -F perm=x -F auid>=1000 -F auid!=#{auid} -F key=kernel_modules",
-                )
+              if os_facts[:operatingsystem].casecmp('redhat').zero? && os_facts[:operatingsystemmajrelease] == '7'
+                is_expected.to contain_concat__fragment('watch kernel modules rule 1')
+                  .with(
+                    'order' => '204',
+                    'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
+                    'content' => "-a always,exit -S all -F path=/usr/bin/kmod -p x -F auid>=1000 -F auid!=#{auid} -k module-change",
+                  )
+              else
+                is_expected.to contain_concat__fragment('watch kernel modules rule 1')
+                  .with(
+                    'order' => '204',
+                    'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
+                    'content' => "-a always,exit -S all -F path=/usr/bin/kmod -F perm=x -F auid>=1000 -F auid!=#{auid} -F key=kernel_modules",
+                  )
+              end
 
               if ['x86_64', 'amd64'].include?(arch)
                 is_expected.to contain_concat__fragment('watch kernel modules rule 2')

@@ -41,12 +41,21 @@ describe 'cis_security_hardening::rules::auditd_chsh_use' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_concat__fragment('watch chsh command rule 1')
-              .with(
-                'order'   => '174',
-                'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                'content' => '-a always,exit -F path=/usr/bin/chsh -F perm=x -F auid>=1000 -F auid!=4294967295 -k priv_cmd',
-              )
+            if os_facts[:operatingsystem].casecmp('redhat').zero? && os_facts[:operatingsystemmajrelease] == '7'
+              is_expected.to contain_concat__fragment('watch chsh command rule 1')
+                .with(
+                  'order'   => '174',
+                  'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
+                  'content' => '-a always,exit -F path=/usr/bin/chsh -F auid>=1000 -F auid!=4294967295 -k priv_cmd',
+                )
+            else
+              is_expected.to contain_concat__fragment('watch chsh command rule 1')
+                .with(
+                  'order'   => '174',
+                  'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
+                  'content' => '-a always,exit -F path=/usr/bin/chsh -F perm=x -F auid>=1000 -F auid!=4294967295 -k priv_cmd',
+                )
+            end
           else
             is_expected.not_to contain_concat__fragment('watch chsh command rule 1')
           end

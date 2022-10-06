@@ -35,7 +35,7 @@
 #       crypto_policy = 'FUTURE',
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::crypto_policy (
   Boolean $enforce                                           = false,
   Enum['FUTURE', 'FIPS', 'LEGACY', 'DEFAULT'] $crypto_policy = 'FUTURE',

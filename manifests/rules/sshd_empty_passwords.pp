@@ -16,7 +16,7 @@
 #       enforce => true,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::sshd_empty_passwords (
   Boolean $enforce = false,
 ) {
@@ -29,7 +29,7 @@ class cis_security_hardening::rules::sshd_empty_passwords (
       ensure => present,
       path   => $path,
       line   => 'PermitEmptyPasswords no',
-      match  => '^PermitEmptyPasswords.*',
+      match  => '^#?PermitEmptyPasswords.*',
       notify => Exec['reload-sshd'],
     }
   }

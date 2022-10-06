@@ -20,16 +20,17 @@
 #             max_log_size => 32,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::auditd_max_log_file (
   Boolean $enforce      = false,
   Integer $max_log_size = 16,
 ) {
   if $enforce {
     file_line { 'auditd_max_log_size':
-      path  => '/etc/audit/auditd.conf',
-      line  => "max_log_file = ${max_log_size}",
-      match => '^max_log_file =',
+      path               => '/etc/audit/auditd.conf',
+      line               => "max_log_file = ${max_log_size}",
+      match              => '^max_log_file =',
+      append_on_no_match => true,
     }
   }
 }

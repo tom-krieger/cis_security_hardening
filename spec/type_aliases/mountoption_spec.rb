@@ -9,6 +9,7 @@ describe 'Cis_security_hardening::Mountoption' do
       'noexec',
       'nosuid',
       'defaults',
+      'sec=krb5:krb5i:krb5p',
     ].each do |value|
       describe value.inspect do
         it { is_expected.to allow_value(value) }
@@ -26,6 +27,7 @@ describe 'Cis_security_hardening::Mountoption' do
         '',
         'nodev;rm -rf /',
         'cat /etc/shadow;nodev',
+        'secd=sec=krb5:krb5i:krb5p',
       ].each do |value|
         describe value.inspect do
           it { is_expected.not_to allow_value(value) }

@@ -96,20 +96,6 @@ describe 'cis_security_hardening::rules::pam_old_passwords' do
                   .that_notifies('Exec[authselect-apply-changes]')
               end
 
-              # if os_facts[:operatingsystem].casecmp('rocky').zero? || os_facts[:operatingsystem].casecmp('almalinux').zero?
-              #   is_expected.to contain_pam('pam-_unix_sufficient')
-              #     .with(
-              #       'ensure'    => 'present',
-              #       'service'   => 'system-auth',
-              #       'type'      => 'password',
-              #       'control'   => 'sufficient',
-              #       'module'    => 'pam_unix.so',
-              #       'arguments' => ['sha512', 'remember=5', 'shadow', 'try_first_pass', 'use_authtok'],
-              #       'target'    => '/etc/authselect/custom/testprofile/system-auth',
-              #     )
-              #     .that_notifies('Exec[authselect-apply-changes]')
-              # end
-
             elsif os_facts[:osfamily].casecmp('debian').zero? || os_facts[:osfamily].casecmp('suse').zero?
               is_expected.not_to contain_pam('pam-system-auth-sufficient')
               is_expected.not_to contain_pam('pam-password-auth-sufficient')

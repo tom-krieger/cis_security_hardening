@@ -29,7 +29,7 @@
 #       enforce => true,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::sudo_installed (
   Boolean $enforce = false,
   Array $sudo_pkgs = ['sudo']

@@ -21,7 +21,7 @@
 #       state => 'permissive',
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::selinux_state (
   Boolean $enforce                       = false,
   Enum['enforcing', 'permissive'] $state = 'enforcing',

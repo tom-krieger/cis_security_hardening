@@ -1,2 +1,4 @@
 ---
-cis_security_hardening::time_until_reboot: 60
+cis_security_hardening::time_until_reboot: 120
+cis_security_hardening::verbose_logging: false
+cis_security_hardening::remove_authconfig: false

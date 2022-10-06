@@ -21,17 +21,29 @@
 # @param lockouttime
 #    Lockout the account for this number of seconds
 #
+# @param fail_interval
+#    Time interval for failed login attempts counted for lockout.
+#
+# @param lockout_root
+#    Flag if root should be locked on failed logins.
+#
+# @param lock_dir
+#    Faillock direcrory to use.
+#
 # @example
 #   class { 'cis_security_hardening::rules::pam_lockout':
 #       enforce => true,
 #       lockouttime => 300,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::pam_lockout (
-  Boolean $enforce     = false,
-  Integer $attempts    = 3,
-  Integer $lockouttime = 900,
+  Boolean $enforce               = false,
+  Integer $attempts              = 3,
+  Integer $lockouttime           = 900,
+  Integer $fail_interval         = 0,
+  Boolean $lockout_root          = false,
+  Stdlib::Absolutepath $lock_dir = '/var/log/faillock',
 ) {
   if $enforce {
     $services = [
@@ -39,7 +51,7 @@ class cis_security_hardening::rules::pam_lockout (
       'password-auth',
     ]
 
-    case $facts['osfamily'].downcase() {
+    case $facts['os']['family'].downcase() {
       'redhat': {
         $profile = fact('cis_security_hardening.authselect.profile')
 
@@ -49,51 +61,136 @@ class cis_security_hardening::rules::pam_lockout (
           $pf_path = ''
         }
 
-        $services.each | $service | {
-          $pf_file = "${pf_path}/${service}"
+        if $facts['os']['release']['major'] > '7' {
+          $services.each | $service | {
+            $pf_file = "${pf_path}/${service}"
 
-          if  $facts['operatingsystemmajrelease'] > '7' and $pf_path != '' {
-            file_line { "update pam lockout ${service}":
-              path   => $pf_file,
-              line   => "auth         required                                     pam_faillock.so preauth silent deny=${attempts} unlock_time=${lockouttime}  {include if \"with-faillock\"}", #lint:ignore:140chars
-              match  => '^auth\s+required\s+pam_faillock.so\s+preauth\s+silent',
-              notify => Exec['authselect-apply-changes'],
+            if $pf_path != '' {
+              file_line { "update pam lockout ${service}":
+                path   => $pf_file,
+                line   => "auth         required                                     pam_faillock.so preauth silent deny=${attempts} unlock_time=${lockouttime}  {include if \"with-faillock\"}", #lint:ignore:140chars
+                match  => '^auth\s+required\s+pam_faillock.so\s+preauth\s+silent',
+                notify => Exec['authselect-apply-changes'],
+              }
+            }
+          }
+
+          file_line { 'faillock_fail_interval':
+            ensure             => present,
+            path               => '/etc/security/faillock.conf',
+            match              => '^fail_interval =',
+            line               => "fail_interval = ${lockouttime}",
+            append_on_no_match => true,
+          }
+
+          file_line { 'faillock_deny':
+            ensure             => present,
+            path               => '/etc/security/faillock.conf',
+            match              => '^deny =',
+            line               => "deny = ${attempts}",
+            append_on_no_match => true,
+          }
+
+          file_line { 'faillock_fail_unlock_time':
+            ensure             => present,
+            path               => '/etc/security/faillock.conf',
+            match              => '^unlock_time =',
+            line               => "unlock_time = ${lockouttime}",
+            append_on_no_match => true,
+          }
+
+          file_line { 'faillock_dir':
+            ensure             => present,
+            path               => '/etc/security/faillock.conf',
+            match              => '^dir =',
+            line               => "dir = ${lock_dir}",
+            append_on_no_match => true,
+          }
+
+          file_line { 'faillock_silent':
+            ensure             => present,
+            path               => '/etc/security/faillock.conf',
+            match              => '^silent',
+            line               => 'silent',
+            append_on_no_match => true,
+          }
+
+          file_line { 'faillock_audit':
+            ensure             => present,
+            path               => '/etc/security/faillock.conf',
+            match              => '^audit',
+            line               => 'audit',
+            append_on_no_match => true,
+          }
+
+          if $lockout_root {
+            file_line { 'faillock_even_deny_root':
+              ensure             => present,
+              path               => '/etc/security/faillock.conf',
+              match              => '^even_deny_root',
+              line               => 'even_deny_root',
+              append_on_no_match => true,
             }
           }
         }
 
-        if ($facts['operatingsystemmajrelease'] == '7') {
+        if ($facts['os']['release']['major'] == '7') {
+          if ($fail_interval > 0) {
+            $fail = "fail_interval=${fail_interval} "
+          } else {
+            $fail = ''
+          }
+          $root_lockout = $lockout_root ? {
+            true  => 'even_deny_root ',
+            false => '',
+          }
+
+          if $fail_interval > 0 {
+            $arguments = ['preauth', 'silent', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}", "fail_interval=${fail_interval}"]
+            $faillock_args = ['preauth', 'silent','audit', "deny=${attempts}", "unlock_time=${lockouttime}", "fail_interval=${fail_interval}"] #lint:ignore:140chars
+            $arguments2 = ['authfail', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}", "fail_interval=${fail_interval}"]
+          } else {
+            $arguments = ['preauth', 'silent', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}"]
+            $faillock_args = ['preauth', 'silent','audit', "deny=${attempts}", "unlock_time=${lockouttime}"]
+            $arguments2 = ['authfail', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}"]
+          }
+
+          if $lockout_root {
+            $real_arguments = concat($arguments, 'even_deny_root')
+            $real_arguments2 = concat($arguments2, 'even_deny_root')
+            $real_faillock_args = concat($faillock_args, 'even_deny_root')
+          } else {
+            $real_arguments = $arguments
+            $real_arguments2 = $arguments2
+            $real_faillock_args = $faillock_args
+          }
+
+          file_line { 'use pam access':
+            ensure             => present,
+            path               => '/etc/sysconfig/authconfig',
+            match              => '^USEPAMACCESS=',
+            line               => 'USEPAMACCESS=yes',
+            append_on_no_match => true,
+            notify             => Exec['configure faillock'],
+          }
+
+          file_line { 'faillock args':
+            ensure             => present,
+            path               => '/etc/sysconfig/authconfig',
+            match              => '^FAILLOCKARGS=',
+            line               => "FAILLOCKARGS=\"${join($real_faillock_args, ' ')}\"",
+            append_on_no_match => true,
+            notify             => Exec['configure faillock'],
+          }
+
           exec { 'configure faillock':
-            command => "authconfig --faillockargs=\"preauth silent audit deny=${attempts} unlock_time=${lockouttime}\" --enablefaillock --updateall", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
-            path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-            onlyif  => "test -z \"\$(grep -E \"auth\\s+required\\s+pam_faillock.so.*deny=${attempts}\\s+unlock_time=${lockouttime}\" /etc/pam.d/system-auth /etc/pam.d/password-auth)\"", #lint:ignore:140chars
+            command     => "authconfig --faillockargs=\"${join($real_faillock_args, ' ')}\" --enablefaillock --update", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
+            path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+            refreshonly => true,
+            notify      => Exec['authconfig-apply-changes'],
           }
 
           $services.each | $service | {
-            Pam { "pam-auth-faillock-required-2-${service}":
-              ensure           => present,
-              service          => $service,
-              type             => 'auth',
-              control          => '[default=die]',
-              control_is_param => true,
-              module           => 'pam_faillock.so',
-              arguments        => ['authfail', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}"],
-              position         => 'after *[type="auth" and module="pam_unix.so"]',
-              # before           => Pam["pam-auth-faillock-required-${service}"],
-              require          => Exec['configure faillock'],
-            }
-
-            # Pam { "pam-auth-faillock-required-${service}":
-            #   ensure           => present,
-            #   service          => $service,
-            #   type             => 'auth',
-            #   control          => 'required',
-            #   control_is_param => true,
-            #   module           => 'pam_faillock.so',
-            #   arguments        => ['preauth', 'silent', 'audit', "deny=${attempts}", "unlock_time=${lockouttime}"],
-            #   position         => 'after *[type="auth" and module="pam_env.so"]',
-            # }
-
             Pam { "account-faillock-${service}":
               ensure  => present,
               service => $service,
@@ -101,8 +198,22 @@ class cis_security_hardening::rules::pam_lockout (
               control => 'required',
               module  => 'pam_faillock.so',
             }
+
+            Pam { "disable-nullok-${service}":
+              ensure    => present,
+              service   => $service,
+              type      => 'auth',
+              module    => 'pam_unix.so',
+              arguments => ['try_first_pass'],
+            }
           }
         }
+
+        # if $facts['os']['name'].downcase() == 'redhat' and $facts['os']['release']['major'] >= '8' {
+
+        # } else {
+
+        # }
       }
       'debian': {
         if $lockouttime == 0 {

@@ -21,7 +21,7 @@
 #       macs => ['a','b'],
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::sshd_macs (
   Boolean $enforce  = false,
   Array $macs       = [],
@@ -37,7 +37,7 @@ class cis_security_hardening::rules::sshd_macs (
         ensure => present,
         path   => $path,
         line   => "MACs ${maclist}",
-        match  => '^MACs.*',
+        match  => '^#?MACs.*',
         notify => Exec['reload-sshd'],
       }
     }

@@ -18,7 +18,7 @@
 #     enforce =A true,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::auditd_pam_timestamp_check_use (
   Boolean $enforce = false,
 ) {
@@ -27,10 +27,15 @@ class cis_security_hardening::rules::auditd_pam_timestamp_check_use (
       undef => '1000',
       default => fact('cis_security_hardening.auditd.uid_min'),
     }
+    if $facts['os']['name'].downcase() == 'redhat' and $facts['os']['release']['major'] == '7' {
+      $rule1 = "-a always,exit -F path=/usr/sbin/pam_timestamp_check -F auid>=${uid} -F auid!=4294967295 -k privileged-pam"
+    } else {
+      $rule1 = "-a always,exit -F path=/usr/sbin/pam_timestamp_check -F perm=x -F auid>=${uid} -F auid!=4294967295 -k privileged-pam_timestamp_check" #lint:ignore:140chars
+    }
     concat::fragment { 'watch pam_timestamp_check command rule 1':
       order   => '186',
       target  => $cis_security_hardening::rules::auditd_init::rules_file,
-      content => "-a always,exit -F path=/usr/sbin/pam_timestamp_check -F perm=x -F auid>=${uid} -F auid!=4294967295 -k privileged-pam_timestamp_check", #lint:ignore:140chars
+      content => $rule1,
     }
   }
 }

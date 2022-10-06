@@ -15,7 +15,7 @@
 #       enforce => true,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::sshd_user_environment (
   Boolean $enforce = false,
 ) {
@@ -28,7 +28,7 @@ class cis_security_hardening::rules::sshd_user_environment (
       ensure => present,
       path   => $path,
       line   => 'PermitUserEnvironment no',
-      match  => '^PermitUserEnvironment.*',
+      match  => '^#?PermitUserEnvironment.*',
       notify => Exec['reload-sshd'],
     }
   }

@@ -31,7 +31,7 @@
 #     enforce => true,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::auditd_nonlocal_admin_access (
   Boolean $enforce = false,
 ) {

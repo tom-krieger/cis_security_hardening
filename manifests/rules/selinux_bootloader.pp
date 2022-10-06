@@ -14,7 +14,7 @@
 #       enforce => true,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::selinux_bootloader (
   Boolean $enforce = false,
 ) {

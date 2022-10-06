@@ -8,7 +8,14 @@ describe 'cis_security_hardening::rules::gdm_auto_mount' do
   on_supported_os.each do |os, os_facts|
     enforce_options.each do |enforce|
       context "on #{os} with enforce = #{enforce}" do
-        let(:facts) { os_facts }
+        let(:facts) do
+          os_facts.merge!(
+            cis_security_hardening: {
+              gnome_gdm_conf: false,
+              gnome_gdm: true,
+            },
+          )
+        end
         let(:params) do
           {
             'enforce' => enforce,
@@ -41,28 +48,6 @@ describe 'cis_security_hardening::rules::gdm_auto_mount' do
                 'content' => "[org/gnome/desktop/media-handling]\nautomount=false\nautomount-open=false\n",
               )
               .that_notifies('Exec[dconf update]')
-
-            # is_expected.to contain_ini_setting('gdm-disable-automount')
-            #   .with(
-            #      'ensure'  => 'present',
-            #      'path'    => '/etc/dconf/db/local.d/00-media-automount',
-            #      'section' => 'org/gnome/desktop/media-handling',
-            #      'setting' => 'automount',
-            #      'value'   => 'false',
-            #    )
-            #   .that_requires('File[/etc/dconf/db/local.d/00-media-automount]')
-            #   .that_notifies('Exec[dconf update]')
-
-            # is_expected.to contain_ini_setting('gdm-disable-automount-open')
-            #   .with(
-            #     'ensure'  => 'present',
-            #     'path'    => '/etc/dconf/db/local.d/00-media-automount',
-            #     'section' => 'org/gnome/desktop/media-handling',
-            #     'setting' => 'automount-open',
-            #     'value'   => 'false',
-            #   )
-            #   .that_requires('File[/etc/dconf/db/local.d/00-media-automount]')
-            #   .that_notifies('Exec[dconf update]')
 
             is_expected.to contain_exec('dconf update')
               .with(

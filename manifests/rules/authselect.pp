@@ -26,7 +26,7 @@
 #             base_profile => 'sssd',
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::authselect (
   Boolean $enforce                                        = false,
   Enum['sssd', 'nis', 'winbind', 'minimal'] $base_profile = 'sssd',
@@ -38,7 +38,6 @@ class cis_security_hardening::rules::authselect (
       command => "authselect create-profile ${custom_profile} -b ${base_profile} --symlink-meta", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars
       path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
       onlyif  => "test ! -d /etc/authselect/custom/${custom_profile}",
-      before  => Exec['select authselect profile'],
     }
 
     exec { 'select authselect profile':
@@ -46,6 +45,20 @@ class cis_security_hardening::rules::authselect (
       path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
       onlyif  => ["test -d /etc/authselect/custom/${custom_profile}", "test -z \"$(authselect current | grep 'custom/${custom_profile}')\""], #lint:ignore:140chars
       returns => [0, 1],
+      require => Exec['create custom profile'],
+    }
+
+    $check = fact('cis_security_hardening.authselect.check') ? {
+      undef   => 0,
+      default => fact('cis_security_hardening.authselect.check'),
+    }
+
+    if $check == 3 {
+      exec { 'fix authselect profile':
+        command => "authselect select custom/${custom_profile} -f",   #lint:ignore:security_class_or_define_parameter_in_exec
+        path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+        require => Exec['create custom profile'],
+      }
     }
 
     $available_features = fact('cis_security_hardening.authselect.available_features') ? {
@@ -62,6 +75,7 @@ class cis_security_hardening::rules::authselect (
           command => "authselect enable-feature ${opt}",
           path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
           onlyif  => ["test -d /etc/authselect/custom/${custom_profile}", "test -z \"$(authselect current | grep '${opt}')\""],
+          require => Exec['select authselect profile'],
         }
       } else {
         echo { "unavailable feature ${opt}":

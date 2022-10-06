@@ -51,6 +51,15 @@ describe 'cis_security_hardening::rules::auditd_mounts' do
                   'content' => '-a always,exit -F arch=b32 -S mount -F auid>=1000 -F auid!=4294967295 -k mounts',
                 )
 
+              if os_facts[:operatingsystem].casecmp('redhat').zero?
+                is_expected.to contain_concat__fragment('watch mounts rule 3')
+                  .with(
+                    'order' => '215',
+                    'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
+                    'content' => '-a always,exit -F path=/usr/bin/mount -F auid>=1000 -F auid!=4294967295 -k privileged-mount',
+                  )
+              end
+
               if ['x86_64', 'amd64'].include?(arch)
                 is_expected.to contain_concat__fragment('watch mounts rule 2')
                   .with(

@@ -23,7 +23,7 @@
 #     enforce => true
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::aide_notify_admins (
   Boolean $enforce = false,
 ) {

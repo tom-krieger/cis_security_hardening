@@ -19,7 +19,7 @@
 #       enforce => true,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::sshd_use_pam (
   Boolean $enforce = false,
 ) {
@@ -32,7 +32,7 @@ class cis_security_hardening::rules::sshd_use_pam (
       ensure             => present,
       path               => $path,
       line               => 'UsePAM yes',
-      match              => '^UsePAM.*',
+      match              => '^#?UsePAM.*',
       append_on_no_match => true,
       notify             => Exec['reload-sshd'],
     }

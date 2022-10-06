@@ -17,11 +17,12 @@
 #     enforce => true,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::ctrl_alt_del_graphical (
   Boolean $enforce = false
 ) {
-  if $enforce {
+  $gnome_gdm = fact('cis_security_hardening.gnome_gdm')
+  if  $enforce and $gnome_gdm != undef and $gnome_gdm {
     ensure_resource('file', '/etc/dconf/db/local.d', {
         ensure => directory,
         owner  => 'root',

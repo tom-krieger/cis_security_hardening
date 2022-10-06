@@ -17,7 +17,7 @@
 #   }
 
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::sshd_banner (
   Boolean $enforce = false,
 ) {
@@ -30,7 +30,7 @@ class cis_security_hardening::rules::sshd_banner (
       ensure => present,
       path   => $path,
       line   => 'Banner /etc/issue.net',
-      match  => '^Banner.*',
+      match  => '^#?Banner.*',
       notify => Exec['reload-sshd'],
     }
   }

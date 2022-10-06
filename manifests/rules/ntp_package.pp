@@ -14,7 +14,7 @@
 #   pkg => 'ntp',
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::ntp_package (
   Boolean $enforce           = false,
   Enum['ntp', 'chrony'] $pkg = 'ntp',

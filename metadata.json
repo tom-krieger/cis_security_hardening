@@ -1,6 +1,6 @@
 {
   "name": "tomkrieger-cis_security_hardening",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "author": "Thomas Krieger",
   "summary": "Secure your systems according to CIS benchmarks",
   "license": "Apache-2.0",
@@ -29,11 +29,11 @@
       "version_requirement": ">= 0.1.7 < 1.0.0"
     },
     {
-      "name": "herculesteam-augeasproviders_pam",
+      "name": "puppet-augeasproviders_pam",
       "version_requirement": ">= 2.2.1 < 4.0.0"
     },
     {
-      "name": "herculesteam-augeasproviders_core",
+      "name": "puppet-augeasproviders_core",
       "version_requirement": ">= 2.5.0 < 4.0.0"
     },
     {
@@ -41,20 +41,16 @@
       "version_requirement": ">= 2.3.1 < 4.0.0"
     },
     {
-      "name": "herculesteam-augeasproviders_grub",
-      "version_requirement": ">= 3.1.0 < 4.0.0"
+      "name": "puppet-augeasproviders_grub",
+      "version_requirement": ">= 3.1.0 < 5.0.0"
     },
     {
-      "name": "herculesteam/augeasproviders_shellvar",
-      "version_requirement": ">= 3.1.0 < 5.0.0"
+      "name": "puppet-augeasproviders_shellvar",
+      "version_requirement": ">= 3.1.0 < 6.0.0"
     },
     {
       "name": "herculesteam/augeasproviders_mounttab",
       "version_requirement": ">= 2.1.1 < 4.0.0"
-    },
-    {
-      "name": "purplehazech-syslogng",
-      "version_requirement": ">= 0.7.1 < 1.0.0"
     },
     {
       "name": "puppet-rsyslog",
@@ -69,7 +65,7 @@
       "version_requirement": ">= 8.0.0 < 10.0.0"
     },
     {
-      "name": "puppetlabs-chrony",
+      "name": "puppet-chrony",
       "version_requirement": ">= 2.5.0 < 3.0.0"
     },
     {

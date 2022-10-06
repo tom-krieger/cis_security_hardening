@@ -28,44 +28,41 @@
 # @param cert_policy
 #    Comma seperated list of policies.
 # @param pkcs11_config
-#    Prepared config file to install. The file must be given in the 'puppet://modules/...' format.
+#    Prepared config file to install. The file must be given in the 'puppet:///modules/...' format.
 #
 # @example
 #   class { 'cis_security_hardening::rules::pki_certs_validation':
 #     enforce => tru,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::pki_certs_validation (
   Boolean $enforce                = false,
   String $cert_policy             = 'ca,signature,ocsp_on;',
-  Optional[String] $pkcs11_config = undef,
+  Optional[String] $pkcs11_config = '',
 ) {
   if $enforce {
-    if $pkcs11_config == undef {
-
+    if $pkcs11_config == '' {
       $policy = fact('cis_security_hardening.pkcs11_config.policy')
-      $match = "cert_policy\\s*=\\s*${policy};"
+      $match = "\\s*cert_policy ="
       $line = "    cert_policy = ${cert_policy}"
 
       file_line { 'pki certs validation':
-        ensure   => present,
-        path     => '/etc/pam_pkcs11/pam_pkcs11.conf',
-        line     => $line,
-        match    => $match,
-        multiple => true,
+        ensure             => present,
+        path               => '/etc/pam_pkcs11/pam_pkcs11.conf',
+        line               => $line,
+        match              => $match,
+        multiple           => true,
+        append_on_no_match => false,
       }
-
     } else {
-
-      file { 'pkcs11_config prepared':
+      file { '/etc/pam_pkcs11/pam_pkcs11.conf':
         ensure => file,
         source => $pkcs11_config,
         owner  => 'root',
         group  => 'root',
         mode   => '0644',
       }
-
     }
   }
 }

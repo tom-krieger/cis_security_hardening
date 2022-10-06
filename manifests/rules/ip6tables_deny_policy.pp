@@ -30,7 +30,7 @@
 # @example
 #   include cis_security_hardening::rules::ip6tables_deny_policy
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::ip6tables_deny_policy (
   Boolean $enforce                       = false,
   Enum['drop', 'accept'] $input_policy   = 'drop',

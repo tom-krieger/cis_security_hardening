@@ -21,7 +21,7 @@
 #       max_auth_tries => 4,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::sshd_max_auth_tries (
   Boolean $enforce        = false,
   Integer $max_auth_tries = 4,
@@ -35,7 +35,7 @@ class cis_security_hardening::rules::sshd_max_auth_tries (
       ensure => present,
       path   => $path,
       line   => "MaxAuthTries ${max_auth_tries}",
-      match  => '^MaxAuthTries.*',
+      match  => '^#?MaxAuthTries.*',
       notify => Exec['reload-sshd'],
     }
   }

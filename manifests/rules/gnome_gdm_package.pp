@@ -14,7 +14,7 @@
 #       enforce => true,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::gnome_gdm_package (
   Boolean $enforce = false,
 ) {

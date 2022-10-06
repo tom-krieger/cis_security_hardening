@@ -34,7 +34,7 @@
 #       client_alive_count_max => 0,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::sshd_timeouts (
   Boolean $enforce                = false,
   Integer $client_alive_interval  = 300,
@@ -49,7 +49,7 @@ class cis_security_hardening::rules::sshd_timeouts (
       ensure => present,
       path   => $path,
       line   => "ClientAliveInterval ${client_alive_interval}",
-      match  => '^ClientAliveInterval.*',
+      match  => '^#?ClientAliveInterval.*',
       notify => Exec['reload-sshd'],
     }
 
@@ -57,7 +57,7 @@ class cis_security_hardening::rules::sshd_timeouts (
       ensure => present,
       path   => $path,
       line   => "ClientAliveCountMax ${client_alive_count_max}",
-      match  => '^ClientAliveCountMax.*',
+      match  => '^#?ClientAliveCountMax.*',
       notify => Exec['reload-sshd'],
     }
   }

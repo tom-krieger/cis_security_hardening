@@ -80,7 +80,7 @@ describe 'cis_security_hardening::rules::sshd_max_auth_tries' do
                 'ensure' => 'present',
                 'path'   => path,
                 'line'   => 'MaxAuthTries 3',
-                'match'  => '^MaxAuthTries.*',
+                'match'  => '^#?MaxAuthTries.*',
               )
               .that_notifies('Exec[reload-sshd]')
           else

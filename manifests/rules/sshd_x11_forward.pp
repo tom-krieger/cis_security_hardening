@@ -17,7 +17,7 @@
 #       enforce => true,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::sshd_x11_forward (
   Boolean $enforce = false,
 ) {
@@ -30,7 +30,7 @@ class cis_security_hardening::rules::sshd_x11_forward (
       ensure => present,
       path   => $path,
       line   => 'X11Forwarding no',
-      match  => '^X11Forwarding.*',
+      match  => '^#?X11Forwarding.*',
       notify => Exec['reload-sshd'],
     }
   }

@@ -80,7 +80,7 @@ describe 'cis_security_hardening::rules::sshd_ciphers' do
                 'ensure' => 'present',
                 'path'   => path,
                 'line'   => 'Ciphers aes128-cbc,aes192-cbc',
-                'match'  => '^Ciphers.*',
+                'match'  => '^#?Ciphers.*',
               )
               .that_notifies('Exec[reload-sshd]')
           else

@@ -28,7 +28,7 @@
 #       enable => true,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::tmp_filesystem (
   Boolean $enforce = false,
   Integer $size    = 0,
@@ -36,7 +36,7 @@ class cis_security_hardening::rules::tmp_filesystem (
 ) {
   if $enforce {
     $file = '/etc/systemd/system/tmp.mount'
-    case $facts['operatingsystem'].downcase() {
+    case $facts['os']['name'].downcase() {
       'ubuntu': {
         $epp = 'tmp.mount.ubuntu.epp'
       }
@@ -46,20 +46,29 @@ class cis_security_hardening::rules::tmp_filesystem (
       'sles': {
         $epp = 'tmp.mount.sles.epp'
       }
+      'redhat': {
+        unless $facts['os']['release']['major'] >= '8' {
+          $epp = 'tmp.mount.epp'
+        } else {
+          $epp = ''
+        }
+      }
       default: {
         $epp = 'tmp.mount.epp'
       }
     }
 
-    file { $file:
-      ensure  => file,
-      content => epp("cis_security_hardening/rules/common/${epp}", {
-          size => $size,
-      }),
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0644',
-      notify  => Exec['systemd-daemon-reload'],
+    if !empty($epp) {
+      file { $file:
+        ensure  => file,
+        content => epp("cis_security_hardening/rules/common/${epp}", {
+            size => $size,
+        }),
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0644',
+        notify  => Exec['systemd-daemon-reload'],
+      }
     }
 
     ensure_resource('service', 'tmp.mount', {

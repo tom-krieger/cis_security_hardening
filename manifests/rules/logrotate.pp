@@ -21,7 +21,7 @@
 #       enforce => true,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::logrotate (
   Boolean $enforce = false,
   String $su_user  = 'root',

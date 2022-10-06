@@ -22,7 +22,7 @@
 #       enforce => true,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::enable_reverse_path_filtering (
   Boolean $enforce = false,
 ) {

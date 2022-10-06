@@ -76,6 +76,18 @@ class cis_security_hardening::services (
     refreshonly => true,
   }
 
+  exec { 'grub2-mkconfig':
+    command     => 'grub2-mkconfig -o /boot/grub2/grub.cfg',
+    path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+    refreshonly => true,
+  }
+
+  exec { 'reload-sysctl-system':
+    command     => 'sysctl --system',
+    path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+    refreshonly => true,
+  }
+
   reboot { 'after_run':
     timeout => $time_until_reboot,
     message => 'forced reboot by Puppet',

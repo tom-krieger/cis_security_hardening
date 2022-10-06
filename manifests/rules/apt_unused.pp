@@ -19,7 +19,7 @@
 #     ensure => true,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::apt_unused (
   Boolean $enforce = false,
   Array $files = ['/etc/apt/apt.conf.d/50unattended-upgrades']

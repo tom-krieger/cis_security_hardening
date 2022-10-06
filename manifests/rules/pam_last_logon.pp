@@ -20,18 +20,30 @@
 #     enforce => true,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::pam_last_logon (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    Pam { 'pam-login-last-logon':
-      ensure    => present,
-      service   => 'login',
-      type      => 'session',
-      control   => 'required',
-      module    => 'pam_lastlog.so',
-      arguments => ['showfailed'],
+    if ($facts['os']['name'].downcase() == 'redhat') and ($facts['os']['release']['major'] == '7') {
+      $service = 'postlogin'
+    } else {
+      $service = 'login'
+    }
+
+    file_line { 'pam last logon':
+      ensure             => present,
+      path               => "/etc/pam.d/${service}",
+      match              => 'session\s+required\s+pam_lastlog.so',
+      line               => 'session     required      pam_lastlog.so showfailed',
+      append_on_no_match => true,
+    }
+
+    file_line { 'pam last logon remove optional':
+      ensure            => absent,
+      path              => "/etc/pam.d/${service}",
+      match             => '^session\s+optional\s+pam_lastlog.so silent noupdate showfailed',
+      match_for_absence => true,
     }
   }
 }

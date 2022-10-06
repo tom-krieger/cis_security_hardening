@@ -24,7 +24,7 @@
 #       enforce => true,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::ufw_default_deny (
   Boolean $enforce                        = false,
   Enum['allow', 'deny'] $default_incoming = 'allow',

@@ -1,0 +1,9 @@
+<% if $search != '' { -%>
+search <%= $search %>
+<% } -%>
+<% if $dnsdomain != '' { -%>
+domain <%= $dnsdomain %>
+<% } -%>
+<%- $dnsservers.each |$dns| { -%>
+nameserver <%= $dns %>
+<%- } %>

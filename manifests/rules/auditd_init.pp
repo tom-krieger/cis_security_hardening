@@ -21,7 +21,7 @@
 #       buffer_size => 8192,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::auditd_init (
   Boolean $enforce                 = false,
   Integer $buffer_size             = 8192,
@@ -32,6 +32,13 @@ class cis_security_hardening::rules::auditd_init (
     $notify = $auto_reboot ? {
       true  => [Exec['reload auditd rules'], Reboot['after_run']],
       false => Exec['reload auditd rules'],
+    }
+
+    file { '/etc/audisp':
+      ensure => directory,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0755',
     }
 
     concat { $rules_file:

@@ -29,7 +29,7 @@
 #     }
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::chrony (
   Boolean $enforce   = false,
   Hash $ntp_servers = {},

@@ -16,7 +16,7 @@
 #       enforce => true,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::sticky_world_writeable_files (
   Boolean $enforce = false,
 ) {

@@ -18,7 +18,7 @@
 #     enforce => true,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::auditd_gpasswd_use (
   Boolean $enforce = false,
 ) {
@@ -27,10 +27,14 @@ class cis_security_hardening::rules::auditd_gpasswd_use (
       undef => '1000',
       default => fact('cis_security_hardening.auditd.uid_min'),
     }
+    $rule1 = $facts['operatingsystem'].downcase() ? {
+      'redhat' => "-a always,exit -F path=/usr/bin/gpasswd -F auid>=${uid} -F auid!=4294967295 -k privileged-passwd",
+      default  => "-a always,exit -F path=/usr/bin/gpasswd -F perm=x -F auid>=${uid} -F auid!=4294967295 -k privileged-gpasswd",
+    }
     concat::fragment { 'watch gpasswd command rule 1':
       order   => '182',
       target  => $cis_security_hardening::rules::auditd_init::rules_file,
-      content => "-a always,exit -F path=/usr/bin/gpasswd -F perm=x -F auid>=${uid} -F auid!=4294967295 -k privileged-gpasswd",
+      content => $rule1,
     }
   }
 }

@@ -10,6 +10,8 @@
 
 # @param enforce
 #    Enforce the rule
+# @param banner_message
+#    The banner message.
 #
 # @example
 #   class { 'cis_security_hardening::rules::gnome_gdm':
@@ -19,9 +21,10 @@
 # @example
 #   include cis_security_hardening::rules::gnome_gdm
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::gnome_gdm (
   Boolean $enforce = false,
+  String $banner_message = 'Authorized uses only. All activity may be monitored and reported.',
 ) {
   $gnome_gdm = fact('cis_security_hardening.gnome_gdm')
   if  $enforce and $gnome_gdm != undef and $gnome_gdm {
@@ -43,7 +46,7 @@ class cis_security_hardening::rules::gnome_gdm (
         file { 'banner-login':
           ensure  => file,
           path    => '/etc/dconf/db/gdm.d/01-banner-message',
-          content => "[org/gnome/login-screen]\nbanner-message-enable=true\nbanner-message-text=\'Authorized uses only. All activity may be monitored and reported.\'", #lint:ignore:140chars
+          content => "[org/gnome/login-screen]\nbanner-message-enable=true\nbanner-message-text=\'${banner_message}\'", #lint:ignore:140chars
           owner   => 'root',
           group   => 'root',
           mode    => '0644',

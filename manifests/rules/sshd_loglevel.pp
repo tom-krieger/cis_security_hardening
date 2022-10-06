@@ -22,7 +22,7 @@
 #       loglevel => 'INFO',
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::sshd_loglevel (
   Boolean $enforce                   = false,
   Enum['INFO', 'VERBOSE'] $log_level = 'INFO',
@@ -36,7 +36,7 @@ class cis_security_hardening::rules::sshd_loglevel (
       ensure => present,
       path   => $path,
       line   => "LogLevel ${log_level}",
-      match  => '^LogLevel.*',
+      match  => '^#?LogLevel.*',
       notify => Exec['reload-sshd'],
     }
   }

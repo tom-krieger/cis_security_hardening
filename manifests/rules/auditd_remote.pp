@@ -23,26 +23,40 @@
 #     remote_server => '1.2.3.4',
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::auditd_remote (
   Boolean $enforce                    = false,
   Stdlib::IP::Address $remote_server  = '1.2.3.4',
 ) {
   if $enforce {
+    $file = $facts['os']['family'].downcase() ? {
+      'redhat' => '/etc/audisp/audisp-remote.conf',
+      default  => '/etc/audisp/plugins.d/au-remote.conf',
+    }
+
+    ensure_resource('file', $file, {
+        ensure => file,
+        owner  => 'root',
+        group  => 'root',
+        mode   => '0644',
+    })
+
     file_line { 'auditd log remote':
       ensure             => present,
-      path               => '/etc/audisp/plugins.d/au-remote.conf',
+      path               => $file,
       line               => 'active = yes',
       match              => '^active =',
       append_on_no_match => true,
+      require            => File[$file],
     }
 
     file_line { 'auditd log remote server':
       ensure             => present,
-      path               => '/etc/audisp/plugins.d/au-remote.conf',
+      path               => $file,
       line               => "remote_server = ${remote_server}",
       match              => "^remote_server = ${remote_server}",
       append_on_no_match => true,
+      require            => File[$file],
     }
   }
 }

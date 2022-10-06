@@ -20,7 +20,7 @@
 #       enforce => true,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::pam_passwd_sha512 (
   Boolean $enforce = false,
 ) {
@@ -49,10 +49,18 @@ class cis_security_hardening::rules::pam_passwd_sha512 (
             }
           }
         } else {
-          exec { 'switch sha512 on':
-            command => 'authconfig --passalgo=sha512 --updateall',
-            path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-            onlyif  => 'test -z "$(grep -E "^password\\s+sufficient\\s+pam_unix.so.*sha512" /etc/pam.d/system-auth)"',
+          exec { 'authconfig-passalgo-sha512':
+            command     => 'authconfig --passalgo=sha512 --updateall',
+            path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+            refreshonly => true,
+          }
+          file_line { 'password algorithm sha512':
+            ensure             => present,
+            path               => '/etc/sysconfig/authconfig',
+            match              => '^PASSWDALGORITHM=',
+            line               => 'PASSWDALGORITHM=sha512',
+            append_on_no_match => true,
+            notify             => Exec['authconfig-passalgo-sha512'],
           }
         }
       }

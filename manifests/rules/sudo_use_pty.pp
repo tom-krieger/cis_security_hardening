@@ -15,7 +15,7 @@
 #       enforce => true,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::sudo_use_pty (
   Boolean $enforce = false,
 ) {

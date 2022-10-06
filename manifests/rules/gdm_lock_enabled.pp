@@ -17,11 +17,12 @@
 #     enforce => true,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::gdm_lock_enabled (
   Boolean $enforce = false,
 ) {
-  if $enforce {
+  $gnome_gdm = fact('cis_security_hardening.gnome_gdm')
+  if  $enforce and $gnome_gdm != undef and $gnome_gdm {
     exec { 'gdm lock enabled':
       command => 'gsettings set org.gnome.desktop.screensaver lock-enabled true',
       path    => ['/bin', '/usr/bin'],

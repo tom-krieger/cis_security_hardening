@@ -46,7 +46,7 @@
 #     mode => '0640',
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::auditd_conf_perms (
   Boolean $enforce = false,
   String $user     = 'root',

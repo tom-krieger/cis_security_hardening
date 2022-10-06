@@ -22,7 +22,7 @@
 #       }
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::rsyslog_logging (
   Boolean $enforce = false,
   Hash $log_config = {},

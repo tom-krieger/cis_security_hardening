@@ -17,7 +17,7 @@
 #       enforce => true,
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::ufw_open_ports (
   Boolean $enforce     = false,
   Hash $firewall_rules = {},

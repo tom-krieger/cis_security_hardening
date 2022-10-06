@@ -24,7 +24,7 @@
 #       firewall_rules => {},
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::ip6tables_open_ports (
   Boolean $enforce     = false,
   Hash $firewall_rules = {},

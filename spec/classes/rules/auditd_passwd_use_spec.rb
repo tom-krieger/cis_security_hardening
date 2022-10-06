@@ -41,12 +41,21 @@ describe 'cis_security_hardening::rules::auditd_passwd_use' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_concat__fragment('watch passwd command rule 1')
-              .with(
-                'order'   => '180',
-                'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
-                'content' => '-a always,exit -F path=/usr/bin/passwd -F perm=x -F auid>=1000 -F auid!=4294967295 -k privileged-passwd',
-              )
+            if os_facts[:operatingsystem].casecmp('redhat').zero? && os_facts[:operatingsystemmajrelease] == '7'
+              is_expected.to contain_concat__fragment('watch passwd command rule 1')
+                .with(
+                  'order'   => '180',
+                  'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
+                  'content' => '-a always,exit -F path=/usr/bin/passwd -F auid>=1000 -F auid!=4294967295 -k privileged-passwd',
+                )
+            else
+              is_expected.to contain_concat__fragment('watch passwd command rule 1')
+                .with(
+                  'order'   => '180',
+                  'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
+                  'content' => '-a always,exit -F path=/usr/bin/passwd -F perm=x -F auid>=1000 -F auid!=4294967295 -k privileged-passwd',
+                )
+            end
           else
             is_expected.not_to contain_concat__fragment('watch passwd command rule 1')
           end

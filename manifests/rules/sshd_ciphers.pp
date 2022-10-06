@@ -39,7 +39,7 @@
 #       ciphers => ['a','b'],
 #   }
 #
-# @api public
+# @api private
 class cis_security_hardening::rules::sshd_ciphers (
   Boolean $enforce  = false,
   Array $ciphers    = [],
@@ -55,7 +55,7 @@ class cis_security_hardening::rules::sshd_ciphers (
         ensure => present,
         path   => $path,
         line   => "Ciphers ${cipherlist}",
-        match  => '^Ciphers.*',
+        match  => '^#?Ciphers.*',
         notify => Exec['reload-sshd'],
       }
     }
