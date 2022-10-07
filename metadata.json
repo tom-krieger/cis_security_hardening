@@ -49,10 +49,6 @@
       "version_requirement": ">= 3.1.0 < 6.0.0"
     },
     {
-      "name": "herculesteam/augeasproviders_mounttab",
-      "version_requirement": ">= 2.1.1 < 4.0.0"
-    },
-    {
       "name": "puppet-rsyslog",
       "version_requirement": ">= 3.3.0 < 6.0.0"
     },
@@ -75,10 +71,6 @@
     {
       "name": "puppetlabs-firewall",
       "version_requirement": ">= 2.2.0 < 5.0.0"
-    },
-    {
-      "name": "puppetlabs-mount_providers",
-      "version_requirement": ">= 2.0.1 < 3.0.0"
     },
     {
       "name": "puppetlabs-reboot",

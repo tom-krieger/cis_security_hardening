@@ -42,9 +42,6 @@ fixtures:
     augeasprovider_shellvar:
       repo: "puppet/augeasproviders_shellvar"
       ref: "5.0.0"
-    augeasprovider_mounttab:
-      repo: "herculesteam/augeasproviders_mounttab"
-      ref: "2.1.1"
     rsyslog:
       repo: "puppet/rsyslog"
       ref: "3.3.0"
@@ -63,9 +60,6 @@ fixtures:
     firewall:
       repo: "puppetlabs/firewall"
       ref: "2.2.0"
-    mount_providers:
-      repo: "puppetlabs/mount_providers"
-      ref: "2.0.1"
     reboot:
       repo: "puppetlabs/reboot"
       ref: "2.3.0"
