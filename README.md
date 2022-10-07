@@ -10,6 +10,7 @@
     * [Setup requirements](#setup-requirements)
     * [Beginning with cis_security_hardening](#beginning-with-cis_security_hardening)
     * [Cronjobs](#cronjobs)
+    * [Grub default password](#grub-default-password)
 5. [Usage](#usage)
 6. [Reference](#reference)
 7. [Limitations](#limitations)
@@ -106,6 +107,10 @@ This cronjob searches for world writable files with sticky bit.
 #### /etc/cron.d/auditd_priv_commands.cron
 
 This cronjob searched privileged commands to be included into auditd rules.
+
+### Grub default password
+
+All the configuration files containing parameter in this module contain a valif grub password. The password is *`change_it`* which you should do.
 
 ## Usage
 

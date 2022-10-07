@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.7.3
+
+* Solved issue with missing grub passwords in some paramedter files
+* use a valid grub password insted of a fake string. See README.md for the default password.
+
 ## Release v0.7.2
 
 * Added STIG benchmarks for Redhat 7 and 8

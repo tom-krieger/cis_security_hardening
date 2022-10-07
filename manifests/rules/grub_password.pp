@@ -32,7 +32,7 @@
 #       enforce              => true,
 #       grub_password_pbkdf2 => 'grub.pbkdf2.sha512.10000.943.......',
 #   }
-#
+# 
 # @api private
 class cis_security_hardening::rules::grub_password (
   Boolean $enforce             = false,
@@ -40,8 +40,7 @@ class cis_security_hardening::rules::grub_password (
 ) {
   case $facts['osfamily'].downcase() {
     'redhat': {
-      if  $enforce and
-      $grub_password_pbkdf2 != '' {
+      if $enforce and $grub_password_pbkdf2 != '' {
         file { '/boot/grub2/user.cfg':
           ensure  => file,
           content => "GRUB2_PASSWORD=${grub_password_pbkdf2}",
@@ -66,8 +65,7 @@ class cis_security_hardening::rules::grub_password (
       }
     }
     'debian': {
-      if  $enforce and
-      $grub_password_pbkdf2 != '' {
+      if $enforce and $grub_password_pbkdf2 != '' {
         file_line { 'grub-unrestricted':
           ensure             => present,
           path               => '/etc/grub.d/10_linux',
