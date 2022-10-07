@@ -49,6 +49,7 @@ cis_security_hardening::rules::aide_installed::enforce: true
 cis_security_hardening::rules::aide_regular_checks::enforce: true
 
 cis_security_hardening::rules::grub_password::enforce: false
+cis_security_hardening::rules::grub_password::grub_password_pbkdf2: 'xxx'
 cis_security_hardening::rules::grub_bootloader_config::enforce: true
 cis_security_hardening::rules::single_user_mode::enforce: true
 cis_security_hardening::rules::crtl_alt_del::enforce: true
