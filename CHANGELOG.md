@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.7.4
+
+Fixed issue #23: nftables resources should be within if !defined
+
 ## Release 0.7.3
 
 * Solved issue with missing grub passwords in some paramedter files
