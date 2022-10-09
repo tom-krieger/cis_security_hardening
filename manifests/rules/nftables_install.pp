@@ -27,40 +27,48 @@ class cis_security_hardening::rules::nftables_install (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    $pkgs_remove = $facts['operatingsystem'].downcase() ? {
+    $pkgs_remove = $facts['os']['name'].downcase() ? {
       'sles'  => ['firewalld'],
       default => ['firewalld', 'iptables-services'],
     }
 
-    $ensure = $facts['osfamily'].downcase() ? {
+    $ensure = $facts['os']['family'].downcase() ? {
       'suse'  => 'absent',
       default => 'purged',
     }
 
-    ensure_packages(['nftables'], {
-        ensure => installed,
-    })
+    if !defined(Package['nftables']) {
+      ensure_packages(['nftables'], {
+          ensure => installed,
+      })
+    }
 
     ensure_packages($pkgs_remove, {
         ensure => $ensure,
     })
 
-    ensure_resource('service', 'iptables', {
-        enable => false,
-        ensure => stopped,
-    })
+    if !defined(Service['iptables']) {
+      ensure_resource('service', 'iptables', {
+          enable => false,
+          ensure => stopped,
+      })
+    }
 
-    ensure_resource('service', 'ip6tables', {
-        enable => false,
-        ensure => stopped,
-    })
+    if !defined(Service['ip6tables']) {
+      ensure_resource('service', 'ip6tables', {
+          enable => false,
+          ensure => stopped,
+      })
+    }
 
-    ensure_resource('service', 'nftables', {
-        enable => true,
-        ensure => running,
-    })
+    if !defined(Service['nftables']) {
+      ensure_resource('service', 'nftables', {
+          enable => true,
+          ensure => running,
+      })
+    }
 
-    if $facts['operatingsystem'].downcase() == 'ubuntu' {
+    if $facts['os']['name'].downcase() == 'ubuntu' {
       ensure_packages(['ufw'], {
           ensure => $ensure,
       })
