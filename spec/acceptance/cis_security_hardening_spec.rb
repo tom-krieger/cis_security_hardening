@@ -9,6 +9,7 @@ PUPPETCODE
 
 describe 'cis_security_hardening class' do
   let(:hiera_config) { './spec/fixtures/hiera/hiera.yaml' }
+
   describe 'with basic test' do
     it 'sets up the services' do
       # idempotent_apply(pp_basic)

@@ -31,8 +31,8 @@ fixtures:
       repo: "puppet/augeasproviders_core"
       ref: "3.2.0"
     sysctl:
-      repo: "thias/sysctl"
-      ref: "1.0.7"
+      repo: "fiddyspence/sysctl"
+      ref: "1.1.0"
     augeasprovider_grub:
       repo: "puppet/augeasproviders_grub"
       ref: "4.0.0"
