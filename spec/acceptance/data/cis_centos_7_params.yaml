@@ -1,0 +1,15 @@
+---
+cis_security_hardening::profile: server
+cis_security_hardening::level: '2'
+
+cis_security_hardening::exclude_dirs_world_writeable: []
+cis_security_hardening::exclude_dirs_sticky_ww: []
+cis_security_hardening::update_postrun_command: true
+cis_security_hardening::fact_upload_command: '/usr/share/cis_security_hardening/bin/fact_upload.sh'
+cis_security_hardening::system_file_permissions: '/usr/share/cis_security_hardening/data/system-file-permissions.txt'
+
+cis_security_hardening::suid_fact_file: '/opt/puppetlabs/facter/facts.d/cis_security_hardening_suid_programs.yaml'
+cis_security_hardening::sgid_fact_file: '/opt/puppetlabs/facter/facts.d/cis_security_hardening_sgid_programs.yaml'
+cis_security_hardening::auditd_dirs_to_include: 
+  - '/usr'
+cis_security_hardening::auditd_rules_fact_file: '/opt/puppetlabs/facter/facts.d/cis_security_hardening_auditd.yaml'

@@ -24,9 +24,6 @@ fixtures:
     echo:
       repo: "ipcrm/echo"
       ref: "0.1.6"
-    augeasproviders:
-      repo: "herculesteam/augeasproviders"
-      ref: "2.2.1"
     augeasprovider_pam:
       repo: "puppet/augeasproviders_pam"
       ref: "3.0.1"
@@ -34,14 +31,11 @@ fixtures:
       repo: "puppet/augeasproviders_core"
       ref: "3.2.0"
     sysctl:
-      repo: "herculesteam/augeasproviders_sysctl"
-      ref: "2.3.1"
+      repo: "thias/sysctl"
+      ref: "1.0.7"
     augeasprovider_grub:
       repo: "puppet/augeasproviders_grub"
       ref: "4.0.0"
-    augeasprovider_shellvar:
-      repo: "puppet/augeasproviders_shellvar"
-      ref: "5.0.0"
     rsyslog:
       repo: "puppet/rsyslog"
       ref: "3.3.0"

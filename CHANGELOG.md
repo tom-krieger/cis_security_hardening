@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.7.5
+
+> This release changed from augeasproviders_sysctl to thias-sysctl module. make sure to check your dependencies.
+
+* Replaced herculesteam-augeasproviders_sysctl module by thias-sysctl module (fix for issue #28)
+* removed old modules from .fixtures
+
 ## Release 0.7.4
 
 Fixed issue #23: nftables resources should be within if !defined
