@@ -41,7 +41,7 @@ class cis_security_hardening::rules::dac_on_symlinks (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    Sysctl {
+    sysctl {
       'fs.protected_symlinks':
         value  => 1,
         notify => Exec['reload-sysctl-system'],

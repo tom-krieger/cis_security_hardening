@@ -27,11 +27,11 @@ class cis_security_hardening::rules::enable_reverse_path_filtering (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    Sysctl {
+    sysctl {
       'net.ipv4.conf.all.rp_filter':
         value => 1,
     }
-    Sysctl {
+    sysctl {
       'net.ipv4.conf.default.rp_filter':
         value => 1,
     }

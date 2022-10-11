@@ -25,7 +25,7 @@ class cis_security_hardening::rules::ignore_icmp_broadcast (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    Sysctl {
+    sysctl {
       'net.ipv4.icmp_echo_ignore_broadcasts':
         value => 1,
     }
