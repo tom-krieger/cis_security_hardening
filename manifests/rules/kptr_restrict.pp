@@ -20,7 +20,7 @@ class cis_security_hardening::rules::kptr_restrict (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    Sysctl {
+    sysctl {
       'kernel.kptr_restrict':
         value  => '1',
         notify => Exec['reload-sysctl-system'],
