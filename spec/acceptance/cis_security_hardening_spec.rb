@@ -1,11 +1,11 @@
 require 'spec_helper_acceptance'
 
-pp_basic = <<-PUPPETCODE
-  class { 'cis_security_hardening':
-    verbose_logging => true,
-    update_postrun_command => false,
-  }
-PUPPETCODE
+# pp_basic = <<-PUPPETCODE
+#   class { 'cis_security_hardening':
+#     verbose_logging => true,
+#     update_postrun_command => false,
+#   }
+# PUPPETCODE
 
 describe 'cis_security_hardening class' do
   let(:hiera_config) { './spec/fixtures/hiera/hiera.yaml' }
