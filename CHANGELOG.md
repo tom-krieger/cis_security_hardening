@@ -4,9 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ## Release 0.7.5
 
-> This release changed from augeasproviders_sysctl to thias-sysctl module. make sure to check your dependencies.
+> This release changed from augeasproviders_sysctl to fiddyspence-sysctl module. make sure to check your dependencies.
 
-* Replaced herculesteam-augeasproviders_sysctl module by thias-sysctl module (fix for issue #28)
+* Replaced herculesteam-augeasproviders_sysctl module by fiddyspence-sysctl module (fix for issue #28)
 * removed old modules from .fixtures
 
 ## Release 0.7.4
