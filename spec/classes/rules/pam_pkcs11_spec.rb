@@ -27,7 +27,7 @@ describe 'cis_security_hardening::rules::pam_pkcs11' do
                 )
               is_expected.to contain_package('pam_pkcs11')
                 .with(
-                  'ensure' => 'instaloled',
+                  'ensure' => 'installed',
                 )
             else
               is_expected.to contain_package('libpam-pkcs11')
