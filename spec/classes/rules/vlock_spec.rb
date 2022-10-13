@@ -21,7 +21,7 @@ describe 'cis_security_hardening::rules::vlock' do
           if enforce
             is_expected.to contain_package('vlock')
               .with(
-                'ensure' => 'present',
+                'ensure' => 'installed',
               )
           else
             is_expected.not_to contain_package('vlock')

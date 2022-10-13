@@ -22,7 +22,7 @@ describe 'cis_security_hardening::rules::fapolicyd' do
           if enforce
             is_expected.to contain_package('fapolicyd')
               .with(
-                'ensure' => 'present',
+                'ensure' => 'installed',
               )
 
             is_expected.to contain_file('/run/fapolicyd')

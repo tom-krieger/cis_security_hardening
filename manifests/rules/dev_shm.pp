@@ -28,19 +28,20 @@ class cis_security_hardening::rules::dev_shm (
   Integer $size    = 0,
 ) {
   if $enforce {
-    if $size == 0 {
-      $options = 'defaults,nodev,nosuid,noexec,seclabel'
-    } else {
-      $options = "defaults,size=${size}G,nodev,nosuid,noexec,seclabel"
-    }
+    # fstab { '/dev/shm entry':
+    #   source => 'tmpfs',
+    #   dest   => '/dev/shm',
+    #   type   => 'tmpfs',
+    #   opts   => $options,
+    #   dump   => 0,
+    #   passno => 0,
+    # }
 
-    fstab { '/dev/shm entry':
-      source => 'tmpfs',
-      dest   => '/dev/shm',
-      type   => 'tmpfs',
-      opts   => $options,
-      dump   => 0,
-      passno => 0,
+    if $size > 0 {
+      cis_security_hardening::set_mount_options { '/dev/shm':
+        mountpoint   => '/dev/shm',
+        mountoptions => "size=${size}G",
+      }
     }
   }
 }

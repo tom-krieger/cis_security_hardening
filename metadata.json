@@ -73,10 +73,6 @@
       "version_requirement": ">= 4.0.2 < 5.0.0"
     },
     {
-      "name": "AlexCline-fstab",
-      "version_requirement": ">= 0.5.4 < 1.0.0"
-    },
-    {
       "name": "puppetlabs-inifile",
       "version_requirement": ">= 5.2.0 < 6.0.0"
     }

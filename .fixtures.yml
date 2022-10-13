@@ -11,19 +11,16 @@ fixtures:
   forge_modules:
     stdlib:
       repo: "puppetlabs/stdlib"
-      ref: "6.0"
+      ref: "8.4.0"
     concat:
       repo: "puppetlabs/concat"
-      ref: "5.3.0"
+      ref: "7.3.0"
     kmod:
-      repo: "camptocamp/kmod"
-      ref: "2.3.1"
-    augeas:
-      repo: "camptocamp/augeas"
-      ref: "1.8.0"
+      repo: "puppet/kmod"
+      ref: "3.2.0"
     echo:
       repo: "ipcrm/echo"
-      ref: "0.1.6"
+      ref: "0.1.7"
     augeasprovider_pam:
       repo: "puppet/augeasproviders_pam"
       ref: "3.0.1"
@@ -38,43 +35,34 @@ fixtures:
       ref: "4.0.0"
     rsyslog:
       repo: "puppet/rsyslog"
-      ref: "3.3.0"
+      ref: "6.0.0"
     logrotate:
       repo: "puppet/logrotate"
-      ref: "4.0.0"
+      ref: "6.1.0"
     ntp:
       repo: "puppetlabs/ntp"
-      ref: "8.0.0"
+      ref: "9.2.0"
     chrony:
       repo: "puppet/chrony"
       ref: "2.5.0"
     augeas_core:
       repo: "puppetlabs/augeas_core"
-      ref: "1.0.5"
+      ref: "1.2.0"
     firewall:
       repo: "puppetlabs/firewall"
-      ref: "2.2.0"
+      ref: "3.6.0"
     reboot:
       repo: "puppetlabs/reboot"
-      ref: "2.3.0"
-    puppet_agent:
-      repo: "puppetlabs/puppet_agent"
-      ref: "3.0.2"
-    facts:
-      repo: "puppetlabs/facts"
-      ref: "1.0.0"
+      ref: "4.3.0"
     inifile:
       repo: "puppetlabs/inifile"
-      ref: "4.1.0"
+      ref: "5.4.0"
     apt:
       repo: "puppetlabs/apt"
-      ref: "7.3.0"
-    registry:
-      repo: "puppetlabs/registry"
-      ref: "3.1.0"
-    autofs:
-      repo: "puppet/autofs"
-      ref: "5.0.1"
-    fstab:
-      repo: "AlexCline/fstab"
-      ref: "0.5.4"
+      ref: "9.0.0"
+    puppet_agent:
+      repo: "puppetlabs/puppet_agent"
+      ref: "4.12.1"
+    facts:
+      repo: "puppetlabs/facts"
+      ref: "1.4.0"

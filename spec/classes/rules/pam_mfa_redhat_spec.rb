@@ -37,7 +37,7 @@ describe 'cis_security_hardening::rules::pam_mfa_redhat' do
           if enforce
             is_expected.to contain_package('dconf')
               .with(
-                'ensure' => 'present',
+                'ensure' => 'installed',
               )
 
             is_expected.to contain_file_line('authconfig-config-smartcard')

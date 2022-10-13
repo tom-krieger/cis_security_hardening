@@ -22,7 +22,7 @@ describe 'cis_security_hardening::rules::sudo_installed' do
           if enforce
             is_expected.to contain_package('sudo')
               .with(
-                'ensure' => 'present',
+                'ensure' => 'installed',
               )
           else
             is_expected.not_to contain_package('sudo')

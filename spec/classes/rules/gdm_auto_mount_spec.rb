@@ -28,7 +28,7 @@ describe 'cis_security_hardening::rules::gdm_auto_mount' do
           if enforce
             is_expected.to contain_package('dconf')
               .with(
-                'ensure' => 'present',
+                'ensure' => 'installed',
               )
 
             is_expected.to contain_file('/etc/dconf/db/local.d')

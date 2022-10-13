@@ -26,7 +26,7 @@ describe 'cis_security_hardening::rules::selinux' do
         if enforce
           is_expected.to contain_package('libselinux')
             .with(
-              'ensure' => 'present',
+              'ensure' => 'installed',
             )
         else
           is_expected.not_to contain_package('libselinux')

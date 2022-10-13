@@ -20,17 +20,23 @@ describe 'cis_security_hardening::rules::dev_shm' do
         it {
           is_expected.to compile
           if enforce
-            is_expected.to contain_fstab('/dev/shm entry')
+            # is_expected.to contain_fstab('/dev/shm entry')
+            #   .with(
+            #     'source' => 'tmpfs',
+            #     'dest'   => '/dev/shm',
+            #     'type'   => 'tmpfs',
+            #     'opts'   => 'defaults,size=2G,nodev,nosuid,noexec,seclabel',
+            #     'dump'   => 0,
+            #     'passno' => 0,
+            #   )
+
+            is_expected.to contain_cis_security_hardening__set_mount_options('/dev/shm')
               .with(
-                'source' => 'tmpfs',
-                'dest'   => '/dev/shm',
-                'type'   => 'tmpfs',
-                'opts'   => 'defaults,size=2G,nodev,nosuid,noexec,seclabel',
-                'dump'   => 0,
-                'passno' => 0,
+                'mountpoint'   => '/dev/shm',
+                'mountoptions' => 'size=2G',
               )
           else
-            is_expected.not_to contain_fstab('/dev/shm entry')
+            is_expected.not_to contain_cis_security_hardening__set_mount_options('/dev/shm')
           end
         }
       end

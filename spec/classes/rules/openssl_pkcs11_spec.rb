@@ -21,7 +21,7 @@ describe 'cis_security_hardening::rules::openssl_pkcs11' do
           if enforce
             is_expected.to contain_package('openssl-pkcs11')
               .with(
-                'ensure' => 'present',
+                'ensure' => 'installed',
               )
           else
             is_expected.not_to contain_package('openssl-pkcs11')

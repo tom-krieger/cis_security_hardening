@@ -22,12 +22,12 @@ describe 'cis_security_hardening::rules::sshd_install' do
             if os_facts[:osfamily].casecmp('redhat').zero?
               is_expected.to contain_package('openssh-server')
                 .with(
-                  'ensure' => 'present',
+                  'ensure' => 'installed',
                 )
             else
               is_expected.to contain_package('ssh')
                 .with(
-                  'ensure' => 'present',
+                  'ensure' => 'installed',
                 )
             end
 

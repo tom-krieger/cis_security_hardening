@@ -22,11 +22,11 @@ describe 'cis_security_hardening::rules::apparmor' do
             if os_facts[:osfamily].casecmp('debian').zero?
               is_expected.to contain_package('apparmor')
                 .with(
-                  'ensure' => 'present',
+                  'ensure' => 'installed',
                 )
               is_expected.to contain_package('apparmor-utils')
                 .with(
-                  'ensure' => 'present',
+                  'ensure' => 'installed',
                 )
             elsif os_facts[:osfamily].casecmp('suse').zero?
               is_expected.to contain_exec('install apparmor')

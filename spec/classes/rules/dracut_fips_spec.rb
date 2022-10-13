@@ -21,7 +21,7 @@ describe 'cis_security_hardening::rules::dracut_fips' do
           if enforce
             is_expected.to contain_package('dracut-fips')
               .with(
-                'ensure' => 'present',
+                'ensure' => 'installed',
               )
               .that_notifies('Exec[recreate initramfs]')
 

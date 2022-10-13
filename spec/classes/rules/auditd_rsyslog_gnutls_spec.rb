@@ -21,7 +21,7 @@ describe 'cis_security_hardening::rules::auditd_rsyslog_gnutls' do
           if enforce
             is_expected.to contain_package('rsyslog-gnutls')
               .with(
-                'ensure' => 'present',
+                'ensure' => 'installed',
               )
           else
             is_expected.not_to contain_package('rsyslog-gnutls')
