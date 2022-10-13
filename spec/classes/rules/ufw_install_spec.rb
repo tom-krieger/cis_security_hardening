@@ -21,7 +21,7 @@ describe 'cis_security_hardening::rules::ufw_install' do
           if enforce
             is_expected.to contain_package('ufw')
               .with(
-                'ensure' => 'present',
+                'ensure' => 'installed',
               )
 
             if os_facts[:osfamily].casecmp('suse').zero?

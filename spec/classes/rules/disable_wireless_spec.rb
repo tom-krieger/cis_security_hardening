@@ -28,12 +28,12 @@ describe 'cis_security_hardening::rules::disable_wireless' do
             if os_facts[:osfamily].casecmp('redhat').zero?
               is_expected.to contain_package('NetworkManager')
                 .with(
-                  'ensure' => 'present',
+                  'ensure' => 'installed',
                 )
             elsif os_facts[:osfamily].casecmp('debian').zero?
               is_expected.to contain_package('network-manager')
                 .with(
-                  'ensure' => 'present',
+                  'ensure' => 'installed',
                 )
             end
 

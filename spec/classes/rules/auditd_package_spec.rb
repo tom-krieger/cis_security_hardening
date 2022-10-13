@@ -22,11 +22,11 @@ describe 'cis_security_hardening::rules::auditd_package' do
           if enforce
             is_expected.to contain_package('audit')
               .with(
-                'ensure' => 'present',
+                'ensure' => 'installed',
               )
             is_expected.to contain_package('audit-libs')
               .with(
-                'ensure' => 'present',
+                'ensure' => 'installed',
               )
           else
             is_expected.not_to contain_package('audit')

@@ -282,7 +282,7 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
 
               is_expected.to contain_package('libpam-pwquality')
                 .with(
-                  'ensure' => 'present',
+                  'ensure' => 'installed',
                 )
 
             elsif os_facts[:osfamily].casecmp('suse').zero?

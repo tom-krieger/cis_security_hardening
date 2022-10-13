@@ -28,7 +28,7 @@ describe 'cis_security_hardening::rules::ntp_package' do
         if enforce
           is_expected.to contain_package('chrony')
             .with(
-              'ensure' => 'present',
+              'ensure' => 'installed',
             )
         else
           is_expected.not_to contain_package('chrony')

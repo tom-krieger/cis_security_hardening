@@ -22,7 +22,7 @@ describe 'cis_security_hardening::rules::firewalld_install' do
             if os_facts[:operatingsystem].casecmp('sles').zero?
               is_expected.to contain_package('iptables')
                 .with(
-                  'ensure' => 'present',
+                  'ensure' => 'installed',
                 )
               is_expected.to contain_package('nftables')
                 .with(
@@ -41,7 +41,7 @@ describe 'cis_security_hardening::rules::firewalld_install' do
 
             is_expected.to contain_package('firewalld')
               .with(
-                'ensure' => 'present',
+                'ensure' => 'installed',
               )
             is_expected.to contain_service('iptables')
               .with(

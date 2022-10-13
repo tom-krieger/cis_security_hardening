@@ -4,7 +4,7 @@ require 'spec_helper'
 require 'pp'
 
 mpts = ['/dev/shm', '/home', '/tmp', '/var/tmp', '/var', '/var/log', '/var/log/audit', '/export/store', '/boot', '/boot/efi']
-opts = ['nodev', 'noexec', 'nosuid', 'usrquota', 'grpquota', 'quota', 'sec=krb5:krb5i:krb5p']
+opts = ['nodev', 'noexec', 'nosuid', 'usrquota', 'grpquota', 'quota', 'sec=krb5:krb5i:krb5p', 'size=2G']
 
 mpts.each do |mpt|
   opts.each do |opt|
