@@ -21,21 +21,21 @@ fixtures:
     echo:
       repo: "ipcrm/echo"
       ref: "0.1.7"
-    augeasprovider_pam:
-      repo: "puppet/augeasproviders_pam"
-      ref: "3.0.1"
-    augeasprovider_core:
-      repo: "puppet/augeasproviders_core"
-      ref: "3.2.0"
     sysctl:
       repo: "fiddyspence/sysctl"
       ref: "1.1.0"
-    augeasprovider_grub:
+    augeasproviders_pam:
+      repo: "puppet/augeasproviders_pam"
+      ref: "3.0.1"
+    augeasproviders_core:
+      repo: "puppet/augeasproviders_core"
+      ref: "3.2.0"
+    augeasproviders_grub:
       repo: "puppet/augeasproviders_grub"
       ref: "4.0.0"
-    rsyslog:
-      repo: "puppet/rsyslog"
-      ref: "6.0.0"
+    augeas_core:
+      repo: "puppetlabs/augeas_core"
+      ref: "1.2.0"
     logrotate:
       repo: "puppet/logrotate"
       ref: "6.1.0"
@@ -45,9 +45,6 @@ fixtures:
     chrony:
       repo: "puppet/chrony"
       ref: "2.5.0"
-    augeas_core:
-      repo: "puppetlabs/augeas_core"
-      ref: "1.2.0"
     firewall:
       repo: "puppetlabs/firewall"
       ref: "3.6.0"
@@ -57,9 +54,6 @@ fixtures:
     inifile:
       repo: "puppetlabs/inifile"
       ref: "5.4.0"
-    apt:
-      repo: "puppetlabs/apt"
-      ref: "9.0.0"
     puppet_agent:
       repo: "puppetlabs/puppet_agent"
       ref: "4.12.1"
