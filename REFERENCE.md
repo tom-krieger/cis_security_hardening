@@ -1003,7 +1003,7 @@ Check a mount option
 Alias of
 
 ```puppet
-Pattern[/(^[\/a-zA-Z0-9]+$|^sec=[\/a-zA-Z0-9:]+$)/]
+Pattern[/(^[\/a-zA-Z0-9]+$|^sec=[\/a-zA-Z0-9:]+$)|^size=[\/a-zA-Z0-9]+$/]
 ```
 
 ### <a name="cis_security_hardeningmountpoint"></a>`Cis_security_hardening::Mountpoint`
