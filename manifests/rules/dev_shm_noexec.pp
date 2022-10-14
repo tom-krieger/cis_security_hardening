@@ -1,4 +1,4 @@
-# @summary 
+# @summary
 #    Ensure noexec option set on /dev/shm partition 
 #
 # The noexec mount option specifies that the filesystem cannot contain executable binaries.
