@@ -1,4 +1,4 @@
- # @summary 
+ # @summary
 #    Security baseline enforcement
 #
 # Define a complete security baseline and monitor the rules. The definition of the baseline can be done in Hiera. 

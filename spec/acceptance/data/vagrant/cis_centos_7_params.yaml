@@ -1,10 +1,11 @@
 ---
 cis_security_hardening::profile: server
 cis_security_hardening::level: '2'
+cis_security_hardening::time_until_reboot: 900
 
 cis_security_hardening::exclude_dirs_world_writeable: []
 cis_security_hardening::exclude_dirs_sticky_ww: []
-cis_security_hardening::update_postrun_command: true
+cis_security_hardening::update_postrun_command: false
 cis_security_hardening::fact_upload_command: '/usr/share/cis_security_hardening/bin/fact_upload.sh'
 cis_security_hardening::system_file_permissions: '/usr/share/cis_security_hardening/data/system-file-permissions.txt'
 
@@ -24,11 +25,11 @@ cis_security_hardening::rules::tmp_filesystem::size: 0
 cis_security_hardening::rules::tmp_noexec::enforce: true
 cis_security_hardening::rules::tmp_nodev::enforce: true
 cis_security_hardening::rules::tmp_nosuid::enforce: true
-cis_security_hardening::rules::dev_shm::enforce: true
+cis_security_hardening::rules::dev_shm::enforce: false
 cis_security_hardening::rules::dev_shm::size: 0
-cis_security_hardening::rules::dev_shm_noexec::enforce: true
-cis_security_hardening::rules::dev_shm_nodev::enforce: true
-cis_security_hardening::rules::dev_shm_nosuid::enforce: true
+cis_security_hardening::rules::dev_shm_noexec::enforce: false
+cis_security_hardening::rules::dev_shm_nodev::enforce: false
+cis_security_hardening::rules::dev_shm_nosuid::enforce: false
 cis_security_hardening::rules::var_tmp_noexec::enforce: true
 cis_security_hardening::rules::var_tmp_nodev::enforce: true
 cis_security_hardening::rules::var_tmp_nosuid::enforce: true
@@ -116,7 +117,7 @@ cis_security_hardening::rules::cups::enforce: true
 cis_security_hardening::rules::dhcp::enforce: true
 cis_security_hardening::rules::ldapd::enforce: true
 cis_security_hardening::rules::nfs_utils::enforce: true
-cis_security_hardening::rules::rpcbind::enforce: true
+cis_security_hardening::rules::rpcbind::enforce: false
 cis_security_hardening::rules::bind::enforce: true
 cis_security_hardening::rules::vsftp::enforce: true
 cis_security_hardening::rules::httpd::enforce: true
@@ -331,10 +332,10 @@ cis_security_hardening::rules::etc_crond::enforce: true
 cis_security_hardening::rules::cron_restrict::enforce: true
 cis_security_hardening::rules::at_restrict::enforce: true
 
-cis_security_hardening::rules::sshd_config_permissions::enforce: true
-cis_security_hardening::rules::sshd_private_keys::enforce: true
-cis_security_hardening::rules::sshd_public_keys::enforce: true
-cis_security_hardening::rules::sshd_limit_access::enforce: true
+cis_security_hardening::rules::sshd_config_permissions::enforce: false
+cis_security_hardening::rules::sshd_private_keys::enforce: false
+cis_security_hardening::rules::sshd_public_keys::enforce: false
+cis_security_hardening::rules::sshd_limit_access::enforce: false
 cis_security_hardening::rules::sshd_limit_access::allow_users:
   - kriegeth
   - root
@@ -345,16 +346,16 @@ cis_security_hardening::rules::sshd_limit_access::allow_users:
 cis_security_hardening::rules::sshd_limit_access::deny_users: []
 cis_security_hardening::rules::sshd_limit_access::allow_groups: []
 cis_security_hardening::rules::sshd_limit_access::deny_groups: []
-cis_security_hardening::rules::sshd_loglevel::enforce: true
+cis_security_hardening::rules::sshd_loglevel::enforce: false
 cis_security_hardening::rules::sshd_loglevel::loglevel: INFO
-cis_security_hardening::rules::sshd_x11_forward::enforce: true
-cis_security_hardening::rules::sshd_max_auth_tries::enforce: true
+cis_security_hardening::rules::sshd_x11_forward::enforce: false
+cis_security_hardening::rules::sshd_max_auth_tries::enforce: false
 cis_security_hardening::rules::sshd_max_auth_tries::max_auth_tries: 4
-cis_security_hardening::rules::sshd_ignore_rhosts::enforce: true
-cis_security_hardening::rules::sshd_hostbased_authentication::enforce: true
-cis_security_hardening::rules::sshd_root_login::enforce: true
-cis_security_hardening::rules::sshd_user_environment::enforce: true
-cis_security_hardening::rules::sshd_ciphers::enforce: true
+cis_security_hardening::rules::sshd_ignore_rhosts::enforce: false
+cis_security_hardening::rules::sshd_hostbased_authentication::enforce: false
+cis_security_hardening::rules::sshd_root_login::enforce: false
+cis_security_hardening::rules::sshd_user_environment::enforce: false
+cis_security_hardening::rules::sshd_ciphers::enforce: false
 cis_security_hardening::rules::sshd_ciphers::ciphers:
   - chacha20-poly1305@openssh.com
   - aes256-gcm@openssh.com
@@ -362,13 +363,13 @@ cis_security_hardening::rules::sshd_ciphers::ciphers:
   - aes256-ctr
   - aes192-ctr
   - aes128-ctr
-cis_security_hardening::rules::sshd_macs::enforce: true
+cis_security_hardening::rules::sshd_macs::enforce: false
 cis_security_hardening::rules::sshd_macs::macs:
   - hmac-sha2-512-etm@openssh.com
   - hmac-sha2-256-etm@openssh.com
   - hmac-sha2-512
   - hmac-sha2-256
-cis_security_hardening::rules::sshd_kex::enforce: true
+cis_security_hardening::rules::sshd_kex::enforce: false
 cis_security_hardening::rules::sshd_kex::kexs:
   - curve25519-sha256
   - curve25519-sha256@libssh.org
@@ -379,16 +380,16 @@ cis_security_hardening::rules::sshd_kex::kexs:
   - ecdh-sha2-nistp384
   - ecdh-sha2-nistp256
   - diffie-hellman-group-exchange-sha256
-cis_security_hardening::rules::sshd_timeouts::enforce: true
+cis_security_hardening::rules::sshd_timeouts::enforce: false
 cis_security_hardening::rules::sshd_timeouts::client_alive_interval: 300
 cis_security_hardening::rules::sshd_timeouts::client_alive_count_max: 0
-cis_security_hardening::rules::sshd_login_gracetime::enforce: true
+cis_security_hardening::rules::sshd_login_gracetime::enforce: false
 cis_security_hardening::rules::sshd_login_gracetime::login_grace_time: 60
-cis_security_hardening::rules::sshd_banner::enforce: true
-cis_security_hardening::rules::sshd_use_pam::enforce: true
-cis_security_hardening::rules::sshd_tcp_forwarding::enforce: true
-cis_security_hardening::rules::sshd_max_startups::enforce: true
-cis_security_hardening::rules::sshd_max_sessions::enforce: true
+cis_security_hardening::rules::sshd_banner::enforce: false
+cis_security_hardening::rules::sshd_use_pam::enforce: false
+cis_security_hardening::rules::sshd_tcp_forwarding::enforce: false
+cis_security_hardening::rules::sshd_max_startups::enforce: false
+cis_security_hardening::rules::sshd_max_sessions::enforce: false
 
 cis_security_hardening::rules::pam_pw_requirements::enforce: true
 cis_security_hardening::rules::pam_pw_requirements::minlen: 14
@@ -406,13 +407,13 @@ cis_security_hardening::rules::pam_old_passwords::enforce: true
 cis_security_hardening::rules::pam_old_passwords::oldpasswords: 5
 cis_security_hardening::rules::pam_old_passwords::sha512: true
 
-cis_security_hardening::rules::passwd_expiration::enforce: true
+cis_security_hardening::rules::passwd_expiration::enforce: false
 cis_security_hardening::rules::passwd_expiration::max_pass_days: 90
 cis_security_hardening::rules::passwd_min_days::enforce: true
 cis_security_hardening::rules::passwd_min_days::min_pass_days: 7
 cis_security_hardening::rules::passwd_warn_days::enforce: true
 cis_security_hardening::rules::passwd_warn_days::warn_pass_days: 7
-cis_security_hardening::rules::passwd_inactive_days::enforce: true
+cis_security_hardening::rules::passwd_inactive_days::enforce: false
 cis_security_hardening::rules::passwd_inactive_days::inactive_pass_days: 30
 cis_security_hardening::rules::shell_nologin::enforce: true
 cis_security_hardening::rules::root_gid::enforce: true

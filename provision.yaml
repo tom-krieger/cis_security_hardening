@@ -1,4 +1,4 @@
-default:
+docker:
   provisioner: docker
   images:
   - litmusimage/centos:7
@@ -28,4 +28,22 @@ rockylinux:
   - litmusimage/rockylinux:8
 vagrant:
   provisioner: vagrant
-  images: ['centos/7']
+  images: 
+  - 'centos/7'
+  - 'almalinux-8'
+  - 'rockylinux-8'
+
+vg-centos-7:
+  provisioner: vagrant
+  images: 
+  - 'centos/7'
+
+vg-rocky-8:
+  provisioner: vagrant
+  images: 
+  - 'rockylinux-8'
+
+vg-alma-8:
+  provisioner: vagrant
+  images: 
+  - 'almalinux-8'
