@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.7.6
+
+* Bugfix for /dev/shm fstab entry
+* check in crypto policy exec with onlyif for idempotency
+* changed default firewall to nftables for Redhat like OSes version 8
+* fixed nftables rules handling
+
 ## Release 0.7.5
 
 > This release changed from herculesteam/augeasproviders_sysctl to fiddyspence/sysctl module. make sure to check your dependencies.

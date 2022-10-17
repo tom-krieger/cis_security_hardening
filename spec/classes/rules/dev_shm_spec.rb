@@ -24,7 +24,7 @@ describe 'cis_security_hardening::rules::dev_shm' do
               .with(
                 'ensure'             => 'present',
                 'path'               => '/etc/fstab',
-                'match'              => "^tmpfs\\s* /dev/shm",
+                'match'              => '^tmpfs\\s* /dev/shm',
                 'line'               => 'tmpfs   /dev/shm        tmpfs   defaults,size=2G,nodev,nosuid,noexec,seclabel   0 0',
                 'append_on_no_match' => true,
               )

@@ -21,8 +21,8 @@
 #
 # @api private
 class cis_security_hardening::rules::nftables_outbound_established (
-  Boolean $enforce                               = false,
-  Cis_security_hardening::Numbers_letters $table = 'default',
+  Boolean $enforce                                         = false,
+  Cis_security_hardening::Nftables_address_families $table = 'inet',
 ) {
   if $enforce {
     exec { 'add nftables rule for input tcp established':
