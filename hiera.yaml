@@ -26,6 +26,10 @@ hierarchy:
     paths:
       - "cis/cis_redhat_8_params.yaml"
       - "cis/cis_redhat_8_rules.yaml"
+  - name: "CentOS 8 Benchmark"
+    paths:
+      - "cis/cis_centos_8_params.yaml"
+      - "cis/cis_centos_8_rules.yaml"
   - name: "Ubuntu 18.04 Benchmark"
     paths:
       - "cis/cis_ubuntu_18.04_params.yaml"
