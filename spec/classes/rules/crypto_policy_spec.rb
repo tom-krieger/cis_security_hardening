@@ -52,6 +52,7 @@ describe 'cis_security_hardening::rules::crypto_policy' do
                   .with(
                     'command' => 'update-crypto-policies --set FUTURE',
                     'path'    => ['/sbin', '/usr/sbin', '/bin', '/usr/bin'],
+                    'onlyif'  => "test -z \"\$(update-crypto-policies --show | grep ${crypto_policy})\"",
                   )
                   .that_notifies('Reboot[after_run]')
 
@@ -66,6 +67,7 @@ describe 'cis_security_hardening::rules::crypto_policy' do
                   .with(
                     'command' => 'update-crypto-policies --set FUTURE',
                     'path'    => ['/sbin', '/usr/sbin', '/bin', '/usr/bin'],
+                    'onlyif'  => "test -z \"\$(update-crypto-policies --show | grep ${crypto_policy})\"",
                   )
 
                 is_expected.to contain_exec('set FIPS to disable')
