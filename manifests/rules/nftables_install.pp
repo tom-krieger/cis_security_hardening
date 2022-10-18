@@ -57,7 +57,7 @@ class cis_security_hardening::rules::nftables_install (
         ensure => $ensure,
     })
 
-    unless $facts['os']['release']['major'].downcase() == 'centos' and $facts['os']['release']['major'] > '7' {
+    unless $facts['os']['name'].downcase() == 'centos' and $facts['os']['release']['major'] > '7' {
       if !defined(Service['iptables']) {
         ensure_resource('service', 'iptables', {
             enable => false,
