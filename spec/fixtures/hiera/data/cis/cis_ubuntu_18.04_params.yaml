@@ -171,7 +171,19 @@ cis_security_hardening::rules::nftables_default_deny::default_policy_input: drop
 cis_security_hardening::rules::nftables_default_deny::default_policy_output: drop
 cis_security_hardening::rules::nftables_default_deny::default_policy_forward: drop
 cis_security_hardening::rules::nftables_default_deny::table: inet
-cis_security_hardening::rules::nftables_default_deny::additional_rules: {}
+cis_security_hardening::rules::nftables_default_deny::additional_rules:
+  input:
+    - tcp dport 22 accept
+    - udp dport 123 accept
+    - udp dport 53 accept
+  output:
+    - tcp dport 80 accept
+    - tcp dport 443 accept
+    - tcp dport 21 accept
+    - tcp dport 20 accept
+    - tcp dport 53 accept
+    - udp dport 53 accept
+    - udp dport 123 accept
 cis_security_hardening::rules::nftables_persistence::enforce: false
 cis_security_hardening::rules::nftables_service::enforce: false
 
