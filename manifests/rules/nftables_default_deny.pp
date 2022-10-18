@@ -39,7 +39,7 @@ class cis_security_hardening::rules::nftables_default_deny (
   Enum['accept', 'reject', 'drop'] $default_policy_input   = 'drop',
   Enum['accept', 'reject', 'drop'] $default_policy_output  = 'drop',
   Enum['accept', 'reject', 'drop'] $default_policy_forward = 'drop',
-  Cis_security_hardening::Numbers_letters $table           = 'default',
+  Cis_security_hardening::Nftables_address_families $table = 'inet',
   Hash $additional_rules                                   = {},
 ) {
   if $enforce {
@@ -74,10 +74,11 @@ class cis_security_hardening::rules::nftables_default_deny (
         }
         $cmd = "nft add rule ${table} filter ${chain} ${rule}"
 
-        exec { "adding rule ${rule}":
+        exec { "adding rule ${chain}-${rule}":
           command => $cmd,
           path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-          onlyif  => "test -z \"$(nft list ruleset ${table} | grep '${rule}')\"",
+          onlyif  => "test -z \"$(nft list chain ${table} filter ${chain} | grep '${rule}')\"",
+          # onlyif  => "test -z \"$(nft list ruleset ${table} | grep '${rule}')\"",
           notify  => Exec['dump nftables ruleset'],
         }
       }

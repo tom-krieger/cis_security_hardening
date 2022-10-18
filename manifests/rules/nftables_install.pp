@@ -27,9 +27,19 @@ class cis_security_hardening::rules::nftables_install (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    $pkgs_remove = $facts['os']['name'].downcase() ? {
-      'sles'  => ['firewalld'],
-      default => ['firewalld', 'iptables-services'],
+    case $facts['os']['name'].downcase() {
+      'sles': {
+        $pkgs_remove = ['firewalld']
+      }
+      'centos': {
+        $pkgs_remove = $facts['os']['release']['major'] ? {
+          '7'     => ['firewalld', 'iptables-services'],
+          default => ['firewalld'],
+        }
+      }
+      default: {
+        $pkgs_remove = ['firewalld', 'iptables-services']
+      }
     }
 
     $ensure = $facts['os']['family'].downcase() ? {
@@ -47,18 +57,20 @@ class cis_security_hardening::rules::nftables_install (
         ensure => $ensure,
     })
 
-    if !defined(Service['iptables']) {
-      ensure_resource('service', 'iptables', {
-          enable => false,
-          ensure => stopped,
-      })
-    }
+    unless $facts['os']['name'].downcase() == 'centos' and $facts['os']['release']['major'] > '7' {
+      if !defined(Service['iptables']) {
+        ensure_resource('service', 'iptables', {
+            enable => false,
+            ensure => stopped,
+        })
+      }
 
-    if !defined(Service['ip6tables']) {
-      ensure_resource('service', 'ip6tables', {
-          enable => false,
-          ensure => stopped,
-      })
+      if !defined(Service['ip6tables']) {
+        ensure_resource('service', 'ip6tables', {
+            enable => false,
+            ensure => stopped,
+        })
+      }
     }
 
     if !defined(Service['nftables']) {

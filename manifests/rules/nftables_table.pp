@@ -17,13 +17,13 @@
 # @example
 #   class  { 'cis_security_hardening::rules::nftables_table':
 #       enforce => true,
-#       nftables_default_table => 'default',
+#       nftables_default_table => 'inet',
 #   }
 #
 # @api private
 class cis_security_hardening::rules::nftables_table (
-  Boolean $enforce                                                = false,
-  Cis_security_hardening::Numbers_letters $nftables_default_table = 'default',
+  Boolean $enforce                                                          = false,
+  Cis_security_hardening::Nftables_address_families $nftables_default_table = 'inet',
 ) {
   if $enforce {
     $tables = fact('cis_security_hardening.nftables.tables')

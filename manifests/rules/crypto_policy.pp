@@ -1,4 +1,4 @@
-# @summary 
+# @summary
 #    Ensure system-wide crypto policy is FUTURE or FIPS 
 #
 # The system-wide crypto-policies followed by the crypto core components allow consistently deprecating 
@@ -65,6 +65,7 @@ class cis_security_hardening::rules::crypto_policy (
       exec { "set crypto policy to ${crypto_policy} (current: ${policy})":
         command => "update-crypto-policies --set ${crypto_policy}", #lint:ignore:security_class_or_define_parameter_in_exec 
         path    => ['/sbin', '/usr/sbin', '/bin', '/usr/bin'],
+        onlyif  => "test -z \"\$(update-crypto-policies --show | grep ${crypto_policy})\"",
         notify  => $notify,
       }
 

@@ -29,7 +29,7 @@ describe 'cis_security_hardening::rules::nftables_persistence' do
         is_expected.to compile
 
         if enforce
-          is_expected.to contain_file('/etc/sysconfig/nftable.conf')
+          is_expected.to contain_file('/etc/sysconfig/nftables.conf')
             .with(
               'ensure' => 'file',
               'owner'  => 'root',
@@ -51,7 +51,7 @@ describe 'cis_security_hardening::rules::nftables_persistence' do
               'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
             )
         else
-          is_expected.not_to contain_file('/etc/sysconfig/nftable.conf')
+          is_expected.not_to contain_file('/etc/sysconfig/nftables.conf')
           is_expected.not_to contain_file_line('add persistence file include')
           is_expected.not_to contain_exec('dump nftables ruleset')
         end
