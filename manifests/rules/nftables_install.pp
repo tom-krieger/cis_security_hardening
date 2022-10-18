@@ -64,13 +64,13 @@ class cis_security_hardening::rules::nftables_install (
             ensure => stopped,
         })
       }
-    }
 
-    if !defined(Service['ip6tables']) {
-      ensure_resource('service', 'ip6tables', {
-          enable => false,
-          ensure => stopped,
-      })
+      if !defined(Service['ip6tables']) {
+        ensure_resource('service', 'ip6tables', {
+            enable => false,
+            ensure => stopped,
+        })
+      }
     }
 
     if !defined(Service['nftables']) {
