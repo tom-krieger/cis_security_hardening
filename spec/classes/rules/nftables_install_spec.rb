@@ -46,16 +46,20 @@ describe 'cis_security_hardening::rules::nftables_install' do
               .with(
                 'ensure' => 'installed',
               )
-            is_expected.to contain_service('iptables')
-              .with(
-                'ensure' => 'stopped',
-                'enable' => false,
-              )
-            is_expected.to contain_service('ip6tables')
-              .with(
-                'ensure' => 'stopped',
-                'enable' => false,
-              )
+
+            unless os_facts[:operatingsystem].casecmp('centos').zero? && os_facts[:operatingsystemmajrelease] > '7'
+              is_expected.to contain_service('iptables')
+                .with(
+                  'ensure' => 'stopped',
+                  'enable' => false,
+                )
+              is_expected.to contain_service('ip6tables')
+                .with(
+                  'ensure' => 'stopped',
+                  'enable' => false,
+                )
+            end
+
             is_expected.to contain_service('nftables')
               .with(
                 'ensure' => 'running',
