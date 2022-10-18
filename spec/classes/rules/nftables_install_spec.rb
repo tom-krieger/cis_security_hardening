@@ -24,6 +24,11 @@ describe 'cis_security_hardening::rules::nftables_install' do
                 .with(
                   'ensure' => 'absent',
                 )
+            elsif os_facts[:operatingsystem].casecmp('centos').zero? && os_facts[:operatingsystemmajrelease] > '7'
+              is_expected.to contain_package('firewalld')
+                .with(
+                  'ensure' => 'purged',
+                )
             else
 
               is_expected.to contain_package('iptables-services')
