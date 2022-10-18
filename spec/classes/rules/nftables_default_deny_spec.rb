@@ -93,7 +93,6 @@ describe 'cis_security_hardening::rules::nftables_default_deny' do
               'command' => 'nft add rule inet filter input tcp dport ssh accept',
               'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
               'onlyif'  => 'test -z "$(nft list chain inet filter input | grep \'tcp dport ssh accept\')"',
-              # 'onlyif'  => 'test -z "$(nft list ruleset inet | grep \'tcp dport ssh accept\')"',
             )
             .that_notifies('Exec[dump nftables ruleset]')
         else
