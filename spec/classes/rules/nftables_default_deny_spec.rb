@@ -88,7 +88,7 @@ describe 'cis_security_hardening::rules::nftables_default_deny' do
             )
             .that_notifies('Exec[dump nftables ruleset]')
 
-          is_expected.to contain_exec('adding rule tcp dport ssh accept')
+          is_expected.to contain_exec('adding rule input-tcp dport ssh accept')
             .with(
               'command' => 'nft add rule inet filter input tcp dport ssh accept',
               'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
