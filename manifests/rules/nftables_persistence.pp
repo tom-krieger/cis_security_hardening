@@ -26,7 +26,7 @@ class cis_security_hardening::rules::nftables_persistence (
 ) {
   if $enforce {
     if(!defined(File['/etc/sysconfig/nftables.conf'])) {
-      file { '/etc/sysconfig/nftable.conf':
+      file { '/etc/sysconfig/nftables.conf':
         ensure => file,
         owner  => 'root',
         group  => 'root',

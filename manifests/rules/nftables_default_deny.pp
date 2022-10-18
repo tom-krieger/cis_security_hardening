@@ -77,7 +77,7 @@ class cis_security_hardening::rules::nftables_default_deny (
         exec { "adding rule ${chain}-${rule}":
           command => $cmd,
           path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-          onlyif  => "test -z \"$(nft list chain ${table} filter ${chain})\"",
+          onlyif  => "test -z \"$(nft list chain ${table} filter ${chain} | grep '${rule}')\"",
           # onlyif  => "test -z \"$(nft list ruleset ${table} | grep '${rule}')\"",
           notify  => Exec['dump nftables ruleset'],
         }
