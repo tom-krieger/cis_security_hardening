@@ -438,6 +438,7 @@ termination events that affect "/etc/sudoers.d/"
 
 * [`Cis_security_hardening::Mountoption`](#cis_security_hardeningmountoption): Validate mountoption
 * [`Cis_security_hardening::Mountpoint`](#cis_security_hardeningmountpoint): Validate mountpoint
+* [`Cis_security_hardening::Nftables_address_families`](#cis_security_hardeningnftables_address_families): Valid nftables address families
 * [`Cis_security_hardening::Numbers_letters`](#cis_security_hardeningnumbers_letters): Check for only numbers and letters
 * [`Cis_security_hardening::Servicename`](#cis_security_hardeningservicename): Check service name
 * [`Cis_security_hardening::Word`](#cis_security_hardeningword): Word datatype
@@ -1014,6 +1015,16 @@ Alias of
 
 ```puppet
 Pattern[/^[\/a-zA-Z0-9_-]+$/]
+```
+
+### <a name="cis_security_hardeningnftables_address_families"></a>`Cis_security_hardening::Nftables_address_families`
+
+Valid nftables address families
+
+Alias of
+
+```puppet
+Enum['ip', 'ip6', 'inet', 'arp', 'bridge', 'netdev']
 ```
 
 ### <a name="cis_security_hardeningnumbers_letters"></a>`Cis_security_hardening::Numbers_letters`

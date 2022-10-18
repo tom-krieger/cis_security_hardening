@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 * check in crypto policy exec with onlyif for idempotency
 * changed default firewall to nftables for Redhat like OSes version 8
 * fixed nftables rules handling
+* added basic ruleset for nftables
 
 ## Release 0.7.5
 
