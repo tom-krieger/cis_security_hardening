@@ -241,17 +241,17 @@ cis_security_hardening::rules::firewalld_ports_services::expected_ports:
 cis_security_hardening::rules::firewalld_ports_services::expected_services:
   - ssh
 
-cis_security_hardening::rules::nftables_install::enforce: false
-cis_security_hardening::rules::nftables_flush_iptables::enforce: false
-cis_security_hardening::rules::nftables_table::enforce: false
+cis_security_hardening::rules::nftables_install::enforce: true
+cis_security_hardening::rules::nftables_flush_iptables::enforce: true
+cis_security_hardening::rules::nftables_table::enforce: true
 cis_security_hardening::rules::nftables_table::nftables_default_table: inet
-cis_security_hardening::rules::nftables_base_chains::enforce: false
+cis_security_hardening::rules::nftables_base_chains::enforce: true
 cis_security_hardening::rules::nftables_base_chains::table: inet
-cis_security_hardening::rules::nftables_loopback::enforce: false
+cis_security_hardening::rules::nftables_loopback::enforce: true
 cis_security_hardening::rules::nftables_loopback::table: inet
-cis_security_hardening::rules::nftables_outbound_established::enforce: false
+cis_security_hardening::rules::nftables_outbound_established::enforce: true
 cis_security_hardening::rules::nftables_outbound_established::table: inet
-cis_security_hardening::rules::nftables_default_deny::enforce: false
+cis_security_hardening::rules::nftables_default_deny::enforce: true
 cis_security_hardening::rules::nftables_default_deny::default_policy_input: drop
 cis_security_hardening::rules::nftables_default_deny::default_policy_output: drop
 cis_security_hardening::rules::nftables_default_deny::default_policy_forward: drop
@@ -269,17 +269,17 @@ cis_security_hardening::rules::nftables_default_deny::additional_rules:
     - tcp dport 53 accept
     - udp dport 53 accept
     - udp dport 123 accept
-cis_security_hardening::rules::nftables_persistence::enforce: false
-cis_security_hardening::rules::nftables_service::enforce: false
+cis_security_hardening::rules::nftables_persistence::enforce: true
+cis_security_hardening::rules::nftables_service::enforce: true
 
-cis_security_hardening::rules::iptables_install::enforce: true
-cis_security_hardening::rules::iptables_deny_policy::enforce: true
+cis_security_hardening::rules::iptables_install::enforce: false
+cis_security_hardening::rules::iptables_deny_policy::enforce: false
 cis_security_hardening::rules::iptables_deny_policy::input_policy: drop
 cis_security_hardening::rules::iptables_deny_policy::output_policy: accept
 cis_security_hardening::rules::iptables_deny_policy::forward_policy: drop
-cis_security_hardening::rules::iptables_loopback::enforce: true
-cis_security_hardening::rules::iptables_outbound_established::enforce: true
-cis_security_hardening::rules::iptables_open_ports::enforce: true
+cis_security_hardening::rules::iptables_loopback::enforce: false
+cis_security_hardening::rules::iptables_outbound_established::enforce: false
+cis_security_hardening::rules::iptables_open_ports::enforce: false
 cis_security_hardening::rules::iptables_open_ports::firewall_rules:
   '100 ssh inbound':
     chain: INPUT
@@ -312,13 +312,13 @@ cis_security_hardening::rules::iptables_open_ports::firewall_rules:
     state: NEW
     action: accept
 
-cis_security_hardening::rules::ip6tables_deny_policy::enforce: true
+cis_security_hardening::rules::ip6tables_deny_policy::enforce: false
 cis_security_hardening::rules::ip6tables_deny_policy::input_policy: drop
 cis_security_hardening::rules::ip6tables_deny_policy::output_policy: accept
 cis_security_hardening::rules::ip6tables_deny_policy::forward_policy: drop
-cis_security_hardening::rules::ip6tables_loopback::enforce: true
-cis_security_hardening::rules::ip6tables_outbound_established::enforce: true
-cis_security_hardening::rules::ip6tables_open_ports::enforce: true
+cis_security_hardening::rules::ip6tables_loopback::enforce: false
+cis_security_hardening::rules::ip6tables_outbound_established::enforce: false
+cis_security_hardening::rules::ip6tables_open_ports::enforce: false
 cis_security_hardening::rules::ip6tables_open_ports::firewall_rules: {}
 
 cis_security_hardening::rules::disable_wireless::enforce: true
