@@ -48,7 +48,7 @@ case $1 in
       pdk bundle exec bolt command run 'puppet module list' -t all -i spec/fixtures/litmus_inventory.yaml
       if [ "$vgi" = "vg-centos-7" ]
       then
-        pdk bundle exec bolt file upload spec/acceptance/data/vagrant/cis_centos_7_params.yaml /etc/puppetlabs/code/environments/production/modules/cis_security_hardening/data/cis/cis_centos_7_params.yaml -t all -i spec/fixtures/litmus_inventory.yaml
+        pdk bundle exec bolt file upload spec/acceptance/data/vagrant/cis_CentOS_7_params.yaml /etc/puppetlabs/code/environments/production/modules/cis_security_hardening/data/cis/cis_CentOS_7_params.yaml -t all -i spec/fixtures/litmus_inventory.yaml
       fi
       echo "=== applying module"
       pdk bundle exec rake litmus:acceptance:parallel
