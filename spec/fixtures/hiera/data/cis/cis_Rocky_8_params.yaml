@@ -114,8 +114,8 @@ cis_security_hardening::rules::ntp_package::enforce: true
 cis_security_hardening::rules::ntp_package::pkg: chrony
 cis_security_hardening::rules::chrony::enforce: true
 cis_security_hardening::rules::chrony::ntp_servers:
-  - hostname: 10.10.10.10
-  - hostname: 10.10.10.11
+  10.10.10.10: []
+  10.10.10.11: []
 cis_security_hardening::rules::ntpd::enforce: false
 cis_security_hardening::rules::ntpd::ntp_servers:
   - 10.10.10.1
