@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.7.7
+
+> This release changes the hiera.yaml configuration to use OS facts to determine the files to load. Keep in mind that the OS names are written in CamelCase and therefore the filenames in the data folder will change.
+
+* changed hiera config to use facts and renamed hiera config files to use camelcase
+
 ## Release 0.7.6
 
 * Bugfix for /dev/shm fstab entry
