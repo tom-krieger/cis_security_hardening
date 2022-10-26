@@ -42,7 +42,7 @@ class cis_security_hardening::rules::crypto_policy (
   Boolean $auto_reboot                                       = true,
 ) {
   $notify = $auto_reboot ? {
-    true  => Reboot['after_run'],
+    true  => Class['cis_security_hardening::reboot'],
     false => [],
   }
 

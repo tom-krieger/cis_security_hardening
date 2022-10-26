@@ -31,7 +31,7 @@ class cis_security_hardening::rules::selinux_policy (
 ) {
   if $enforce {
     $notify = $auto_reboot ? {
-      true  => Reboot['after_run'],
+      true  => Class['cis_security_hardening::reboot'],
       false => [],
     }
 
