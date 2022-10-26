@@ -89,7 +89,7 @@ describe 'cis_security_hardening::rules::authselect' do
 
               is_expected.to contain_echo('unavailable feature with-bad')
                 .with(
-                  'message'  => 'authselect: unavailable feature with-bad',
+                  'message'  => 'authselect: unavailable feature with-bad with base profile sssd',
                   'loglevel' => 'warning',
                   'withpath' => false,
                 )
