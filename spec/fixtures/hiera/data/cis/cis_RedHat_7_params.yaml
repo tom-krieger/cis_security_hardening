@@ -420,7 +420,6 @@ cis_security_hardening::rules::sshd_private_keys::enforce: true
 cis_security_hardening::rules::sshd_public_keys::enforce: true
 cis_security_hardening::rules::sshd_limit_access::enforce: true
 cis_security_hardening::rules::sshd_limit_access::allow_users:
-  - kriegeth
   - root
   - vagrant
   - centos
