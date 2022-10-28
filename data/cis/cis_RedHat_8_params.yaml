@@ -17,7 +17,7 @@ cis_security_hardening::rules::squashfs::enforce: true
 cis_security_hardening::rules::udf::enforce: true
 cis_security_hardening::rules::fat::enforce: true
 cis_security_hardening::rules::tmp_filesystem::enforce: true
-cis_security_hardening::rules::tmp_filesystem::enable: false
+cis_security_hardening::rules::tmp_filesystem::enable: true
 cis_security_hardening::rules::tmp_filesystem::size: 0
 cis_security_hardening::rules::tmp_noexec::enforce: true
 cis_security_hardening::rules::tmp_nodev::enforce: true
@@ -97,13 +97,13 @@ cis_security_hardening::rules::disable_core_dumps::enforce: true
 cis_security_hardening::rules::disable_coredump_socket::enforce: true
 cis_security_hardening::rules::kdump_service::enforce: true
 
-cis_security_hardening::rules::selinux::enforce: false
+cis_security_hardening::rules::selinux::enforce: true
 cis_security_hardening::rules::selinux_bootloader::enforce: true
 cis_security_hardening::rules::selinux_policy::enforce: true
 cis_security_hardening::rules::selinux_policy::selinux_policy: targeted
 cis_security_hardening::rules::selinux_policy::auto_reboot: true
 cis_security_hardening::rules::selinux_state::enforce: true
-cis_security_hardening::rules::selinux_state::state: permissive
+cis_security_hardening::rules::selinux_state::state: enforcing
 cis_security_hardening::rules::selinux_state::auto_reboot: true
 cis_security_hardening::rules::setroubleshoot::enforce: true
 cis_security_hardening::rules::mcstrans::enforce: true
