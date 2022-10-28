@@ -21,7 +21,7 @@ class cis_security_hardening::rules::unprivileged_bpf_disabled (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    sysctl {
+    Sysctl {
       'kernel.unprivileged_bpf_disabled':
         value  => '1',
         notify => Exec['reload-sysctl-system'],

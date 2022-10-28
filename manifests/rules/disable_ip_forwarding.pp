@@ -20,12 +20,12 @@ class cis_security_hardening::rules::disable_ip_forwarding (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    sysctl {
+    Sysctl {
       'net.ipv4.ip_forward':
         value => 0,
     }
     if  fact('network6') != undef {
-      sysctl {
+      Sysctl {
         'net.ipv6.conf.all.forwarding':
           value => 0,
       }

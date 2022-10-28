@@ -21,7 +21,7 @@ class cis_security_hardening::rules::disable_core_dumps (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    sysctl {
+    Sysctl {
       'kernel.core_pattern':
         value  => '|/bin/false',
         notify => Exec['reload-sysctl-system'],

@@ -24,21 +24,21 @@ class cis_security_hardening::rules::icmp_redirects (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    sysctl {
+    Sysctl {
       'net.ipv4.conf.all.accept_redirects':
         value => 0,
     }
-    sysctl {
+    Sysctl {
       'net.ipv4.conf.default.accept_redirects':
         value => 0,
     }
 
     if fact('network6') != undef {
-      sysctl {
+      Sysctl {
         'net.ipv6.conf.all.accept_redirects':
           value => 0,
       }
-      sysctl {
+      Sysctl {
         'net.ipv6.conf.default.accept_redirects':
           value => 0,
       }
