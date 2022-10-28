@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.7.8
+
+* Optout for automatic reboots is now working, new parameter `auto_reboot` is available. The default value is set to `true`.
+* SELinux default state is now `enforcing`
+* the service for /tmp filesystem management is now enabled
+* replaced sysctl module with `thias-sysctl`
+
+If some of the defaults changed do not fit for your environment, just copy the paramters configuration into your conreol repository and set the values suitable for your environment.
+
 ## Release 0.7.7
 
 > This release changes the hiera.yaml configuration to use OS facts to determine the files to load. Keep in mind that the OS names are written in CamelCase and therefore the filenames in the data folder will change.

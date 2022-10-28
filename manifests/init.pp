@@ -23,9 +23,12 @@
 # @param auditd_dirs_to_include
 #    Directories to search for privileged commands to create auditd rules.
 # @param time_until_reboot
-#    Time to wait until system is rebooted if required. Time in seconds.
+#    Time to wait until system is rebooted if required. Time in seconds. For `reboot` the `puppetlabs-reboot` module is used. Please obey
+#    the follwing comment from this module: POSIX systems (with the exception of Solaris) only support 
+#    specifying the timeout as minutes. As such, the value of timeout must be a multiple of 60. Other values will be rounded up to the 
+#    nearest minute and a warning will be issued.
 # @param auto_reboot
-#    Reboot when necessary after time_until_reboot is exeeded
+#    Reboot when necessary after `time_until_reboot` is exeeded
 # @param verbose_logging
 #    Print various info messages
 # @param remove_authconfig

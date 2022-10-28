@@ -16,8 +16,8 @@ describe 'cis_security_hardening::reboot' do
           }
         end
 
-        it { 
-          is_expected.to compile 
+        it {
+          is_expected.to compile
 
           if auto_reboot
             is_expected.to contain_reboot('after_run')

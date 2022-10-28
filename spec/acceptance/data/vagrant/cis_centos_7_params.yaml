@@ -1,6 +1,7 @@
 ---
 cis_security_hardening::profile: server
 cis_security_hardening::level: '2'
+cis_security_hardening::auto_reboot: true
 cis_security_hardening::time_until_reboot: 900
 
 cis_security_hardening::exclude_dirs_world_writeable: []
