@@ -22,7 +22,7 @@ fixtures:
       repo: "ipcrm/echo"
       ref: "0.1.7"
     sysctl:
-      epo: "thias/sysctl"
+      repo: "thias/sysctl"
       ref: "1.0.7"
     augeasproviders_pam:
       repo: "puppet/augeasproviders_pam"

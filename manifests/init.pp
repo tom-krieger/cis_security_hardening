@@ -45,7 +45,7 @@ class cis_security_hardening (
   Boolean $verbose_logging                  = false,
   Boolean $remove_authconfig                = false,
 ) {
-  require cis_security_hardening::reboot
+  contain cis_security_hardening::reboot
 
   $base_dir = '/usr/share/cis_security_hardening'
 
