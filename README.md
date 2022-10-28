@@ -4,7 +4,7 @@
 
 1. [Description](#description)
 2. [Security baseline](#security-baseline)
-3. [CIS Benchmark Reference](#CIS-Benchmark-Reference)
+3. [CIS Benchmark Reference](#cis-benchmark-reference)
 4. [Setup - The basics of getting started with cis_security_hardening](#setup)
     * [What cis_security_hardening affects](#what-cis_security_hardening-affects)
     * [Setup requirements](#setup-requirements)
@@ -180,7 +180,7 @@ Automatic reboots might be *dangerous* as servers would be rebooted if one of th
 
 The default value for *auto_reboot* is `true` and can easily be changed by setting it to `false` in the Hiera configuration of this module.
 
-The global parameter `time_until_reboot` sets the waiting time until the reboot will be performed. On Linux systems you can cancel this reboot with the `shutdown -c` command. But keep in mind that canceling the reboot won't activate some changes. 
+The global parameter `time_until_reboot` sets the waiting time until the reboot will be performed. On Linux systems you can cancel this reboot with the `shutdown -c` command. But keep in mind that canceling the reboot won't activate some changes.
 
 For `rebooting` the `puppetlabs-reboot` module is used. Please obey the follwing comment from this module:
 > POSIX systems (with the exception of Solaris) only support
