@@ -12,10 +12,9 @@ describe 'cis_security_hardening::rules::selinux_state' do
         context "on #{os} with enforce = #{enforce} and reboot = #{reboot}" do
           let(:pre_condition) do
             <<-EOF
-            reboot { 'after_run':
-              timeout => 60,
-              message => 'forced reboot by Puppet',
-              apply   => 'finished',
+            class { 'cis_security_hardening::reboot':
+              auto_reboot => true,
+              time_until_reboot => 120,
             }
             EOF
           end

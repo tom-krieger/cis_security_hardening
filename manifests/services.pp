@@ -88,9 +88,9 @@ class cis_security_hardening::services (
     refreshonly => true,
   }
 
-  reboot { 'after_run':
-    timeout => $time_until_reboot,
-    message => 'forced reboot by Puppet',
-    apply   => 'finished',
-  }
+  # reboot { 'after_run':
+  #   timeout => $time_until_reboot,
+  #   message => 'forced reboot by Puppet',
+  #   apply   => 'finished',
+  # }
 }

@@ -335,7 +335,7 @@
       }
     },
     "local_users" : {
-      "kriegeth" : {
+      "test" : {
         "account_expires_days" : "never",
         "last_password_change_days" : 0,
         "max_days_between_password_change" : 90,
@@ -426,7 +426,7 @@
     "sshd" : {
       "allowgroups" : [ ],
       "allowtcpforwarding" : "no",
-      "allowusers" : [ "kriegeth", "root", "vagrant", "centos", "ec2-user", "ubuntu" ],
+      "allowusers" : [ "test", "root", "vagrant", "centos", "ec2-user", "ubuntu" ],
       "banner" : "/etc/issue.net",
       "ciphers" : [ "aes256-gcm@openssh.com", "aes128-gcm@openssh.com", "aes256-ctr", "aes192-ctr", "aes128-ctr" ],
       "clientalivecountmax" : "0",

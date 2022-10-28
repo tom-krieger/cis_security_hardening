@@ -1,6 +1,6 @@
 {
   "name": "tomkrieger-cis_security_hardening",
-  "version": "0.7.7",
+  "version": "0.7.8",
   "author": "Thomas Krieger",
   "summary": "Secure your systems according to CIS benchmarks",
   "license": "Apache-2.0",
@@ -25,8 +25,8 @@
       "version_requirement": ">= 0.1.7 < 1.0.0"
     },
     {
-      "name": "fiddyspence-sysctl",
-      "version_requirement": ">= 1.1.0 < 2.0.0"
+      "name": "thias-sysctl",
+      "version_requirement": ">= 1.0.7 < 2.0.0"
     },
     {
       "name": "puppet-augeasproviders_pam",

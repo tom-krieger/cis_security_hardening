@@ -21,11 +21,11 @@ class cis_security_hardening::rules::ipv6_router_advertisements (
   Boolean $enforce = false,
 ) {
   if $enforce and fact('network6') != undef {
-    sysctl {
+    Sysctl {
       'net.ipv6.conf.all.accept_ra':
         value => 0,
     }
-    sysctl {
+    Sysctl {
       'net.ipv6.conf.default.accept_ra':
         value => 0,
     }

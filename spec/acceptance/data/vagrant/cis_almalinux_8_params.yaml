@@ -2,6 +2,8 @@
 ---
 cis_security_hardening::profile: server
 cis_security_hardening::level: '2'
+cis_security_hardening::auto_reboot: true
+cis_security_hardening::time_until_reboot: 900
 
 cis_security_hardening::exclude_dirs_sticky_ww: []
 cis_security_hardening::update_postrun_command: true
@@ -17,7 +19,7 @@ cis_security_hardening::rules::cramfs::enforce: true
 cis_security_hardening::rules::squashfs::enforce: true
 cis_security_hardening::rules::udf::enforce: true
 cis_security_hardening::rules::tmp_filesystem::enforce: true
-cis_security_hardening::rules::tmp_filesystem::enable: false
+cis_security_hardening::rules::tmp_filesystem::enable: true
 cis_security_hardening::rules::tmp_filesystem::size: 0
 cis_security_hardening::rules::tmp_noexec::enforce: true
 cis_security_hardening::rules::tmp_nodev::enforce: true
@@ -66,13 +68,13 @@ cis_security_hardening::rules::single_user_mode::enforce: true
 cis_security_hardening::rules::restrict_core_dumps::enforce: true
 cis_security_hardening::rules::enable_aslr::enforce: true
 
-cis_security_hardening::rules::selinux::enforce: false
+cis_security_hardening::rules::selinux::enforce: true
 cis_security_hardening::rules::selinux_bootloader::enforce: true
 cis_security_hardening::rules::selinux_policy::enforce: true
 cis_security_hardening::rules::selinux_policy::selinux_policy: targeted
 cis_security_hardening::rules::selinux_policy::auto_reboot: true
 cis_security_hardening::rules::selinux_state::enforce: true
-cis_security_hardening::rules::selinux_state::state: permissive
+cis_security_hardening::rules::selinux_state::state: enforcing
 cis_security_hardening::rules::selinux_state::auto_reboot: true
 cis_security_hardening::rules::setroubleshoot::enforce: true
 cis_security_hardening::rules::mcstrans::enforce: true
@@ -378,7 +380,6 @@ cis_security_hardening::rules::sshd_private_keys::enforce: true
 cis_security_hardening::rules::sshd_public_keys::enforce: true
 cis_security_hardening::rules::sshd_limit_access::enforce: true
 cis_security_hardening::rules::sshd_limit_access::allow_users:
-  - kriegeth
   - root
   - vagrant
   - centos

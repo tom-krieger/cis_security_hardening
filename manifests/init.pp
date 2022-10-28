@@ -23,7 +23,12 @@
 # @param auditd_dirs_to_include
 #    Directories to search for privileged commands to create auditd rules.
 # @param time_until_reboot
-#    Time to wait until system is rebooted if required. Time in seconds.
+#    Time to wait until system is rebooted if required. Time in seconds. For `reboot` the `puppetlabs-reboot` module is used. Please obey
+#    the follwing comment from this module: POSIX systems (with the exception of Solaris) only support 
+#    specifying the timeout as minutes. As such, the value of timeout must be a multiple of 60. Other values will be rounded up to the 
+#    nearest minute and a warning will be issued.
+# @param auto_reboot
+#    Reboot when necessary after `time_until_reboot` is exeeded
 # @param verbose_logging
 #    Print various info messages
 # @param remove_authconfig
@@ -39,9 +44,12 @@ class cis_security_hardening (
   Boolean $update_postrun_command           = true,
   Stdlib::Absolutepath $fact_upload_command = "${base_dir}/bin/fact_upload.sh",
   Integer $time_until_reboot                = 120,
+  Boolean $auto_reboot                      = true,
   Boolean $verbose_logging                  = false,
   Boolean $remove_authconfig                = false,
 ) {
+  contain cis_security_hardening::reboot
+
   $base_dir = '/usr/share/cis_security_hardening'
 
   if $remove_authconfig and $facts['os']['family'].downcase() == 'redhat' and $facts['os']['release']['major'] == '7' {

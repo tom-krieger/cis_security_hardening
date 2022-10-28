@@ -156,7 +156,7 @@ See [REFERENCE.md](https://github.com/tom-krieger/cis_security_hardening/blob/ma
 
 ## Limitations
 
-Currently the module is tested with RedHat 7, 8, CentOS 8, Suse SLES 12, Debian 10, Ubuntu 18.04 and Ubuntu 20.04. Other OSes may work but there's no guarantee. If you need your own rules please create Puppet modules and call them from the security baseline module. See [extend the security baseline](#extend-the-security-baseline).
+Currently the module is tested with RedHat 7, 8, CentOS 8, Suse SLES 12, Debian 10, Ubuntu 18.04 and Ubuntu 20.04. Other OSes may work but there's no guarantee. If you need your own rules please create Puppet modules and call them from the security baseline module.
 
 More testing is needed as for every supported OS there are different setups in the wild and some of them might not be covered.
 
@@ -172,16 +172,20 @@ SELinux and AppArmor are - if configured - activated while this module is applie
 
 ### Automatic reboot
 
-Automatic reboots might be *dangerous* as servers would be rebooted if one of the classes subscribed for reboot takes any action. But some changes need a reboot, e. g. enabling SELinux or changing auditd rules. As servers in production environments may not be rebooted you have to choose if you will allow reboots by settings a parameter *auto_reboot*. You can choose this for each rule triggering a reboot to be able to decide, which reboots are important enough to trigger an automatic reboot. The *auto_reboot* parameter is available for all rules which can trigger a reboot. Currently the following rules trigger reboots:
+Automatic reboots might be *dangerous* as servers would be rebooted if one of the classes subscribed for reboot takes any action. But some changes need a reboot, e. g. enabling SELinux or changing auditd rules. As servers in production environments may not be rebooted at any time you have to choose if you will allow reboots by settings the parameter *auto_reboot*. Currently the following rules or group of rules trigger reboots:
 
-* auditd_init
+* auditd changes in immutable rules
 * crypto_policy
-* selinux_policy
-* selinux_state
+* selinux changes in policy or state
 
-The default value for *auto_reboot* is `true` and can easily be changed by setting it to false in the Hier configuration of this module.
+The default value for *auto_reboot* is `true` and can easily be changed by setting it to `false` in the Hiera configuration of this module.
 
-The global parameter `time_until_reboot` sets the waiting time until the reboot will be performed. On Linux systems you can cancel this reboot with the `shutdown -c` command. But keep in mind that canceling the reboot won't activate some changes.
+The global parameter `time_until_reboot` sets the waiting time until the reboot will be performed. On Linux systems you can cancel this reboot with the `shutdown -c` command. But keep in mind that canceling the reboot won't activate some changes. 
+
+For `rebooting` the `puppetlabs-reboot` module is used. Please obey the follwing comment from this module:
+> POSIX systems (with the exception of Solaris) only support
+specifying the timeout as minutes. As such, the value of timeout must be a multiple of 60. Other values will be rounded up to the
+nearest minute and a warning will be issued.
 
 Hiera example:
 

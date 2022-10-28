@@ -11,6 +11,7 @@
 * [`cis_security_hardening`](#cis_security_hardening): Security baseline enforcement
 * [`cis_security_hardening::auditd_cron`](#cis_security_hardeningauditd_cron): Create a cron job to search privileged commands for auditd
 * [`cis_security_hardening::config`](#cis_security_hardeningconfig): Configure the module
+* [`cis_security_hardening::reboot`](#cis_security_hardeningreboot): Handle necessary reboot
 * [`cis_security_hardening::rules::dac_on_hardlinks`](#cis_security_hardeningrulesdac_on_hardlinks): Ensure the operating system is configured to enable DAC on hardlinks
 * [`cis_security_hardening::rules::dac_on_symlinks`](#cis_security_hardeningrulesdac_on_symlinks): Ensure the operating system is configured to enable DAC on symlinks
 * [`cis_security_hardening::rules::gdm_lock_delay`](#cis_security_hardeningrulesgdm_lock_delay): Ensure overriding the screensaver lock-delay setting is prevented
@@ -505,6 +506,7 @@ The following parameters are available in the `cis_security_hardening` class:
 * [`exclude_dirs_sticky_ww`](#exclude_dirs_sticky_ww)
 * [`auditd_dirs_to_include`](#auditd_dirs_to_include)
 * [`time_until_reboot`](#time_until_reboot)
+* [`auto_reboot`](#auto_reboot)
 * [`verbose_logging`](#verbose_logging)
 * [`remove_authconfig`](#remove_authconfig)
 
@@ -561,9 +563,20 @@ Default value: `['/usr']`
 
 Data type: `Integer`
 
-Time to wait until system is rebooted if required. Time in seconds.
+Time to wait until system is rebooted if required. Time in seconds. For `reboot` the `puppetlabs-reboot` module is used. Please obey
+the follwing comment from this module: POSIX systems (with the exception of Solaris) only support
+specifying the timeout as minutes. As such, the value of timeout must be a multiple of 60. Other values will be rounded up to the
+nearest minute and a warning will be issued.
 
 Default value: `120`
+
+##### <a name="auto_reboot"></a>`auto_reboot`
+
+Data type: `Boolean`
+
+Reboot when necessary after `time_until_reboot` is exeeded
+
+Default value: ``true``
 
 ##### <a name="verbose_logging"></a>`verbose_logging`
 
@@ -691,6 +704,44 @@ Directory where all files go to.
 Data type: `Stdlib::Absolutepath`
 
 Command to use for fact upload.
+
+### <a name="cis_security_hardeningreboot"></a>`cis_security_hardening::reboot`
+
+Class triggered by resources requesting a system reboot
+
+#### Examples
+
+##### 
+
+```puppet
+include cis_security_hardening::reboot
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::reboot` class:
+
+* [`time_until_reboot`](#time_until_reboot)
+* [`auto_reboot`](#auto_reboot)
+
+##### <a name="time_until_reboot"></a>`time_until_reboot`
+
+Data type: `Integer`
+
+Time to wait until system is rebooted if required. Time in seconds. For `reboot` the `puppetlabs-reboot` module is used. Please obey
+the follwing comment from this module: POSIX systems (with the exception of Solaris) only support
+specifying the timeout as minutes. As such, the value of timeout must be a multiple of 60. Other values will be rounded up to the
+nearest minute and a warning will be issued.
+
+Default value: `$cis_security_hardening::time_until_reboot`
+
+##### <a name="auto_reboot"></a>`auto_reboot`
+
+Data type: `Boolean`
+
+Reboot when necessary after `time_until_reboot` is exeeded
+
+Default value: `$cis_security_hardening::auto_reboot`
 
 ### <a name="cis_security_hardeningrulesdac_on_hardlinks"></a>`cis_security_hardening::rules::dac_on_hardlinks`
 

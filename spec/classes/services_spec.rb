@@ -90,12 +90,12 @@ describe 'cis_security_hardening::services' do
           'refreshonly' => true,
         )
 
-        is_expected.to contain_reboot('after_run')
-          .with(
-            'timeout' => 60,
-            'message' => 'forced reboot by Puppet',
-            'apply'   => 'finished',
-          )
+        # is_expected.to contain_reboot('after_run')
+        #   .with(
+        #     'timeout' => 60,
+        #     'message' => 'forced reboot by Puppet',
+        #     'apply'   => 'finished',
+        #   )
       }
     end
   end

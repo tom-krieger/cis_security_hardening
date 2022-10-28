@@ -30,7 +30,7 @@ class cis_security_hardening::rules::auditd_init (
 ) {
   if $enforce {
     $notify = $auto_reboot ? {
-      true  => [Exec['reload auditd rules'], Reboot['after_run']],
+      true  => [Exec['reload auditd rules'], Class['cis_security_hardening::reboot']],
       false => Exec['reload auditd rules'],
     }
 

@@ -24,7 +24,7 @@ class cis_security_hardening::rules::net_bpf_jit_harden (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    sysctl {
+    Sysctl {
       'net.core.bpf_jit_harden':
         value  => 2,
         notify => Exec['reload-sysctl-system'],

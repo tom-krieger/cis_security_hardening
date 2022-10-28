@@ -33,7 +33,7 @@ class cis_security_hardening::rules::restrict_core_dumps (
       mode    => '0644',
     }
 
-    sysctl { 'fs.suid_dumpable':
+    Sysctl { 'fs.suid_dumpable':
       value => 0,
     }
 

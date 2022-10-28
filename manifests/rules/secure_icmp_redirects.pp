@@ -23,11 +23,11 @@ class cis_security_hardening::rules::secure_icmp_redirects (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    sysctl {
+    Sysctl {
       'net.ipv4.conf.all.secure_redirects':
         value => 0,
     }
-    sysctl {
+    Sysctl {
       'net.ipv4.conf.default.secure_redirects':
         value => 0,
     }

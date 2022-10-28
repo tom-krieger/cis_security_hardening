@@ -317,7 +317,7 @@ cis_security_hardening:
       mode: 420
       uid: 0
   local_users:
-    kriegeth:
+    test:
       account_expires_days: never
       last_password_change_days: 0
       max_days_between_password_change: 90
@@ -406,7 +406,6 @@ cis_security_hardening:
     allowgroups: []
     allowtcpforwarding: 'no'
     allowusers:
-      - kriegeth
       - root
       - vagrant
       - centos

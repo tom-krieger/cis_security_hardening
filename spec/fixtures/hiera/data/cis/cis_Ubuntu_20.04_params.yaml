@@ -1,6 +1,8 @@
 ---
 cis_security_hardening::profile: server
 cis_security_hardening::level: '2'
+cis_security_hardening::auto_reboot: true
+cis_security_hardening::time_until_reboot: 120
 
 cis_security_hardening::exclude_dirs_sticky_ww: []
 cis_security_hardening::update_postrun_command: true
@@ -17,7 +19,7 @@ cis_security_hardening::rules::hfsplus::enforce: true
 cis_security_hardening::rules::squashfs::enforce: true
 cis_security_hardening::rules::udf::enforce: true
 cis_security_hardening::rules::tmp_filesystem::enforce: true
-cis_security_hardening::rules::tmp_filesystem::enable: false
+cis_security_hardening::rules::tmp_filesystem::enable: true
 cis_security_hardening::rules::tmp_filesystem::size: 0
 cis_security_hardening::rules::tmp_noexec::enforce: true
 cis_security_hardening::rules::tmp_nodev::enforce: true
@@ -426,7 +428,6 @@ cis_security_hardening::rules::sshd_private_keys::enforce: true
 cis_security_hardening::rules::sshd_public_keys::enforce: true
 cis_security_hardening::rules::sshd_limit_access::enforce: true
 cis_security_hardening::rules::sshd_limit_access::allow_users:
-  - kriegeth
   - root
   - vagrant
   - centos
