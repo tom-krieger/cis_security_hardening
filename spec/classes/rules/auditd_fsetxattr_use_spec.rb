@@ -12,10 +12,9 @@ describe 'cis_security_hardening::rules::auditd_fsetxattr_use' do
       rules_file => '/etc/audit/rules.d/cis_security_hardening.rules',
     }
 
-    reboot { 'after_run':
-      timeout => 60,
-      message => 'forced reboot by Puppet',
-      apply   => 'finished',
+    class { 'cis_security_hardening::reboot':
+      auto_reboot => true,
+      time_until_reboot => 120,
     }
     EOF
   end
