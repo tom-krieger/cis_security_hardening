@@ -23,7 +23,7 @@
 #    Limit of clock updates since chronyd start.
 #
 # @example
-#   class ecurity_baseline::rules::common::sec_ntp_daemon_chrony {
+#   class cis_security_hardening::rules::chrony {
 #       enforce => true,
 #       ntp_servers => ['server1', 'server2'],
 #     }
@@ -31,12 +31,16 @@
 #
 # @api private
 class cis_security_hardening::rules::chrony (
-  Boolean $enforce   = false,
-  Hash $ntp_servers = {},
-  Integer $makestep_seconds = 1,
-  Integer $makestep_updates = 3,
+  Boolean $enforce            = false,
+  Optional[Hash] $ntp_servers = {},
+  Integer $makestep_seconds   = 1,
+  Integer $makestep_updates   = 3,
 ) {
   if $enforce {
+    if(empty($ntp_servers)) {
+      warning("You have not defined any ntp servers, time updating may not work unless provided by your network DHCP")
+    }
+
     class { 'chrony':
       servers          => $ntp_servers,
       makestep_seconds => $makestep_seconds,

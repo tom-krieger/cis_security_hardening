@@ -28,7 +28,7 @@ class cis_security_hardening::rules::cramfs (
         }
         kmod::blacklist { 'cramfs': }
       }
-      'redhat': {
+      'centos', 'redhat': {
         if $facts['os']['release']['major'] > '7' {
           kmod::install { 'cramfs':
             command => '/bin/false',
