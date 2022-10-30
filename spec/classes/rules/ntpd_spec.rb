@@ -8,7 +8,6 @@ describe 'cis_security_hardening::rules::ntpd' do
   on_supported_os.each do |os, os_facts|
     enforce_options.each do |enforce|
       context "on #{os} with enforce = #{enforce}" do
-
         describe 'without ntp servers defined' do
           let(:facts) { os_facts }
           let(:params) do
@@ -35,12 +34,12 @@ describe 'cis_security_hardening::rules::ntpd' do
               'ntp_restrict' => ['127.0.0.1'],
             }
           end
-  
+
           it {
             is_expected.to compile
-  
+
             if enforce && !os_facts[:operatingsystem].casecmp('sles').zero?
-  
+
               is_expected.to create_class('ntp')
                 .with(
                   'servers' => ['10.10.10.1', '10.10.10.2'],
@@ -50,7 +49,7 @@ describe 'cis_security_hardening::rules::ntpd' do
                   'iburst_enable'   => false,
                   'service_manage'  => true,
                 )
-  
+
               if os_facts[:osfamily].casecmp('debian').zero?
                 is_expected.to contain_package('chrony')
                   .with(
@@ -61,7 +60,7 @@ describe 'cis_security_hardening::rules::ntpd' do
                     'ensure' => 'stopped',
                     'enable' => false,
                   )
-  
+
                 is_expected.to contain_file_line('ntp runas')
                   .with(
                     'ensure' => 'present',
@@ -69,7 +68,7 @@ describe 'cis_security_hardening::rules::ntpd' do
                     'match'  => '^RUNASUSER=',
                     'line'   =>  'RUNASUSER=ntp',
                   )
-  
+
               else
                 is_expected.not_to contain_service('systemd-timesyncd')
                 is_expected.to contain_file('/etc/sysconfig/ntpd')

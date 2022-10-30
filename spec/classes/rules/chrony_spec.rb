@@ -8,7 +8,6 @@ describe 'cis_security_hardening::rules::chrony' do
   on_supported_os.each do |os, os_facts|
     enforce_options.each do |enforce|
       context "on #{os}" do
-
         describe 'without ntp servers defined' do
           let(:facts) { os_facts }
           let(:params) do
@@ -38,10 +37,10 @@ describe 'cis_security_hardening::rules::chrony' do
               'makestep_updates' => -1,
             }
           end
-  
+
           it {
             is_expected.to compile
-  
+
             if enforce
               is_expected.to contain_class('chrony')
                 .with(
@@ -52,7 +51,7 @@ describe 'cis_security_hardening::rules::chrony' do
                   'makestep_seconds' => 1,
                   'makestep_updates' => -1,
                 )
-  
+
               if os_facts[:operatingsystem].casecmp('ubuntu').zero?
                 is_expected.to contain_package('ntp')
                   .with(
@@ -68,7 +67,7 @@ describe 'cis_security_hardening::rules::chrony' do
                     'mode'    => '0644',
                     'content' => 'OPTIONS="-u chrony"',
                   )
-  
+
               end
             else
               is_expected.not_to contain_class('chrony')
