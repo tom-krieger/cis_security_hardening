@@ -55,8 +55,12 @@ class cis_security_hardening::rules::ntpd (
 ) {
   if $enforce and
   $facts['operatingsystem'].downcase() != 'sles' {
-    if(empty($ntp_servers)) {
-      warning("You have not defined any ntp servers, time updating may not work unless provided by your network DHCP")
+    if (empty($ntp_servers)) {
+      echo { 'no ntp servers warning':
+        message  => 'You have not defined any ntp servers, time updating may not work unless provided by your network DHCP',
+        loglevel => 'warning',
+        withpath => false,
+      }
     }
     $ntp_default = {
       servers         => $ntp_servers,

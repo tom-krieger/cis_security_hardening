@@ -96,9 +96,7 @@ cis_security_hardening::rules::systemd_timesyncd::ntp_servers:
 cis_security_hardening::rules::systemd_timesyncd::ntp_fallback_server:
   - 3.de.pool.ntp.org
 cis_security_hardening::rules::chrony::enforce: false
-cis_security_hardening::rules::chrony::ntp_servers:
-  10.10.10.10: []
-  10.10.10.11: []
+cis_security_hardening::rules::chrony::ntp_servers: ~
 cis_security_hardening::rules::x11_installed::enforce: true
 cis_security_hardening::rules::avahi::enforce: true
 cis_security_hardening::rules::cups::enforce: true

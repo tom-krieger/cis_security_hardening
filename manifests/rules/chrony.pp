@@ -37,8 +37,12 @@ class cis_security_hardening::rules::chrony (
   Integer $makestep_updates   = 3,
 ) {
   if $enforce {
-    if(empty($ntp_servers)) {
-      warning("You have not defined any ntp servers, time updating may not work unless provided by your network DHCP")
+    if (empty($ntp_servers)) {
+      echo { 'no ntp servers warning':
+        message  => 'You have not defined any ntp servers, time updating may not work unless provided by your network DHCP',
+        loglevel => 'warning',
+        withpath => false,
+      }
     }
 
     class { 'chrony':

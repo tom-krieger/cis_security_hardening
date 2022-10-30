@@ -155,9 +155,7 @@ cis_security_hardening::rules::xinetd::enforce: true
 cis_security_hardening::rules::ntp_package::enforce: true
 cis_security_hardening::rules::ntp_package::pkg: chrony
 cis_security_hardening::rules::chrony::enforce: true
-cis_security_hardening::rules::chrony::ntp_servers:
-  10.10.10.10: []
-  10.10.10.11: []
+cis_security_hardening::rules::chrony::ntp_servers: ~
 
 cis_security_hardening::rules::x11_installed::enforce: true
 cis_security_hardening::rules::avahi::enforce: true
