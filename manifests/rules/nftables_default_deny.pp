@@ -39,7 +39,7 @@ class cis_security_hardening::rules::nftables_default_deny (
   Enum['accept', 'reject', 'drop'] $default_policy_input   = 'drop',
   Enum['accept', 'reject', 'drop'] $default_policy_output  = 'drop',
   Enum['accept', 'reject', 'drop'] $default_policy_forward = 'drop',
-  Cis_security_hardening::Nftables_address_families $table = 'inet',
+  String $table                                            = 'inet',
   Hash $additional_rules                                   = {},
 ) {
   if $enforce {

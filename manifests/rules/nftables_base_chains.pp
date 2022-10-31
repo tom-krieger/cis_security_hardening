@@ -23,8 +23,8 @@
 #
 # @api private
 class cis_security_hardening::rules::nftables_base_chains (
-  Boolean $enforce                                         = false,
-  Cis_security_hardening::Nftables_address_families $table = 'inet',
+  Boolean $enforce  = false,
+  String  $table    = 'inet',
 ) {
   if $enforce {
     exec { 'create base chain input':
