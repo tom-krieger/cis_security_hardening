@@ -10,8 +10,6 @@
 #
 # @param enforce
 #    Sets rule enforcement. If set to true, code will be exeuted to bring the system into a comliant state.
-# @param auto_reboot
-#    Trigger a reboot if this rule creates a change. Defaults to true.
 #
 # @example
 #   class { 'cis_security_hardening::rules::auditd_privileged_commands':
@@ -21,7 +19,6 @@
 # @api private
 class cis_security_hardening::rules::auditd_privileged_commands (
   Boolean $enforce                 = false,
-  Boolean $auto_reboot             = true,
 ) {
   if $enforce {
     $dir = dirname($cis_security_hardening::rules::auditd_init::rules_file)

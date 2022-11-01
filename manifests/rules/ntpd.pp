@@ -45,7 +45,7 @@
 # @api private
 class cis_security_hardening::rules::ntpd (
   Boolean $enforce             = false,
-  Array $ntp_servers           = [],
+  Optional[Array] $ntp_servers = [],
   Array $ntp_restrict          = [],
   String $ntp_driftfile        = '',
   String $ntp_statsdir         = '',
@@ -53,10 +53,14 @@ class cis_security_hardening::rules::ntpd (
   Boolean $ntp_burst           = false,
   Boolean $ntp_service_manage  = true,
 ) {
-  if  $enforce and
+  if $enforce and
   $facts['operatingsystem'].downcase() != 'sles' {
-    if(empty($ntp_servers)) {
-      fail("Can't configure ntp daemon without ntp servers")
+    if (empty($ntp_servers)) {
+      echo { 'no ntp servers warning':
+        message  => 'You have not defined any ntp servers, time updating may not work unless provided by your network DHCP',
+        loglevel => 'warning',
+        withpath => false,
+      }
     }
     $ntp_default = {
       servers         => $ntp_servers,

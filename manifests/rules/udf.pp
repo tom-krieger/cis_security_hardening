@@ -30,7 +30,7 @@ class cis_security_hardening::rules::udf (
         }
         kmod::blacklist { 'udf': }
       }
-      'redhat': {
+      'centos', 'redhat': {
         if $facts['operatingsystemmajrelease'] > '7' {
           kmod::install { 'udf':
             command => '/bin/false',

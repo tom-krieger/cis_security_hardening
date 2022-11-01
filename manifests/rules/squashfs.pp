@@ -29,7 +29,7 @@ class cis_security_hardening::rules::squashfs (
         }
         kmod::blacklist { 'squashfs': }
       }
-      'redhat': {
+      'centos', 'redhat': {
         if $facts['operatingsystemmajrelease'] > '7' {
           kmod::install { 'squashfs':
             command => '/bin/false',

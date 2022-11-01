@@ -8,9 +8,7 @@
 #
 # @example
 #   include cis_security_hardening::services
-class cis_security_hardening::services (
-  Integer $time_until_reboot = 60,
-) {
+class cis_security_hardening::services {
   $rel = fact('os') ? {
     undef   => '',
     default => fact('operatingsystemmajrelease')
@@ -87,10 +85,4 @@ class cis_security_hardening::services (
     path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
     refreshonly => true,
   }
-
-  # reboot { 'after_run':
-  #   timeout => $time_until_reboot,
-  #   message => 'forced reboot by Puppet',
-  #   apply   => 'finished',
-  # }
 }

@@ -49,6 +49,7 @@ class cis_security_hardening (
   Boolean $remove_authconfig                = false,
 ) {
   contain cis_security_hardening::reboot
+  contain cis_security_hardening::services
 
   $base_dir = '/usr/share/cis_security_hardening'
 
@@ -60,10 +61,6 @@ class cis_security_hardening (
     ensure_packages(['authconfig'], {
         ensure => $ensure,
     })
-  }
-
-  class { 'cis_security_hardening::services':
-    time_until_reboot => $time_until_reboot,
   }
 
   class { 'cis_security_hardening::sticky_world_writable_cron':

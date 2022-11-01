@@ -24,7 +24,7 @@ describe 'cis_security_hardening::rules::squashfs' do
                   command: '/bin/false',
                 )
               is_expected.to contain_kmod__blacklist('squashfs')
-            elsif os_facts[:operatingsystem].casecmp('redhat').zero?
+            elsif os_facts[:operatingsystem].casecmp('redhat').zero? || os_facts[:operatingsystem].casecmp('centos').zero?
               if os_facts[:operatingsystemmajrelease] > '7'
                 is_expected.to contain_kmod__install('squashfs')
                   .with(

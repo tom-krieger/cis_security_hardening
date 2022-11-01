@@ -101,15 +101,11 @@ cis_security_hardening::rules::systemd_timesyncd::ntp_servers:
 cis_security_hardening::rules::systemd_timesyncd::ntp_fallback_server:
   - 3.de.pool.ntp.org
 cis_security_hardening::rules::chrony::enforce: false
-cis_security_hardening::rules::chrony::ntp_servers:
-  10.10.10.10: []
-  10.10.10.11: []
+cis_security_hardening::rules::chrony::ntp_servers: ~
 cis_security_hardening::rules::chrony::makestep_seconds: 1
 cis_security_hardening::rules::chrony::makestep_updates: 3
 cis_security_hardening::rules::ntpd::enforce: true
-cis_security_hardening::rules::ntpd::ntp_servers:
-  - 10.10.10.1
-  - 10.10.10.11
+cis_security_hardening::rules::ntpd::ntp_servers: ~
 cis_security_hardening::rules::ntpd::ntp_restrict:
   - '-4 default kod nomodify notrap nopeer noquery'
   - '-6 default kod nomodify notrap nopeer noquery'
