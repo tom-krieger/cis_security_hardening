@@ -21,6 +21,15 @@ describe 'cis_security_hardening::rules::grub_password' do
           it {
             is_expected.to compile
 
+            if enforce && grubpw == ''
+              is_expected.to contain_echo('No grub password defined')
+                .with(
+                  'message'  => 'Enforcing a grub boot password needs a grub password to be defined. Please define an encrypted in Hiera.',
+                  'loglevel' => 'warning',
+                  'withpath' => false,
+                )
+            end
+
             if os_facts[:osfamily].casecmp('redhat').zero?
 
               is_expected.not_to contain_file('/etc/grub.d/user.cfg')

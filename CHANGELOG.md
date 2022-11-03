@@ -2,14 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.7.9
+
+* The GRUB boot password is set to `undef` and the previous used default password was removed
+* Fix facts not resolving CentOS is 3 classes
+* Make NTP servers optional and raise warning if not provided, also remove hardcoded default ones
+
 ## Release 0.7.8
 
 * Optout for automatic reboots is now working, new parameter `auto_reboot` is available. The default value is set to `true`.
 * SELinux default state is now `enforcing`
-* the service for /tmp filesystem management is now enabled
+* the service for /tmp filesystem management is now enabled by default
 * replaced sysctl module with `thias-sysctl`
 
-If some of the defaults changed do not fit for your environment, just copy the paramters configuration into your conreol repository and set the values suitable for your environment.
+If some of the defaults changed do not fit for your environment, just copy the parameters configuration into your control repository and set the values suitable for your environment.
 
 ## Release 0.7.7
 

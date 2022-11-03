@@ -1,4 +1,4 @@
-# @summary 
+# @summary
 #    Ensure bootloader password is set 
 #
 # Setting the boot loader password will require that anyone rebooting the system must enter a password 
@@ -38,7 +38,14 @@ class cis_security_hardening::rules::grub_password (
   Boolean $enforce             = false,
   String $grub_password_pbkdf2 = '',
 ) {
-  case $facts['osfamily'].downcase() {
+  if $enforce and $grub_password_pbkdf2 == '' {
+    echo { 'No grub password defined':
+      message  => 'Enforcing a grub boot password needs a grub password to be defined. Please define an encrypted in Hiera.',
+      loglevel => 'warning',
+      withpath => false,
+    }
+  }
+  case $facts['os']['family'].downcase() {
     'redhat': {
       if $enforce and $grub_password_pbkdf2 != '' {
         file { '/boot/grub2/user.cfg':
@@ -94,8 +101,7 @@ class cis_security_hardening::rules::grub_password (
       }
     }
     'suse': {
-      if  $enforce and
-      $grub_password_pbkdf2 != '' {
+      if  $enforce and $grub_password_pbkdf2 != '' {
         file { '/etc/grub.d/40_custom':
           ensure  => file,
           content => epp('cis_security_hardening/rules/common/ubuntu_grub_user.cfg.epp', {
