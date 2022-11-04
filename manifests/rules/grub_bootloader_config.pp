@@ -58,17 +58,16 @@ class cis_security_hardening::rules::grub_bootloader_config (
     }
 
     if $facts['efi'] and has_key($facts['mountpoints'], '/boot/efi') {
-      cis_security_hardening::set_mount_options { '/boot/efi-fmask':
-        mountpoint   => '/boot/efi',
-        mountoptions => 'fmask=0077',
-      }
-      cis_security_hardening::set_mount_options { '/boot/efi-uid':
-        mountpoint   => '/boot/efi',
-        mountoptions => 'uid=0',
-      }
-      cis_security_hardening::set_mount_options { '/boot/efi-gid':
-        mountpoint   => '/boot/efi',
-        mountoptions => 'gid=0',
+      $device = $facts['mointpoints']['/boot/efi']['device']
+      $uuid   = $facts['partitions'][$device]['uuid']
+      $line   = "UUID=${uuid}  /boot/efi       vfat    umask=0077,fmask=0077,uid=0,gid=0      0        1"
+
+      file_line { 'fix /boot/efi':
+        ensure             => present,
+        path               => '/etc/fstab',
+        match              => "^UUID=${uuid}\s+/boot/efi\s+vfat",
+        line               => $line,
+        append_on_no_match => true,
       }
     }
   }

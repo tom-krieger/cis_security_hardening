@@ -13,7 +13,7 @@ describe 'Cis_security_hardening::Mountoption' do
       'size=2G',
       'uid=0',
       'gid=0',
-      'fmask=0077'
+      'fmask=0077',
     ].each do |value|
       describe value.inspect do
         it { is_expected.to allow_value(value) }
