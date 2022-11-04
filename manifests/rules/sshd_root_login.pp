@@ -19,6 +19,7 @@
 # @api private
 class cis_security_hardening::rules::sshd_root_login (
   Boolean $enforce = false,
+  Cis_security_hardening::Sshd_root_login_values $permitrootlogin = 'no',
 ) {
   if $enforce {
     $path = ($facts['operatingsystem'] == 'SLES' and $facts['operatingsystemmajrelease'] == '12') ? {
@@ -28,7 +29,7 @@ class cis_security_hardening::rules::sshd_root_login (
     file_line { 'sshd-root-login':
       ensure => present,
       path   => $path,
-      line   => 'PermitRootLogin no',
+      line   => "PermitRootLogin ${permitrootlogin}",
       match  => '^#?PermitRootLogin.*',
       notify => Exec['reload-sshd'],
     }

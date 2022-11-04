@@ -113,7 +113,6 @@ cis_security_hardening::rules::policycoreutils::enforce: true
 
 cis_security_hardening::rules::motd_perms::enforce: true
 cis_security_hardening::rules::motd_perms::content: |
-  
   ###################################################################
   # This system is for the use of authorized users only.            #
   # Individuals using this computer system without authority, or in #
@@ -131,11 +130,12 @@ cis_security_hardening::rules::motd_perms::content: |
   # evidence of such monitoring to law enforcement officials.       #
   ###################################################################
   
-
 cis_security_hardening::rules::issue_perms::enforce: true
 cis_security_hardening::rules::issue_perms::content: ''
+
 cis_security_hardening::rules::issue_net_perms::enforce: true
 cis_security_hardening::rules::issue_net_perms::content: ''
+
 cis_security_hardening::rules::gnome_gdm::enforce: true
 cis_security_hardening::rules::gnome_gdm_package::enforce: true
 cis_security_hardening::rules::xdmcp_config::enforce: true
@@ -505,6 +505,7 @@ cis_security_hardening::rules::sshd_max_auth_tries::max_auth_tries: 4
 cis_security_hardening::rules::sshd_ignore_rhosts::enforce: true
 cis_security_hardening::rules::sshd_hostbased_authentication::enforce: true
 cis_security_hardening::rules::sshd_root_login::enforce: true
+cis_security_hardening::rules::sshd_root_login::permitrootlogin: no
 cis_security_hardening::rules::sshd_empty_passwords::enforce: true
 cis_security_hardening::rules::sshd_user_environment::enforce: true
 cis_security_hardening::rules::sshd_ciphers::enforce: true
