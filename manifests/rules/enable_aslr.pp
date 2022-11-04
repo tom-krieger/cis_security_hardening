@@ -21,7 +21,7 @@ class cis_security_hardening::rules::enable_aslr (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    Sysctl { 'kernel.randomize_va_space':
+    sysctl { 'kernel.randomize_va_space':
       value => 2,
     }
   }

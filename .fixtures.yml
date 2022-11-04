@@ -60,3 +60,6 @@ fixtures:
     facts:
       repo: "puppetlabs/facts"
       ref: "1.4.0"
+    efi:
+      repo: "jcpunk-efi"
+      ref: "0.1.1"

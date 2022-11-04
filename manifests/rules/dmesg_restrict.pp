@@ -33,7 +33,7 @@ class cis_security_hardening::rules::dmesg_restrict (
   Boolean $enforce = true,
 ) {
   if $enforce {
-    Sysctl {
+    sysctl {
       'kernel.dmesg_restrict':
         value  => 1,
         notify => Exec['reload-sysctl-system'],
