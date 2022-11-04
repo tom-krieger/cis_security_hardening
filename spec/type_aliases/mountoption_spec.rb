@@ -11,6 +11,9 @@ describe 'Cis_security_hardening::Mountoption' do
       'defaults',
       'sec=krb5:krb5i:krb5p',
       'size=2G',
+      'uid=0',
+      'gid=0',
+      'fmask=0077'
     ].each do |value|
       describe value.inspect do
         it { is_expected.to allow_value(value) }
