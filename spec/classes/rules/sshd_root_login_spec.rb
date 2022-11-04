@@ -62,6 +62,7 @@ describe 'cis_security_hardening::rules::sshd_root_login' do
         let(:params) do
           {
             'enforce' => enforce,
+            'permitrootlogin' => 'no',
           }
         end
 
