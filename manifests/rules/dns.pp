@@ -18,6 +18,7 @@
 #    DNS search entries.
 # @param dns_domain
 #    The DNS domain.
+#
 # @example
 #   class { 'cis_security_hardening::rules::dns':
 #     enforce = true,
@@ -25,11 +26,11 @@
 #
 # @api private
 class cis_security_hardening::rules::dns (
-  Boolean $enforce       = false,
-  String $nsswitch_entry = 'files dns',
-  Array $dns_servers     = [],
-  Array $dns_search      = [],
-  String $dns_domain     = '',
+  Boolean $enforce             = false,
+  String $nsswitch_entry       = 'files dns',
+  Array $dns_servers           = [],
+  Array $dns_search            = [],
+  Optional[String] $dns_domain = undef,
 ) {
   if $enforce {
     file_line { 'nsswitch dns':

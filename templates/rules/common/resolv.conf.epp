@@ -1,7 +1,7 @@
 <% if $search != '' { -%>
 search <%= $search %>
 <% } -%>
-<% if $dnsdomain != '' { -%>
+<% if $dnsdomain != undef { -%>
 domain <%= $dnsdomain %>
 <% } -%>
 <%- $dnsservers.each |$dns| { -%>
