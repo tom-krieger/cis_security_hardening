@@ -72,7 +72,7 @@ describe 'cis_security_hardening::rules::selinux_state' do
                   'command' => '/usr/sbin/setenforce 1',
                   'unless'  => '/usr/sbin/getenforce | grep Enforcing',
                 )
-                
+
             else
               is_expected.not_to contain_file('/etc/selinux/config')
               is_expected.not_to contain_file_line('selinux_enforce')

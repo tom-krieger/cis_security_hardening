@@ -1,4 +1,4 @@
-# @summary 
+# @summary
 #    Ensure the operating system is configured to enable DAC on symlinks
 #
 # The operating system must enable kernel parameters to enforce discretionary access control on symlinks.

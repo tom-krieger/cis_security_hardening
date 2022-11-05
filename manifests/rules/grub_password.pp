@@ -35,10 +35,10 @@
 # 
 # @api private
 class cis_security_hardening::rules::grub_password (
-  Boolean $enforce             = false,
-  String $grub_password_pbkdf2 = '',
+  Boolean $enforce                       = false,
+  Optional[String] $grub_password_pbkdf2 = undef,
 ) {
-  if $enforce and $grub_password_pbkdf2 == '' {
+  if $enforce and $grub_password_pbkdf2 == undef {
     echo { 'No grub password defined':
       message  => 'Enforcing a grub boot password needs a grub password to be defined. Please define an encrypted in Hiera.',
       loglevel => 'warning',
@@ -50,7 +50,7 @@ class cis_security_hardening::rules::grub_password (
 
   case $facts['os']['family'].downcase() {
     'redhat': {
-      if $enforce and $grub_password_pbkdf2 != '' {
+      if $enforce and $grub_password_pbkdf2 != undef {
         $notify =  fact('cis_security_hardening.efi') ? {
           true    => [Exec['bootpw-grub-config'], Exec['bootpw-grub-config-efi']],
           default => Exec['bootpw-grub-config'],
@@ -86,7 +86,7 @@ class cis_security_hardening::rules::grub_password (
       }
     }
     'debian': {
-      if $enforce and $grub_password_pbkdf2 != '' {
+      if $enforce and $grub_password_pbkdf2 != undef {
         $notify =  fact('cis_security_hardening.efi') ? {
           true    => [Exec['bootpw-grub-config-ubuntu'], Exec['bootpw-grub-config-ubuntu-efi']],
           default => Exec['bootpw-grub-config-ubuntu'],
@@ -126,7 +126,7 @@ class cis_security_hardening::rules::grub_password (
       }
     }
     'suse': {
-      if  $enforce and $grub_password_pbkdf2 != '' {
+      if  $enforce and $grub_password_pbkdf2 != undef {
         $notify =  fact('cis_security_hardening.efi') ? {
           true    => [Exec['bootpw-grub-config-sles'], Exec['bootpw-grub-config-sles-efi']],
           default => Exec['bootpw-grub-config-sles'],

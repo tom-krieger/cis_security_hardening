@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
+require 'pp'
 
 enforce_options = [true, false]
 grub_pws = ['', 'grub.pbkdf2.sha512.10000.943.....']
@@ -11,17 +12,26 @@ describe 'cis_security_hardening::rules::grub_password' do
       grub_pws.each do |grubpw|
         context "on #{os} with enforce = #{enforce}, pw = #{grubpw}" do
           let(:facts) { os_facts }
-          let(:params) do
-            {
-              'enforce' => enforce,
-              'grub_password_pbkdf2' => grubpw,
-            }
+
+          if grubpw == ''
+            let(:params) do
+              {
+                'enforce' => enforce,
+              }
+            end
+          else
+            let(:params) do
+              {
+                'enforce' => enforce,
+                'grub_password_pbkdf2' => grubpw,
+              }
+            end
           end
 
           it {
             is_expected.to compile
 
-            if enforce && grubpw == ''
+            if enforce && grubpw == :undef
               is_expected.to contain_echo('No grub password defined')
                 .with(
                   'message'  => 'Enforcing a grub boot password needs a grub password to be defined. Please define an encrypted in Hiera.',
@@ -38,7 +48,7 @@ describe 'cis_security_hardening::rules::grub_password' do
               is_expected.not_to contain_exec('bootpw-grub-config-ubuntu')
               is_expected.not_to contain_exec('bootpw-grub-config-ubuntu-efi')
 
-              if enforce && grubpw != ''
+              if enforce && grubpw != :undef
                 is_expected.to contain_file('/boot/grub2/user.cfg')
                   .with(
                     'ensure' => 'file',
@@ -78,7 +88,7 @@ describe 'cis_security_hardening::rules::grub_password' do
               is_expected.not_to contain_file('/boot/grub2/user.cfg')
               is_expected.not_to contain_exec('bootpw-grub-config')
 
-              if enforce && grubpw != ''
+              if enforce && grubpw != :undef
                 is_expected.to contain_file('/etc/grub.d/50_custom')
                   .with(
                     'ensure' => 'file',
@@ -126,7 +136,7 @@ describe 'cis_security_hardening::rules::grub_password' do
               is_expected.not_to contain_exec('bootpw-grub-config-ubuntu')
               is_expected.not_to contain_file_line('grub-unrestricted')
 
-              if enforce && grubpw != ''
+              if enforce && grubpw != :undef
                 is_expected.to contain_file('/etc/grub.d/40_custom')
                   .with(
                     'ensure'  => 'file',
