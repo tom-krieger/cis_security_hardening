@@ -63,10 +63,6 @@
     {
       "name": "puppetlabs-inifile",
       "version_requirement": ">= 5.2.0 < 6.0.0"
-    },
-    {
-      "name": "jcpunk-efi",
-      "version_requirement": "0.1.1"
     }
   ],
   "operatingsystem_support": [

@@ -125,5 +125,7 @@ def common_facts(os, _distid, _release)
 
   facts['nfs_file_systems'] = read_nfs_filesystems
 
+  facts['efi'] = File.directory?('/sys/firmware/efi')
+
   facts
 end

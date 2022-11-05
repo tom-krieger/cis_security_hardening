@@ -57,7 +57,7 @@ class cis_security_hardening::rules::grub_bootloader_config (
       }
     }
 
-    if $facts['efi'] and has_key($facts['mountpoints'], '/boot/efi') {
+    if fact('cis_security_hardening.efi') and has_key($facts['mountpoints'], '/boot/efi') {
       $device = $facts['mountpoints']['/boot/efi']['device']
       $uuid   = $facts['partitions'][$device]['uuid']
       $line   = "UUID=${uuid}  /boot/efi       vfat    umask=0077,fmask=0077,uid=0,gid=0      0        1"

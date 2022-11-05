@@ -51,7 +51,7 @@ class cis_security_hardening::rules::grub_password (
   case $facts['os']['family'].downcase() {
     'redhat': {
       if $enforce and $grub_password_pbkdf2 != '' {
-        $notify = $facts['efi'] ? {
+        $notify =  fact('cis_security_hardening.efi') ? {
           true    => [Exec['bootpw-grub-config'], Exec['bootpw-grub-config-efi']],
           default => Exec['bootpw-grub-config'],
         }
@@ -87,7 +87,7 @@ class cis_security_hardening::rules::grub_password (
     }
     'debian': {
       if $enforce and $grub_password_pbkdf2 != '' {
-        $notify = $facts['efi'] ? {
+        $notify =  fact('cis_security_hardening.efi') ? {
           true    => [Exec['bootpw-grub-config-ubuntu'], Exec['bootpw-grub-config-ubuntu-efi']],
           default => Exec['bootpw-grub-config-ubuntu'],
         }
@@ -127,7 +127,7 @@ class cis_security_hardening::rules::grub_password (
     }
     'suse': {
       if  $enforce and $grub_password_pbkdf2 != '' {
-        $notify = $facts['efi'] ? {
+        $notify =  fact('cis_security_hardening.efi') ? {
           true    => [Exec['bootpw-grub-config-sles'], Exec['bootpw-grub-config-sles-efi']],
           default => Exec['bootpw-grub-config-sles'],
         }
