@@ -30,10 +30,13 @@ describe 'cis_security_hardening::rules::grub_password' do
                 )
             end
 
+            efi_grub_cfg = "/boot/efi/EFI/#{os_facts[:operatingsystem].downcase}/grub.cfg"
+
             if os_facts[:osfamily].casecmp('redhat').zero?
 
               is_expected.not_to contain_file('/etc/grub.d/user.cfg')
               is_expected.not_to contain_exec('bootpw-grub-config-ubuntu')
+              is_expected.not_to contain_exec('bootpw-grub-config-ubuntu-efi')
 
               if enforce && grubpw != ''
                 is_expected.to contain_file('/boot/grub2/user.cfg')
@@ -51,6 +54,13 @@ describe 'cis_security_hardening::rules::grub_password' do
                     'path'        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
                     'refreshonly' => true,
                   )
+
+                is_expected.to contain_exec('bootpw-grub-config-efi')
+                  .with(
+                    'command'     => "grub2-mkconfig -o #{efi_grub_cfg}",
+                    'path'        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+                    'refreshonly' => true,
+                  )
               else
                 is_expected.to contain_file('/boot/grub2/user.cfg')
                   .with(
@@ -60,6 +70,7 @@ describe 'cis_security_hardening::rules::grub_password' do
                     'mode'   => '0600',
                   )
                 is_expected.not_to contain_exec('bootpw-grub-config')
+                is_expected.not_to contain_exec('bootpw-grub-config-efi')
               end
 
             elsif os_facts[:osfamily].casecmp('debian').zero?
@@ -93,9 +104,17 @@ describe 'cis_security_hardening::rules::grub_password' do
                     'path'        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
                     'refreshonly' => true,
                   )
+
+                is_expected.to contain_exec('bootpw-grub-config-ubuntu-efi')
+                  .with(
+                    'command'     => "update-grub -o #{efi_grub_cfg}",
+                    'path'        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+                    'refreshonly' => true,
+                  )
               else
                 is_expected.not_to contain_file('/etc/grub.d/50_custom')
                 is_expected.not_to contain_exec('bootpw-grub-config-ubuntu')
+                is_expected.not_to contain_exec('bootpw-grub-config-ubuntu-efi')
                 is_expected.not_to contain_file_line('grub-unrestricted')
               end
 
@@ -120,6 +139,13 @@ describe 'cis_security_hardening::rules::grub_password' do
                 is_expected.to contain_exec('bootpw-grub-config-sles')
                   .with(
                     'command'     => 'grub2-mkconfig -o /boot/grub2/grub.cfg',
+                    'path'        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+                    'refreshonly' => true,
+                  )
+
+                is_expected.to contain_exec('bootpw-grub-config-sles-efi')
+                  .with(
+                    'command'     => "grub2-mkconfig -o #{efi_grub_cfg}",
                     'path'        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
                     'refreshonly' => true,
                   )
