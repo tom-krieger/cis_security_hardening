@@ -44,16 +44,6 @@ describe 'cis_security_hardening::rules::fapolicyd' do
               )
               .that_requires('Package[fapolicyd]')
 
-            os_facts[:mountpoints].each do |mp, data|
-              pp mp
-              pp data['filesystem']
-              next unless (['tmpfs', 'ext4', 'ext3', 'xfs'].include? data['filesystem']) && (mp !~ %r{^/run}) && (mp !~ %r{/sys})
-              is_expected.to contain_concat__fragment("mount-#{mp}")
-                .with(
-                  'content' => "#{mp}\n",
-                  'target'  => '/etc/fapolicyd/fapolicyd.mounts',
-                )
-            end
           else
             is_expected.not_to contain_package('fapolicyd')
             is_expected.not_to contain_file('/run/fapolicyd')
