@@ -100,7 +100,7 @@ cis_security_hardening::rules::ntpd::enforce: true
 cis_security_hardening::rules::ntpd::ntp_servers: ~
 cis_security_hardening::rules::ntpd::ntp_restrict:
   - 127.0.0.1
-cis_security_hardening::rules::ntpd::ntp_driftfile: ''
+cis_security_hardening::rules::ntpd::ntp_driftfile: /var/lib/ntp/drift
 cis_security_hardening::rules::ntpd::ntp_statsdir: ''
 cis_security_hardening::rules::ntpd::ntp_disable_monitor: true
 cis_security_hardening::rules::ntpd::ntp_burst: false
