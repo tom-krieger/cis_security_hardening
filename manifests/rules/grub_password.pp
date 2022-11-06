@@ -36,11 +36,12 @@
 # @api private
 class cis_security_hardening::rules::grub_password (
   Boolean $enforce                       = false,
-  Optional[String] $grub_password_pbkdf2 = undef,
+  Optional[String] $grub_password_pbkdf2,
 ) {
-  if $enforce and $grub_password_pbkdf2 == undef {
+  #if $enforce and $grub_password_pbkdf2 == undef {
+  if $enforce and !$grub_password_pbkdf2 {
     echo { 'No grub password defined':
-      message  => 'Enforcing a grub boot password needs a grub password to be defined. Please define an encrypted in Hiera.',
+      message  => 'Enforcing a grub boot password needs a grub password to be defined. Please define an encrypted grub password in Hiera.',
       loglevel => 'warning',
       withpath => false,
     }

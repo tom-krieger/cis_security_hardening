@@ -10,6 +10,7 @@ describe 'cis_security_hardening::rules::grub_password' do
   on_supported_os.each do |os, os_facts|
     enforce_options.each do |enforce|
       grub_pws.each do |grubpw|
+
         context "on #{os} with enforce = #{enforce}, pw = #{grubpw}" do
           let(:facts) { os_facts }
 
@@ -34,7 +35,7 @@ describe 'cis_security_hardening::rules::grub_password' do
             if enforce && grubpw == :undef
               is_expected.to contain_echo('No grub password defined')
                 .with(
-                  'message'  => 'Enforcing a grub boot password needs a grub password to be defined. Please define an encrypted in Hiera.',
+                  'message'  => 'Enforcing a grub boot password needs a grub password to be defined. Please define an encrypted grub password in Hiera.',
                   'loglevel' => 'warning',
                   'withpath' => false,
                 )
