@@ -110,7 +110,7 @@ cis_security_hardening::rules::ntpd::ntp_restrict:
   - '-4 default kod nomodify notrap nopeer noquery'
   - '-6 default kod nomodify notrap nopeer noquery'
 cis_security_hardening::rules::ntpd::ntp_driftfile: /var/lib/ntp/drift
-cis_security_hardening::rules::ntpd::ntp_statsdir: ''
+cis_security_hardening::rules::ntpd::ntp_statsdir: '/var/log/ntpstats'
 cis_security_hardening::rules::ntpd::ntp_disable_monitor: true
 cis_security_hardening::rules::ntpd::ntp_burst: false
 cis_security_hardening::rules::ntpd::ntp_service_manage: true
