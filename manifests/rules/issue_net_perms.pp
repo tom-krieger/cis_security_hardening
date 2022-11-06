@@ -21,16 +21,25 @@
 #
 # @api private
 class cis_security_hardening::rules::issue_net_perms (
-  Boolean $enforce = false,
-  String $content  = '',
+  Boolean $enforce           = false,
+  Optional[String] $content  = undef,
 ) {
   if $enforce {
-    ensure_resource('file', '/etc/issue.net', {
+    $data = $content ? {
+      undef   => {
+        ensure  => present,
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0644',
+      },
+      default => {
         ensure  => present,
         content => $content,
         owner   => 'root',
         group   => 'root',
         mode    => '0644',
-    })
+      },
+    }
+    ensure_resource('file', '/etc/issue.net', $data)
   }
 }

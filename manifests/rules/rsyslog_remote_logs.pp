@@ -25,14 +25,22 @@ class cis_security_hardening::rules::rsyslog_remote_logs (
   Boolean $enforce        = false,
   String $remote_log_host = '',
 ) {
-  if $enforce and ($remote_log_host != '') {
-    file_line { 'rsyslog-remote-log-host':
-      ensure  => present,
-      path    => '/etc/rsyslog.conf',
-      line    => "*.* @@${remote_log_host}",
-      match   => '^\*\.\* \@\@.*',
-      notify  => Exec['reload-rsyslog'],
-      require => Package['rsyslog'],
+  if $enforce {
+    if $remote_log_host == '' {
+      echo { 'no remote log host warning':
+        message  => 'You have not defined a remote log host, remote syslog is not activated therefore',
+        loglevel => 'warning',
+        withpath => false,
+      }
+    } else {
+      file_line { 'rsyslog-remote-log-host':
+        ensure  => present,
+        path    => '/etc/rsyslog.conf',
+        line    => "*.* @@${remote_log_host}",
+        match   => '^\*\.\* \@\@.*',
+        notify  => Exec['reload-rsyslog'],
+        require => Package['rsyslog'],
+      }
     }
   }
 }
