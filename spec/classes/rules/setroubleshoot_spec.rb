@@ -5,7 +5,6 @@ require 'spec_helper'
 enforce_options = [true, false]
 
 describe 'cis_security_hardening::rules::setroubleshoot' do
-
   test_on = {
     supported_os: [{
       'operatingsystem'        => 'RedHat',

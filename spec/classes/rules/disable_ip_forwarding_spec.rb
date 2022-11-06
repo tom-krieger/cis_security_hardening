@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-require 'pp'
 
 enforce_options = [true, false]
 
@@ -10,7 +9,7 @@ describe 'cis_security_hardening::rules::disable_ip_forwarding' do
     enforce_options.each do |enforce|
       context "on #{os} with enforce = #{enforce}" do
         let(:facts) do
-          os_facts.merge(
+          os_facts.merge!(
             'network6' => 'ff:ee:aa:bb:11:33',
           )
         end
