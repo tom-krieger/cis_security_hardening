@@ -3,9 +3,6 @@
 #
 # Several exec resources needed from multiple classes.
 #
-# @param time_until_reboot
-#    Time to wait until system is rebooted if required. Time in seconds.
-#
 # @example
 #   include cis_security_hardening::services
 class cis_security_hardening::services {
