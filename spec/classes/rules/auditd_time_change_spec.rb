@@ -5,7 +5,6 @@ require 'spec_helper'
 enforce_options = [true, false]
 
 describe 'cis_security_hardening::rules::auditd_time_change' do
-
   test_on = {
     hardwaremodels: ['x86_64', 'i686'],
   }

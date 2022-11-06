@@ -46,7 +46,7 @@ describe 'cis_security_hardening::rules::auditd_privileged_functions_use' do
 
           if enforce
             if os_facts[:os]['name'].casecmp('redhat').zero? && os_facts[:os]['release']['major'] == '7'
-              if ['x86_64', 'amd64'].include?(arch)
+              if ['x86_64', 'amd64'].include?(os_facts[:os]['architecture'])
                 is_expected.to contain_concat__fragment('watch privileged_functions command rule 3')
                   .with(
                     'order'   => '191',
