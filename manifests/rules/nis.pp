@@ -24,7 +24,7 @@ class cis_security_hardening::rules::nis (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    case $facts['operatingsystem'].downcase() {
+    case $facts['os']['name'].downcase() {
       'ubuntu': {
         ensure_packages(['nis'], {
             ensure => purged,

@@ -28,7 +28,7 @@ class cis_security_hardening::rules::gnome_gdm (
 ) {
   $gnome_gdm = fact('cis_security_hardening.gnome_gdm')
   if  $enforce and $gnome_gdm != undef and $gnome_gdm {
-    case $facts['operatingsystem'].downcase() {
+    case $facts['os']['name'].downcase() {
       'redhat','centos', 'almalinux', 'rocky': {
         file { 'gdm':
           ensure  => file,

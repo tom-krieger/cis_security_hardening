@@ -23,14 +23,14 @@ class cis_security_hardening::rules::avahi (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    $ensure = $facts['osfamily'].downcase() ? {
+    $ensure = $facts['os']['family'].downcase() ? {
       'suse'  => 'absent',
       default => 'purged'
     }
 
-    case $facts['operatingsystem'].downcase {
+    case $facts['os']['name'].downcase {
       'redhat', 'centos': {
-        if $facts['operatingsystemmajrelease'] >= '8' {
+        if $facts['os']['release']['major'] >= '8' {
           ensure_resource('service', ['avahi-daemon.socket'], {
               ensure => 'stopped',
               enable => false,

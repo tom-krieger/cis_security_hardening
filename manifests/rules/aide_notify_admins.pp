@@ -28,7 +28,7 @@ class cis_security_hardening::rules::aide_notify_admins (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    $file = $facts['operatingsystem'].downcase() ? {
+    $file = $facts['os']['name'].downcase() ? {
       'debian' => '/etc/default/aide',
       'ubuntu' => '/etc/default/aide',
       default  => '/etc/sysconfig/aide',

@@ -28,7 +28,7 @@ class cis_security_hardening::rules::aide_regular_checks (
   Integer $minute  = 5,
 ) {
   if $enforce {
-    case $facts['operatingsystem'].downcase() {
+    case $facts['os']['name'].downcase() {
       'centos', 'redhat', 'sles', 'almalinux', 'rocky': {
         $content = "${hour} ${minute} * * * root /usr/sbin/aide --check"
       }

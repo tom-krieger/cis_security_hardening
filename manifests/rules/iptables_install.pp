@@ -41,7 +41,7 @@ class cis_security_hardening::rules::iptables_install (
       }
     }
 
-    if ($facts['operatingsystem'].downcase() == 'redhat' or $facts['operatingsystem'].downcase() == 'centos') and
+    if ($facts['os']['name'].downcase() == 'redhat' or $facts['os']['name'].downcase() == 'centos') and
     $facts['os']['release']['major'] > '7' {
       $params_rh = {
         service_name => ['iptables'],
@@ -64,7 +64,7 @@ class cis_security_hardening::rules::iptables_install (
       purge => true,
     }
 
-    case $facts['operatingsystem'].downcase() {
+    case $facts['os']['name'].downcase() {
       'redhat', 'centos', 'almalinux', 'rocky': {
         if !defined(Package['nftables']) {
           ensure_packages(['nftables'], {

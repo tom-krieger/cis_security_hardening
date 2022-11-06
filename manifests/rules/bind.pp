@@ -21,13 +21,13 @@ class cis_security_hardening::rules::bind (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    case $facts['osfamily'].downcase() {
+    case $facts['os']['family'].downcase() {
       'suse': {
         $pkgs = ['bind']
         $ensure = 'absent'
       }
       default: {
-        if $facts['operatingsystem'].downcase() == 'ubuntu' {
+        if $facts['os']['name'].downcase() == 'ubuntu' {
           $pkgs = ['bind9']
         } else {
           $pkgs = ['bind']

@@ -22,7 +22,7 @@ class cis_security_hardening::rules::telnet_client (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    case $facts['osfamily'].downcase() {
+    case $facts['os']['family'].downcase() {
       'suse': {
         ensure_packages(['telnet'], {
             ensure => 'absent',

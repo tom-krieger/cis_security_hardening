@@ -21,7 +21,7 @@ class cis_security_hardening::rules::nfs (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    if $facts['operatingsystem'].downcase() == 'ubuntu' {
+    if $facts['os']['name'].downcase() == 'ubuntu' {
       ensure_packages(['nfs-kernel-server'], {
           ensure => purged,
       })

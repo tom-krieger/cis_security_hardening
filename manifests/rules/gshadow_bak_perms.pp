@@ -22,7 +22,7 @@ class cis_security_hardening::rules::gshadow_bak_perms (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    if $facts['operatingsystem'].downcase() == 'debian' {
+    if $facts['os']['name'].downcase() == 'debian' {
       $attrs = {
         ensure => file,
         owner  => 'root',

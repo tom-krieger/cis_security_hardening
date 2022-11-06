@@ -36,12 +36,12 @@ class cis_security_hardening::rules::firewalld_install (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    $pkgs = $facts['operatingsystem'].downcase() ? {
+    $pkgs = $facts['os']['name'].downcase() ? {
       'sles'  => ['firewalld', 'iptables'],
       default => ['firewalld'],
     }
 
-    $pkgs_remove = $facts['operatingsystem'].downcase() ? {
+    $pkgs_remove = $facts['os']['name'].downcase() ? {
       'sles'  => ['nftables'],
       default => ['nftables', 'iptables-services'],
     }
@@ -50,7 +50,7 @@ class cis_security_hardening::rules::firewalld_install (
         ensure => installed,
     })
 
-    $ensure = $facts['osfamily'].downcase() ? {
+    $ensure = $facts['os']['family'].downcase() ? {
       'suse'  => 'absent',
       default => 'purged',
     }

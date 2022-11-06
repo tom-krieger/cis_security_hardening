@@ -23,7 +23,7 @@ class cis_security_hardening::rules::disable_prelink (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    $ensure = $facts['osfamily'].downcase() ? {
+    $ensure = $facts['os']['family'].downcase() ? {
       'suse'   => 'absent',
       default => 'purged',
     }

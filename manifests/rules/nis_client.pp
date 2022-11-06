@@ -27,13 +27,13 @@ class cis_security_hardening::rules::nis_client (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    if $facts['operatingsystem'].downcase() == 'ubuntu' {
+    if $facts['os']['name'].downcase() == 'ubuntu' {
       $pkg = 'nis'
     } else {
       $pkg = 'ypbind'
     }
 
-    $ensure = $facts['osfamily'].downcase() ? {
+    $ensure = $facts['os']['family'].downcase() ? {
       'suse'  => 'absent',
       default => 'purged',
     }

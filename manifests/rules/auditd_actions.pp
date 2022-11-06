@@ -29,16 +29,16 @@ class cis_security_hardening::rules::auditd_actions (
       undef => '1000',
       default => fact('cis_security_hardening.auditd.uid_min'),
     }
-    case $facts['operatingsystem'].downcase() {
+    case $facts['os']['name'].downcase() {
       'redhat', 'centos', 'almalinux', 'rocky': {
-        if $facts['operatingsystemmajrelease'] >= '8' {
+        if $facts['os']['release']['major'] >= '8' {
           concat::fragment { 'watch admin actions rule 1':
             order   => 21,
             target  => $cis_security_hardening::rules::auditd_init::rules_file,
             content => '-w /var/log/sudo.log -p wa -k actions',
           }
         } else {
-          if  $facts['architecture'] == 'x86_64' or $facts['architecture'] == 'amd64' {
+          if  $facts['os']['architecture'] == 'x86_64' or $facts['os']['architecture'] == 'amd64' {
             concat::fragment { 'watch admin actions rule 1':
               order   => 21,
               target  => $cis_security_hardening::rules::auditd_init::rules_file,
@@ -54,7 +54,7 @@ class cis_security_hardening::rules::auditd_actions (
         }
       }
       'ubuntu': {
-        if  $facts['architecture'] == 'x86_64' or $facts['architecture'] == 'amd64' {
+        if  $facts['os']['architecture'] == 'x86_64' or $facts['os']['architecture'] == 'amd64' {
           concat::fragment { 'watch admin actions rule 1':
             order   => 21,
             target  => $cis_security_hardening::rules::auditd_init::rules_file,

@@ -19,7 +19,7 @@ class cis_security_hardening::rules::gnome_gdm_package (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    case $facts['osfamily'].downcase() {
+    case $facts['os']['family'].downcase() {
       'suse': {
         $pkg = 'gdm'
         $ensure = 'absent'

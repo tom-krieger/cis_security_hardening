@@ -30,14 +30,14 @@ class cis_security_hardening::rules::timeout_setting (
       ensure  => file,
       content => epp('cis_security_hardening/rules/common/shell_timeout.epp', {
           default_timeout => $default_timeout,
-          os              => $facts['operatingsystem'].downcase(),
+          os              => $facts['os']['name'].downcase(),
       }),
       owner   => 'root',
       group   => 'root',
       mode    => '0644',
     }
 
-    if $facts['operatingsystem'].downcase() == 'debian' {
+    if $facts['os']['name'].downcase() == 'debian' {
       file { '/etc/profile':
         ensure  => file,
         content => epp('cis_security_hardening/rules/common/profile.debian.epp', {

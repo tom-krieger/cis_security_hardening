@@ -36,7 +36,7 @@ class cis_security_hardening::rules::auditd_system_locale (
       undef   => 'unknown',
       default => fact('operatingsystem').downcase()
     }
-    if  $facts['architecture'] == 'x86_64' or $facts['architecture'] == 'amd64' {
+    if  $facts['os']['architecture'] == 'x86_64' or $facts['os']['architecture'] == 'amd64' {
       $content_rule7 = $os ? {
         'almalinux' => '-a always,exit -F arch=b64 -S sethostname,setdomainname -k system-locale',
         'rocky'     => '-a always,exit -F arch=b64 -S sethostname,setdomainname -k system-locale',
@@ -73,7 +73,7 @@ class cis_security_hardening::rules::auditd_system_locale (
       target  => $cis_security_hardening::rules::auditd_init::rules_file,
       content => '-w /etc/hosts -p wa -k system-locale',
     }
-    if $facts['osfamily'].downcase() == 'debian' {
+    if $facts['os']['family'].downcase() == 'debian' {
       concat::fragment { 'watch network environment rule 5':
         order   => '135',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,
@@ -87,7 +87,7 @@ class cis_security_hardening::rules::auditd_system_locale (
       }
     }
 
-    if $facts['operatingsystem'].downcase() == 'rocky' or $facts['operatingsystem'].downcase() == 'almalinux' {
+    if $facts['os']['name'].downcase() == 'rocky' or $facts['os']['name'].downcase() == 'almalinux' {
       concat::fragment { 'watch network environment rule 6':
         order   => '135',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,

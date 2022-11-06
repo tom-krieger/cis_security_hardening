@@ -29,7 +29,7 @@ class cis_security_hardening::rules::auditd_rmdir (
       target  => $cis_security_hardening::rules::auditd_init::rules_file,
       content => "-a always,exit -F arch=b32 -S rmdir -F auid>=${uid} -F auid!=4294967295 -k delete",
     }
-    if  $facts['architecture'] == 'x86_64' or $facts['architecture'] == 'amd64' {
+    if  $facts['os']['architecture'] == 'x86_64' or $facts['os']['architecture'] == 'amd64' {
       concat::fragment { 'watch rmdir rule 2':
         order   => '211',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,

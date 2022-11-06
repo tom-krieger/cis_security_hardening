@@ -28,7 +28,7 @@ class cis_security_hardening::rules::auditd_logins (
       content => '-w /var/log/lastlog -p wa -k logins',
     }
 
-    case $facts['osfamily'].downcase() {
+    case $facts['os']['family'].downcase() {
       'redhat': {
         concat::fragment { 'logins policy rule 2':
           order   => '52',

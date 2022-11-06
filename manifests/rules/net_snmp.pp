@@ -32,13 +32,13 @@ class cis_security_hardening::rules::net_snmp (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    if $facts['operatingsystem'].downcase() == 'ubuntu' {
+    if $facts['os']['name'].downcase() == 'ubuntu' {
       $pkg = 'snmpd'
     } else {
       $pkg = 'net-snmp'
     }
 
-    $ensure = $facts['osfamily'].downcase() ? {
+    $ensure = $facts['os']['family'].downcase() ? {
       'suse'  => 'absent',
       default => 'purged',
     }

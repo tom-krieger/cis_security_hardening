@@ -186,7 +186,7 @@ class cis_security_hardening::rules::pam_pw_requirements (
         }
 
         $services.each | $service | {
-          if ($facts['operatingsystemmajrelease'] > '7') {
+          if ($facts['os']['release']['major'] > '7') {
             if $pf_path != '' {
               $pf_file = "${pf_path}/${service}"
 
@@ -202,7 +202,7 @@ class cis_security_hardening::rules::pam_pw_requirements (
                 notify    => Exec['authselect-apply-changes'],
               }
             }
-          } elsif($facts['operatingsystemmajrelease'] == '7') {
+          } elsif($facts['os']['release']['major'] == '7') {
             Pam { "pam-${service}-requisite":
               ensure    => present,
               service   => $service,

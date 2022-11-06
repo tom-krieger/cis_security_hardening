@@ -42,7 +42,7 @@ class cis_security_hardening::rules::auditd_delete_module (
       content => "-a always,exit -F arch=b32 -S delete_module -F auid>=${uid} -F auid!=4294967295 -k module_chng",
     }
 
-    if $facts['architecture'] == 'x86_64' or $facts['architecture'] == 'amd64' {
+    if $facts['os']['architecture'] == 'x86_64' or $facts['os']['architecture'] == 'amd64' {
       concat::fragment { 'watch delete_module command rule 2':
         order   => '222',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,

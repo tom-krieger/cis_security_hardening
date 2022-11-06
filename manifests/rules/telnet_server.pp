@@ -22,18 +22,18 @@ class cis_security_hardening::rules::telnet_server (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    $ensure = $facts['osfamily'].downcase() ? {
+    $ensure = $facts['os']['family'].downcase() ? {
       'suse'  => 'absent',
       default => 'purged',
     }
 
-    $pkgs = $facts['operatingsystem'].downcase() ? {
+    $pkgs = $facts['os']['name'].downcase() ? {
       'ubuntu' => 'telnetd',
       'debian' => 'telnetd',
       default  => 'telnet-server'
     }
 
-    unless $facts['operatingsystem'].downcase() == 'sles' {
+    unless $facts['os']['name'].downcase() == 'sles' {
       ensure_resource('service', ['telnet'], {
           ensure => stopped,
           enable => false,

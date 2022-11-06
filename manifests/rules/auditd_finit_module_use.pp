@@ -37,7 +37,7 @@ class cis_security_hardening::rules::auditd_finit_module_use (
       $rule2 = "-a always,exit -F arch=b64 -S finit_module -F auid>=${uid} -F auid!=4294967295 -k module_chng"
     }
 
-    if  $facts['architecture'] == 'x86_64' or $facts['architecture'] == 'amd64' {
+    if  $facts['os']['architecture'] == 'x86_64' or $facts['os']['architecture'] == 'amd64' {
       concat::fragment { 'watch finit_module command rule 2':
         order   => '188',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,

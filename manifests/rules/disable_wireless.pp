@@ -20,7 +20,7 @@ class cis_security_hardening::rules::disable_wireless (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    case $facts['osfamily'].downcase() {
+    case $facts['os']['family'].downcase() {
       'redhat': {
         $pkg = 'NetworkManager'
       }

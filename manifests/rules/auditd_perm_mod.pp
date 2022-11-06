@@ -71,7 +71,7 @@ class cis_security_hardening::rules::auditd_perm_mod (
       target  => $cis_security_hardening::rules::auditd_init::rules_file,
       content => $content_rule3,
     }
-    if $facts['architecture'] == 'x86_64' or $facts['architecture'] == 'amd64' {
+    if $facts['os']['architecture'] == 'x86_64' or $facts['os']['architecture'] == 'amd64' {
       concat::fragment { 'watch perm mod rule 4':
         order   => '94',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,

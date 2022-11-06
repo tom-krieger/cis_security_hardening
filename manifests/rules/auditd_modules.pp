@@ -45,7 +45,7 @@ class cis_security_hardening::rules::auditd_modules (
       content => '-w /sbin/modprobe -p x -k modules',
     }
 
-    if  $facts['architecture'] == 'x86_64' or $facts['architecture'] == 'amd64' {
+    if  $facts['os']['architecture'] == 'x86_64' or $facts['os']['architecture'] == 'amd64' {
       concat::fragment { 'watch modules rule 4':
         order   => '74',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,

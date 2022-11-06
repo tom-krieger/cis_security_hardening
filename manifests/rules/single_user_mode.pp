@@ -21,9 +21,9 @@ class cis_security_hardening::rules::single_user_mode (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    case $facts['osfamily'].downcase() {
+    case $facts['os']['family'].downcase() {
       'redhat': {
-        case $facts['operatingsystemmajrelease'] {
+        case $facts['os']['release']['major'] {
           '8': {
             file_line { 'su-rescue':
               path  => '/usr/lib/systemd/system/rescue.service',

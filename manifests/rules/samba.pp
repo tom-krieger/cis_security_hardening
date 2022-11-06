@@ -23,9 +23,9 @@ class cis_security_hardening::rules::samba (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    if  $facts['operatingsystem'].downcase() == 'ubuntu' or
-    $facts['operatingsystem'].downcase() == 'sles' {
-      $ensure = $facts['osfamily'].downcase() ? {
+    if  $facts['os']['name'].downcase() == 'ubuntu' or
+    $facts['os']['name'].downcase() == 'sles' {
+      $ensure = $facts['os']['family'].downcase() ? {
         'suse'  => 'absent',
         default => 'purged',
       }

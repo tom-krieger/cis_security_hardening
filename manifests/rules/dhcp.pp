@@ -20,7 +20,7 @@ class cis_security_hardening::rules::dhcp (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    case $facts['operatingsystem'].downcase() {
+    case $facts['os']['name'].downcase() {
       'ubuntu': {
         ensure_packages(['isc-dhcp-server'], {
             ensure => purged,
