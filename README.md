@@ -53,6 +53,7 @@ The code of this security hardening module is based on the following CIS Benchma
 | RedHat 8     | CIS Red Hat Enterprise Linux 8 Benchmark                     | 2.0.0   | 02-23-2022 |
 | RedHat 8     | CIS Red Hat Enterprise Linux 8 STIG Benchmark                | 1.0.0   | 11-12-2021 |
 | CentOS 7     | CIS CentOS Linux 7 Benchmark                                 | 3.1.2   | 08-31-2021 |
+| CentOS 8     | CIS CentOS Linux 8 Benchmark                                 | 2.0.0   | 02-23-2022 |
 | Ubuntu 18.04 | CIS Ubuntu Linux 18.04 LTS Benchmark                         | 2.0.1   | 01-03-2020 |
 | Ubuntu 20.04 | CIS Ubuntu Linux 20.04 LTS Benchmark                         | 1.1.0   | 03-31-2021 |
 | Ubuntu 20.04 | CIS Ubuntu Linux 20.04 LTS STIG Benchmark                    | 1.0.0   | 26.07.2021 |
