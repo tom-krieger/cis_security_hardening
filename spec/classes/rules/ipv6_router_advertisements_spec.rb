@@ -8,7 +8,7 @@ describe 'cis_security_hardening::rules::ipv6_router_advertisements' do
     enforce_options.each do |enforce|
       context "on #{os}" do
         let(:facts) do
-          os_facts.merge!(
+          os_facts.merge(
             network6: 'fe80::',
           )
         end

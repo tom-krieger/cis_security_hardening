@@ -22,7 +22,7 @@ describe 'cis_security_hardening::rules::auditd_kernel_modules' do
     enforce_options.each do |enforce|
       context "on #{os} with enforce = #{enforce} and arch = #{os_facts[:os]['architecture']}" do
         let(:facts) do
-          os_facts.merge!(
+          os_facts.merge(
             cis_security_hardening: {
               auditd: {
                 delete: false,

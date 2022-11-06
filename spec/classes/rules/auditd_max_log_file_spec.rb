@@ -9,7 +9,7 @@ describe 'cis_security_hardening::rules::auditd_max_log_file' do
     enforce_options.each do |enforce|
       context "on #{os} with enforce = #{enforce}" do
         let(:facts) do
-          os_facts.merge!(
+          os_facts.merge(
             cis_security_hardening: {
               auditd: {
                 'max_log_file' => 'none',

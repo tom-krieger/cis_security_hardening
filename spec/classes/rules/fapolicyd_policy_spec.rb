@@ -10,7 +10,7 @@ describe 'cis_security_hardening::rules::fapolicyd_policy' do
     enforce_options.each do |enforce|
       context "on #{os} with enforce = #{enforce}" do
         let(:facts) do
-          os_facts.merge!(
+          os_facts.merge(
             mountpoints: {
               '/' => {
                 'available' => '3.05 GiB',

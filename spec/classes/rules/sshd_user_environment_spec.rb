@@ -19,7 +19,7 @@ describe 'cis_security_hardening::rules::sshd_user_environment' do
     enforce_options.each do |enforce|
       context "on #{os} with enforce = #{enforce}" do
         let(:facts) do
-          os_facts.merge!(
+          os_facts.merge(
             'cis_security_hardening' => {
               'sshd' => {
                 'pub_key_files_status' => false,

@@ -17,7 +17,7 @@ describe 'cis_security_hardening::rules::auditd_remote_conf' do
           EOF
         end
         let(:facts) do
-          os_facts.merge!(
+          os_facts.merge(
             cis_security_hardening: {
               auditd: {
                 immutable: false,

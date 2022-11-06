@@ -9,7 +9,7 @@ describe 'cis_security_hardening::rules::pam_last_logon' do
     enforce_options.each do |enforce|
       context "on #{os}" do
         let(:facts) do
-          os_facts.merge!(
+          os_facts.merge(
             'cis_security_hardening' => {
               'systemd-coredump' => 'yes',
             },

@@ -9,7 +9,7 @@ describe 'cis_security_hardening::rules::disable_wireless' do
     enforce_options.each do |enforce|
       context "on #{os} with enforce = #{enforce} without nmcli" do
         let(:facts) do
-          os_facts.merge!(
+          os_facts.merge(
             'cis_security_hardening' => {
               'wlan_interfaces_count' => 1,
               'wlan_interfaces' => ['wlan1'],
@@ -51,7 +51,7 @@ describe 'cis_security_hardening::rules::disable_wireless' do
 
       context "on #{os} with enforce = #{enforce} with nmcli" do
         let(:facts) do
-          os_facts.merge!(
+          os_facts.merge(
             'cis_security_hardening' => {
               'wlan_status' => 'enabled',
             },

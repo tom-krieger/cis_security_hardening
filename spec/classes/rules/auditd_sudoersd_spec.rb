@@ -21,7 +21,7 @@ describe 'cis_security_hardening::rules::auditd_sudoersd' do
           EOF
         end
         let(:facts) do
-          os_facts.merge!(
+          os_facts.merge(
             cis_security_hardening: {
               auditd: {
                 uid_min: '1000',

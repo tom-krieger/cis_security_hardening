@@ -20,7 +20,7 @@ describe 'cis_security_hardening::rules::crypto_policy' do
       enforce_options.each do |enforce|
         context "RedHat with enforce = #{enforce} and policy FUTURE and reboot = #{reboot}" do
           let(:facts) do
-            os_facts.merge!(
+            os_facts.merge(
               'cis_security_hardening' => {
                 'crypto_policy' => {
                   'legacy' => 'LEGACY',
@@ -85,7 +85,7 @@ describe 'cis_security_hardening::rules::crypto_policy' do
 
         context "RedHat with enforce = #{enforce} and policy FIPS and reboot = #{reboot}" do
           let(:facts) do
-            os_facts.merge!(
+            os_facts.merge(
               'cis_security_hardening' => {
                 'crypto_policy' => {
                   'legacy' => 'LEGACY',

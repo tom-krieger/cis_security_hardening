@@ -9,7 +9,7 @@ describe 'cis_security_hardening::rules::root_gid' do
     enforce_options.each do |enforce|
       context "on #{os} with enforce = #{enforce} and root password" do
         let(:facts) do
-          os_facts.merge!(
+          os_facts.merge(
             'cis_security_hardening' => {
               'accounts' => {
                 'root_gid' => 1,
@@ -41,7 +41,7 @@ describe 'cis_security_hardening::rules::root_gid' do
 
       context "on #{os} with enforce = #{enforce} and no root password" do
         let(:facts) do
-          os_facts.merge!(
+          os_facts.merge(
             'cis_security_hardening' => {
               'accounts' => {
                 'root_gid' => 1,

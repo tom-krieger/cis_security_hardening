@@ -11,7 +11,7 @@ describe 'cis_security_hardening::rules::systemd_timesyncd' do
       fix_perms_options.each do |fix_perms|
         context "on #{os} with enforce = #{enforce} and fix_perms = #{fix_perms}" do
           let(:facts) do
-            os_facts.merge!(
+            os_facts.merge(
               cis_security_hardening: {
                 services_enabled: {
                   'systemd-timesyncd' => 'disabled',

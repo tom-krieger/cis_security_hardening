@@ -9,7 +9,7 @@ describe 'cis_security_hardening::rules::gdm_lock_enabled' do
     enforce_options.each do |enforce|
       context "on #{os} with enforce = #{enforce}" do
         let(:facts) do
-          os_facts.merge!(
+          os_facts.merge(
             cis_security_hardening: {
               gnome_gdm_conf: false,
               gnome_gdm: true,

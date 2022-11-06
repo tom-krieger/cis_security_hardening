@@ -9,7 +9,7 @@ describe 'cis_security_hardening::rules::system_cmd_group' do
     enforce_options.each do |enforce|
       context "on #{os} with enforce = #{enforce}" do
         let(:facts) do
-          os_facts.merge!(
+          os_facts.merge(
             'cis_security_hardening' => {
               'system_command_files' => ['/sbin/pppd', '/usr/sbin/pppd'],
             },
