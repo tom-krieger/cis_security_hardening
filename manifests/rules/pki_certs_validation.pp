@@ -39,10 +39,10 @@
 class cis_security_hardening::rules::pki_certs_validation (
   Boolean $enforce                = false,
   String $cert_policy             = 'ca,signature,ocsp_on;',
-  Optional[String] $pkcs11_config = '',
+  Optional[String] $pkcs11_config = undef,
 ) {
   if $enforce {
-    if $pkcs11_config == '' {
+    if $pkcs11_config == undef {
       $policy = fact('cis_security_hardening.pkcs11_config.policy')
       $match = "\\s*cert_policy ="
       $line = "    cert_policy = ${cert_policy}"

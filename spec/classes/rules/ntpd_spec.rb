@@ -12,10 +12,11 @@ describe 'cis_security_hardening::rules::ntpd' do
           let(:facts) { os_facts }
           let(:params) do
             {
-              'enforce' => enforce,
-              'ntp_servers' => [],
-              'ntp_statsdir' => '/var/tmp',
-              'ntp_restrict' => ['127.0.0.1'],
+              'enforce'       => enforce,
+              'ntp_servers'   => [],
+              'ntp_statsdir'  => '/var/tmp',
+              'ntp_driftfile' => '/var/lib/ntp/drift',
+              'ntp_restrict'  => ['127.0.0.1'],
             }
           end
 
@@ -28,10 +29,11 @@ describe 'cis_security_hardening::rules::ntpd' do
           let(:facts) { os_facts }
           let(:params) do
             {
-              'enforce' => enforce,
-              'ntp_servers' => ['10.10.10.1', '10.10.10.2'],
-              'ntp_statsdir' => '/var/tmp',
-              'ntp_restrict' => ['127.0.0.1'],
+              'enforce'       => enforce,
+              'ntp_servers'   => ['10.10.10.1', '10.10.10.2'],
+              'ntp_statsdir'  => '/var/tmp',
+              'ntp_driftfile' => '/var/lib/ntp/drift',
+              'ntp_restrict'  => ['127.0.0.1'],
             }
           end
 
@@ -42,9 +44,10 @@ describe 'cis_security_hardening::rules::ntpd' do
 
               is_expected.to create_class('ntp')
                 .with(
-                  'servers' => ['10.10.10.1', '10.10.10.2'],
+                  'servers'         => ['10.10.10.1', '10.10.10.2'],
                   'restrict'        => ['127.0.0.1'],
                   'statsdir'        => '/var/tmp',
+                  'driftfile'       => '/var/lib/ntp/drift',
                   'disable_monitor' => true,
                   'iburst_enable'   => false,
                   'service_manage'  => true,

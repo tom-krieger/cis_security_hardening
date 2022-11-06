@@ -20,7 +20,7 @@ describe 'cis_security_hardening::rules::rsyslog_remote_logs' do
 
   on_supported_os.each do |os, os_facts|
     enforce_options.each do |enforce|
-      context "on #{os} with enforce = #{enforce}" do
+      context "on #{os} with enforce = #{enforce} and remote host" do
         let(:facts) { os_facts }
         let(:params) do
           {
@@ -44,6 +44,33 @@ describe 'cis_security_hardening::rules::rsyslog_remote_logs' do
           else
             is_expected.not_to contain_file_line('rsyslog-remote-log-host')
           end
+        }
+      end
+
+      context "on #{os} with enforce = #{enforce} and no remote host" do
+        let(:facts) { os_facts }
+        let(:params) do
+          {
+            'enforce' => enforce,
+            'remote_log_host' => '',
+          }
+        end
+
+        it {
+          is_expected.to compile
+
+          if enforce
+            is_expected.to contain_echo('no remote log host warning')
+                .with(
+                  'message'  => 'You have not defined a remote log host, remote syslog is not activated therefore',
+                  'loglevel' => 'warning',
+                  'withpath' => false,
+                )
+          else
+            is_expected.not_to contain_echo('no remote log host warning')
+          end
+
+          is_expected.not_to contain_file_line('rsyslog-remote-log-host')
         }
       end
     end
