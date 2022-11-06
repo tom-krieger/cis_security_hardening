@@ -20,12 +20,12 @@ describe 'cis_security_hardening::rules::samba' do
 
           if enforce
 
-            if os_facts[:operatingsystem].casecmp('ubuntu').zero?
+            if os_facts[:os]['name'].casecmp('ubuntu').zero?
               is_expected.to contain_package('samba')
                 .with(
                   'ensure' => 'purged',
                 )
-            elsif os_facts[:operatingsystem].casecmp('sles').zero?
+            elsif os_facts[:os]['name'].casecmp('sles').zero?
               is_expected.to contain_package('samba')
                 .with(
                   'ensure' => 'absent',

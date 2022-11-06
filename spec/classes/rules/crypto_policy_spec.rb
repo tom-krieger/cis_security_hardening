@@ -42,9 +42,9 @@ describe 'cis_security_hardening::rules::crypto_policy' do
             is_expected.to compile
 
             if enforce &&
-               (os_facts[:operatingsystem].casecmp('centos').zero? ||
-               os_facts[:operatingsystem].casecmp('almalinux').zero? || os_facts[:operatingsystem].casecmp('rocky').zero?) &&
-               (os_facts[:operatingsystemmajrelease] >= '8')
+               (os_facts[:os]['name'].casecmp('centos').zero? ||
+               os_facts[:os]['name'].casecmp('almalinux').zero? || os_facts[:os]['name'].casecmp('rocky').zero?) &&
+               (os_facts[:os]['release']['major'] >= '8')
 
               if reboot
                 is_expected.to contain_exec('set crypto policy to FUTURE (current: DEFAULT)')
@@ -107,10 +107,10 @@ describe 'cis_security_hardening::rules::crypto_policy' do
             is_expected.to compile
 
             if enforce &&
-               (os_facts[:operatingsystem].casecmp('centos').zero? ||
-               os_facts[:operatingsystem].casecmp('almalinux').zero? ||
-               os_facts[:operatingsystem].casecmp('rocky').zero?) &&
-               (os_facts[:operatingsystemmajrelease] >= '8')
+               (os_facts[:os]['name'].casecmp('centos').zero? ||
+               os_facts[:os]['name'].casecmp('almalinux').zero? ||
+               os_facts[:os]['name'].casecmp('rocky').zero?) &&
+               (os_facts[:os]['release']['major'] >= '8')
 
               if reboot
                 is_expected.to contain_exec('set crypto policy to FIPS (current: DEFAULT)')

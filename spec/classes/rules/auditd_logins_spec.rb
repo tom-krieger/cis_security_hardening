@@ -47,7 +47,7 @@ describe 'cis_security_hardening::rules::auditd_logins' do
                 'content' => '-w /var/log/lastlog -p wa -k logins',
               )
 
-            if os_facts[:osfamily].casecmp('redhat').zero?
+            if os_facts[:os]['family'].casecmp('redhat').zero?
 
               is_expected.to contain_concat__fragment('logins policy rule 2')
                 .with(
@@ -58,7 +58,7 @@ describe 'cis_security_hardening::rules::auditd_logins' do
 
               is_expected.not_to contain_concat__fragment('logins policy rule 3')
 
-            elsif os_facts[:osfamily].casecmp('redhat').zero? || os_facts[:osfamily].casecmp('suse').zero?
+            elsif os_facts[:os]['family'].casecmp('redhat').zero? || os_facts[:os]['family'].casecmp('suse').zero?
 
               is_expected.to contain_concat__fragment('logins policy rule 2')
                 .with(

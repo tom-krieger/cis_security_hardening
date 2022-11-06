@@ -20,12 +20,12 @@ describe 'cis_security_hardening::rules::dhcp' do
 
           if enforce
 
-            if os_facts[:operatingsystem].casecmp('ubuntu').zero?
+            if os_facts[:os]['name'].casecmp('ubuntu').zero?
               is_expected.to contain_package('isc-dhcp-server')
                 .with(
                   'ensure' => 'purged',
                 )
-            elsif os_facts[:operatingsystem].casecmp('debian').zero?
+            elsif os_facts[:os]['name'].casecmp('debian').zero?
               is_expected.to contain_service('isc-dhcp-server')
                 .with(
                   'ensure' => 'stopped',
@@ -36,7 +36,7 @@ describe 'cis_security_hardening::rules::dhcp' do
                   'ensure' => 'stopped',
                   'enable' => false,
                 )
-            elsif os_facts[:operatingsystem].casecmp('sles').zero?
+            elsif os_facts[:os]['name'].casecmp('sles').zero?
               is_expected.to contain_package('dhcp')
                 .with(
                   'ensure' => 'absent',

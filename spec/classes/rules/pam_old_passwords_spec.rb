@@ -43,9 +43,9 @@ describe 'cis_security_hardening::rules::pam_old_passwords' do
         it do
           if enforce
 
-            if os_facts[:osfamily].casecmp('redhat').zero?
+            if os_facts[:os]['family'].casecmp('redhat').zero?
 
-              if os_facts[:operatingsystemmajrelease] == '7'
+              if os_facts[:os]['release']['major'] == '7'
                 is_expected.to contain_pam('pam-system-auth-sufficient')
                   .with(
                     'ensure'    => 'present',
@@ -96,7 +96,7 @@ describe 'cis_security_hardening::rules::pam_old_passwords' do
                   .that_notifies('Exec[authselect-apply-changes]')
               end
 
-            elsif os_facts[:osfamily].casecmp('debian').zero? || os_facts[:osfamily].casecmp('suse').zero?
+            elsif os_facts[:os]['family'].casecmp('debian').zero? || os_facts[:os]['family'].casecmp('suse').zero?
               is_expected.not_to contain_pam('pam-system-auth-sufficient')
               is_expected.not_to contain_pam('pam-password-auth-sufficient')
               is_expected.not_to contain_exec('update authselect config for old passwords')

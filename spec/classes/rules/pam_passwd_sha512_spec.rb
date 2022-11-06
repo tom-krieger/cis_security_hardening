@@ -48,9 +48,9 @@ describe 'cis_security_hardening::rules::pam_passwd_sha512' do
           is_expected.to compile
           if enforce
 
-            if os_facts[:osfamily].casecmp('redhat').zero?
+            if os_facts[:os]['family'].casecmp('redhat').zero?
 
-              if os_facts[:operatingsystemmajrelease] == '7'
+              if os_facts[:os]['release']['major'] == '7'
                 is_expected.not_to contain_exec('update authselect config for sha512 system-auth')
                 is_expected.not_to contain_exec('update authselect config for sha512 password-auth')
 
@@ -94,7 +94,7 @@ describe 'cis_security_hardening::rules::pam_passwd_sha512' do
                   .that_notifies('Exec[authselect-apply-changes]')
               end
 
-            elsif os_facts[:osfamily].casecmp('debian').zero?
+            elsif os_facts[:os]['family'].casecmp('debian').zero?
               is_expected.not_to contain_exec('update authselect config for sha512 system-auth')
               is_expected.not_to contain_exec('update authselect config for sha512 password-auth')
               is_expected.not_to contain_exec('switch sha512 on')

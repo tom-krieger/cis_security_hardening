@@ -24,7 +24,7 @@ describe 'cis_security_hardening::rules::pam_last_logon' do
         it {
           is_expected.to compile
 
-          service = if os_facts[:operatingsystem].casecmp('redhat').zero? && os_facts[:operatingsystemmajrelease] == '7'
+          service = if os_facts[:os]['name'].casecmp('redhat').zero? && os_facts[:os]['release']['major'] == '7'
                       'postlogin'
                     else
                       'login'

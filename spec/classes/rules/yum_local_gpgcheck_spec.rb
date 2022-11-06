@@ -28,7 +28,7 @@ describe 'cis_security_hardening::rules::yum_local_gpgcheck' do
                 'match'              => '^localpkg_gpgcheck',
                 'append_on_no_match' => true,
               )
-            if os_facts[:operatingsystemmajrelease] >= '8'
+            if os_facts[:os]['release']['major'] >= '8'
               is_expected.to contain_file_line('dnf_localpgk_gpgcheck')
                 .with(
                   'ensure'             => 'present',

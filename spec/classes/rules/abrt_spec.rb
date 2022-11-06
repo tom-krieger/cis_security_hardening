@@ -27,7 +27,7 @@ describe 'cis_security_hardening::rules::abrt' do
           is_expected.to compile
 
           if enforce
-            ensureval = if os_facts[:osfamily].casecmp('suse').zero?
+            ensureval = if os_facts[:os]['family'].casecmp('suse').zero?
                           'absent'
                         else
                           'purged'

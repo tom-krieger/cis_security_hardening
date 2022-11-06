@@ -20,7 +20,7 @@ describe 'cis_security_hardening::rules::dovecot' do
 
           if enforce
 
-            if os_facts[:operatingsystem].casecmp('ubuntu').zero?
+            if os_facts[:os]['name'].casecmp('ubuntu').zero?
               is_expected.to contain_package('dovecot-imapd')
                 .with(
                   'ensure' => 'purged',
@@ -30,7 +30,7 @@ describe 'cis_security_hardening::rules::dovecot' do
                 .with(
                   'ensure' => 'purged',
                 )
-            elsif os_facts[:operatingsystem].casecmp('sles').zero?
+            elsif os_facts[:os]['name'].casecmp('sles').zero?
               is_expected.to contain_package('dovecot')
                 .with(
                   'ensure' => 'absent',

@@ -30,7 +30,7 @@ describe 'cis_security_hardening::rules::passwd_sha512' do
         it {
           is_expected.to compile
           if enforce
-            path = if os_facts[:operatingsystem] == 'SLES' && os_facts[:operatingsystemmajrelease] == '12'
+            path = if os_facts[:os]['name'] == 'SLES' && os_facts[:os]['release']['major'] == '12'
                      '/usr/etc/login.defs'
                    else
                      '/etc/login.defs'

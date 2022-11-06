@@ -19,9 +19,9 @@ describe 'cis_security_hardening::rules::single_user_mode' do
           is_expected.to compile
 
           if enforce
-            if os_facts[:osfamily].casecmp('redhat').zero?
+            if os_facts[:os]['family'].casecmp('redhat').zero?
 
-              if os_facts[:operatingsystemmajrelease].to_s == '6'
+              if os_facts[:os]['release']['major'].to_s == '6'
 
                 is_expected.to contain_file_line('sulogin')
                   .with(
@@ -31,7 +31,7 @@ describe 'cis_security_hardening::rules::single_user_mode' do
                     'append_on_no_match' => true,
                   )
 
-              elsif os_facts[:operatingsystemmajrelease].to_s == '7'
+              elsif os_facts[:os]['release']['major'].to_s == '7'
 
                 is_expected.to contain_file_line('su-rescue')
                   .with(
@@ -64,7 +64,7 @@ describe 'cis_security_hardening::rules::single_user_mode' do
                   )
               end
 
-            elsif os_facts[:osfamily].casecmp('suse').zero?
+            elsif os_facts[:os]['family'].casecmp('suse').zero?
 
               is_expected.to contain_file_line('modify resuce')
                 .with(

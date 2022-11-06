@@ -19,7 +19,7 @@ describe 'cis_security_hardening::rules::pam_pkcs11' do
           is_expected.to compile
 
           if enforce
-            if os_facts[:osfamily].casecmp('redhat').zero?
+            if os_facts[:os]['family'].casecmp('redhat').zero?
               is_expected.to contain_package('esc')
                 .with(
                   'ensure' => 'installed',

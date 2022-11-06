@@ -40,9 +40,9 @@ describe 'cis_security_hardening::rules::grub_password' do
                 )
             end
 
-            efi_grub_cfg = "/boot/efi/EFI/#{os_facts[:operatingsystem].downcase}/grub.cfg"
+            efi_grub_cfg = "/boot/efi/EFI/#{os_facts[:os]['name'].downcase}/grub.cfg"
 
-            if os_facts[:osfamily].casecmp('redhat').zero?
+            if os_facts[:os]['family'].casecmp('redhat').zero?
 
               is_expected.not_to contain_file('/etc/grub.d/user.cfg')
               is_expected.not_to contain_exec('bootpw-grub-config-ubuntu')
@@ -83,7 +83,7 @@ describe 'cis_security_hardening::rules::grub_password' do
                 is_expected.not_to contain_exec('bootpw-grub-config-efi')
               end
 
-            elsif os_facts[:osfamily].casecmp('debian').zero?
+            elsif os_facts[:os]['family'].casecmp('debian').zero?
 
               is_expected.not_to contain_file('/boot/grub2/user.cfg')
               is_expected.not_to contain_exec('bootpw-grub-config')
@@ -128,7 +128,7 @@ describe 'cis_security_hardening::rules::grub_password' do
                 is_expected.not_to contain_file_line('grub-unrestricted')
               end
 
-            elsif os_facts[:osfamily].casecmp('suse').zero?
+            elsif os_facts[:os]['family'].casecmp('suse').zero?
 
               is_expected.not_to contain_file('/boot/grub2/user.cfg')
               is_expected.not_to contain_exec('bootpw-grub-config')

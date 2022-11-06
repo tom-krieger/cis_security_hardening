@@ -18,7 +18,7 @@ describe 'cis_security_hardening::rules::rsh_server' do
         it {
           is_expected.to compile
 
-          if enforce && (os_facts[:osfamily].casecmp('ubuntu').zero? || os_facts[:osfamily].casecmp('debian').zero?)
+          if enforce && (os_facts[:os]['family'].casecmp('ubuntu').zero? || os_facts[:os]['family'].casecmp('debian').zero?)
             is_expected.to contain_package('rsh-server')
               .with(
                 'ensure' => 'purged',

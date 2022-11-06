@@ -18,7 +18,7 @@ describe 'cis_security_hardening::rules::apparmor_bootloader' do
         it { is_expected.to compile }
         it do
           if enforce
-            if os_facts[:osfamily].casecmp('debian').zero?
+            if os_facts[:os]['family'].casecmp('debian').zero?
               is_expected.to contain_exec('apparmor-grub-config')
                 .with(
                   'command'     => 'update-grub',
@@ -46,7 +46,7 @@ describe 'cis_security_hardening::rules::apparmor_bootloader' do
                 )
                 .that_notifies('Exec[apparmor-grub-config]')
 
-            elsif os_facts[:osfamily].casecmp('suse').zero?
+            elsif os_facts[:os]['family'].casecmp('suse').zero?
               is_expected.to contain_exec('apparmor-grub-config')
                 .with(
                   'command'     => 'grub2-mkconfig -o /boot/grub2/grub.cfg',

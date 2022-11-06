@@ -25,8 +25,8 @@ describe 'cis_security_hardening::rules::xdmcp_config' do
           is_expected.to compile
 
           if enforce
-            filename = if os_facts[:operatingsystem].casecmp('rocky').zero? || os_facts[:operatingsystem].casecmp('almalinux').zero? ||
-                          os_facts[:operatingsystem].casecmp('centos').zero? || os_facts[:operatingsystem].casecmp('redhat').zero?
+            filename = if os_facts[:os]['name'].casecmp('rocky').zero? || os_facts[:os]['name'].casecmp('almalinux').zero? ||
+                          os_facts[:os]['name'].casecmp('centos').zero? || os_facts[:os]['name'].casecmp('redhat').zero?
                          '/etc/gdm/custom.conf'
                        else
                          '/etc/gdm3/custom.conf'

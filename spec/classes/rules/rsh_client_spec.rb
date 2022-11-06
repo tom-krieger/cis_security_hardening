@@ -20,8 +20,8 @@ describe 'cis_security_hardening::rules::rsh_client' do
 
           if enforce
 
-            unless os_facts[:operatingsystem].casecmp('ubuntu').zero?
-              if os_facts[:osfamily].casecmp('suse').zero?
+            unless os_facts[:os]['name'].casecmp('ubuntu').zero?
+              if os_facts[:os]['family'].casecmp('suse').zero?
                 is_expected.to contain_package('rsh')
                   .with(
                     'ensure' => 'absent',

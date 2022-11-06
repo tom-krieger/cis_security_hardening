@@ -69,7 +69,7 @@ describe 'cis_security_hardening::rules::sshd_ignore_user_known_hosts' do
           is_expected.to compile
 
           if enforce
-            path = if os_facts[:operatingsystem] == 'SLES' && os_facts[:operatingsystemmajrelease] == '12'
+            path = if os_facts[:os]['name'] == 'SLES' && os_facts[:os]['release']['major'] == '12'
                      '/usr/etc/ssh/sshd_config'
                    else
                      '/etc/ssh/sshd_config'

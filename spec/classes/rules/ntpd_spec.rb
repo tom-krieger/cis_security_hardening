@@ -20,7 +20,7 @@ describe 'cis_security_hardening::rules::ntpd' do
             }
           end
 
-          if enforce && !os_facts[:operatingsystem].casecmp('sles').zero?
+          if enforce && !os_facts[:os]['name'].casecmp('sles').zero?
             it { is_expected.to create_echo('no ntp servers warning').with_message(%r{You have not defined any ntp servers, time updating may not work unless provided by your network DHCP}) }
           end
         end
@@ -40,7 +40,7 @@ describe 'cis_security_hardening::rules::ntpd' do
           it {
             is_expected.to compile
 
-            if enforce && !os_facts[:operatingsystem].casecmp('sles').zero?
+            if enforce && !os_facts[:os]['name'].casecmp('sles').zero?
 
               is_expected.to create_class('ntp')
                 .with(
@@ -53,7 +53,7 @@ describe 'cis_security_hardening::rules::ntpd' do
                   'service_manage'  => true,
                 )
 
-              if os_facts[:osfamily].casecmp('debian').zero?
+              if os_facts[:os]['family'].casecmp('debian').zero?
                 is_expected.to contain_package('chrony')
                   .with(
                     'ensure' => 'purged',

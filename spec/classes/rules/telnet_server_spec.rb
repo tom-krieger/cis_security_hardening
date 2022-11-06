@@ -19,7 +19,7 @@ describe 'cis_security_hardening::rules::telnet_server' do
           is_expected.to compile
 
           if enforce
-            unless os_facts[:operatingsystem].casecmp('sles').zero?
+            unless os_facts[:os]['name'].casecmp('sles').zero?
               is_expected.to contain_service('telnet')
                 .with(
                   'ensure' => 'stopped',
@@ -27,12 +27,12 @@ describe 'cis_security_hardening::rules::telnet_server' do
                 )
             end
 
-            if os_facts[:osfamily].casecmp('suse').zero?
+            if os_facts[:os]['family'].casecmp('suse').zero?
               is_expected.to contain_package('telnet-server')
                 .with(
                   'ensure' => 'absent',
                 )
-            elsif os_facts[:osfamily].casecmp('ubuntu').zero? || os_facts[:osfamily].casecmp('debian').zero?
+            elsif os_facts[:os]['family'].casecmp('ubuntu').zero? || os_facts[:os]['family'].casecmp('debian').zero?
               is_expected.to contain_package('telnetd')
                 .with(
                   'ensure' => 'purged',

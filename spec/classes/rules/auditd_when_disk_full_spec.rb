@@ -34,7 +34,7 @@ describe 'cis_security_hardening::rules::auditd_when_disk_full' do
           is_expected.to compile
 
           if enforce
-            file = if os_facts[:osfamily].casecmp('redhat').zero?
+            file = if os_facts[:os]['family'].casecmp('redhat').zero?
                      '/etc/audisp/audisp-remote.conf'
                    else
                      '/etc/audisp/plugins.d/au-remote.conf'

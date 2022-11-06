@@ -40,7 +40,7 @@ describe 'cis_security_hardening::rules::auditd_passwd_use' do
           is_expected.to compile
 
           if enforce
-            if os_facts[:operatingsystem].casecmp('redhat').zero? && os_facts[:operatingsystemmajrelease] == '7'
+            if os_facts[:os]['name'].casecmp('redhat').zero? && os_facts[:os]['release']['major'] == '7'
               is_expected.to contain_concat__fragment('watch passwd command rule 1')
                 .with(
                   'order'   => '180',

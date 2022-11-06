@@ -19,7 +19,7 @@ describe 'cis_security_hardening::rules::firewalld_install' do
           is_expected.to compile
 
           if enforce
-            if os_facts[:operatingsystem].casecmp('sles').zero?
+            if os_facts[:os]['name'].casecmp('sles').zero?
               is_expected.to contain_package('iptables')
                 .with(
                   'ensure' => 'installed',

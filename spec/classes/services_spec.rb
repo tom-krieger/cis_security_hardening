@@ -10,7 +10,7 @@ describe 'cis_security_hardening::services' do
       it {
         is_expected.to compile
 
-        if os_facts[:operatingsystemmajrelease] == '6' && os_facts[:osfamily] == 'RedHat'
+        if os_facts[:os]['release']['major'] == '6' && os_facts[:os]['family'] == 'RedHat'
           is_expected.to contain_exec('reload-sshd')
             .with(
               'command'     => 'service sshd reload',

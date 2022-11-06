@@ -19,12 +19,12 @@ describe 'cis_security_hardening::rules::nftables_install' do
           is_expected.to compile
 
           if enforce
-            if os_facts[:operatingsystem].casecmp('sles').zero?
+            if os_facts[:os]['name'].casecmp('sles').zero?
               is_expected.to contain_package('firewalld')
                 .with(
                   'ensure' => 'absent',
                 )
-            elsif os_facts[:operatingsystem].casecmp('centos').zero? && os_facts[:operatingsystemmajrelease] > '7'
+            elsif os_facts[:os]['name'].casecmp('centos').zero? && os_facts[:os]['release']['major'] > '7'
               is_expected.to contain_package('firewalld')
                 .with(
                   'ensure' => 'purged',
@@ -47,7 +47,7 @@ describe 'cis_security_hardening::rules::nftables_install' do
                 'ensure' => 'installed',
               )
 
-            unless os_facts[:operatingsystem].casecmp('centos').zero? && os_facts[:operatingsystemmajrelease] > '7'
+            unless os_facts[:os]['name'].casecmp('centos').zero? && os_facts[:os]['release']['major'] > '7'
               is_expected.to contain_service('iptables')
                 .with(
                   'ensure' => 'stopped',
@@ -65,7 +65,7 @@ describe 'cis_security_hardening::rules::nftables_install' do
                 'ensure' => 'running',
                 'enable' => true,
               )
-            if os_facts[:operatingsystem].casecmp('ubuntu').zero?
+            if os_facts[:os]['name'].casecmp('ubuntu').zero?
               is_expected.to contain_package('ufw')
                 .with(
                   'ensure' => 'purged',

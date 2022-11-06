@@ -19,7 +19,7 @@ describe 'cis_security_hardening::rules::aide_installed' do
           is_expected.to compile
 
           if enforce
-            if os_facts[:operatingsystem].casecmp('ubuntu').zero? || os_facts[:operatingsystem].casecmp('debian').zero?
+            if os_facts[:os]['name'].casecmp('ubuntu').zero? || os_facts[:os]['name'].casecmp('debian').zero?
               is_expected.to contain_package('aide')
                 .that_notifies('Exec[aidedb-ubuntu-init]')
 
@@ -45,8 +45,8 @@ describe 'cis_security_hardening::rules::aide_installed' do
                 )
                 .that_requires(['Package[aide]', 'Package[aide-common]'])
 
-            elsif os_facts[:operatingsystem].casecmp('centos').zero? || os_facts[:operatingsystem].casecmp('redhat').zero? ||
-                  os_facts[:operatingsystem].casecmp('almalinux').zero? || os_facts[:operatingsystem].casecmp('rocky').zero?
+            elsif os_facts[:os]['name'].casecmp('centos').zero? || os_facts[:os]['name'].casecmp('redhat').zero? ||
+                  os_facts[:os]['name'].casecmp('almalinux').zero? || os_facts[:os]['name'].casecmp('rocky').zero?
               is_expected.to contain_package('aide')
                 .that_notifies('Exec[aidedb]')
 
@@ -68,7 +68,7 @@ describe 'cis_security_hardening::rules::aide_installed' do
                   refreshonly: true,
                 )
                 .that_requires('Package[aide]')
-            elsif os_facts[:operatingsystem].casecmp('sles').zero?
+            elsif os_facts[:os]['name'].casecmp('sles').zero?
               is_expected.to contain_package('aide')
                 .that_notifies('Exec[aidedb]')
 

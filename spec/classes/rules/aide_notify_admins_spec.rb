@@ -18,7 +18,7 @@ describe 'cis_security_hardening::rules::aide_notify_admins' do
         it {
           is_expected.to compile
 
-          file = if os_facts[:operatingsystem].casecmp('debian').zero? || os_facts[:operatingsystem].casecmp('ubuntu').zero?
+          file = if os_facts[:os]['name'].casecmp('debian').zero? || os_facts[:os]['name'].casecmp('ubuntu').zero?
                    '/etc/default/aide'
                  else
                    '/etc/sysconfig/aide'

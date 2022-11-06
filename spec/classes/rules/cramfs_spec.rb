@@ -18,14 +18,14 @@ describe 'cis_security_hardening::rules::cramfs' do
         it {
           is_expected.to compile
           if enforce
-            if os_facts[:operatingsystem].casecmp('rocky').zero? || os_facts[:operatingsystem].casecmp('almalinux').zero?
+            if os_facts[:os]['name'].casecmp('rocky').zero? || os_facts[:os]['name'].casecmp('almalinux').zero?
               is_expected.to contain_kmod__install('cramfs')
                 .with(
                   command: '/bin/false',
                 )
               is_expected.to contain_kmod__blacklist('cramfs')
-            elsif os_facts[:operatingsystem].casecmp('redhat').zero? || os_facts[:operatingsystem].casecmp('centos').zero?
-              if os_facts[:operatingsystemmajrelease] > '7'
+            elsif os_facts[:os]['name'].casecmp('redhat').zero? || os_facts[:os]['name'].casecmp('centos').zero?
+              if os_facts[:os]['release']['major'] > '7'
                 is_expected.to contain_kmod__install('cramfs')
                   .with(
                   command: '/bin/false',

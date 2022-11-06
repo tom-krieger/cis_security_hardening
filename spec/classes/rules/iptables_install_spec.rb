@@ -25,10 +25,10 @@ describe 'cis_security_hardening::rules::iptables_install' do
                 'purge' => true,
               )
 
-            if os_facts[:operatingsystem].casecmp('redhat').zero? || os_facts[:operatingsystem].casecmp('centos').zero? ||
-               os_facts[:operatingsystem].casecmp('almalinux').zero? || os_facts[:operatingsystem].casecmp('rocky').zero?
+            if os_facts[:os]['name'].casecmp('redhat').zero? || os_facts[:os]['name'].casecmp('centos').zero? ||
+               os_facts[:os]['name'].casecmp('almalinux').zero? || os_facts[:os]['name'].casecmp('rocky').zero?
 
-              if os_facts[:operatingsystem].casecmp('almalinux').zero? || os_facts[:operatingsystem].casecmp('rocky').zero?
+              if os_facts[:os]['name'].casecmp('almalinux').zero? || os_facts[:os]['name'].casecmp('rocky').zero?
                 is_expected.to contain_package('nftables')
                   .with(
                     'ensure' => 'installed',
@@ -63,7 +63,7 @@ describe 'cis_security_hardening::rules::iptables_install' do
                   'enable' => false,
                 )
 
-              if os_facts[:operatingsystem].casecmp('redhat').zero? && os_facts[:operatingsystemmajrelease] > '7'
+              if os_facts[:os]['name'].casecmp('redhat').zero? && os_facts[:os]['release']['major'] > '7'
                 is_expected.to contain_class('firewall')
                   .with(
                     'service_name' => ['iptables'],
@@ -75,7 +75,7 @@ describe 'cis_security_hardening::rules::iptables_install' do
                 is_expected.to contain_class('firewall')
               end
 
-            elsif os_facts[:operatingsystem].casecmp('ubuntu').zero?
+            elsif os_facts[:os]['name'].casecmp('ubuntu').zero?
 
               is_expected.to contain_package('ufw')
                 .with(
@@ -85,7 +85,7 @@ describe 'cis_security_hardening::rules::iptables_install' do
                 .with(
                   'ensure' => 'purged',
                 )
-            elsif os_facts[:operatingsystem].casecmp('sles').zero?
+            elsif os_facts[:os]['name'].casecmp('sles').zero?
 
               is_expected.to contain_package('firewalld')
                 .with(

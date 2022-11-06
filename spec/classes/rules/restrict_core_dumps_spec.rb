@@ -35,7 +35,7 @@ describe 'cis_security_hardening::rules::restrict_core_dumps' do
               )
             is_expected.to contain_sysctl('fs.suid_dumpable').with('value' => 0)
 
-            if os_facts[:osfamily].casecmp('redhat').zero? || os_facts[:osfamily].casecmp('suse').zero?
+            if os_facts[:os]['family'].casecmp('redhat').zero? || os_facts[:os]['family'].casecmp('suse').zero?
               is_expected.to contain_file_line('systemd-coredump-storage')
                 .with(
                   'path' => '/etc/systemd/coredump.conf',

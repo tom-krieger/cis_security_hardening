@@ -20,7 +20,7 @@ describe 'cis_security_hardening::rules::nfs' do
 
           if enforce
 
-            if os_facts[:operatingsystem].casecmp('ubuntu').zero?
+            if os_facts[:os]['name'].casecmp('ubuntu').zero?
               is_expected.to contain_package('nfs-kernel-server')
                 .with(
                   'ensure' => 'purged',

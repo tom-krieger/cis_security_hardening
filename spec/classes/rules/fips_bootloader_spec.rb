@@ -33,7 +33,7 @@ describe 'cis_security_hardening::rules::fips_bootloader' do
               )
               .that_notifies('Exec[fips-grub-config]')
 
-            if os_facts[:operatingsystem].casecmp('redhat').zero?
+            if os_facts[:os]['name'].casecmp('redhat').zero?
               is_expected.to contain_kernel_parameter('boot')
                 .with(
                   'value' => 'UUID="80ee5fdc-04ff-48c2-93ec-186903ced35f"',
@@ -41,7 +41,7 @@ describe 'cis_security_hardening::rules::fips_bootloader' do
                 .that_notifies('Exec[fips-grub-config]')
             end
 
-            if os_facts[:osfamily].casecmp('debian').zero?
+            if os_facts[:os]['family'].casecmp('debian').zero?
               is_expected.to contain_exec('fips-grub-config')
                 .with(
                   'command'     => 'update-grub',
@@ -49,7 +49,7 @@ describe 'cis_security_hardening::rules::fips_bootloader' do
                   'refreshonly' => true,
                 )
 
-            elsif os_facts[:osfamily].casecmp('suse').zero?
+            elsif os_facts[:os]['family'].casecmp('suse').zero?
               is_expected.to contain_exec('fips-grub-config')
                 .with(
                   'command'     => 'grub2-mkconfig -o /boot/grub2/grub.cfg',

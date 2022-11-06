@@ -41,7 +41,7 @@ describe 'cis_security_hardening::rules::auditd_usermod_use' do
           is_expected.to compile
 
           if enforce
-            auid = if os_facts[:operatingsystem].casecmp('rocky').zero? || os_facts[:operatingsystem].casecmp('almalinux').zero?
+            auid = if os_facts[:os]['name'].casecmp('rocky').zero? || os_facts[:os]['name'].casecmp('almalinux').zero?
                      'unset'
                    else
                      '4294967295'
