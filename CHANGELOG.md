@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 * NTP driftfile and NTP statsfile are now defined as Stdlib::Absolutepath with default values set to the same values the puppetlabs-ntp module uses
 * added a fact to determine if a system is booted via efi
 * fixed handling GRUB configuration for UEFI systems as the grub.cfg in the EFI directory was not updated. The grub.cfg in the EFI is only updated if there are changes to roll out.
+* removed old legacy facts
 
 ## Release 0.7.8
 
