@@ -61,7 +61,7 @@ describe 'cis_security_hardening::rules::rsyslog_remote_logs' do
 
           if enforce
             is_expected.to contain_echo('no remote log host warning')
-                .with(
+              .with(
                   'message'  => 'You have not defined a remote log host, remote syslog is not activated therefore',
                   'loglevel' => 'warning',
                   'withpath' => false,
