@@ -46,10 +46,10 @@ describe 'cis_security_hardening::rules::auditd_access' do
 
           if enforce
             auid = if os_facts[:os]['name'].casecmp('rocky').zero? || os_facts[:os]['name'].casecmp('almalinux').zero?
-                      'unset'
-                    else
-                      '4294967295'
-                    end
+                     'unset'
+                   else
+                     '4294967295'
+                   end
 
             content_rule1 = if os_facts[:os]['name'].casecmp('almalinux').zero? || os_facts[:os]['name'].casecmp('rocky').zero?
                               "-a always,exit -F arch=b32 -S creat,open,openat,truncate,ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=#{auid} -k access"

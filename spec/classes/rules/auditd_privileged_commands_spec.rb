@@ -5,7 +5,6 @@ require 'spec_helper'
 enforce_options = [true, false]
 
 describe 'cis_security_hardening::rules::auditd_privileged_commands' do
-
   let(:pre_condition) do
     <<-EOF
     class {'cis_security_hardening::rules::auditd_init':
@@ -18,7 +17,7 @@ describe 'cis_security_hardening::rules::auditd_privileged_commands' do
     }
     EOF
   end
-  
+
   on_supported_os.each do |os, os_facts|
     enforce_options.each do |enforce|
       context "on #{os} with enforce = #{enforce}" do

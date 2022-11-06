@@ -5,7 +5,6 @@ require 'spec_helper'
 enforce_options = [true, false]
 
 describe 'cis_security_hardening::rules::auditd_open_by_handle_use' do
-
   test_on = {
     hardwaremodels: ['x86_64', 'i686'],
   }

@@ -5,7 +5,6 @@ require 'spec_helper'
 enforce_options = [true, false]
 
 describe 'cis_security_hardening::rules::auditd_actions' do
-
   test_on = {
     hardwaremodels: ['x86_64', 'i686'],
   }
@@ -26,7 +25,6 @@ describe 'cis_security_hardening::rules::auditd_actions' do
   on_supported_os(test_on).each do |os, os_facts|
     enforce_options.each do |enforce|
       context "on #{os} with enforce = #{enforce} and arch = #{os_facts[:os]['architecture']} and major = #{os_facts[:os]['release']['major']}" do
-        
         let(:facts) do
           os_facts.merge!(
             cis_security_hardening: {
@@ -49,7 +47,7 @@ describe 'cis_security_hardening::rules::auditd_actions' do
           if enforce
 
             if os_facts[:os]['name'].casecmp('redhat').zero? || os_facts[:os]['name'].casecmp('centos').zero? ||
-                os_facts[:os]['name'].casecmp('almalinux').zero? || os_facts[:os]['name'].casecmp('rocky').zero?
+               os_facts[:os]['name'].casecmp('almalinux').zero? || os_facts[:os]['name'].casecmp('rocky').zero?
 
               if os_facts[:os]['release']['major'] >= '8'
 
