@@ -69,16 +69,7 @@ describe 'cis_security_hardening::rules::grub_password' do
                   'path'        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
                   'refreshonly' => true,
                 )
-            else
-              is_expected.to contain_file('/boot/grub2/user.cfg')
-                .with(
-                  'ensure' => 'file',
-                  'owner'  => 'root',
-                  'group'  => 'root',
-                  'mode'   => '0600',
-                )
-              is_expected.not_to contain_exec('bootpw-grub-config')
-              is_expected.not_to contain_exec('bootpw-grub-config-efi')
+
             end
 
           elsif os_facts[:os]['family'].casecmp('debian').zero?

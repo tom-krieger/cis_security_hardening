@@ -38,122 +38,111 @@ class cis_security_hardening::rules::grub_password (
   Boolean $enforce                       = false,
   Optional[String] $grub_password_pbkdf2 = undef,
 ) {
-  if $enforce and !$grub_password_pbkdf2 {
-    fail('Enforcing a grub boot password needs a grub password to be defined. Please define an encrypted grub password in Hiera.')
-  }
+  if $enforce {
+    if !$grub_password_pbkdf2 {
+      fail('Enforcing a grub boot password needs a grub password to be defined. Please define an encrypted grub password in Hiera.')
+    } else {
+      $efi_grub_cfg = "/boot/efi/EFI/${facts['os']['name'].downcase()}/grub.cfg"
 
-  $efi_grub_cfg = "/boot/efi/EFI/${facts['os']['name'].downcase()}/grub.cfg"
+      case $facts['os']['family'].downcase() {
+        'redhat': {
+          $notify =  fact('cis_security_hardening.efi') ? {
+            true    => [Exec['bootpw-grub-config'], Exec['bootpw-grub-config-efi']],
+            default => Exec['bootpw-grub-config'],
+          }
 
-  case $facts['os']['family'].downcase() {
-    'redhat': {
-      if $enforce and $grub_password_pbkdf2 {
-        $notify =  fact('cis_security_hardening.efi') ? {
-          true    => [Exec['bootpw-grub-config'], Exec['bootpw-grub-config-efi']],
-          default => Exec['bootpw-grub-config'],
+          file { '/boot/grub2/user.cfg':
+            ensure  => file,
+            content => "GRUB2_PASSWORD=${grub_password_pbkdf2}",
+            owner   => 'root',
+            group   => 'root',
+            mode    => '0600',
+            notify  => $notify,
+          }
+
+          exec { 'bootpw-grub-config':
+            command     => 'grub2-mkconfig -o /boot/grub2/grub.cfg',
+            path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+            refreshonly => true,
+          }
+
+          exec { 'bootpw-grub-config-efi':
+            command     => "grub2-mkconfig -o ${efi_grub_cfg}",
+            path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+            refreshonly => true,
+          }
         }
+        'debian': {
+          $notify =  fact('cis_security_hardening.efi') ? {
+            true    => [Exec['bootpw-grub-config-ubuntu'], Exec['bootpw-grub-config-ubuntu-efi']],
+            default => Exec['bootpw-grub-config-ubuntu'],
+          }
 
-        file { '/boot/grub2/user.cfg':
-          ensure  => file,
-          content => "GRUB2_PASSWORD=${grub_password_pbkdf2}",
-          owner   => 'root',
-          group   => 'root',
-          mode    => '0600',
-          notify  => $notify,
-        }
+          file_line { 'grub-unrestricted':
+            ensure             => present,
+            path               => '/etc/grub.d/10_linux',
+            line               => 'CLASS="--class gnu-linux --class gnu --class os --unrestricted"',
+            match              => '^CLASS="--class gnu-linux --class gnu --class os"',
+            append_on_no_match => false,
+            notify             => $notify,
+          }
 
-        exec { 'bootpw-grub-config':
-          command     => 'grub2-mkconfig -o /boot/grub2/grub.cfg',
-          path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-          refreshonly => true,
-        }
+          file { '/etc/grub.d/50_custom':
+            ensure  => file,
+            content => epp('cis_security_hardening/rules/common/ubuntu_grub_user.cfg.epp', {
+                password => $grub_password_pbkdf2,
+            }),
+            owner   => 'root',
+            group   => 'root',
+            mode    => '0755',
+            notify  => $notify,
+          }
 
-        exec { 'bootpw-grub-config-efi':
-          command     => "grub2-mkconfig -o ${efi_grub_cfg}",
-          path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-          refreshonly => true,
+          exec { 'bootpw-grub-config-ubuntu':
+            command     => 'update-grub',
+            path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+            refreshonly => true,
+          }
+
+          exec { 'bootpw-grub-config-ubuntu-efi':
+            command     => "update-grub -o ${efi_grub_cfg}",
+            path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+            refreshonly => true,
+          }
         }
-      } else {
-        file { '/boot/grub2/user.cfg':
-          ensure => file,
-          owner  => 'root',
-          group  => 'root',
-          mode   => '0600',
+        'suse': {
+          $notify =  fact('cis_security_hardening.efi') ? {
+            true    => [Exec['bootpw-grub-config-sles'], Exec['bootpw-grub-config-sles-efi']],
+            default => Exec['bootpw-grub-config-sles'],
+          }
+
+          file { '/etc/grub.d/40_custom':
+            ensure  => file,
+            content => epp('cis_security_hardening/rules/common/ubuntu_grub_user.cfg.epp', {
+                password => $grub_password_pbkdf2,
+            }),
+            owner   => 'root',
+            group   => 'root',
+            mode    => '0755',
+            notify  => $notify,
+          }
+
+          exec { 'bootpw-grub-config-sles':
+            command     => 'grub2-mkconfig -o /boot/grub2/grub.cfg',
+            path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+            refreshonly => true,
+          }
+
+          exec { 'bootpw-grub-config-sles-efi':
+            command     => "grub2-mkconfig -o ${efi_grub_cfg}",
+            path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+            refreshonly => true,
+          }
+        }
+        default: {
+          # nothing to do yet
         }
       }
-    }
-    'debian': {
-      if $enforce and $grub_password_pbkdf2 {
-        $notify =  fact('cis_security_hardening.efi') ? {
-          true    => [Exec['bootpw-grub-config-ubuntu'], Exec['bootpw-grub-config-ubuntu-efi']],
-          default => Exec['bootpw-grub-config-ubuntu'],
-        }
-
-        file_line { 'grub-unrestricted':
-          ensure             => present,
-          path               => '/etc/grub.d/10_linux',
-          line               => 'CLASS="--class gnu-linux --class gnu --class os --unrestricted"',
-          match              => '^CLASS="--class gnu-linux --class gnu --class os"',
-          append_on_no_match => false,
-          notify             => $notify,
-        }
-
-        file { '/etc/grub.d/50_custom':
-          ensure  => file,
-          content => epp('cis_security_hardening/rules/common/ubuntu_grub_user.cfg.epp', {
-              password => $grub_password_pbkdf2,
-          }),
-          owner   => 'root',
-          group   => 'root',
-          mode    => '0755',
-          notify  => $notify,
-        }
-
-        exec { 'bootpw-grub-config-ubuntu':
-          command     => 'update-grub',
-          path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-          refreshonly => true,
-        }
-
-        exec { 'bootpw-grub-config-ubuntu-efi':
-          command     => "update-grub -o ${efi_grub_cfg}",
-          path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-          refreshonly => true,
-        }
-      }
-    }
-    'suse': {
-      if  $enforce and $grub_password_pbkdf2 {
-        $notify =  fact('cis_security_hardening.efi') ? {
-          true    => [Exec['bootpw-grub-config-sles'], Exec['bootpw-grub-config-sles-efi']],
-          default => Exec['bootpw-grub-config-sles'],
-        }
-
-        file { '/etc/grub.d/40_custom':
-          ensure  => file,
-          content => epp('cis_security_hardening/rules/common/ubuntu_grub_user.cfg.epp', {
-              password => $grub_password_pbkdf2,
-          }),
-          owner   => 'root',
-          group   => 'root',
-          mode    => '0755',
-          notify  => $notify,
-        }
-
-        exec { 'bootpw-grub-config-sles':
-          command     => 'grub2-mkconfig -o /boot/grub2/grub.cfg',
-          path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-          refreshonly => true,
-        }
-
-        exec { 'bootpw-grub-config-sles-efi':
-          command     => "grub2-mkconfig -o ${efi_grub_cfg}",
-          path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-          refreshonly => true,
-        }
-      }
-    }
-    default: {
-      # nothing to do yet
     }
   }
 }
