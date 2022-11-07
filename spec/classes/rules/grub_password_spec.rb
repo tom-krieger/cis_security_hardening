@@ -7,7 +7,6 @@ enforce_options = [true, false]
 describe 'cis_security_hardening::rules::grub_password' do
   on_supported_os.each do |os, os_facts|
     enforce_options.each do |enforce|
-
       context "on #{os} with enforce = #{enforce} without grub password provided" do
         let(:facts) { os_facts }
         let(:params) do
@@ -17,7 +16,7 @@ describe 'cis_security_hardening::rules::grub_password' do
           }
         end
 
-        it { 
+        it {
           if enforce
             is_expected.to compile.and_raise_error(%r{Enforcing a grub boot password needs a grub password to be defined. Please define an encrypted grub password in Hiera.})
           else
