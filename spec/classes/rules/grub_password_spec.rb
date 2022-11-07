@@ -15,10 +15,10 @@ describe 'cis_security_hardening::rules::grub_password' do
             let(:params) do
               {
                 'enforce' => enforce,
-#                'grub_password_pbkdf2' => :undef,
+                # 'grub_password_pbkdf2' => :undef,
               }
             end
-            it { is_expected.to compile.and_raise_error(/parameter 'grub_password_pbkdf2' expects a String value, got Undef/) }
+            it { is_expected.to compile.and_raise_error %r{parameter 'grub_password_pbkdf2' expects a String value, got Undef} }
           end
         else
           context "on #{os} with enforce = #{enforce}, pw = #{grubpw}" do
