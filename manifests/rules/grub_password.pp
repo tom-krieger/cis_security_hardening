@@ -35,9 +35,12 @@
 # 
 # @api private
 class cis_security_hardening::rules::grub_password (
-  Boolean $enforce               = false,
-  String  $grub_password_pbkdf2  = undef,
+  Boolean $enforce                       = false,
+  Optional[String] $grub_password_pbkdf2 = undef,
 ) {
+  if $enforce and !$grub_password_pbkdf2 {
+    fail('Enforcing a grub boot password needs a grub password to be defined. Please define an encrypted grub password in Hiera.')
+  }
 
   $efi_grub_cfg = "/boot/efi/EFI/${facts['os']['name'].downcase()}/grub.cfg"
 

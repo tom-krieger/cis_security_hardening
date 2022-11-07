@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file.
 * added a fact to determine if a system is booted via efi
 * fixed handling GRUB configuration for UEFI systems as the grub.cfg in the EFI directory was not updated. The grub.cfg in the EFI is only updated if there are changes to roll out.
 * removed old legacy facts
+* the predefined GRUB password was removed from Hiera files. If you want to enforce a GRUB bootloader password ou must define this password within Hiera. Otherwise the calaolog will fail with an error message pointing you to that fact.
 
 ## Release 0.7.8
 
