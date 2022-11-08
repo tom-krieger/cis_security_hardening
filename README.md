@@ -71,7 +71,7 @@ It is highly recommended to have the complete security baseline definition writt
 The *cis_security_hardening* module has a parameter `enforce` for each rule. If this parameter is set to true all necessary changes are made to make a server compliant to the security baseline rules. This can have severe impacts to the machines, especially if security settings are defined in a wrong way.
 > Please test your settings before rolling out to production environments.
 
-The module needs a base directory. The base directory `/usr/share/cis_security_hardening` is created by the module during the fist run. Some data is collected with cronjobs once a day as collecting this data is somewhat expensive and time consuming depending on the server size, e. g. searching als s-bit programs . Under the base directory there will be a directory `bin` where all scripts for gathering information are located.
+The module needs a base directory. The base directory `/usr/share/cis_security_hardening` is created by the module during the fist run. Some data is collected with cronjobs once a day as collecting this data is somewhat expensive and time consuming depending on the server size, e. g. searching for s-bit programs . Under the base directory there will be a directory `bin` where all scripts for gathering information are located.
 
 This module creates a larger fact `cis_security_hardening` to have all required information for applying the rules. Some information is collected with cronjobs once a day as these jobs might run for a long time (e. g. searching filesystems for s-bit programs).
 
@@ -152,7 +152,7 @@ See [REFERENCE.md](https://github.com/tom-krieger/cis_security_hardening/blob/ma
 
 ## Limitations
 
-Currently the module is tested with RedHat 7, 8, CentOS 8, Suse SLES 12, Debian 10, Ubuntu 18.04 and Ubuntu 20.04. Other OSes may work but there's no guarantee. If you need your own rules please create Puppet modules and call them from the security baseline module.
+Currently the module is tested with RedHat 7, 8, CentOS 7, 8, AlmaLinux 8, Rocky Linux 8, Suse SLES 12, Debian 10, Ubuntu 18.04 and Ubuntu 20.04. Other OSes may work but there's no guarantee.
 
 More testing is needed as for every supported OS there are different setups in the wild and some of them might not be covered.
 
