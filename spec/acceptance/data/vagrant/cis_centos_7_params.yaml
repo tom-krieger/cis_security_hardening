@@ -49,7 +49,6 @@ cis_security_hardening::rules::aide_installed::enforce: true
 cis_security_hardening::rules::aide_regular_checks::enforce: true
 
 cis_security_hardening::rules::grub_password::enforce: false
-#cis_security_hardening::rules::grub_password::grub_password_pbkdf2: 'grub.pbkdf2.sha512.10000.0D293FFA3696AF2ACBB43C3CA56D1C7F2251F8CD61F62DB8C0FA12B251A1604302E4DD85C400A80D96BBBDD3B94CCBBBB1687BA8A8D2ECF7462769B6EC6A5AB0.46910FFB2DF23982E71510651D10387AB889551ED7188A0E2EC6D74E73AB19973DD5E16657569808DE93D7387DE30275C4877835CD0F371BE0CF0FF5CB19A94B'
 cis_security_hardening::rules::grub_bootloader_config::enforce: true
 cis_security_hardening::rules::single_user_mode::enforce: true
 
