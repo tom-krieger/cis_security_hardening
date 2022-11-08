@@ -19,7 +19,7 @@ describe 'cis_security_hardening::rules::grub_bootloader_config' do
           is_expected.to compile
 
           if enforce
-            if os_facts[:osfamily].casecmp('redhat').zero?
+            if os_facts[:os]['family'].casecmp('redhat').zero?
               is_expected.to contain_file('/boot/grub2/grub.cfg')
                 .with(
                   'ensure' => 'file',
@@ -27,7 +27,7 @@ describe 'cis_security_hardening::rules::grub_bootloader_config' do
                   'group'  => 'root',
                   'mode'   => '0400',
                 )
-            elsif os_facts[:osfamily].casecmp('debian').zero?
+            elsif os_facts[:os]['family'].casecmp('debian').zero?
               is_expected.to contain_file('/boot/grub/grub.cfg')
                 .with(
                   'ensure' => 'file',
@@ -45,7 +45,7 @@ describe 'cis_security_hardening::rules::grub_bootloader_config' do
                   'replace_all_matches_not_matching_line' => true,
                   'append_on_no_match' => false,
                 )
-            elsif os_facts[:osfamily].casecmp('suse').zero?
+            elsif os_facts[:os]['family'].casecmp('suse').zero?
               is_expected.to contain_file('/boot/grub2/grub.cfg')
                 .with(
                   'ensure' => 'file',

@@ -9,6 +9,7 @@ Gemfile:
       - gem: 'puppet_litmus'
         ref: '~> 0.34.1'
       - gem: 'puppet-lint-security-plugins'
+      - gem: 'puppet-lint-legacy_facts-check'
 
 spec/spec_helper.rb:
   mock_with: ':rspec'

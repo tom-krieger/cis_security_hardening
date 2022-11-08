@@ -28,12 +28,12 @@ class cis_security_hardening::rules::rsh_server (
   Boolean $enforce = false
 ) {
   if $enforce {
-    $ensure = $facts['osfamily'].downcase() ? {
+    $ensure = $facts['os']['family'].downcase() ? {
       'suse'  => 'absent',
       default => 'purged',
     }
 
-    $pkgs = $facts['operatingsystem'].downcase() ? {
+    $pkgs = $facts['os']['name'].downcase() ? {
       'ubuntu' => 'rsh-server',
       'debian' => 'rsh-server',
       default  => ''

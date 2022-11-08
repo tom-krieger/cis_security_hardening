@@ -33,7 +33,7 @@ class cis_security_hardening::rules::ufw_install (
         ensure => installed,
     })
 
-    $ensure = $facts['osfamily'].downcase() ? {
+    $ensure = $facts['os']['family'].downcase() ? {
       'suse'  => 'absent',
       default => 'purged',
     }

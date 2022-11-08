@@ -22,7 +22,7 @@ describe 'cis_security_hardening::rules::auditd_chcon_use' do
     enforce_options.each do |enforce|
       context "on #{os} with enforce = #{enforce}" do
         let(:facts) do
-          os_facts.merge!(
+          os_facts.merge(
             cis_security_hardening: {
               auditd: {
                 auditing_process: 'none',
@@ -40,12 +40,12 @@ describe 'cis_security_hardening::rules::auditd_chcon_use' do
           is_expected.to compile
 
           if enforce
-            auid = if os_facts[:operatingsystem].casecmp('rocky').zero? || os_facts[:operatingsystem].casecmp('almalinux').zero?
+            auid = if os_facts[:os]['name'].casecmp('rocky').zero? || os_facts[:os]['name'].casecmp('almalinux').zero?
                      'unset'
                    else
                      '4294967295'
                    end
-            if os_facts[:operatingsystem].casecmp('redhat').zero? && os_facts[:operatingsystemmajrelease] == '7'
+            if os_facts[:os]['name'].casecmp('redhat').zero? && os_facts[:os]['release']['major'] == '7'
               is_expected.to contain_concat__fragment('watch chcon command rule 1')
                 .with(
                   'order'   => '176',

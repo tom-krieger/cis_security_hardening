@@ -19,7 +19,7 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
     enforce_options.each do |enforce|
       context "on #{os} with enforce = #{enforce}" do
         let(:facts) do
-          os_facts.merge!(
+          os_facts.merge(
             cis_security_hardening: {
               authselect: {
                 profile: 'testprofile',
@@ -53,7 +53,7 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
           is_expected.to compile
 
           if enforce
-            if os_facts[:osfamily].casecmp('redhat').zero?
+            if os_facts[:os]['family'].casecmp('redhat').zero?
 
               is_expected.not_to contain_package('libpam-pwquality')
 
@@ -138,7 +138,7 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                   'append_on_no_match' => true,
                 )
 
-              if os_facts[:operatingsystemmajrelease] == '7'
+              if os_facts[:os]['release']['major'] == '7'
                 is_expected.to contain_pam('pam-system-auth-requisite')
                   .with(
                     'ensure'    => 'present',
@@ -160,7 +160,7 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                   )
               end
 
-              if os_facts[:operatingsystemmajrelease] > '7'
+              if os_facts[:os]['release']['major'] > '7'
 
                 is_expected.to contain_pam('authselect configure pw requirements in system-auth')
                   .with(
@@ -188,7 +188,7 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
 
               end
 
-            elsif os_facts[:osfamily].casecmp('debian').zero?
+            elsif os_facts[:os]['family'].casecmp('debian').zero?
 
               is_expected.to contain_file_line('pam dcredit')
                 .with(
@@ -285,7 +285,7 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                   'ensure' => 'installed',
                 )
 
-            elsif os_facts[:osfamily].casecmp('suse').zero?
+            elsif os_facts[:os]['family'].casecmp('suse').zero?
 
               is_expected.to contain_pam('pam-common-password-requisite')
                 .with(

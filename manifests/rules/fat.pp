@@ -22,14 +22,14 @@ class cis_security_hardening::rules::fat (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    case $facts['operatingsystem'].downcase() {
+    case $facts['os']['name'].downcase() {
       'ubuntu', 'debian': {
         kmod::install { 'vfat':
           command => '/bin/true',
         }
       }
       'centos', 'almalinux', 'rocky', 'redhat': {
-        case $facts['operatingsystemmajrelease'] {
+        case $facts['os']['release']['major'] {
           '7': {
             kmod::install { 'fat':
               command => '/bin/true',

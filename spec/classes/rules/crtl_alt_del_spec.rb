@@ -37,7 +37,7 @@ describe 'cis_security_hardening::rules::crtl_alt_del' do
               )
               .that_notifies('Exec[systemd-daemon-reload]')
 
-            if os_facts[:operatingsystem].casecmp('redhat').zero? && (os_facts[:operatingsystemmajrelease] >= '8')
+            if os_facts[:os]['name'].casecmp('redhat').zero? && (os_facts[:os]['release']['major'] >= '8')
               is_expected.to contain_file_line('ctrl-alt-del-burst')
                 .with(
                   'ensure'             => 'present',

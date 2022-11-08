@@ -31,7 +31,7 @@ class cis_security_hardening::rules::umask_setting (
   String $default_umask = '027',
 ) {
   if $enforce {
-    case $facts['osfamily'].downcase() {
+    case $facts['os']['family'].downcase() {
       'redhat': {
         $services = [
           'system-auth',
@@ -93,7 +93,7 @@ class cis_security_hardening::rules::umask_setting (
           append_on_no_match => true,
         }
 
-        if $facts['operatingsystem'].downcase() == 'debian' {
+        if $facts['os']['name'].downcase() == 'debian' {
           file_line { 'umask-in-bashrc':
             path               => '/etc/bash.bashrc',
             line               => "umask ${default_umask}",
@@ -149,10 +149,10 @@ class cis_security_hardening::rules::umask_setting (
       $pf_file = "${pf_path}/${srv}"
 
       if  (
-        $facts['operatingsystem'].downcase() == 'centos' or
-        $facts['operatingsystem'].downcase() == 'almalinux' or
-        $facts['operatingsystem'].downcase() == 'rocky'
-      ) and $facts['operatingsystemmajrelease'] > '7' and $pf_path != '' {
+        $facts['os']['name'].downcase() == 'centos' or
+        $facts['os']['name'].downcase() == 'almalinux' or
+        $facts['os']['name'].downcase() == 'rocky'
+      ) and $facts['os']['release']['major'] > '7' and $pf_path != '' {
         file_line { "umask in ${srv}":
           path               => $pf_file,
           line               => 'session     optional                                     pam_umask.so',

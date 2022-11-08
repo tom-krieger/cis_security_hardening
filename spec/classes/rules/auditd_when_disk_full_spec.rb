@@ -9,7 +9,7 @@ describe 'cis_security_hardening::rules::auditd_when_disk_full' do
     enforce_options.each do |enforce|
       context "on #{os} with enforce = #{enforce}" do
         let(:facts) do
-          os_facts.merge!(
+          os_facts.merge(
             cis_security_hardening: {
               auditd: {
                 action_mail_acct: 'none',
@@ -34,7 +34,7 @@ describe 'cis_security_hardening::rules::auditd_when_disk_full' do
           is_expected.to compile
 
           if enforce
-            file = if os_facts[:osfamily].casecmp('redhat').zero?
+            file = if os_facts[:os]['family'].casecmp('redhat').zero?
                      '/etc/audisp/audisp-remote.conf'
                    else
                      '/etc/audisp/plugins.d/au-remote.conf'

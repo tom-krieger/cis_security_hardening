@@ -19,13 +19,13 @@ class cis_security_hardening::rules::rsyncd (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    case $facts['osfamily'].downcase() {
+    case $facts['os']['family'].downcase() {
       'debian': {
         ensure_packages(['rsync'], {
             ensure => purged,
         })
 
-        if $facts['operatingsystem'].downcase() == 'debian' {
+        if $facts['os']['name'].downcase() == 'debian' {
           ensure_resource('service', ['rsync'],  {
               ensure => 'stopped',
               enable => false,
@@ -38,7 +38,7 @@ class cis_security_hardening::rules::rsyncd (
         })
       }
       'redhat': {
-        if($facts['operatingsystemmajrelease'] > '6') {
+        if($facts['os']['release']['major'] > '6') {
           $rsyncd_srv = 'rsyncd'
         } else {
           $rsyncd_srv = 'rsync'

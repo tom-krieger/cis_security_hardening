@@ -26,7 +26,7 @@ class cis_security_hardening::rules::grub_bootloader_config (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    $filename = $facts['operatingsystem'].downcase() ? {
+    $filename = $facts['os']['name'].downcase() ? {
       'centos'    => '/boot/grub2/grub.cfg',
       'almalinux' => '/boot/grub2/grub.cfg',
       'rocky'     => '/boot/grub2/grub.cfg',
@@ -46,7 +46,7 @@ class cis_security_hardening::rules::grub_bootloader_config (
       }
     }
 
-    if $facts['osfamily'].downcase() == 'debian' {
+    if $facts['os']['family'].downcase() == 'debian' {
       file_line { 'correct grub.cfg permissions':
         path                                  => '/usr/sbin/grub-mkconfig',
         line                                  => "  chmod 400 \${grub_cfg}.new || true",
@@ -54,6 +54,20 @@ class cis_security_hardening::rules::grub_bootloader_config (
         multiple                              => true,
         replace_all_matches_not_matching_line => true,
         append_on_no_match                    => false,
+      }
+    }
+
+    if fact('cis_security_hardening.efi') and has_key($facts['mountpoints'], '/boot/efi') {
+      $device = $facts['mountpoints']['/boot/efi']['device']
+      $uuid   = $facts['partitions'][$device]['uuid']
+      $line   = "UUID=${uuid}  /boot/efi       vfat    umask=0077,fmask=0077,uid=0,gid=0      0        1"
+
+      file_line { 'fix /boot/efi':
+        ensure             => present,
+        path               => '/etc/fstab',
+        match              => "^UUID=${uuid}\s+/boot/efi\s+vfat",
+        line               => $line,
+        append_on_no_match => true,
       }
     }
   }

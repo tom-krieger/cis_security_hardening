@@ -23,12 +23,12 @@ class cis_security_hardening::rules::rsh_client (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    if $facts['operatingsystem'].downcase() == 'ubuntu' {
+    if $facts['os']['name'].downcase() == 'ubuntu' {
       # rsh-client is virtual and can not be removed as ssh package will be removed as well
       $pkg = 'rsh-client'
     } else {
       $pkg = 'rsh'
-      $ensure = $facts['osfamily'].downcase() ? {
+      $ensure = $facts['os']['family'].downcase() ? {
         'suse'  => 'absent',
         default => 'purged',
       }

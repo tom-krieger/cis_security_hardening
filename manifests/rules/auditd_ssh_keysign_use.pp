@@ -27,7 +27,7 @@ class cis_security_hardening::rules::auditd_ssh_keysign_use (
       undef => '1000',
       default => fact('cis_security_hardening.auditd.uid_min'),
     }
-    $rule1 = $facts['operatingsystem'].downcase() ? {
+    $rule1 = $facts['os']['name'].downcase() ? {
       'redhat' => "-a always,exit -F path=/usr/libexec/openssh/ssh-keysign -F auid>=${uid} -F auid!=4294967295 -k privileged-ssh",
       default  => "-a always,exit -F path=/usr/lib/openssh/ssh-keysign -F perm=x -F auid>=${uid} -F auid!=4294967295 -k privileged-ssh",
     }

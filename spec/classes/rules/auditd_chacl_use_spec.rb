@@ -22,7 +22,7 @@ describe 'cis_security_hardening::rules::auditd_chacl_use' do
     enforce_options.each do |enforce|
       context "on #{os} with enforce = #{enforce}" do
         let(:facts) do
-          os_facts.merge!(
+          os_facts.merge(
             cis_security_hardening: {
               auditd: {
                 uid_min: '1000',
@@ -41,7 +41,7 @@ describe 'cis_security_hardening::rules::auditd_chacl_use' do
           is_expected.to compile
 
           if enforce
-            auid = if os_facts[:operatingsystem].casecmp('rocky').zero? || os_facts[:operatingsystem].casecmp('almalinux').zero?
+            auid = if os_facts[:os]['name'].casecmp('rocky').zero? || os_facts[:os]['name'].casecmp('almalinux').zero?
                      'unset'
                    else
                      '4294967295'

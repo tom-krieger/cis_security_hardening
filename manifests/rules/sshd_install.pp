@@ -32,7 +32,7 @@ class cis_security_hardening::rules::sshd_install (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    $pkgs = $facts['osfamily'].downcase() ? {
+    $pkgs = $facts['os']['family'].downcase() ? {
       'redhat' => ['openssh-server'],
       default  => ['ssh']
     }

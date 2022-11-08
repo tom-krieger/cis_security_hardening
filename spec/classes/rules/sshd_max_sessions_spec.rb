@@ -19,7 +19,7 @@ describe 'cis_security_hardening::rules::sshd_max_sessions' do
     enforce_options.each do |enforce|
       context "on #{os} with enforce = #{enforce}" do
         let(:facts) do
-          os_facts.merge!(
+          os_facts.merge(
             'cis_security_hardening' => {
               'sshd' => {
                 'pub_key_files_status' => false,
@@ -69,7 +69,7 @@ describe 'cis_security_hardening::rules::sshd_max_sessions' do
           is_expected.to compile
 
           if enforce
-            path = if os_facts[:operatingsystem] == 'SLES' && os_facts[:operatingsystemmajrelease] == '12'
+            path = if os_facts[:os]['name'] == 'SLES' && os_facts[:os]['release']['major'] == '12'
                      '/usr/etc/ssh/sshd_config'
                    else
                      '/etc/ssh/sshd_config'

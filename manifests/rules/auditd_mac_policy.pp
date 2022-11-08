@@ -21,7 +21,7 @@ class cis_security_hardening::rules::auditd_mac_policy (
   Boolean $enforce                 = false,
 ) {
   if $enforce {
-    case $facts['osfamily'].downcase() {
+    case $facts['os']['family'].downcase() {
       'redhat', 'suse': {
         concat::fragment { 'mac policy rule 1':
           order   => '61',

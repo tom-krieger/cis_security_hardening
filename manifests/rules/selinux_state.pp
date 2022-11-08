@@ -52,7 +52,7 @@ class cis_security_hardening::rules::selinux_state (
     # Ensure selinux is active in event of disabling, as config files require reboot
     exec { 'ensure selinux active':
       command => '/usr/sbin/setenforce 1',
-      unless  => '/usr/sbin/getenforce | grep Enforcing'
+      unless  => '/usr/sbin/getenforce | grep Enforcing',
     }
   }
 }

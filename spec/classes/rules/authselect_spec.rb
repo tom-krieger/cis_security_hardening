@@ -11,7 +11,7 @@ describe 'cis_security_hardening::rules::authselect' do
       check_options.each do |check|
         context "on #{os} with enforce = #{enforce} and check = #{check}" do
           let(:facts) do
-            os_facts.merge!(
+            os_facts.merge(
               cis_security_hardening: {
                 authselect: {
                   check: check,

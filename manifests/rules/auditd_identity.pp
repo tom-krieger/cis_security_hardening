@@ -43,7 +43,7 @@ class cis_security_hardening::rules::auditd_identity (
       target  => $cis_security_hardening::rules::auditd_init::rules_file,
       content => '-w /etc/security/opasswd -p wa -k identity',
     }
-    if $facts['operatingsystem'].downcase() != 'sles' {
+    if $facts['os']['name'].downcase() != 'sles' {
       concat::fragment { 'watch identity rule 3':
         order   => '43',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,

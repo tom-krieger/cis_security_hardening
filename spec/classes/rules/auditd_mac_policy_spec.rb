@@ -21,7 +21,7 @@ describe 'cis_security_hardening::rules::auditd_mac_policy' do
           EOF
         end
         let(:facts) do
-          os_facts.merge!(
+          os_facts.merge(
             cis_security_hardening: {
               auditd: {
                 uid_min: '1000',
@@ -41,7 +41,7 @@ describe 'cis_security_hardening::rules::auditd_mac_policy' do
           is_expected.to compile
 
           if enforce
-            if os_facts[:osfamily].casecmp('redhat').zero? || os_facts[:osfamily].casecmp('suse').zero?
+            if os_facts[:os]['family'].casecmp('redhat').zero? || os_facts[:os]['family'].casecmp('suse').zero?
               is_expected.to contain_concat__fragment('mac policy rule 1')
                 .with(
                   'order' => '61',
@@ -55,7 +55,7 @@ describe 'cis_security_hardening::rules::auditd_mac_policy' do
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
                   'content' => '-w /usr/share/selinux/ -p wa -k MAC-policy',
                 )
-            elsif os_facts[:osfamily].casecmp('debian').zero?
+            elsif os_facts[:os]['family'].casecmp('debian').zero?
               is_expected.to contain_concat__fragment('mac policy rule 1')
                 .with(
                   'order' => '61',

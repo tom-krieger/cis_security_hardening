@@ -27,7 +27,7 @@ class cis_security_hardening::rules::crond_service (
   Boolean $uninstall_cron = false,
 ) {
   if $enforce {
-    if $facts['osfamily'].downcase() == 'suse' {
+    if $facts['os']['family'].downcase() == 'suse' {
       $ensure = 'absent'
     } else {
       $ensure = 'purged'
@@ -38,7 +38,7 @@ class cis_security_hardening::rules::crond_service (
           ensure => $ensure,
       })
     } else {
-      $srv = $facts['osfamily'].downcase() ? {
+      $srv = $facts['os']['family'].downcase() ? {
         'debian' => 'cron',
         'suse'   => 'cron',
         default  => 'crond',

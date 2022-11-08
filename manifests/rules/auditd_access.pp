@@ -67,7 +67,7 @@ class cis_security_hardening::rules::auditd_access (
       order   => '12',
     }
 
-    if $facts['architecture'] == 'x86_64' or $facts['architecture'] == 'amd64' {
+    if $facts['os']['architecture'] == 'x86_64' or $facts['os']['architecture'] == 'amd64' {
       concat::fragment { 'watch access rule 3':
         target  => $cis_security_hardening::rules::auditd_init::rules_file,
         content => $content_rule3,

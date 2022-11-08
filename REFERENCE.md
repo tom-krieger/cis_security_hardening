@@ -903,20 +903,6 @@ Several exec resources needed from multiple classes.
 include cis_security_hardening::services
 ```
 
-#### Parameters
-
-The following parameters are available in the `cis_security_hardening::services` class:
-
-* [`time_until_reboot`](#time_until_reboot)
-
-##### <a name="time_until_reboot"></a>`time_until_reboot`
-
-Data type: `Integer`
-
-Time to wait until system is rebooted if required. Time in seconds.
-
-Default value: `60`
-
 ### <a name="cis_security_hardeningsticky_world_writable_cron"></a>`cis_security_hardening::sticky_world_writable_cron`
 
 Create a cron ob for the search for world writable directories with sticky bit set.
@@ -1055,7 +1041,7 @@ Check a mount option
 Alias of
 
 ```puppet
-Pattern[/(^[\/a-zA-Z0-9]+$|^sec=[\/a-zA-Z0-9:]+$)|^size=[\/a-zA-Z0-9]+$/]
+Pattern[/(^[\/a-zA-Z0-9]+$|^sec=[\/a-zA-Z0-9:]+$)|^size=[\/a-zA-Z0-9]+$|^fmask=[0-9]+$|^uid=[0-9]+$|^gid=[0-9]+$/]
 ```
 
 ### <a name="cis_security_hardeningmountpoint"></a>`Cis_security_hardening::Mountpoint`

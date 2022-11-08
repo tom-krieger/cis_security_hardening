@@ -21,14 +21,14 @@ class cis_security_hardening::rules::ldap_client (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    $pkg = $facts['operatingsystem'].downcase() ? {
+    $pkg = $facts['os']['name'].downcase() ? {
       'ubuntu' => 'ldap-utils',
       'debian' => 'ldap-utils',
       'sles'   => 'openldap2-clients',
       default  => 'openldap-clients',
     }
 
-    $ensure = $facts['osfamily'].downcase() ? {
+    $ensure = $facts['os']['family'].downcase() ? {
       'suse'  => 'absent',
       default => 'purged'
     }

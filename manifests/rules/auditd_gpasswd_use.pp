@@ -27,7 +27,7 @@ class cis_security_hardening::rules::auditd_gpasswd_use (
       undef => '1000',
       default => fact('cis_security_hardening.auditd.uid_min'),
     }
-    $rule1 = $facts['operatingsystem'].downcase() ? {
+    $rule1 = $facts['os']['name'].downcase() ? {
       'redhat' => "-a always,exit -F path=/usr/bin/gpasswd -F auid>=${uid} -F auid!=4294967295 -k privileged-passwd",
       default  => "-a always,exit -F path=/usr/bin/gpasswd -F perm=x -F auid>=${uid} -F auid!=4294967295 -k privileged-gpasswd",
     }

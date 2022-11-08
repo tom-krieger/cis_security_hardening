@@ -11,7 +11,7 @@ describe 'cis_security_hardening::rules::systemd_timesyncd' do
       fix_perms_options.each do |fix_perms|
         context "on #{os} with enforce = #{enforce} and fix_perms = #{fix_perms}" do
           let(:facts) do
-            os_facts.merge!(
+            os_facts.merge(
               cis_security_hardening: {
                 services_enabled: {
                   'systemd-timesyncd' => 'disabled',
@@ -48,7 +48,7 @@ describe 'cis_security_hardening::rules::systemd_timesyncd' do
                   'append_on_no_match' => true,
                 )
 
-              if os_facts[:osfamily].casecmp('suse').zero?
+              if os_facts[:os]['family'].casecmp('suse').zero?
                 is_expected.to contain_package('ntp')
                   .with(
                     'ensure' => 'absent',
@@ -76,7 +76,7 @@ describe 'cis_security_hardening::rules::systemd_timesyncd' do
                   'ensure' => 'running',
                 )
 
-              if os_facts[:operatingsystem].casecmp('sles').zero?
+              if os_facts[:os]['name'].casecmp('sles').zero?
                 is_expected.to contain_exec('timedatectl')
                   .with(
                     'command'   => 'timefdatectl set-ntp true',
@@ -84,7 +84,7 @@ describe 'cis_security_hardening::rules::systemd_timesyncd' do
                   )
               end
 
-              if os_facts[:osfamily].casecmp('debian').zero? && fix_perms == true
+              if os_facts[:os]['family'].casecmp('debian').zero? && fix_perms == true
                 is_expected.to contain_file('/var/lib/private/systemd/timesync')
                   .with(
                     'owner' => 'root',

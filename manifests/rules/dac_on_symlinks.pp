@@ -1,4 +1,4 @@
-# @summary 
+# @summary
 #    Ensure the operating system is configured to enable DAC on symlinks
 #
 # The operating system must enable kernel parameters to enforce discretionary access control on symlinks.
@@ -41,7 +41,7 @@ class cis_security_hardening::rules::dac_on_symlinks (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    Sysctl {
+    sysctl {
       'fs.protected_symlinks':
         value  => 1,
         notify => Exec['reload-sysctl-system'],

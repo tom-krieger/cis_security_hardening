@@ -18,12 +18,12 @@ describe 'cis_security_hardening::rules::fat' do
         it {
           is_expected.to compile
 
-          if os_facts[:operatingsystem].casecmp('centos').zero? ||
-             os_facts[:operatingsystem].casecmp('almalinux').zero? ||
-             os_facts[:operatingsystem].casecmp('rocky').zero? ||
-             os_facts[:operatingsystem].casecmp('redhat').zero?
+          if os_facts[:os]['name'].casecmp('centos').zero? ||
+             os_facts[:os]['name'].casecmp('almalinux').zero? ||
+             os_facts[:os]['name'].casecmp('rocky').zero? ||
+             os_facts[:os]['name'].casecmp('redhat').zero?
 
-            if os_facts[:operatingsystemmajrelease] == '7'
+            if os_facts[:os]['release']['major'] == '7'
 
               if enforce
                 is_expected.to contain_kmod__install('fat')
@@ -44,7 +44,7 @@ describe 'cis_security_hardening::rules::fat' do
                 is_expected.not_to contain_kmod__install('msdos')
               end
 
-            elsif os_facts[:operatingsystemmajrelease] == '8'
+            elsif os_facts[:os]['release']['major'] == '8'
               if enforce
                 is_expected.to contain_kmod__install('vfat')
                   .with(
@@ -55,7 +55,7 @@ describe 'cis_security_hardening::rules::fat' do
               end
             end
 
-          elsif os_facts[:operatingsystem].casecmp('ubuntu').zero?
+          elsif os_facts[:os]['name'].casecmp('ubuntu').zero?
 
             if enforce
               is_expected.to contain_kmod__install('vfat')
@@ -68,7 +68,7 @@ describe 'cis_security_hardening::rules::fat' do
               is_expected.not_to contain_kmod__install('vfat')
             end
 
-          elsif os_facts[:operatingsystem].casecmp('sles').zero?
+          elsif os_facts[:os]['name'].casecmp('sles').zero?
             if enforce
               is_expected.to contain_kmod__install('fat')
                 .with(

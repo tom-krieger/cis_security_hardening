@@ -41,7 +41,7 @@ class cis_security_hardening::rules::auditd_open_by_handle_use (
       content => "-a always,exit -F arch=b32 -S open_by_handle_at -F exit=-EACCES -F auid>=${uid} -F auid!=4294967295 -k perm_access",
     }
 
-    if  $facts['architecture'] == 'x86_64' or $facts['architecture'] == 'amd64' {
+    if  $facts['os']['architecture'] == 'x86_64' or $facts['os']['architecture'] == 'amd64' {
       concat::fragment { 'watch open_by_handle_at command rule 3':
         order   => '170',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,

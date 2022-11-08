@@ -23,28 +23,37 @@
 #
 # @api private
 class cis_security_hardening::rules::issue_perms (
-  Boolean $enforce = false,
-  String $content  = '',
-  String $file     = '',
+  Boolean $enforce           = false,
+  Optional[String] $content  = undef,
+  Optional[String] $file     = undef,
 ) {
   if $enforce {
     $issue_link = fact('cis_security_hardening.etc_issue_link')
 
-    $data = $file ? {
-      '' => {
-        ensure  => present,
-        content => $content,
-        owner   => 'root',
-        group   => 'root',
-        mode    => '0644',
-      },
-      default => {
+    if $file == undef {
+      $data = $content ? {
+        undef => {
+          ensure  => present,
+          owner   => 'root',
+          group   => 'root',
+          mode    => '0644',
+        },
+        default => {
+          ensure  => present,
+          content => $content,
+          owner   => 'root',
+          group   => 'root',
+          mode    => '0644',
+        },
+      }
+    } else {
+      $data = {
         ensure  => present,
         source  => $file,
         owner   => 'root',
         group   => 'root',
         mode    => '0644',
-      },
+      }
     }
 
     unless  $facts['os']['name'] == 'SLES' and $facts['os']['release']['major'] == '12' and $issue_link {

@@ -39,7 +39,7 @@ describe 'cis_security_hardening::rules::selinux_state' do
                     'group'  => 'root',
                     'mode'   => '0644',
                   )
-                  .that_notifies('Reboot[after_run]')
+                  .that_notifies('Class[cis_security_hardening::reboot]')
 
                 is_expected.to contain_file_line('selinux_enforce')
                   .with(
@@ -48,7 +48,7 @@ describe 'cis_security_hardening::rules::selinux_state' do
                     'match'    => 'SELINUX=',
                     'multiple' => true,
                   )
-                  .that_notifies('Reboot[after_run]')
+                  .that_notifies('Class[cis_security_hardening::reboot]')
               else
                 is_expected.to contain_file('/etc/selinux/config')
                   .with(
@@ -66,9 +66,17 @@ describe 'cis_security_hardening::rules::selinux_state' do
                     'multiple' => true,
                   )
               end
+
+              is_expected.to contain_exec('ensure selinux active')
+                .with(
+                  'command' => '/usr/sbin/setenforce 1',
+                  'unless'  => '/usr/sbin/getenforce | grep Enforcing',
+                )
+
             else
               is_expected.not_to contain_file('/etc/selinux/config')
               is_expected.not_to contain_file_line('selinux_enforce')
+              is_expected.not_to contain_exec('ensure selinux active')
             end
           }
         end

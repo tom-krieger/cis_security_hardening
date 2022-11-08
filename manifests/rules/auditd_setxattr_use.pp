@@ -41,7 +41,7 @@ class cis_security_hardening::rules::auditd_setxattr_use (
       content => '-a always,exit -F arch=b32 -S setxattr -F auid=0 -k perm_mod',
     }
 
-    if  $facts['architecture'] == 'x86_64' or $facts['architecture'] == 'amd64' {
+    if  $facts['os']['architecture'] == 'x86_64' or $facts['os']['architecture'] == 'amd64' {
       concat::fragment { 'watch setxattr command rule 3':
         order   => '146',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,

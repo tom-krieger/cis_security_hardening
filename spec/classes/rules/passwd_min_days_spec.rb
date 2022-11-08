@@ -9,7 +9,7 @@ describe 'cis_security_hardening::rules::passwd_min_days' do
     enforce_options.each do |enforce|
       context "on #{os} with enforce = #{enforce}" do
         let(:facts) do
-          os_facts.merge!(
+          os_facts.merge(
             'cis_security_hardening' => {
               'local_users' => {
                 'test1' => {
@@ -43,7 +43,7 @@ describe 'cis_security_hardening::rules::passwd_min_days' do
         it {
           is_expected.to compile
           if enforce
-            path = if os_facts[:operatingsystem] == 'SLES' && os_facts[:operatingsystemmajrelease] == '12'
+            path = if os_facts[:os]['name'] == 'SLES' && os_facts[:os]['release']['major'] == '12'
                      '/usr/etc/login.defs'
                    else
                      '/etc/login.defs'

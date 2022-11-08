@@ -9,7 +9,7 @@ describe 'cis_security_hardening::rules::logrotate_configuration' do
     on_supported_os.each do |os, os_facts|
       context "on #{os} with enforce = #{enforce}" do
         let(:facts) do
-          os_facts.merge!(
+          os_facts.merge(
             cis_security_hardening: {
               logrotate_conf: {
                 '/etc/logrotate.d/alternatives' => {

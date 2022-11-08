@@ -19,7 +19,7 @@ describe 'cis_security_hardening::rules::apparmor' do
           is_expected.to compile
 
           if enforce
-            if os_facts[:osfamily].casecmp('debian').zero?
+            if os_facts[:os]['family'].casecmp('debian').zero?
               is_expected.to contain_package('apparmor')
                 .with(
                   'ensure' => 'installed',
@@ -28,7 +28,7 @@ describe 'cis_security_hardening::rules::apparmor' do
                 .with(
                   'ensure' => 'installed',
                 )
-            elsif os_facts[:osfamily].casecmp('suse').zero?
+            elsif os_facts[:os]['family'].casecmp('suse').zero?
               is_expected.to contain_exec('install apparmor')
                 .with(
                   'command' => 'zypper install -t pattern apparmor',

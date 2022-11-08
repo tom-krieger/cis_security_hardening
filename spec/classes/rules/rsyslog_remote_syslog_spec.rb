@@ -25,7 +25,7 @@ describe 'cis_security_hardening::rules::rsyslog_remote_syslog' do
         loghost_param = !is_loghost
         context "on #{os} with enforce = #{enforce} and loghost = #{is_loghost}" do
           let(:facts) do
-            os_facts.merge!(
+            os_facts.merge(
               'cis_security_hardening' => {
                 'syslog' => {
                   'rsyslog' => {

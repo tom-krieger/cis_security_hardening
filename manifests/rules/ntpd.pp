@@ -44,18 +44,17 @@
 #
 # @api private
 class cis_security_hardening::rules::ntpd (
-  Boolean $enforce             = false,
-  Optional[Array] $ntp_servers = [],
-  Array $ntp_restrict          = [],
-  String $ntp_driftfile        = '',
-  String $ntp_statsdir         = '',
-  Boolean $ntp_disable_monitor = true,
-  Boolean $ntp_burst           = false,
-  Boolean $ntp_service_manage  = true,
+  Boolean $enforce                    = false,
+  Optional[Array] $ntp_servers,
+  Array $ntp_restrict                 = [],
+  Stdlib::Absolutepath $ntp_driftfile = '/var/lib/ntp/drift',
+  Optional[Stdlib::Absolutepath] $ntp_statsdir,
+  Boolean $ntp_disable_monitor        = true,
+  Boolean $ntp_burst                  = false,
+  Boolean $ntp_service_manage         = true,
 ) {
-  if $enforce and
-  $facts['operatingsystem'].downcase() != 'sles' {
-    if (empty($ntp_servers)) {
+  if $enforce and $facts['os']['name'].downcase() != 'sles' {
+    if empty($ntp_servers) {
       echo { 'no ntp servers warning':
         message  => 'You have not defined any ntp servers, time updating may not work unless provided by your network DHCP',
         loglevel => 'warning',
@@ -78,7 +77,7 @@ class cis_security_hardening::rules::ntpd (
       }
     }
 
-    if empty($ntp_statsdir) {
+    if $ntp_statsdir == undef {
       $statsdir = {}
     } else {
       $statsdir = {
@@ -92,7 +91,7 @@ class cis_security_hardening::rules::ntpd (
       * => $ntp_data,
     }
 
-    if $facts['osfamily'].downcase() == 'debian' {
+    if $facts['os']['family'].downcase() == 'debian' {
       ensure_packages(['chrony'], {
           ensure => purged,
       })
@@ -106,7 +105,7 @@ class cis_security_hardening::rules::ntpd (
         match  => '^RUNASUSER=',
         line   => 'RUNASUSER=ntp',
       }
-    } elsif $facts['osfamily'].downcase() == 'redhat' {
+    } elsif $facts['os']['family'].downcase() == 'redhat' {
       file { '/etc/sysconfig/ntpd':
         ensure  => file,
         owner   => 'root',

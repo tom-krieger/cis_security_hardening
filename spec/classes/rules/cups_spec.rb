@@ -19,9 +19,9 @@ describe 'cis_security_hardening::rules::cups' do
           is_expected.to compile
 
           if enforce
-            if os_facts[:operatingsystem].casecmp('ubuntu').zero? || os_facts[:operatingsystem].casecmp('sles').zero?
+            if os_facts[:os]['name'].casecmp('ubuntu').zero? || os_facts[:os]['name'].casecmp('sles').zero?
 
-              if os_facts[:osfamily].casecmp('suse').zero?
+              if os_facts[:os]['family'].casecmp('suse').zero?
                 is_expected.to contain_package('cups')
                   .with(
                     'ensure' => 'absent',
@@ -33,7 +33,7 @@ describe 'cis_security_hardening::rules::cups' do
                   )
               end
 
-            elsif os_facts[:operatingsystem].casecmp('rocky').zero? || os_facts[:operatingsystem].casecmp('almalinux').zero?
+            elsif os_facts[:os]['name'].casecmp('rocky').zero? || os_facts[:os]['name'].casecmp('almalinux').zero?
               is_expected.to contain_package('cups')
                 .with(
                   'ensure' => 'purged',

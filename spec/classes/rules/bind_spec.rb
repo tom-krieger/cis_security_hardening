@@ -19,14 +19,14 @@ describe 'cis_security_hardening::rules::bind' do
           is_expected.to compile
 
           if enforce
-            if os_facts[:osfamily].casecmp('suse').zero?
+            if os_facts[:os]['family'].casecmp('suse').zero?
 
               is_expected.to contain_package('bind')
                 .with(
                   'ensure' => 'absent',
                 )
 
-            elsif os_facts[:operatingsystem].casecmp('ubuntu').zero?
+            elsif os_facts[:os]['name'].casecmp('ubuntu').zero?
               is_expected.to contain_package('bind9')
                 .with(
                     'ensure' => 'purged',

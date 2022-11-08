@@ -37,7 +37,7 @@ class cis_security_hardening::rules::fips_bootloader (
     }
 
     $boot_uuid = fact('cis_security_hardening.grub.boot_part_uuid')
-    if $boot_uuid != undef and $facts['operatingsystem'].downcase() == 'redhat' {
+    if $boot_uuid != undef and $facts['os']['name'].downcase() == 'redhat' {
       kernel_parameter { 'boot':
         value  => $boot_uuid,
         notify => Exec['fips-grub-config'],

@@ -51,7 +51,7 @@ class cis_security_hardening::rules::systemd_timesyncd (
     if(empty($ntp_servers)) {
       fail('no ntp servers specified!')
     } else {
-      $ensure = $facts['osfamily'].downcase() ? {
+      $ensure = $facts['os']['family'].downcase() ? {
         'suse'  => 'absent',
         default => 'purged',
       }
@@ -79,7 +79,7 @@ class cis_security_hardening::rules::systemd_timesyncd (
       }
     }
 
-    if $facts['osfamily'].downcase() == 'debian' and $fix_file_perms {
+    if $facts['os']['family'].downcase() == 'debian' and $fix_file_perms {
       ensure_resource('file', '/var/lib/private/systemd/timesync', {
           owner => 'root',
           group => 'root',
@@ -96,7 +96,7 @@ class cis_security_hardening::rules::systemd_timesyncd (
         enable => true,
     })
 
-    if $facts['operatingsystem'].downcase() == 'sles' {
+    if $facts['os']['name'].downcase() == 'sles' {
       exec { 'timedatectl':
         command   => 'timefdatectl set-ntp true',
         path      => ['/bin', '/usr/bin'],

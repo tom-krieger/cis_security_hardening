@@ -19,7 +19,7 @@ class cis_security_hardening::rules::selinux_bootloader (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    if($facts['operatingsystemmajrelease'] >= '7') {
+    if($facts['os']['release']['major'] >= '7') {
       file_line { 'cmdline_definition':
         line   => 'GRUB_CMDLINE_LINUX_DEFAULT="quiet"',
         path   => '/etc/default/grub',

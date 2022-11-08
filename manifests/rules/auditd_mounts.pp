@@ -38,14 +38,14 @@ class cis_security_hardening::rules::auditd_mounts (
       target  => $cis_security_hardening::rules::auditd_init::rules_file,
       content => "-a always,exit -F arch=b32 -S mount -F auid>=${uid} -F auid!=4294967295 -k mounts",
     }
-    if $facts['operatingsystem'].downcase() == 'redhat' {
+    if $facts['os']['name'].downcase() == 'redhat' {
       concat::fragment { 'watch mounts rule 3':
         order   => '215',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,
         content => "-a always,exit -F path=/usr/bin/mount -F auid>=${uid} -F auid!=4294967295 -k privileged-mount",
       }
     }
-    if  $facts['architecture'] == 'x86_64' or $facts['architecture'] == 'amd64' {
+    if  $facts['os']['architecture'] == 'x86_64' or $facts['os']['architecture'] == 'amd64' {
       concat::fragment { 'watch mounts rule 2':
         order   => '82',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,

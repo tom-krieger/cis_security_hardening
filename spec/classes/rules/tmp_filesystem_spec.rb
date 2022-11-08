@@ -33,7 +33,7 @@ describe 'cis_security_hardening::rules::tmp_filesystem' do
           filename = '/etc/systemd/system/tmp.mount'
 
           if enforce
-            unless os_facts[:operatingsystem].casecmp('redhat').zero? && os_facts[:operatingsystemmajrelease] > '7'
+            unless os_facts[:os]['name'].casecmp('redhat').zero? && os_facts[:os]['release']['major'] > '7'
               is_expected.to contain_file(filename)
                 .with(
                   'ensure'  => 'file',

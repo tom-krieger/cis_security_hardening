@@ -22,11 +22,11 @@
 #
 # @api private
 class cis_security_hardening::rules::root_gid (
-  Boolean $enforce                = false,
-  String $encrypted_root_password = '',
+  Boolean $enforce                          = false,
+  Optional[String] $encrypted_root_password = undef,
 ) {
   if($enforce) {
-    if empty($encrypted_root_password) {
+    if $encrypted_root_password == undef {
       $data = {
         ensure => present,
         gid    => '0',

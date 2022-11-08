@@ -27,7 +27,7 @@ class cis_security_hardening::rules::passwd_warn_days (
   Integer $warn_pass_days = 7,
 ) {
   if $enforce {
-    $path = ($facts['operatingsystem'] == 'SLES' and $facts['operatingsystemmajrelease'] == '12') ? {
+    $path = ($facts['os']['name'] == 'SLES' and $facts['os']['release']['major'] == '12') ? {
       true  => '/usr/etc/login.defs',
       false => '/etc/login.defs',
     }

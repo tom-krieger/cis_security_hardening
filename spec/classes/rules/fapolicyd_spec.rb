@@ -43,6 +43,7 @@ describe 'cis_security_hardening::rules::fapolicyd' do
                 'append_on_no_match' => true,
               )
               .that_requires('Package[fapolicyd]')
+
           else
             is_expected.not_to contain_package('fapolicyd')
             is_expected.not_to contain_file('/run/fapolicyd')

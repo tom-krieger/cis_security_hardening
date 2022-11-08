@@ -20,7 +20,7 @@ class cis_security_hardening::rules::httpd (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    case $facts['operatingsystem'].downcase() {
+    case $facts['os']['name'].downcase() {
       'ubuntu', 'debian': {
         ensure_packages(['apache2'], {
             ensure => purged,

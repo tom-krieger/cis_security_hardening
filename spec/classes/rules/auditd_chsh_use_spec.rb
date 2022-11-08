@@ -22,7 +22,7 @@ describe 'cis_security_hardening::rules::auditd_chsh_use' do
     enforce_options.each do |enforce|
       context "on #{os} with enforce = #{enforce}" do
         let(:facts) do
-          os_facts.merge!(
+          os_facts.merge(
             cis_security_hardening: {
               auditd: {
                 auditing_process: 'none',
@@ -40,7 +40,7 @@ describe 'cis_security_hardening::rules::auditd_chsh_use' do
           is_expected.to compile
 
           if enforce
-            if os_facts[:operatingsystem].casecmp('redhat').zero? && os_facts[:operatingsystemmajrelease] == '7'
+            if os_facts[:os]['name'].casecmp('redhat').zero? && os_facts[:os]['release']['major'] == '7'
               is_expected.to contain_concat__fragment('watch chsh command rule 1')
                 .with(
                   'order'   => '174',

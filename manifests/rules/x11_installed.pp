@@ -28,7 +28,7 @@ class cis_security_hardening::rules::x11_installed (
     $x11_packages.each |$pkg| {
       # do not uninstall these packages due to dependances needed on the system
       if $pkg !~ /^xorg-x11-font/ and $pkg !~ /^xorg-x11-server-utils/ {
-        $ensure = $facts['osfamily'].downcase() ? {
+        $ensure = $facts['os']['family'].downcase() ? {
           'suse'  => 'absent',
           default => 'purged',
         }

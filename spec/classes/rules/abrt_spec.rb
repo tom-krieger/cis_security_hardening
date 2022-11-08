@@ -9,7 +9,7 @@ describe 'cis_security_hardening::rules::abrt' do
     enforce_options.each do |enforce|
       context "on #{os} with enforce = #{enforce}" do
         let(:facts) do
-          os_facts.merge!(
+          os_facts.merge(
             cis_security_hardening: {
               abrt: {
                 packages: ['abrt-libs', 'abrt-cli-ng', 'abrt-cli']
@@ -27,7 +27,7 @@ describe 'cis_security_hardening::rules::abrt' do
           is_expected.to compile
 
           if enforce
-            ensureval = if os_facts[:osfamily].casecmp('suse').zero?
+            ensureval = if os_facts[:os]['family'].casecmp('suse').zero?
                           'absent'
                         else
                           'purged'

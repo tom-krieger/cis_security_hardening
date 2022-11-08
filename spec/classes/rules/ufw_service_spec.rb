@@ -7,7 +7,7 @@ describe 'cis_security_hardening::rules::ufw_service' do
     enforce_options.each do |enforce|
       context "on #{os} with enforce = #{enforce}" do
         let(:facts) do
-          os_facts.merge!(
+          os_facts.merge(
             cis_security_hardening: {
               services_enabled: {
                 srv_ufw: 'disabled',

@@ -27,7 +27,7 @@ class cis_security_hardening::rules::auditd_setfacl_use (
       undef => '1000',
       default => fact('cis_security_hardening.auditd.uid_min'),
     }
-    $auid = $facts['operatingsystem'].downcase() ? {
+    $auid = $facts['os']['name'].downcase() ? {
       'rocky'     => 'unset',
       'almalinux' => 'unset',
       default     => '4294967295',

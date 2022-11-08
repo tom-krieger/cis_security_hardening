@@ -21,7 +21,7 @@ class cis_security_hardening::rules::ldapd (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    case $facts['operatingsystem'].downcase() {
+    case $facts['os']['name'].downcase() {
       'ubuntu': {
         ensure_packages(['slapd'], {
             ensure => purged,

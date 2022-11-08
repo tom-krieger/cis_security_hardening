@@ -9,7 +9,7 @@ describe 'cis_security_hardening::rules::gnome_gdm' do
     enforce_options.each do |enforce|
       context "on #{os} with enforce = #{enforce}" do
         let(:facts) do
-          os_facts.merge!(
+          os_facts.merge(
             cis_security_hardening: {
               gnome_gdm_conf: false,
               gnome_gdm: true,
@@ -25,8 +25,8 @@ describe 'cis_security_hardening::rules::gnome_gdm' do
         it {
           is_expected.to compile
 
-          if os_facts[:operatingsystem].casecmp('centos').zero? || os_facts[:operatingsystem].casecmp('redhat').zero? ||
-             os_facts[:operatingsystem].casecmp('almalinux').zero? || os_facts[:operatingsystem].casecmp('rocky').zero?
+          if os_facts[:os]['name'].casecmp('centos').zero? || os_facts[:os]['name'].casecmp('redhat').zero? ||
+             os_facts[:os]['name'].casecmp('almalinux').zero? || os_facts[:os]['name'].casecmp('rocky').zero?
 
             if enforce
               is_expected.to contain_file('gdm')
@@ -82,7 +82,7 @@ describe 'cis_security_hardening::rules::gnome_gdm' do
             is_expected.not_to contain_file('/etc/gdm3/greeter.dconf-defaults')
             is_expected.not_to contain_exec('dpkg-gdm-reconfigure')
 
-          elsif os_facts[:operatingsystem].casecmp('ubuntu').zero?
+          elsif os_facts[:os]['name'].casecmp('ubuntu').zero?
 
             if enforce
               is_expected.to contain_file('/etc/gdm3/greeter.dconf-defaults')
@@ -110,7 +110,7 @@ describe 'cis_security_hardening::rules::gnome_gdm' do
             is_expected.not_to contain_exec('dconf-gdm-exec')
             is_expected.not_to contain_file('/etc/dconf/db/gdm.d')
 
-          elsif os_facts[:operatingsystem].casecmp('sles').zero?
+          elsif os_facts[:os]['name'].casecmp('sles').zero?
 
             if enforce
               is_expected.to contain_file('/etc/dconf/profile/gdm')

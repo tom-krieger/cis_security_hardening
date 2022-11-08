@@ -30,9 +30,9 @@ class cis_security_hardening::rules::pam_passwd_sha512 (
       'password-auth',
     ]
 
-    case $facts['osfamily'].downcase() {
+    case $facts['os']['family'].downcase() {
       'redhat': {
-        if $facts['operatingsystemmajrelease'] > '7' {
+        if $facts['os']['release']['major'] > '7' {
           $profile = fact('cis_security_hardening.authselect.profile')
           if $profile != undef and $profile != 'none' {
             $pf_path = "/etc/authselect/custom/${profile}"

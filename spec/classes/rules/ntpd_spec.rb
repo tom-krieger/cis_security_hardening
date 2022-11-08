@@ -12,14 +12,15 @@ describe 'cis_security_hardening::rules::ntpd' do
           let(:facts) { os_facts }
           let(:params) do
             {
-              'enforce' => enforce,
-              'ntp_servers' => [],
-              'ntp_statsdir' => '/var/tmp',
-              'ntp_restrict' => ['127.0.0.1'],
+              'enforce'       => enforce,
+              'ntp_servers'   => [],
+              'ntp_statsdir'  => '/var/tmp',
+              'ntp_driftfile' => '/var/lib/ntp/drift',
+              'ntp_restrict'  => ['127.0.0.1'],
             }
           end
 
-          if enforce && !os_facts[:operatingsystem].casecmp('sles').zero?
+          if enforce && !os_facts[:os]['name'].casecmp('sles').zero?
             it { is_expected.to create_echo('no ntp servers warning').with_message(%r{You have not defined any ntp servers, time updating may not work unless provided by your network DHCP}) }
           end
         end
@@ -28,29 +29,31 @@ describe 'cis_security_hardening::rules::ntpd' do
           let(:facts) { os_facts }
           let(:params) do
             {
-              'enforce' => enforce,
-              'ntp_servers' => ['10.10.10.1', '10.10.10.2'],
-              'ntp_statsdir' => '/var/tmp',
-              'ntp_restrict' => ['127.0.0.1'],
+              'enforce'       => enforce,
+              'ntp_servers'   => ['10.10.10.1', '10.10.10.2'],
+              'ntp_statsdir'  => '/var/tmp',
+              'ntp_driftfile' => '/var/lib/ntp/drift',
+              'ntp_restrict'  => ['127.0.0.1'],
             }
           end
 
           it {
             is_expected.to compile
 
-            if enforce && !os_facts[:operatingsystem].casecmp('sles').zero?
+            if enforce && !os_facts[:os]['name'].casecmp('sles').zero?
 
               is_expected.to create_class('ntp')
                 .with(
-                  'servers' => ['10.10.10.1', '10.10.10.2'],
+                  'servers'         => ['10.10.10.1', '10.10.10.2'],
                   'restrict'        => ['127.0.0.1'],
                   'statsdir'        => '/var/tmp',
+                  'driftfile'       => '/var/lib/ntp/drift',
                   'disable_monitor' => true,
                   'iburst_enable'   => false,
                   'service_manage'  => true,
                 )
 
-              if os_facts[:osfamily].casecmp('debian').zero?
+              if os_facts[:os]['family'].casecmp('debian').zero?
                 is_expected.to contain_package('chrony')
                   .with(
                     'ensure' => 'purged',

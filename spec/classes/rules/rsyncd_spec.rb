@@ -20,14 +20,14 @@ describe 'cis_security_hardening::rules::rsyncd' do
 
           if enforce
 
-            if os_facts[:osfamily].casecmp('debian').zero?
+            if os_facts[:os]['family'].casecmp('debian').zero?
 
               is_expected.to contain_package('rsync')
                 .with(
                   'ensure' => 'purged',
                 )
 
-              if os_facts[:operatingsystem].casecmp('debian').zero?
+              if os_facts[:os]['name'].casecmp('debian').zero?
                 is_expected.to contain_service('rsync')
                   .with(
                     'ensure' => 'stopped',
@@ -35,16 +35,16 @@ describe 'cis_security_hardening::rules::rsyncd' do
                   )
               end
 
-            elsif os_facts[:osfamily].casecmp('suse').zero?
+            elsif os_facts[:os]['family'].casecmp('suse').zero?
 
               is_expected.to contain_package('rsync')
                 .with(
                   'ensure' => 'absent',
                 )
 
-            elsif os_facts[:osfamily].casecmp('redhat').zero?
+            elsif os_facts[:os]['family'].casecmp('redhat').zero?
 
-              if os_facts[:operatingsystemmajrelease] > '6'
+              if os_facts[:os]['release']['major'] > '6'
                 is_expected.to contain_service('rsyncd')
                   .with(
                       'ensure' => 'stopped',

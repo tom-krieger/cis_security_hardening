@@ -17,26 +17,26 @@ describe 'cis_security_hardening' do
         end
 
         it {
-          os_vers = if os_facts[:operatingsystem].casecmp('ubuntu').zero?
-                      os_facts[:operatingsystemmajrelease].split("/\./")
+          os_vers = if os_facts[:os]['name'].casecmp('ubuntu').zero?
+                      os_facts[:os]['release']['major'].split("/\./")
                     else
-                      os_facts[:operatingsystemmajrelease]
+                      os_facts[:os]['release']['major']
                     end
 
-          key = "cis_security_hardening::benchmark::#{os_facts[:operatingsystem]}::#{os_vers}"
+          key = "cis_security_hardening::benchmark::#{os_facts[:os]['name']}::#{os_vers}"
           # is_expected.to compile
           is_expected.to compile.with_all_deps
           is_expected.to contain_class('cis_security_hardening::services')
           is_expected.to contain_class('cis_security_hardening::config')
           is_expected.to contain_class('cis_security_hardening::auditd_cron')
 
-          unless os_facts[:operatingsystem].casecmp('ubuntu').zero? ||
-                 os_facts[:operatingsystem].casecmp('debian').zero? ||
-                 os_facts[:operatingsystem].casecmp('centos').zero? ||
-                 os_facts[:operatingsystem].casecmp('redhat').zero? ||
-                 os_facts[:operatingsystem].casecmp('almalinux').zero? ||
-                 os_facts[:operatingsystem].casecmp('rocky').zero? ||
-                 os_facts[:operatingsystem].casecmp('sles').zero?
+          unless os_facts[:os]['name'].casecmp('ubuntu').zero? ||
+                 os_facts[:os]['name'].casecmp('debian').zero? ||
+                 os_facts[:os]['name'].casecmp('centos').zero? ||
+                 os_facts[:os]['name'].casecmp('redhat').zero? ||
+                 os_facts[:os]['name'].casecmp('almalinux').zero? ||
+                 os_facts[:os]['name'].casecmp('rocky').zero? ||
+                 os_facts[:os]['name'].casecmp('sles').zero?
 
             is_expected.to contain_echo('no bundles')
               .with(

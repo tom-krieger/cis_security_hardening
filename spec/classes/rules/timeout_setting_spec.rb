@@ -27,7 +27,7 @@ describe 'cis_security_hardening::rules::timeout_setting' do
                 'mode'    => '0644',
               )
 
-            if os_facts[:operatingsystem].casecmp('debian').zero?
+            if os_facts[:os]['name'].casecmp('debian').zero?
 
               is_expected.to contain_file('/etc/profile')
                 .with(

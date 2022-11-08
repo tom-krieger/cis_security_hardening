@@ -19,7 +19,7 @@ describe 'cis_security_hardening::rules::umask_setting' do
     enforce_options.each do |enforce|
       context "on #{os} with enforce = #{enforce}" do
         let(:facts) do
-          os_facts.merge!(
+          os_facts.merge(
             cis_security_hardening: {
               umask: true,
               authselect: {
@@ -40,7 +40,7 @@ describe 'cis_security_hardening::rules::umask_setting' do
 
           if enforce
 
-            if os_facts[:osfamily].casecmp('debian').zero?
+            if os_facts[:os]['family'].casecmp('debian').zero?
 
               is_expected.to contain_file_line('login.defs')
                 .with(
@@ -59,7 +59,7 @@ describe 'cis_security_hardening::rules::umask_setting' do
                   'append_on_no_match' => true,
                 )
 
-              if os_facts[:operatingsystem].casecmp('debian').zero?
+              if os_facts[:os]['name'].casecmp('debian').zero?
                 is_expected.to contain_file_line('umask-in-bashrc')
                   .with(
                     'path'               => '/etc/bash.bashrc',
@@ -89,7 +89,7 @@ describe 'cis_security_hardening::rules::umask_setting' do
                   )
               end
 
-            elsif os_facts[:osfamily].casecmp('redhat').zero?
+            elsif os_facts[:os]['family'].casecmp('redhat').zero?
 
               is_expected.to contain_file_line('bashrc')
                 .with(
@@ -132,11 +132,11 @@ describe 'cis_security_hardening::rules::umask_setting' do
                   'append_on_no_match' => true,
                 )
 
-            elsif os_facts[:osfamily].casecmp('suse').zero?
+            elsif os_facts[:os]['family'].casecmp('suse').zero?
 
             end
 
-            unless os_facts[:osfamily].casecmp('suse').zero?
+            unless os_facts[:os]['family'].casecmp('suse').zero?
 
               is_expected.to contain_file('/etc/profile.d/set_umask.sh')
                 .with(
@@ -146,10 +146,10 @@ describe 'cis_security_hardening::rules::umask_setting' do
                   'mode'    => '0644',
                 )
 
-              if os_facts[:operatingsystemmajrelease] == '8' &&
-                 (os_facts[:operatingsystem].casecmp('centos').zero? ||
-                  os_facts[:operatingsystem].casecmp('almalinux').zero? ||
-                  os_facts[:operatingsystem].casecmp('rocky').zero?)
+              if os_facts[:os]['release']['major'] == '8' &&
+                 (os_facts[:os]['name'].casecmp('centos').zero? ||
+                  os_facts[:os]['name'].casecmp('almalinux').zero? ||
+                  os_facts[:os]['name'].casecmp('rocky').zero?)
 
                 is_expected.to contain_file_line('umask in system-auth')
                   .with(
@@ -175,7 +175,7 @@ describe 'cis_security_hardening::rules::umask_setting' do
                 is_expected.not_to contain_file_line('umask in system-auth')
                 is_expected.not_to contain_file_line('umask in password-auth')
 
-                if os_facts[:operatingsystem].casecmp('ubuntu').zero? || os_facts[:operatingsystem].casecmp('debian').zero?
+                if os_facts[:os]['name'].casecmp('ubuntu').zero? || os_facts[:os]['name'].casecmp('debian').zero?
                   is_expected.to contain_pam('pam umask common-session')
                     .with(
                       'ensure'  => 'present',

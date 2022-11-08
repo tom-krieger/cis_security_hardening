@@ -9,7 +9,7 @@ describe 'cis_security_hardening::rules::disable_wireless' do
     enforce_options.each do |enforce|
       context "on #{os} with enforce = #{enforce} without nmcli" do
         let(:facts) do
-          os_facts.merge!(
+          os_facts.merge(
             'cis_security_hardening' => {
               'wlan_interfaces_count' => 1,
               'wlan_interfaces' => ['wlan1'],
@@ -25,12 +25,12 @@ describe 'cis_security_hardening::rules::disable_wireless' do
         it {
           is_expected.to compile
           if enforce
-            if os_facts[:osfamily].casecmp('redhat').zero?
+            if os_facts[:os]['family'].casecmp('redhat').zero?
               is_expected.to contain_package('NetworkManager')
                 .with(
                   'ensure' => 'installed',
                 )
-            elsif os_facts[:osfamily].casecmp('debian').zero?
+            elsif os_facts[:os]['family'].casecmp('debian').zero?
               is_expected.to contain_package('network-manager')
                 .with(
                   'ensure' => 'installed',
@@ -51,7 +51,7 @@ describe 'cis_security_hardening::rules::disable_wireless' do
 
       context "on #{os} with enforce = #{enforce} with nmcli" do
         let(:facts) do
-          os_facts.merge!(
+          os_facts.merge(
             'cis_security_hardening' => {
               'wlan_status' => 'enabled',
             },

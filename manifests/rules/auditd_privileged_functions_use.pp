@@ -39,7 +39,7 @@ class cis_security_hardening::rules::auditd_privileged_functions_use (
       $rule3 = '-a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -F key=execpriv'
       $rule4 = '-a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -F key=execpriv'
     }
-    if  $facts['architecture'] == 'x86_64' or $facts['architecture'] == 'amd64' {
+    if  $facts['os']['architecture'] == 'x86_64' or $facts['os']['architecture'] == 'amd64' {
       concat::fragment { 'watch privileged_functions command rule 3':
         order   => '191',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,

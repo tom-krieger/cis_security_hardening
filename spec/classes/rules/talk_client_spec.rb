@@ -19,7 +19,7 @@ describe 'cis_security_hardening::rules::talk_client' do
           is_expected.to compile
 
           if enforce
-            if os_facts[:osfamily].casecmp('suse').zero?
+            if os_facts[:os]['family'].casecmp('suse').zero?
               is_expected.to contain_package('talk')
                 .with(
                   'ensure' => 'absent',

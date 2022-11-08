@@ -19,7 +19,7 @@ describe 'cis_security_hardening::rules::tftp_server' do
           is_expected.to compile
 
           if enforce
-            ensure_val = if os_facts[:osfamily].casecmp('suse').zero?
+            ensure_val = if os_facts[:os]['family'].casecmp('suse').zero?
                            'absent'
                          else
                            'purged'

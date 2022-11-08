@@ -19,7 +19,7 @@ describe 'cis_security_hardening::rules::nfs_utils' do
           is_expected.to compile
 
           if enforce
-            if os_facts[:operatingsystem].casecmp('sles').zero?
+            if os_facts[:os]['name'].casecmp('sles').zero?
               is_expected.to contain_package('nfs-utils')
                 .with(
                   'ensure' => 'absent',
@@ -29,7 +29,7 @@ describe 'cis_security_hardening::rules::nfs_utils' do
                 .with(
                   'ensure' => 'absent',
                 )
-            elsif os_facts[:operatingsystem].casecmp('rocky').zero? || os_facts[:operatingsystem].casecmp('almalinux').zero?
+            elsif os_facts[:os]['name'].casecmp('rocky').zero? || os_facts[:os]['name'].casecmp('almalinux').zero?
               is_expected.to contain_package('nfs-utils')
                 .with(
                   'ensure' => 'absent',

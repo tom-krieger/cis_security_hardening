@@ -25,7 +25,7 @@ describe 'cis_security_hardening::rules::crond_service' do
               if uninstall
                 is_expected.not_to contain_service('crond')
 
-                if os_facts[:osfamily].casecmp('suse').zero?
+                if os_facts[:os]['family'].casecmp('suse').zero?
                   is_expected.to contain_package('cronie')
                     .with(
                       'ensure' => 'absent',
@@ -40,7 +40,7 @@ describe 'cis_security_hardening::rules::crond_service' do
 
               else
 
-                if os_facts[:osfamily].casecmp('debian').zero? || os_facts[:osfamily].casecmp('suse').zero?
+                if os_facts[:os]['family'].casecmp('debian').zero? || os_facts[:os]['family'].casecmp('suse').zero?
                   is_expected.to contain_service('cron')
                     .with(
                       'ensure' => 'running',

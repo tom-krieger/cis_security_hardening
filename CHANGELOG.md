@@ -4,9 +4,16 @@ All notable changes to this project will be documented in this file.
 
 ## Release 0.7.9
 
+> This release changes the default values for `ntp_statsdir` and `ntp_driftfile`. Please check your configurations if needed.
+
 * The GRUB boot password is set to `undef` and the previous used default password was removed
-* Fix facts not resolving CentOS is 3 classes
+* Fix facts not resolving CentOS in 3 classes
 * Make NTP servers optional and raise warning if not provided, also remove hardcoded default ones
+* NTP driftfile and NTP statsfile are now defined as Stdlib::Absolutepath with default values set to the same values the puppetlabs-ntp module uses
+* added a fact to determine if a system is booted via efi
+* fixed handling GRUB configuration for UEFI systems as the grub.cfg in the EFI directory was not updated. The grub.cfg in the EFI is only updated if there are changes to roll out.
+* removed old legacy facts
+* the predefined GRUB password was removed from Hiera files. If you want to enforce a GRUB bootloader password you must define this password within Hiera. Otherwise the catalog will fail with an error message pointing you to that fact.
 
 ## Release 0.7.8
 

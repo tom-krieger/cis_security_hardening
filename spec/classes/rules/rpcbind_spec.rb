@@ -20,12 +20,12 @@ describe 'cis_security_hardening::rules::rpcbind' do
 
           if enforce
 
-            if os_facts[:operatingsystem].casecmp('ubuntu').zero?
+            if os_facts[:os]['name'].casecmp('ubuntu').zero?
               is_expected.to contain_package('rpcbind')
                 .with(
                   'ensure' => 'purged',
                 )
-            elsif os_facts[:operatingsystem].casecmp('sles').zero?
+            elsif os_facts[:os]['name'].casecmp('sles').zero?
               is_expected.to contain_package('rpcbind')
                 .with(
                   'ensure' => 'absent',
@@ -40,7 +40,7 @@ describe 'cis_security_hardening::rules::rpcbind' do
                   'ensure' => 'stopped',
                   'enable' => false,
                 )
-            elsif os_facts[:operatingsystem].casecmp('rocky').zero? || os_facts[:operatingsystem].casecmp('almalinux').zero?
+            elsif os_facts[:os]['name'].casecmp('rocky').zero? || os_facts[:os]['name'].casecmp('almalinux').zero?
               is_expected.to contain_service('rpcbind.socket')
                 .with(
                   'ensure' => 'stopped',

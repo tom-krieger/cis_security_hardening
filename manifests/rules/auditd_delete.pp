@@ -25,7 +25,7 @@ class cis_security_hardening::rules::auditd_delete (
   Boolean $enforce                 = false,
 ) {
   if $enforce {
-    $auid = $facts['operatingsystem'].downcase() ? {
+    $auid = $facts['os']['name'].downcase() ? {
       'rocky'     => 'unset',
       'almalinux' => 'unset',
       default     => '4294967295',
@@ -48,7 +48,7 @@ class cis_security_hardening::rules::auditd_delete (
       target  => $cis_security_hardening::rules::auditd_init::rules_file,
       content => $content_rule1,
     }
-    if  $facts['architecture'] == 'x86_64' or $facts['architecture'] == 'amd64' {
+    if  $facts['os']['architecture'] == 'x86_64' or $facts['os']['architecture'] == 'amd64' {
       $content_rule2 = $os ? {
         'almalinux' => "-a always,exit -F arch=b64 -S unlink,unlinkat,rename,renameat -F auid>=${uid} -F auid!=${auid} -k delete",
         'rocky'     => "-a always,exit -F arch=b64 -S unlink,unlinkat,rename,renameat -F auid>=${uid} -F auid!=${auid} -k delete",

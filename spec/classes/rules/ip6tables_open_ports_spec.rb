@@ -9,7 +9,7 @@ describe 'cis_security_hardening::rules::ip6tables_open_ports' do
     enforce_options.each do |enforce|
       context "on #{os} with enforce = #{enforce} with ipv6" do
         let(:facts) do
-          os_facts.merge!(
+          os_facts.merge(
             'network6' => '1.2.3.4',
             'cis_security_hardening' => {
               'ip6tables' => {

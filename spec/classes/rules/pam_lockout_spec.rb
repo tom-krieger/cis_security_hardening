@@ -25,7 +25,7 @@ describe 'cis_security_hardening::rules::pam_lockout' do
     enforce_options.each do |enforce|
       context "on #{os} with enforce = #{enforce}" do
         let(:facts) do
-          os_facts.merge!(
+          os_facts.merge(
             cis_security_hardening: {
               authselect: {
                 profile: 'testprofile',
@@ -52,9 +52,9 @@ describe 'cis_security_hardening::rules::pam_lockout' do
           is_expected.to compile
 
           if enforce
-            if os_facts[:osfamily].casecmp('redhat').zero?
+            if os_facts[:os]['family'].casecmp('redhat').zero?
 
-              if os_facts[:operatingsystemmajrelease] == '7'
+              if os_facts[:os]['release']['major'] == '7'
                 is_expected.to contain_file_line('faillock args')
                   .with(
                     'ensure'             => 'present',
@@ -147,7 +147,7 @@ describe 'cis_security_hardening::rules::pam_lockout' do
                   .that_notifies('Exec[authselect-apply-changes]')
               end
 
-              if os_facts[:operatingsystem].casecmp('redhat').zero? && os_facts[:operatingsystemmajrelease] >= '8'
+              if os_facts[:os]['name'].casecmp('redhat').zero? && os_facts[:os]['release']['major'] >= '8'
                 is_expected.to contain_file_line('faillock_fail_interval')
                   .with(
                     'ensure'             => 'present',
@@ -212,7 +212,7 @@ describe 'cis_security_hardening::rules::pam_lockout' do
                   )
               end
 
-            elsif os_facts[:osfamily].casecmp('debian').zero?
+            elsif os_facts[:os]['family'].casecmp('debian').zero?
 
               is_expected.not_to contain_file__line('update pam lockout system-auth')
               is_expected.not_to contain_file__line('update pam lockout password-auth')
@@ -251,7 +251,7 @@ describe 'cis_security_hardening::rules::pam_lockout' do
                   'control' => 'required',
                   'module'  => 'pam_tally2.so',
                 )
-            elsif os_facts[:osfamily].casecmp('suse').zero?
+            elsif os_facts[:os]['family'].casecmp('suse').zero?
 
               is_expected.not_to contain_file_line('faillock_fail_interval')
               is_expected.not_to contain_file_line('faillock_deny')

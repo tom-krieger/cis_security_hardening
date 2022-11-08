@@ -19,7 +19,7 @@ describe 'cis_security_hardening::rules::chrony' do
             }
           end
 
-          if enforce && !os_facts[:operatingsystem].casecmp('sles').zero?
+          if enforce && !os_facts[:os]['name'].casecmp('sles').zero?
             it { is_expected.to create_echo('no ntp servers warning').with_message(%r{You have not defined any ntp servers, time updating may not work unless provided by your network DHCP}) }
           end
         end
@@ -52,13 +52,13 @@ describe 'cis_security_hardening::rules::chrony' do
                   'makestep_updates' => -1,
                 )
 
-              if os_facts[:operatingsystem].casecmp('ubuntu').zero?
+              if os_facts[:os]['name'].casecmp('ubuntu').zero?
                 is_expected.to contain_package('ntp')
                   .with(
                     'ensure' => 'purged',
                   )
-              elsif os_facts[:operatingsystem].casecmp('rocky').zero? || os_facts[:operatingsystem].casecmp('almalinux').zero? ||
-                    os_facts[:operatingsystem].casecmp('redhst').zero? || os_facts[:operatingsystem].casecmp('centos').zero?
+              elsif os_facts[:os]['name'].casecmp('rocky').zero? || os_facts[:os]['name'].casecmp('almalinux').zero? ||
+                    os_facts[:os]['name'].casecmp('redhst').zero? || os_facts[:os]['name'].casecmp('centos').zero?
                 is_expected.to contain_file('/etc/sysconfig/chronyd')
                   .with(
                     'ensure'  => 'file',
