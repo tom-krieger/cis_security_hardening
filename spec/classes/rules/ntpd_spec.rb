@@ -23,8 +23,7 @@ describe 'cis_security_hardening::rules::ntpd' do
           if enforce && !os_facts[:os]['name'].casecmp('sles').zero?
             it {
               is_expected.to compile
-              is_expected.to create_class('cis_security_hardening::rules::ntpd')
-              is_expected.to contain_class('ntp')
+              is_expected.to create_class('ntp')
             }
           end
         end
@@ -46,8 +45,7 @@ describe 'cis_security_hardening::rules::ntpd' do
 
             if enforce && !os_facts[:os]['name'].casecmp('sles').zero?
 
-              is_expected.to create_class('cis_security_hardening::rules::ntpd')
-              is_expected.to contain_class('ntp')
+              is_expected.to create_class('ntp')
                 .with(
                   'servers'         => ['10.10.10.1', '10.10.10.2'],
                   'restrict'        => ['127.0.0.1'],
