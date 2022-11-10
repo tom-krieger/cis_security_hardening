@@ -21,7 +21,10 @@ describe 'cis_security_hardening::rules::ntpd' do
           end
 
           if enforce && !os_facts[:os]['name'].casecmp('sles').zero?
-            it { is_expected.to create_echo('no ntp servers warning').with_message(%r{You have not defined any ntp servers, time updating may not work unless provided by your network DHCP}) }
+            it {
+              is_expected.to compile
+              is_expected.to create_class('ntp')
+            }
           end
         end
 
