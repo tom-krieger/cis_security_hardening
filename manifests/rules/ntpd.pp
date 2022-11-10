@@ -35,7 +35,7 @@
 #    Manage ntp service
 #
 # @example
-#   class { 'cis_security_hardening::rules::ntp':
+#   class { 'cis_security_hardening::rules::ntpd':
 #       enforce => true,
 #       ntp_daemon => 'ntp',  
 #       ntp_servers => ['server1', 'server2'],
