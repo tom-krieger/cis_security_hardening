@@ -85,7 +85,10 @@ cis_security_hardening::rules::motd_perms::content: |
   ###################################################################
   
 cis_security_hardening::rules::issue_perms::enforce: true
+cis_security_hardening::rules::issue_perms::content: '%{lookup("cis_security_hardening::rules::motd_perms::content")}'
 cis_security_hardening::rules::issue_net_perms::enforce: true
+cis_security_hardening::rules::issue_net_perms::content: '%{lookup("cis_security_hardening::rules::motd_perms::content")}'
+
 cis_security_hardening::rules::gnome_gdm::enforce: true
 cis_security_hardening::rules::xdmcp_config::enforce: true
 cis_security_hardening::rules::gdm_lock_enabled::enforce: true

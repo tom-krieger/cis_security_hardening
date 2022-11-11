@@ -131,13 +131,17 @@ cis_security_hardening::rules::motd_perms::content: |
   
 
 cis_security_hardening::rules::issue_perms::enforce: true
-cis_security_hardening::rules::issue_perms::content: ''
+cis_security_hardening::rules::issue_perms::content: '%{lookup("cis_security_hardening::rules::motd_perms::content")}'
 cis_security_hardening::rules::issue_net_perms::enforce: true
-cis_security_hardening::rules::issue_net_perms::content: ''
+cis_security_hardening::rules::issue_net_perms::content: '%{lookup("cis_security_hardening::rules::motd_perms::content")}'
+
 cis_security_hardening::rules::gnome_gdm::enforce: true
 cis_security_hardening::rules::gnome_gdm_package::enforce: true
+
 cis_security_hardening::rules::xdmcp_config::enforce: true
+
 cis_security_hardening::rules::gdm_auto_mount::enforce: true
+
 cis_security_hardening::rules::crypto_policy::enforce: true
 cis_security_hardening::rules::crypto_policy::crypto_policy: FUTURE
 cis_security_hardening::rules::crypto_policy::auto_reboot: true
