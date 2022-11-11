@@ -42,49 +42,37 @@ class cis_security_hardening::rules::grub_password (
     if !$grub_password_pbkdf2 {
       fail('Enforcing a grub boot password needs a grub password to be defined. Please define an encrypted grub password in Hiera.')
     } else {
-      $efi_grub_cfg = "/boot/efi/EFI/${facts['os']['name'].downcase()}/grub.cfg"
+    $grub_path = fact('cis_security_hardening.efi') ? {
+      true    => "/boot/efi/EFI/${facts['os']['name'].downcase()}",
+      default => '/boot/grub2',
+    }
 
       case $facts['os']['family'].downcase() {
         'redhat': {
-          $notify =  fact('cis_security_hardening.efi') ? {
-            true    => [Exec['bootpw-grub-config'], Exec['bootpw-grub-config-efi']],
-            default => Exec['bootpw-grub-config'],
-          }
 
-          file { '/boot/grub2/user.cfg':
+          file { "${grub_path}/user.cfg":
             ensure  => file,
             content => "GRUB2_PASSWORD=${grub_password_pbkdf2}",
             owner   => 'root',
             group   => 'root',
-            mode    => '0600',
-            notify  => $notify,
+            mode    => fact('cis_security_hardening.efi') ? { true => '0700', default => '0600'},
+            notify  => Exec['bootpw-grub-config'],
           }
 
           exec { 'bootpw-grub-config':
-            command     => 'grub2-mkconfig -o /boot/grub2/grub.cfg',
-            path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-            refreshonly => true,
-          }
-
-          exec { 'bootpw-grub-config-efi':
-            command     => "grub2-mkconfig -o ${efi_grub_cfg}",
+            command     => "grub2-mkconfig -o ${grub_path}/grub.cfg",
             path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
             refreshonly => true,
           }
         }
         'debian': {
-          $notify =  fact('cis_security_hardening.efi') ? {
-            true    => [Exec['bootpw-grub-config-ubuntu'], Exec['bootpw-grub-config-ubuntu-efi']],
-            default => Exec['bootpw-grub-config-ubuntu'],
-          }
-
           file_line { 'grub-unrestricted':
             ensure             => present,
             path               => '/etc/grub.d/10_linux',
             line               => 'CLASS="--class gnu-linux --class gnu --class os --unrestricted"',
             match              => '^CLASS="--class gnu-linux --class gnu --class os"',
             append_on_no_match => false,
-            notify             => $notify,
+            notify             => Exec['bootpw-grub-config-ubuntu'],
           }
 
           file { '/etc/grub.d/50_custom':
@@ -95,27 +83,16 @@ class cis_security_hardening::rules::grub_password (
             owner   => 'root',
             group   => 'root',
             mode    => '0755',
-            notify  => $notify,
+            notify  => Exec['bootpw-grub-config-ubuntu'],
           }
 
           exec { 'bootpw-grub-config-ubuntu':
-            command     => 'update-grub',
-            path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-            refreshonly => true,
-          }
-
-          exec { 'bootpw-grub-config-ubuntu-efi':
-            command     => "update-grub -o ${efi_grub_cfg}",
+            command     => fact('cis_security_hardening.efi') ? { true => "update-grub -o ${grub_path}/grub.cfg", default => 'update-grub'},
             path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
             refreshonly => true,
           }
         }
         'suse': {
-          $notify =  fact('cis_security_hardening.efi') ? {
-            true    => [Exec['bootpw-grub-config-sles'], Exec['bootpw-grub-config-sles-efi']],
-            default => Exec['bootpw-grub-config-sles'],
-          }
-
           file { '/etc/grub.d/40_custom':
             ensure  => file,
             content => epp('cis_security_hardening/rules/common/ubuntu_grub_user.cfg.epp', {
@@ -124,17 +101,11 @@ class cis_security_hardening::rules::grub_password (
             owner   => 'root',
             group   => 'root',
             mode    => '0755',
-            notify  => $notify,
+            notify  => Exec['bootpw-grub-config-sles'],
           }
 
           exec { 'bootpw-grub-config-sles':
-            command     => 'grub2-mkconfig -o /boot/grub2/grub.cfg',
-            path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-            refreshonly => true,
-          }
-
-          exec { 'bootpw-grub-config-sles-efi':
-            command     => "grub2-mkconfig -o ${efi_grub_cfg}",
+            command     => "grub2-mkconfig -o ${grub_path}/grub.cfg",
             path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
             refreshonly => true,
           }
