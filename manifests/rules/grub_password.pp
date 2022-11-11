@@ -42,9 +42,9 @@ class cis_security_hardening::rules::grub_password (
     if !$grub_password_pbkdf2 {
       fail('Enforcing a grub boot password needs a grub password to be defined. Please define an encrypted grub password in Hiera.')
     } else {
-    $grub_path = fact('cis_security_hardening.efi') ? {
-      true    => "/boot/efi/EFI/${facts['os']['name'].downcase()}",
-      default => '/boot/grub2',
+      $grub_path = fact('cis_security_hardening.efi') ? {
+        true    => "/boot/efi/EFI/${facts['os']['name'].downcase()}",
+        default => '/boot/grub2',
     }
 
       case $facts['os']['family'].downcase() {
