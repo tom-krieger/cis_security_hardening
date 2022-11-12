@@ -22,16 +22,12 @@
 #
 # @api private
 class cis_security_hardening::rules::rsyslog_remote_logs (
-  Boolean $enforce        = false,
-  String $remote_log_host = '',
+  Boolean $enforce                        = false,
+  Optional[Stdlib::Host] $remote_log_host = undef,
 ) {
   if $enforce {
-    if $remote_log_host == '' {
-      echo { 'no remote log host warning':
-        message  => 'You have not defined a remote log host, remote syslog is not activated therefore',
-        loglevel => 'warning',
-        withpath => false,
-      }
+    if !$remote_log_host {
+      fail('You have not defined a remote log host.')
     } else {
       file_line { 'rsyslog-remote-log-host':
         ensure  => present,

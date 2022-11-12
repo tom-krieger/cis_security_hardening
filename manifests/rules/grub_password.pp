@@ -45,17 +45,16 @@ class cis_security_hardening::rules::grub_password (
       $grub_path = fact('cis_security_hardening.efi') ? {
         true    => "/boot/efi/EFI/${facts['os']['name'].downcase()}",
         default => '/boot/grub2',
-    }
+      }
 
       case $facts['os']['family'].downcase() {
         'redhat': {
-
           file { "${grub_path}/user.cfg":
             ensure  => file,
             content => "GRUB2_PASSWORD=${grub_password_pbkdf2}",
             owner   => 'root',
             group   => 'root',
-            mode    => fact('cis_security_hardening.efi') ? { true => '0700', default => '0600'},
+            mode    => fact('cis_security_hardening.efi') ? { true => '0700', default => '0600' },
             notify  => Exec['bootpw-grub-config'],
           }
 
@@ -87,7 +86,10 @@ class cis_security_hardening::rules::grub_password (
           }
 
           exec { 'bootpw-grub-config-ubuntu':
-            command     => fact('cis_security_hardening.efi') ? { true => "update-grub -o ${grub_path}/grub.cfg", default => 'update-grub'},
+            command     => fact('cis_security_hardening.efi') ? {
+              true    => "update-grub -o ${grub_path}/grub.cfg",
+              default => 'update-grub'
+            },
             path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
             refreshonly => true,
           }

@@ -52,27 +52,34 @@ describe 'cis_security_hardening::rules::rsyslog_remote_logs' do
         let(:params) do
           {
             'enforce' => enforce,
-            'remote_log_host' => '',
+            'remote_log_host' => :undef,
           }
         end
 
         it {
-          is_expected.to compile
-
           if enforce
-            is_expected.to contain_echo('no remote log host warning')
-              .with(
-                  'message'  => 'You have not defined a remote log host, remote syslog is not activated therefore',
-                  'loglevel' => 'warning',
-                  'withpath' => false,
-                )
+            is_expected.to compile.and_raise_error(%r{You have not defined a remote log host.})
           else
-            is_expected.not_to contain_echo('no remote log host warning')
+            is_expected.to compile
+            is_expected.not_to contain_file_line('rsyslog-remote-log-host')
           end
-
-          is_expected.not_to contain_file_line('rsyslog-remote-log-host')
         }
       end
+    end
+
+    context "on #{os} and invalid remote host" do
+      let(:facts) { os_facts }
+      let(:params) do
+        {
+          'enforce' => true,
+          'remote_log_host' => ' ',
+        }
+      end
+
+      it {
+        #is_expected.to compile
+        is_expected.to compile.and_raise_error(%r{parameter 'remote_log_host' expects a Stdlib::Host})
+      }
     end
   end
 end
