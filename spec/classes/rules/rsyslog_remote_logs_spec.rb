@@ -77,7 +77,6 @@ describe 'cis_security_hardening::rules::rsyslog_remote_logs' do
       end
 
       it {
-        #is_expected.to compile
         is_expected.to compile.and_raise_error(%r{parameter 'remote_log_host' expects a Stdlib::Host})
       }
     end
