@@ -272,7 +272,7 @@ cis_security_hardening::rules::rsyslog_logging::log_config:
     src: "daemon.*"
     dst: "/var/log/daemon.log"
 cis_security_hardening::rules::rsyslog_remote_logs::enforce: true
-cis_security_hardening::rules::rsyslog_remote_logs::remote_log_host: 10.10.10.10
+cis_security_hardening::rules::rsyslog_remote_logs::remote_log_host: ~
 cis_security_hardening::rules::rsyslog_remote_syslog::enforce: true
 cis_security_hardening::rules::rsyslog_remote_syslog::is_loghost: false
 cis_security_hardening::rules::journald_rsyslog::enforce: true
