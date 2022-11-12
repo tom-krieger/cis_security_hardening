@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.7.10
+
+* Refactor grub_password.pp to create user.cfg in correct path on RedHat
+* ensure all ntp restrict defaults to match CIS requirements
+* remove default rsyslog server as not required, class will fail if no remote syslog server is defined
+* changed `remote_log_host` parameter to type Stdlib::Host
+
 ## Release 0.7.9
 
 > This release changes the default values for `ntp_statsdir` and `ntp_driftfile`. Please check your configurations if needed.
