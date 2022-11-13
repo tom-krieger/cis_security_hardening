@@ -433,7 +433,7 @@ cis_security_hardening::rules::sshd_max_auth_tries::max_auth_tries: 4
 cis_security_hardening::rules::sshd_ignore_rhosts::enforce: true
 cis_security_hardening::rules::sshd_hostbased_authentication::enforce: true
 cis_security_hardening::rules::sshd_root_login::enforce: true
-cis_security_hardening::rules::sshd_root_login::permitrootlogin: no
+cis_security_hardening::rules::sshd_root_login::permitrootlogin: 'no'
 cis_security_hardening::rules::sshd_user_environment::enforce: true
 cis_security_hardening::rules::sshd_ciphers::enforce: true
 cis_security_hardening::rules::sshd_ciphers::ciphers:
