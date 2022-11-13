@@ -6,7 +6,8 @@ All notable changes to this project will be documented in this file.
 
 * Refactor grub_password.pp to create user.cfg in correct path on RedHat
 * ensure all ntp restrict defaults to match CIS requirements
-* remove default rsyslog server as not required, class will fail if no remote syslog server is defined
+* add type to ntp servers array
+* remove default rsyslog server as not required, class will fail if no remote syslog server is defined when remote syslog should be enforced
 * changed `remote_log_host` parameter to type Stdlib::Host
 * sshd permit root login is now configurable
 
