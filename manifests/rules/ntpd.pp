@@ -44,14 +44,14 @@
 #
 # @api private
 class cis_security_hardening::rules::ntpd (
-  Boolean $enforce                    = false,
-  Optional[Array] $ntp_servers,
-  Array $ntp_restrict                 = [],
-  Stdlib::Absolutepath $ntp_driftfile = '/var/lib/ntp/drift',
+  Boolean                        $enforce             = false,
+  Optional[Array[Stdlib::Host]]  $ntp_servers,
+  Array                          $ntp_restrict        = [],
+  Stdlib::Absolutepath           $ntp_driftfile       = '/var/lib/ntp/drift',
   Optional[Stdlib::Absolutepath] $ntp_statsdir,
-  Boolean $ntp_disable_monitor        = true,
-  Boolean $ntp_burst                  = false,
-  Boolean $ntp_service_manage         = true,
+  Boolean                        $ntp_disable_monitor = true,
+  Boolean                        $ntp_burst           = false,
+  Boolean                        $ntp_service_manage  = true,
 ) {
   if $enforce and $facts['os']['name'].downcase() != 'sles' {
     $ntp_default = {
