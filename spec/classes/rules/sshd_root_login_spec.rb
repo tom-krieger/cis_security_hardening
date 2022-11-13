@@ -3,6 +3,7 @@
 require 'spec_helper'
 
 enforce_options = [true, false]
+rootlogin_options = ['yes', 'prohibit-password', 'without-password', 'forced-commands-only', 'no']
 
 describe 'cis_security_hardening::rules::sshd_root_login' do
   let(:pre_condition) do
@@ -17,75 +18,78 @@ describe 'cis_security_hardening::rules::sshd_root_login' do
 
   on_supported_os.each do |os, os_facts|
     enforce_options.each do |enforce|
-      context "on #{os} with enforce = #{enforce}" do
-        let(:facts) do
-          os_facts.merge(
-            'cis_security_hardening' => {
-              'sshd' => {
-                'pub_key_files_status' => false,
-                'pub_key_files' => {
-                  '/etc/ssh/ssh_host_ecdsa_key.pub' => {
-                    'combined' => '0-0-420',
-                    'gid' => '0',
-                    'mode' => '420',
-                    'uid' => '0',
+      rootlogin_options.each do |rootlogin|
+        context "on #{os} with enforce = #{enforce} and root login #{rootlogin}" do
+          let(:facts) do
+            os_facts.merge(
+              'cis_security_hardening' => {
+                'sshd' => {
+                  'pub_key_files_status' => false,
+                  'pub_key_files' => {
+                    '/etc/ssh/ssh_host_ecdsa_key.pub' => {
+                      'combined' => '0-0-420',
+                      'gid' => '0',
+                      'mode' => '420',
+                      'uid' => '0',
+                    },
                   },
+                  'package' => true,
+                  'banner' => 'none',
+                  '/etc/ssh/sshd_config' => {
+                    'uid' => 1,
+                    'gig' => 1,
+                    'mode' => 222,
+                  },
+                  'permitemptypasswords' => 'yes',
+                  'protocol' => '1',
+                  'hostbasedauthentication' => 'yes',
+                  'ignorerhosts' => 'no',
+                  'allowusers' => 'none',
+                  'allowgroups' => 'none',
+                  'denyusers' => 'none',
+                  'denygroups' => 'none',
+                  'logingracetime' => 90,
+                  'loglevel' => 'WARN',
+                  'macs' => ['hmm'],
+                  'maxauthtries' => '5',
+                  'permitrootlogin' => 'yes',
+                  'clientaliveinterval' => 400,
+                  'clientalivecountmax' => 3,
+                  'permituserenvironment' => 'yes',
                 },
-                'package' => true,
-                'banner' => 'none',
-                '/etc/ssh/sshd_config' => {
-                  'uid' => 1,
-                  'gig' => 1,
-                  'mode' => 222,
-                },
-                'permitemptypasswords' => 'yes',
-                'protocol' => '1',
-                'hostbasedauthentication' => 'yes',
-                'ignorerhosts' => 'no',
-                'allowusers' => 'none',
-                'allowgroups' => 'none',
-                'denyusers' => 'none',
-                'denygroups' => 'none',
-                'logingracetime' => 90,
-                'loglevel' => 'WARN',
-                'macs' => ['hmm'],
-                'maxauthtries' => '5',
-                'permitrootlogin' => 'yes',
-                'clientaliveinterval' => 400,
-                'clientalivecountmax' => 3,
-                'permituserenvironment' => 'yes',
               },
-            },
-          )
-        end
+            )
+          end
 
-        let(:params) do
-          {
-            'enforce' => enforce,
+          let(:params) do
+            {
+              'enforce' => enforce,
+              'permitrootlogin' => rootlogin,
+            }
+          end
+
+          it {
+            is_expected.to compile
+
+            if enforce
+              path = if os_facts[:os]['name'] == 'SLES' && os_facts[:os]['release']['major'] == '12'
+                       '/usr/etc/ssh/sshd_config'
+                     else
+                       '/etc/ssh/sshd_config'
+                     end
+              is_expected.to contain_file_line('sshd-root-login')
+                .with(
+                  'ensure' => 'present',
+                  'path'   => path,
+                  'line'   => "PermitRootLogin #{rootlogin}",
+                  'match'  => '^#?PermitRootLogin.*',
+                )
+                .that_notifies('Exec[reload-sshd]')
+            else
+              is_expected.not_to contain_file_line('sshd-root-login')
+            end
           }
         end
-
-        it {
-          is_expected.to compile
-
-          if enforce
-            path = if os_facts[:os]['name'] == 'SLES' && os_facts[:os]['release']['major'] == '12'
-                     '/usr/etc/ssh/sshd_config'
-                   else
-                     '/etc/ssh/sshd_config'
-                   end
-            is_expected.to contain_file_line('sshd-root-login')
-              .with(
-                'ensure' => 'present',
-                'path'   => path,
-                'line'   => 'PermitRootLogin no',
-                'match'  => '^#?PermitRootLogin.*',
-              )
-              .that_notifies('Exec[reload-sshd]')
-          else
-            is_expected.not_to contain_file_line('sshd-root-login')
-          end
-        }
       end
     end
   end

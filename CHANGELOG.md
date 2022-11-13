@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 * ensure all ntp restrict defaults to match CIS requirements
 * remove default rsyslog server as not required, class will fail if no remote syslog server is defined
 * changed `remote_log_host` parameter to type Stdlib::Host
+* sshd permit root login is now configurable
 
 ## Release 0.7.9
 
