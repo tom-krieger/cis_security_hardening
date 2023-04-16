@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.7.11
+
+* Updated to PDK 2.7
+* some linting related to PDK 2.7
+* dropped support for puppet 5 and 6
+
+Thanks to @canihavethisone:
+
+* Updated dependencies, removed version from fixtures, added github_changelog_generator to gemfile
+
 ## Release 0.7.10
 
 * Refactor grub_password.pp to create user.cfg in correct path on RedHat

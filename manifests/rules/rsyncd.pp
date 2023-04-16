@@ -26,7 +26,7 @@ class cis_security_hardening::rules::rsyncd (
         })
 
         if $facts['os']['name'].downcase() == 'debian' {
-          ensure_resource('service', ['rsync'],  {
+          ensure_resource('service', ['rsync'], {
               ensure => 'stopped',
               enable => false,
           })
@@ -43,7 +43,7 @@ class cis_security_hardening::rules::rsyncd (
         } else {
           $rsyncd_srv = 'rsync'
         }
-        ensure_resource('service', [$rsyncd_srv],  {
+        ensure_resource('service', [$rsyncd_srv], {
             ensure => 'stopped',
             enable => false,
         })

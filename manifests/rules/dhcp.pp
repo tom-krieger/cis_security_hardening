@@ -42,7 +42,7 @@ class cis_security_hardening::rules::dhcp (
         })
       }
       default: {
-        ensure_resource('service' ,['dhcpd'], {
+        ensure_resource('service' , ['dhcpd'], {
             ensure => 'stopped',
             enable => false
         })

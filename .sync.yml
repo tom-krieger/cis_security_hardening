@@ -7,8 +7,6 @@ Gemfile:
     ':development':
       - gem: 'puppet-strings'
       - gem: 'puppet_litmus'
-        ref: '~> 0.34.1'
-      - gem: 'puppet-lint-security-plugins'
       - gem: 'puppet-lint-legacy_facts-check'
       - gem: 'github_changelog_generator'
 
