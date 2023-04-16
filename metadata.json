@@ -1,6 +1,6 @@
 {
   "name": "tomkrieger-cis_security_hardening",
-  "version": "0.7.10",
+  "version": "0.7.11",
   "author": "Thomas Krieger",
   "summary": "Secure your systems according to CIS benchmarks",
   "license": "Apache-2.0",
@@ -14,7 +14,7 @@
     },
     {
       "name": "puppetlabs-concat",
-      "version_requirement": ">= 5.0.0 < 8.0.0"
+      "version_requirement": ">= 5.0.0 < 9.0.0"
     },
     {
       "name": "puppet-kmod",
@@ -46,7 +46,7 @@
     },
     {
       "name": "puppetlabs-ntp",
-      "version_requirement": ">= 8.0.0 < 10.0.0"
+      "version_requirement": ">= 8.0.0 < 11.0.0"
     },
     {
       "name": "puppet-chrony",
@@ -54,7 +54,7 @@
     },
     {
       "name": "puppetlabs-firewall",
-      "version_requirement": ">= 2.2.0 < 5.0.0"
+      "version_requirement": ">= 2.2.0 < 6.0.0"
     },
     {
       "name": "puppetlabs-reboot",
@@ -62,7 +62,7 @@
     },
     {
       "name": "puppetlabs-inifile",
-      "version_requirement": ">= 5.2.0 < 6.0.0"
+      "version_requirement": ">= 5.2.0 < 7.0.0"
     }
   ],
   "operatingsystem_support": [
@@ -116,10 +116,10 @@
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 5.5.0 < 8.0.0"
+      "version_requirement": ">= 7.0.0 < 9.0.0"
     }
   ],
-  "pdk-version": "2.5.0",
-  "template-url": "pdk-default#2.5.0",
-  "template-ref": "tags/2.5.0-0-g369d483"
+  "pdk-version": "2.7.1",
+  "template-url": "pdk-default#2.7.4",
+  "template-ref": "tags/2.7.4-0-g58edf57"
 }

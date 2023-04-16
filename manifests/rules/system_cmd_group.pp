@@ -30,11 +30,9 @@ class cis_security_hardening::rules::system_cmd_group (
     $files = fact('cis_security_hardening.system_command_files')
     unless $files == undef {
       $files.each |$file| {
-
         file { $file:
           group => 'root',
         }
-
       }
     }
   }
