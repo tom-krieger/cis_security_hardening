@@ -28,6 +28,7 @@ group :development do
   gem 'puppet_litmus', '~> 0.34.1'
   gem "puppet-lint-security-plugins",                            require: false
   gem "puppet-lint-legacy_facts-check",                          require: false
+  gem "github_changelog_generator"
 end
 group :system_tests do
   gem "puppet-module-posix-system-r#{minor_version}", '~> 1.0', require: false, platforms: [:ruby]

@@ -9,54 +9,20 @@ fixtures:
       repo: 'https://github.com/puppetlabs/provision.git'
       branch: 'main'
   forge_modules:
-    stdlib:
-      repo: "puppetlabs/stdlib"
-      ref: "8.4.0"
-    concat:
-      repo: "puppetlabs/concat"
-      ref: "7.3.0"
-    kmod:
-      repo: "puppet/kmod"
-      ref: "3.2.0"
-    echo:
-      repo: "ipcrm/echo"
-      ref: "0.1.7"
-    sysctl:
-      repo: "thias/sysctl"
-      ref: "1.0.7"
-    augeasproviders_pam:
-      repo: "puppet/augeasproviders_pam"
-      ref: "3.0.1"
-    augeasproviders_core:
-      repo: "puppet/augeasproviders_core"
-      ref: "3.2.0"
-    augeasproviders_grub:
-      repo: "puppet/augeasproviders_grub"
-      ref: "4.0.0"
-    augeas_core:
-      repo: "puppetlabs/augeas_core"
-      ref: "1.2.0"
-    logrotate:
-      repo: "puppet/logrotate"
-      ref: "6.1.0"
-    ntp:
-      repo: "puppetlabs/ntp"
-      ref: "9.2.0"
-    chrony:
-      repo: "puppet/chrony"
-      ref: "2.5.0"
-    firewall:
-      repo: "puppetlabs/firewall"
-      ref: "3.6.0"
-    reboot:
-      repo: "puppetlabs/reboot"
-      ref: "4.3.0"
-    inifile:
-      repo: "puppetlabs/inifile"
-      ref: "5.4.0"
-    puppet_agent:
-      repo: "puppetlabs/puppet_agent"
-      ref: "4.12.1"
-    facts:
-      repo: "puppetlabs/facts"
-      ref: "1.4.0"
+    stdlib:               "puppetlabs/stdlib"
+    concat:               "puppetlabs/concat"
+    kmod:                 "puppet/kmod"
+    echo:                 "ipcrm/echo"
+    sysctl:               "thias/sysctl"
+    augeasproviders_pam:  "puppet/augeasproviders_pam"
+    augeasproviders_core: "puppet/augeasproviders_core"
+    augeasproviders_grub: "puppet/augeasproviders_grub"
+    augeas_core:          "puppetlabs/augeas_core"
+    logrotate:            "puppet/logrotate"
+    ntp:                  "puppetlabs/ntp"
+    chrony:               "puppet/chrony"
+    firewall:             "puppetlabs/firewall"
+    reboot:               "puppetlabs/reboot"
+    inifile:              "puppetlabs/inifile"
+    puppet_agent:         "puppetlabs/puppet_agent"
+    facts:                "puppetlabs/facts"
