@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.7.13
+
+* omit comments during /etc/fstab reading
+
 ## Release 0.7.12
 
 * updated dependencies
