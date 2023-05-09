@@ -58,7 +58,7 @@
     },
     {
       "name": "puppetlabs-reboot",
-      "version_requirement": ">= 4.0.2 < 5.0.0"
+      "version_requirement": ">= 4.0.2 < 6.0.0"
     },
     {
       "name": "puppetlabs-inifile",
