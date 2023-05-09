@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.7.12
+
+* updated dependencies
+* fixed nfs fact
+
 ## Release 0.7.11
 
 * Updated to PDK 2.7
