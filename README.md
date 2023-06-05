@@ -100,11 +100,11 @@ The `data` folder contains example Hiera definitions for various operation syste
 
 Gathering information can sometime consume a lot of time. Gathering those facts during Puppet runs would have a significat impact on the time consumed by a Puppet run. Therefore some facts are only gathered once a day using cronjobs. The `cis_security_hardening` module installes the following cronjobs to collect information and provide the information to the fact scripts creating the `cis_security_hardening` fact.
 
-#### Cron /etc/cron.d/sticky-world-writebale.cron
+#### Cron /etc/cron.d/sticky-world-writebale
 
 This cronjob searches for world writable files with sticky bit.
 
-#### /etc/cron.d/auditd_priv_commands.cron
+#### /etc/cron.d/auditd_priv_commands
 
 This cronjob searched privileged commands to be included into auditd rules.
 
