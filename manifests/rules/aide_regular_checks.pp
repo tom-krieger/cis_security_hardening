@@ -41,7 +41,10 @@ class cis_security_hardening::rules::aide_regular_checks (
     }
 
     if ! empty($content) {
-      file { '/etc/cron.d/aide.cron':
+      ile { '/etc/cron.d/aide.cron':
+        ensure  => absent,
+      }
+      file { '/etc/cron.d/aide':
         ensure  => file,
         owner   => 'root',
         group   => 'root',

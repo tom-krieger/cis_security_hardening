@@ -30,6 +30,9 @@ class cis_security_hardening::auditd_cron (
 ) {
   if ! empty($dirs_to_include) {
     file { '/etc/cron.d/auditd_priv_commands.cron':
+      ensure  => absent,
+    }
+    file { '/etc/cron.d/auditd_priv_commands':
       ensure  => file,
       content => epp('cis_security_hardening/auditd_priv_cmds.cron.epp', {
           minute      => $start_time_minute,

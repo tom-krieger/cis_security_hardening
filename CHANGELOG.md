@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.8.0
+
+* added Debian11 support
+* renamed cronjbs in /etc/cron.d and removed `.cron` extension from filenames
+
 ## Release 0.7.13
 
 * omit comments during /etc/fstab reading

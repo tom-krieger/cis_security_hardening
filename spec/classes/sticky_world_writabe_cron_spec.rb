@@ -26,6 +26,11 @@ describe 'cis_security_hardening::sticky_world_writable_cron' do
           )
         is_expected.to contain_file('/etc/cron.d/sticky-world-writebale.cron')
           .with(
+            'ensure'  => 'absent',
+          )
+
+        is_expected.to contain_file('/etc/cron.d/sticky-world-writebale')
+          .with(
             'ensure'  => 'file',
             'owner'   => 'root',
             'group'   => 'root',

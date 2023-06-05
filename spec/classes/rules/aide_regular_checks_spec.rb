@@ -19,12 +19,17 @@ describe 'cis_security_hardening::rules::aide_regular_checks' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file('/etc/cron.d/aide.cron')
+            is_expected.to contain_file('/etc/cron.d/aide')
               .with(
                 'ensure' => 'file',
                 'owner'  => 'root',
                 'group'  => 'root',
                 'mode'   => '0644',
+              )
+
+            s_expected.to contain_file('/etc/cron.d/aide.cron')
+              .with(
+                'ensure' => 'absent',
               )
           end
         }
