@@ -19,7 +19,7 @@
 class cis_security_hardening::rules::home_nosuid (
   Boolean $enforce = false,
 ) {
-  if ($enforce) and has_key($facts['mountpoints'], '/home') {
+  if ($enforce) and cis_security_hardening::hash_key($facts['mountpoints'], '/home') {
     cis_security_hardening::set_mount_options { '/home-nosuid':
       mountpoint   => '/home',
       mountoptions => 'nosuid',

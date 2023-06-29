@@ -19,7 +19,7 @@
 class cis_security_hardening::rules::var_tmp_noexec (
   Boolean $enforce = false,
 ) {
-  if ($enforce) and has_key($facts['mountpoints'], '/var/tmp') {
+  if ($enforce) and cis_security_hardening::hash_key($facts['mountpoints'], '/var/tmp') {
     cis_security_hardening::set_mount_options { '/var/tmp-noexec':
       mountpoint   => '/var/tmp',
       mountoptions => 'noexec',
