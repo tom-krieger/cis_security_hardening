@@ -19,7 +19,7 @@
 class cis_security_hardening::rules::var_nosuid (
   Boolean $enforce = false,
 ) {
-  if ($enforce) and has_key($facts['mountpoints'], '/var') {
+  if ($enforce) and cis_security_hardening::hash_key($facts['mountpoints'], '/var') {
     cis_security_hardening::set_mount_options { '/var-nosuid':
       mountpoint   => '/var',
       mountoptions => 'nosuid',

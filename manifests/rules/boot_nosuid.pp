@@ -20,7 +20,7 @@
 class cis_security_hardening::rules::boot_nosuid (
   Boolean $enforce = false,
 ) {
-  if ($enforce) and has_key($facts['mountpoints'], '/boot') {
+  if ($enforce) and cis_security_hardening::hash_key($facts['mountpoints'], '/boot') {
     cis_security_hardening::set_mount_options { '/boot-nosuid':
       mountpoint   => '/boot',
       mountoptions => 'nosuid',

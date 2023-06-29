@@ -24,7 +24,9 @@ class cis_security_hardening::rules::tmp_nosuid (
       undef   => {},
       default => fact('mountpoints')
     }
-    if has_key($mps, '/tmp') and has_key($mps['/tmp'], 'device') and $mps['/tmp']['device'] != 'tmpfs' {
+    if cis_security_hardening::hash_key($mps, '/tmp') and
+    cis_security_hardening::hash_key($mps['/tmp'], 'device') and
+    $mps['/tmp']['device'] != 'tmpfs' {
       cis_security_hardening::set_mount_options { '/tmp-nosuid':
         mountpoint   => '/tmp',
         mountoptions => 'nosuid',

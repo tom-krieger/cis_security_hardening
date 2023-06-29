@@ -24,7 +24,7 @@ class cis_security_hardening::rules::ufw_open_ports (
 ) {
   if $enforce {
     $firewall_rules.each |$title, $data| {
-      if has_key($data, 'action') {
+      if cis_security_hardening::hash_key($data, 'action') {
         unless $data['action'] =~ /\W*/ {
           fail("Illegal action: ${data['action']}")
         }
@@ -33,7 +33,7 @@ class cis_security_hardening::rules::ufw_open_ports (
         $action = ''
       }
 
-      if has_key($data, 'queue') {
+      if cis_security_hardening::hash_key($data, 'queue') {
         unless $data['queue'] =~ /\W*/ {
           fail("Illegal queue: ${data['queue']}")
         }
@@ -42,7 +42,7 @@ class cis_security_hardening::rules::ufw_open_ports (
         $queue =''
       }
 
-      if has_key($data, 'port') {
+      if cis_security_hardening::hash_key($data, 'port') {
         unless $data['port'] =~ /^\d+$/ {
           fail("Illegal port: ${data['port']}")
         }
@@ -52,7 +52,7 @@ class cis_security_hardening::rules::ufw_open_ports (
       }
 
       if ($data['queue'] == 'in') {
-        if(has_key($data, 'from')) {
+        if(cis_security_hardening::hash_key($data, 'from')) {
           unless $data['from'] =~ /^[a-zA-Z0-9\-_\.]+$/ {
             fail("Illegal from value: ${data['from']}")
           }
@@ -61,7 +61,7 @@ class cis_security_hardening::rules::ufw_open_ports (
           $from = ''
         }
 
-        if (has_key($data, 'to')) {
+        if (cis_security_hardening::hash_key($data, 'to')) {
           unless $data['to'] =~ /^[a-zA-Z0-9\-_\.]+$/ {
             fail("Illegal to value: ${data['to']}")
           }
@@ -70,7 +70,7 @@ class cis_security_hardening::rules::ufw_open_ports (
           $to = ''
         }
 
-        if has_key($data, 'proto') {
+        if cis_security_hardening::hash_key($data, 'proto') {
           unless $data['proto'] in ['tcp', 'udp', 'icmp'] {
             fail("Illegal protocol: ${data['proto']}")
           }

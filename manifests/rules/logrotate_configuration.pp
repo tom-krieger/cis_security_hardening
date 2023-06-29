@@ -25,8 +25,8 @@ class cis_security_hardening::rules::logrotate_configuration (
   String $permission  = '640',
 ) {
   if
-  has_key($facts, 'cis_security_hardening') and
-  has_key($facts['cis_security_hardening'], 'logrotate_conf') {
+  cis_security_hardening::hash_key($facts, 'cis_security_hardening') and
+  cis_security_hardening::hash_key($facts['cis_security_hardening'], 'logrotate_conf') {
     $facts['cis_security_hardening']['logrotate_conf'].each |$file, $data| {
       $match   = "${data['action']} ${data['mode']} ${data['user']} ${data['group']}"
       $replace = "${data['action']} ${permission} ${data['user']} ${data['group']}"

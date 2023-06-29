@@ -22,7 +22,7 @@
 class cis_security_hardening::rules::boot_efi_nosuid (
   Boolean $enforce = false,
 ) {
-  if ($enforce) and has_key($facts['mountpoints'], '/boot/efi') {
+  if ($enforce) and cis_security_hardening::hash_key($facts['mountpoints'], '/boot/efi') {
     cis_security_hardening::set_mount_options { '/boot/efi-nosuid':
       mountpoint   => '/boot/efi',
       mountoptions => 'nosuid',
