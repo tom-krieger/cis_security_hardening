@@ -9,7 +9,10 @@ fixtures:
       repo: 'https://github.com/puppetlabs/provision.git'
       branch: 'main'
   forge_modules:
-    stdlib:               "puppetlabs/stdlib"
+    # stdlib:               "puppetlabs/stdlib"
+    stdlib:
+      repo: "puppetlabs/stdlib"
+      ref: "8.6.0"
     concat:               "puppetlabs/concat"
     kmod:                 "puppet/kmod"
     echo:                 "ipcrm/echo"
