@@ -19,7 +19,7 @@
 class cis_security_hardening::rules::dev_shm_noexec (
   Boolean $enforce = false,
 ) {
-  if ($enforce) and has_key($facts['mountpoints'], '/dev/shm') {
+  if ($enforce) and cis_security_hardening::hash_key($facts['mountpoints'], '/dev/shm') {
     cis_security_hardening::set_mount_options { '/dev/shm-noexec':
       mountpoint   => '/dev/shm',
       mountoptions => 'noexec',

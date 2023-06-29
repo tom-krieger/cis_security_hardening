@@ -98,19 +98,19 @@ class cis_security_hardening (
   $key = "cis_security_hardening::benchmark::${os}::${os_vers}"
   $benchmark = lookup($key, undef, undef, {})
 
-  if has_key($benchmark, 'bundles') {
+  if cis_security_hardening::hash_key($benchmark, 'bundles') {
     $benchmark['bundles'].each |$bundle, $bundle_data| {
-      $level1 = has_key($bundle_data, 'level1') ? {
+      $level1 = cis_security_hardening::hash_key($bundle_data, 'level1') ? {
         true  => $bundle_data['level1'],
         false => [],
       }
 
-      $level2 = has_key($bundle_data, 'level2') ? {
+      $level2 = cis_security_hardening::hash_key($bundle_data, 'level2') ? {
         true  => $bundle_data['level2'],
         false => [],
       }
 
-      $stig = has_key($bundle_data, 'stig') ? {
+      $stig = cis_security_hardening::hash_key($bundle_data, 'stig') ? {
         true => $bundle_data['stig'],
         false => [],
       }

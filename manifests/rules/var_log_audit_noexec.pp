@@ -19,7 +19,7 @@
 class cis_security_hardening::rules::var_log_audit_noexec (
   Boolean $enforce = false,
 ) {
-  if ($enforce) and has_key($facts['mountpoints'], '/var/log/audit') {
+  if ($enforce) and cis_security_hardening::hash_key($facts['mountpoints'], '/var/log/audit') {
     cis_security_hardening::set_mount_options { '/var/log/audit-noexec':
       mountpoint   => '/var/log/audit',
       mountoptions => 'noexec',

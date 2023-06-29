@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 * added Debian11 support
 * renamed cronjobs in /etc/cron.d and removed `.cron` extension from filenames
+* added replacement for has_key
 
 ## Release 0.7.13
 
