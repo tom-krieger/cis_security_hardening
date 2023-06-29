@@ -27,7 +27,7 @@ describe 'cis_security_hardening::rules::aide_regular_checks' do
                 'mode'   => '0644',
               )
 
-            s_expected.to contain_file('/etc/cron.d/aide.cron')
+            is_expected.to contain_file('/etc/cron.d/aide.cron')
               .with(
                 'ensure' => 'absent',
               )

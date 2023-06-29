@@ -30,10 +30,10 @@ class cis_security_hardening::rules::aide_regular_checks (
   if $enforce {
     case $facts['os']['name'].downcase() {
       'centos', 'redhat', 'sles', 'almalinux', 'rocky': {
-        $content = "${hour} ${minute} * * * root /usr/sbin/aide --check"
+        $content = "${hour} ${minute} * * * root /usr/sbin/aide --check\n"
       }
       'ubuntu', 'debian': {
-        $content = "${hour} ${minute} * * * /usr/bin/aide.wrapper --config /etc/aide/aide.conf --check"
+        $content = "${hour} ${minute} * * * /usr/bin/aide.wrapper --config /etc/aide/aide.conf --check\n"
       }
       default: {
         $content = ''
@@ -41,7 +41,7 @@ class cis_security_hardening::rules::aide_regular_checks (
     }
 
     if ! empty($content) {
-      ile { '/etc/cron.d/aide.cron':
+      file { '/etc/cron.d/aide.cron':
         ensure  => absent,
       }
       file { '/etc/cron.d/aide':
