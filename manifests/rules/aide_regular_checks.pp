@@ -1,4 +1,4 @@
-# @summary 
+# @summary
 #    Ensure filesystem integrity is regularly checked 
 #
 # Periodic checking of the filesystem integrity is needed to detect changes to the filesystem.
