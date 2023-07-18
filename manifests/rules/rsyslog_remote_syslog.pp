@@ -1,4 +1,4 @@
-# @summary 
+# @summary
 #    Ensure remote rsyslog messages are only accepted on designated log hosts. 
 #
 # By default, rsyslog does not listen for log messages coming in from remote systems. The ModLoad tells rsyslog 
@@ -37,6 +37,7 @@ class cis_security_hardening::rules::rsyslog_remote_syslog (
         match              => '^#.*\$ModLoad.*imtcp',
         append_on_no_match => true,
         require            => Package['rsyslog'],
+        notify             => Exec['reload-rsyslog'],
       }
 
       file_line { 'rsyslog.conf add InputTCPServerRun':
@@ -45,6 +46,7 @@ class cis_security_hardening::rules::rsyslog_remote_syslog (
         line    => '$InputTCPServerRun 514',
         match   => '\$InputTCPServerRun',
         require => Package['rsyslog'],
+        notify  => Exec['reload-rsyslog'],
       }
     } else {
       file_line { 'rsyslog.conf remove ModLoad':
@@ -53,6 +55,7 @@ class cis_security_hardening::rules::rsyslog_remote_syslog (
         line    => '# $ModLoad imtcp',
         match   => '^\$ModLoad.*imtcp',
         require => Package['rsyslog'],
+        notify  => Exec['reload-rsyslog'],
       }
 
       file_line { 'rsyslog.conf remove InputTCPServerRun':
@@ -61,6 +64,7 @@ class cis_security_hardening::rules::rsyslog_remote_syslog (
         line    => '#$InputTCPServerRun 514',
         match   => '\$InputTCPServerRun',
         require => Package['rsyslog'],
+        notify  => Exec['reload-rsyslog'],
       }
     }
   }

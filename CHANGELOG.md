@@ -6,7 +6,8 @@ All notable changes to this project will be documented in this file.
 
 * added Debian11 support
 * renamed cronjobs in /etc/cron.d and removed `.cron` extension from filenames
-* added replacement for has_key
+* added replacement for has_key (deprecated in stdlib and was now removed)
+* fix for issue #48, rsyslogd service is now notifed when rsyslogd.conf is changed.<br>Thanks to Ben Parry
 
 ## Release 0.7.13
 
