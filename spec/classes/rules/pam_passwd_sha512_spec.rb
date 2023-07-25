@@ -100,16 +100,29 @@ describe 'cis_security_hardening::rules::pam_passwd_sha512' do
                 is_expected.not_to contain_exec('update authselect config for sha512 password-auth')
                 is_expected.not_to contain_exec('switch sha512 on')
 
-                is_expected.to contain_pam('pam-common-password-unix')
-                  .with(
+                if os_facts[:os]['name'].casecmp('debian').zero? && os_facts[:os]['release']['major'] > '10'
+                  is_expected.to contain_pam('pam-common-password-unix')
+                    .with(
                     'ensure'           => 'present',
                     'service'          => 'common-password',
                     'type'             => 'password',
                     'control'          => '[success=1 default=ignore]',
                     'control_is_param' => true,
                     'module'           => 'pam_unix.so',
-                    'arguments'        => ['sha512'],
+                    'arguments'        => ['obscure', 'use_authok', 'try_first_pass'],
                   )
+                else
+                  is_expected.to contain_pam('pam-common-password-unix')
+                    .with(
+                      'ensure'           => 'present',
+                      'service'          => 'common-password',
+                      'type'             => 'password',
+                      'control'          => '[success=1 default=ignore]',
+                      'control_is_param' => true,
+                      'module'           => 'pam_unix.so',
+                      'arguments'        => ['sha512'],
+                    )
+                end
 
               end
 

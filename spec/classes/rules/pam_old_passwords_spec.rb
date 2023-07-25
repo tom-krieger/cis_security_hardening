@@ -100,15 +100,29 @@ describe 'cis_security_hardening::rules::pam_old_passwords' do
               is_expected.not_to contain_pam('pam-system-auth-sufficient')
               is_expected.not_to contain_pam('pam-password-auth-sufficient')
               is_expected.not_to contain_exec('update authselect config for old passwords')
-              is_expected.to contain_pam('pam-common-password-requisite-pwhistory')
-                .with(
-                  'ensure'    => 'present',
-                  'service'   => 'common-password',
-                  'type'      => 'password',
-                  'control'   => 'required',
-                  'module'    => 'pam_pwhistory.so',
-                  'arguments' => ['remember=5'],
-                )
+
+              if os_facts[:os]['name'].casecmp('debian').zero? && os_facts[:os]['release']['major'] > '10'
+                is_expected.to contain_pam('pam-common-password-requisite-pwhistory')
+                  .with(
+                    'ensure'    => 'present',
+                    'service'   => 'common-password',
+                    'type'      => 'password',
+                    'control'   => 'required',
+                    'module'    => 'pam_pwhistory.so',
+                    'position'  => 'before *[type="password" and module="pam_unix.so"]',
+                    'arguments' => ['use_authok', 'remember=5'],
+                  )
+              else
+                is_expected.to contain_pam('pam-common-password-requisite-pwhistory')
+                  .with(
+                    'ensure'    => 'present',
+                    'service'   => 'common-password',
+                    'type'      => 'password',
+                    'control'   => 'required',
+                    'module'    => 'pam_pwhistory.so',
+                    'arguments' => ['remember=5'],
+                  )
+              end
             end
 
           else

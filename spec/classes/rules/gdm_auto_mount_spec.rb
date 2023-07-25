@@ -39,15 +39,27 @@ describe 'cis_security_hardening::rules::gdm_auto_mount' do
                 'mode'   => '0755',
               )
 
-            is_expected.to contain_file('/etc/dconf/db/local.d/00-media-automount')
-              .with(
+            if os_facts[:os]['name'].casecmp('debian').zero? && os_facts[:os]['release']['major'] > '10'
+              is_expected.to contain_file('/etc/dconf/db/local.d/00-media-automount')
+                .with(
                 'ensure' => 'file',
                 'owner'  => 'root',
                 'group'  => 'root',
                 'mode'   => '0644',
-                'content' => "[org/gnome/desktop/media-handling]\nautomount=false\nautomount-open=false\n",
+                'content' => "[org/gnome/desktop/media-handling]\nautorun-never=true\nautorun-never=true\n",
               )
-              .that_notifies('Exec[dconf update]')
+                .that_notifies('Exec[dconf update]')
+            else
+              is_expected.to contain_file('/etc/dconf/db/local.d/00-media-automount')
+                .with(
+                  'ensure' => 'file',
+                  'owner'  => 'root',
+                  'group'  => 'root',
+                  'mode'   => '0644',
+                  'content' => "[org/gnome/desktop/media-handling]\nautomount=false\nautomount-open=false\n",
+                )
+                .that_notifies('Exec[dconf update]')
+            end
 
             is_expected.to contain_exec('dconf update')
               .with(

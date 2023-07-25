@@ -16,6 +16,22 @@ def facts_debian(os, distid, release)
   # get gnome display manager information
   cis_security_hardening[:gnome_gdm] = File.exist?('/etc/gdm3/greeter.dconf')
 
+  # determine apport installation
+  apport = {}
+  val = Facter::Core::Execution.exec("dpkg-query -s apport > /dev/null 2>&1 && grep -Psi -- '^\\h*enabled\\h*=\\h*[^0]\\b' /etc/default/apport")
+  apport['pkg'] = if !val.nil? && !val.empty?
+                    true
+                  else
+                    false
+                  end
+  val = Facter::Core::Execution.exec("systemctl is-active apport.service | grep '^active'")
+  apport['service'] = if val.nil? || val.empty?
+                        false
+                      else
+                        true
+                      end
+  cis_security_hardening[:apport] = apport
+
   # get iptables config
   cis_security_hardening['iptables'] = read_iptables_rules('4')
   cis_security_hardening['ip6tables'] = read_iptables_rules('6')

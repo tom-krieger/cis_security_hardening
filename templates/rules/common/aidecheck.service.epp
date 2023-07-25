@@ -1,0 +1,11 @@
+[Unit]
+Description=Aide Check
+[Service]
+Type=simple
+<% if empty($config) { %>
+ExecStart=<%= $aide_bin %> --check
+<% } else { %>
+ExecStart=<%= $aide_bin %> --config <%= $config %> --check
+<% } %>
+[Install]
+WantedBy=multi-user.target

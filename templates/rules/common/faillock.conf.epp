@@ -1,0 +1,3 @@
+deny = <%= $deny %>
+fail_interval = <%= $fail_interval %>
+unlock_time = <%= $unlock_time %>

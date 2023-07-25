@@ -65,14 +65,27 @@ class cis_security_hardening::rules::pam_passwd_sha512 (
         }
       }
       'debian': {
-        Pam { 'pam-common-password-unix':
-          ensure           => present,
-          service          => 'common-password',
-          type             => 'password',
-          control          => '[success=1 default=ignore]',
-          control_is_param => true,
-          module           => 'pam_unix.so',
-          arguments        => ['sha512'],
+        if $facts['os']['name'].downcase() == 'debian' and
+        $facts['os']['release']['major'] > '10' {
+          Pam { 'pam-common-password-unix':
+            ensure           => present,
+            service          => 'common-password',
+            type             => 'password',
+            control          => '[success=1 default=ignore]',
+            control_is_param => true,
+            module           => 'pam_unix.so',
+            arguments        => ['obscure', 'use_authok', 'try_first_pass'],
+          }
+        } else {
+          Pam { 'pam-common-password-unix':
+            ensure           => present,
+            service          => 'common-password',
+            type             => 'password',
+            control          => '[success=1 default=ignore]',
+            control_is_param => true,
+            module           => 'pam_unix.so',
+            arguments        => ['sha512'],
+          }
         }
       }
       default: {

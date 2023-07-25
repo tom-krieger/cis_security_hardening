@@ -224,8 +224,56 @@ describe 'cis_security_hardening::rules::pam_lockout' do
               is_expected.not_to contain_file_line('faillock_silent')
               is_expected.not_to contain_file_line('faillock_even_deny_root')
 
-              is_expected.to contain_pam('pam-common-auth-require-tally2')
-                .with(
+              if os_facts[:os]['name'].casecmp('debian').zero? && os_facts[:os]['release']['major'] > '10'
+                is_expected.to contain_pam('pam-common-auth-require-faillock')
+                  .with(
+                    'ensure'    => 'present',
+                    'service'   => 'common-auth',
+                    'type'      => 'auth',
+                    'control'   => 'required',
+                    'module'    => 'pam_faillock.so',
+                    'position'  => 'before *[type="auth" and module="pam_unix.so"]',
+                    'arguments' => 'preauth',
+                  )
+                is_expected.to contain_pam('pam-common-auth-require-faillock-die')
+                  .with(
+                    'ensure'    => 'present',
+                    'service'   => 'common-auth',
+                    'type'      => 'auth',
+                    'control'   => '[default=die]',
+                    'control_is_param' => true,
+                    'module'    => 'pam_faillock.so',
+                    'position'  => 'after *[type="auth" and module="pam_unix.so"]',
+                    'arguments' => 'authfail',
+                  )
+                is_expected.to contain_pam('pam-common-auth-sufficient-faillock')
+                  .with(
+                    'ensure'    => 'present',
+                    'service'   => 'common-auth',
+                    'type'      => 'auth',
+                    'control'   => 'sufficient',
+                    'module'    => 'pam_faillock.so',
+                    'arguments' => 'authsucc',
+                    'position'  => 'after *[type="auth" and module="pam_faillock.so"]',
+                  )
+                is_expected.to contain_pam('pam-common-account-required-faillock')
+                  .with(
+                    'ensure'   => 'present',
+                    'service'  => 'common-account',
+                    'type'     => 'account',
+                    'control'  => 'required',
+                    'module'   => 'pam_faillock.so',
+                  )
+                is_expected.to contain_file('/etc/security/faillock.conf')
+                  .with(
+                    'ensure'  => 'file',
+                    'owner'   => 'root',
+                    'group'   => 'root',
+                    'mode'    => '0644',
+                  )
+              else
+                is_expected.to contain_pam('pam-common-auth-require-tally2')
+                  .with(
                   'ensure'    => 'present',
                   'service'   => 'common-auth',
                   'type'      => 'auth',
@@ -234,23 +282,25 @@ describe 'cis_security_hardening::rules::pam_lockout' do
                   'arguments' => ['onerr=fail', 'audit', 'silent', 'deny=3', 'unlock_time=900'],
                 )
 
-              is_expected.to contain_pam('pam-common-account-requisite-deny')
-                .with(
-                  'ensure'  => 'present',
-                  'service' => 'common-account',
-                  'type'    => 'account',
-                  'control' => 'requisite',
-                  'module'  => 'pam_deny.so',
-                )
+                is_expected.to contain_pam('pam-common-account-requisite-deny')
+                  .with(
+                    'ensure'  => 'present',
+                    'service' => 'common-account',
+                    'type'    => 'account',
+                    'control' => 'requisite',
+                    'module'  => 'pam_deny.so',
+                  )
 
-              is_expected.to contain_pam('pam-common-account-require-tally2')
-                .with(
-                  'ensure'  => 'present',
-                  'service' => 'common-account',
-                  'type'    => 'account',
-                  'control' => 'required',
-                  'module'  => 'pam_tally2.so',
-                )
+                is_expected.to contain_pam('pam-common-account-require-tally2')
+                  .with(
+                    'ensure'  => 'present',
+                    'service' => 'common-account',
+                    'type'    => 'account',
+                    'control' => 'required',
+                    'module'  => 'pam_tally2.so',
+                  )
+              end
+
             elsif os_facts[:os]['family'].casecmp('suse').zero?
 
               is_expected.not_to contain_file_line('faillock_fail_interval')
