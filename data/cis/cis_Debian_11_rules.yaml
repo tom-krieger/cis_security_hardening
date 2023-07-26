@@ -160,8 +160,13 @@ cis_security_hardening::benchmark::debian::11:
         - auditd_backlog_limit
         - auditd_time_change
         - auditd_identity
+        - auditd_user_emulation
         - auditd_system_locale
         - auditd_mac_policy
+        - auditd_chacl_use
+        - auditd_chcon_use
+        - auditd_setfacl_use
+        - auditd_usermod_use
         - auditd_logins
         - auditd_session_logins
         - auditd_perm_mod

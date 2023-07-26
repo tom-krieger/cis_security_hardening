@@ -40,7 +40,7 @@ class cis_security_hardening::rules::auditd_logins (
         concat::fragment { 'logins policy rule 2':
           order   => '52',
           target  => $cis_security_hardening::rules::auditd_init::rules_file,
-          content => '-w /var/log/faillog -p wa -k logins',
+          content => '-w /var/run/faillog -p wa -k logins',
         }
 
         if $facts['os']['release']['major'] < '11' {
@@ -55,7 +55,7 @@ class cis_security_hardening::rules::auditd_logins (
         concat::fragment { 'logins policy rule 2':
           order   => '52',
           target  => $cis_security_hardening::rules::auditd_init::rules_file,
-          content => '-w /var/log/faillog -p wa -k logins',
+          content => '-w /var/run/faillog -p wa -k logins',
         }
 
         concat::fragment { 'logins policy rule 3':

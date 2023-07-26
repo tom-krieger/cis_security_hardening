@@ -30,7 +30,7 @@ class cis_security_hardening::rules::auditd_setfacl_use (
     $auid = $facts['os']['name'].downcase() ? {
       'rocky'     => 'unset',
       'almalinux' => 'unset',
-      'debian'    => 'unset',
+      'debian'    => '-1',
       default     => '4294967295',
     }
     concat::fragment { 'watch setfacl command rule 1':

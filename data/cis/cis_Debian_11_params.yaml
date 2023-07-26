@@ -283,6 +283,10 @@ cis_security_hardening::rules::auditd_actions::enforce: true
 cis_security_hardening::rules::auditd_modules::enforce: true
 cis_security_hardening::rules::auditd_immutable::enforce: true
 cis_security_hardening::rules::auditd_user_emulation::enforce: true
+cis_security_hardening::rules::auditd_chacl_use::enforce: true
+cis_security_hardening::rules::auditd_chcon_use::enforce: true
+cis_security_hardening::rules::auditd_setfacl_use::enforce: true
+cis_security_hardening::rules::auditd_usermod_use::enforce: true
 
 cis_security_hardening::rules::rsyslog_installed::enforce: true
 cis_security_hardening::rules::rsyslog_service::enforce: true
@@ -420,6 +424,7 @@ cis_security_hardening::rules::pam_pw_requirements::retry: 3
 cis_security_hardening::rules::pam_lockout::enforce: true
 cis_security_hardening::rules::pam_lockout::attempts: 3
 cis_security_hardening::rules::pam_lockout::lockouttime: 300
+cis_security_hardening::rules::pam_lockout::lock_dir: /var/run/faillog.log
 cis_security_hardening::rules::pam_passwd_sha512::enforce: true
 cis_security_hardening::rules::pam_old_passwords::enforce: true
 cis_security_hardening::rules::pam_old_passwords::oldpasswords: 5

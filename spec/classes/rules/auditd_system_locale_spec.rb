@@ -79,11 +79,19 @@ describe 'cis_security_hardening::rules::auditd_system_locale' do
               )
 
             if os_facts[:os]['family'].casecmp('debian').zero?
+              if os_facts[:os]['release']['major'] > '10' {
+                is_expected.to contain_concat__fragment('watch network environment rule 8')
+                  .with(
+                    'order' => '136',
+                    'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
+                    'content' => '-w /etc/networks -p wa -k system-locale',
+                  )
+              }
               is_expected.to contain_concat__fragment('watch network environment rule 5')
                 .with(
                   'order' => '135',
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-w /etc/network -p wa -k system-locale',
+                  'content' => '-w /etc/network/ -p wa -k system-locale',
                 )
             else
               is_expected.to contain_concat__fragment('watch network environment rule 5')

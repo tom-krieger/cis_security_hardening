@@ -34,7 +34,7 @@ class cis_security_hardening::rules::auditd_kernel_modules (
     $auid = $facts['os']['name'].downcase() ? {
       'rocky'     => 'unset',
       'almalinux' => 'unset',
-      'debian'    => 'unset',
+      'debian'    => '-1',
       default     => '4294967295',
     }
     $uid = fact('cis_security_hardening.auditd.uid_min') ? {
