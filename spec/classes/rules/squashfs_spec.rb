@@ -54,7 +54,7 @@ describe 'cis_security_hardening::rules::squashfs' do
                 .with(
                   command: '/bin/true',
                 )
-              end
+            end
           else
             is_expected.not_to contain_kmod__install('squashfs')
             is_expected.not_to contain_kmod__blacklist('squashfs')

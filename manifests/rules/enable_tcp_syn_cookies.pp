@@ -31,8 +31,9 @@ class cis_security_hardening::rules::enable_tcp_syn_cookies (
   if $enforce {
     sysctl {
       'net.ipv4.tcp_syncookies':
-        ensure => present,
-        value  => 1,
+        ensure    => present,
+        permanent => 'yes',
+        value     => 1,
     }
   }
 }

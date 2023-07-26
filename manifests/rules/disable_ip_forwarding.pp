@@ -22,14 +22,16 @@ class cis_security_hardening::rules::disable_ip_forwarding (
   if $enforce {
     sysctl {
       'net.ipv4.ip_forward':
-        ensure => present,
-        value  => 0,
+        ensure    => present,
+        permanent => 'yes',
+        value     => 0,
     }
     if fact('network6') {
       sysctl {
         'net.ipv6.conf.all.forwarding':
-          ensure => present,
-          value  => 0,
+          ensure    => present,
+          permanent => 'yes',
+          value     => 0,
       }
     }
   }

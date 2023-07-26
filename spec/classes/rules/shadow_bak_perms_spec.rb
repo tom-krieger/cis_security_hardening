@@ -20,7 +20,7 @@ describe 'cis_security_hardening::rules::shadow_bak_perms' do
 
           if enforce
             if os_facts[:os]['name'].casecmp('debian').zero?
-              if os_facts[:os]['release']['major']  > '10'
+              if os_facts[:os]['release']['major'] > '10'
                 is_expected.to contain_file('/etc/shadow-')
                   .with(
                     'ensure' => 'file',

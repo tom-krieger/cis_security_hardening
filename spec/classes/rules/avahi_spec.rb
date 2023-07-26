@@ -90,7 +90,7 @@ describe 'cis_security_hardening::rules::avahi' do
                   .with(
                     'command' => 'systemctl stop avahi-demon.service',
                     'path'    => ['/bin', '/usr/bin'],
-                    'unless'  => "test \"$(systemctl is-active avahi-daemon.service)\" = \"inactive\"",
+                    'unless'  => 'test "$(systemctl is-active avahi-daemon.service)" = "inactive"',
                   )
                   .that_requires('Exec[stop avahi socket]')
 
@@ -98,7 +98,7 @@ describe 'cis_security_hardening::rules::avahi' do
                   .with(
                     'command' => 'systemctl stop avahi-demon.socket',
                     'path'    => ['/bin', '/usr/bin'],
-                    'unless'  => "test \"$(systemctl is-active avahi-daemon.socket)\" = \"inactive\"",
+                    'unless'  => 'test "$(systemctl is-active avahi-daemon.socket)" = "inactive"',
                   )
                 is_expected.to contain_package('avahi-daemon')
                   .with(
