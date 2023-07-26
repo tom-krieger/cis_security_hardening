@@ -77,6 +77,7 @@ class cis_security_hardening::rules::avahi (
           exec { 'stop avahi service':
             command => 'systemctl stop avahi-demon.service',
             path    => ['/bin', '/usr/bin'],
+            returns => [0, 5],
             unless  => "test \"$(systemctl is-active avahi-daemon.service)\" = \"inactive\"",
             require => Exec['stop avahi socket'],
           }
@@ -84,6 +85,7 @@ class cis_security_hardening::rules::avahi (
           exec { 'stop avahi socket':
             command => 'systemctl stop avahi-demon.socket',
             path    => ['/bin', '/usr/bin'],
+            returns => [0, 5],
             unless  => "test \"$(systemctl is-active avahi-daemon.socket)\" = \"inactive\"",
           }
 
