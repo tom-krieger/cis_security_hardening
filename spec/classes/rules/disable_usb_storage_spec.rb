@@ -19,7 +19,6 @@ describe 'cis_security_hardening::rules::disable_usb_storage' do
         it {
           is_expected.to compile
           if enforce
-            cmd = '/bin/true'
             cmd = if os_facts[:os]['name'].casecmp('debian').zero?
                     if os_facts[:os]['release']['major'] > '10'
                       '/bin/false'
