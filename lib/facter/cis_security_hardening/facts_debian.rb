@@ -63,7 +63,6 @@ def facts_debian(os, distid, release)
     x11['installed'] = true
     x11['packages'] = pkgs.split("\n")
   end
-  x11['packages'] = pkgs
   cis_security_hardening[:x11] = x11
 
   # check for xdmcp
