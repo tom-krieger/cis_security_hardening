@@ -61,6 +61,7 @@ def facts_debian(os, distid, release)
                      else
                        true
                      end
+  x11['packages'] = pkgs
   cis_security_hardening[:x11] = x11
 
   # check for xdmcp
