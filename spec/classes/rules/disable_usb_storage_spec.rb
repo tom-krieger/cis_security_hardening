@@ -19,9 +19,19 @@ describe 'cis_security_hardening::rules::disable_usb_storage' do
         it {
           is_expected.to compile
           if enforce
+            cmd = '/bin/true'
+            if os_facts[:os]['name'].casecmp('debian').zero?
+              if os_facts[:os]['release']['major'] > '10'
+                cmd = '/bin/false'
+              else
+                cmd = '/bin/true'
+              end
+            else
+              cmd = '/bin/true'
+            end
             is_expected.to contain_kmod__install('usb-storage')
               .with(
-                command: '/bin/true',
+                command: cmd,
               )
           else
             is_expected.not_to contain_kmod__install('usb-storage')

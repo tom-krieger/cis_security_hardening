@@ -23,8 +23,21 @@ class cis_security_hardening::rules::disable_usb_storage (
   Boolean $enforce = false,
 ) {
   if $enforce {
+    case $facts['os']['name'].downcase() {
+      'debian': {
+        if $facts['os']['release']['major'] > '10' {
+          $command = '/bin/false'
+        } else {
+          $command = '/bin/true'
+        }
+      }
+      default: {
+        $command = '/bin/true'
+      }
+    }
+
     kmod::install { 'usb-storage':
-      command => '/bin/true',
+      command => $command,
     }
   }
 }

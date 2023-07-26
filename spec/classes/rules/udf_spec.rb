@@ -37,6 +37,18 @@ describe 'cis_security_hardening::rules::udf' do
                   command: '/bin/true',
                 )
               end
+            elsif os_facts[:os]['name'].casecmp('debian').zero?
+              if os_facts[:os]['release']['major'] > '10'
+                is_expected.to contain_kmod__install('udf')
+                  .with(
+                  command: '/bin/false',
+                )
+              else
+                is_expected.to contain_kmod__install('udf')
+                  .with(
+                  command: '/bin/true',
+                )
+              end
             else
               is_expected.to contain_kmod__install('udf')
                 .with(

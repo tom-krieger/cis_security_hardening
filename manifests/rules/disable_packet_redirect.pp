@@ -24,11 +24,13 @@ class cis_security_hardening::rules::disable_packet_redirect (
   if $enforce {
     sysctl {
       'net.ipv4.conf.all.send_redirects':
-        value => 0,
+        ensure => present,
+        value  => 0,
     }
     sysctl {
       'net.ipv4.conf.default.send_redirects':
-        value => 0,
+        ensure => present,
+        value  => 0,
     }
   }
 }

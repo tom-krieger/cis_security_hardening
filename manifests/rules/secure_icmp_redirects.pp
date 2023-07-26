@@ -25,11 +25,13 @@ class cis_security_hardening::rules::secure_icmp_redirects (
   if $enforce {
     sysctl {
       'net.ipv4.conf.all.secure_redirects':
-        value => 0,
+        ensure => present,
+        value  => 0,
     }
     sysctl {
       'net.ipv4.conf.default.secure_redirects':
-        value => 0,
+        ensure => present,
+        value  => 0,
     }
   }
 }

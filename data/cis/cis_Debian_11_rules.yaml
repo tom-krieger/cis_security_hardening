@@ -22,6 +22,7 @@ cis_security_hardening::benchmark::debian::11:
         - var_log_audit_nosuid
         - var_log_audit_noexec
         - home_nodev
+        - home_nosuid
         - dev_shm
         - dev_shm_nodev
         - dev_shm_nosuid

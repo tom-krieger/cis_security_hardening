@@ -23,11 +23,13 @@ class cis_security_hardening::rules::ipv6_router_advertisements (
   if $enforce and fact('network6') != undef {
     sysctl {
       'net.ipv6.conf.all.accept_ra':
-        value => 0,
+        ensure => present,
+        value  => 0,
     }
     sysctl {
       'net.ipv6.conf.default.accept_ra':
-        value => 0,
+        ensure => present,
+        value  => 0,
     }
   }
 }

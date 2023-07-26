@@ -22,11 +22,13 @@ class cis_security_hardening::rules::log_suspicious_packets (
   if $enforce {
     sysctl {
       'net.ipv4.conf.all.log_martians':
-        value => 1,
+        ensure => present,
+        value  => 1,
     }
     sysctl {
       'net.ipv4.conf.default.log_martians':
-        value => 1,
+        ensure => present,
+        value  => 1,
     }
   }
 }
