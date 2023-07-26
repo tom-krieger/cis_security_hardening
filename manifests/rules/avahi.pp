@@ -88,6 +88,7 @@ class cis_security_hardening::rules::avahi (
 
           ensure_packages(['avahi-daemon'], {
               ensure => $ensure,
+              require => [Exec['stop avahi service'], Exec['stop avahi socket']]
           })
         } else {
           ensure_resource('service', ['avahi-daemon'], {
