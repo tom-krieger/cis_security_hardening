@@ -86,15 +86,17 @@ describe 'cis_security_hardening::rules::avahi' do
                 )
             elsif os_facts[:os]['name'].casecmp('debian').zero?
               if os_facts[:os]['release']['major'] > '10'
-                is_expected.to contain_service('avahi-daemon.service')
+                is_expected.to contain_exec('stop avahi service')
                   .with(
-                    'ensure' => 'stopped',
-                    'enable' => false,
+                    'command' => 'systemctl stop avahi-demon.service',
+                    'path'    => ['/bin', '/usr/bin'],
+                    'unless'  => "test \"$(systemctl is-active avahi-daemon.service)\" = \"inactive\"",
                   )
-                is_expected.to contain_service('avahi-dsemon.socket')
+                is_expected.to contain_exec('stop avahi socket')
                   .with(
-                    'ensure' => 'stopped',
-                    'enable' => false,
+                    'command' => 'systemctl stop avahi-demon.socket',
+                    'path'    => ['/bin', '/usr/bin'],
+                    'unless'  => "test \"$(systemctl is-active avahi-daemon.socket)\" = \"inactive\"",
                   )
                 is_expected.to contain_package('avahi-daemon')
                   .with(

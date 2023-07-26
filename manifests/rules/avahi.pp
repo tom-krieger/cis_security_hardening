@@ -74,12 +74,16 @@ class cis_security_hardening::rules::avahi (
       }
       'debian': {
         if $facts['os']['release']['major'] > '10' {
-          if cis_security_hardening::hash_key($facts['cis_security_hardening'], 'avahiservice') and
-          $facts['cis_security_hardening']['avahiservice'] {
-            ensure_resource('service', ['avahi-daemon.service', 'avahi-dsemon.socket'], {
-                ensure => 'stopped',
-                enable => false,
-            })
+          exec { 'stop avahi service':
+            command => 'systemctl stop avahi-demon.service',
+            path    => ['/bin', '/usr/bin'],
+            unless  => "test \"$(systemctl is-active avahi-daemon.service)\" = \"inactive\"",
+          }
+
+          exec { 'stop avahi socket':
+            command => 'systemctl stop avahi-demon.socket',
+            path    => ['/bin', '/usr/bin'],
+            unless  => "test \"$(systemctl is-active avahi-daemon.socket)\" = \"inactive\"",
           }
 
           ensure_packages(['avahi-daemon'], {
