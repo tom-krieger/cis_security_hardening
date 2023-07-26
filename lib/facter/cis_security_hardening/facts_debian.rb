@@ -34,7 +34,8 @@ def facts_debian(os, distid, release)
 
   # get avahi service to avoid errors in debian 11
   val = Facter::Core::Execution.exec('systemctl | grep -c avahi')
-  cis_security_hardening[:avahiservice] = if val.nil? || val.empty? || val == '0'
+  cis_security_hardening[:avahival] = val
+  cis_security_hardening[:avahiservice] = if val.nil? || val.empty? || val.to_s == '0'
                                             false
                                           else
                                             true
