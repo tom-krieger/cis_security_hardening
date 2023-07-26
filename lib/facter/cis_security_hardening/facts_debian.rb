@@ -56,11 +56,13 @@ def facts_debian(os, distid, release)
   # check for x11 packages
   x11 = {}
   pkgs = Facter::Core::Execution.exec('dpkg -l | grep -e xorg-x1 -e xserver-xorg | awk \'{print $2;}\'')
-  x11['installed'] = if pkgs.nil? || pkgs.empty?
-                       false
-                     else
-                       true
-                     end
+  if pkgs.nil? || pkgs.empty?
+    x11['installed'] = false
+    x11['packages'] = []
+  else
+    x11['installed'] = true
+    x11['packages'] = pkgs.split("\n")
+  end
   x11['packages'] = pkgs
   cis_security_hardening[:x11] = x11
 

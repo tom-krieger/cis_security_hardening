@@ -41,12 +41,12 @@ describe 'cis_security_hardening::rules::cups' do
             elsif os_facts[:os]['name'].casecmp('debian').zero?
               if os_facts[:os]['release']['major'] > '10'
                 is_expected.to contain_package('cups')
-                .with(
+                  .with(
                   'ensure' => 'purged',
                 )
               else
                 is_expected.to contain_service('cups')
-                .with(
+                  .with(
                   'ensure' => 'stopped',
                   'enable' => false,
                 )
