@@ -78,6 +78,30 @@ describe 'cis_security_hardening::rules::avahi' do
                 .with(
                   'ensure' => 'purged',
                 )
+            elsif os_facts[:os]['name'].casecmp('debian').zero?
+              if os_facts[:os]['release']['major'] > '10'
+                is_expected.to contain_service('avahi-daemon.service')
+                  .with(
+                    'ensure' => 'stopped',
+                    'enable' => false,
+                  )
+                is_expected.to contain_service('avahi-dsemon.socket')
+                  .with(
+                    'ensure' => 'stopped',
+                    'enable' => false,
+                  )
+                is_expected.to contain_package('avahi-daemon')
+                  .with(
+                    'ensure' => 'purged',
+                  )
+              else
+                is_expected.to contain_service('avahi-daemon')
+                  .with(
+                    'ensure' => 'stopped',
+                    'enable' => false,
+                  )
+              end
+
             elsif os_facts[:os]['name'].casecmp('sles').zero?
 
               is_expected.to contain_service('avahi-daemon.socket')

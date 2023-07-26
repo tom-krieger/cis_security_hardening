@@ -73,10 +73,20 @@ class cis_security_hardening::rules::avahi (
         })
       }
       'debian': {
-        ensure_resource('service', ['avahi-daemon'], {
-            ensure => 'stopped',
-            enable => false,
-        })
+        if $facts['os']['release']['major'] > '10' {
+          ensure_resource('service', ['avahi-daemon.service', 'avahi-dsemon.socket'], {
+              ensure => 'stopped',
+              enable => false,
+          })
+          ensure_packages(['avahi-daemon'], {
+              ensure => $ensure,
+          })
+        } else {
+          ensure_resource('service', ['avahi-daemon'], {
+              ensure => 'stopped',
+              enable => false,
+          })
+        }
       }
       'sles': {
         ensure_resource('service', ['avahi-daemon.socket'], {
