@@ -240,7 +240,6 @@ class cis_security_hardening::rules::pam_lockout (
             control   => 'sufficient',
             module    => 'pam_faillock.so',
             arguments => ['authsucc'],
-            position  => 'after *[type="auth" and module="pam_faillock.so"]',
             require   => Pam['pam-common-auth-require-faillock-die'],
           }
 
