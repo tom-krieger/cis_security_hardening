@@ -40,10 +40,10 @@ describe 'cis_security_hardening::rules::auditd_chcon_use' do
           is_expected.to compile
 
           if enforce
-            auid = if os_facts[:os]['name'].casecmp('rocky').zero? || os_facts[:os]['name'].casecmp('almalinux').zero? 
+            auid = if os_facts[:os]['name'].casecmp('rocky').zero? || os_facts[:os]['name'].casecmp('almalinux').zero?
                      'unset'
-                    elsif os_facts[:os]['name'].casecmp('debian').zero? 
-                      '-1'
+                   elsif os_facts[:os]['name'].casecmp('debian').zero?
+                     '-1'
                    else
                      '4294967295'
                    end
