@@ -43,6 +43,7 @@ describe 'cis_security_hardening::rules::cramfs' do
                   .with(
                   command: '/bin/false',
                 )
+                is_expected.to contain_kmod__blacklist('cramfs')
               else
                 is_expected.to contain_kmod__install('cramfs')
                   .with(

@@ -43,6 +43,7 @@ describe 'cis_security_hardening::rules::udf' do
                   .with(
                   command: '/bin/false',
                 )
+                is_expected.to contain_kmod__blacklist('udf')
               else
                 is_expected.to contain_kmod__install('udf')
                   .with(

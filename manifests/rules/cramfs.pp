@@ -45,6 +45,7 @@ class cis_security_hardening::rules::cramfs (
           kmod::install { 'cramfs':
             command => '/bin/false',
           }
+          kmod::blacklist { 'cramfs': }
         } else {
           kmod::install { 'cramfs':
             command => '/bin/true',
