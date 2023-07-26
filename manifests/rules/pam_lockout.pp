@@ -219,7 +219,7 @@ class cis_security_hardening::rules::pam_lockout (
             control   => 'required',
             module    => 'pam_faillock.so',
             position  => 'before *[type="auth" and module="pam_unix.so"]',
-            arguments => 'preauth',
+            arguments => ['preauth'],
           }
 
           Pam { 'pam-common-auth-require-faillock-die':
@@ -230,7 +230,7 @@ class cis_security_hardening::rules::pam_lockout (
             control_is_param => true,
             module           => 'pam_faillock.so',
             position         => 'after *[type="auth" and module="pam_unix.so"]',
-            arguments        => 'authfail',
+            arguments        => ['authfail'],
           }
 
           Pam { 'pam-common-auth-sufficient-faillock':
@@ -239,7 +239,7 @@ class cis_security_hardening::rules::pam_lockout (
             type      => 'auth',
             control   => 'sufficient',
             module    => 'pam_faillock.so',
-            arguments => 'authsucc',
+            arguments => ['authsucc'],
             position  => 'after *[type="auth" and module="pam_faillock.so"]',
           }
 
@@ -251,16 +251,28 @@ class cis_security_hardening::rules::pam_lockout (
             module  => 'pam_faillock.so',
           }
 
-          file { '/etc/security/faillock.conf':
-            ensure  => file,
-            content => epp('cis_security_hardening/rules/common/faillock.conf.epp', {
-                deny          => $attempts,
-                fail_interval => $fail_interval,
-                unlock_time   => $lockouttime,
-            }),
-            owner   => 'root',
-            group   => 'root',
-            mode    => '0644',
+          file_line { 'faillock_fail_interval':
+            ensure             => present,
+            path               => '/etc/security/faillock.conf',
+            match              => '^fail_interval =',
+            line               => "fail_interval = ${lockouttime}",
+            append_on_no_match => true,
+          }
+
+          file_line { 'faillock_deny':
+            ensure             => present,
+            path               => '/etc/security/faillock.conf',
+            match              => '^deny =',
+            line               => "deny = ${attempts}",
+            append_on_no_match => true,
+          }
+
+          file_line { 'faillock_fail_unlock_time':
+            ensure             => present,
+            path               => '/etc/security/faillock.conf',
+            match              => '^unlock_time =',
+            line               => "unlock_time = ${lockouttime}",
+            append_on_no_match => true,
           }
         } else {
           if $lockouttime == 0 {
