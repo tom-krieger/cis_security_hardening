@@ -24,6 +24,7 @@ class cis_security_hardening::rules::disable_tipc (
     if $facts['os']['name'].downcase() == 'debian' and
     $facts['os']['release']['major'] > '10' {
       $command = '/bin/false'
+      kmod::blacklist { 'tipc': }
     } else {
       $command = '/bin/true'
     }

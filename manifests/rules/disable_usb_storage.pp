@@ -27,6 +27,7 @@ class cis_security_hardening::rules::disable_usb_storage (
       'debian': {
         if $facts['os']['release']['major'] > '10' {
           $command = '/bin/false'
+          kmod::blacklist { 'usb-storage': }
         } else {
           $command = '/bin/true'
         }
