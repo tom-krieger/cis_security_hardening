@@ -66,7 +66,7 @@ describe 'cis_security_hardening::rules::auditd_logins' do
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
                   'content' => '-w /var/log/faillog -p wa -k logins',
                 )
-
+              
               is_expected.to contain_concat__fragment('logins policy rule 3')
                 .with(
                   'order' => '53',

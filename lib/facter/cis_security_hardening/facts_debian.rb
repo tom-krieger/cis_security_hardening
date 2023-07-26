@@ -55,7 +55,7 @@ def facts_debian(os, distid, release)
 
   # check for x11 packages
   x11 = {}
-  pkgs = Facter::Core::Execution.exec('dpkg -l | grep xorg-x1 | awk \'{print $2;}\'')
+  pkgs = Facter::Core::Execution.exec('dpkg -l | grep -e xorg-x1 -e xserver-xorg | awk \'{print $2;}\'')
   x11['installed'] = if pkgs.nil? || pkgs.empty?
                        false
                      else

@@ -40,6 +40,7 @@ class cis_security_hardening::rules::auditd_system_locale (
       $content_rule7 = $os ? {
         'almalinux' => '-a always,exit -F arch=b64 -S sethostname,setdomainname -k system-locale',
         'rocky'     => '-a always,exit -F arch=b64 -S sethostname,setdomainname -k system-locale',
+        'debian'    => '-a always,exit -F arch=b64 -S sethostname,setdomainname -k system-locale',
         default     => '-a always,exit -F arch=b64 -S sethostname -S setdomainname -k system-locale',
       }
       concat::fragment { 'watch network environment rule 7':
@@ -51,6 +52,7 @@ class cis_security_hardening::rules::auditd_system_locale (
     $content_rule1 = $os ? {
       'almalinux' => '-a always,exit -F arch=b32 -S sethostname,setdomainname -k system-locale',
       'rocky'     => '-a always,exit -F arch=b32 -S sethostname,setdomainname -k system-locale',
+      'debian'    => '-a always,exit -F arch=b32 -S sethostname,setdomainname -k system-locale',
       default     => '-a always,exit -F arch=b32 -S sethostname -S setdomainname -k system-locale',
     }
     concat::fragment { 'watch network environment rule 1':

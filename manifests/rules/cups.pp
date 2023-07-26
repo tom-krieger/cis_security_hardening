@@ -38,6 +38,18 @@ class cis_security_hardening::rules::cups (
             ensure => $ensure,
         })
       }
+      'debian': {
+        if $facts['os']['release']['major'] > '10' {
+          ensure_packages('cups', {
+              ensure => $ensure,
+          })
+        } else {
+          ensure_resource('service', ['cups'], {
+              ensure => 'stopped',
+              enable => false,
+          })
+        }
+      }
       default: {
         ensure_resource('service', ['cups'], {
             ensure => 'stopped',

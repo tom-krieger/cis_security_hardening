@@ -45,7 +45,7 @@ describe 'cis_security_hardening::rules::auditd_system_locale' do
           is_expected.to compile
 
           if enforce
-            content_rule1 = if os_facts[:os]['name'].casecmp('almalinux').zero? || os_facts[:os]['name'].casecmp('rocky').zero?
+            content_rule1 = if os_facts[:os]['name'].casecmp('almalinux').zero? || os_facts[:os]['name'].casecmp('rocky').zero? || os_facts[:os]['name'].casecmp('debian').zero?
                               '-a always,exit -F arch=b32 -S sethostname,setdomainname -k system-locale'
                             else
                               '-a always,exit -F arch=b32 -S sethostname -S setdomainname -k system-locale'
@@ -104,7 +104,7 @@ describe 'cis_security_hardening::rules::auditd_system_locale' do
             end
 
             if ['x86_64', 'amd64'].include?(os_facts[:os]['architecture'])
-              content_rule7 = if os_facts[:os]['name'].casecmp('almalinux').zero? || os_facts[:os]['name'].casecmp('rocky').zero?
+              content_rule7 = if os_facts[:os]['name'].casecmp('almalinux').zero? || os_facts[:os]['name'].casecmp('rocky').zero? || os_facts[:os]['name'].casecmp('debian').zero?
                                 '-a always,exit -F arch=b64 -S sethostname,setdomainname -k system-locale'
                               else
                                 '-a always,exit -F arch=b64 -S sethostname -S setdomainname -k system-locale'
