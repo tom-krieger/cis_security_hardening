@@ -8,7 +8,13 @@ describe 'cis_security_hardening::rules::avahi' do
   on_supported_os.each do |os, os_facts|
     enforce_options.each do |enforce|
       context "on #{os}" do
-        let(:facts) { os_facts }
+        let(:facts) do
+          os_facts.merge(
+            cis_security_hardening: {
+              avahiservice: true,
+            },
+          )
+        end
         let(:params) do
           {
             'enforce' => enforce,
