@@ -33,12 +33,12 @@ def facts_debian(os, distid, release)
   cis_security_hardening[:apport] = apport
 
   # get avahi service to avoid errors in debian 11
-  val = Facter::Core::Execution.exec("systemctl | grep avahi")
-  if val.nil? || val.empty?
-    cis_security_hardening[:avahiservice] = false
-  else
-    cis_security_hardening[:avahiservice] = true
-  end
+  val = Facter::Core::Execution.exec('systemctl | grep -c avahi')
+  cis_security_hardening[:avahiservice] = if val.nil? || val.empty? || val == '0'
+                                            false
+                                          else
+                                            true
+                                          end
 
   # get iptables config
   cis_security_hardening['iptables'] = read_iptables_rules('4')
