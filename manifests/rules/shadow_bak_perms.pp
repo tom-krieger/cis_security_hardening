@@ -22,11 +22,20 @@ class cis_security_hardening::rules::shadow_bak_perms (
 ) {
   if $enforce {
     if $facts['os']['name'].downcase() == 'debian' {
-      $attrs = {
-        ensure => file,
-        owner  => 'root',
-        group  => 'root',
-        mode   => '0600',
+      if $facts[ 'os']['release']['major'] > '10' {
+        $attrs = {
+          ensure => file,
+          owner  => 'root',
+          group  => 'root',
+          mode   => '0000',
+        }
+      } else {
+        $attrs = {
+          ensure => file,
+          owner  => 'root',
+          group  => 'root',
+          mode   => '0600',
+        }
       }
     } else {
       $attrs = {
