@@ -214,12 +214,9 @@ describe 'cis_security_hardening::rules::pam_lockout' do
 
             elsif os_facts[:os]['family'].casecmp('debian').zero?
 
-              is_expected.not_to contain_file__line('update pam lockout system-auth')
-              is_expected.not_to contain_file__line('update pam lockout password-auth')
+              is_expected.not_to contain_file_line('update pam lockout system-auth')
+              is_expected.not_to contain_file_line('update pam lockout password-auth')
               is_expected.not_to contain_exec('configure faillock')
-              is_expected.not_to contain_file_line('faillock_fail_interval')
-              is_expected.not_to contain_file_line('faillock_deny')
-              is_expected.not_to contain_file_line('faillock_unlock_time')
               is_expected.not_to contain_file_line('faillock_dir')
               is_expected.not_to contain_file_line('faillock_silent')
               is_expected.not_to contain_file_line('faillock_even_deny_root')
@@ -254,7 +251,7 @@ describe 'cis_security_hardening::rules::pam_lockout' do
                     'control'   => 'sufficient',
                     'module'    => 'pam_faillock.so',
                     'arguments' => ['authsucc'],
-                    'position'  => 'after *[type="auth" and module="pam_faillock.so"]',
+                    'position'  => 'after *[type="auth" and control="[default=die]"]',
                   )
                 is_expected.to contain_pam('pam-common-account-required-faillock')
                   .with(
@@ -264,12 +261,29 @@ describe 'cis_security_hardening::rules::pam_lockout' do
                     'control'  => 'required',
                     'module'   => 'pam_faillock.so',
                   )
-                is_expected.to contain_file('/etc/security/faillock.conf')
+                is_expected.to contain_file_line('faillock_fail_interval')
                   .with(
-                    'ensure'  => 'file',
-                    'owner'   => 'root',
-                    'group'   => 'root',
-                    'mode'    => '0644',
+                    'ensure'             => 'present',
+                    'path'               => '/etc/security/faillock.conf',
+                    'match'              => '^fail_interval =',
+                    'line'               => "fail_interval = 900",
+                    'append_on_no_match' => true,
+                  )
+                is_expected.to contain_file_line('faillock_deny')
+                  .with(
+                    'ensure'             => 'present',
+                    'path'               => '/etc/security/faillock.conf',
+                    'match'              => '^deny =',
+                    'line'               => "deny = 3",
+                    'append_on_no_match' => true,
+                  )
+                is_expected.to contain_file_line('faillock_fail_unlock_time')
+                  .with(
+                    'ensure'             => 'present',
+                    'path'               => '/etc/security/faillock.conf',
+                    'match'              => '^unlock_time =',
+                    'line'               => "unlock_time = 900",
+                    'append_on_no_match' => true,
                   )
               else
                 is_expected.to contain_pam('pam-common-auth-require-tally2')
