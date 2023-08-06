@@ -147,6 +147,7 @@ termination events that affect "/etc/sudoers.d/"
 * `cis_security_hardening::rules::dev_shm_noexec`: Ensure noexec option set on /dev/shm partition
 * `cis_security_hardening::rules::dev_shm_nosuid`: Ensure nosuid option set on /dev/shm partition
 * `cis_security_hardening::rules::dhcp`: Ensure DHCP Server is not enabled
+* `cis_security_hardening::rules::disable_apport`: Ensure Automatic Error Reporting is not enabled (Automated)
 * `cis_security_hardening::rules::disable_atm`: Ensure ATM is disabled
 * `cis_security_hardening::rules::disable_automount`: Disable Automounting
 * `cis_security_hardening::rules::disable_bluetooth`: Ensure Bluetooth is disabled
@@ -428,6 +429,7 @@ termination events that affect "/etc/sudoers.d/"
 
 ### Defined types
 
+* [`cis_security_hardening::parent_dirs`](#cis_security_hardening--parent_dirs): Create directories recursivly
 * [`cis_security_hardening::set_mount_options`](#cis_security_hardening--set_mount_options): Change mount options
 * [`cis_security_hardening::unmask_systemd_service`](#cis_security_hardening--unmask_systemd_service): Unmask a systemd service
 
@@ -954,6 +956,60 @@ The script to run
 Default value: `'/usr/share/cis_security_hardening/bin/sticy-world-writable.sh'`
 
 ## Defined types
+
+### <a name="cis_security_hardening--parent_dirs"></a>`cis_security_hardening::parent_dirs`
+
+Create all missing directories
+
+ }
+
+#### Examples
+
+##### 
+
+```puppet
+pxe_installarent_dirs{ 'create script dir':
+ dir_path => '/var/www/scripts',
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::parent_dirs` defined type:
+
+* [`dir_path`](#-cis_security_hardening--parent_dirs--dir_path)
+* [`owner`](#-cis_security_hardening--parent_dirs--owner)
+* [`group`](#-cis_security_hardening--parent_dirs--group)
+* [`mode`](#-cis_security_hardening--parent_dirs--mode)
+
+##### <a name="-cis_security_hardening--parent_dirs--dir_path"></a>`dir_path`
+
+Data type: `Stdlib::Unixpath`
+
+The directories to be created.
+
+##### <a name="-cis_security_hardening--parent_dirs--owner"></a>`owner`
+
+Data type: `Optional[String]`
+
+The directory owner.
+
+Default value: `undef`
+
+##### <a name="-cis_security_hardening--parent_dirs--group"></a>`group`
+
+Data type: `Optional[String]`
+
+The directoray group.
+
+Default value: `undef`
+
+##### <a name="-cis_security_hardening--parent_dirs--mode"></a>`mode`
+
+Data type: `Optional[String]`
+
+The directory permissions.
+
+Default value: `undef`
 
 ### <a name="cis_security_hardening--set_mount_options"></a>`cis_security_hardening::set_mount_options`
 

@@ -32,6 +32,7 @@ cis_security_hardening::rules::var_log_audit_noexec::enforce: true
 cis_security_hardening::rules::var_log_audit_nodev::enforce: true
 cis_security_hardening::rules::var_log_audit_nosuid::enforce: true
 cis_security_hardening::rules::home_nodev::enforce: true
+cis_security_hardening::rules::home_nosuid::enforce: true
 cis_security_hardening::rules::dev_shm::enforce: true
 cis_security_hardening::rules::dev_shm::size: 0
 cis_security_hardening::rules::dev_shm_noexec::enforce: true
@@ -87,6 +88,7 @@ cis_security_hardening::rules::gdm_screensaver::enforce: true
 cis_security_hardening::rules::gdm_screensaver::timeout: 900
 cis_security_hardening::rules::gdm_screensaver::lockdelay: 5
 cis_security_hardening::rules::gdm_auto_mount::enforce: true
+cis_security_hardening::rules::gnome_gdm_package::enforce: true
 
 cis_security_hardening::rules::systemd_timesyncd::enforce: false
 cis_security_hardening::rules::systemd_timesyncd::fix_file_perms: true
@@ -280,6 +282,12 @@ cis_security_hardening::rules::auditd_scope::enforce: true
 cis_security_hardening::rules::auditd_actions::enforce: true
 cis_security_hardening::rules::auditd_modules::enforce: true
 cis_security_hardening::rules::auditd_immutable::enforce: true
+cis_security_hardening::rules::auditd_user_emulation::enforce: true
+cis_security_hardening::rules::auditd_chacl_use::enforce: true
+cis_security_hardening::rules::auditd_chcon_use::enforce: true
+cis_security_hardening::rules::auditd_setfacl_use::enforce: true
+cis_security_hardening::rules::auditd_usermod_use::enforce: true
+cis_security_hardening::rules::auditd_kernel_modules::enforce: true
 
 cis_security_hardening::rules::rsyslog_installed::enforce: true
 cis_security_hardening::rules::rsyslog_service::enforce: true
@@ -417,6 +425,7 @@ cis_security_hardening::rules::pam_pw_requirements::retry: 3
 cis_security_hardening::rules::pam_lockout::enforce: true
 cis_security_hardening::rules::pam_lockout::attempts: 3
 cis_security_hardening::rules::pam_lockout::lockouttime: 300
+cis_security_hardening::rules::pam_lockout::lock_dir: /var/run/faillog.log
 cis_security_hardening::rules::pam_passwd_sha512::enforce: true
 cis_security_hardening::rules::pam_old_passwords::enforce: true
 cis_security_hardening::rules::pam_old_passwords::oldpasswords: 5

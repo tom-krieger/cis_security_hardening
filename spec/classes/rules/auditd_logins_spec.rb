@@ -58,7 +58,7 @@ describe 'cis_security_hardening::rules::auditd_logins' do
 
               is_expected.not_to contain_concat__fragment('logins policy rule 3')
 
-            elsif os_facts[:os]['family'].casecmp('debian').zero? 
+            elsif os_facts[:os]['family'].casecmp('debian').zero?
 
               is_expected.to contain_concat__fragment('logins policy rule 2')
                 .with(

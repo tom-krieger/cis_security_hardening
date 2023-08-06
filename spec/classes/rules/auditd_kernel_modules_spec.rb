@@ -54,22 +54,20 @@ describe 'cis_security_hardening::rules::auditd_kernel_modules' do
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
                   'content' => "-a always,exit -S all -F path=/usr/bin/kmod -p x -F auid>=1000 -F auid!=#{auid} -k module-change",
                 )
-            else
-              if os_facts[:os]['name'].casecmp('debian').zero? && os_facts[:os]['release']['major'] > '10'
-                  is_expected.to contain_concat__fragment('watch kernel modules rule 1')
-                    .with(
+            elsif os_facts[:os]['name'].casecmp('debian').zero? && os_facts[:os]['release']['major'] > '10'
+              is_expected.to contain_concat__fragment('watch kernel modules rule 1')
+                .with(
                       'order' => '204',
                       'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
                       'content' => "-a always,exit -S all -F path=/usr/bin/kmod -F perm=x -F auid>=1000 -F auid!=#{auid} -k kernel_modules",
                     )
-              else
-                is_expected.to contain_concat__fragment('watch kernel modules rule 1')
-                  .with(
-                    'order' => '204',
-                    'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                    'content' => "-a always,exit -S all -F path=/usr/bin/kmod -F perm=x -F auid>=1000 -F auid!=#{auid} -F key=kernel_modules",
-                  )
-              end
+            else
+              is_expected.to contain_concat__fragment('watch kernel modules rule 1')
+                .with(
+                  'order' => '204',
+                  'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
+                  'content' => "-a always,exit -S all -F path=/usr/bin/kmod -F perm=x -F auid>=1000 -F auid!=#{auid} -F key=kernel_modules",
+                )
             end
 
             if ['x86_64', 'amd64'].include?(os_facts[:os]['architecture'])
