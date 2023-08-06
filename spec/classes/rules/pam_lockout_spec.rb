@@ -222,52 +222,72 @@ describe 'cis_security_hardening::rules::pam_lockout' do
               is_expected.not_to contain_file_line('faillock_even_deny_root')
 
               if os_facts[:os]['name'].casecmp('debian').zero? && os_facts[:os]['release']['major'] > '10'
-                is_expected.to contain_pam('pam-common-auth-require-faillock')
+                is_expected.to contain_file('/etc/pam.d/common-auth')
                   .with(
-                    'ensure'    => 'present',
-                    'service'   => 'common-auth',
-                    'type'      => 'auth',
-                    'control'   => 'required',
-                    'module'    => 'pam_faillock.so',
-                    'position'  => 'before *[type="auth" and module="pam_unix.so"]',
-                    'arguments' => ['preauth'],
+                    'ensure'  => 'file',
+                    'source'  => 'puppet:///modules/cis_security_hardening/pam_lockout/debian/common-auth',
+                    'owner'   => 'root',
+                    'group'   => 'root',
                   )
-                is_expected.to contain_pam('pam-common-auth-require-faillock-die')
+                  .that_requires('Class[cis_security_hardening::rules::pam_pw_requirements]')
+
+                is_expecte3d.to contain_file('/etc/pam.d/common-account')
                   .with(
-                    'ensure'    => 'present',
-                    'service'   => 'common-auth',
-                    'type'      => 'auth',
-                    'control'   => '[default=die]',
-                    'control_is_param' => true,
-                    'module'    => 'pam_faillock.so',
-                    'position'  => 'after *[type="auth" and module="pam_unix.so"]',
-                    'arguments' => ['authfail'],
+                    'ensure' => 'file',
+                    'source' => 'puppet:///modules/cis_security_hardening/pam_lockout/debian/common-account',
+                    'owner'  => 'root',
+                    'group'  => 'root',
+                    'mode'   => '0644',
                   )
-                  .that_requires('Pam[pam-common-auth-sufficient-faillock]')
-                is_expected.to contain_pam('pam-common-auth-sufficient-faillock')
-                  .with(
-                    'ensure'    => 'present',
-                    'service'   => 'common-auth',
-                    'type'      => 'auth',
-                    'control'   => 'sufficient',
-                    'module'    => 'pam_faillock.so',
-                    'arguments' => ['authsucc'],
-                    'position'  => 'after *[type="auth" and module="pam_unix.so"]',
-                  )
-                is_expected.to contain_pam('pam-common-account-required-faillock')
-                  .with(
-                    'ensure'   => 'present',
-                    'service'  => 'common-account',
-                    'type'     => 'account',
-                    'control'  => 'required',
-                    'module'   => 'pam_faillock.so',
-                  )
+                  .that_requires('Class[cis_security_hardening::rules::pam_pw_requirements]')
+
+                # is_expected.to contain_pam('pam-common-auth-require-faillock')
+                #   .with(
+                #     'ensure'    => 'present',
+                #     'service'   => 'common-auth',
+                #     'type'      => 'auth',
+                #     'control'   => 'required',
+                #     'module'    => 'pam_faillock.so',
+                #     'position'  => 'before *[type="auth" and module="pam_unix.so"]',
+                #     'arguments' => ['preauth'],
+                #   )
+                # is_expected.to contain_pam('pam-common-auth-require-faillock-die')
+                #   .with(
+                #     'ensure'    => 'present',
+                #     'service'   => 'common-auth',
+                #     'type'      => 'auth',
+                #     'control'   => '[default=die]',
+                #     'control_is_param' => true,
+                #     'module'    => 'pam_faillock.so',
+                #     'position'  => 'after *[type="auth" and module="pam_unix.so"]',
+                #     'arguments' => ['authfail'],
+                #   )
+                #   .that_requires('Pam[pam-common-auth-sufficient-faillock]')
+                # is_expected.to contain_pam('pam-common-auth-sufficient-faillock')
+                #   .with(
+                #     'ensure'    => 'present',
+                #     'service'   => 'common-auth',
+                #     'type'      => 'auth',
+                #     'control'   => 'sufficient',
+                #     'module'    => 'pam_faillock.so',
+                #     'arguments' => ['authsucc'],
+                #     'position'  => 'after *[type="auth" and module="pam_unix.so"]',
+                #   )
+                # is_expected.to contain_pam('pam-common-account-required-faillock')
+                #   .with(
+                #     'ensure'   => 'present',
+                #     'service'  => 'common-account',
+                #     'type'     => 'account',
+                #     'control'  => 'required',
+                #     'module'   => 'pam_faillock.so',
+                #   )
+
                 is_expected.to contain_file_line('faillock_fail_interval')
                   .with(
                     'ensure'             => 'present',
                     'path'               => '/etc/security/faillock.conf',
                     'match'              => '^fail_interval =',
-                    'line'               => "fail_interval = 900",
+                    'line'               => 'fail_interval = 900',
                     'append_on_no_match' => true,
                   )
                 is_expected.to contain_file_line('faillock_deny')
@@ -275,7 +295,7 @@ describe 'cis_security_hardening::rules::pam_lockout' do
                     'ensure'             => 'present',
                     'path'               => '/etc/security/faillock.conf',
                     'match'              => '^deny =',
-                    'line'               => "deny = 3",
+                    'line'               => 'deny = 3',
                     'append_on_no_match' => true,
                   )
                 is_expected.to contain_file_line('faillock_fail_unlock_time')
@@ -283,7 +303,7 @@ describe 'cis_security_hardening::rules::pam_lockout' do
                     'ensure'             => 'present',
                     'path'               => '/etc/security/faillock.conf',
                     'match'              => '^unlock_time =',
-                    'line'               => "unlock_time = 900",
+                    'line'               => 'unlock_time = 900',
                     'append_on_no_match' => true,
                   )
               else
