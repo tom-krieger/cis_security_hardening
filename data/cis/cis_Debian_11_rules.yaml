@@ -171,6 +171,7 @@ cis_security_hardening::benchmark::debian::11:
         - auditd_session_logins
         - auditd_perm_mod
         - auditd_access
+        - auditd_kernel_modules
         - auditd_privileged_commands
         - auditd_mounts
         - auditd_delete

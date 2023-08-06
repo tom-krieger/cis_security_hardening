@@ -58,13 +58,31 @@ describe 'cis_security_hardening::rules::auditd_logins' do
 
               is_expected.not_to contain_concat__fragment('logins policy rule 3')
 
+            elsif os_facts[:os]['family'].casecmp('debian').zero? 
+
+              is_expected.to contain_concat__fragment('logins policy rule 2')
+                .with(
+                  'order' => '52',
+                  'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
+                  'content' => '-w /var/run/faillock -p wa -k logins',
+                )
+
+              if os_facts[:os]['name'].casecmp('debian').zero? && os_facts[:os]['release']['major'] < '11'
+                is_expected.to contain_concat__fragment('logins policy rule 3')
+                  .with(
+                    'order' => '53',
+                    'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
+                    'content' => '-w /var/log/tallylog -p wa -k logins',
+                  )
+              end
+
             elsif os_facts[:os]['family'].casecmp('redhat').zero? || os_facts[:os]['family'].casecmp('suse').zero?
 
               is_expected.to contain_concat__fragment('logins policy rule 2')
                 .with(
                   'order' => '52',
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-w /var/run/faillog -p wa -k logins',
+                  'content' => '-w /var/run/faillock -p wa -k logins',
                 )
 
               is_expected.to contain_concat__fragment('logins policy rule 3')
