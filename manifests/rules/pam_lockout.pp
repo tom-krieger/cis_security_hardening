@@ -219,7 +219,7 @@ class cis_security_hardening::rules::pam_lockout (
             control   => 'required',
             module    => 'pam_faillock.so',
             position  => 'before *[type="auth" and module="pam_unix.so"]',
-            arguments => ['preauth'],
+            arguments => ['preauth','debug'],
           }
 
           Pam { 'pam-common-auth-require-faillock-die':
@@ -230,7 +230,7 @@ class cis_security_hardening::rules::pam_lockout (
             control_is_param => true,
             module           => 'pam_faillock.so',
             position         => 'after *[type="auth" and module="pam_unix.so"]',
-            arguments        => ['authfail'],
+            arguments        => ['authfail','debug'],
             require          => Pam['pam-common-auth-sufficient-faillock'],
           }
 
@@ -241,15 +241,16 @@ class cis_security_hardening::rules::pam_lockout (
             control   => 'sufficient',
             module    => 'pam_faillock.so',
             position  => 'after *[type="auth" and module="pam_unix.so"]',
-            arguments => ['authsucc'],
+            arguments => ['authsucc','debug'],
           }
 
           Pam { 'pam-common-account-required-faillock':
-            ensure  => present,
-            service => 'common-account',
-            type    => 'account',
-            control => 'required',
-            module  => 'pam_faillock.so',
+            ensure    => present,
+            service   => 'common-account',
+            type      => 'account',
+            control   => 'required',
+            module    => 'pam_faillock.so',
+            arguments => ['debug'],
           }
 
           file_line { 'faillock_fail_interval':
