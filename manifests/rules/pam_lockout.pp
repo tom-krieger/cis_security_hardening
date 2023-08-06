@@ -231,6 +231,7 @@ class cis_security_hardening::rules::pam_lockout (
             module           => 'pam_faillock.so',
             position         => 'after *[type="auth" and module="pam_unix.so"]',
             arguments        => ['authfail'],
+            require          => Pam['pam-common-auth-sufficient-faillock'],
           }
 
           Pam { 'pam-common-auth-sufficient-faillock':
@@ -239,9 +240,8 @@ class cis_security_hardening::rules::pam_lockout (
             type      => 'auth',
             control   => 'sufficient',
             module    => 'pam_faillock.so',
-            position  => 'after *[type="auth" and control="[default=die]"]',
+            position  => 'after *[type="auth" and module="pam_unix.so"]',
             arguments => ['authsucc'],
-            require   => Pam['pam-common-auth-require-faillock-die'],
           }
 
           Pam { 'pam-common-account-required-faillock':

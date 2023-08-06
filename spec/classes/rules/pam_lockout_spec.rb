@@ -243,6 +243,7 @@ describe 'cis_security_hardening::rules::pam_lockout' do
                     'position'  => 'after *[type="auth" and module="pam_unix.so"]',
                     'arguments' => ['authfail'],
                   )
+                  .that_requires('Pam[pam-common-auth-sufficient-faillock]')
                 is_expected.to contain_pam('pam-common-auth-sufficient-faillock')
                   .with(
                     'ensure'    => 'present',
@@ -251,7 +252,7 @@ describe 'cis_security_hardening::rules::pam_lockout' do
                     'control'   => 'sufficient',
                     'module'    => 'pam_faillock.so',
                     'arguments' => ['authsucc'],
-                    'position'  => 'after *[type="auth" and control="[default=die]"]',
+                    'position'  => 'after *[type="auth" and module="pam_unix.so"]',
                   )
                 is_expected.to contain_pam('pam-common-account-required-faillock')
                   .with(
