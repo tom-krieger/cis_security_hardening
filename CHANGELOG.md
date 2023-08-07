@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## Release 0.8.1
 
-* fix for issue #52
+* fix for issue #52, write auditd rules in a way the scanner recognices them
 
 ## Release 0.8.0
 
