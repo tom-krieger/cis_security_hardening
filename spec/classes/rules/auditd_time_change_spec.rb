@@ -44,7 +44,15 @@ describe 'cis_security_hardening::rules::auditd_time_change' do
           is_expected.to compile
 
           if enforce
-            if os_facts[:os]['name'].casecmp('rocky').zero? || os_facts[:os]['name'].casecmp('almalinux').zero?
+            myos = if os_facts[:os]['name'].nil? || os_facts[:os]['name'].empty?
+                     'unknown'
+                   elsif os_facts[:os]['name'].casecmp('redhat').zero?
+                     "redhat#{os_facts[:os]['release']['major']}"
+                   else
+                     os_facts[:os]['name'].downcase
+                   end
+
+            if myos.casecmp('rocky').zero? || myos.casecmp('almalinux').zero? || myos.casecmp('redhat8').zero? || myos.casecmp('redhat9').zero?
               is_expected.to contain_concat__fragment('watch for date-time-change rule 1')
                 .with(
                   'order' => '121',
