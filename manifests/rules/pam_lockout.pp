@@ -212,6 +212,7 @@ class cis_security_hardening::rules::pam_lockout (
       'debian': {
         if $facts['os']['name'].downcase() == 'debian' and
         $facts['os']['release']['major'] > '10' {
+          require cis_security_hardening::rules::pam_pw_requirements
           file { '/etc/pam.d/common-auth':
             ensure  => file,
             source  => 'puppet:///modules/cis_security_hardening/pam_lockout/debian/common-auth',
@@ -229,48 +230,6 @@ class cis_security_hardening::rules::pam_lockout (
             mode    => '0644',
             require => Class['cis_security_hardening::rules::pam_pw_requirements'],
           }
-
-          # Pam { 'pam-common-auth-require-faillock':
-          #   ensure    => present,
-          #   service   => 'common-auth',
-          #   type      => 'auth',
-          #   control   => 'required',
-          #   module    => 'pam_faillock.so',
-          #   position  => 'before *[type="auth" and module="pam_unix.so"]',
-          #   arguments => ['preauth','debug'],
-          #   require   => Class['cis_security_hardening::rules::pam_pw_requirements'],
-          # }
-
-          # Pam { 'pam-common-auth-require-faillock-die':
-          #   ensure           => present,
-          #   service          => 'common-auth',
-          #   type             => 'auth',
-          #   control          => '[default=die]',
-          #   control_is_param => true,
-          #   module           => 'pam_faillock.so',
-          #   position         => 'after *[type="auth" and module="pam_unix.so"]',
-          #   arguments        => ['authfail','debug'],
-          #   require          => Pam['pam-common-auth-sufficient-faillock'],
-          # }
-
-          # Pam { 'pam-common-auth-sufficient-faillock':
-          #   ensure    => present,
-          #   service   => 'common-auth',
-          #   type      => 'auth',
-          #   control   => 'sufficient',
-          #   module    => 'pam_faillock.so',
-          #   position  => 'after *[type="auth" and module="pam_unix.so"]',
-          #   arguments => ['authsucc','debug'],
-          # }
-
-          # Pam { 'pam-common-account-required-faillock':
-          #   ensure    => present,
-          #   service   => 'common-account',
-          #   type      => 'account',
-          #   control   => 'required',
-          #   module    => 'pam_faillock.so',
-          #   arguments => ['debug'],
-          # }
 
           file_line { 'faillock_fail_interval':
             ensure             => present,

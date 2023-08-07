@@ -18,6 +18,22 @@ describe 'cis_security_hardening::rules::pam_lockout' do
       path        => ['/sbin','/usr/sbin'],
       refreshonly => true,
     }
+
+    class cis_security_hardening::rules::pam_pw_requirements (
+      Boolean $enforce        = false,
+      Integer $minlen         = 14,
+      Integer $dcredit        = -1,
+      Integer $ucredit        = -1,
+      Integer $ocredit        = -1,
+      Integer $lcredit        = -1,
+      Integer $minclass       = -1,
+      Integer $retry          = 3,
+      Boolean $dictcheck      = false,
+      Integer $difok          = 0,
+      Integer $maxrepeat      = 0,
+      Integer $maxclassrepeat = 0,
+    ) {
+    }
     EOF
   end
 
@@ -229,9 +245,8 @@ describe 'cis_security_hardening::rules::pam_lockout' do
                     'owner'   => 'root',
                     'group'   => 'root',
                   )
-                  .that_requires('Class[cis_security_hardening::rules::pam_pw_requirements]')
 
-                is_expecte3d.to contain_file('/etc/pam.d/common-account')
+                is_expected.to contain_file('/etc/pam.d/common-account')
                   .with(
                     'ensure' => 'file',
                     'source' => 'puppet:///modules/cis_security_hardening/pam_lockout/debian/common-account',
@@ -239,48 +254,6 @@ describe 'cis_security_hardening::rules::pam_lockout' do
                     'group'  => 'root',
                     'mode'   => '0644',
                   )
-                  .that_requires('Class[cis_security_hardening::rules::pam_pw_requirements]')
-
-                # is_expected.to contain_pam('pam-common-auth-require-faillock')
-                #   .with(
-                #     'ensure'    => 'present',
-                #     'service'   => 'common-auth',
-                #     'type'      => 'auth',
-                #     'control'   => 'required',
-                #     'module'    => 'pam_faillock.so',
-                #     'position'  => 'before *[type="auth" and module="pam_unix.so"]',
-                #     'arguments' => ['preauth'],
-                #   )
-                # is_expected.to contain_pam('pam-common-auth-require-faillock-die')
-                #   .with(
-                #     'ensure'    => 'present',
-                #     'service'   => 'common-auth',
-                #     'type'      => 'auth',
-                #     'control'   => '[default=die]',
-                #     'control_is_param' => true,
-                #     'module'    => 'pam_faillock.so',
-                #     'position'  => 'after *[type="auth" and module="pam_unix.so"]',
-                #     'arguments' => ['authfail'],
-                #   )
-                #   .that_requires('Pam[pam-common-auth-sufficient-faillock]')
-                # is_expected.to contain_pam('pam-common-auth-sufficient-faillock')
-                #   .with(
-                #     'ensure'    => 'present',
-                #     'service'   => 'common-auth',
-                #     'type'      => 'auth',
-                #     'control'   => 'sufficient',
-                #     'module'    => 'pam_faillock.so',
-                #     'arguments' => ['authsucc'],
-                #     'position'  => 'after *[type="auth" and module="pam_unix.so"]',
-                #   )
-                # is_expected.to contain_pam('pam-common-account-required-faillock')
-                #   .with(
-                #     'ensure'   => 'present',
-                #     'service'  => 'common-account',
-                #     'type'     => 'account',
-                #     'control'  => 'required',
-                #     'module'   => 'pam_faillock.so',
-                #   )
 
                 is_expected.to contain_file_line('faillock_fail_interval')
                   .with(
