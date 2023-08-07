@@ -280,10 +280,25 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                   'arguments' => ['retry=3'],
                 )
 
-              is_expected.to contain_package('libpam-pwquality')
-                .with(
-                  'ensure' => 'installed',
-                )
+              if os_facts[:os]['name'].casecmp('debian').zero? && os_facts[:os]['release']['major'] > '10'
+                is_expected.to contain_package('libpam-pwquality')
+                  .with(
+                    'ensure' => 'installed',
+                  )
+                  .that_notifies('Exec[update-pam-config]')
+
+                is_expected.to contain_exec('update-pam-config')
+                  .with(
+                    'command'     => 'pam-auth-update --package pwquality',
+                    'path'        => ['/sbin', '/usr/sbin'],
+                    'refreshonly' => true,
+                  )
+              else
+                is_expected.to contain_package('libpam-pwquality')
+                  .with(
+                    'ensure' => 'installed',
+                  )
+              end
 
             elsif os_facts[:os]['family'].casecmp('suse').zero?
 

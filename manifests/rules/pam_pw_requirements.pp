@@ -225,9 +225,27 @@ class cis_security_hardening::rules::pam_pw_requirements (
         }
       }
       'debian' : {
+        if $facts['os']['name'].downcase() == 'debian' and
+        $facts['os']['release']['major'] > '10' {
+          $pkg_opts = {
+            ensure => installed,
+            notify => Exec['update-pam-config'],
+          }
+        } else {
+          $pkg_opts = {
+            ensure => installed,
+          }
+        }
         ensure_packages(['libpam-pwquality'], {
             ensure => installed,
+            notify => Exec['update-pam-config'],
         })
+
+        exec { 'update-pam-config':
+          command     => 'pam-auth-update --package pwquality',
+          path        => ['/sbin', '/usr/sbin'],
+          refreshonly => true,
+        }
 
         file_line { 'pam minlen':
           ensure             => 'present',

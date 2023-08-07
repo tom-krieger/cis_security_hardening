@@ -1,0 +1,6 @@
+auth    required                        pam_faillock.so preauth debug
+auth    [success=1 default=ignore]      pam_unix.so nullok
+auth    [default=die]                   pam_faillock.so authfail debug
+auth    sufficient                      pam_faillock.so authsucc debug
+auth    requisite                       pam_deny.so
+auth    required                        pam_permit.so

@@ -22,6 +22,11 @@ describe 'cis_security_hardening::auditd_cron' do
 
         is_expected.to contain_file('/etc/cron.d/auditd_priv_commands.cron')
           .with(
+            'ensure'  => 'absent',
+          )
+
+        is_expected.to contain_file('/etc/cron.d/auditd_priv_commands')
+          .with(
             'ensure'  => 'file',
             'owner'   => 'root',
             'group'   => 'root',

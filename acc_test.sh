@@ -1,7 +1,7 @@
 #!/bin/bash
 
 VGIMAGES="vg-centos-7 vg-alma-8 vg-rocky-8"
-VGIMAGES="vg-centos-7"
+VGIMAGES="vg-centos-7 vg-debian-11"
 
 if [ $# -ne 1 ]
 then

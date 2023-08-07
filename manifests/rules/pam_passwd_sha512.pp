@@ -65,14 +65,35 @@ class cis_security_hardening::rules::pam_passwd_sha512 (
         }
       }
       'debian': {
-        Pam { 'pam-common-password-unix':
-          ensure           => present,
-          service          => 'common-password',
-          type             => 'password',
-          control          => '[success=1 default=ignore]',
-          control_is_param => true,
-          module           => 'pam_unix.so',
-          arguments        => ['sha512'],
+        if $facts['os']['name'].downcase() == 'debian' and
+        $facts['os']['release']['major'] > '10' {
+          file { '/etc/pam.d/common-password':
+            ensure  => file,
+            source  => 'puppet:///modules/cis_security_hardening/pam_lockout/debian/common-password',
+            owner   => 'root',
+            group   => 'root',
+            mode    => '0644',
+            require => Class['cis_security_hardening::rules::pam_pw_requirements'],
+          }
+
+          file_line { 'set crypt method':
+            ensure             => present,
+            path               => '/etc/login.defs',
+            match              => '^ENCRYPT_METHOD',
+            line               => 'ENCRYPT_METHOD yescrypt',
+            append_on_no_match => true,
+            require            => Class['cis_security_hardening::rules::pam_pw_requirements'],
+          }
+        } else {
+          Pam { 'pam-common-password-unix':
+            ensure           => present,
+            service          => 'common-password',
+            type             => 'password',
+            control          => '[success=1 default=ignore]',
+            control_is_param => true,
+            module           => 'pam_unix.so',
+            arguments        => ['sha512'],
+          }
         }
       }
       default: {

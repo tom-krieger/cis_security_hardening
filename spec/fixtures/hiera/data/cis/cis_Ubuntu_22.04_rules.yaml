@@ -1,0 +1,320 @@
+---
+cis_security_hardening::benchmark::ubuntu::20:
+  bundles:
+    filesystem_config:
+      level1:
+        - cramfs
+        - freevxfs
+        - jffs2
+        - hfs
+        - hfsplus
+        - squashfs
+        - udf
+        - tmp_filesystem
+        - tmp_nodev
+        - tmp_nosuid
+        - tmp_noexec
+        - dev_shm
+        - dev_shm_nodev
+        - dev_shm_nosuid
+        - dev_shm_noexec
+        - var_tmp_nodev
+        - var_tmp_nosuid
+        - var_tmp_noexec
+        - home_nodev
+        - sticky_world_writeable_files
+        - disable_automount
+        - disable_usb_storage
+    software_updates:
+      stig:
+        - apt_unused
+    filesystem_integrety:
+      level1:
+        - aide_installed
+        - aide_regular_checks
+      stig:
+        - aide_notify_admins
+    boot_settings:
+      level1:
+        - grub_bootloader_config
+        - grub_password
+        - single_user_mode
+    process_hardening:
+      level1:
+        - enable_aslr
+        - disable_prelink
+        - restrict_core_dumps
+      stig:
+        - limits_maxlogins
+        - kdump_service
+        - fips_bootloader
+        - crtl_alt_del
+    mandatory_access_control:
+      level1:
+        - apparmor
+        - apparmor_bootloader
+        - apparmor_profiles
+      level2:
+        - apparmor_profiles_enforcing
+    warning_banners:
+      level1:
+        - issue_perms
+        - issue_net_perms
+        - motd_perms
+    gnome_display_manager:
+      level1:
+        - gnome_gdm
+        - xdmcp_config
+      level2:
+        - gnome_gdm_package
+      stig:
+        - gdm_lock_enabled
+        - ctrl_alt_del_graphical
+    special_purpose_services:
+      level1:
+        - systemd_timesyncd
+        - chrony
+        - ntpd
+        - x11_installed
+        - avahi
+        - cups
+        - dhcp
+        - ldapd
+        - nfs
+        - bind
+        - vsftp
+        - httpd
+        - dovecot
+        - samba
+        - squid
+        - net_snmp
+        - mta_local
+        - rsyncd
+        - nis
+      stig: 
+        - timezone_utc_gmt
+        - telnet_server
+        - rsh_server
+        - mfetp
+    service_clients:
+      level1:
+        - nis_client
+        - rsh_client
+        - talk_client
+        - telnet_client
+
+        - ldap_client
+        - rpcbind
+    unused_network_protocols:
+      level2:
+        - disable_ipv6
+        - disable_wireless
+    network_parameters_host:
+      level1:
+        - disable_packet_redirect
+        - disable_ip_forwarding
+    network_parameters_host_router:
+      level1:
+        - source_routed_packets
+        - icmp_redirects
+        - secure_icmp_redirects
+        - log_suspicious_packets
+        - ignore_icmp_broadcast
+        - ignore_bogus_icmp_responses
+        - enable_reverse_path_filtering
+        - enable_tcp_syn_cookies
+        - ipv6_router_advertisements
+    uncommon_network_protocols:
+      level2:
+        - disable_dccp
+        - disable_sctp
+        - disable_rds
+        - disable_tipc
+    configure_ufw:
+      level1:
+        - ufw_install
+        - ufw_service
+        - ufw_loopback
+        - ufw_outbound
+        - ufw_open_ports
+        - ufw_default_deny
+    configure_iptables:
+      level1:
+        - iptables_install
+        - iptables_deny_policy
+        - iptables_loopback
+        - iptables_outbound_established
+        - iptables_open_ports
+    configure_ip6tables:
+      level1:
+        - ip6tables_deny_policy
+        - ip6tables_loopback
+        - ip6tables_outbound_established
+        - ip6tables_open_ports
+    configure_accounting:
+      level2:
+        - auditd_init
+        - auditd_package
+        - auditd_service
+        - auditd_process
+        - auditd_max_log_file
+        - auditd_max_log_file_action
+        - auditd_when_disk_full
+        - auditd_backlog_limit
+        - auditd_time_change
+        - auditd_identity
+        - auditd_system_locale
+        - auditd_mac_policy
+        - auditd_logins
+        - auditd_session_logins
+        - auditd_perm_mod
+        - auditd_access
+        - auditd_privileged_commands
+        - auditd_mounts
+        - auditd_delete
+        - auditd_scope
+        - auditd_actions
+        - auditd_modules
+        - auditd_immutable
+      stig:
+        - auditd_remote
+        - auditd_privileged_priv_change
+        - auditd_chfn_use
+        - auditd_ssh_agent_use
+        - auditd_ssh_keysign_use
+        - auditd_setxattr_use
+        - auditd_lsetxattr_use
+        - auditd_fsetxattr_use
+        - auditd_removexattr_use
+        - auditd_fremovexattr_use
+        - auditd_lremovexattr_use
+        - auditd_open_by_handle_use
+        - auditd_sudo_use
+        - auditd_sudoedit_use
+        - auditd_chsh_use
+        - auditd_newgrp_use
+        - auditd_chcon_use
+        - auditd_apparmor_parser_use
+        - auditd_setfacl_use
+        - auditd_chacl_use
+        - auditd_passwd_use
+        - auditd_unix_update_use
+        - auditd_gpasswd_use
+        - auditd_chage_use
+        - auditd_usermod_use
+        - auditd_crontab_use
+        - auditd_pam_timestamp_check_use
+        - auditd_finit_module_use
+        - auditd_privileged_functions_use
+        - auditd_nonlocal_admin_access
+        - auditd_kmod_use
+        - auditd_fdisk_use
+        - auditd_log_perms
+        - auditd_log_dir_perms
+        - auditd_conf_perms
+        - auditd_tools_perms
+    configure_logging:
+      level1:
+        - rsyslog_installed
+        - rsyslog_service
+        - rsyslog_default_file_perms
+        - rsyslog_logging
+        - rsyslog_remote_logs
+        - rsyslog_remote_syslog
+        - journald_rsyslog
+        - journald_compress
+        - journald_persistent
+        - logfile_permissions
+        - logrotate
+        - logrotate_configuration
+      stig: 
+        - var_log_syslog_perms
+    configure_job_schedulers:
+      level1:
+        - crond_service
+        - crontab
+        - cron_hourly
+        - cron_daily
+        - cron_weekly
+        - cron_monthly
+        - etc_crond
+        - cron_restrict
+        - at_restrict
+    sudo_config:
+      level1:
+        - sudo_installed
+        - sudo_use_pty
+        - sudo_log
+    configure_ssh:
+      level1:
+        - sshd_config_permissions
+        - sshd_private_keys
+        - sshd_public_keys
+        - sshd_limit_access
+        - sshd_loglevel
+        - sshd_x11_forward
+        - sshd_max_auth_tries
+        - sshd_ignore_rhosts
+        - sshd_hostbased_authentication
+        - sshd_root_login
+        - sshd_empty_passwords
+        - sshd_user_environment
+        - sshd_ciphers
+        - sshd_macs
+        - sshd_kex
+        - sshd_timeouts
+        - sshd_login_gracetime
+        - sshd_banner
+        - sshd_use_pam
+        - sshd_tcp_forwarding
+        - sshd_max_startups
+        - sshd_max_sessions
+      stig:
+        - sshd_install
+        - sshd_x11_use_localhost
+    configure_pam:
+      level1:
+        - pam_pw_requirements
+        - pam_lockout
+        - pam_old_passwords
+        - pam_passwd_sha512
+      stig:
+        - pam_pkcs11
+        - opensc_pkcs11
+        - pam_use_mappers
+        - pam_mfa
+        - pki_certs_validation
+        - pam_fail_delay
+        - pam_cached_auth
+        - pam_last_logon
+    configure_user_accounts:
+      level1:
+        - passwd_min_days
+        - passwd_expiration
+        - passwd_warn_days
+        - passwd_inactive_days
+        - shell_nologin
+        - root_gid
+        - umask_setting
+        - timeout_setting
+        - restrict_su
+      stig:
+        - passwd_sha512
+        - vlock
+        - lock_root
+    system_file_permissions:
+      level1:
+        - passwd_perms
+        - passwd_bak_perms
+        - group_perms
+        - group_bak_perms
+        - shadow_perms
+        - shadow_bak_perms
+        - gshadow_perms
+        - gshadow_bak_perms
+    configure_user_groups:
+      level1:
+        - shadowed_passwords
+      stig:
+        - system_cmd_group
+        

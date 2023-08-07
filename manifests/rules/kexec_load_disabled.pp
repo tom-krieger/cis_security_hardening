@@ -27,8 +27,10 @@ class cis_security_hardening::rules::kexec_load_disabled (
   if $enforce {
     sysctl {
       'kernel.kexec_load_disabled':
-        value  => 1,
-        notify => Exec['reload-sysctl-system'],
+        ensure    => present,
+        permanent => 'yes',
+        value     => 1,
+        notify    => Exec['reload-sysctl-system'],
     }
   }
 }

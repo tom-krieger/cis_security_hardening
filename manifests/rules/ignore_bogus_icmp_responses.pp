@@ -24,7 +24,9 @@ class cis_security_hardening::rules::ignore_bogus_icmp_responses (
   if $enforce {
     sysctl {
       'net.ipv4.icmp_ignore_bogus_error_responses':
-        value => 1,
+        ensure    => present,
+        permanent => 'yes',
+        value     => 1,
     }
   }
 }

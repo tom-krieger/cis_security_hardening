@@ -8,7 +8,7 @@ describe 'cis_security_hardening::rules::chrony' do
   on_supported_os.each do |os, os_facts|
     enforce_options.each do |enforce|
       context "on #{os}" do
-        describe 'without ntp servers defined' do
+        describe "without ntp servers defined enforce = #{enforce}" do
           let(:facts) { os_facts }
           let(:params) do
             {
@@ -24,7 +24,7 @@ describe 'cis_security_hardening::rules::chrony' do
           end
         end
 
-        describe 'with ntp servers defined' do
+        describe "with ntp servers defined, enforce = #{enforce}" do
           let(:facts) { os_facts }
           let(:params) do
             {

@@ -19,9 +19,16 @@ describe 'cis_security_hardening::rules::disable_tipc' do
           is_expected.to compile
 
           if enforce
+            if os_facts[:os]['name'].casecmp('debian').zero? && os_facts[:os]['release']['major'] > '10'
+              cmd = '/bin/false'
+              is_expected.to contain_kmod__blacklist('tipc')
+            else
+              cmd = '/bin/true'
+            end
+
             is_expected.to contain_kmod__install('tipc')
               .with(
-                command: '/bin/true',
+                command: cmd,
               )
           else
             is_expected.not_to contain_kmod__install('tipc')

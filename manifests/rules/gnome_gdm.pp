@@ -71,7 +71,47 @@ class cis_security_hardening::rules::gnome_gdm (
           refreshonly => true,
         }
       }
-      'ubuntu', 'debian': {
+      'debian': {
+        if $facts['os']['release']['major'] > '10' {
+          file { '/etc/dconf/profile/cis':
+            ensure  => file,
+            content => "user-db:user\nsystem-db:cis\nfile-db:/usr/share/cis/greeter-dconf-defaults",
+            owner   => 'root',
+            group   => 'root',
+            mode    => '0644',
+          }
+
+          file { '/etc/dconf/db/cis.d':
+            ensure => directory,
+            owner  => 'root',
+            group  => 'root',
+            mode   => '0755',
+          }
+
+          file { '/etc/dconf/db/cis.d/01-banner-message':
+            ensure  => file,
+            content => "[org/gnome/login-screen]\nbanner-message-enable=true\nbanner-message-text=\'Authorized uses only. All activity may be monitored and reported.\'\ndisable-user-list=true\n", #lint:ignore:140chars
+            owner   => 'root',
+            group   => 'root',
+            mode    => '0644',
+          }
+        } else {
+          file { '/etc/gdm3/greeter.dconf-defaults':
+            ensure  => file,
+            content => "[org/gnome/login-screen]\nbanner-message-enable=true\nbanner-message-text=\'Authorized uses only. All activity may be monitored and reported.\'\ndisable-user-list=true\n", #lint:ignore:140chars
+            owner   => 'root',
+            group   => 'root',
+            mode    => '0644',
+            notify  => Exec['dpkg-gdm-reconfigure'],
+          }
+        }
+        exec { 'dpkg-gdm-reconfigure':
+          path        => ['/bin', '/usr/bin'],
+          command     => 'dpkg-reconfigure gdm3',
+          refreshonly => true,
+        }
+      }
+      'ubuntu': {
         file { '/etc/gdm3/greeter.dconf-defaults':
           ensure  => file,
           content => "[org/gnome/login-screen]\nbanner-message-enable=true\nbanner-message-text=\'Authorized uses only. All activity may be monitored and reported.\'\ndisable-user-list=true\n", #lint:ignore:140chars

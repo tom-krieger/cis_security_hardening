@@ -100,16 +100,39 @@ describe 'cis_security_hardening::rules::pam_passwd_sha512' do
                 is_expected.not_to contain_exec('update authselect config for sha512 password-auth')
                 is_expected.not_to contain_exec('switch sha512 on')
 
-                is_expected.to contain_pam('pam-common-password-unix')
-                  .with(
-                    'ensure'           => 'present',
-                    'service'          => 'common-password',
-                    'type'             => 'password',
-                    'control'          => '[success=1 default=ignore]',
-                    'control_is_param' => true,
-                    'module'           => 'pam_unix.so',
-                    'arguments'        => ['sha512'],
-                  )
+                if os_facts[:os]['name'].casecmp('debian').zero? && os_facts[:os]['release']['major'] > '10'
+                  is_expected.to contain_ile('/etc/pam.d/common-password')
+                    .with(
+                      'ensure'  => 'file',
+                      'source'  => 'puppet:///modules/cis_security_hardening/pam_lockout/debian/common-password',
+                      'owner'   => 'root',
+                      'group'   => 'root',
+                      'mode'    => '0644',
+                    )
+                    .that_requires('Class[cis_security_hardening::rules::pam_pw_requirements],')
+
+                  is_expected.to contain_file_line('set crypt method')
+                    .with(
+                      'ensure'             => 'present',
+                      'path'               => '/etc/login.defs',
+                      'match'              => '^ENCRYPT_METHOD',
+                      'line'               => 'ENCRYPT_METHOD yescrypt',
+                      'append_on_no_match' => true,
+                    )
+                    .that_requires('Class[cis_security_hardening::rules::pam_pw_requirements]')
+
+                else
+                  is_expected.to contain_pam('pam-common-password-unix')
+                    .with(
+                      'ensure'           => 'present',
+                      'service'          => 'common-password',
+                      'type'             => 'password',
+                      'control'          => '[success=1 default=ignore]',
+                      'control_is_param' => true,
+                      'module'           => 'pam_unix.so',
+                      'arguments'        => ['sha512'],
+                    )
+                end
 
               end
 

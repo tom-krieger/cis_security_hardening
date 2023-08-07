@@ -34,7 +34,9 @@ class cis_security_hardening::rules::restrict_core_dumps (
     }
 
     sysctl { 'fs.suid_dumpable':
-      value => 0,
+      ensure    => present,
+      permanent => 'yes',
+      value     => 0,
     }
 
     $installed = fact('cis_security_hardening.systemd-coredump') ? {

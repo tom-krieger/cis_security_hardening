@@ -9,14 +9,14 @@
 #### Public Classes
 
 * [`cis_security_hardening`](#cis_security_hardening): Security baseline enforcement
-* [`cis_security_hardening::auditd_cron`](#cis_security_hardeningauditd_cron): Create a cron job to search privileged commands for auditd
-* [`cis_security_hardening::config`](#cis_security_hardeningconfig): Configure the module
-* [`cis_security_hardening::reboot`](#cis_security_hardeningreboot): Handle necessary reboot
-* [`cis_security_hardening::rules::dac_on_hardlinks`](#cis_security_hardeningrulesdac_on_hardlinks): Ensure the operating system is configured to enable DAC on hardlinks
-* [`cis_security_hardening::rules::dac_on_symlinks`](#cis_security_hardeningrulesdac_on_symlinks): Ensure the operating system is configured to enable DAC on symlinks
-* [`cis_security_hardening::rules::gdm_lock_delay`](#cis_security_hardeningrulesgdm_lock_delay): Ensure overriding the screensaver lock-delay setting is prevented
-* [`cis_security_hardening::services`](#cis_security_hardeningservices): Services
-* [`cis_security_hardening::sticky_world_writable_cron`](#cis_security_hardeningsticky_world_writable_cron): Create cron job for searching world writable dir3ctories with sticky bit
+* [`cis_security_hardening::auditd_cron`](#cis_security_hardening--auditd_cron): Create a cron job to search privileged commands for auditd
+* [`cis_security_hardening::config`](#cis_security_hardening--config): Configure the module
+* [`cis_security_hardening::reboot`](#cis_security_hardening--reboot): Handle necessary reboot
+* [`cis_security_hardening::rules::dac_on_hardlinks`](#cis_security_hardening--rules--dac_on_hardlinks): Ensure the operating system is configured to enable DAC on hardlinks
+* [`cis_security_hardening::rules::dac_on_symlinks`](#cis_security_hardening--rules--dac_on_symlinks): Ensure the operating system is configured to enable DAC on symlinks
+* [`cis_security_hardening::rules::gdm_lock_delay`](#cis_security_hardening--rules--gdm_lock_delay): Ensure overriding the screensaver lock-delay setting is prevented
+* [`cis_security_hardening::services`](#cis_security_hardening--services): Services
+* [`cis_security_hardening::sticky_world_writable_cron`](#cis_security_hardening--sticky_world_writable_cron): Create cron job for searching world writable dir3ctories with sticky bit
 
 #### Private Classes
 
@@ -147,6 +147,7 @@ termination events that affect "/etc/sudoers.d/"
 * `cis_security_hardening::rules::dev_shm_noexec`: Ensure noexec option set on /dev/shm partition
 * `cis_security_hardening::rules::dev_shm_nosuid`: Ensure nosuid option set on /dev/shm partition
 * `cis_security_hardening::rules::dhcp`: Ensure DHCP Server is not enabled
+* `cis_security_hardening::rules::disable_apport`: Ensure Automatic Error Reporting is not enabled (Automated)
 * `cis_security_hardening::rules::disable_atm`: Ensure ATM is disabled
 * `cis_security_hardening::rules::disable_automount`: Disable Automounting
 * `cis_security_hardening::rules::disable_bluetooth`: Ensure Bluetooth is disabled
@@ -428,21 +429,28 @@ termination events that affect "/etc/sudoers.d/"
 
 ### Defined types
 
-* [`cis_security_hardening::set_mount_options`](#cis_security_hardeningset_mount_options): Change mount options
-* [`cis_security_hardening::unmask_systemd_service`](#cis_security_hardeningunmask_systemd_service): Unmask a systemd service
+* [`cis_security_hardening::parent_dirs`](#cis_security_hardening--parent_dirs): Create directories recursivly
+* [`cis_security_hardening::set_mount_options`](#cis_security_hardening--set_mount_options): Change mount options
+* [`cis_security_hardening::unmask_systemd_service`](#cis_security_hardening--unmask_systemd_service): Unmask a systemd service
 
 ### Functions
 
+#### Public Functions
+
 * [`sanitize_input`](#sanitize_input): sanitize_input.rb Uses Shellwords.escape to sabitize cmd.
+
+#### Private Functions
+
+* `cis_security_hardening::hash_key`: Check if a hash contains a particular key
 
 ### Data types
 
-* [`Cis_security_hardening::Mountoption`](#cis_security_hardeningmountoption): Validate mountoption
-* [`Cis_security_hardening::Mountpoint`](#cis_security_hardeningmountpoint): Validate mountpoint
-* [`Cis_security_hardening::Nftables_address_families`](#cis_security_hardeningnftables_address_families): Valid nftables address families
-* [`Cis_security_hardening::Numbers_letters`](#cis_security_hardeningnumbers_letters): Check for only numbers and letters
-* [`Cis_security_hardening::Servicename`](#cis_security_hardeningservicename): Check service name
-* [`Cis_security_hardening::Word`](#cis_security_hardeningword): Word datatype
+* [`Cis_security_hardening::Mountoption`](#Cis_security_hardening--Mountoption): Validate mountoption
+* [`Cis_security_hardening::Mountpoint`](#Cis_security_hardening--Mountpoint): Validate mountpoint
+* [`Cis_security_hardening::Nftables_address_families`](#Cis_security_hardening--Nftables_address_families): Valid nftables address families
+* [`Cis_security_hardening::Numbers_letters`](#Cis_security_hardening--Numbers_letters): Check for only numbers and letters
+* [`Cis_security_hardening::Servicename`](#Cis_security_hardening--Servicename): Check service name
+* [`Cis_security_hardening::Word`](#Cis_security_hardening--Word): Word datatype
 
 ### Tasks
 
@@ -499,18 +507,18 @@ include cis_security_hardening
 
 The following parameters are available in the `cis_security_hardening` class:
 
-* [`profile`](#profile)
-* [`level`](#level)
-* [`update_postrun_command`](#update_postrun_command)
-* [`fact_upload_command`](#fact_upload_command)
-* [`exclude_dirs_sticky_ww`](#exclude_dirs_sticky_ww)
-* [`auditd_dirs_to_include`](#auditd_dirs_to_include)
-* [`time_until_reboot`](#time_until_reboot)
-* [`auto_reboot`](#auto_reboot)
-* [`verbose_logging`](#verbose_logging)
-* [`remove_authconfig`](#remove_authconfig)
+* [`profile`](#-cis_security_hardening--profile)
+* [`level`](#-cis_security_hardening--level)
+* [`update_postrun_command`](#-cis_security_hardening--update_postrun_command)
+* [`fact_upload_command`](#-cis_security_hardening--fact_upload_command)
+* [`exclude_dirs_sticky_ww`](#-cis_security_hardening--exclude_dirs_sticky_ww)
+* [`auditd_dirs_to_include`](#-cis_security_hardening--auditd_dirs_to_include)
+* [`time_until_reboot`](#-cis_security_hardening--time_until_reboot)
+* [`auto_reboot`](#-cis_security_hardening--auto_reboot)
+* [`verbose_logging`](#-cis_security_hardening--verbose_logging)
+* [`remove_authconfig`](#-cis_security_hardening--remove_authconfig)
 
-##### <a name="profile"></a>`profile`
+##### <a name="-cis_security_hardening--profile"></a>`profile`
 
 Data type: `Enum['server']`
 
@@ -518,7 +526,7 @@ The benchmark profile to use. Currently only server profiles are supported.
 
 Default value: `'server'`
 
-##### <a name="level"></a>`level`
+##### <a name="-cis_security_hardening--level"></a>`level`
 
 Data type: `Enum['1', '2', 'stig']`
 
@@ -527,15 +535,15 @@ in the level2 rules and stig includes level1 nd level 2 rules.
 
 Default value: `'2'`
 
-##### <a name="update_postrun_command"></a>`update_postrun_command`
+##### <a name="-cis_security_hardening--update_postrun_command"></a>`update_postrun_command`
 
 Data type: `Boolean`
 
 Update Puppet agent post run command
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="fact_upload_command"></a>`fact_upload_command`
+##### <a name="-cis_security_hardening--fact_upload_command"></a>`fact_upload_command`
 
 Data type: `Stdlib::Absolutepath`
 
@@ -543,7 +551,7 @@ Command to use to upload facts to Puppet master
 
 Default value: `"${base_dir}/bin/fact_upload.sh"`
 
-##### <a name="exclude_dirs_sticky_ww"></a>`exclude_dirs_sticky_ww`
+##### <a name="-cis_security_hardening--exclude_dirs_sticky_ww"></a>`exclude_dirs_sticky_ww`
 
 Data type: `Array`
 
@@ -551,7 +559,7 @@ Araay of directories to exclude from the search for world writable directories w
 
 Default value: `[]`
 
-##### <a name="auditd_dirs_to_include"></a>`auditd_dirs_to_include`
+##### <a name="-cis_security_hardening--auditd_dirs_to_include"></a>`auditd_dirs_to_include`
 
 Data type: `Array`
 
@@ -559,7 +567,7 @@ Directories to search for privileged commands to create auditd rules.
 
 Default value: `['/usr']`
 
-##### <a name="time_until_reboot"></a>`time_until_reboot`
+##### <a name="-cis_security_hardening--time_until_reboot"></a>`time_until_reboot`
 
 Data type: `Integer`
 
@@ -570,31 +578,31 @@ nearest minute and a warning will be issued.
 
 Default value: `120`
 
-##### <a name="auto_reboot"></a>`auto_reboot`
+##### <a name="-cis_security_hardening--auto_reboot"></a>`auto_reboot`
 
 Data type: `Boolean`
 
 Reboot when necessary after `time_until_reboot` is exeeded
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="verbose_logging"></a>`verbose_logging`
+##### <a name="-cis_security_hardening--verbose_logging"></a>`verbose_logging`
 
 Data type: `Boolean`
 
 Print various info messages
 
-Default value: ``false``
+Default value: `false`
 
-##### <a name="remove_authconfig"></a>`remove_authconfig`
+##### <a name="-cis_security_hardening--remove_authconfig"></a>`remove_authconfig`
 
 Data type: `Boolean`
 
 remove yuthconfig package on Redhat 7 or similar OSes
 
-Default value: ``false``
+Default value: `false`
 
-### <a name="cis_security_hardeningauditd_cron"></a>`cis_security_hardening::auditd_cron`
+### <a name="cis_security_hardening--auditd_cron"></a>`cis_security_hardening::auditd_cron`
 
 Auditd rules can monitor privileged command use. As filesystems cn be huge and searching
 the relevant commands can be time consuming this cron job will create a custom fact to
@@ -612,14 +620,14 @@ include cis_security_hardening::auditd_cron
 
 The following parameters are available in the `cis_security_hardening::auditd_cron` class:
 
-* [`dirs_to_include`](#dirs_to_include)
-* [`start_time_minute`](#start_time_minute)
-* [`start_time_hour`](#start_time_hour)
-* [`cron_repeat`](#cron_repeat)
-* [`output_file`](#output_file)
-* [`script`](#script)
+* [`dirs_to_include`](#-cis_security_hardening--auditd_cron--dirs_to_include)
+* [`start_time_minute`](#-cis_security_hardening--auditd_cron--start_time_minute)
+* [`start_time_hour`](#-cis_security_hardening--auditd_cron--start_time_hour)
+* [`cron_repeat`](#-cis_security_hardening--auditd_cron--cron_repeat)
+* [`output_file`](#-cis_security_hardening--auditd_cron--output_file)
+* [`script`](#-cis_security_hardening--auditd_cron--script)
 
-##### <a name="dirs_to_include"></a>`dirs_to_include`
+##### <a name="-cis_security_hardening--auditd_cron--dirs_to_include"></a>`dirs_to_include`
 
 Data type: `Array`
 
@@ -627,7 +635,7 @@ A list of directories to search
 
 Default value: `['/usr']`
 
-##### <a name="start_time_minute"></a>`start_time_minute`
+##### <a name="-cis_security_hardening--auditd_cron--start_time_minute"></a>`start_time_minute`
 
 Data type: `Integer`
 
@@ -635,7 +643,7 @@ The minute to start the cronjob
 
 Default value: `37`
 
-##### <a name="start_time_hour"></a>`start_time_hour`
+##### <a name="-cis_security_hardening--auditd_cron--start_time_hour"></a>`start_time_hour`
 
 Data type: `Integer`
 
@@ -643,7 +651,7 @@ The hour to run the cronjob
 
 Default value: `3`
 
-##### <a name="cron_repeat"></a>`cron_repeat`
+##### <a name="-cis_security_hardening--auditd_cron--cron_repeat"></a>`cron_repeat`
 
 Data type: `Enum['0','2','4','6','8']`
 
@@ -651,7 +659,7 @@ Interval to repeat the cronjob in hours. 0 means run only once a day.
 
 Default value: `'0'`
 
-##### <a name="output_file"></a>`output_file`
+##### <a name="-cis_security_hardening--auditd_cron--output_file"></a>`output_file`
 
 Data type: `Stdlib::Absolutepath`
 
@@ -659,7 +667,7 @@ File to write fact data.
 
 Default value: `'/usr/share/cis_security_hardening/data/auditd_priv_cmds.txt'`
 
-##### <a name="script"></a>`script`
+##### <a name="-cis_security_hardening--auditd_cron--script"></a>`script`
 
 Data type: `Stdlib::Absolutepath`
 
@@ -667,7 +675,7 @@ Filename of the script to riun from cron.
 
 Default value: `'/usr/share/cis_security_hardening/bin/auditd_priv_cmds.sh'`
 
-### <a name="cis_security_hardeningconfig"></a>`cis_security_hardening::config`
+### <a name="cis_security_hardening--config"></a>`cis_security_hardening::config`
 
 Create files, install scripts and cron jobs
 
@@ -683,29 +691,29 @@ include cis_security_hardening::config
 
 The following parameters are available in the `cis_security_hardening::config` class:
 
-* [`update_postrun_command`](#update_postrun_command)
-* [`base_dir`](#base_dir)
-* [`fact_upload_command`](#fact_upload_command)
+* [`update_postrun_command`](#-cis_security_hardening--config--update_postrun_command)
+* [`base_dir`](#-cis_security_hardening--config--base_dir)
+* [`fact_upload_command`](#-cis_security_hardening--config--fact_upload_command)
 
-##### <a name="update_postrun_command"></a>`update_postrun_command`
+##### <a name="-cis_security_hardening--config--update_postrun_command"></a>`update_postrun_command`
 
 Data type: `Boolean`
 
 Update Puppet agent's postrun command.
 
-##### <a name="base_dir"></a>`base_dir`
+##### <a name="-cis_security_hardening--config--base_dir"></a>`base_dir`
 
 Data type: `Stdlib::Absolutepath`
 
 Directory where all files go to.
 
-##### <a name="fact_upload_command"></a>`fact_upload_command`
+##### <a name="-cis_security_hardening--config--fact_upload_command"></a>`fact_upload_command`
 
 Data type: `Stdlib::Absolutepath`
 
 Command to use for fact upload.
 
-### <a name="cis_security_hardeningreboot"></a>`cis_security_hardening::reboot`
+### <a name="cis_security_hardening--reboot"></a>`cis_security_hardening::reboot`
 
 Class triggered by resources requesting a system reboot
 
@@ -721,10 +729,10 @@ include cis_security_hardening::reboot
 
 The following parameters are available in the `cis_security_hardening::reboot` class:
 
-* [`time_until_reboot`](#time_until_reboot)
-* [`auto_reboot`](#auto_reboot)
+* [`time_until_reboot`](#-cis_security_hardening--reboot--time_until_reboot)
+* [`auto_reboot`](#-cis_security_hardening--reboot--auto_reboot)
 
-##### <a name="time_until_reboot"></a>`time_until_reboot`
+##### <a name="-cis_security_hardening--reboot--time_until_reboot"></a>`time_until_reboot`
 
 Data type: `Integer`
 
@@ -735,7 +743,7 @@ nearest minute and a warning will be issued.
 
 Default value: `$cis_security_hardening::time_until_reboot`
 
-##### <a name="auto_reboot"></a>`auto_reboot`
+##### <a name="-cis_security_hardening--reboot--auto_reboot"></a>`auto_reboot`
 
 Data type: `Boolean`
 
@@ -743,7 +751,7 @@ Reboot when necessary after `time_until_reboot` is exeeded
 
 Default value: `$cis_security_hardening::auto_reboot`
 
-### <a name="cis_security_hardeningrulesdac_on_hardlinks"></a>`cis_security_hardening::rules::dac_on_hardlinks`
+### <a name="cis_security_hardening--rules--dac_on_hardlinks"></a>`cis_security_hardening::rules::dac_on_hardlinks`
 
 The operating system must enable kernel parameters to enforce discretionary access control on hardlinks.
 
@@ -785,17 +793,17 @@ include cis_security_hardening::rules::dac_on_hardlinks
 
 The following parameters are available in the `cis_security_hardening::rules::dac_on_hardlinks` class:
 
-* [`enforce`](#enforce)
+* [`enforce`](#-cis_security_hardening--rules--dac_on_hardlinks--enforce)
 
-##### <a name="enforce"></a>`enforce`
+##### <a name="-cis_security_hardening--rules--dac_on_hardlinks--enforce"></a>`enforce`
 
 Data type: `Boolean`
 
 Enforce the rule.
 
-Default value: ``false``
+Default value: `false`
 
-### <a name="cis_security_hardeningrulesdac_on_symlinks"></a>`cis_security_hardening::rules::dac_on_symlinks`
+### <a name="cis_security_hardening--rules--dac_on_symlinks"></a>`cis_security_hardening::rules::dac_on_symlinks`
 
 The operating system must enable kernel parameters to enforce discretionary access control on symlinks.
 
@@ -838,17 +846,17 @@ class { 'cis_security_hardening::rules::dac_on_symlinks':
 
 The following parameters are available in the `cis_security_hardening::rules::dac_on_symlinks` class:
 
-* [`enforce`](#enforce)
+* [`enforce`](#-cis_security_hardening--rules--dac_on_symlinks--enforce)
 
-##### <a name="enforce"></a>`enforce`
+##### <a name="-cis_security_hardening--rules--dac_on_symlinks--enforce"></a>`enforce`
 
 Data type: `Boolean`
 
 Enforce the rule.
 
-Default value: ``false``
+Default value: `false`
 
-### <a name="cis_security_hardeningrulesgdm_lock_delay"></a>`cis_security_hardening::rules::gdm_lock_delay`
+### <a name="cis_security_hardening--rules--gdm_lock_delay"></a>`cis_security_hardening::rules::gdm_lock_delay`
 
 The operating system must prevent a user from overriding the screensaver lock-delay setting for the graphical user interface.
 
@@ -872,18 +880,18 @@ include cis_security_hardening::rules::gdm_lock_delay
 
 The following parameters are available in the `cis_security_hardening::rules::gdm_lock_delay` class:
 
-* [`enforce`](#enforce)
-* [`timeout`](#timeout)
+* [`enforce`](#-cis_security_hardening--rules--gdm_lock_delay--enforce)
+* [`timeout`](#-cis_security_hardening--rules--gdm_lock_delay--timeout)
 
-##### <a name="enforce"></a>`enforce`
+##### <a name="-cis_security_hardening--rules--gdm_lock_delay--enforce"></a>`enforce`
 
 Data type: `Boolean`
 
 Enforce the rule.
 
-Default value: ``false``
+Default value: `false`
 
-##### <a name="timeout"></a>`timeout`
+##### <a name="-cis_security_hardening--rules--gdm_lock_delay--timeout"></a>`timeout`
 
 Data type: `Integer`
 
@@ -891,7 +899,7 @@ Lock delay timeout.
 
 Default value: `900`
 
-### <a name="cis_security_hardeningservices"></a>`cis_security_hardening::services`
+### <a name="cis_security_hardening--services"></a>`cis_security_hardening::services`
 
 Several exec resources needed from multiple classes.
 
@@ -903,7 +911,7 @@ Several exec resources needed from multiple classes.
 include cis_security_hardening::services
 ```
 
-### <a name="cis_security_hardeningsticky_world_writable_cron"></a>`cis_security_hardening::sticky_world_writable_cron`
+### <a name="cis_security_hardening--sticky_world_writable_cron"></a>`cis_security_hardening::sticky_world_writable_cron`
 
 Create a cron ob for the search for world writable directories with sticky bit set.
 
@@ -919,11 +927,11 @@ include cis_security_hardening::sticky_world_writable_cron
 
 The following parameters are available in the `cis_security_hardening::sticky_world_writable_cron` class:
 
-* [`dirs_to_exclude`](#dirs_to_exclude)
-* [`filename`](#filename)
-* [`script`](#script)
+* [`dirs_to_exclude`](#-cis_security_hardening--sticky_world_writable_cron--dirs_to_exclude)
+* [`filename`](#-cis_security_hardening--sticky_world_writable_cron--filename)
+* [`script`](#-cis_security_hardening--sticky_world_writable_cron--script)
 
-##### <a name="dirs_to_exclude"></a>`dirs_to_exclude`
+##### <a name="-cis_security_hardening--sticky_world_writable_cron--dirs_to_exclude"></a>`dirs_to_exclude`
 
 Data type: `Array`
 
@@ -931,7 +939,7 @@ Array of directories to exclude from search.
 
 Default value: `[]`
 
-##### <a name="filename"></a>`filename`
+##### <a name="-cis_security_hardening--sticky_world_writable_cron--filename"></a>`filename`
 
 Data type: `Stdlib::Absolutepath`
 
@@ -939,7 +947,7 @@ The file to write data to
 
 Default value: `'/usr/share/cis_security_hardening/data/world-writable-files.txt'`
 
-##### <a name="script"></a>`script`
+##### <a name="-cis_security_hardening--sticky_world_writable_cron--script"></a>`script`
 
 Data type: `Stdlib::Absolutepath`
 
@@ -949,7 +957,61 @@ Default value: `'/usr/share/cis_security_hardening/bin/sticy-world-writable.sh'`
 
 ## Defined types
 
-### <a name="cis_security_hardeningset_mount_options"></a>`cis_security_hardening::set_mount_options`
+### <a name="cis_security_hardening--parent_dirs"></a>`cis_security_hardening::parent_dirs`
+
+Create all missing directories
+
+ }
+
+#### Examples
+
+##### 
+
+```puppet
+pxe_installarent_dirs{ 'create script dir':
+ dir_path => '/var/www/scripts',
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::parent_dirs` defined type:
+
+* [`dir_path`](#-cis_security_hardening--parent_dirs--dir_path)
+* [`owner`](#-cis_security_hardening--parent_dirs--owner)
+* [`group`](#-cis_security_hardening--parent_dirs--group)
+* [`mode`](#-cis_security_hardening--parent_dirs--mode)
+
+##### <a name="-cis_security_hardening--parent_dirs--dir_path"></a>`dir_path`
+
+Data type: `Stdlib::Unixpath`
+
+The directories to be created.
+
+##### <a name="-cis_security_hardening--parent_dirs--owner"></a>`owner`
+
+Data type: `Optional[String]`
+
+The directory owner.
+
+Default value: `undef`
+
+##### <a name="-cis_security_hardening--parent_dirs--group"></a>`group`
+
+Data type: `Optional[String]`
+
+The directoray group.
+
+Default value: `undef`
+
+##### <a name="-cis_security_hardening--parent_dirs--mode"></a>`mode`
+
+Data type: `Optional[String]`
+
+The directory permissions.
+
+Default value: `undef`
+
+### <a name="cis_security_hardening--set_mount_options"></a>`cis_security_hardening::set_mount_options`
 
 Change the mount options of a mountpoint.
 
@@ -968,22 +1030,22 @@ cis_security_hardening::set_mount_options {
 
 The following parameters are available in the `cis_security_hardening::set_mount_options` defined type:
 
-* [`mountpoint`](#mountpoint)
-* [`mountoptions`](#mountoptions)
+* [`mountpoint`](#-cis_security_hardening--set_mount_options--mountpoint)
+* [`mountoptions`](#-cis_security_hardening--set_mount_options--mountoptions)
 
-##### <a name="mountpoint"></a>`mountpoint`
+##### <a name="-cis_security_hardening--set_mount_options--mountpoint"></a>`mountpoint`
 
 Data type: `Cis_security_hardening::Mountpoint`
 
 Mountpoint to work on
 
-##### <a name="mountoptions"></a>`mountoptions`
+##### <a name="-cis_security_hardening--set_mount_options--mountoptions"></a>`mountoptions`
 
 Data type: `Cis_security_hardening::Mountoption`
 
 Options to set
 
-### <a name="cis_security_hardeningunmask_systemd_service"></a>`cis_security_hardening::unmask_systemd_service`
+### <a name="cis_security_hardening--unmask_systemd_service"></a>`cis_security_hardening::unmask_systemd_service`
 
 Execute a systemd command to unmask a service.
 
@@ -1002,9 +1064,9 @@ cis_security_hardening::unmask_systemd_service { 'namevar':
 
 The following parameters are available in the `cis_security_hardening::unmask_systemd_service` defined type:
 
-* [`service`](#service)
+* [`service`](#-cis_security_hardening--unmask_systemd_service--service)
 
-##### <a name="service"></a>`service`
+##### <a name="-cis_security_hardening--unmask_systemd_service--service"></a>`service`
 
 Data type: `Cis_security_hardening::Servicename`
 
@@ -1034,65 +1096,41 @@ Data type: `String`
 
 ## Data types
 
-### <a name="cis_security_hardeningmountoption"></a>`Cis_security_hardening::Mountoption`
+### <a name="Cis_security_hardening--Mountoption"></a>`Cis_security_hardening::Mountoption`
 
 Check a mount option
 
-Alias of
+Alias of `Pattern[/(^[\/a-zA-Z0-9]+$|^sec=[\/a-zA-Z0-9:]+$)|^size=[\/a-zA-Z0-9]+$|^fmask=[0-9]+$|^uid=[0-9]+$|^gid=[0-9]+$/]`
 
-```puppet
-Pattern[/(^[\/a-zA-Z0-9]+$|^sec=[\/a-zA-Z0-9:]+$)|^size=[\/a-zA-Z0-9]+$|^fmask=[0-9]+$|^uid=[0-9]+$|^gid=[0-9]+$/]
-```
-
-### <a name="cis_security_hardeningmountpoint"></a>`Cis_security_hardening::Mountpoint`
+### <a name="Cis_security_hardening--Mountpoint"></a>`Cis_security_hardening::Mountpoint`
 
 Check a mountpoint with a regex
 
-Alias of
+Alias of `Pattern[/^[\/a-zA-Z0-9_-]+$/]`
 
-```puppet
-Pattern[/^[\/a-zA-Z0-9_-]+$/]
-```
-
-### <a name="cis_security_hardeningnftables_address_families"></a>`Cis_security_hardening::Nftables_address_families`
+### <a name="Cis_security_hardening--Nftables_address_families"></a>`Cis_security_hardening::Nftables_address_families`
 
 Valid nftables address families
 
-Alias of
+Alias of `Enum['ip', 'ip6', 'inet', 'arp', 'bridge', 'netdev']`
 
-```puppet
-Enum['ip', 'ip6', 'inet', 'arp', 'bridge', 'netdev']
-```
-
-### <a name="cis_security_hardeningnumbers_letters"></a>`Cis_security_hardening::Numbers_letters`
+### <a name="Cis_security_hardening--Numbers_letters"></a>`Cis_security_hardening::Numbers_letters`
 
 Check for only numbers and letters
 
-Alias of
+Alias of `Pattern[/^[0-9a-zA-Z]+$/, /^$/]`
 
-```puppet
-Pattern[/^[0-9a-zA-Z]+$/, /^$/]
-```
-
-### <a name="cis_security_hardeningservicename"></a>`Cis_security_hardening::Servicename`
+### <a name="Cis_security_hardening--Servicename"></a>`Cis_security_hardening::Servicename`
 
 Check service name
 
-Alias of
+Alias of `Pattern[/^[a-zA-Z0-9\.\-_]+$/]`
 
-```puppet
-Pattern[/^[a-zA-Z0-9\.\-_]+$/]
-```
-
-### <a name="cis_security_hardeningword"></a>`Cis_security_hardening::Word`
+### <a name="Cis_security_hardening--Word"></a>`Cis_security_hardening::Word`
 
 Word datatype
 
-Alias of
-
-```puppet
-Pattern[/^[a-zA-Z0-9_]+$/]
-```
+Alias of `Pattern[/^[a-zA-Z0-9_]+$/]`
 
 ## Tasks
 

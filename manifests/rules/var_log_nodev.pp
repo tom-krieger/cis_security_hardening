@@ -19,7 +19,7 @@
 class cis_security_hardening::rules::var_log_nodev (
   Boolean $enforce = false,
 ) {
-  if ($enforce) and has_key($facts['mountpoints'], '/var/log') {
+  if ($enforce) and cis_security_hardening::hash_key($facts['mountpoints'], '/var/log') {
     cis_security_hardening::set_mount_options { '/var/log-nodev':
       mountpoint   => '/var/log',
       mountoptions => 'nodev',

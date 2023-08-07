@@ -37,14 +37,26 @@ class cis_security_hardening::rules::gdm_auto_mount (
         mode   => '0755',
     })
 
-    ensure_resource('file', '/etc/dconf/db/local.d/00-media-automount', {
-        ensure  => file,
-        owner   => 'root',
-        group   => 'root',
-        mode    => '0644',
-        content => "[org/gnome/desktop/media-handling]\nautomount=false\nautomount-open=false\n",
-        notify  => Exec['dconf update'],
-    })
+    if ($facts['os']['name'].downcase() == 'debian') and
+    ($facts['os']['release']['major'] > '10') {
+      ensure_resource('file', '/etc/dconf/db/local.d/00-media-automount', {
+          ensure  => file,
+          owner   => 'root',
+          group   => 'root',
+          mode    => '0644',
+          content => "[org/gnome/desktop/media-handling]\nautorun-never=true\nautorun-never=true\n",
+          notify  => Exec['dconf update'],
+      })
+    } else {
+      ensure_resource('file', '/etc/dconf/db/local.d/00-media-automount', {
+          ensure  => file,
+          owner   => 'root',
+          group   => 'root',
+          mode    => '0644',
+          content => "[org/gnome/desktop/media-handling]\nautomount=false\nautomount-open=false\n",
+          notify  => Exec['dconf update'],
+      })
+    }
 
     exec { 'dconf update':
       command     => 'dconf update',

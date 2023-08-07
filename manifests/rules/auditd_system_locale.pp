@@ -40,6 +40,7 @@ class cis_security_hardening::rules::auditd_system_locale (
       $content_rule7 = $os ? {
         'almalinux' => '-a always,exit -F arch=b64 -S sethostname,setdomainname -k system-locale',
         'rocky'     => '-a always,exit -F arch=b64 -S sethostname,setdomainname -k system-locale',
+        'debian'    => '-a always,exit -F arch=b64 -S sethostname,setdomainname -k system-locale',
         default     => '-a always,exit -F arch=b64 -S sethostname -S setdomainname -k system-locale',
       }
       concat::fragment { 'watch network environment rule 7':
@@ -51,6 +52,7 @@ class cis_security_hardening::rules::auditd_system_locale (
     $content_rule1 = $os ? {
       'almalinux' => '-a always,exit -F arch=b32 -S sethostname,setdomainname -k system-locale',
       'rocky'     => '-a always,exit -F arch=b32 -S sethostname,setdomainname -k system-locale',
+      'debian'    => '-a always,exit -F arch=b32 -S sethostname,setdomainname -k system-locale',
       default     => '-a always,exit -F arch=b32 -S sethostname -S setdomainname -k system-locale',
     }
     concat::fragment { 'watch network environment rule 1':
@@ -74,10 +76,17 @@ class cis_security_hardening::rules::auditd_system_locale (
       content => '-w /etc/hosts -p wa -k system-locale',
     }
     if $facts['os']['family'].downcase() == 'debian' {
+      if $facts['os']['release']['major'] > '10' {
+        concat::fragment { 'watch network environment rule 8':
+          order   => '136',
+          target  => $cis_security_hardening::rules::auditd_init::rules_file,
+          content => '-w /etc/networks -p wa -k system-locale',
+        }
+      }
       concat::fragment { 'watch network environment rule 5':
         order   => '135',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,
-        content => '-w /etc/network -p wa -k system-locale',
+        content => '-w /etc/network/ -p wa -k system-locale',
       }
     } else {
       concat::fragment { 'watch network environment rule 5':

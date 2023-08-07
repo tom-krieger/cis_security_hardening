@@ -62,6 +62,14 @@ describe 'cis_security_hardening::rules::auditd_init' do
                   'mode'   => '0755',
                 )
 
+              is_expected.to contain_file('/etc/audisp/plugins.d')
+                .with(
+                  'ensure' => 'directory',
+                  'owner'  => 'root',
+                  'group'  => 'root',
+                  'mode'   => '0750',
+                )
+
               is_expected.to contain_concat__fragment('auditd init delete rules')
                 .with(
                   'order' => '01',

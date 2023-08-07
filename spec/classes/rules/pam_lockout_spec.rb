@@ -18,6 +18,22 @@ describe 'cis_security_hardening::rules::pam_lockout' do
       path        => ['/sbin','/usr/sbin'],
       refreshonly => true,
     }
+
+    class cis_security_hardening::rules::pam_pw_requirements (
+      Boolean $enforce        = false,
+      Integer $minlen         = 14,
+      Integer $dcredit        = -1,
+      Integer $ucredit        = -1,
+      Integer $ocredit        = -1,
+      Integer $lcredit        = -1,
+      Integer $minclass       = -1,
+      Integer $retry          = 3,
+      Boolean $dictcheck      = false,
+      Integer $difok          = 0,
+      Integer $maxrepeat      = 0,
+      Integer $maxclassrepeat = 0,
+    ) {
+    }
     EOF
   end
 
@@ -214,18 +230,58 @@ describe 'cis_security_hardening::rules::pam_lockout' do
 
             elsif os_facts[:os]['family'].casecmp('debian').zero?
 
-              is_expected.not_to contain_file__line('update pam lockout system-auth')
-              is_expected.not_to contain_file__line('update pam lockout password-auth')
+              is_expected.not_to contain_file_line('update pam lockout system-auth')
+              is_expected.not_to contain_file_line('update pam lockout password-auth')
               is_expected.not_to contain_exec('configure faillock')
-              is_expected.not_to contain_file_line('faillock_fail_interval')
-              is_expected.not_to contain_file_line('faillock_deny')
-              is_expected.not_to contain_file_line('faillock_unlock_time')
               is_expected.not_to contain_file_line('faillock_dir')
               is_expected.not_to contain_file_line('faillock_silent')
               is_expected.not_to contain_file_line('faillock_even_deny_root')
 
-              is_expected.to contain_pam('pam-common-auth-require-tally2')
-                .with(
+              if os_facts[:os]['name'].casecmp('debian').zero? && os_facts[:os]['release']['major'] > '10'
+                is_expected.to contain_file('/etc/pam.d/common-auth')
+                  .with(
+                    'ensure'  => 'file',
+                    'source'  => 'puppet:///modules/cis_security_hardening/pam_lockout/debian/common-auth',
+                    'owner'   => 'root',
+                    'group'   => 'root',
+                  )
+
+                is_expected.to contain_file('/etc/pam.d/common-account')
+                  .with(
+                    'ensure' => 'file',
+                    'source' => 'puppet:///modules/cis_security_hardening/pam_lockout/debian/common-account',
+                    'owner'  => 'root',
+                    'group'  => 'root',
+                    'mode'   => '0644',
+                  )
+
+                is_expected.to contain_file_line('faillock_fail_interval')
+                  .with(
+                    'ensure'             => 'present',
+                    'path'               => '/etc/security/faillock.conf',
+                    'match'              => '^fail_interval =',
+                    'line'               => 'fail_interval = 900',
+                    'append_on_no_match' => true,
+                  )
+                is_expected.to contain_file_line('faillock_deny')
+                  .with(
+                    'ensure'             => 'present',
+                    'path'               => '/etc/security/faillock.conf',
+                    'match'              => '^deny =',
+                    'line'               => 'deny = 3',
+                    'append_on_no_match' => true,
+                  )
+                is_expected.to contain_file_line('faillock_fail_unlock_time')
+                  .with(
+                    'ensure'             => 'present',
+                    'path'               => '/etc/security/faillock.conf',
+                    'match'              => '^unlock_time =',
+                    'line'               => 'unlock_time = 900',
+                    'append_on_no_match' => true,
+                  )
+              else
+                is_expected.to contain_pam('pam-common-auth-require-tally2')
+                  .with(
                   'ensure'    => 'present',
                   'service'   => 'common-auth',
                   'type'      => 'auth',
@@ -234,23 +290,25 @@ describe 'cis_security_hardening::rules::pam_lockout' do
                   'arguments' => ['onerr=fail', 'audit', 'silent', 'deny=3', 'unlock_time=900'],
                 )
 
-              is_expected.to contain_pam('pam-common-account-requisite-deny')
-                .with(
-                  'ensure'  => 'present',
-                  'service' => 'common-account',
-                  'type'    => 'account',
-                  'control' => 'requisite',
-                  'module'  => 'pam_deny.so',
-                )
+                is_expected.to contain_pam('pam-common-account-requisite-deny')
+                  .with(
+                    'ensure'  => 'present',
+                    'service' => 'common-account',
+                    'type'    => 'account',
+                    'control' => 'requisite',
+                    'module'  => 'pam_deny.so',
+                  )
 
-              is_expected.to contain_pam('pam-common-account-require-tally2')
-                .with(
-                  'ensure'  => 'present',
-                  'service' => 'common-account',
-                  'type'    => 'account',
-                  'control' => 'required',
-                  'module'  => 'pam_tally2.so',
-                )
+                is_expected.to contain_pam('pam-common-account-require-tally2')
+                  .with(
+                    'ensure'  => 'present',
+                    'service' => 'common-account',
+                    'type'    => 'account',
+                    'control' => 'required',
+                    'module'  => 'pam_tally2.so',
+                  )
+              end
+
             elsif os_facts[:os]['family'].casecmp('suse').zero?
 
               is_expected.not_to contain_file_line('faillock_fail_interval')

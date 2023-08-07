@@ -208,42 +208,82 @@ class cis_security_hardening::rules::pam_lockout (
             }
           }
         }
-
-        # if $facts['os']['name'].downcase() == 'redhat' and $facts['os']['release']['major'] >= '8' {
-
-        # } else {
-
-        # }
       }
       'debian': {
-        if $lockouttime == 0 {
-          $args = ['onerr=fail', 'audit', 'silent', "deny=${attempts}"]
+        if $facts['os']['name'].downcase() == 'debian' and
+        $facts['os']['release']['major'] > '10' {
+          require cis_security_hardening::rules::pam_pw_requirements
+          file { '/etc/pam.d/common-auth':
+            ensure  => file,
+            source  => 'puppet:///modules/cis_security_hardening/pam_lockout/debian/common-auth',
+            owner   => 'root',
+            group   => 'root',
+            mode    => '0644',
+            require => Class['cis_security_hardening::rules::pam_pw_requirements'],
+          }
+
+          file { '/etc/pam.d/common-account':
+            ensure  => file,
+            source  => 'puppet:///modules/cis_security_hardening/pam_lockout/debian/common-account',
+            owner   => 'root',
+            group   => 'root',
+            mode    => '0644',
+            require => Class['cis_security_hardening::rules::pam_pw_requirements'],
+          }
+
+          file_line { 'faillock_fail_interval':
+            ensure             => present,
+            path               => '/etc/security/faillock.conf',
+            match              => '^fail_interval =',
+            line               => "fail_interval = ${lockouttime}",
+            append_on_no_match => true,
+          }
+
+          file_line { 'faillock_deny':
+            ensure             => present,
+            path               => '/etc/security/faillock.conf',
+            match              => '^deny =',
+            line               => "deny = ${attempts}",
+            append_on_no_match => true,
+          }
+
+          file_line { 'faillock_fail_unlock_time':
+            ensure             => present,
+            path               => '/etc/security/faillock.conf',
+            match              => '^unlock_time =',
+            line               => "unlock_time = ${lockouttime}",
+            append_on_no_match => true,
+          }
         } else {
-          $args = ['onerr=fail', 'audit', 'silent', "deny=${attempts}", "unlock_time=${lockouttime}"]
-        }
-        Pam { 'pam-common-auth-require-tally2':
-          ensure    => present,
-          service   => 'common-auth',
-          type      => 'auth',
-          control   => 'required',
-          module    => 'pam_tally2.so',
-          arguments => $args,
-        }
+          if $lockouttime == 0 {
+            $args = ['onerr=fail', 'audit', 'silent', "deny=${attempts}"]
+          } else {
+            $args = ['onerr=fail', 'audit', 'silent', "deny=${attempts}", "unlock_time=${lockouttime}"]
+          }
+          Pam { 'pam-common-auth-require-tally2':
+            ensure    => present,
+            service   => 'common-auth',
+            type      => 'auth',
+            control   => 'required',
+            module    => 'pam_tally2.so',
+            arguments => $args,
+          }
 
-        Pam { 'pam-common-account-requisite-deny':
-          ensure  => present,
-          service => 'common-account',
-          type    => 'account',
-          control => 'requisite',
-          module  => 'pam_deny.so',
-        }
+          Pam { 'pam-common-account-requisite-deny':
+            ensure  => present,
+            service => 'common-account',
+            type    => 'account',
+            control => 'requisite',
+            module  => 'pam_deny.so',
+          }
 
-        Pam { 'pam-common-account-require-tally2':
-          ensure  => present,
-          service => 'common-account',
-          type    => 'account',
-          control => 'required',
-          module  => 'pam_tally2.so',
+          Pam { 'pam-common-account-require-tally2':
+            ensure  => present,
+            service => 'common-account',
+            type    => 'account',
+            control => 'required',
+            module  => 'pam_tally2.so',
+          }
         }
       }
       'suse': {

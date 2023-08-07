@@ -23,8 +23,16 @@ class cis_security_hardening::rules::disable_sctp (
   Boolean $enforce = false,
 ) {
   if $enforce {
+    if $facts['os']['name'].downcase() == 'debian' and
+    $facts['os']['release']['major'] > '10' {
+      $command = '/bin/false'
+      kmod::blacklist { 'sctp': }
+    } else {
+      $command = '/bin/true'
+    }
+
     kmod::install { 'sctp':
-      command => '/bin/true',
+      command => $command,
     }
   }
 }

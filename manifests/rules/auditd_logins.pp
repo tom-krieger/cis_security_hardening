@@ -36,11 +36,26 @@ class cis_security_hardening::rules::auditd_logins (
           content => '-w /var/run/faillock/ -p wa -k logins',
         }
       }
-      'debian', 'suse': {
+      'debian': {
         concat::fragment { 'logins policy rule 2':
           order   => '52',
           target  => $cis_security_hardening::rules::auditd_init::rules_file,
-          content => '-w /var/log/faillog -p wa -k logins',
+          content => '-w /var/run/faillock -p wa -k logins',
+        }
+
+        if $facts['os']['release']['major'] < '11' {
+          concat::fragment { 'logins policy rule 3':
+            order   => '53',
+            target  => $cis_security_hardening::rules::auditd_init::rules_file,
+            content => '-w /var/log/tallylog -p wa -k logins',
+          }
+        }
+      }
+      'suse': {
+        concat::fragment { 'logins policy rule 2':
+          order   => '52',
+          target  => $cis_security_hardening::rules::auditd_init::rules_file,
+          content => '-w /var/run/faillock -p wa -k logins',
         }
 
         concat::fragment { 'logins policy rule 3':

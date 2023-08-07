@@ -8,7 +8,13 @@ describe 'cis_security_hardening::rules::avahi' do
   on_supported_os.each do |os, os_facts|
     enforce_options.each do |enforce|
       context "on #{os}" do
-        let(:facts) { os_facts }
+        let(:facts) do
+          os_facts.merge(
+            cis_security_hardening: {
+              avahiservice: true,
+            },
+          )
+        end
         let(:params) do
           {
             'enforce' => enforce,
@@ -78,6 +84,34 @@ describe 'cis_security_hardening::rules::avahi' do
                 .with(
                   'ensure' => 'purged',
                 )
+            elsif os_facts[:os]['name'].casecmp('debian').zero?
+              if os_facts[:os]['release']['major'] > '10'
+                is_expected.to contain_exec('stop avahi service')
+                  .with(
+                    'command' => 'systemctl stop avahi-demon.service',
+                    'path'    => ['/bin', '/usr/bin'],
+                    'unless'  => 'test "$(systemctl is-active avahi-daemon.service)" = "inactive"',
+                  )
+                  .that_requires('Exec[stop avahi socket]')
+
+                is_expected.to contain_exec('stop avahi socket')
+                  .with(
+                    'command' => 'systemctl stop avahi-demon.socket',
+                    'path'    => ['/bin', '/usr/bin'],
+                    'unless'  => 'test "$(systemctl is-active avahi-daemon.socket)" = "inactive"',
+                  )
+                is_expected.to contain_package('avahi-daemon')
+                  .with(
+                    'ensure' => 'purged',
+                  )
+              else
+                is_expected.to contain_service('avahi-daemon')
+                  .with(
+                    'ensure' => 'stopped',
+                    'enable' => false,
+                  )
+              end
+
             elsif os_facts[:os]['name'].casecmp('sles').zero?
 
               is_expected.to contain_service('avahi-daemon.socket')

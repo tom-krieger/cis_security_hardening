@@ -33,6 +33,9 @@ class cis_security_hardening::sticky_world_writable_cron (
   $min = fqdn_rand(60, 'ah  ue65^b  gdf^zrbzcê2zf^b w')
 
   file { '/etc/cron.d/sticky-world-writebale.cron':
+    ensure  => absent,
+  }
+  file { '/etc/cron.d/sticky-world-writebale':
     ensure  => file,
     content => epp('cis_security_hardening/sticky-world-writeable.cron.epp', {
         min    => $min,
