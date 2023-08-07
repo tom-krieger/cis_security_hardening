@@ -10,6 +10,9 @@
 # @param enforce
 #    Enforce the rule
 #
+# @param use_systemd
+#    Use systemd for perioding aide work instead of cronjbs.
+#
 # @param hour
 #    Cron hour.
 #
