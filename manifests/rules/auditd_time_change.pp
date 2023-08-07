@@ -23,55 +23,66 @@ class cis_security_hardening::rules::auditd_time_change (
   Boolean $enforce                 = false,
 ) {
   if $enforce {
-    $os = fact('os.name') ? {
-      undef   => 'unknown',
-      default => fact('os.name').downcase()
+    case fact('os.name') {
+      undef: {
+        $os = 'unknown'
+      }
+      'RedHat': {
+        $os = "redhat${fact('os.release.major')}"
+      }
+      default: {
+        $os = fact('os.name').downcase()
+      }
     }
-    if $os == 'rocky' or $os == 'almalinux' {
-      concat::fragment { 'watch for date-time-change rule 1':
-        order   => '121',
-        target  => $cis_security_hardening::rules::auditd_init::rules_file,
-        content => '-a always,exit -F arch=b32 -S adjtimex,settimeofday,clock_settime -k time-change',
+
+    case $os {
+      'rocky', 'almalinux', 'redhat8', 'redhat9': {
+        concat::fragment { 'watch for date-time-change rule 1':
+          order   => '121',
+          target  => $cis_security_hardening::rules::auditd_init::rules_file,
+          content => '-a always,exit -F arch=b32 -S adjtimex,settimeofday,clock_settime -k time-change',
+        }
+        concat::fragment { 'watch for date-time-change rule 3':
+          order   => '123',
+          target  => $cis_security_hardening::rules::auditd_init::rules_file,
+          content => '-w /etc/localtime -p wa -k time-change',
+        }
+        if  $facts['os']['architecture'] == 'x86_64' or $facts['os']['architecture'] == 'amd64' {
+          concat::fragment { 'watch for date-time-change rule 2':
+            order   => '122',
+            target  => $cis_security_hardening::rules::auditd_init::rules_file,
+            content => '-a always,exit -F arch=b64 -S adjtimex,settimeofday,clock_settime -k time-change',
+          }
+        }
       }
-      concat::fragment { 'watch for date-time-change rule 3':
-        order   => '123',
-        target  => $cis_security_hardening::rules::auditd_init::rules_file,
-        content => '-w /etc/localtime -p wa -k time-change',
-      }
-      if  $facts['os']['architecture'] == 'x86_64' or $facts['os']['architecture'] == 'amd64' {
+      default: {
+        concat::fragment { 'watch for date-time-change rule 1':
+          order   => '121',
+          target  => $cis_security_hardening::rules::auditd_init::rules_file,
+          content => '-a always,exit -F arch=b32 -S adjtimex -S settimeofday -S stime -k time-change',
+        }
         concat::fragment { 'watch for date-time-change rule 2':
           order   => '122',
           target  => $cis_security_hardening::rules::auditd_init::rules_file,
-          content => '-a always,exit -F arch=b64 -S adjtimex,settimeofday,clock_settime -k time-change',
+          content => '-a always,exit -F arch=b32 -S clock_settime -k time-change',
         }
-      }
-    } else {
-      concat::fragment { 'watch for date-time-change rule 1':
-        order   => '121',
-        target  => $cis_security_hardening::rules::auditd_init::rules_file,
-        content => '-a always,exit -F arch=b32 -S adjtimex -S settimeofday -S stime -k time-change',
-      }
-      concat::fragment { 'watch for date-time-change rule 2':
-        order   => '122',
-        target  => $cis_security_hardening::rules::auditd_init::rules_file,
-        content => '-a always,exit -F arch=b32 -S clock_settime -k time-change',
-      }
-      concat::fragment { 'watch for date-time-change rule 3':
-        order   => '123',
-        target  => $cis_security_hardening::rules::auditd_init::rules_file,
-        content => '-w /etc/localtime -p wa -k time-change',
-      }
+        concat::fragment { 'watch for date-time-change rule 3':
+          order   => '123',
+          target  => $cis_security_hardening::rules::auditd_init::rules_file,
+          content => '-w /etc/localtime -p wa -k time-change',
+        }
 
-      if  $facts['os']['architecture'] == 'x86_64' or $facts['os']['architecture'] == 'amd64' {
-        concat::fragment { 'watch for date-time-change rule 4':
-          order   => '124',
-          target  => $cis_security_hardening::rules::auditd_init::rules_file,
-          content => '-a always,exit -F arch=b64 -S adjtimex -S settimeofday -k time-change',
-        }
-        concat::fragment { 'watch for date-time-change rule 5':
-          order   => '125',
-          target  => $cis_security_hardening::rules::auditd_init::rules_file,
-          content => '-a always,exit -F arch=b64 -S clock_settime -k time-change',
+        if  $facts['os']['architecture'] == 'x86_64' or $facts['os']['architecture'] == 'amd64' {
+          concat::fragment { 'watch for date-time-change rule 4':
+            order   => '124',
+            target  => $cis_security_hardening::rules::auditd_init::rules_file,
+            content => '-a always,exit -F arch=b64 -S adjtimex -S settimeofday -k time-change',
+          }
+          concat::fragment { 'watch for date-time-change rule 5':
+            order   => '125',
+            target  => $cis_security_hardening::rules::auditd_init::rules_file,
+            content => '-a always,exit -F arch=b64 -S clock_settime -k time-change',
+          }
         }
       }
     }
