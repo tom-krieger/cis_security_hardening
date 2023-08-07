@@ -10,15 +10,15 @@
   "dependencies": [
     {
       "name": "puppetlabs-stdlib",
-      "version_requirement": ">= 4.0.0 < 9.0.0"
+      "version_requirement": ">= 9.0.0 < 10.0.0"
     },
     {
       "name": "puppetlabs-concat",
-      "version_requirement": ">= 5.0.0 < 9.0.0"
+      "version_requirement": ">= 9.0.0 < 10.0.0"
     },
     {
       "name": "puppet-kmod",
-      "version_requirement": ">= 3.2.0 < 4.0.0"
+      "version_requirement": ">= 4.0.0 < 5.0.0"
     },
     {
       "name": "ipcrm-echo",
@@ -30,11 +30,11 @@
     },
     {
       "name": "puppet-augeasproviders_pam",
-      "version_requirement": ">= 2.2.1 < 4.0.0"
+      "version_requirement": ">= 2.2.1 < 5.0.0"
     },
     {
       "name": "puppet-augeasproviders_grub",
-      "version_requirement": ">= 3.1.0 < 5.0.0"
+      "version_requirement": ">= 3.1.0 < 6.0.0"
     },
     {
       "name": "puppetlabs-augeas_core",
@@ -42,7 +42,7 @@
     },
     {
       "name": "puppet-logrotate",
-      "version_requirement": ">= 4.0.0 < 7.0.0"
+      "version_requirement": ">= 4.0.0 < 8.0.0"
     },
     {
       "name": "puppetlabs-ntp",
@@ -50,11 +50,11 @@
     },
     {
       "name": "puppet-chrony",
-      "version_requirement": ">= 2.5.0 < 3.0.0"
+      "version_requirement": ">= 2.5.0 < 4.0.0"
     },
     {
       "name": "puppetlabs-firewall",
-      "version_requirement": ">= 2.2.0 < 6.0.0"
+      "version_requirement": ">= 6.0.0 < 7.0.0"
     },
     {
       "name": "puppetlabs-reboot",
