@@ -1,5 +1,5 @@
 ---
-cis_security_hardening::benchmark::redhat::89:
+cis_security_hardening::benchmark::redhat::9:
   bundles:
     filesystem_config:
       level1:

@@ -22,6 +22,7 @@
 
 * `cis_security_hardening::rules::abrt`: Ensure automated bug reporting tools are not installed
 * `cis_security_hardening::rules::adm_crypt_style`: nsure user and group account administration utilities are configured to store only encrypted representations of passwords
+* `cis_security_hardening::rules::aide_audit_integrity`: Ensure cryptographic mechanisms are used to protect the integrity of audit tools (Automated)
 * `cis_security_hardening::rules::aide_installed`: Ensure AIDE is installed
 * `cis_security_hardening::rules::aide_notify_admins`: Ensure System Administrator are notified of changes to the baseline configuration or anomalies
 * `cis_security_hardening::rules::aide_regular_checks`: Ensure filesystem integrity is regularly checked
@@ -166,6 +167,7 @@ termination events that affect "/etc/sudoers.d/"
 * `cis_security_hardening::rules::disable_wireless`: Ensure wireless interfaces are disabled (Not Scored)
 * `cis_security_hardening::rules::dmesg_restrict`: Ensure the operating system is configured to restrict access to the kernel message buffer
 * `cis_security_hardening::rules::dns`: Ensure DNS is servers are configured
+* `cis_security_hardening::rules::dnsmasq`: Ensure dnsmasq is not installed (Automated)
 * `cis_security_hardening::rules::dovecot`: Ensure IMAP and POP3 server is not enabled
 * `cis_security_hardening::rules::dracut_fips`: Ensure NIST FIPS-validated cryptography is configured
 * `cis_security_hardening::rules::enable_aslr`: Ensure address space layout randomization (ASLR) is enabled
