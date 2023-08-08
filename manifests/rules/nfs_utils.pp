@@ -14,6 +14,9 @@
 # @param enforce
 #    Enforce the rule
 #
+# @param uninstall
+#    Switch to select if package shoul be uninstalled or service should be masked
+#
 # @example
 #   class { 'cis_security_hardening::rules::nfs_utils':
 #       enforce => true,
@@ -22,28 +25,36 @@
 # @api private
 class cis_security_hardening::rules::nfs_utils (
   Boolean $enforce = false,
+  Boolean $uninstall = true,
 ) {
   if $enforce {
-    case $facts['os']['name'].downcase() {
-      'sles': {
-        ensure_packages(['nfs-utils', 'nfs-kernel-server'], {
-            ensure => absent,
-        })
+    if $uninstall {
+      case $facts['os']['name'].downcase() {
+        'sles': {
+          ensure_packages(['nfs-utils', 'nfs-kernel-server'], {
+              ensure => absent,
+          })
+        }
+        'rocky', 'almalinux': {
+          ensure_packages(['nfs-utils'], {
+              ensure => absent,
+          })
+        }
+        default: {
+          ensure_resource('service', 'nfs-server', {
+              ensure => stopped,
+              enable => false,
+          })
+          ensure_packages(['nfs-utils'], {
+              ensure => absent,
+          })
+        }
       }
-      'rocky', 'almalinux': {
-        ensure_packages(['nfs-utils'], {
-            ensure => absent,
-        })
-      }
-      default: {
-        ensure_resource('service', 'nfs-server', {
-            ensure => stopped,
-            enable => false,
-        })
-        ensure_packages(['nfs-utils'], {
-            ensure => absent,
-        })
-      }
+    } else {
+      ensure_resource('service', 'nfs-server', {
+          ensure => stopped,
+          enable => false,
+      })
     }
   }
 }

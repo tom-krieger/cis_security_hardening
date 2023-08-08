@@ -25,6 +25,9 @@
 # @param enforce
 #    Enforce the rule
 #
+# @param uninstall
+#    Switch to select if package shoul be uninstalled or service should be masked
+#
 # @example
 #   class { 'cis_security_hardening::rules::rpcbind':
 #       enforce => true,
@@ -33,46 +36,54 @@
 # @api private
 class cis_security_hardening::rules::rpcbind (
   Boolean $enforce = false,
+  Boolean $uninstall = true,
 ) {
   if $enforce {
-    case $facts['os']['name'].downcase() {
-      'ubuntu': {
-        ensure_packages(['rpcbind'], {
-            ensure => purged,
-        })
-      }
-      'sles': {
-        ensure_resource('service', 'rpcbind', {
-            ensure => stopped,
-            enable => false,
-        })
-        ensure_resource('service', 'rpcbind.socket', {
-            ensure => stopped,
-            enable => false,
-        })
-        ensure_packages(['rpcbind'], {
-            ensure => absent,
-        })
-      }
-      'rocky', 'almalinux': {
-        ensure_packages(['rpcbind'], {
-            ensure => absent,
-        })
+    if $uninstall {
+      case $facts['os']['name'].downcase() {
+        'ubuntu': {
+          ensure_packages(['rpcbind'], {
+              ensure => purged,
+          })
+        }
+        'sles': {
+          ensure_resource('service', 'rpcbind', {
+              ensure => stopped,
+              enable => false,
+          })
+          ensure_resource('service', 'rpcbind.socket', {
+              ensure => stopped,
+              enable => false,
+          })
+          ensure_packages(['rpcbind'], {
+              ensure => absent,
+          })
+        }
+        'rocky', 'almalinux': {
+          ensure_packages(['rpcbind'], {
+              ensure => absent,
+          })
 
-        ensure_resource('service', ['rpcbind.socket'], {
-            ensure => 'stopped',
-            enable => false,
-        })
+          ensure_resource('service', ['rpcbind.socket'], {
+              ensure => 'stopped',
+              enable => false,
+          })
+        }
+        default: {
+          ensure_resource('service', ['rpcbind.socket', 'rpcbind'], {
+              ensure => 'stopped',
+              enable => false,
+          })
+          ensure_packages(['rpcbind'], {
+              ensure => absent,
+          })
+        }
       }
-      default: {
-        ensure_resource('service', ['rpcbind.socket', 'rpcbind'], {
-            ensure => 'stopped',
-            enable => false,
-        })
-        ensure_packages(['rpcbind'], {
-            ensure => absent,
-        })
-      }
+    } else {
+      ensure_resource('service', ['rpcbind.socket', 'rpcbind'], {
+          ensure => 'stopped',
+          enable => false,
+      })
     }
   }
 }
