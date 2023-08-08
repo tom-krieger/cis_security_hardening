@@ -82,7 +82,7 @@ cis_security_hardening::rules::sudo_passwd_required::enforce: true
 
 cis_security_hardening::rules::aide_installed::enforce: true
 cis_security_hardening::rules::aide_regular_checks::enforce: true
-cis_security_hardening::rules::aide_audit_integrity:enforce: true
+cis_security_hardening::rules::aide_audit_integrity::enforce: true
 cis_security_hardening::rules::aide_audit_integrity::tools:
   /sbin/auditctl: p+i+n+u+g+s+b+acl+xattrs+sha512
   /sbin/auditd: p+i+n+u+g+s+b+acl+xattrs+sha512
