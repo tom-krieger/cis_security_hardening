@@ -32,6 +32,14 @@ class cis_security_hardening::rules::disable_usb_storage (
           $command = '/bin/true'
         }
       }
+      'redhat': {
+        if $facts['os']['release']['major'] > '8' {
+          $command = '/bin/false'
+          kmod::blacklist { 'usb-storage': }
+        } else {
+          $command = '/bin/true'
+        }
+      }
       default: {
         $command = '/bin/true'
       }
