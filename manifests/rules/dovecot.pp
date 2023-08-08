@@ -31,6 +31,17 @@ class cis_security_hardening::rules::dovecot (
             ensure => absent,
         })
       }
+      'redhat': {
+        ensure_packages(['dovecot'], {
+            ensure => purged,
+        })
+
+        if $facts['os']['release']['major'] >= '9' {
+          ensure_packages(['cyrus-imapd'], {
+              ensure => purged,
+          })
+        }
+      }
       default: {
         ensure_resource('service', ['dovecot'], {
             ensure => 'stopped',

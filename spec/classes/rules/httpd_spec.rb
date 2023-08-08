@@ -7,7 +7,7 @@ enforce_options = [true, false]
 describe 'cis_security_hardening::rules::httpd' do
   on_supported_os.each do |os, os_facts|
     enforce_options.each do |enforce|
-      context "on #{os} with enforce = ‘{enforce}" do
+      context "on #{os} with enforce = #{enforce}" do
         let(:facts) { os_facts }
         let(:params) do
           {
@@ -30,6 +30,17 @@ describe 'cis_security_hardening::rules::httpd' do
                 .with(
                   'ensure' => 'absent',
                 )
+            elsif os_facts[:os]['name'].casecmp('redhat').zero?
+              is_expected.to contain_package('httpd')
+                .with(
+                  'ensure' => 'purged',
+                )
+              if os_facts[:os]['release']['major'] >= '9'
+                is_expected.to contain_package('nginx')
+                  .with(
+                    'ensure' => 'purged',
+                  )
+              end
             else
               is_expected.to contain_service('httpd')
                 .with(

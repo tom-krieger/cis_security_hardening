@@ -19,17 +19,29 @@ class cis_security_hardening::rules::selinux_bootloader (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    if($facts['os']['release']['major'] >= '7') {
-      file_line { 'cmdline_definition':
-        line   => 'GRUB_CMDLINE_LINUX_DEFAULT="quiet"',
-        path   => '/etc/default/grub',
-        match  => '^GRUB_CMDLINE_LINUX_DEFAULT',
-        notify => Exec['selinux-grub-config'],
+    case $facts['os']['release']['major'] {
+      '7', '8': {
+        file_line { 'cmdline_definition':
+          line   => 'GRUB_CMDLINE_LINUX_DEFAULT="quiet"',
+          path   => '/etc/default/grub',
+          match  => '^GRUB_CMDLINE_LINUX_DEFAULT',
+          notify => Exec['selinux-grub-config'],
+        }
+        exec { 'selinux-grub-config':
+          command     => 'grub2-mkconfig -o /boot/grub2/grub.cfg',
+          path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+          refreshonly => true,
+        }
       }
-      exec { 'selinux-grub-config':
-        command     => 'grub2-mkconfig -o /boot/grub2/grub.cfg',
-        path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-        refreshonly => true,
+      '9': {
+        exec { 'enable selinux with grubby':
+          command => 'grubby --update-kernel ALL --remove-args "selinux=0 enforcing=0"',
+          path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+          unless  => 'test -z "$(grubby --info=ALL | grep -Po \'(selinux|enforcing)=1\\b\')"',
+        }
+      }
+      default: {
+        # nothing to do yet
       }
     }
   }

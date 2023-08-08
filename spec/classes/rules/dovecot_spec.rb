@@ -35,6 +35,17 @@ describe 'cis_security_hardening::rules::dovecot' do
                 .with(
                   'ensure' => 'absent',
                 )
+            elsif os_facts[:os]['name'].casecmp('redhat').zero?
+              is_expected.to contain_package('dovecot')
+                .with(
+                  'ensure' => 'purged',
+                )
+              if os_facts[:os]['release']['major'] >= '9'
+                is_expected.to contain_package('cyrus-imapd')
+                  .with(
+                    'ensure' => 'purged',
+                  )
+              end
             else
               is_expected.to contain_service('dovecot')
                 .with(

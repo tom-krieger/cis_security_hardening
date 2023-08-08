@@ -8,7 +8,7 @@ describe 'cis_security_hardening::rules::selinux_bootloader' do
   test_on = {
     supported_os: [{
       'operatingsystem'        => 'RedHat',
-      'operatingsystemrelease' => ['7', '8'],
+      'operatingsystemrelease' => ['7', '8', '9'],
     }]
   }
 
@@ -26,7 +26,7 @@ describe 'cis_security_hardening::rules::selinux_bootloader' do
           is_expected.to compile
 
           if enforce
-            if facts[:operatingsystemmajrelease] >= '7'
+            if facts[:operatingsystemmajrelease] >= '7' && facts[:operatingsystemmajrelease] < '9'
               is_expected.to contain_file_line('cmdline_definition')
                 .with(
                   'line'  => 'GRUB_CMDLINE_LINUX_DEFAULT="quiet"',
@@ -40,13 +40,22 @@ describe 'cis_security_hardening::rules::selinux_bootloader' do
                   'path'        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
                   'refreshonly' => true,
                 )
+            elsif facts[:operatingsystemmajrelease] >= '9'
+              is_expected.to contain_exec('enable selinux with grubby')
+                .with(
+                  'command' => 'grubby --update-kernel ALL --remove-args "selinux=0 enforcing=0"',
+                  'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+                  'unless'  => 'test -z "$(grubby --info=ALL | grep -Po \'(selinux|enforcing)=1\\b\')"',
+                )
             else
               is_expected.not_to contain_file_line('cmdline_definition')
               is_expected.not_to contain_exec('selinux-grub-config')
+              is_expected.not_to contain_exec('enable selinux with grubby')
             end
           else
             is_expected.not_to contain_file_line('cmdline_definition')
             is_expected.not_to contain_exec('selinux-grub-config')
+            is_expected.not_to contain_exec('enable selinux with grubby')
           end
         }
       end
