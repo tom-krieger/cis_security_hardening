@@ -44,7 +44,7 @@ class cis_security_hardening::rules::selinux_state (
     file_line { 'selinux_enforce':
       path     => '/etc/selinux/config',
       line     => "SELINUX=${state}",
-      match    => 'SELINUX=',
+      match    => '^SELINUX=',
       multiple => true,
       notify   => $notify,
     }

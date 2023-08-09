@@ -218,6 +218,9 @@ cis_security_hardening::benchmark::redhat::9:
         - sshd_max_sessions
         - sshd_login_gracetime
         - sshd_timeouts
+        - sshd_ciphers
+        - sshd_macs
+        - sshd_kex
       level2:
         - sshd_tcp_forwarding
         - sshd_x11_forward

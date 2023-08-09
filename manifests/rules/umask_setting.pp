@@ -33,10 +33,16 @@ class cis_security_hardening::rules::umask_setting (
   if $enforce {
     case $facts['os']['family'].downcase() {
       'redhat': {
-        $services = [
-          'system-auth',
-          'password-auth',
-        ]
+        if $facts['os']['name'].downcase() == 'redhat' and $facts['os']['release']['major'] >= '9' {
+          $services = [
+            'common-session',
+          ]
+        } else {
+          $services = [
+            'system-auth',
+            'password-auth',
+          ]
+        }
 
         file_line { 'bashrc':
           path     => '/etc/bashrc',
