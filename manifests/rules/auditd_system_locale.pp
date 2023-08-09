@@ -107,16 +107,16 @@ class cis_security_hardening::rules::auditd_system_locale (
         target  => $cis_security_hardening::rules::auditd_init::rules_file,
         content => '-w /etc/network/ -p wa -k system-locale',
       }
-    } elsif $facts['os']['name'].downcase() == 'redhat'and $facts['os']['release']['major'] >= '9' {
+    } elsif $facts['os']['name'].downcase() == 'redhat' and $facts['os']['release']['major'] >= '9' {
       concat::fragment { 'watch network environment rule 8':
         order   => '136',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,
-        content => '-w /etc/networks -p wa -k system-locale',
+        content => '-w /etc/sysconfig/network -p wa -k system-locale',
       }
       concat::fragment { 'watch network environment rule 5':
         order   => '135',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,
-        content => '-w /etc/network/ -p wa -k system-locale',
+        content => '-w /etc/sysconfig/network-scripts/ -p wa -k system-locale',
       }
     } else {
       concat::fragment { 'watch network environment rule 5':

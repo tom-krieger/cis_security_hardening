@@ -100,13 +100,13 @@ describe 'cis_security_hardening::rules::auditd_system_locale' do
                 .with(
                   'order' => '136',
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-w /etc/networks -p wa -k system-locale',
+                  'content' => '-w /etc/sysconfig/network -p wa -k system-locale',
                 )
               is_expected.to contain_concat__fragment('watch network environment rule 5')
                 .with(
                   'order' => '135',
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-w /etc/network/ -p wa -k system-locale',
+                  'content' => '-w /etc/sysconfig/network-scripts/ -p wa -k system-locale',
                 )
             else
               is_expected.to contain_concat__fragment('watch network environment rule 5')
