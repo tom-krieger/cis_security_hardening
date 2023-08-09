@@ -76,7 +76,7 @@ describe 'cis_security_hardening::rules::nfs_utils' do
               .with(
                 'command' => 'systemctl --now mask nfs-server',
                 'path'    => ['/usr/bin', '/bin'],
-                'unless'  => 'test "$(systemctl is-enabled nfs-server) = "masked"',
+                'unless'  => 'test "$(systemctl is-enabled nfs-server)" = "masked"',
               )
           end
         }

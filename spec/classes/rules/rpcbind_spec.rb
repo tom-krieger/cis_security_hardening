@@ -98,14 +98,14 @@ describe 'cis_security_hardening::rules::rpcbind' do
               .with(
                 'command' => 'systemctl --now mask rpcbind',
                 'path'    => ['/usr/bin', '/bin'],
-                'unless'  => 'test "$(systemctl is-enabled rpcbind) = "masked"',
+                'unless'  => 'test "$(systemctl is-enabled rpcbind)" = "masked"',
               )
 
             is_expected.to contain_exec('mask rpcbind.socket service')
               .with(
                 'command' => 'systemctl --now mask rpcbind.socket',
                 'path'    => ['/usr/bin', '/bin'],
-                'unless'  => 'test "$(systemctl is-enabled rpcbind.socket) = "masked"',
+                'unless'  => 'test "$(systemctl is-enabled rpcbind.socket)" = "masked"',
               )
           end
         }
