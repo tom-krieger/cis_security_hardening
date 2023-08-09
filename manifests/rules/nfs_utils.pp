@@ -55,6 +55,11 @@ class cis_security_hardening::rules::nfs_utils (
           ensure => stopped,
           enable => false,
       })
+      exec { 'mask nfs-server service':
+        command => 'systemctl --now mask nfs-server',
+        path    => ['/usr/bin', '/bin'],
+        unless  => 'test "$(systemctl is-enabled nfs-server) = "masked"',
+      }
     }
   }
 }

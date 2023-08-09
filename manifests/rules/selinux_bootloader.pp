@@ -37,7 +37,7 @@ class cis_security_hardening::rules::selinux_bootloader (
         exec { 'enable selinux with grubby':
           command => 'grubby --update-kernel ALL --remove-args "selinux=0 enforcing=0"',
           path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-          unless  => 'test -z "$(grubby --info=ALL | grep -Po \'(selinux|enforcing)=1\\b\')"',
+          unless  => 'test -z "$(grubby --info=ALL | grep -Po \'(selinux|enforcing)=0\\b\')"',
         }
       }
       default: {

@@ -45,7 +45,7 @@ describe 'cis_security_hardening::rules::selinux_bootloader' do
                 .with(
                   'command' => 'grubby --update-kernel ALL --remove-args "selinux=0 enforcing=0"',
                   'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-                  'unless'  => 'test -z "$(grubby --info=ALL | grep -Po \'(selinux|enforcing)=1\\b\')"',
+                  'unless'  => 'test -z "$(grubby --info=ALL | grep -Po \'(selinux|enforcing)=0\\b\')"',
                 )
             else
               is_expected.not_to contain_file_line('cmdline_definition')

@@ -47,6 +47,8 @@ describe 'cis_security_hardening::rules::auditd_system_locale' do
           if enforce
             content_rule1 = if os_facts[:os]['name'].casecmp('almalinux').zero? || os_facts[:os]['name'].casecmp('rocky').zero? || os_facts[:os]['name'].casecmp('debian').zero?
                               '-a always,exit -F arch=b32 -S sethostname,setdomainname -k system-locale'
+                            elsif os_facts[:os]['name'].casecmp('redhat').zero? && os_facts[:os]['release']['major'] >= '9'
+                              '-a always,exit -F arch=b32 -S sethostname,setdomainname -k system-locale'
                             else
                               '-a always,exit -F arch=b32 -S sethostname -S setdomainname -k system-locale'
                             end
@@ -113,6 +115,8 @@ describe 'cis_security_hardening::rules::auditd_system_locale' do
 
             if ['x86_64', 'amd64'].include?(os_facts[:os]['architecture'])
               content_rule7 = if os_facts[:os]['name'].casecmp('almalinux').zero? || os_facts[:os]['name'].casecmp('rocky').zero? || os_facts[:os]['name'].casecmp('debian').zero?
+                                '-a always,exit -F arch=b64 -S sethostname,setdomainname -k system-locale'
+                              elsif os_facts[:os]['name'].casecmp('redhat').zero? && os_facts[:os]['release']['major'] >= '9'
                                 '-a always,exit -F arch=b64 -S sethostname,setdomainname -k system-locale'
                               else
                                 '-a always,exit -F arch=b64 -S sethostname -S setdomainname -k system-locale'

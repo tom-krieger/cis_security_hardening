@@ -45,7 +45,7 @@ describe 'cis_security_hardening::rules::selinux_state' do
                   .with(
                     'path'     => '/etc/selinux/config',
                     'line'     => 'SELINUX=enforcing',
-                    'match'    => 'SELINUX=',
+                    'match'    => '^SELINUX=',
                     'multiple' => true,
                   )
                   .that_notifies('Class[cis_security_hardening::reboot]')
@@ -62,7 +62,7 @@ describe 'cis_security_hardening::rules::selinux_state' do
                   .with(
                     'path'     => '/etc/selinux/config',
                     'line'     => 'SELINUX=enforcing',
-                    'match'    => 'SELINUX=',
+                    'match'    => '^SELINUX=',
                     'multiple' => true,
                   )
               end

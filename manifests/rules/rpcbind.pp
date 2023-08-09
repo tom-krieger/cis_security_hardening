@@ -84,6 +84,12 @@ class cis_security_hardening::rules::rpcbind (
           ensure => 'stopped',
           enable => false,
       })
+
+      exec { 'mask rpcbind service':
+        command => 'systemctl --now mask rpcbind',
+        path    => ['/usr/bin', '/bin'],
+        unless  => 'test "$(systemctl is-enabled rpcbind) = "masked"',
+      }
     }
   }
 }

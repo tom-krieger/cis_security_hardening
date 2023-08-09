@@ -32,29 +32,47 @@ class cis_security_hardening::rules::auditd_system_locale (
   Boolean $enforce                 = false,
 ) {
   if $enforce {
-    $os = fact('operatingsystem') ? {
+    $os = fact('os.name') ? {
       undef   => 'unknown',
-      default => fact('operatingsystem').downcase()
+      default => fact('os.name').downcase()
     }
-    if  $facts['os']['architecture'] == 'x86_64' or $facts['os']['architecture'] == 'amd64' {
-      $content_rule7 = $os ? {
-        'almalinux' => '-a always,exit -F arch=b64 -S sethostname,setdomainname -k system-locale',
-        'rocky'     => '-a always,exit -F arch=b64 -S sethostname,setdomainname -k system-locale',
-        'debian'    => '-a always,exit -F arch=b64 -S sethostname,setdomainname -k system-locale',
-        default     => '-a always,exit -F arch=b64 -S sethostname -S setdomainname -k system-locale',
+
+    case $os {
+      'almalinux', 'rocky', 'debian': {
+        if  $facts['os']['architecture'] == 'x86_64' or $facts['os']['architecture'] == 'amd64' {
+          $content_rule7 = '-a always,exit -F arch=b64 -S sethostname,setdomainname -k system-locale'
+        }
+        $content_rule1 = '-a always,exit -F arch=b32 -S sethostname,setdomainname -k system-locale'
       }
+      'redhat': {
+        if $facts['os']['release']['major'] >= '9' {
+          if  $facts['os']['architecture'] == 'x86_64' or $facts['os']['architecture'] == 'amd64' {
+            $content_rule7 = '-a always,exit -F arch=b64 -S sethostname,setdomainname -k system-locale'
+          }
+          $content_rule1 = '-a always,exit -F arch=b32 -S sethostname,setdomainname -k system-locale'
+        } else {
+          if  $facts['os']['architecture'] == 'x86_64' or $facts['os']['architecture'] == 'amd64' {
+            $content_rule7 = '-a always,exit -F arch=b64 -S sethostname -S setdomainname -k system-locale'
+          }
+          $content_rule1 = '-a always,exit -F arch=b32 -S sethostname -S setdomainname -k system-locale'
+        }
+      }
+      default: {
+        if  $facts['os']['architecture'] == 'x86_64' or $facts['os']['architecture'] == 'amd64' {
+          $content_rule7 = '-a always,exit -F arch=b64 -S sethostname -S setdomainname -k system-locale'
+        }
+        $content_rule1 = '-a always,exit -F arch=b32 -S sethostname -S setdomainname -k system-locale'
+      }
+    }
+
+    if  $facts['os']['architecture'] == 'x86_64' or $facts['os']['architecture'] == 'amd64' {
       concat::fragment { 'watch network environment rule 7':
         order   => '130',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,
         content => $content_rule7,
       }
     }
-    $content_rule1 = $os ? {
-      'almalinux' => '-a always,exit -F arch=b32 -S sethostname,setdomainname -k system-locale',
-      'rocky'     => '-a always,exit -F arch=b32 -S sethostname,setdomainname -k system-locale',
-      'debian'    => '-a always,exit -F arch=b32 -S sethostname,setdomainname -k system-locale',
-      default     => '-a always,exit -F arch=b32 -S sethostname -S setdomainname -k system-locale',
-    }
+
     concat::fragment { 'watch network environment rule 1':
       order   => '131',
       target  => $cis_security_hardening::rules::auditd_init::rules_file,

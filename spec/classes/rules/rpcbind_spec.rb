@@ -74,6 +74,35 @@ describe 'cis_security_hardening::rules::rpcbind' do
           end
         }
       end
+
+      context "on RedHat with enforce = #{enforce} and uninstall = true" do
+        let(:facts) { os_facts }
+        let(:params) do
+          {
+            'enforce'   => enforce,
+            'uninstall' => false,
+          }
+        end
+
+        it {
+          is_expected.to compile
+
+          if enforce
+            is_expected.to contain_service('rpcbind')
+              .with(
+                'ensure' => 'stopped',
+                'enable' => false,
+              )
+
+            is_expected.to contain_exec('mask rpcbind service')
+              .with(
+                'command' => 'systemctl --now mask rpcbind',
+                'path'    => ['/usr/bin', '/bin'],
+                'unless'  => 'test "$(systemctl is-enabled rpcbind) = "masked"',
+              )
+          end
+        }
+      end
     end
   end
 end
