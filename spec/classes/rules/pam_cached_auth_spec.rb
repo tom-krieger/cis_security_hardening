@@ -25,6 +25,34 @@ describe 'cis_security_hardening::rules::pam_cached_auth' do
           is_expected.to compile
 
           if enforce
+            is_expected.to contain_cis_security_hardening__parent_dirs('ssd conf dir')
+              .with(
+                'dir_path' => '/etc/sssd/conf.d',
+                'owner'    => 'root',
+                'group'    => 'root',
+                'mode'     => '0755',
+              )
+            is_expected.to contain_file('/etc/sssd/conf.d')
+              .with(
+                'ensure' => 'directory',
+                'owner' => 'root',
+                'group' => 'root',
+                'mode' => '0755',
+              )
+            is_expected.to contain_file('/etc/sssd')
+              .with(
+                'ensure' => 'directory',
+                'owner' => 'root',
+                'group' => 'root',
+                'mode' => '0755',
+              )
+            is_expected.to contain_file('/etc')
+              .with(
+                'ensure' => 'directory',
+                'owner' => 'root',
+                'group' => 'root',
+                'mode' => '0755',
+              )
             is_expected.to contain_file('/etc/sssd/conf.d/cis.conf')
               .with(
                 'ensure' => 'file',

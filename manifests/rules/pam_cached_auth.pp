@@ -21,6 +21,13 @@ class cis_security_hardening::rules::pam_cached_auth (
   Boolean $enforce = false
 ) {
   if $enforce {
+    cis_security_hardening::parent_dirs { 'ssd conf dir':
+      dir_path => '/etc/sssd/conf.d',
+      owner    => 'root',
+      group    => 'root',
+      mode     => '0755',
+    }
+
     file { '/etc/sssd/conf.d/cis.conf':
       ensure => file,
       owner  => 'root',
