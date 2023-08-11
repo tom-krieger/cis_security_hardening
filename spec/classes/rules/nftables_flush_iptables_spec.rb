@@ -5,6 +5,14 @@ require 'spec_helper'
 enforce_options = [true, false]
 
 describe 'cis_security_hardening::rules::nftables_flush_iptables' do
+  let(:pre_condition) do
+    <<-EOF
+    package { 'nftables':
+      ensure => installed,
+    }
+    EOF
+  end
+
   enforce_options.each do |enforce|
     context 'on RedHat' do
       let(:facts) do
@@ -30,6 +38,7 @@ describe 'cis_security_hardening::rules::nftables_flush_iptables' do
               'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
               'onlyif'  => 'test $(iptables -L | grep -c -e \'^ACCEPT\' -e \'^REJECT\' -e \'^DROP\') -gt 0',
             )
+            .that_requires('Package[nftables]')
 
           is_expected.to contain_exec('flush ip6tables rules')
             .with(
@@ -37,6 +46,7 @@ describe 'cis_security_hardening::rules::nftables_flush_iptables' do
               'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
               'onlyif'  => 'test $(ip6tables -L | grep -c -e \'^ACCEPT\' -e \'^REJECT\' -e \'^DROP\') -gt 0',
             )
+            .that_requires('Package[nftables]')
         end
       }
     end

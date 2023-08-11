@@ -24,7 +24,7 @@ class cis_security_hardening::rules::nftables_service (
       ensure_resource('service', ['nftables'], {
           ensure  => running,
           enable  => true,
-          require => package['nftbles'],
+          require => Package['nftables'],
       })
     }
   }

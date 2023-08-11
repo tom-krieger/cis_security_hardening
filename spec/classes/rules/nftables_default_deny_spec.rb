@@ -14,6 +14,9 @@ describe 'cis_security_hardening::rules::nftables_default_deny' do
           path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
           refreshonly => true,
         }
+        package { 'nftables':
+          ensure => installes,
+        }
         EOF
       end
       let(:facts) do
@@ -73,6 +76,7 @@ describe 'cis_security_hardening::rules::nftables_default_deny' do
               'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
             )
             .that_notifies('Exec[dump nftables ruleset]')
+            .that_requires('Package[nftables]')
 
           is_expected.to contain_exec('set forward default policy')
             .with(
@@ -80,6 +84,7 @@ describe 'cis_security_hardening::rules::nftables_default_deny' do
               'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
             )
             .that_notifies('Exec[dump nftables ruleset]')
+            .that_requires('Package[nftables]')
 
           is_expected.to contain_exec('set output default policy')
             .with(
@@ -87,6 +92,7 @@ describe 'cis_security_hardening::rules::nftables_default_deny' do
               'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
             )
             .that_notifies('Exec[dump nftables ruleset]')
+            .that_requires('Package[nftables]')
 
           is_expected.to contain_exec('adding rule input-tcp dport ssh accept')
             .with(
@@ -95,6 +101,7 @@ describe 'cis_security_hardening::rules::nftables_default_deny' do
               'onlyif'  => 'test -z "$(nft list chain inet filter input | grep \'tcp dport ssh accept\')"',
             )
             .that_notifies('Exec[dump nftables ruleset]')
+            .that_requires('Package[nftables]')
         else
           is_expected.not_to contain_exec('set input default policy')
           is_expected.not_to contain_exec('set forward default policy')

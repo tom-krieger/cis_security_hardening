@@ -32,7 +32,7 @@ class cis_security_hardening::rules::nftables_loopback (
       path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
       onlyif  => "test -z \"$(nft list ruleset ${table} | grep 'iif \"lo\" accept')\"",
       notify  => Exec['dump nftables ruleset'],
-      require => package['nftbles'],
+      require => Package['nftables'],
     }
 
     exec { 'nftables add local network':
@@ -40,7 +40,7 @@ class cis_security_hardening::rules::nftables_loopback (
       path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
       onlyif  => "test -z \"$(nft list ruleset ${table} | grep -E 'ip\\s*saddr\\s*127.0.0.0/8\\s*counter\\s*packets.*drop')\"",
       notify  => Exec['dump nftables ruleset'],
-      require => package['nftbles'],
+      require => Package['nftables'],
     }
 
     exec { 'nftables ip6 traffic':
@@ -48,7 +48,7 @@ class cis_security_hardening::rules::nftables_loopback (
       path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
       onlyif  => "test -z \"$(nft list ruleset ${table} | grep 'ip6 saddr ::1 counter packets')\"",
       notify  => Exec['dump nftables ruleset'],
-      require => package['nftbles'],
+      require => Package['nftables'],
     }
   }
 }

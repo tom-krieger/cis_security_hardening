@@ -14,6 +14,9 @@ describe 'cis_security_hardening::rules::nftables_loopback' do
           path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
           refreshonly => true,
         }
+        package { 'nftables':
+          ensure => installed,
+        }
         EOF
       end
       let(:facts) do
@@ -59,6 +62,7 @@ describe 'cis_security_hardening::rules::nftables_loopback' do
               'onlyif'  => 'test -z "$(nft list ruleset inet | grep \'iif "lo" accept\')"',
             )
             .that_notifies('Exec[dump nftables ruleset]')
+            .that_required('Package[nftables]')
 
           is_expected.to contain_exec('nftables add local network')
             .with(
@@ -67,6 +71,7 @@ describe 'cis_security_hardening::rules::nftables_loopback' do
               'onlyif'  => "test -z \"$(nft list ruleset inet | grep -E 'ip\\s*saddr\\s*127.0.0.0/8\\s*counter\\s*packets.*drop')\"",
             )
             .that_notifies('Exec[dump nftables ruleset]')
+            .that_required('Package[nftables]')
 
           is_expected.to contain_exec('nftables ip6 traffic')
             .with(
@@ -75,6 +80,7 @@ describe 'cis_security_hardening::rules::nftables_loopback' do
               'onlyif'  => "test -z \"$(nft list ruleset inet | grep 'ip6 saddr ::1 counter packets')\"",
             )
             .that_notifies('Exec[dump nftables ruleset]')
+            .that_required('Package[nftables]')
         else
           is_expected.not_to contain_exec('nftables add local interface')
           is_expected.not_to contain_exec('nftables add local network')

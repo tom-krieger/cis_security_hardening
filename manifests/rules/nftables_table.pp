@@ -41,7 +41,7 @@ class cis_security_hardening::rules::nftables_table (
         path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
         onlyif  => "test -z \"$(nft list ruleset | grep -E '^table ${nftables_default_table}')\"",
         notify  => Exec['dump nftables ruleset'],
-        require => package['nftbles'],
+        require => Package['nftables'],
       }
     }
   }

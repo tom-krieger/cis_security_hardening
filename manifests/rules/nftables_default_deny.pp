@@ -48,6 +48,7 @@ class cis_security_hardening::rules::nftables_default_deny (
       path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
       onlyif  => "test -z \"$(nft list chains ${table} | grep 'hook input.*policy ${default_policy_input};')\"",
       notify  => Exec['dump nftables ruleset'],
+      require => Package['nftables'],
     }
 
     exec { 'set forward default policy':
@@ -55,6 +56,7 @@ class cis_security_hardening::rules::nftables_default_deny (
       path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
       onlyif  => "test -z \"$(nft list chains ${table} | grep 'hook forward.*policy ${default_policy_forward};')\"",
       notify  => Exec['dump nftables ruleset'],
+      require => Package['nftables'],
     }
 
     exec { 'set output default policy':
@@ -62,6 +64,7 @@ class cis_security_hardening::rules::nftables_default_deny (
       path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
       onlyif  => "test -z \"$(nft list chains ${table} | grep 'hook output.*policy ${default_policy_output};')\"",
       notify  => Exec['dump nftables ruleset'],
+      require => Package['nftables'],
     }
 
     $additional_rules.each |$chain, $rules| {
@@ -79,6 +82,7 @@ class cis_security_hardening::rules::nftables_default_deny (
           path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
           onlyif  => "test -z \"$(nft list chain ${table} filter ${chain} | grep '${rule}')\"",
           notify  => Exec['dump nftables ruleset'],
+          require => Package['nftables'],
         }
       }
     }
