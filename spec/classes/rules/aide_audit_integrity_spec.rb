@@ -18,7 +18,7 @@ describe 'cis_security_hardening::rules::aide_audit_integrity' do
               '/sbin/ausearch' => 'p+i+n+u+g+s+b+acl+xattrs+sha512',
               '/sbin/aureport' => 'p+i+n+u+g+s+b+acl+xattrs+sha512',
               '/sbin/autrace' => 'p+i+n+u+g+s+b+acl+xattrs+sha512',
-              '/sbin/augenrules' => ' p+i+n+u+g+s+b+acl+xattrs+sha512',
+              '/sbin/augenrules' => 'p+i+n+u+g+s+b+acl+xattrs+sha512',
             },
           }
         end
