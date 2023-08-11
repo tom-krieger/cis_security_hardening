@@ -46,8 +46,8 @@ class cis_security_hardening::rules::grub_bootloader_config (
       }
     }
 
-    if $facts['os']['name'].downcase() == 'redhat' and
-    $facts['os']['release']['major'] >='9' {
+    if $facts['os']['family'].downcase() == 'redhat' and
+    $facts['os']['release']['major'] >= '9' {
       file { '/boot/grub2/grubenv':
         ensure => file,
         owner  => 'root',
@@ -82,7 +82,7 @@ class cis_security_hardening::rules::grub_bootloader_config (
       file_line { 'fix /boot/efi':
         ensure             => present,
         path               => '/etc/fstab',
-        match              => "^UUID=${uuid}\s+/boot/efi\s+vfat",
+        match              => "^UUID=${uuid}\\s+/boot/efi\\s+vfat",
         line               => $line,
         append_on_no_match => true,
       }

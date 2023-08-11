@@ -33,7 +33,9 @@ class cis_security_hardening::rules::umask_setting (
   if $enforce {
     case $facts['os']['family'].downcase() {
       'redhat': {
-        if $facts['os']['name'].downcase() == 'redhat' and $facts['os']['release']['major'] >= '9' {
+        if ($facts['os']['name'].downcase() == 'redhat' and $facts['os']['release']['major'] >= '9') or
+        ($facts['os']['name'].downcase() == 'rocky' and $facts['os']['release']['major'] >= '9') or
+        ($facts['os']['name'].downcase() == 'almalinux' and $facts['os']['release']['major'] >= '9') {
           $services = [
             'common-session',
           ]
@@ -158,7 +160,7 @@ class cis_security_hardening::rules::umask_setting (
         $facts['os']['name'].downcase() == 'centos' or
         $facts['os']['name'].downcase() == 'almalinux' or
         $facts['os']['name'].downcase() == 'rocky'
-      ) and $facts['os']['release']['major'] > '7' and $pf_path != '' {
+      ) and ($facts['os']['release']['major'] > '7' and $facts['os']['release']['major'] < '9') and $pf_path != '' {
         file_line { "umask in ${srv}":
           path               => $pf_file,
           line               => 'session     optional                                     pam_umask.so',
