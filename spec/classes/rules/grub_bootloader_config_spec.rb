@@ -98,27 +98,27 @@ describe 'cis_security_hardening::rules::grub_bootloader_config' do
               'efi' => true,
             },
             'mountpoints' => {
-              "/boot/efi" => {
-                "available" => "732.21 MiB",
-                "available_bytes" => 767782912,
-                "capacity" => "20.71%",
-                "device" => "/dev/sda1",
-                "filesystem" => "ext3",
-                "options" => [ "rw", "relatime" ],
-                "size" => "974.67 MiB",
-                "size_bytes" => 1022013440,
-                "used" => "191.25 MiB",
-                "used_bytes" => 200544256
+              '/boot/efi' => {
+                'available' => '732.21 MiB',
+                'available_bytes' => 767_782_912,
+                'capacity' => '20.71%',
+                'device' => '/dev/sda1',
+                'filesystem' => 'ext3',
+                'options' => [ 'rw', 'relatime' ],
+                'size' => '974.67 MiB',
+                'size_bytes' => 1_022_013_440,
+                'used' => '191.25 MiB',
+                'used_bytes' => 200_544_256
               },
             },
             'partitions' => {
-              "/dev/sda1" => {
-                "filesystem" => "ext3",
-                "mount" => "/boot/efi",
-                "partuuid" => "931e1103-01",
-                "size" => "1.00 GiB",
-                "size_bytes" => 1073741824,
-                "uuid" => "583bc67c-8dfa-42f2-9022-6d3161d34521"
+              '/dev/sda1' => {
+                'filesystem' => 'ext3',
+                'mount' => '/boot/efi',
+                'partuuid' => '931e1103-01',
+                'size' => '1.00 GiB',
+                'size_bytes' => 1_073_741_824,
+                'uuid' => '583bc67c-8dfa-42f2-9022-6d3161d34521'
               },
             },
           )
@@ -138,10 +138,10 @@ describe 'cis_security_hardening::rules::grub_bootloader_config' do
                 'ensure'             => 'present',
                 'path'               => '/etc/fstab',
                 'match'              => '^UUID=583bc67c-8dfa-42f2-9022-6d3161d34521\\s+/boot/efi\\s+vfat',
-                'line'               => "UUID=583bc67c-8dfa-42f2-9022-6d3161d34521  /boot/efi       vfat    umask=0077,fmask=0077,uid=0,gid=0      0        1",
+                'line'               => 'UUID=583bc67c-8dfa-42f2-9022-6d3161d34521  /boot/efi       vfat    umask=0077,fmask=0077,uid=0,gid=0      0        1',
                 'append_on_no_match' => true,
               )
-            
+
             if os_facts[:os]['family'].casecmp('redhat').zero?
               is_expected.to contain_file('/boot/grub2/grub.cfg')
                 .with(

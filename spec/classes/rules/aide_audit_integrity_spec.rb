@@ -16,6 +16,9 @@ describe 'cis_security_hardening::rules::aide_audit_integrity' do
               '/sbin/auditctl' => 'p+i+n+u+g+s+b+acl+xattrs+sha512',
               '/sbin/auditd' => 'p+i+n+u+g+s+b+acl+xattrs+sha512',
               '/sbin/ausearch' => 'p+i+n+u+g+s+b+acl+xattrs+sha512',
+              '/sbin/aureport' => 'p+i+n+u+g+s+b+acl+xattrs+sha512',
+              '/sbin/autrace' => 'p+i+n+u+g+s+b+acl+xattrs+sha512',
+              '/sbin/augenrules' => ' p+i+n+u+g+s+b+acl+xattrs+sha512',
             },
           }
         end
@@ -47,6 +50,30 @@ describe 'cis_security_hardening::rules::aide_audit_integrity' do
                 'path'               => '/etc/aide.conf',
                 'line'               => '/sbin/ausearch p+i+n+u+g+s+b+acl+xattrs+sha512',
                 'match'              => '^/sbin/ausearch',
+              )
+            is_expected.to contain_file_line('aide tool /sbin/aureport')
+              .with(
+                'ensure'             => 'present',
+                'append_on_no_match' => true,
+                'path'               => '/etc/aide.conf',
+                'line'               => '/sbin/aureport p+i+n+u+g+s+b+acl+xattrs+sha512',
+                'match'              => '^/sbin/aureport',
+              )
+            is_expected.to contain_file_line('aide tool /sbin/autrace')
+              .with(
+                'ensure'             => 'present',
+                'append_on_no_match' => true,
+                'path'               => '/etc/aide.conf',
+                'line'               => '/sbin/autrace p+i+n+u+g+s+b+acl+xattrs+sha512',
+                'match'              => '^/sbin/autrace',
+              )
+            is_expected.to contain_file_line('aide tool /sbin/augenrules')
+              .with(
+                'ensure'             => 'present',
+                'append_on_no_match' => true,
+                'path'               => '/etc/aide.conf',
+                'line'               => '/sbin/augenrules p+i+n+u+g+s+b+acl+xattrs+sha512',
+                'match'              => '^/sbin/augenrules',
               )
           else
             is_expected.not_to contain_file_line('aide tool /sbin/auditctl')
