@@ -12,7 +12,7 @@ describe 'cis_security_hardening::rules::nftables_persistence' do
     }
     EOF
   end
-  
+
   enforce_options.each do |enforce|
     context 'on RedHat' do
       let(:facts) do

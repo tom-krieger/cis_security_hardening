@@ -47,7 +47,7 @@ describe 'cis_security_hardening::rules::single_user_mode' do
                     'match' => '^ExecStart=',
                   )
 
-              else
+                elsif os_facts[:os]['release']['major'].to_s == '8'
 
                 is_expected.to contain_file_line('su-rescue')
                   .with(

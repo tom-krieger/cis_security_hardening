@@ -24,7 +24,10 @@ class cis_security_hardening::rules::single_user_mode (
     case $facts['os']['family'].downcase() {
       'redhat': {
         case $facts['os']['release']['major'] {
-          '8', '9': {
+          '9': {
+            # nothing to do
+          }
+          '8': {
             file_line { 'su-rescue':
               path  => '/usr/lib/systemd/system/rescue.service',
               line  => 'ExecStart=-/usr/lib/systemd/systemd-sulogin-shell rescue',
