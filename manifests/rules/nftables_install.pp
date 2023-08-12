@@ -31,7 +31,7 @@ class cis_security_hardening::rules::nftables_install (
       'sles': {
         $pkgs_remove = ['firewalld']
       }
-      'centos': {
+      'centos', 'redhat', 'rocky', 'almalinux': {
         $pkgs_remove = $facts['os']['release']['major'] ? {
           '7'     => ['firewalld', 'iptables-services'],
           default => ['firewalld'],
@@ -75,8 +75,9 @@ class cis_security_hardening::rules::nftables_install (
 
     if !defined(Service['nftables']) {
       ensure_resource('service', 'nftables', {
-          enable => true,
-          ensure => running,
+          enable  => true,
+          ensure  => running,
+          require => Package['nftables'],
       })
     }
 

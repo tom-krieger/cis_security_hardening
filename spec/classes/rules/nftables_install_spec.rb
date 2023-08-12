@@ -65,6 +65,8 @@ describe 'cis_security_hardening::rules::nftables_install' do
                 'ensure' => 'running',
                 'enable' => true,
               )
+              .that_requires('Package[nftables]')
+
             if os_facts[:os]['name'].casecmp('ubuntu').zero?
               is_expected.to contain_package('ufw')
                 .with(
