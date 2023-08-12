@@ -31,8 +31,18 @@ class cis_security_hardening::rules::nftables_install (
     case $facts['os']['name'].downcase() {
       'sles': {
         $pkgs_remove = ['firewalld']
+        $pkgs_install = ['nftables']
       }
       'centos', 'redhat', 'rocky', 'almalinux': {
+        case $facts['os']['release']['major'] {
+          '9': {
+            $pkgs_install = ['nftables', 'libnftnl']
+          }
+          default: {
+            $pkgs_install = ['nftables']
+          }
+        }
+
         $pkgs_remove = $facts['os']['release']['major'] ? {
           '7'     => ['firewalld', 'iptables-services'],
           default => ['firewalld'],
@@ -40,6 +50,7 @@ class cis_security_hardening::rules::nftables_install (
       }
       default: {
         $pkgs_remove = ['firewalld', 'iptables-services']
+        $pkgs_install = ['nftables']
       }
     }
 
@@ -48,9 +59,13 @@ class cis_security_hardening::rules::nftables_install (
       default => 'purged',
     }
 
-    ensure_packages($pkgs_remove, {
-        ensure => $ensure,
-    })
+    package { $pkgs_remove:
+      ensure => $ensure,
+    }
+
+    package { $pkgs_install:
+      ensure => installed,
+    }
 
     unless $facts['os']['name'].downcase() == 'centos' and $facts['os']['release']['major'] > '7' {
       if !defined(Service['iptables']) {
@@ -66,10 +81,6 @@ class cis_security_hardening::rules::nftables_install (
             ensure => stopped,
         })
       }
-    }
-
-    package { 'nftables':
-      ensure => installed,
     }
 
     file { '/etc/nftables/nftables.rules':

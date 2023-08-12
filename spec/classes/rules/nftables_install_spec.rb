@@ -47,6 +47,13 @@ describe 'cis_security_hardening::rules::nftables_install' do
                 'ensure' => 'installed',
               )
 
+            if os_facts[:os]['family'].casecmp('redhat').zero? && os_facts[:os]['release']['major'] > '8'
+              is_expected.to contain_package('libnftnl')
+                .with(
+                  'ensure' => 'installed',
+                )
+            end
+
             is_expected.to contain_file('/etc/nftables/nftables.rules')
               .with(
                 'ensure'  => 'file',
