@@ -54,6 +54,10 @@ class cis_security_hardening::rules::nftables_install (
       }
     }
 
+    package { $pkgs_install:
+      ensure => installed,
+    }
+
     $ensure = $facts['os']['family'].downcase() ? {
       'suse'  => 'absent',
       default => 'purged',
@@ -61,10 +65,6 @@ class cis_security_hardening::rules::nftables_install (
 
     package { $pkgs_remove:
       ensure => $ensure,
-    }
-
-    package { $pkgs_install:
-      ensure => installed,
     }
 
     unless $facts['os']['name'].downcase() == 'centos' and $facts['os']['release']['major'] > '7' {
