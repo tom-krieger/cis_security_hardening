@@ -68,27 +68,17 @@ class cis_security_hardening::rules::nftables_install (
       }
     }
 
-    # ensure_packages(['nftables'], {
-    #     ensure => installed,
-    # })
-
     package { 'nftables':
       ensure => installed,
     }
 
-    # ensure_resource('service', 'nftables', {
-    #     enable  => true,
-    #     ensure  => running,
-    #     require => Package['nftables'],
-    # })
-
-    ensure_resource('file', '/etc/nftables/nftables.rules', {
-        ensure  => file,
-        owner   => 'root',
-        group   => 'root',
-        mode    => '0640',
-        require => Package['nftables'],
-    })
+    file { '/etc/nftables/nftables.rules':
+      ensure  => file,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0640',
+      require => Package['nftables'],
+    }
 
     if $facts['os']['name'].downcase() == 'ubuntu' {
       ensure_packages(['ufw'], {

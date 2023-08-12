@@ -133,8 +133,8 @@ cis_security_hardening::benchmark::rocky::9:
         - nftables_loopback
         - nftables_outbound_established
         - nftables_default_deny
-        - nftables_service
         - nftables_persistence
+        - nftables_service
     configure_firewalld:
       level1:
         - firewalld_install
