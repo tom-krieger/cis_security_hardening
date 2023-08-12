@@ -26,7 +26,6 @@ class cis_security_hardening::rules::nftables_loopback (
   Boolean $enforce = false,
   String $table    = 'default',
 ) {
-  require cis_security_hardening::rules::nftables_install
   if $enforce {
     exec { 'nftables add local interface':
       command => "nft add rule ${table} filter input iif lo accept", #lint:ignore:security_class_or_define_parameter_in_exec
