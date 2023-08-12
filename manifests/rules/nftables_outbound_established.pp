@@ -24,6 +24,7 @@ class cis_security_hardening::rules::nftables_outbound_established (
   Boolean $enforce                                         = false,
   Cis_security_hardening::Nftables_address_families $table = 'inet',
 ) {
+  require cis_security_hardening::rules::nftables_install
   if $enforce {
     exec { 'add nftables rule for input tcp established':
       command => "nft add rule ${table} filter input ip protocol tcp ct state established accept", #lint:ignore:security_class_or_define_parameter_in_exec lint:ignore:140chars

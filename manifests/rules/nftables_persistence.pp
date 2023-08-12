@@ -24,6 +24,7 @@
 class cis_security_hardening::rules::nftables_persistence (
   Boolean $enforce = false,
 ) {
+  require cis_security_hardening::rules::nftables_install
   if $enforce {
     if(!defined(File['/etc/sysconfig/nftables.conf'])) {
       file { '/etc/sysconfig/nftables.conf':

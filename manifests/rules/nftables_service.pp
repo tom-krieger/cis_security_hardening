@@ -19,6 +19,7 @@
 class cis_security_hardening::rules::nftables_service (
   Boolean $enforce = false,
 ) {
+  require cis_security_hardening::rules::nftables_install
   if $enforce {
     if(!defined(Service['nftables'])) {
       ensure_resource('service', ['nftables'], {
