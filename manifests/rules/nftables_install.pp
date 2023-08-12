@@ -72,9 +72,13 @@ class cis_security_hardening::rules::nftables_install (
       }
     }
 
-    ensure_packages(['nftables'], {
-        ensure => installed,
-    })
+    # ensure_packages(['nftables'], {
+    #     ensure => installed,
+    # })
+
+    package { 'nftables':
+      ensure => installed,
+    }
 
     # ensure_resource('service', 'nftables', {
     #     enable  => true,
