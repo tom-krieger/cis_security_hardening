@@ -81,6 +81,14 @@ class cis_security_hardening::rules::nftables_install (
       })
     }
 
+    ensure_resource('file', '/etc/nftables/nftables.rules', {
+        ensure  => file,
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0640',
+        require => Package['nftables'],
+    })
+
     if $facts['os']['name'].downcase() == 'ubuntu' {
       ensure_packages(['ufw'], {
           ensure => $ensure,

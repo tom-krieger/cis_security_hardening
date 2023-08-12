@@ -24,7 +24,7 @@ describe 'cis_security_hardening::rules::nftables_install' do
                 .with(
                   'ensure' => 'absent',
                 )
-            elsif os_facts[:os]['name'].casecmp('centos').zero? && os_facts[:os]['release']['major'] > '7'
+            elsif os_facts[:os]['family'].casecmp('redhat').zero? && os_facts[:os]['release']['major'] > '7'
               is_expected.to contain_package('firewalld')
                 .with(
                   'ensure' => 'purged',
@@ -46,6 +46,15 @@ describe 'cis_security_hardening::rules::nftables_install' do
               .with(
                 'ensure' => 'installed',
               )
+
+            is_expected.to contain_file('/etc/nftables/nftables.rules')
+              .with(
+                'ensure'  => 'file',
+                'owner'   => 'root',
+                'group'   => 'root',
+                'mode'    => '0640',
+              )
+              .that_requires('Package[nftables]')
 
             unless os_facts[:os]['name'].casecmp('centos').zero? && os_facts[:os]['release']['major'] > '7'
               is_expected.to contain_service('iptables')
@@ -81,6 +90,7 @@ describe 'cis_security_hardening::rules::nftables_install' do
             is_expected.not_to contain_service('ip6tables')
             is_expected.not_to contain_service('nftables')
             is_expected.not_to contain_package('ufw')
+            is_expected.not_to contain_file('/etc/nftables/nftables.rules')
           end
         }
       end
