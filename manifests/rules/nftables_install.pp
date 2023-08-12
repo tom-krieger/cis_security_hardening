@@ -48,10 +48,6 @@ class cis_security_hardening::rules::nftables_install (
       default => 'purged',
     }
 
-    ensure_packages(['nftables'], {
-        ensure => installed,
-    })
-
     ensure_packages($pkgs_remove, {
         ensure => $ensure,
     })
