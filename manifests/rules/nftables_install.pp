@@ -19,6 +19,7 @@
 #    Enforce the rule
 #
 # @example cis_security_hardening::rules::nftables_install {
+# @example cis_security_hardening::rules::nftables_install {
 #       enforce => true,
 #   }
 #
@@ -46,6 +47,10 @@ class cis_security_hardening::rules::nftables_install (
       'suse'  => 'absent',
       default => 'purged',
     }
+
+    ensure_packages(['nftables'], {
+        ensure => installed,
+    })
 
     ensure_packages($pkgs_remove, {
         ensure => $ensure,
