@@ -18,7 +18,7 @@
 # @param enforce
 #    Enforce the rule
 #
-# @example cis_security_hardening::rules::nftables_installcis_security_hardening::rules::avahi {
+# @example cis_security_hardening::rules::nftables_install {
 #       enforce => true,
 #   }
 #
@@ -47,11 +47,9 @@ class cis_security_hardening::rules::nftables_install (
       default => 'purged',
     }
 
-    if !defined(Package['nftables']) {
-      ensure_packages(['nftables'], {
-          ensure => installed,
-      })
-    }
+    ensure_packages(['nftables'], {
+        ensure => installed,
+    })
 
     ensure_packages($pkgs_remove, {
         ensure => $ensure,
