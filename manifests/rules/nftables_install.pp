@@ -63,9 +63,9 @@ class cis_security_hardening::rules::nftables_install (
       default => 'purged',
     }
 
-    package { $pkgs_remove:
-      ensure => $ensure,
-    }
+    nsure_packages($pkgs_remove, {
+        ensure => $ensure,
+    })
 
     unless $facts['os']['name'].downcase() == 'centos' and $facts['os']['release']['major'] > '7' {
       if !defined(Service['iptables']) {
