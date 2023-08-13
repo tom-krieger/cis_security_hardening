@@ -94,6 +94,22 @@ describe 'cis_security_hardening::rules::pam_old_passwords' do
                     'target'    => '/etc/authselect/custom/testprofile/system-auth',
                   )
                   .that_notifies('Exec[authselect-apply-changes]')
+
+                is_expected.to contain_file('/etc/security/pwhistory.conf')
+                  .with(
+                    'ensure' => 'file',
+                    'owner'  => 'root',
+                    'group'  => 'root',
+                    'mode'   => '0644',
+                  )
+
+                is_expected.to contain_file_line('pwhistory remember')
+                  .with(
+                    'path'               => '/etc/security/pwhistory.conf',
+                    'match'              => '^remember\\s*=',
+                    'append_on_no_match' => true,
+                    'line'               => 'remember=5',
+                  )
               end
 
             elsif os_facts[:os]['family'].casecmp('debian').zero? || os_facts[:os]['family'].casecmp('suse').zero?
@@ -129,6 +145,8 @@ describe 'cis_security_hardening::rules::pam_old_passwords' do
             is_expected.not_to contain_pam('pam-system-auth-sufficient')
             is_expected.not_to contain_pam('pam-password-auth-sufficient')
             is_expected.not_to contain_exec('update authselect config for old passwords')
+            is_expected.not_to contain_file('/etc/security/pwhistory.conf')
+            is_expected.not_to contain_file_line('pwhistory remener')
           end
         end
       end

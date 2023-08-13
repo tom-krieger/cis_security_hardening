@@ -75,6 +75,20 @@ class cis_security_hardening::rules::pam_old_passwords (
               target    => $pf_file,
               notify    => Exec['authselect-apply-changes'],
             }
+
+            file { '/etc/security/pwhistory.conf':
+              ensure => file,
+              owner  => 'root',
+              group  => 'root',
+              mode   => '0644',
+            }
+
+            file_line { 'pwhistory remember':
+              path               => '/etc/security/pwhistory.conf',
+              match              => "^remember\\s*=",
+              append_on_no_match => true,
+              line               => "remember=${oldpasswords}",
+            }
           }
         } else {
           $services.each | $service | {
@@ -88,15 +102,6 @@ class cis_security_hardening::rules::pam_old_passwords (
                 arguments => $real_arguments,
                 position  => 'after *[type="password" and module="pam_unix.so" and control="requisite"]',
               }
-
-              # Pam { "pam-pwhistory-${service}":
-              #   ensure    => absent,
-              #   service   => $service,
-              #   type      => 'password',
-              #   control   => 'required',
-              #   module    => 'pam_pwhistory.so',
-              #   arguments => ["remember=${oldpasswords}"],
-              # }
             } else {
               Pam { "pam-pwhistory-${service}":
                 ensure    => present,
