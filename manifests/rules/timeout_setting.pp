@@ -37,10 +37,16 @@ class cis_security_hardening::rules::timeout_setting (
       mode    => '0644',
     }
 
-    if $facts['os']['name'].downcase() == 'debian' {
+    if $facts['os']['name'].downcase() == 'debian' or
+    ($facts['os']['family'].downcase() == 'redhat' and $facts['os']['release']['major'] >= '9') {
+      if $facts['os']['name'].downcase() == 'debian' {
+        $tpl = 'cis_security_hardening/rules/common/profile.debian.epp'
+      } else {
+        $tpl = 'cis_security_hardening/rules/common/profile.redhat.epp'
+      }
       file { '/etc/profile':
         ensure  => file,
-        content => epp('cis_security_hardening/rules/common/profile.debian.epp', {
+        content => epp($tpl, {
             default_timeout => $default_timeout,
         }),
         owner   => 'root',

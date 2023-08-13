@@ -449,7 +449,7 @@ cis_security_hardening::rules::sshd_limit_access::deny_users: []
 cis_security_hardening::rules::sshd_limit_access::allow_groups: []
 cis_security_hardening::rules::sshd_limit_access::deny_groups: []
 cis_security_hardening::rules::sshd_loglevel::enforce: true
-cis_security_hardening::rules::sshd_loglevel::loglevel: INFO
+cis_security_hardening::rules::sshd_loglevel::loglevel: VERBOSE
 cis_security_hardening::rules::sshd_x11_forward::enforce: true
 cis_security_hardening::rules::sshd_max_auth_tries::enforce: true
 cis_security_hardening::rules::sshd_max_auth_tries::max_auth_tries: 4
@@ -490,6 +490,7 @@ cis_security_hardening::rules::sshd_timeouts::client_alive_count_max: 0
 cis_security_hardening::rules::sshd_login_gracetime::enforce: true
 cis_security_hardening::rules::sshd_login_gracetime::login_grace_time: 60
 cis_security_hardening::rules::sshd_banner::enforce: true
+cis_security_hardening::rules::sshd_banner::banner_line: '/etc/issue'
 cis_security_hardening::rules::sshd_use_pam::enforce: true
 cis_security_hardening::rules::sshd_tcp_forwarding::enforce: true
 cis_security_hardening::rules::sshd_max_startups::enforce: true
@@ -515,6 +516,7 @@ cis_security_hardening::rules::authselect::profile_options:
   - with-sudo
   - with-faillock
   - without-nullok
+  - with-pwhistory
 
 cis_security_hardening::rules::pam_pw_requirements::enforce: true
 cis_security_hardening::rules::pam_pw_requirements::minlen: 14
@@ -522,7 +524,7 @@ cis_security_hardening::rules::pam_pw_requirements::dcredit: -1
 cis_security_hardening::rules::pam_pw_requirements::ucredit: -1
 cis_security_hardening::rules::pam_pw_requirements::ocredit: -1
 cis_security_hardening::rules::pam_pw_requirements::lcredit: -1
-cis_security_hardening::rules::pam_pw_requirements::minclass: -1
+cis_security_hardening::rules::pam_pw_requirements::minclass: 4
 cis_security_hardening::rules::pam_pw_requirements::retry: 3
 cis_security_hardening::rules::pam_pw_requirements::dictcheck: false
 cis_security_hardening::rules::pam_pw_requirements::difok: 0

@@ -5,6 +5,8 @@ All notable changes to this project will be documented in this file.
 ## Release 0.8.2
 
 * added Redhat 9 support
+* added AlmaLinux 9 support
+* added Rocky Linux 9 support
 
 ## Release 0.8.1
 

@@ -45,7 +45,7 @@ describe 'cis_security_hardening::rules::auditd_perm_mod' do
           is_expected.to compile
 
           if enforce
-            if os_facts[:os]['name'].casecmp('rocky').zero? || os_facts[:os]['name'].casecmp('almalinux').zero?
+            if os_facts[:os]['name'].casecmp('rocky').zero? || os_facts[:os]['name'].casecmp('almalinux').zero? || os_facts[:os]['name'].casecmp('redhat').zero?
               auid = 'unset'
               content_rule1 = "-a always,exit -F arch=b32 -S chmod,fchmod,fchmodat -F auid>=1000 -F auid!=#{auid} -k perm_mod"
               content_rule2 = "-a always,exit -F arch=b32 -S chown,fchown,fchownat,lchown -F auid>=1000 -F auid!=#{auid} -k perm_mod"
