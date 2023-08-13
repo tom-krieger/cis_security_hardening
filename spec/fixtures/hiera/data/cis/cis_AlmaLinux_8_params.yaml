@@ -385,7 +385,7 @@ cis_security_hardening::rules::sshd_limit_access::allow_users:
 cis_security_hardening::rules::sshd_limit_access::deny_users: []
 cis_security_hardening::rules::sshd_limit_access::allow_groups: []
 cis_security_hardening::rules::sshd_limit_access::deny_groups: []
-cis_security_hardening::rules::sshd_loglevel::loglevel: true
+cis_security_hardening::rules::sshd_loglevel::log_level: true
 cis_security_hardening::rules::sshd_x11_forward::enforce: true
 cis_security_hardening::rules::sshd_max_auth_tries::enforce: true
 cis_security_hardening::rules::sshd_max_auth_tries::max_auth_tries: 4
