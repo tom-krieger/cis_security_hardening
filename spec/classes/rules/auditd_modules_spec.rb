@@ -73,7 +73,7 @@ describe 'cis_security_hardening::rules::auditd_modules' do
                     'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
                     'content' => '-a always,exit -F arch=b64 -S init_module -S delete_module -F key=modules',
                   )
-                end
+              end
 
               is_expected.to contain_concat__fragment('watch modules rule 5')
                 .with(
@@ -89,7 +89,7 @@ describe 'cis_security_hardening::rules::auditd_modules' do
                     'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
                     'content' => '-a always,exit -F arch=b64 -S init_module -S delete_module -k modules',
                   )
-                end
+              end
 
               is_expected.to contain_concat__fragment('watch modules rule 5')
                 .with(

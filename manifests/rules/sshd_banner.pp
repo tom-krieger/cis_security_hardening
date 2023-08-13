@@ -20,7 +20,7 @@
 # @api private
 class cis_security_hardening::rules::sshd_banner (
   Boolean $enforce = false,
-  String $banner_line = '/etc/issue.net',
+  String $banner_line = 'Banner /etc/issue.net',
 ) {
   if $enforce {
     $path = ($facts['os']['name'] == 'SLES' and $facts['os']['release']['major'] == '12') ? {
