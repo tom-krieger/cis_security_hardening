@@ -54,8 +54,6 @@ cis_security_hardening::benchmark::almalinux::9:
         - selinux_state
         - setroubleshoot
         - mcstrans
-      stig:
-        - policycoreutils
     warning_banners:
       level1:
         - motd_perms
