@@ -490,7 +490,7 @@ cis_security_hardening::rules::sshd_timeouts::client_alive_count_max: 0
 cis_security_hardening::rules::sshd_login_gracetime::enforce: true
 cis_security_hardening::rules::sshd_login_gracetime::login_grace_time: 60
 cis_security_hardening::rules::sshd_banner::enforce: true
-cis_security_hardening::rules::sshd_banner::banner_line: '/etc/issue.net'
+cis_security_hardening::rules::sshd_banner::banner_line: 'Banner /etc/issue.net'
 cis_security_hardening::rules::sshd_use_pam::enforce: true
 cis_security_hardening::rules::sshd_tcp_forwarding::enforce: true
 cis_security_hardening::rules::sshd_max_startups::enforce: true
