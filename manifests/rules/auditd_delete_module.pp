@@ -36,7 +36,7 @@ class cis_security_hardening::rules::auditd_delete_module (
       undef => '1000',
       default => fact('cis_security_hardening.auditd.uid_min'),
     }
-    if $facts['os']['famlily'].downcase() == 'redhat' and $facts['os']['release']['major'] >= '9' {
+    if $facts['os']['family'].downcase() == 'redhat' and $facts['os']['release']['major'] >= '9' {
       concat::fragment { 'watch delete_module command rule 1':
         order   => '221',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,
