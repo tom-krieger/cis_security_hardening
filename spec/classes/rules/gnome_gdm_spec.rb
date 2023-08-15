@@ -95,29 +95,29 @@ describe 'cis_security_hardening::rules::gnome_gdm' do
                     'group'   => 'root',
                     'mode'    => '0644',
                   )
-                
+
                 is_expected.to contain_file('/etc/dconf/db/cis.d')
                   .with(
                     'ensure'  => 'directory',
                     'owner'  => 'root',
                     'group'  => 'root',
                     'mode'   => '0755',
-                  ) 
-    
+                  )
+
                 is_expected.to contain_file('/etc/dconf/db/cis.d/01-banner-message')
                   .with(
                     'ensure'  => 'file',
-                    'content' => "[org/gnome/login-screen]\nbanner-message-enable=true\nbanner-message-text=\'Authorized uses only. All activity may be monitored and reported.\'\ndisable-user-list=true\n", #lint:ignore:140chars
+                    'content' => "[org/gnome/login-screen]\nbanner-message-enable=true\nbanner-message-text=\'Authorized uses only. All activity may be monitored and reported.\'\ndisable-user-list=true\n", # lint:ignore:140chars
                     'owner'   => 'root',
                     'group'   => 'root',
                     'mode'    => '0644',
                   )
-                
+
               else
                 is_expected.to contain_file('/etc/gdm3/greeter.dconf-defaults')
                   .with(
                     'ensure'  => 'file',
-                    'content' => "[org/gnome/login-screen]\nbanner-message-enable=true\nbanner-message-text=\'Authorized uses only. All activity may be monitored and reported.\'\ndisable-user-list=true\n", #lint:ignore:140chars
+                    'content' => "[org/gnome/login-screen]\nbanner-message-enable=true\nbanner-message-text=\'Authorized uses only. All activity may be monitored and reported.\'\ndisable-user-list=true\n", # lint:ignore:140chars
                     'owner'   => 'root',
                     'group'   => 'root',
                     'mode'    => '0644',
