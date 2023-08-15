@@ -62,15 +62,17 @@ class cis_security_hardening::rules::pam_lockout (
         }
 
         if $facts['os']['release']['major'] > '7' {
-          $services.each | $service | {
-            $pf_file = "${pf_path}/${service}"
+          if $facts['os']['release']['major'] == '8' {
+            $services.each | $service | {
+              $pf_file = "${pf_path}/${service}"
 
-            if $pf_path != '' {
-              file_line { "update pam lockout ${service}":
-                path   => $pf_file,
-                line   => "auth         required                                     pam_faillock.so preauth silent deny=${attempts} unlock_time=${lockouttime}  {include if \"with-faillock\"}", #lint:ignore:140chars
-                match  => '^auth\s+required\s+pam_faillock.so\s+preauth\s+silent',
-                notify => Exec['authselect-apply-changes'],
+              if $pf_path != '' {
+                file_line { "update pam lockout ${service}":
+                  path   => $pf_file,
+                  line   => "auth         required                                     pam_faillock.so preauth silent deny=${attempts} unlock_time=${lockouttime}  {include if \"with-faillock\"}", #lint:ignore:140chars
+                  match  => '^auth\s+required\s+pam_faillock.so\s+preauth\s+silent',
+                  notify => Exec['authselect-apply-changes'],
+                }
               }
             }
           }

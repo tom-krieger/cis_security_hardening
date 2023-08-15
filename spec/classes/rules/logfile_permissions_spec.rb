@@ -19,15 +19,21 @@ describe 'cis_security_hardening::rules::logfile_permissions' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_file('/var/log')
+            # is_expected.to contain_file('/var/log')
+            #   .with(
+            #     'ensure'  => 'directory',
+            #     'recurse' => true,
+            #     'mode'    => 'g-wx,o-rwx',
+            #     'ignore'  => ['puppetlabs', 'puppet'],
+            #   )
+            is_expected.to contain_recursive_file_permissions('/var/log')
               .with(
-                'ensure'  => 'directory',
-                'recurse' => true,
-                'mode'    => 'g-wx,o-rwx',
-                'ignore'  => ['puppetlabs', 'puppet'],
+                'file_mode' => '0640',
               )
+
           else
-            is_expected.not_to contain_file('/var/log')
+            # is_expected.not_to contain_file('/var/log')
+            is_expected.not_to contain_recursive_file_permissions('/var/log')
           end
         }
       end

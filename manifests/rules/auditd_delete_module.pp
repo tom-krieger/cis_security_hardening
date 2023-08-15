@@ -36,17 +36,33 @@ class cis_security_hardening::rules::auditd_delete_module (
       undef => '1000',
       default => fact('cis_security_hardening.auditd.uid_min'),
     }
-    concat::fragment { 'watch delete_module command rule 1':
-      order   => '221',
-      target  => $cis_security_hardening::rules::auditd_init::rules_file,
-      content => "-a always,exit -F arch=b32 -S delete_module -F auid>=${uid} -F auid!=4294967295 -k module_chng",
-    }
-
-    if $facts['os']['architecture'] == 'x86_64' or $facts['os']['architecture'] == 'amd64' {
-      concat::fragment { 'watch delete_module command rule 2':
-        order   => '222',
+    if $facts['os']['family'].downcase() == 'redhat' and $facts['os']['release']['major'] >= '9' {
+      concat::fragment { 'watch delete_module command rule 1':
+        order   => '221',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,
-        content => "-a always,exit -F arch=b64 -S delete_module -F auid>=${uid} -F auid!=4294967295 -k module_chng",
+        content => "-a always,exit -F arch=b32 -S delete_module -F auid>=${uid} -F auid!=4294967295 -F key=modules",
+      }
+
+      if $facts['os']['architecture'] == 'x86_64' or $facts['os']['architecture'] == 'amd64' {
+        concat::fragment { 'watch delete_module command rule 2':
+          order   => '222',
+          target  => $cis_security_hardening::rules::auditd_init::rules_file,
+          content => "-a always,exit -F arch=b64 -S delete_module -F auid>=${uid} -F auid!=4294967295 -F key=modules",
+        }
+      }
+    } else {
+      concat::fragment { 'watch delete_module command rule 1':
+        order   => '221',
+        target  => $cis_security_hardening::rules::auditd_init::rules_file,
+        content => "-a always,exit -F arch=b32 -S delete_module -F auid>=${uid} -F auid!=4294967295 -k module_chng",
+      }
+
+      if $facts['os']['architecture'] == 'x86_64' or $facts['os']['architecture'] == 'amd64' {
+        concat::fragment { 'watch delete_module command rule 2':
+          order   => '222',
+          target  => $cis_security_hardening::rules::auditd_init::rules_file,
+          content => "-a always,exit -F arch=b64 -S delete_module -F auid>=${uid} -F auid!=4294967295 -k module_chng",
+        }
       }
     }
   }

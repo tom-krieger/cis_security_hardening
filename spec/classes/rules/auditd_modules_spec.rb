@@ -65,17 +65,35 @@ describe 'cis_security_hardening::rules::auditd_modules' do
                 'content' => '-w /sbin/modprobe -p x -k modules',
               )
 
-            if ['x86_64', 'amd64'].include?(os_facts[:os]['architecture'])
-              is_expected.to contain_concat__fragment('watch modules rule 4')
+            if os_facts[:os]['family'].casecmp('redhat').zero? && os_facts[:os]['release']['major'] >= '9'
+              if ['x86_64', 'amd64'].include?(os_facts[:os]['architecture'])
+                is_expected.to contain_concat__fragment('watch modules rule 4')
+                  .with(
+                    'order' => '74',
+                    'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
+                    'content' => '-a always,exit -F arch=b64 -S init_module -S delete_module -F key=modules',
+                  )
+              end
+
+              is_expected.to contain_concat__fragment('watch modules rule 5')
                 .with(
-                  'order' => '74',
+                  'order' => '75',
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-a always,exit -F arch=b64 -S init_module -S delete_module -k modules',
+                  'content' => '-a always,exit -F arch=b32 -S init_module -S delete_module -F key=modules',
                 )
             else
-              is_expected.to contain_concat__fragment('watch modules rule 4')
+              if ['x86_64', 'amd64'].include?(os_facts[:os]['architecture'])
+                is_expected.to contain_concat__fragment('watch modules rule 4')
+                  .with(
+                    'order' => '74',
+                    'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
+                    'content' => '-a always,exit -F arch=b64 -S init_module -S delete_module -k modules',
+                  )
+              end
+
+              is_expected.to contain_concat__fragment('watch modules rule 5')
                 .with(
-                  'order' => '74',
+                  'order' => '75',
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
                   'content' => '-a always,exit -F arch=b32 -S init_module -S delete_module -k modules',
                 )

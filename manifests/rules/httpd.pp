@@ -31,6 +31,16 @@ class cis_security_hardening::rules::httpd (
             ensure => absent,
         })
       }
+      'redhat': {
+        if $facts['os']['release']['major'] >= '9' {
+          ensure_packages(['nginx'], {
+              ensure => purged,
+          })
+        }
+        ensure_packages(['httpd'], {
+            ensure => purged,
+        })
+      }
       default: {
         ensure_resource('service', ['httpd'], {
             ensure => 'stopped',

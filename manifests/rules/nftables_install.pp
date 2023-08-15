@@ -18,7 +18,8 @@
 # @param enforce
 #    Enforce the rule
 #
-# @example cis_security_hardening::rules::nftables_installcis_security_hardening::rules::avahi {
+# @example cis_security_hardening::rules::nftables_install {
+# @example cis_security_hardening::rules::nftables_install {
 #       enforce => true,
 #   }
 #
@@ -30,8 +31,18 @@ class cis_security_hardening::rules::nftables_install (
     case $facts['os']['name'].downcase() {
       'sles': {
         $pkgs_remove = ['firewalld']
+        $pkgs_install = ['nftables']
       }
-      'centos': {
+      'centos', 'redhat', 'rocky', 'almalinux': {
+        case $facts['os']['release']['major'] {
+          '9': {
+            $pkgs_install = ['nftables', 'libnftnl']
+          }
+          default: {
+            $pkgs_install = ['nftables']
+          }
+        }
+
         $pkgs_remove = $facts['os']['release']['major'] ? {
           '7'     => ['firewalld', 'iptables-services'],
           default => ['firewalld'],
@@ -39,18 +50,17 @@ class cis_security_hardening::rules::nftables_install (
       }
       default: {
         $pkgs_remove = ['firewalld', 'iptables-services']
+        $pkgs_install = ['nftables']
       }
+    }
+
+    package { $pkgs_install:
+      ensure => installed,
     }
 
     $ensure = $facts['os']['family'].downcase() ? {
       'suse'  => 'absent',
       default => 'purged',
-    }
-
-    if !defined(Package['nftables']) {
-      ensure_packages(['nftables'], {
-          ensure => installed,
-      })
     }
 
     ensure_packages($pkgs_remove, {
@@ -73,11 +83,12 @@ class cis_security_hardening::rules::nftables_install (
       }
     }
 
-    if !defined(Service['nftables']) {
-      ensure_resource('service', 'nftables', {
-          enable => true,
-          ensure => running,
-      })
+    file { '/etc/nftables/nftables.rules':
+      ensure  => file,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0640',
+      require => Package['nftables'],
     }
 
     if $facts['os']['name'].downcase() == 'ubuntu' {

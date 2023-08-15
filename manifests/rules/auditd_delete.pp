@@ -34,9 +34,9 @@ class cis_security_hardening::rules::auditd_delete (
       undef => '1000',
       default => fact('cis_security_hardening.auditd.uid_min'),
     }
-    $os = fact('operatingsystem') ? {
+    $os = $facts['os']['name'].downcase() ? {
       undef   => 'unknown',
-      default => fact('operatingsystem').downcase()
+      default => $facts['os']['name'].downcase()
     }
     $content_rule1 = $os ? {
       'rocky'     => "-a always,exit -F arch=b32 -S unlink,unlinkat,rename,renameat -F auid>=${uid} -F auid!=${auid} -k delete",

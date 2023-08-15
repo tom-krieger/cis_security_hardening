@@ -138,7 +138,7 @@ describe 'cis_security_hardening::rules::pam_lockout' do
 
                 is_expected.not_to contain_file__line('update pam lockout system-auth')
                 is_expected.not_to contain_file__line('update pam lockout password-auth')
-              else
+              elsif os_facts[:os]['release']['major'] == '8'
                 is_expected.not_to contain_pam('pam-auth-faillock-required')
                 is_expected.not_to contain_exec('configure faillock')
                 is_expected.not_to contain_pam('account-faillock-system-auth')

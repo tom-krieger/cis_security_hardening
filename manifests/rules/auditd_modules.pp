@@ -45,18 +45,23 @@ class cis_security_hardening::rules::auditd_modules (
       content => '-w /sbin/modprobe -p x -k modules',
     }
 
+    if $facts['os']['family'].downcase == 'redhat' and $facts['os']['release']['major'] >= '9' {
+      $key = '-F key=modules'
+    } else {
+      $key = '-k modules'
+    }
+
     if  $facts['os']['architecture'] == 'x86_64' or $facts['os']['architecture'] == 'amd64' {
       concat::fragment { 'watch modules rule 4':
         order   => '74',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,
-        content => '-a always,exit -F arch=b64 -S init_module -S delete_module -k modules',
+        content => "-a always,exit -F arch=b64 -S init_module -S delete_module ${key}",
       }
-    } else {
-      concat::fragment { 'watch modules rule 4':
-        order   => '74',
-        target  => $cis_security_hardening::rules::auditd_init::rules_file,
-        content => '-a always,exit -F arch=b32 -S init_module -S delete_module -k modules',
-      }
+    }
+    concat::fragment { 'watch modules rule 5':
+      order   => '75',
+      target  => $cis_security_hardening::rules::auditd_init::rules_file,
+      content => "-a always,exit -F arch=b32 -S init_module -S delete_module ${key}",
     }
   }
 }

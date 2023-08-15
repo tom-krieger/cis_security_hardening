@@ -24,7 +24,7 @@ describe 'cis_security_hardening::rules::sudo_log' do
                 'path'               => '/etc/sudoers',
                 'match'              => 'Defaults.*logfile\s*=',
                 'append_on_no_match' => true,
-                'line'               => 'Defaults logfile="/var/log/sudo.log"',
+                'line'               => 'Defaults logfile=/var/log/sudo.log',
                 'after'              => '# Defaults specification',
               )
           else

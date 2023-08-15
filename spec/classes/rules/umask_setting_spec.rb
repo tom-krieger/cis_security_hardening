@@ -175,7 +175,10 @@ describe 'cis_security_hardening::rules::umask_setting' do
                 is_expected.not_to contain_file_line('umask in system-auth')
                 is_expected.not_to contain_file_line('umask in password-auth')
 
-                if os_facts[:os]['name'].casecmp('ubuntu').zero? || os_facts[:os]['name'].casecmp('debian').zero?
+                if os_facts[:os]['name'].casecmp('ubuntu').zero? || os_facts[:os]['name'].casecmp('debian').zero? ||
+                   (os_facts[:os]['name'].casecmp('redhat').zero? && os_facts[:os]['release']['major'] >= '9') ||
+                   (os_facts[:os]['name'].casecmp('rocky').zero? && os_facts[:os]['release']['major'] >= '9') ||
+                   (os_facts[:os]['name'].casecmp('almalinux').zero? && os_facts[:os]['release']['major'] >= '9')
                   is_expected.to contain_pam('pam umask common-session')
                     .with(
                       'ensure'  => 'present',

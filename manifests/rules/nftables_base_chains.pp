@@ -32,6 +32,7 @@ class cis_security_hardening::rules::nftables_base_chains (
       path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
       onlyif  => "test -z \"$(nft -n list ruleset ${table} | grep 'type filter hook input priority 0')\"",
       notify  => Exec['dump nftables ruleset'],
+      require => Package['nftables'],
     }
 
     exec { 'create base chain forward':
@@ -39,6 +40,7 @@ class cis_security_hardening::rules::nftables_base_chains (
       path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
       onlyif  => "test -z \"$(nft -n list ruleset ${table} | grep 'type filter hook forward priority 0')\"",
       notify  => Exec['dump nftables ruleset'],
+      require => Package['nftables'],
     }
 
     exec { 'create base chain output':
@@ -46,6 +48,7 @@ class cis_security_hardening::rules::nftables_base_chains (
       path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
       onlyif  => "test -z \"$(nft -n list ruleset ${table} | grep 'type filter hook output priority 0')\"",
       notify  => Exec['dump nftables ruleset'],
+      require => Package['nftables'],
     }
   }
 }

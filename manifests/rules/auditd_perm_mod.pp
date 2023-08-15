@@ -36,7 +36,7 @@ class cis_security_hardening::rules::auditd_perm_mod (
     }
 
     case $os {
-      'rocky', 'almalinux': {
+      'rocky', 'almalinux', 'redhat': {
         $auid = 'unset'
         $content_rule1 = "-a always,exit -F arch=b32 -S chmod,fchmod,fchmodat -F auid>=${uid} -F auid!=${auid} -k perm_mod"
         $content_rule2 = "-a always,exit -F arch=b32 -S chown,fchown,fchownat,lchown -F auid>=${uid} -F auid!=${auid} -k perm_mod"

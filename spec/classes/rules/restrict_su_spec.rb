@@ -20,15 +20,27 @@ describe 'cis_security_hardening::rules::restrict_su' do
         it {
           is_expected.to compile
           if enforce
-            is_expected.to contain_pam('pam-su-restrict')
-              .with(
-                'ensure'    => 'present',
-                'service'   => 'su',
-                'type'      => 'auth',
-                'control'   => 'required',
-                'module'    => 'pam_wheel.so',
-                'arguments' => ['use_uid', 'group=wheel'],
-              )
+            if os_facts[:os]['family'].casecmp('redhat').zero? && os_facts[:os]['release']['major'] >= '9'
+              is_expected.to contain_pam('pam-su-restrict')
+                .with(
+                  'ensure'    => 'present',
+                  'service'   => 'su',
+                  'type'      => 'auth',
+                  'control'   => 'required',
+                  'module'    => 'pam_wheel.so',
+                  'arguments' => ['use_uid'],
+                )
+            else
+              is_expected.to contain_pam('pam-su-restrict')
+                .with(
+                  'ensure'    => 'present',
+                  'service'   => 'su',
+                  'type'      => 'auth',
+                  'control'   => 'required',
+                  'module'    => 'pam_wheel.so',
+                  'arguments' => ['use_uid', 'group=wheel'],
+                )
+            end
             is_expected.to contain_exec('root_wheel')
               .with(
                 'command' => 'usermod -G wheel root',

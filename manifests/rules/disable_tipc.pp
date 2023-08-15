@@ -21,12 +21,26 @@ class cis_security_hardening::rules::disable_tipc (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    if $facts['os']['name'].downcase() == 'debian' and
-    $facts['os']['release']['major'] > '10' {
-      $command = '/bin/false'
-      kmod::blacklist { 'tipc': }
-    } else {
-      $command = '/bin/true'
+    case $facts['os']['name'].downcase() {
+      'debian': {
+        if $facts['os']['release']['major'] > '10' {
+          $command = '/bin/false'
+          kmod::blacklist { 'tipc': }
+        } else {
+          $command = '/bin/true'
+        }
+      }
+      'redhat': {
+        if $facts['os']['release']['major'] > '8' {
+          $command = '/bin/false'
+          kmod::blacklist { 'tipc': }
+        } else {
+          $command = '/bin/true'
+        }
+      }
+      default: {
+        $command = '/bin/true'
+      }
     }
 
     kmod::install { 'tipc':

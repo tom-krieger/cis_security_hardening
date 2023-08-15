@@ -65,8 +65,7 @@ class cis_security_hardening::rules::pam_passwd_sha512 (
         }
       }
       'debian': {
-        if $facts['os']['name'].downcase() == 'debian' and
-        $facts['os']['release']['major'] > '10' {
+        if $facts['os']['name'].downcase() == 'debian' and $facts['os']['release']['major'] > '10' {
           file { '/etc/pam.d/common-password':
             ensure  => file,
             source  => 'puppet:///modules/cis_security_hardening/pam_lockout/debian/common-password',

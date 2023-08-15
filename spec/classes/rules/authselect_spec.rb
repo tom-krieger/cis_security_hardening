@@ -18,7 +18,7 @@ describe 'cis_security_hardening::rules::authselect' do
                   available_features: [ 'with-sudo', 'with-altfiles', 'with-custom-aliases', 'with-custom-automount', 'with-custom-ethers', 'with-custom-group', 'with-custom-hosts',
                                         'with-custom-initgroups', 'with-custom-netgroup', 'with-custom-networks', 'with-custom-passwd', 'with-custom-protocols', 'with-custom-publickey',
                                         'with-custom-rpc', 'with-custom-services', 'with-custom-shadow', 'with-ecryptfs', 'with-faillock', 'with-mkhomedir', 'with-pamaccess',
-                                        'with-silent-lastlog', 'without-nullok' ],
+                                        'with-silent-lastlog', 'without-nullok', 'with-pwhistory' ],
                 },
               },
             )
@@ -28,7 +28,7 @@ describe 'cis_security_hardening::rules::authselect' do
               'enforce' => enforce,
               'base_profile' => 'sssd',
               'custom_profile' => 'cis',
-              'profile_options' => ['with-sudo', 'with-faillock', 'without-nullok', 'with-bad'],
+              'profile_options' => ['with-sudo', 'with-faillock', 'without-nullok', 'with-pwhistory', 'with-bad'],
             }
           end
 
@@ -84,6 +84,14 @@ describe 'cis_security_hardening::rules::authselect' do
                   'command' => 'authselect enable-feature without-nullok',
                   'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
                   'onlyif'  => ['test -d /etc/authselect/custom/cis', "test -z \"$(authselect current | grep 'without-nullok')\""],
+                )
+                .that_requires('Exec[select authselect profile]')
+
+              is_expected.to contain_exec('enable feature with-pwhistory')
+                .with(
+                  'command' => 'authselect enable-feature with-pwhistory',
+                  'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+                  'onlyif'  => ['test -d /etc/authselect/custom/cis', "test -z \"$(authselect current | grep 'with-pwhistory')\""],
                 )
                 .that_requires('Exec[select authselect profile]')
 

@@ -27,10 +27,11 @@ class cis_security_hardening::rules::nftables_persistence (
   if $enforce {
     if(!defined(File['/etc/sysconfig/nftables.conf'])) {
       file { '/etc/sysconfig/nftables.conf':
-        ensure => file,
-        owner  => 'root',
-        group  => 'root',
-        mode   => '0644',
+        ensure  => file,
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0644',
+        require => Package['nftables'],
       }
     }
     file_line { 'add persistence file include':
@@ -38,12 +39,14 @@ class cis_security_hardening::rules::nftables_persistence (
       line               => 'include "/etc/nftables/nftables.rules"',
       match              => 'include "/etc/nftables/nftables.rules"',
       append_on_no_match => true,
+      require            => Package['nftables'],
     }
 
     exec { 'dump nftables ruleset':
       command     => 'nft list ruleset > /etc/nftables/nftables.rules',
       path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
       refreshonly => true,
+      require     => Package['nftables'],
     }
   }
 }

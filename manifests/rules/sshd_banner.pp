@@ -20,16 +20,18 @@
 # @api private
 class cis_security_hardening::rules::sshd_banner (
   Boolean $enforce = false,
+  String $banner_line = 'Banner /etc/issue.net',
 ) {
   if $enforce {
     $path = ($facts['os']['name'] == 'SLES' and $facts['os']['release']['major'] == '12') ? {
       true    => '/usr/etc/ssh/sshd_config',
       default => '/etc/ssh/sshd_config',
     }
+
     file_line { 'sshd-banner':
       ensure => present,
       path   => $path,
-      line   => 'Banner /etc/issue.net',
+      line   => $banner_line,
       match  => '^#?Banner.*',
       notify => Exec['reload-sshd'],
     }

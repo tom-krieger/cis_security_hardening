@@ -35,6 +35,12 @@ class cis_security_hardening::rules::auditd_logins (
           target  => $cis_security_hardening::rules::auditd_init::rules_file,
           content => '-w /var/run/faillock/ -p wa -k logins',
         }
+
+        concat::fragment { 'logins policy rule 4':
+          order   => '54',
+          target  => $cis_security_hardening::rules::auditd_init::rules_file,
+          content => '-w /var/log/faillock -p wa -k logins',
+        }
       }
       'debian': {
         concat::fragment { 'logins policy rule 2':

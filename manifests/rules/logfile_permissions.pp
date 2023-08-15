@@ -21,11 +21,15 @@ class cis_security_hardening::rules::logfile_permissions (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    ensure_resource('file', '/var/log', {
-        ensure  => directory,
-        recurse => true,
-        mode    => 'g-wx,o-rwx',     #lint:ignore:no_symbolic_file_modes
-        ignore  => ['puppetlabs', 'puppet'],
-    })
+    # ensure_resource('file', '/var/log', {
+    #     ensure  => directory,
+    #     recurse => true,
+    #     mode    => 'g-wx,o-rwx',     #lint:ignore:no_symbolic_file_modes
+    #     ignore  => ['puppetlabs', 'puppet'],
+    # })
+
+    recursive_file_permissions { '/var/log':
+      file_mode => '0640',
+    }
   }
 }

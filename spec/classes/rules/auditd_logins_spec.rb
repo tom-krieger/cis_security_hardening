@@ -56,6 +56,13 @@ describe 'cis_security_hardening::rules::auditd_logins' do
                   'content' => '-w /var/run/faillock/ -p wa -k logins',
                 )
 
+              is_expected.to contain_concat__fragment('logins policy rule 4')
+                .with(
+                  'order' => '54',
+                  'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
+                  'content' => '-w /var/log/faillock -p wa -k logins',
+                )
+
               is_expected.not_to contain_concat__fragment('logins policy rule 3')
 
             elsif os_facts[:os]['family'].casecmp('debian').zero?

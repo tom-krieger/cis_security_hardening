@@ -24,12 +24,14 @@ class cis_security_hardening::rules::nftables_flush_iptables (
       command => 'iptables -F',
       path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
       onlyif  => 'test $(iptables -L | grep -c -e \'^ACCEPT\' -e \'^REJECT\' -e \'^DROP\') -gt 0',
+      require => Package['nftables'],
     }
 
     exec { 'flush ip6tables rules':
       command => 'ip6tables -F',
       path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
       onlyif  => 'test $(ip6tables -L | grep -c -e \'^ACCEPT\' -e \'^REJECT\' -e \'^DROP\') -gt 0',
+      require => Package['nftables'],
     }
   }
 }

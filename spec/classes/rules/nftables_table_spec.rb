@@ -14,6 +14,9 @@ describe 'cis_security_hardening::rules::nftables_table' do
           path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
           refreshonly => true,
         }
+        package { 'nftables':
+          ensure => installed,
+        }
         EOF
       end
       let(:facts) do
@@ -48,6 +51,8 @@ describe 'cis_security_hardening::rules::nftables_table' do
               'onlyif'  => 'test -z "$(nft list ruleset | grep -E \'^table inet\')"',
             )
             .that_notifies('Exec[dump nftables ruleset]')
+            .that_requires('Package[nftables]')
+
         else
           is_expected.not_to contain_exec('create nft table inet')
         end

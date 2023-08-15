@@ -46,6 +46,23 @@ class cis_security_hardening::rules::grub_bootloader_config (
       }
     }
 
+    if $facts['os']['family'].downcase() == 'redhat' and
+    $facts['os']['release']['major'] >= '9' {
+      file { '/boot/grub2/grubenv':
+        ensure => file,
+        owner  => 'root',
+        group  => 'root',
+        mode   => '0600',
+      }
+
+      file { '/boot/grub2/user.cfg':
+        ensure => file,
+        owner  => 'root',
+        group  => 'root',
+        mode   => '0600',
+      }
+    }
+
     if $facts['os']['family'].downcase() == 'debian' {
       file_line { 'correct grub.cfg permissions':
         path                                  => '/usr/sbin/grub-mkconfig',
@@ -65,7 +82,7 @@ class cis_security_hardening::rules::grub_bootloader_config (
       file_line { 'fix /boot/efi':
         ensure             => present,
         path               => '/etc/fstab',
-        match              => "^UUID=${uuid}\s+/boot/efi\s+vfat",
+        match              => "^UUID=${uuid}\\s+/boot/efi\\s+vfat",
         line               => $line,
         append_on_no_match => true,
       }

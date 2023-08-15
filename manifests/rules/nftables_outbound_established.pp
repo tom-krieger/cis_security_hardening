@@ -30,6 +30,7 @@ class cis_security_hardening::rules::nftables_outbound_established (
       path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
       onlyif  => "test -z \"$(nft list ruleset ${table} | grep 'ip protocol tcp ct state established accept')\"",
       notify  => Exec['dump nftables ruleset'],
+      require => Package['nftables'],
     }
 
     exec { 'add nftables rule for input udp established':
@@ -37,6 +38,7 @@ class cis_security_hardening::rules::nftables_outbound_established (
       path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
       onlyif  => "test -z \"$(nft list ruleset ${table} | grep 'ip protocol udp ct state established accept')\"",
       notify  => Exec['dump nftables ruleset'],
+      require => Package['nftables'],
     }
 
     exec { 'add nftables rule for input icmp established':
@@ -44,6 +46,7 @@ class cis_security_hardening::rules::nftables_outbound_established (
       path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
       onlyif  => "test -z \"$(nft list ruleset ${table} | grep 'ip protocol icmp ct state established accept')\"",
       notify  => Exec['dump nftables ruleset'],
+      require => Package['nftables'],
     }
 
     exec { 'add nftables rule for output tcp established':
@@ -51,6 +54,7 @@ class cis_security_hardening::rules::nftables_outbound_established (
       path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
       onlyif  => "test -z \"$(nft list ruleset ${table} | grep 'ip protocol tcp ct state established,related,new accept')\"",
       notify  => Exec['dump nftables ruleset'],
+      require => Package['nftables'],
     }
 
     exec { 'add nftables rule for output udp established':
@@ -58,6 +62,7 @@ class cis_security_hardening::rules::nftables_outbound_established (
       path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
       onlyif  => "test -z \"$(nft list ruleset ${table} | grep 'ip protocol udp ct state established,related,new accept')\"",
       notify  => Exec['dump nftables ruleset'],
+      require => Package['nftables'],
     }
 
     exec { 'add nftables rule for output icmp established':
@@ -65,6 +70,7 @@ class cis_security_hardening::rules::nftables_outbound_established (
       path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
       onlyif  => "test -z \"$(nft list ruleset ${table} | grep 'ip protocol icmp ct state established,related,new accept')\"",
       notify  => Exec['dump nftables ruleset'],
+      require => Package['nftables'],
     }
   }
 }

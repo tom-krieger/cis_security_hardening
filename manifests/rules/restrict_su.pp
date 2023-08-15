@@ -34,13 +34,18 @@ class cis_security_hardening::rules::restrict_su (
   Cis_security_hardening::Word $sudo_group = 'wheel',
 ) {
   if($enforce) {
+    if $facts['os']['family'].downcase() == 'redhat'and $facts['os']['release']['major'] >= '9' {
+      $args = ['use_uid']
+    } else {
+      $args = ['use_uid',"group=${sudo_group}"]
+    }
     Pam { 'pam-su-restrict':
       ensure    => present,
       service   => 'su',
       type      => 'auth',
       control   => 'required',
       module    => 'pam_wheel.so',
-      arguments => ['use_uid',"group=${sudo_group}"],
+      arguments => $args,
     }
 
     group { $sudo_group:

@@ -28,7 +28,8 @@ class cis_security_hardening::rules::auditd_privileged_functions_use (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    if $facts['os']['name'].downcase() == 'redhat' and $facts['os']['release']['major'] == '7' {
+    if $facts['os']['name'].downcase() == 'redhat' and
+    ($facts['os']['release']['major'] == '7' or $facts['os']['release']['major'] == '9') {
       $rule1 = '-a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid'
       $rule2 = '-a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid'
       $rule3 = '-a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid'
