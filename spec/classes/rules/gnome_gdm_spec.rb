@@ -82,6 +82,55 @@ describe 'cis_security_hardening::rules::gnome_gdm' do
             is_expected.not_to contain_file('/etc/gdm3/greeter.dconf-defaults')
             is_expected.not_to contain_exec('dpkg-gdm-reconfigure')
 
+          elsif os_facts[:os]['name'].casecmp('debian').zero?
+
+            if enforce
+              if os_facts[:os]['release']['major'] > '10'
+
+                is_expected.to contain_file('/etc/dconf/profile/cis')
+                  .with(
+                    'ensure'  => 'file',
+                    'content' => "user-db:user\nsystem-db:cis\nfile-db:/usr/share/cis/greeter-dconf-defaults",
+                    'owner'   => 'root',
+                    'group'   => 'root',
+                    'mode'    => '0644',
+                  )
+                
+                is_expected.to contain_file('/etc/dconf/db/cis.d')
+                  .with(
+                    'ensure'  => 'directory',
+                    'owner'  => 'root',
+                    'group'  => 'root',
+                    'mode'   => '0755',
+                  ) 
+    
+                is_expected.to contain_file('/etc/dconf/db/cis.d/01-banner-message')
+                  .with(
+                    'ensure'  => 'file',
+                    'content' => "[org/gnome/login-screen]\nbanner-message-enable=true\nbanner-message-text=\'Authorized uses only. All activity may be monitored and reported.\'\ndisable-user-list=true\n", #lint:ignore:140chars
+                    'owner'   => 'root',
+                    'group'   => 'root',
+                    'mode'    => '0644',
+                  )
+                
+              else
+                is_expected.to contain_file('/etc/gdm3/greeter.dconf-defaults')
+                  .with(
+                    'ensure'  => 'file',
+                    'content' => "[org/gnome/login-screen]\nbanner-message-enable=true\nbanner-message-text=\'Authorized uses only. All activity may be monitored and reported.\'\ndisable-user-list=true\n", #lint:ignore:140chars
+                    'owner'   => 'root',
+                    'group'   => 'root',
+                    'mode'    => '0644',
+                  )
+                  .that_notifies('Exec[dpkg-gdm-reconfigure]')
+              end
+            else
+              is_expected.not_to contain_file('/etc/dconf/profile/cis')
+              is_expected.not_to contain_file('/etc/dconf/db/cis.d')
+              is_expected.not_to contain_file('/etc/dconf/db/cis.d/01-banner-message')
+              is_expected.not_to contain_file('/etc/gdm3/greeter.dconf-defaults')
+            end
+
           elsif os_facts[:os]['name'].casecmp('ubuntu').zero?
 
             if enforce
