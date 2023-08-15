@@ -63,6 +63,9 @@
     {
       "name": "puppetlabs-inifile",
       "version_requirement": ">= 5.2.0 < 7.0.0"
+    },{
+      "name": "npwalker-recursive_file_permissions",
+      "version_requirement": "0.6.2"
     }
   ],
   "operatingsystem_support": [
