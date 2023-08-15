@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 * added Redhat 9 support
 * added AlmaLinux 9 support
 * added Rocky Linux 9 support
+* fix for issue #56 "Permissions on /var/log incorrect". Added module npwalker-recursive_file_permissions for that reason.
 
 ## Release 0.8.1 (not released)
 
