@@ -37,32 +37,47 @@ class cis_security_hardening::rules::timeout_setting (
       mode    => '0644',
     }
 
-    if $facts['os']['name'].downcase() == 'debian' or
-    ($facts['os']['family'].downcase() == 'redhat' and $facts['os']['release']['major'] >= '9') {
-      if $facts['os']['name'].downcase() == 'debian' {
-        $tpl = 'cis_security_hardening/rules/common/profile.debian.epp'
-      } else {
-        $tpl = 'cis_security_hardening/rules/common/profile.redhat.epp'
+    case $facts['os']['name'].downcase() {
+      'redhat': {
+        if $facts['os']['release']['major'] >= '9' {
+          file_line { 'profile_tmout':
+            path               => '/etc/profile',
+            line               => "readonly TMOUT=${default_timeout}; export TMOUT",
+            match              => '^readonly TMOUT=',
+            multiple           => true,
+            append_on_no_match => true,
+          }
+          file_line { 'bashrc_tmout':
+            path               => '/etc/bashrc',
+            line               => "readonly TMOUT=${default_timeout}; export TMOUT",
+            match              => '^readonly TMOUT=',
+            multiple           => true,
+            append_on_no_match => true,
+          }
+        }
       }
-      file { '/etc/profile':
-        ensure  => file,
-        content => epp($tpl, {
-            default_timeout => $default_timeout,
-        }),
-        owner   => 'root',
-        group   => 'root',
-        mode    => '0644',
-      }
+      'debian': {
+        file { '/etc/profile':
+          ensure  => file,
+          content => epp('cis_security_hardening/rules/common/profile.debian.epp', {
+              default_timeout => $default_timeout,
+          }),
+          owner   => 'root',
+          group   => 'root',
+          mode    => '0644',
+        }
 
-      file { '/etc/bash.bashrc':
-        ensure  => file,
-        content => epp('cis_security_hardening/rules/common/bash.bashrc.debian.epp', {
-            default_timeout => $default_timeout,
-        }),
-        owner   => 'root',
-        group   => 'root',
-        mode    => '0644',
+        file { '/etc/bash.bashrc':
+          ensure  => file,
+          content => epp('cis_security_hardening/rules/common/bash.bashrc.debian.epp', {
+              default_timeout => $default_timeout,
+          }),
+          owner   => 'root',
+          group   => 'root',
+          mode    => '0644',
+        }
       }
+      default: {}
     }
   }
 }
