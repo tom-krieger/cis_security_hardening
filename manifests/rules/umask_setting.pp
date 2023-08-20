@@ -48,8 +48,8 @@ class cis_security_hardening::rules::umask_setting (
 
         file_line { 'bashrc':
           path     => '/etc/bashrc',
-          line     => "      umask ${default_umask}",
-          match    => '^\s+umask\s+\d+',
+          line     => "    [ `umask` -eq 0 ] && umask ${default_umask}",
+          match    => '^\s+\[ `umask` -eq 0 \] \&\& umask',
           multiple => true,
         }
 
@@ -61,10 +61,11 @@ class cis_security_hardening::rules::umask_setting (
         }
 
         file_line { 'profile':
-          path     => '/etc/profile',
-          line     => "    umask ${default_umask}",
-          match    => '^\s+umask\s+\d+',
-          multiple => true,
+          path               => '/etc/profile',
+          line               => "umask ${default_umask}",
+          match              => '^umask\s+\d+',
+          multiple           => true,
+          append_on_no_match => true,
         }
 
         file_line { 'login.defs':

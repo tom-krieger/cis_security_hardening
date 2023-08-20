@@ -94,8 +94,8 @@ describe 'cis_security_hardening::rules::umask_setting' do
               is_expected.to contain_file_line('bashrc')
                 .with(
                   'path'     => '/etc/bashrc',
-                  'line'     => '      umask 027',
-                  'match'    => '^\s+umask\s+\d+',
+                  'line'     => "    [ `umask` -eq 0 ] && umask 027",
+                  'match'    => '^\s+\[ `umask` -eq 0 \] \&\& umask',
                   'multiple' => true,
                 )
 
@@ -110,9 +110,10 @@ describe 'cis_security_hardening::rules::umask_setting' do
               is_expected.to contain_file_line('profile')
                 .with(
                   'path'     => '/etc/profile',
-                  'line'     => '    umask 027',
-                  'match'    => '^\s+umask\s+\d+',
+                  'line'     => 'umask 027',
+                  'match'    => '^umask\s+\d+',
                   'multiple' => true,
+                  'append_on_no_match' => true,
                 )
 
               is_expected.to contain_file_line('login.defs')
