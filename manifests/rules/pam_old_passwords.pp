@@ -116,8 +116,10 @@ class cis_security_hardening::rules::pam_old_passwords (
         }
       }
       'debian', 'suse': {
-        if $facts['os']['name'].downcase() == 'debian' and
-        $facts['os']['release']['major'] > '10' {
+        if ($facts['os']['name'].downcase() == 'debian' and
+        $facts['os']['release']['major'] > '10') or 
+        ($facts['os']['name'].downcase() == 'ubuntu' and
+        $facts['os']['release']['major'] >= '22') {
           Pam { 'pam-common-password-requisite-pwhistory':
             ensure    => present,
             service   => 'common-password',

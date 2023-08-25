@@ -225,8 +225,10 @@ class cis_security_hardening::rules::pam_pw_requirements (
         }
       }
       'debian' : {
-        if $facts['os']['name'].downcase() == 'debian' and
-        $facts['os']['release']['major'] > '10' {
+        if ($facts['os']['name'].downcase() == 'debian' and
+        $facts['os']['release']['major'] > '10') or
+        ($facts['os']['name'].downcase() == 'ubuntu' and
+        $facts['os']['release']['major'] >= '22') {
           $pkg_opts = {
             ensure => installed,
             notify => Exec['update-pam-config'],

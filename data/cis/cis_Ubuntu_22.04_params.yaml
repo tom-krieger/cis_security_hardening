@@ -24,18 +24,24 @@ cis_security_hardening::rules::tmp_filesystem::size: 0
 cis_security_hardening::rules::tmp_noexec::enforce: true
 cis_security_hardening::rules::tmp_nodev::enforce: true
 cis_security_hardening::rules::tmp_nosuid::enforce: true
+cis_security_hardening::rules::var_nodev::enforce: true
+cis_security_hardening::rules::var_nosuid::enforce: true
+cis_security_hardening::rules::var_tmp_noexec::enforce: true
+cis_security_hardening::rules::var_tmp_nodev::enforce: true
+cis_security_hardening::rules::var_tmp_nosuid::enforce: true
+cis_security_hardening::rules::var_log_nodev:;enforce: true
+cis_security_hardening::rules::var_log_noexec::enforce: true
+cis_security_hardening::rules::var_log_nosuid::enforce: true
+cis_security_hardening::rules::var_log_audit_nodev:;enforce: true
+cis_security_hardening::rules::var_log_audit_noexec::enforce: true
+cis_security_hardening::rules::var_log_audit_nosuid::enforce: true
+cis_security_hardening::rules::home_nodev::enforce: true
+cis_security_hardening::rules::home_nosuid::enforce: true
 cis_security_hardening::rules::dev_shm::enforce: true
 cis_security_hardening::rules::dev_shm::size: 0
 cis_security_hardening::rules::dev_shm_noexec::enforce: true
 cis_security_hardening::rules::dev_shm_nodev::enforce: true
 cis_security_hardening::rules::dev_shm_nosuid::enforce: true
-cis_security_hardening::rules::var_tmp_noexec::enforce: true
-cis_security_hardening::rules::var_tmp_nodev::enforce: true
-cis_security_hardening::rules::var_tmp_nosuid::enforce: true
-cis_security_hardening::rules::home_nodev::enforce: true
-cis_security_hardening::rules::sticky_world_writeable_files::enforce: true
-cis_security_hardening::rules::disable_automount::enforce: true
-cis_security_hardening::rules::disable_usb_storage::enforce: true
 
 cis_security_hardening::rules::apt_unused::enforce: true
 cis_security_hardening::rules::apt_unused::files:
@@ -89,6 +95,7 @@ cis_security_hardening::rules::issue_net_perms::enforce: true
 cis_security_hardening::rules::gnome_gdm::enforce: true
 cis_security_hardening::rules::xdmcp_config::enforce: true
 cis_security_hardening::rules::gdm_lock_enabled::enforce: true
+cis_security_hardening::rules::gdm_auto_mount::enforce: true
 cis_security_hardening::rules::ctrl_alt_del_graphical::enforce: true
 
 cis_security_hardening::rules::systemd_timesyncd::enforce: false
@@ -275,6 +282,8 @@ cis_security_hardening::rules::auditd_when_disk_full::admin_space_left_action: h
 cis_security_hardening::rules::auditd_when_disk_full::disk_full_action: suspend
 cis_security_hardening::rules::auditd_backlog_limit::enforce: true
 cis_security_hardening::rules::auditd_backlog_limit::backlog_limit: 8192
+cis_security_hardening::rules::auditd_user_emulation::enforce: true
+cis_security_hardening::rules::auditd_actions::enforce: true
 cis_security_hardening::rules::auditd_time_change::enforce: true
 cis_security_hardening::rules::auditd_identity::enforce: true
 cis_security_hardening::rules::auditd_system_locale::enforce: true
@@ -283,12 +292,16 @@ cis_security_hardening::rules::auditd_logins::enforce: true
 cis_security_hardening::rules::auditd_session_logins::enforce: true
 cis_security_hardening::rules::auditd_perm_mod::enforce: true
 cis_security_hardening::rules::auditd_access::enforce: true
+cis_security_hardening::rules::auditd_setfacl_use::ensure: true
+cis_security_hardening::rules::auditd_chacl_use::enforce: true
+cis_security_hardening::rules::auditd_usermod_use::enforce: true
+cis_security_hardening::rules::auditd_kernel_modules::enforce: true
 cis_security_hardening::rules::auditd_privileged_commands::enforce: true
 cis_security_hardening::rules::auditd_privileged_commands::auto_reboot: true
 cis_security_hardening::rules::auditd_mounts::enforce: true
 cis_security_hardening::rules::auditd_delete::enforce: true
 cis_security_hardening::rules::auditd_scope::enforce: true
-cis_security_hardening::rules::auditd_actions::enforce: true
+cis_security_hardening::rules::auditd_chcon_use::enforce: true
 cis_security_hardening::rules::auditd_modules::enforce: true
 cis_security_hardening::rules::auditd_immutable::enforce: true
 cis_security_hardening::rules::auditd_remote::enforce: true
@@ -308,15 +321,12 @@ cis_security_hardening::rules::auditd_sudo_use::enforce: true
 cis_security_hardening::rules::auditd_sudoedit_use::enforce: true
 cis_security_hardening::rules::auditd_chsh_use::enforce: true
 cis_security_hardening::rules::auditd_newgrp_use::enforce: true
-cis_security_hardening::rules::auditd_chcon_use::enforce: true
 cis_security_hardening::rules::auditd_apparmor_parser_use::enforce: true
 cis_security_hardening::rules::auditd_setfacl_use::enforce: true
-cis_security_hardening::rules::auditd_chacl_use::enforce: true
 cis_security_hardening::rules::auditd_passwd_use::enforce: true
 cis_security_hardening::rules::auditd_unix_update_use::enforce: true
 cis_security_hardening::rules::auditd_gpasswd_use::enforce: true
 cis_security_hardening::rules::auditd_chage_use::enforce: true
-cis_security_hardening::rules::auditd_usermod_use::enforce: true
 cis_security_hardening::rules::auditd_crontab_use::enforce: true
 cis_security_hardening::rules::auditd_pam_timestamp_check_use::enforce: true
 cis_security_hardening::rules::auditd_finit_module_use::enforce: true
@@ -344,9 +354,24 @@ cis_security_hardening::rules::auditd_tools_perms::tools:
   - /sbin/ausearch 
   - /sbin/autrace
   - /sbin/auditd 
-  - /sbin/audispd 
   - /sbin/augenrules
+cis_security_hardening::rules::aide_audit_integrity::enforce: true
+cis_security_hardening::rules::aide_audit_integrity::tools:
+  /sbin/auditctl: p+i+n+u+g+s+b+acl+xattrs+sha512
+  /sbin/auditd: p+i+n+u+g+s+b+acl+xattrs+sha512
+  /sbin/ausearch: p+i+n+u+g+s+b+acl+xattrs+sha512
+  /sbin/aureport: p+i+n+u+g+s+b+acl+xattrs+sha512
+  /sbin/autrace: p+i+n+u+g+s+b+acl+xattrs+sha512
+  /sbin/augenrules: p+i+n+u+g+s+b+acl+xattrs+sha512
 
+cis_security_hardening::rules::systemd_journal_remote::enforce: true
+cis_security_hardening::rules::systemd_journal_remote_config::enforce: true
+cis_security_hardening::rules::systemd_journal_remote_config::url: '1.2.3.4'
+cis_security_hardening::rules::systemd_journal_remote_config::server_key_file: '/etc/ssl/private/journal-upload.pem'
+cis_security_hardening::rules::systemd_journal_remote_config::server_cert_file: '/etc/ssl/certs/journal-upload.pem'
+cis_security_hardening::rules::systemd_journal_remote_config::trusted_cert_file: '/etc/ssl/ca/trusted.pem'
+cis_security_hardening::rules::systemd_journal_remote_receive::enforce: true
+cis_security_hardening::rules::systemd_journald_service::enforce: true
 cis_security_hardening::rules::rsyslog_installed::enforce: true
 cis_security_hardening::rules::rsyslog_service::enforce: true
 cis_security_hardening::rules::rsyslog_default_file_perms::enforce: true
@@ -416,6 +441,8 @@ cis_security_hardening::rules::sudo_installed::sudo_pkgs:
   - sudo
 cis_security_hardening::rules::sudo_use_pty::enforce: true
 cis_security_hardening::rules::sudo_log::enforce: true
+cis_security_hardening::rules::sudo_timeout::enforce: true
+cis_security_hardening::rules::sudo_timeout::timeout: 10
 
 cis_security_hardening::rules::sshd_config_permissions::enforce: true
 cis_security_hardening::rules::sshd_private_keys::enforce: true

@@ -57,5 +57,9 @@ class cis_security_hardening::rules::restrict_core_dumps (
         line => 'ProcessSizeMax=0',
       }
     }
+  } elsif $facts['os']['name'].downcase() == 'ubuntu' and $facts['os']['release']['major'] >= '22' {
+    package { 'apport':
+      ensure => purged,
+    }
   }
 }

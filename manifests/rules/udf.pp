@@ -54,6 +54,18 @@ class cis_security_hardening::rules::udf (
           }
         }
       }
+      'ubuntu': {
+        if $facts['os']['release']['major'] >= '22' {
+          kmod::install { 'udf':
+            command => '/bin/false',
+          }
+          kmod::blacklist { 'udf': }
+        } else {
+          kmod::install { 'udf':
+            command => '/bin/true',
+          }
+        }
+      }
       default: {
         kmod::install { 'udf':
           command => '/bin/true',
