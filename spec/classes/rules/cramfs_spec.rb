@@ -50,6 +50,19 @@ describe 'cis_security_hardening::rules::cramfs' do
                   command: '/bin/true',
                 )
               end
+            elsif os_facts[:os]['name'].casecmp('ubuntu').zero?
+              if os_facts[:os]['release']['major'] >= '22'
+                is_expected.to contain_kmod__install('cramfs')
+                  .with(
+                  command: '/bin/false',
+                )
+                is_expected.to contain_kmod__blacklist('cramfs')
+              else
+                is_expected.to contain_kmod__install('cramfs')
+                  .with(
+                  command: '/bin/true',
+                )
+              end
             else
               is_expected.to contain_kmod__install('cramfs')
                 .with(

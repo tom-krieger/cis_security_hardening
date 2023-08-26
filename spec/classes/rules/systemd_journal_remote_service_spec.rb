@@ -9,7 +9,7 @@ describe 'cis_security_hardening::rules::systemd_journal_remote_service' do
     context "on Ubuntu with enforce #{enforce}" do
       let(:facts) do
         {
-          os => {
+          'os' => {
             'architecture' => 'x86_64',
             'family' => 'Debian',
             'name' => 'Ubuntu',

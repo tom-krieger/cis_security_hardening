@@ -237,7 +237,8 @@ describe 'cis_security_hardening::rules::pam_lockout' do
               is_expected.not_to contain_file_line('faillock_silent')
               is_expected.not_to contain_file_line('faillock_even_deny_root')
 
-              if os_facts[:os]['name'].casecmp('debian').zero? && os_facts[:os]['release']['major'] > '10'
+              if (os_facts[:os]['name'].casecmp('debian').zero? && os_facts[:os]['release']['major'] > '10') ||
+                 (os_facts[:os]['name'].casecmp('ubuntu').zero? && os_facts[:os]['release']['major'] >= '22') 
                 is_expected.to contain_file('/etc/pam.d/common-auth')
                   .with(
                     'ensure'  => 'file',

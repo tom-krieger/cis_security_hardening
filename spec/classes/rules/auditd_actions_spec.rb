@@ -79,21 +79,30 @@ describe 'cis_security_hardening::rules::auditd_actions' do
 
             elsif os_facts[:os]['name'].casecmp('ubuntu').zero?
 
-              if ['x86_64', 'amd64'].include?(os_facts[:os]['architecture'])
+              if os_facts[:os]['release']['major'] >= '22'
                 is_expected.to contain_concat__fragment('watch admin actions rule 1')
                   .with(
-                    'order' => '21',
+                    'order'   => 21,
+                    'target'  => '/etc/audit/rules.d/cis_security_hardening.rules',
+                    'content' => '-w /var/log/sudo.log -p wa -k sudo_log_file',
+                  )
+              else
+                if ['x86_64', 'amd64'].include?(os_facts[:os]['architecture'])
+                  is_expected.to contain_concat__fragment('watch admin actions rule 1')
+                    .with(
+                      'order' => '21',
+                      'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
+                      'content' => '-a exit,always -F arch=b64 -C euid!=uid -F euid=0 -F auid>=1000 -F auid!=4294967295 -S execve -k actions',
+                    )
+                end
+  
+                is_expected.to contain_concat__fragment('watch admin actions rule 2')
+                  .with(
+                    'order' => '22',
                     'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                    'content' => '-a exit,always -F arch=b64 -C euid!=uid -F euid=0 -F auid>=1000 -F auid!=4294967295 -S execve -k actions',
+                    'content' => '-a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -F auid>=1000 -F auid!=-1 -F key=actions',
                   )
               end
-
-              is_expected.to contain_concat__fragment('watch admin actions rule 2')
-                .with(
-                  'order' => '22',
-                  'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -F auid>=1000 -F auid!=-1 -F key=actions',
-                )
 
             elsif os_facts[:os]['name'].casecmp('debian').zero?
 

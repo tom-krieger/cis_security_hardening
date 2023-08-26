@@ -117,7 +117,8 @@ describe 'cis_security_hardening::rules::pam_old_passwords' do
               is_expected.not_to contain_pam('pam-password-auth-sufficient')
               is_expected.not_to contain_exec('update authselect config for old passwords')
 
-              if os_facts[:os]['name'].casecmp('debian').zero? && os_facts[:os]['release']['major'] > '10'
+              if (os_facts[:os]['name'].casecmp('debian').zero? && os_facts[:os]['release']['major'] > '10') ||
+                 (os_facts[:os]['name'].casecmp('ubuntu').zero? && os_facts[:os]['release']['major'] >= '22')
                 is_expected.to contain_pam('pam-common-password-requisite-pwhistory')
                   .with(
                     'ensure'    => 'present',
