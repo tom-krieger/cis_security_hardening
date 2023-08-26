@@ -41,7 +41,7 @@ class cis_security_hardening::rules::aide_audit_integrity (
       file_line { "aide tool ${tool}":
         ensure             => present,
         append_on_no_match => true,
-        path               => '/etc/aide.conf',
+        path               => '/etc/aide/aide.conf',
         line               => "${tool} ${data}",
         match              => "^${tool}",
       }
