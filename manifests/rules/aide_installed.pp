@@ -37,6 +37,7 @@ class cis_security_hardening::rules::aide_installed (
           command     => 'aideinit',
           path        => ['/sbin', '/usr/sbin', '/bin', '/usr/bin'],
           refreshonly => true,
+          logoutput   => true,
           notify      => Exec['rename_aidedb_ubuntu'],
           require     => Package['aide', 'aide-common'],
         }
