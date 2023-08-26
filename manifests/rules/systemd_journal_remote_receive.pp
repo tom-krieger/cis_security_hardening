@@ -24,7 +24,7 @@
 class cis_security_hardening::rules::systemd_journal_remote_receive (
   Boolean $enforce = false,
 ) {
-  if enforce {
+  if $enforce {
     service { 'systemd-journal-remote.socket':
       ensure => stopped,
       enable => false,

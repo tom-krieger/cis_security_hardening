@@ -148,13 +148,13 @@ cis_security_hardening::benchmark::ubuntu::22:
         - ip6tables_open_ports
     configure_accounting:
       level1:
+        - auditd_init
         - auditd_log_perms
         - auditd_log_dir_perms
         - auditd_conf_perms
         - auditd_tools_perms
         - aide_audit_integrity
       level2:
-        - auditd_init
         - auditd_package
         - auditd_service
         - auditd_process
