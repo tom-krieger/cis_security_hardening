@@ -48,6 +48,7 @@ cis_security_hardening::rules::apt_unused::files:
   - /etc/apt/apt.conf.d/50unattended-upgrades
 
 cis_security_hardening::rules::aide_installed::enforce: true
+cis_security_hardening::rules::aide_installed::aide_init_timeout: 1800
 cis_security_hardening::rules::aide_regular_checks::enforce: true
 cis_security_hardening::rules::aide_notify_admins::enforce: true
 
