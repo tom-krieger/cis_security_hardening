@@ -239,10 +239,13 @@ describe 'cis_security_hardening::rules::pam_lockout' do
 
               if (os_facts[:os]['name'].casecmp('debian').zero? && os_facts[:os]['release']['major'] > '10') ||
                  (os_facts[:os]['name'].casecmp('ubuntu').zero? && os_facts[:os]['release']['major'] >= '22')
+
+                myos = os_facts[:os]['name'].downcase
+
                 is_expected.to contain_file('/etc/pam.d/common-auth')
                   .with(
                     'ensure'  => 'file',
-                    'source'  => 'puppet:///modules/cis_security_hardening/pam_lockout/debian/common-auth',
+                    'source'  => "puppet:///modules/cis_security_hardening/pam_lockout/#{myos}/common-auth",
                     'owner'   => 'root',
                     'group'   => 'root',
                   )
@@ -250,7 +253,7 @@ describe 'cis_security_hardening::rules::pam_lockout' do
                 is_expected.to contain_file('/etc/pam.d/common-account')
                   .with(
                     'ensure' => 'file',
-                    'source' => 'puppet:///modules/cis_security_hardening/pam_lockout/debian/common-account',
+                    'source' => "puppet:///modules/cis_security_hardening/pam_lockout/#{myos}/common-account",
                     'owner'  => 'root',
                     'group'  => 'root',
                     'mode'   => '0644',
