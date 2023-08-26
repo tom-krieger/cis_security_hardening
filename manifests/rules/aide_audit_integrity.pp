@@ -36,6 +36,7 @@ class cis_security_hardening::rules::aide_audit_integrity (
   Hash $tools      = {},
 ) {
   if $enforce {
+    require 'cis_security_hardening::rules::auditd_package'
     $tools.each |$tool, $data| {
       file_line { "aide tool ${tool}":
         ensure             => present,

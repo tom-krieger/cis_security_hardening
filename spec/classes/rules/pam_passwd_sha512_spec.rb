@@ -121,6 +121,16 @@ describe 'cis_security_hardening::rules::pam_passwd_sha512' do
                     )
                     .that_requires('Class[cis_security_hardening::rules::pam_pw_requirements]')
 
+                elsif os_facts[:os]['name'].casecmp('ubuntu').zero? && os_facts[:os]['release']['major'] >= '22'
+                  is_expected.to contain_file_line('set crypt method')
+                    .with(
+                    'ensure'             => 'present',
+                    'path'               => '/etc/login.defs',
+                    'match'              => '^ENCRYPT_METHOD',
+                    'line'               => 'ENCRYPT_METHOD yescrypt',
+                    'append_on_no_match' => true,
+                  )
+                    .that_requires('Class[cis_security_hardening::rules::pam_pw_requirements]')
                 else
                   is_expected.to contain_pam('pam-common-password-unix')
                     .with(

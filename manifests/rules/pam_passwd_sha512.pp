@@ -65,8 +65,7 @@ class cis_security_hardening::rules::pam_passwd_sha512 (
         }
       }
       'debian': {
-        if ($facts['os']['name'].downcase() == 'debian' and $facts['os']['release']['major'] > '10') or
-        ($facts['os']['name'].downcase() == 'ubuntu' and $facts['os']['release']['major'] >= '22') {
+        if ($facts['os']['name'].downcase() == 'debian' and $facts['os']['release']['major'] > '10') {
           file { '/etc/pam.d/common-password':
             ensure  => file,
             source  => 'puppet:///modules/cis_security_hardening/pam_lockout/debian/common-password',
@@ -76,6 +75,15 @@ class cis_security_hardening::rules::pam_passwd_sha512 (
             require => Class['cis_security_hardening::rules::pam_pw_requirements'],
           }
 
+          file_line { 'set crypt method':
+            ensure             => present,
+            path               => '/etc/login.defs',
+            match              => '^ENCRYPT_METHOD',
+            line               => 'ENCRYPT_METHOD yescrypt',
+            append_on_no_match => true,
+            require            => Class['cis_security_hardening::rules::pam_pw_requirements'],
+          }
+        } elsif  ($facts['os']['name'].downcase() == 'ubuntu' and $facts['os']['release']['major'] >= '22') {
           file_line { 'set crypt method':
             ensure             => present,
             path               => '/etc/login.defs',
