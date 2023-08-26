@@ -29,10 +29,10 @@ cis_security_hardening::rules::var_nosuid::enforce: true
 cis_security_hardening::rules::var_tmp_noexec::enforce: true
 cis_security_hardening::rules::var_tmp_nodev::enforce: true
 cis_security_hardening::rules::var_tmp_nosuid::enforce: true
-cis_security_hardening::rules::var_log_nodev:;enforce: true
+cis_security_hardening::rules::var_log_nodev::enforce: true
 cis_security_hardening::rules::var_log_noexec::enforce: true
 cis_security_hardening::rules::var_log_nosuid::enforce: true
-cis_security_hardening::rules::var_log_audit_nodev:;enforce: true
+cis_security_hardening::rules::var_log_audit_nodev::enforce: true
 cis_security_hardening::rules::var_log_audit_noexec::enforce: true
 cis_security_hardening::rules::var_log_audit_nosuid::enforce: true
 cis_security_hardening::rules::home_nodev::enforce: true
