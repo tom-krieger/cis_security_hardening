@@ -95,7 +95,7 @@ describe 'cis_security_hardening::rules::auditd_actions' do
                       'content' => '-a exit,always -F arch=b64 -C euid!=uid -F euid=0 -F auid>=1000 -F auid!=4294967295 -S execve -k actions',
                     )
                 end
-  
+
                 is_expected.to contain_concat__fragment('watch admin actions rule 2')
                   .with(
                     'order' => '22',
