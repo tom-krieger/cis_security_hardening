@@ -366,6 +366,7 @@ cis_security_hardening::rules::aide_audit_integrity::tools:
 
 cis_security_hardening::rules::systemd_journal_remote::enforce: true
 cis_security_hardening::rules::systemd_journal_remote_config::enforce: true
+cis_security_hardening::rules::systemd_journal_remote_config::install_certs: false
 cis_security_hardening::rules::systemd_journal_remote_config::url: '1.2.3.4'
 cis_security_hardening::rules::systemd_journal_remote_config::server_key_file: '/etc/ssl/private/journal-upload.pem'
 cis_security_hardening::rules::systemd_journal_remote_config::server_cert_file: '/etc/ssl/certs/journal-upload.pem'

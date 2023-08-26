@@ -22,6 +22,7 @@ describe 'cis_security_hardening::rules::systemd_journal_remote_config' do
       let(:params) do
         {
           'enforce' => enforce,
+          'install_certs' => true,
           'url' => '1.2.3.4',
           'server_key_file' => '/etc/ssl/private/journal-upload.pem',
           'server_cert_file' => '/etc/ssl/certs/journal-upload.pem',

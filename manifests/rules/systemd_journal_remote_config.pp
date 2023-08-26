@@ -11,6 +11,9 @@
 # @param enforce
 #    Enforce the rule.
 #
+# @param install_certs
+#   Flag to control if certificates are installed
+#
 # @param server_key_file
 #    SSL server key file.
 # 
@@ -35,6 +38,7 @@
 # @api private
 class cis_security_hardening::rules::systemd_journal_remote_config (
   Boolean $enforce = false,
+  Boolean $install_certs = false,
   Stdlib::IP::Address $url = '1.2.3.4',
   Stdlib::Absolutepath $server_key_file = '/etc/ssl/private/journal-upload.pem',
   Stdlib::Absolutepath $server_cert_file = '/etc/ssl/certs/journal-upload.pem',
@@ -49,28 +53,30 @@ class cis_security_hardening::rules::systemd_journal_remote_config (
       append_on_no_match => true,
     }
 
-    file_line { 'systemd_journal_remote_config_server_key':
-      ensure             => 'present',
-      path               => '/etc/systemd/journal-upload.conf',
-      line               => "ServerKeyFile=${server_key_file}",
-      match              => '^#? ServerKeyFile=',
-      append_on_no_match => true,
-    }
+    if $install_certs {
+      file_line { 'systemd_journal_remote_config_server_key':
+        ensure             => 'present',
+        path               => '/etc/systemd/journal-upload.conf',
+        line               => "ServerKeyFile=${server_key_file}",
+        match              => '^#? ServerKeyFile=',
+        append_on_no_match => true,
+      }
 
-    file_line { 'systemd_journal_remote_config_server_cert':
-      ensure             => 'present',
-      path               => '/etc/systemd/journal-upload.conf',
-      line               => "ServerCertificateFile=${server_cert_file}",
-      match              => '^#? ServerCertificateFile=',
-      append_on_no_match => true,
-    }
+      file_line { 'systemd_journal_remote_config_server_cert':
+        ensure             => 'present',
+        path               => '/etc/systemd/journal-upload.conf',
+        line               => "ServerCertificateFile=${server_cert_file}",
+        match              => '^#? ServerCertificateFile=',
+        append_on_no_match => true,
+      }
 
-    file_line { 'systemd_journal_remote_config_trusted_cert':
-      ensure             => 'present',
-      path               => '/etc/systemd/journal-upload.conf',
-      line               => "TrustedCertificateFile=${trusted_cert_file}",
-      match              => '^#? TrustedCertificateFile=',
-      append_on_no_match => true,
+      file_line { 'systemd_journal_remote_config_trusted_cert':
+        ensure             => 'present',
+        path               => '/etc/systemd/journal-upload.conf',
+        line               => "TrustedCertificateFile=${trusted_cert_file}",
+        match              => '^#? TrustedCertificateFile=',
+        append_on_no_match => true,
+      }
     }
   }
 }

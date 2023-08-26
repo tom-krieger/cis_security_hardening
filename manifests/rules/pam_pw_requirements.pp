@@ -247,6 +247,7 @@ class cis_security_hardening::rules::pam_pw_requirements (
           command     => 'pam-auth-update --package pwquality',
           path        => ['/sbin', '/usr/sbin'],
           refreshonly => true,
+          logoutput   => true,
         }
 
         file_line { 'pam minlen':
