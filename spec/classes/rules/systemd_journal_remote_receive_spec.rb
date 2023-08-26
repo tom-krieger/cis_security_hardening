@@ -32,7 +32,7 @@ describe 'cis_security_hardening::rules::systemd_journal_remote_receive' do
           is_expected.to contain_service('systemd-journal-remote.socket')
             .with(
               'ensure' => 'stopped',
-              'enable' => true,
+              'enable' => false,
             )
         else
           is_expected.not_to contain_service('systemd-journal-remote.socket')
