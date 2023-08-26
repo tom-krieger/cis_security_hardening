@@ -187,7 +187,7 @@ cis_security_hardening::benchmark::ubuntu::22:
     configure_logging:
       level1:
         - systemd_journal_remote
-        - systemd_journl_remote_config
+        - systemd_journal_remote_config
         - systemd_journal_remote_service
         - systemd_journal_remote_receive
         - systemd_journald_service
