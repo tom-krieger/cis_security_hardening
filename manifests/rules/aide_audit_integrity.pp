@@ -37,11 +37,26 @@ class cis_security_hardening::rules::aide_audit_integrity (
 ) {
   if $enforce {
     require 'cis_security_hardening::rules::auditd_package'
+    case $facts[ 'os']['name'].downcase() {
+      'rocky': {
+        $conffile = '/etc/aide.conf'
+      }
+      'ubuntu': {
+        if $facts['os']['release']['major'] >= '22' {
+          $conffile = '/etc/aide/aide.conf'
+        } else {
+          $conffile = '/etc/aide.conf'
+        }
+      }
+      default: {
+        $conffile = '/etc/aide.conf'
+      }
+    }
     $tools.each |$tool, $data| {
       file_line { "aide tool ${tool}":
         ensure             => present,
         append_on_no_match => true,
-        path               => '/etc/aide/aide.conf',
+        path               => $conffile,
         line               => "${tool} ${data}",
         match              => "^${tool}",
       }

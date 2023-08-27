@@ -12,7 +12,7 @@ describe 'cis_security_hardening::rules::aide_installed' do
         let(:params) do
           {
             'enforce' => enforce,
-            'aide_init_timeout' = 3600,
+            'aide_init_timeout' => 3600,
           }
         end
 

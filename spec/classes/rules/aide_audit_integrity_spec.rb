@@ -27,11 +27,23 @@ describe 'cis_security_hardening::rules::aide_audit_integrity' do
           is_expected.to compile.with_all_deps
 
           if enforce
+            conffile = if os_facts[:os]['name'].casecmp('rocky').zero?
+                         '/etc/aide.conf'
+                       elsif os_facts[:os]['name'].casecmp('ubuntu').zero?
+                         if os_facts[:os]['release']['major'] >= '22'
+                           '/etc/aide/aide.conf'
+                         else
+                           '/etc/aide.conf'
+                         end
+                       else
+                         '/etc/aide.conf'
+                       end
+
             is_expected.to contain_file_line('aide tool /sbin/auditctl')
               .with(
                 'ensure'             => 'present',
                 'append_on_no_match' => true,
-                'path'               => '/etc/aide/aide.conf',
+                'path'               => conffile,
                 'line'               => '/sbin/auditctl p+i+n+u+g+s+b+acl+xattrs+sha512',
                 'match'              => '^/sbin/auditctl',
               )
@@ -39,7 +51,7 @@ describe 'cis_security_hardening::rules::aide_audit_integrity' do
               .with(
                 'ensure'             => 'present',
                 'append_on_no_match' => true,
-                'path'               => '/etc/aide/aide.conf',
+                'path'               => conffile,
                 'line'               => '/sbin/auditd p+i+n+u+g+s+b+acl+xattrs+sha512',
                 'match'              => '^/sbin/auditd',
               )
@@ -47,7 +59,7 @@ describe 'cis_security_hardening::rules::aide_audit_integrity' do
               .with(
                 'ensure'             => 'present',
                 'append_on_no_match' => true,
-                'path'               => '/etc/aide/aide.conf',
+                'path'               => conffile,
                 'line'               => '/sbin/ausearch p+i+n+u+g+s+b+acl+xattrs+sha512',
                 'match'              => '^/sbin/ausearch',
               )
@@ -55,7 +67,7 @@ describe 'cis_security_hardening::rules::aide_audit_integrity' do
               .with(
                 'ensure'             => 'present',
                 'append_on_no_match' => true,
-                'path'               => '/etc/aide/aide.conf',
+                'path'               => conffile,
                 'line'               => '/sbin/aureport p+i+n+u+g+s+b+acl+xattrs+sha512',
                 'match'              => '^/sbin/aureport',
               )
@@ -63,7 +75,7 @@ describe 'cis_security_hardening::rules::aide_audit_integrity' do
               .with(
                 'ensure'             => 'present',
                 'append_on_no_match' => true,
-                'path'               => '/etc/aide/aide.conf',
+                'path'               => conffile,
                 'line'               => '/sbin/autrace p+i+n+u+g+s+b+acl+xattrs+sha512',
                 'match'              => '^/sbin/autrace',
               )
@@ -71,7 +83,7 @@ describe 'cis_security_hardening::rules::aide_audit_integrity' do
               .with(
                 'ensure'             => 'present',
                 'append_on_no_match' => true,
-                'path'               => '/etc/aide/aide.conf',
+                'path'               => conffile,
                 'line'               => '/sbin/augenrules p+i+n+u+g+s+b+acl+xattrs+sha512',
                 'match'              => '^/sbin/augenrules',
               )
