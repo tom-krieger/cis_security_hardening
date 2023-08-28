@@ -24,8 +24,8 @@ describe 'cis_security_hardening' do
                     end
 
           key = "cis_security_hardening::benchmark::#{os_facts[:os]['name']}::#{os_vers}"
-          is_expected.to compile
-          # is_expected.to compile.with_all_deps
+          # is_expected.to compile
+          is_expected.to compile.with_all_deps
           is_expected.to contain_class('cis_security_hardening::services')
           is_expected.to contain_class('cis_security_hardening::config')
           is_expected.to contain_class('cis_security_hardening::auditd_cron')
