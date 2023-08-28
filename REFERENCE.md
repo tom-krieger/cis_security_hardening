@@ -380,6 +380,12 @@ termination events that affect "/etc/sudoers.d/"
 * `cis_security_hardening::rules::sudo_timeout`: Ensure sudo authentication timeout is configured correctly
 * `cis_security_hardening::rules::sudo_use_pty`: Ensure sudo commands use pty
 * `cis_security_hardening::rules::system_cmd_group`: Ensure system command files are group-owned by root
+* `cis_security_hardening::rules::systemd_journal_remote`: Ensure systemd-journal-remote is installed
+* `cis_security_hardening::rules::systemd_journal_remote_config`: Ensure systemd-journal-remote is configured
+* `cis_security_hardening::rules::systemd_journal_remote_receive`: Ensure journald is not configured to recieve logs from a remote client (Automated)
+* `cis_security_hardening::rules::systemd_journal_remote_service`: A
+Ensure systemd-journal-remote is enabled
+* `cis_security_hardening::rules::systemd_journald_service`: Ensure journald service is enabled (Automated)
 * `cis_security_hardening::rules::systemd_timesyncd`: Ensure systemd-timesyncd is configured (Not Scored)
 * `cis_security_hardening::rules::talk_client`: Ensure talk client is not installed
 * `cis_security_hardening::rules::telnet_client`: Ensure telnet client is not installed

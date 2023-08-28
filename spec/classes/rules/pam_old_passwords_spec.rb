@@ -128,6 +128,19 @@ describe 'cis_security_hardening::rules::pam_old_passwords' do
                     'position'  => 'before *[type="password" and module="pam_unix.so"]',
                     'arguments' => ['use_authok', 'remember=5'],
                   )
+              elsif os_facts[:os]['name'].casecmp('ubuntu').zero? && os_facts[:os]['release']['major'] >= '22'
+                is_expected.to contain_pam('ubuntu-remember-pld-pw')
+                  .with(
+                    'ensure'           => 'present',
+                    'service'          => 'common-password',
+                    'type'             => 'password',
+                    'control'          => '[success=1 default=ignore]',
+                    'control_is_param' => true,
+                    'module'           => 'pam_unix.so',
+                    'arguments'        => ['obscure', 'use_authok', 'try_first_pass', 'yescrypt', 'remember=5'],
+                    'position'         => 'before *[type="password" and module="pam_deny.so"]',
+                  )
+
               else
                 is_expected.to contain_pam('pam-common-password-requisite-pwhistory')
                   .with(

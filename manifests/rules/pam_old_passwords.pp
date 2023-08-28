@@ -116,8 +116,7 @@ class cis_security_hardening::rules::pam_old_passwords (
         }
       }
       'debian', 'suse': {
-        if $facts['os']['name'].downcase() == 'debian' and
-        $facts['os']['release']['major'] > '10' {
+        if ($facts['os']['name'].downcase() == 'debian' and $facts['os']['release']['major'] > '10') {
           Pam { 'pam-common-password-requisite-pwhistory':
             ensure    => present,
             service   => 'common-password',
@@ -126,6 +125,17 @@ class cis_security_hardening::rules::pam_old_passwords (
             module    => 'pam_pwhistory.so',
             position  => 'before *[type="password" and module="pam_unix.so"]',
             arguments => ['use_authok', "remember=${oldpasswords}"],
+          }
+        } elsif ($facts['os']['name'].downcase() == 'ubuntu' and $facts['os']['release']['major'] >= '22') {
+          Pam { 'ubuntu-remember-pld-pw':
+            ensure           => present,
+            service          => 'common-password',
+            type             => 'password',
+            control          => '[success=1 default=ignore]',
+            control_is_param => true,
+            module           => 'pam_unix.so',
+            arguments        => ['obscure', 'use_authok', 'try_first_pass', 'yescrypt', "remember=${oldpasswords}"],
+            position         => 'before *[type="password" and module="pam_deny.so"]',
           }
         } else {
           Pam { 'pam-common-password-requisite-pwhistory':

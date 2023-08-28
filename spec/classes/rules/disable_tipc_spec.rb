@@ -26,6 +26,13 @@ describe 'cis_security_hardening::rules::disable_tipc' do
               else
                 cmd = '/bin/true'
               end
+            elsif os_facts[:os]['name'].casecmp('ubuntu').zero?
+              if os_facts[:os]['release']['major'] >= '22'
+                cmd = '/bin/false'
+                is_expected.to contain_kmod__blacklist('tipc')
+              else
+                cmd = '/bin/true'
+              end
             elsif os_facts[:os]['name'].casecmp('redhat').zero?
               if os_facts[:os]['release']['major'] > '8'
                 cmd = '/bin/false'

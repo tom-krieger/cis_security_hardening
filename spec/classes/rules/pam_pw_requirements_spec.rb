@@ -292,6 +292,7 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                     'command'     => 'pam-auth-update --package pwquality',
                     'path'        => ['/sbin', '/usr/sbin'],
                     'refreshonly' => true,
+                    'logoutput'   => true,
                   )
               else
                 is_expected.to contain_package('libpam-pwquality')

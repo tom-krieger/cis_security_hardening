@@ -212,12 +212,15 @@ class cis_security_hardening::rules::pam_lockout (
         }
       }
       'debian': {
-        if $facts['os']['name'].downcase() == 'debian' and
-        $facts['os']['release']['major'] > '10' {
+        if ($facts['os']['name'].downcase() == 'debian' and $facts['os']['release']['major'] > '10') or
+        ($facts['os']['name'].downcase() == 'ubuntu' and $facts['os']['release']['major'] >= '22') {
           require cis_security_hardening::rules::pam_pw_requirements
+
+          $_os = $facts['os']['name'].downcase()
+
           file { '/etc/pam.d/common-auth':
             ensure  => file,
-            source  => 'puppet:///modules/cis_security_hardening/pam_lockout/debian/common-auth',
+            source  => "puppet:///modules/cis_security_hardening/pam_lockout/${_os}/common-auth",
             owner   => 'root',
             group   => 'root',
             mode    => '0644',
@@ -226,7 +229,7 @@ class cis_security_hardening::rules::pam_lockout (
 
           file { '/etc/pam.d/common-account':
             ensure  => file,
-            source  => 'puppet:///modules/cis_security_hardening/pam_lockout/debian/common-account',
+            source  => "puppet:///modules/cis_security_hardening/pam_lockout/${_os}/common-account",
             owner   => 'root',
             group   => 'root',
             mode    => '0644',

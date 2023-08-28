@@ -57,10 +57,13 @@ The code of this security hardening module is based on the following CIS Benchma
 | Ubuntu 18.04 | CIS Ubuntu Linux 18.04 LTS Benchmark                         | 2.0.1   | 01-03-2020 |
 | Ubuntu 20.04 | CIS Ubuntu Linux 20.04 LTS Benchmark                         | 1.1.0   | 03-31-2021 |
 | Ubuntu 20.04 | CIS Ubuntu Linux 20.04 LTS STIG Benchmark                    | 1.0.0   | 26.07.2021 |
+| Ununtu 22.04 | VIS Ubuntu Linux 22.04 LTS Benchmark                         | 1.0.0   | 06-30-2022 |
 | Debian 10    | CIS Debian Linux 10 Benchmark                                | 1.0.0   | 02-13-2020 |
-| Debian 11    | CIS Debian Linux 11 Benchmarl                                | 1.0.0   | 09-22-2022 |
+| Debian 11    | CIS Debian Linux 11 Benchmark                                | 1.0.0   | 09-22-2022 |
 | Alma Linux 8 | CIS Alma Linux OS 8 Benchmark                                | 2.0.0   | 05-31-2022 |
+| Alma Linux 8 | CIS Alma Linux OS 9 Benchmark                                | 1.0.0   | 12-12-2022 |
 | Rocky Linux 8| CIS Rocky Linux 8 Benchmark                                  | 1.0.0   | 03-29-2022 |
+| Rocky Linux 8| CIS Rocky Linux 9 Benchmark                                  | 1.0.0   | 12-13-2022 |
 
 The benchmarks can be found at [CIS Benchmarks Website](https://downloads.cisecurity.org/#/).
 

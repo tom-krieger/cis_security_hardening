@@ -12,6 +12,7 @@ describe 'cis_security_hardening::rules::aide_installed' do
         let(:params) do
           {
             'enforce' => enforce,
+            'aide_init_timeout' => 3600,
           }
         end
 
@@ -31,6 +32,8 @@ describe 'cis_security_hardening::rules::aide_installed' do
                   command: 'aideinit',
                   path: ['/sbin', '/usr/sbin', '/bin', '/usr/bin'],
                   refreshonly: true,
+                  logoutput: true,
+                  timeout: 3600,
                 )
                 .that_notifies('Exec[rename_aidedb_ubuntu]')
                 .that_requires(['Package[aide]', 'Package[aide-common]'])

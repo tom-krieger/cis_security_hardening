@@ -12,6 +12,9 @@
 # @param enforce
 #    Enforce the rule
 #
+# @param aide_init_timeout
+#    Timeout in secords for aide init command to complete
+#
 # @example
 #   class { 'cis_security_hardening::rules::aide_installed':
 #       enforce => true,
@@ -20,6 +23,7 @@
 # @api private
 class cis_security_hardening::rules::aide_installed (
   Boolean $enforce = false,
+  Integer $aide_init_timeout = 1800,
 ) {
   if $enforce {
     $os = fact('operatingsystem') ? {
@@ -37,8 +41,10 @@ class cis_security_hardening::rules::aide_installed (
           command     => 'aideinit',
           path        => ['/sbin', '/usr/sbin', '/bin', '/usr/bin'],
           refreshonly => true,
+          logoutput   => true,
           notify      => Exec['rename_aidedb_ubuntu'],
           require     => Package['aide', 'aide-common'],
+          timeout     => $aide_init_timeout,
         }
 
         exec { 'rename_aidedb_ubuntu':

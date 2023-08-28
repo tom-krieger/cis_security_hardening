@@ -53,6 +53,18 @@ class cis_security_hardening::rules::squashfs (
           }
         }
       }
+      'ubuntu': {
+        if $facts['os']['release']['major'] >= '22' {
+          kmod::install { 'squashfs':
+            command => '/bin/false',
+          }
+          kmod::blacklist { 'squashfs': }
+        } else {
+          kmod::install { 'squashfs':
+            command => '/bin/true',
+          }
+        }
+      }
       default: {
         kmod::install { 'squashfs':
           command => '/bin/true',
