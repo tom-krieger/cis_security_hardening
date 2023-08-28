@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## Release 0.8.3
 
 * added Ubuntu 22.04 support
+* minor bigfixes for Redhat 9
 
 ## Release 0.8.2
 
@@ -12,6 +13,9 @@ All notable changes to this project will be documented in this file.
 * added AlmaLinux 9 support
 * added Rocky Linux 9 support
 * fix for issue #56 "Permissions on /var/log incorrect". Added module npwalker-recursive_file_permissions for that reason.
+* Updated dependencies for stdlib v9
+
+> Note that stdlib v9 is now the minimum version required
 
 ## Release 0.8.1 (not released)
 
