@@ -44,7 +44,6 @@ describe 'cis_security_hardening::rules::timeout_setting' do
                   'group'   => 'root',
                   'mode'    => '0644',
                 )
-
             end
           else
             is_expected.not_to contain_file('/etc/profile.d/shell_timeout.sh')

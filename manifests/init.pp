@@ -42,7 +42,7 @@ class cis_security_hardening (
   Array $exclude_dirs_sticky_ww             = [],
   Array $auditd_dirs_to_include             = ['/usr'],
   Boolean $update_postrun_command           = true,
-  Stdlib::Absolutepath $fact_upload_command = "${base_dir}/bin/fact_upload.sh",
+  Stdlib::Absolutepath $fact_upload_command = '/usr/share/cis_security_hardening/bin/fact_upload.sh',
   Integer $time_until_reboot                = 120,
   Boolean $auto_reboot                      = true,
   Boolean $verbose_logging                  = false,
