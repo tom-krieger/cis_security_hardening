@@ -13,7 +13,7 @@ All notable changes to this project will be documented in this file.
 * added AlmaLinux 9 support
 * added Rocky Linux 9 support
 * fix for issue #56 "Permissions on /var/log incorrect". Added module npwalker-recursive_file_permissions for that reason.
-* Updated dependencies for stdlib v9
+* Updated dependencies for stdlib v9 (thanks to `canihavethisone` for the PR)
 
 > Note that stdlib v9 is now the minimum version required
 
