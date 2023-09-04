@@ -35,6 +35,12 @@ class cis_security_hardening::rules::auditd_time_change (
       }
     }
 
+    echo { "running on os ${os}":
+      message  => "running on os ${os}",
+      loglevel => 'warning',
+      withpath => false,
+    }
+
     case $os {
       'rocky', 'almalinux', 'redhat8', 'redhat9': {
         concat::fragment { 'watch for date-time-change rule 1':
