@@ -81,14 +81,14 @@ class cis_security_hardening (
     fact_upload_command    => $fact_upload_command,
   }
 
-  $os = fact('operatingsystem') ? {
+  $os = fact('os.name') ? {
     undef   => 'unknown',
-    default => fact('operatingsystem').downcase()
+    default => fact('os.name').downcase()
   }
 
-  $os_maj = fact('operatingsystemmajrelease') ? {
+  $os_maj = fact('os.release.major') ? {
     undef   => 'unknown',
-    default => fact('operatingsystemmajrelease'),
+    default => fact('os.release.major'),
   }
   $os_vers = $os ? {
     'ubuntu' => split($os_maj, '[.]')[0],

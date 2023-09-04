@@ -94,7 +94,7 @@ describe 'cis_security_hardening::rules::umask_setting' do
               is_expected.to contain_file_line('bashrc')
                 .with(
                   'path'     => '/etc/bashrc',
-                  'line'     => "    [ `umask` -eq 0 ] && umask 027",
+                  'line'     => '    [ `umask` -eq 0 ] && umask 027',
                   'match'    => '^\s+\[ `umask` -eq 0 \] \&\& umask',
                   'multiple' => true,
                 )

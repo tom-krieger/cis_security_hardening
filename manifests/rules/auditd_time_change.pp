@@ -40,7 +40,7 @@ class cis_security_hardening::rules::auditd_time_change (
         concat::fragment { 'watch for date-time-change rule 1':
           order   => '121',
           target  => $cis_security_hardening::rules::auditd_init::rules_file,
-          content => '-a always,exit -F arch=b32 -S adjtimex,settimeofday,clock_settime -k time-change',
+          content => '-a always,exit -F arch=b32 -S adjtimex,settimeofday,clock_settime,stime -k time-change',
         }
         concat::fragment { 'watch for date-time-change rule 3':
           order   => '123',
