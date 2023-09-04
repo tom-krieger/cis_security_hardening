@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.8.4
+
+* fix for issue #62
+
 ## Release 0.8.3
 
 * added Ubuntu 22.04 support
