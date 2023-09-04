@@ -98,12 +98,6 @@ class cis_security_hardening (
   $key = "cis_security_hardening::benchmark::${os}::${os_vers}"
   $benchmark = lookup($key, undef, undef, {})
 
-  echo { "applying benchmark ${key}":
-    message  => "applying benchmark ${key}",
-    loglevel => 'info',
-    withpath => false,
-  }
-
   if cis_security_hardening::hash_key($benchmark, 'bundles') {
     $benchmark['bundles'].each |$bundle, $bundle_data| {
       $level1 = cis_security_hardening::hash_key($bundle_data, 'level1') ? {
