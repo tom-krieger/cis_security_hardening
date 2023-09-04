@@ -81,14 +81,14 @@ class cis_security_hardening (
     fact_upload_command    => $fact_upload_command,
   }
 
-  $os = fact('operatingsystem') ? {
+  $os = fact('os.name') ? {
     undef   => 'unknown',
-    default => fact('operatingsystem').downcase()
+    default => fact('os.name').downcase()
   }
 
-  $os_maj = fact('operatingsystemmajrelease') ? {
+  $os_maj = fact('os.release.major') ? {
     undef   => 'unknown',
-    default => fact('operatingsystemmajrelease'),
+    default => fact('os.release.major'),
   }
   $os_vers = $os ? {
     'ubuntu' => split($os_maj, '[.]')[0],
@@ -97,6 +97,12 @@ class cis_security_hardening (
 
   $key = "cis_security_hardening::benchmark::${os}::${os_vers}"
   $benchmark = lookup($key, undef, undef, {})
+
+  echo { "applying benchmark ${key}":
+    message  => "applying benchmark ${key}",
+    loglevel => 'info',
+    withpath => false,
+  }
 
   if cis_security_hardening::hash_key($benchmark, 'bundles') {
     $benchmark['bundles'].each |$bundle, $bundle_data| {
