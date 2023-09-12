@@ -15,7 +15,7 @@ jobs:
     - name: Run unit tests
       uses: puppets-epic-show-theatre/action-pdk-test-unit@v1
       with:
-        PDKIMAGE: "puppet/pdk:2.7.1.0"
+        pdk-image: "puppet/pdk:2.7.1.0"
         puppet-version: ""
         # [optional]
         # A string indicating the Puppet version to validate against, such as "5.4.2" or "5.5".
