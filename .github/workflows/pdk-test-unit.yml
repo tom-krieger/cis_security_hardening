@@ -15,7 +15,6 @@ jobs:
     - name: Run unit tests
       uses: tom-krieger/action-pdk-test-unit
       with:
-        pdk-image: "puppet/pdk:2.7.1.0"
         puppet-version: ""
         # [optional]
         # A string indicating the Puppet version to validate against, such as "5.4.2" or "5.5".
