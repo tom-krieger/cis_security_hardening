@@ -13,7 +13,7 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Run unit tests
-      uses: tom-krieger/action-pdk-test-unit
+      uses: tom-krieger/action-pdk-test-unit@v1
       with:
         puppet-version: ""
         # [optional]
