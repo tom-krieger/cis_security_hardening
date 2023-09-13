@@ -215,7 +215,7 @@ describe 'cis_security_hardening::rules::ip6tables_outbound_established' do
                 'chain'  => 'OUTPUT',
                 'proto'  => 'tcp',
                 'state'  => ['NEW', 'ESTABLISHED'],
-                'action' => 'accept',
+                'jump => 'ACCEPT',
                 'provider' => 'ip6tables',
               )
 
@@ -224,7 +224,7 @@ describe 'cis_security_hardening::rules::ip6tables_outbound_established' do
                 'chain'  => 'OUTPUT',
                 'proto'  => 'udp',
                 'state'  => ['NEW', 'ESTABLISHED'],
-                'action' => 'accept',
+                'jump => 'ACCEPT',
                 'provider' => 'ip6tables',
               )
 
@@ -233,7 +233,7 @@ describe 'cis_security_hardening::rules::ip6tables_outbound_established' do
                 'chain'  => 'OUTPUT',
                 'proto'  => 'icmp',
                 'state'  => ['NEW', 'ESTABLISHED'],
-                'action' => 'accept',
+                'jump => 'ACCEPT',
                 'provider' => 'ip6tables',
               )
 
@@ -242,7 +242,7 @@ describe 'cis_security_hardening::rules::ip6tables_outbound_established' do
                 'chain'  => 'INPUT',
                 'proto'  => 'tcp',
                 'state'  => 'ESTABLISHED',
-                'action' => 'accept',
+                'jump => 'ACCEPT',
                 'provider' => 'ip6tables',
               )
 
@@ -251,7 +251,7 @@ describe 'cis_security_hardening::rules::ip6tables_outbound_established' do
                 'chain'  => 'INPUT',
                 'proto'  => 'udp',
                 'state'  => 'ESTABLISHED',
-                'action' => 'accept',
+                'jump => 'ACCEPT',
                 'provider' => 'ip6tables',
               )
 
@@ -260,7 +260,7 @@ describe 'cis_security_hardening::rules::ip6tables_outbound_established' do
                 'chain'  => 'INPUT',
                 'proto'  => 'icmp',
                 'state'  => 'ESTABLISHED',
-                'action' => 'accept',
+                'jump => 'ACCEPT',
                 'provider' => 'ip6tables',
               )
           else

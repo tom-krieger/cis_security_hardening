@@ -26,14 +26,14 @@ class cis_security_hardening::rules::ip6tables_loopback (
       chain    => 'INPUT',
       proto    => 'all',
       iniface  => 'lo',
-      action   => 'accept',
+      jump => 'ACCEPT',
       provider => 'ip6tables',
     }
     firewall { '002-6 accept all outgoing traffic to local interface':
       chain    => 'OUTPUT',
       proto    => 'all',
       outiface => 'lo',
-      action   => 'accept',
+      jump => 'ACCEPT',
       provider => 'ip6tables',
     }
 
