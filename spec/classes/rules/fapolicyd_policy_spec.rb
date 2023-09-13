@@ -483,10 +483,7 @@ describe 'cis_security_hardening::rules::fapolicyd_policy' do
                 'mode'   => '0644',
               )
 
-            pp os_facts[:mountpoints]
             os_facts[:mountpoints].each do |mp, data|
-              puts mp
-              # next unless (['tmpfs', 'ext4', 'ext3', 'xfs'].include? data['filesystem']) && (mp !~ %r{^/run}) && (mp !~ %r{/sys})
               next unless (['tmpfs', 'ext4', 'ext3', 'xfs'].include? data['filesystem']) && (mp !~ %r{^/run}) && !mp.include?('/sys')
               is_expected.to contain_concat__fragment("mount-#{mp}")
                 .with(
