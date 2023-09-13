@@ -65,12 +65,12 @@ describe 'cis_security_hardening::rules::nftables_default_deny' do
                         'tcp dport 22 accept',
                         'udp dport 123 accept',
                         'udp dport 53 accept'],
-            'output'=> ['tcp dport 21 accept',
-                        'tcp dport 443 accept',
-                        'tcp dport 53 accept',
-                        'tcp dport 80 accept',
-                        'udp dport 123 accept',
-                        'udp dport 53 accept'],
+            'output' => ['tcp dport 21 accept',
+                         'tcp dport 443 accept',
+                         'tcp dport 53 accept',
+                         'tcp dport 80 accept',
+                         'udp dport 123 accept',
+                         'udp dport 53 accept'],
           },
         }
       end
