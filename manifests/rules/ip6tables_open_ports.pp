@@ -41,7 +41,7 @@ class cis_security_hardening::rules::ip6tables_open_ports (
           proto    => 'tcp',
           dport    => 22,
           state    => 'NEW',
-          jump => 'ACCEPT',
+          jump     => 'ACCEPT',
           provider => 'ip6tables',
         }
       }

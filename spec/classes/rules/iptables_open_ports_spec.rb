@@ -220,35 +220,35 @@ describe 'cis_security_hardening::rules::iptables_open_ports' do
                 'proto' => 'tcp',
                 'dport' => 22,
                 'state' => 'NEW',
-                'jump => 'ACCEPT',
+                'jump' => 'ACCEPT',
               },
               '101 httpd inbound' => {
                 'chain' => 'INPUT',
                 'proto' => 'tcp',
                 'dport' => 443,
                 'state' => 'NEW',
-                'jump => 'ACCEPT',
+                'jump' => 'ACCEPT',
               },
               '102 dns udp inbound' => {
                 'chain' => 'INPUT',
                 'proto' => 'udp',
                 'dport' => 53,
                 'state' => 'NEW',
-                'jump => 'ACCEPT',
+                'jump' => 'ACCEPT',
               },
               '103 dns udp outbound' => {
                 'chain' => 'OUTPUT',
                 'proto' => 'udp',
                 'dport' => 53,
                 'state' => 'NEW',
-                'jump => 'ACCEPT',
+                'jump' => 'ACCEPT',
               },
               '104 dns tcp inbound' => {
                 'chain' => 'INPUT',
                 'proto' => 'tcp',
                 'dport' => 53,
                 'state' => 'NEW',
-                'jump => 'ACCEPT',
+                'jump' => 'ACCEPT',
               },
             },
           }
@@ -264,7 +264,7 @@ describe 'cis_security_hardening::rules::iptables_open_ports' do
                 'proto'  => 'tcp',
                 'dport'  => 22,
                 'state'  => 'NEW',
-                'jump => 'ACCEPT',
+                'jump' => 'ACCEPT',
               )
             is_expected.to contain_firewall('101 httpd inbound')
               .with(
@@ -272,7 +272,7 @@ describe 'cis_security_hardening::rules::iptables_open_ports' do
                 'proto'  => 'tcp',
                 'dport'  => 443,
                 'state'  => 'NEW',
-                'jump => 'ACCEPT',
+                'jump' => 'ACCEPT',
               )
             is_expected.to contain_firewall('102 dns udp inbound')
               .with(
@@ -280,7 +280,7 @@ describe 'cis_security_hardening::rules::iptables_open_ports' do
                 'proto'  => 'udp',
                 'dport'  => 53,
                 'state'  => 'NEW',
-                'jump => 'ACCEPT',
+                'jump' => 'ACCEPT',
               )
             is_expected.to contain_firewall('103 dns udp outbound')
               .with(
@@ -288,7 +288,7 @@ describe 'cis_security_hardening::rules::iptables_open_ports' do
                 'proto'  => 'udp',
                 'dport'  => 53,
                 'state'  => 'NEW',
-                'jump => 'ACCEPT',
+                'jump' => 'ACCEPT',
               )
             is_expected.to contain_firewall('104 dns tcp inbound')
               .with(
@@ -296,7 +296,7 @@ describe 'cis_security_hardening::rules::iptables_open_ports' do
                 'proto'  => 'tcp',
                 'dport'  => 53,
                 'state'  => 'NEW',
-                'jump => 'ACCEPT',
+                'jump' => 'ACCEPT',
               )
           else
             is_expected.not_to contain_firewall('100 ssh inbound')

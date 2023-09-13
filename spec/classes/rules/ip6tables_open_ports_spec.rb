@@ -209,7 +209,7 @@ describe 'cis_security_hardening::rules::ip6tables_open_ports' do
                 'proto' => 'tcp',
                 'dport' => 22,
                 'state' => 'NEW',
-                'jump => 'ACCEPT',
+                'jump' => 'ACCEPT',
                 'provider' => 'ip6tables',
               },
             },
@@ -226,7 +226,7 @@ describe 'cis_security_hardening::rules::ip6tables_open_ports' do
                 'proto'  => 'tcp',
                 'dport'  => 22,
                 'state'  => 'NEW',
-                'jump => 'ACCEPT',
+                'jump' => 'ACCEPT',
                 'provider' => 'ip6tables',
               )
           else

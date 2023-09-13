@@ -31,7 +31,7 @@ describe 'cis_security_hardening::rules::ip6tables_loopback' do
                 'chain'   => 'INPUT',
                 'proto'   => 'all',
                 'iniface' => 'lo',
-                'jump => 'ACCEPT',
+                'jump' => 'ACCEPT',
               )
 
             is_expected.to contain_firewall('002-6 accept all outgoing traffic to local interface')
@@ -39,7 +39,7 @@ describe 'cis_security_hardening::rules::ip6tables_loopback' do
                 'chain'    => 'OUTPUT',
                 'proto'    => 'all',
                 'outiface' => 'lo',
-                'jump => 'ACCEPT',
+                'jump' => 'ACCEPT',
               )
 
             is_expected.to contain_firewall('003-6 drop all traffic to lo ::1')

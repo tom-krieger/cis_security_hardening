@@ -39,7 +39,7 @@ class cis_security_hardening::rules::iptables_open_ports (
           proto  => 'tcp',
           dport  => 22,
           state  => 'NEW',
-          jump => 'ACCEPT',
+          jump   => 'ACCEPT',
           notify => Exec['save iptables rules'],
         }
       }
