@@ -27,14 +27,14 @@ class cis_security_hardening::rules::ip6tables_loopback (
       proto    => 'all',
       iniface  => 'lo',
       jump     => 'ACCEPT',
-      provider => 'ip6tables',
+      protocol => 'ip6tables',
     }
     firewall { '002-6 accept all outgoing traffic to local interface':
       chain    => 'OUTPUT',
       proto    => 'all',
       outiface => 'lo',
       jump     => 'ACCEPT',
-      provider => 'ip6tables',
+      protocol => 'ip6tables',
     }
 
     firewall { '003-6 drop all traffic to lo ::1':
@@ -42,7 +42,7 @@ class cis_security_hardening::rules::ip6tables_loopback (
       proto    => 'all',
       source   => '::1',
       jump     => 'DROP',
-      provider => 'ip6tables',
+      protocol => 'ip6tables',
     }
   }
 }

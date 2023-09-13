@@ -42,7 +42,7 @@ class cis_security_hardening::rules::ip6tables_open_ports (
           dport    => 22,
           state    => 'NEW',
           jump     => 'ACCEPT',
-          provider => 'ip6tables',
+          protocol => 'ip6tables',
         }
       }
     } else {
