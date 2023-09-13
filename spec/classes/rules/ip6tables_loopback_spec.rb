@@ -47,7 +47,7 @@ describe 'cis_security_hardening::rules::ip6tables_loopback' do
                 'chain'   => 'INPUT',
                 'proto'   => 'all',
                 'source'  => '::1',
-                'action'  => 'drop',
+                'jump'  => 'DROP',
               )
           else
             is_expected.not_to contain_firewall('001-6 accept all incoming traffic to local interface')
