@@ -200,31 +200,31 @@ cis_security_hardening::rules::iptables_open_ports::firewall_rules:
     proto: tcp
     dport: 22
     state: NEW
-    action: accept
+    jump: ACCEPT
   '101 httpd inbound':
     chain: INPUT
     proto: tcp
     dport: 443
     state: NEW
-    action: accept
+    jump: ACCEPT
   '102 dns udp inbound':
     chain: INPUT
     proto: udp
     dport: 53
     state: NEW
-    action: accept
+    jump: ACCEPT
   '103 dns udp outbound':
     chain: OUTPUT
     proto: udp
     dport: 53
     state: NEW
-    action: accept
+    jump: ACCEPT
   '104 dns tcp inbound':
     chain: OUTPUT
     proto: tcp
     dport: 53
     state: NEW
-    action: accept
+    jump: ACCEPT
 
 cis_security_hardening::rules::ip6tables_deny_policy::enforce: true
 cis_security_hardening::rules::ip6tables_deny_policy::input_policy: drop
