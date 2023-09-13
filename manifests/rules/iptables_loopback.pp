@@ -41,7 +41,7 @@ class cis_security_hardening::rules::iptables_loopback (
       chain  => 'INPUT',
       proto  => 'all',
       source => '127.0.0.1/8',
-      jump => 'DROP',
+      jump   => 'DROP',
       notify => Exec['save iptables rules'],
     }
   }

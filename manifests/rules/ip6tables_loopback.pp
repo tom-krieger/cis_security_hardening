@@ -41,7 +41,7 @@ class cis_security_hardening::rules::ip6tables_loopback (
       chain    => 'INPUT',
       proto    => 'all',
       source   => '::1',
-      jump => 'DROP',,
+      jump     => 'DROP',
       provider => 'ip6tables',
     }
   }

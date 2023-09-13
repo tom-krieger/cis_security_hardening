@@ -51,7 +51,7 @@ describe 'cis_security_hardening::rules::iptables_loopback' do
                 'chain'   => 'INPUT',
                 'proto'   => 'all',
                 'source'  => '127.0.0.1/8',
-                'jump'  => 'DROP',
+                'jump' => 'DROP',
               )
           else
             is_expected.not_to contain_firewall('001 accept all incoming traffic to local interface')
