@@ -95,6 +95,8 @@ describe 'cis_security_hardening::rules::pam_passwd_sha512' do
                     .that_notifies('Exec[authselect-apply-changes]')
                 end
 
+                is_expected.not_to contain_file_line('set crypt method')
+
               elsif os_facts[:os]['family'].casecmp('debian').zero?
                 is_expected.not_to contain_exec('update authselect config for sha512 system-auth')
                 is_expected.not_to contain_exec('update authselect config for sha512 password-auth')
@@ -212,6 +214,8 @@ describe 'cis_security_hardening::rules::pam_passwd_sha512' do
             is_expected.not_to contain_exec('update authselect config for sha512 password-auth')
             is_expected.not_to contain_exec('switch sha512 on')
           end
+
+          is_expected.not_to contain_pam('pam-common-password-unix')
         }
       end
     end
