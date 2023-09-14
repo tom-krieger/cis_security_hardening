@@ -91,6 +91,9 @@ describe 'cis_security_hardening::rules::aide_audit_integrity' do
             is_expected.not_to contain_file_line('aide tool /sbin/auditctl')
             is_expected.not_to contain_file_line('aide tool /sbin/auditd')
             is_expected.not_to contain_file_line('aide tool /sbin/ausearch')
+            is_expected.not_to contain_file_line('aide tool /sbin/aureport')
+            is_expected.not_to contain_file_line('aide tool /sbin/autrace')
+            is_expected.not_to contain_file_line('aide tool /sbin/augenrules')
           end
         }
       end

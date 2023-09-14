@@ -152,6 +152,7 @@ describe 'cis_security_hardening::rules::pam_passwd_sha512' do
               is_expected.not_to contain_exec('switch sha512 on')
               is_expected.not_to contain_pam('pam-common-password-unix')
               is_expected.not_to contain_exec('authconfig-passalgo-sha512')
+              is_expected.not_to contain_file_line('set crypt method')
             end
           }
         end

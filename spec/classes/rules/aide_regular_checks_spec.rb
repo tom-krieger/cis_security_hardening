@@ -56,10 +56,17 @@ describe 'cis_security_hardening::rules::aide_regular_checks' do
                     'enable'  => true,
                   )
                   .that_requires('File[/etc/systemd/system/aidecheck.service]')
+                is_expected.to contain_exec('enable-aidecheck-timer')
+                  .with(
+                    'command'     => 'systemctl --now enable aidecheck.timer',
+                    'path'        => ['/bin', '/usr/bin'],
+                    'refreshonly' => true,
+                  )
               else
                 is_expected.not_to contain_file('/etc/systemd/system/aidecheck.service')
                 is_expected.not_to contain_file('/etc/systemd/system/aidecheck.timer')
                 is_expected.not_to contain_service('aidecheck.service')
+                is_expected.not_to contain_exec('enable-aidecheck-timer')
                 is_expected.to contain_file('/etc/cron.d/aide')
                   .with(
                     'ensure' => 'file',
