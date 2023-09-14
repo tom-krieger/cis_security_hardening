@@ -96,6 +96,7 @@ describe 'cis_security_hardening::rules::pam_passwd_sha512' do
                 end
 
                 is_expected.not_to contain_file_line('set crypt method')
+                is_expected.not_to contain_ile('/etc/pam.d/common-password')
 
               elsif os_facts[:os]['family'].casecmp('debian').zero?
                 is_expected.not_to contain_exec('update authselect config for sha512 system-auth')
@@ -133,6 +134,7 @@ describe 'cis_security_hardening::rules::pam_passwd_sha512' do
                     'append_on_no_match' => true,
                   )
                     .that_requires('Class[cis_security_hardening::rules::pam_pw_requirements]')
+                  is_expected.not_to contain_ile('/etc/pam.d/common-password')
                 else
                   is_expected.to contain_pam('pam-common-password-unix')
                     .with(
@@ -146,6 +148,8 @@ describe 'cis_security_hardening::rules::pam_passwd_sha512' do
                     )
                 end
 
+                is_expected.not_to contain_ile('/etc/pam.d/common-password')
+
               end
 
             else
@@ -155,6 +159,7 @@ describe 'cis_security_hardening::rules::pam_passwd_sha512' do
               is_expected.not_to contain_pam('pam-common-password-unix')
               is_expected.not_to contain_exec('authconfig-passalgo-sha512')
               is_expected.not_to contain_file_line('set crypt method')
+              is_expected.not_to contain_ile('/etc/pam.d/common-password')
             end
           }
         end
@@ -216,6 +221,7 @@ describe 'cis_security_hardening::rules::pam_passwd_sha512' do
           end
 
           is_expected.not_to contain_pam('pam-common-password-unix')
+          is_expected.not_to contain_ile('/etc/pam.d/common-password')
         }
       end
     end
