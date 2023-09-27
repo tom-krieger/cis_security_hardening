@@ -37,7 +37,7 @@ describe 'cis_security_hardening::rules::auditd_sending_errors' do
               .with(
                 'ensure'             => 'present',
                 'path'               => file,
-                'match'              => '^network_failure_acrion =',
+                'match'              => '^network_failure_action =',
                 'line'               => 'network_failure_action = halt',
                 'append_on_no_match' => true,
               )
