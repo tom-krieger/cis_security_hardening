@@ -1,7 +1,6 @@
 name: Run pdk test unit
 
 on:
-  - push
   - pull_request
   - workflow_dispatch
 

@@ -26,14 +26,14 @@ class cis_security_hardening::rules::iptables_loopback (
       chain   => 'INPUT',
       proto   => 'all',
       iniface => 'lo',
-      action  => 'accept',
+      jump    => 'ACCEPT',
       notify  => Exec['save iptables rules'],
     }
     firewall { '002 accept all outgoing traffic to local interface':
       chain    => 'OUTPUT',
       proto    => 'all',
       outiface => 'lo',
-      action   => 'accept',
+      jump     => 'ACCEPT',
       notify   => Exec['save iptables rules'],
     }
 
@@ -41,7 +41,7 @@ class cis_security_hardening::rules::iptables_loopback (
       chain  => 'INPUT',
       proto  => 'all',
       source => '127.0.0.1/8',
-      action => 'drop',
+      jump   => 'DROP',
       notify => Exec['save iptables rules'],
     }
   }

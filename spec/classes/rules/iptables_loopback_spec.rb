@@ -35,7 +35,7 @@ describe 'cis_security_hardening::rules::iptables_loopback' do
                 'chain'   => 'INPUT',
                 'proto'   => 'all',
                 'iniface' => 'lo',
-                'action'  => 'accept',
+                'jump' => 'ACCEPT',
               )
 
             is_expected.to contain_firewall('002 accept all outgoing traffic to local interface')
@@ -43,7 +43,7 @@ describe 'cis_security_hardening::rules::iptables_loopback' do
                 'chain'    => 'OUTPUT',
                 'proto'    => 'all',
                 'outiface' => 'lo',
-                'action'   => 'accept',
+                'jump' => 'ACCEPT',
               )
 
             is_expected.to contain_firewall('003 drop all traffic to lo 127.0.0.1/8')
@@ -51,7 +51,7 @@ describe 'cis_security_hardening::rules::iptables_loopback' do
                 'chain'   => 'INPUT',
                 'proto'   => 'all',
                 'source'  => '127.0.0.1/8',
-                'action'  => 'drop',
+                'jump' => 'DROP',
               )
           else
             is_expected.not_to contain_firewall('001 accept all incoming traffic to local interface')

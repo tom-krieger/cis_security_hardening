@@ -24,7 +24,7 @@ describe 'cis_security_hardening::rules::auditd_tools_perms' do
             'user' => 'root',
             'group' => 'root',
             'mode' => '0755',
-            'tools' => ['/sbin/auditctl', '/sbin/aureport'],
+            'tools' => ['/sbin/auditctl', '/sbin/aureport', '/sbin/auditd', '/sbin/augenrules', '/sbin/ausearch', '/sbin/autrace'],
           }
         end
 
@@ -47,9 +47,41 @@ describe 'cis_security_hardening::rules::auditd_tools_perms' do
                 'group' => 'root',
                 'mode' => '0755',
               )
+            is_expected.to contain_file('/sbin/auditd')
+              .with(
+                'ensure' => 'file',
+                'owner' => 'root',
+                'group' => 'root',
+                'mode' => '0755',
+              )
+            is_expected.to contain_file('/sbin/augenrules')
+              .with(
+                'ensure' => 'file',
+                'owner' => 'root',
+                'group' => 'root',
+                'mode' => '0755',
+              )
+            is_expected.to contain_file('/sbin/ausearch')
+              .with(
+                'ensure' => 'file',
+                'owner' => 'root',
+                'group' => 'root',
+                'mode' => '0755',
+              )
+            is_expected.to contain_file('/sbin/autrace')
+              .with(
+                'ensure' => 'file',
+                'owner' => 'root',
+                'group' => 'root',
+                'mode' => '0755',
+              )
           else
             is_expected.not_to contain_file('/sbin/auditctl')
             is_expected.not_to contain_file('/sbin/aureport')
+            is_expected.not_to contain_file('/sbin/auditd')
+            is_expected.not_to contain_file('/sbin/augenrules')
+            is_expected.not_to contain_file('/sbin/ausearch')
+            is_expected.not_to contain_file('/sbin/autrace')
           end
         }
       end

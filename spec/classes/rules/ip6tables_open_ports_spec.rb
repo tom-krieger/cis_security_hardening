@@ -209,8 +209,8 @@ describe 'cis_security_hardening::rules::ip6tables_open_ports' do
                 'proto' => 'tcp',
                 'dport' => 22,
                 'state' => 'NEW',
-                'action' => 'accept',
-                'provider' => 'ip6tables',
+                'jump' => 'ACCEPT',
+                'protocol' => 'ip6tables',
               },
             },
           }
@@ -226,8 +226,8 @@ describe 'cis_security_hardening::rules::ip6tables_open_ports' do
                 'proto'  => 'tcp',
                 'dport'  => 22,
                 'state'  => 'NEW',
-                'action' => 'accept',
-                'provider' => 'ip6tables',
+                'jump' => 'ACCEPT',
+                'protocol' => 'ip6tables',
               )
           else
             is_expected.not_to contain_firewall('010-6 open ssh port inbound')

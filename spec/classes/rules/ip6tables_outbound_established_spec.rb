@@ -215,8 +215,8 @@ describe 'cis_security_hardening::rules::ip6tables_outbound_established' do
                 'chain'  => 'OUTPUT',
                 'proto'  => 'tcp',
                 'state'  => ['NEW', 'ESTABLISHED'],
-                'action' => 'accept',
-                'provider' => 'ip6tables',
+                'jump' => 'ACCEPT',
+                'protocol' => 'ip6tables',
               )
 
             is_expected.to contain_firewall('005-6 accept outbound udp state new, established')
@@ -224,8 +224,8 @@ describe 'cis_security_hardening::rules::ip6tables_outbound_established' do
                 'chain'  => 'OUTPUT',
                 'proto'  => 'udp',
                 'state'  => ['NEW', 'ESTABLISHED'],
-                'action' => 'accept',
-                'provider' => 'ip6tables',
+                'jump' => 'ACCEPT',
+                'protocol' => 'ip6tables',
               )
 
             is_expected.to contain_firewall('006-6 accept outbound icmp state new, established')
@@ -233,8 +233,8 @@ describe 'cis_security_hardening::rules::ip6tables_outbound_established' do
                 'chain'  => 'OUTPUT',
                 'proto'  => 'icmp',
                 'state'  => ['NEW', 'ESTABLISHED'],
-                'action' => 'accept',
-                'provider' => 'ip6tables',
+                'jump' => 'ACCEPT',
+                'protocol' => 'ip6tables',
               )
 
             is_expected.to contain_firewall('007-6 accept inbound tcp state established')
@@ -242,8 +242,8 @@ describe 'cis_security_hardening::rules::ip6tables_outbound_established' do
                 'chain'  => 'INPUT',
                 'proto'  => 'tcp',
                 'state'  => 'ESTABLISHED',
-                'action' => 'accept',
-                'provider' => 'ip6tables',
+                'jump' => 'ACCEPT',
+                'protocol' => 'ip6tables',
               )
 
             is_expected.to contain_firewall('008-6 accept inbound udp state established')
@@ -251,8 +251,8 @@ describe 'cis_security_hardening::rules::ip6tables_outbound_established' do
                 'chain'  => 'INPUT',
                 'proto'  => 'udp',
                 'state'  => 'ESTABLISHED',
-                'action' => 'accept',
-                'provider' => 'ip6tables',
+                'jump' => 'ACCEPT',
+                'protocol' => 'ip6tables',
               )
 
             is_expected.to contain_firewall('009-6 accept inbound icmp state established')
@@ -260,8 +260,8 @@ describe 'cis_security_hardening::rules::ip6tables_outbound_established' do
                 'chain'  => 'INPUT',
                 'proto'  => 'icmp',
                 'state'  => 'ESTABLISHED',
-                'action' => 'accept',
-                'provider' => 'ip6tables',
+                'jump' => 'ACCEPT',
+                'protocol' => 'ip6tables',
               )
           else
             is_expected.not_to contain_firewall('004-6 accept outbound tcp state new, established')

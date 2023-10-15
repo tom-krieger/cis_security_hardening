@@ -35,7 +35,7 @@ describe 'cis_security_hardening::rules::iptables_outbound_established' do
                 'chain'  => 'OUTPUT',
                 'proto'  => 'tcp',
                 'state'  => ['NEW', 'ESTABLISHED'],
-                'action' => 'accept',
+                'jump' => 'ACCEPT',
               )
 
             is_expected.to contain_firewall('005 accept outbound udp state new, established')
@@ -43,7 +43,7 @@ describe 'cis_security_hardening::rules::iptables_outbound_established' do
                 'chain'  => 'OUTPUT',
                 'proto'  => 'udp',
                 'state'  => ['NEW', 'ESTABLISHED'],
-                'action' => 'accept',
+                'jump' => 'ACCEPT',
               )
 
             is_expected.to contain_firewall('006 accept outbound icmp state new, established')
@@ -51,7 +51,7 @@ describe 'cis_security_hardening::rules::iptables_outbound_established' do
                 'chain'  => 'OUTPUT',
                 'proto'  => 'icmp',
                 'state'  => ['NEW', 'ESTABLISHED'],
-                'action' => 'accept',
+                'jump' => 'ACCEPT',
               )
 
             is_expected.to contain_firewall('007 accept inbound tcp state established')
@@ -59,7 +59,7 @@ describe 'cis_security_hardening::rules::iptables_outbound_established' do
                 'chain'  => 'INPUT',
                 'proto'  => 'tcp',
                 'state'  => 'ESTABLISHED',
-                'action' => 'accept',
+                'jump' => 'ACCEPT',
               )
 
             is_expected.to contain_firewall('008 accept inbound udp state established')
@@ -67,7 +67,7 @@ describe 'cis_security_hardening::rules::iptables_outbound_established' do
                 'chain'  => 'INPUT',
                 'proto'  => 'udp',
                 'state'  => 'ESTABLISHED',
-                'action' => 'accept',
+                'jump' => 'ACCEPT',
               )
 
             is_expected.to contain_firewall('009 accept inbound icmp state established')
@@ -75,7 +75,7 @@ describe 'cis_security_hardening::rules::iptables_outbound_established' do
                 'chain'  => 'INPUT',
                 'proto'  => 'icmp',
                 'state'  => 'ESTABLISHED',
-                'action' => 'accept',
+                'jump' => 'ACCEPT',
               )
           else
             is_expected.not_to contain_firewall('004 accept outbound tcp state new, established')

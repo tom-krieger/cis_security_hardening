@@ -39,7 +39,7 @@ class cis_security_hardening::rules::auditd_sending_errors (
     file_line { 'network-failure-action':
       ensure             => present,
       path               => $file,
-      match              => '^network_failure_acrion =',
+      match              => '^network_failure_action =',
       line               => "network_failure_action = ${action}",
       append_on_no_match => true,
       require            => File[$file],

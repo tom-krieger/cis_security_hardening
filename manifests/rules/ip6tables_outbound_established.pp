@@ -24,43 +24,43 @@ class cis_security_hardening::rules::ip6tables_outbound_established (
       chain    => 'OUTPUT',
       proto    => 'tcp',
       state    => ['NEW', 'ESTABLISHED'],
-      action   => 'accept',
-      provider => 'ip6tables',
+      jump     => 'ACCEPT',
+      protocol => 'ip6tables',
     }
     firewall { '005-6 accept outbound udp state new, established':
       chain    => 'OUTPUT',
       proto    => 'udp',
       state    => ['NEW', 'ESTABLISHED'],
-      action   => 'accept',
-      provider => 'ip6tables',
+      jump     => 'ACCEPT',
+      protocol => 'ip6tables',
     }
     firewall { '006-6 accept outbound icmp state new, established':
       chain    => 'OUTPUT',
       proto    => 'icmp',
       state    => ['NEW', 'ESTABLISHED'],
-      action   => 'accept',
-      provider => 'ip6tables',
+      jump     => 'ACCEPT',
+      protocol => 'ip6tables',
     }
     firewall { '007-6 accept inbound tcp state established':
       chain    => 'INPUT',
       proto    => 'tcp',
       state    => 'ESTABLISHED',
-      action   => 'accept',
-      provider => 'ip6tables',
+      jump     => 'ACCEPT',
+      protocol => 'ip6tables',
     }
     firewall { '008-6 accept inbound udp state established':
       chain    => 'INPUT',
       proto    => 'udp',
       state    => 'ESTABLISHED',
-      action   => 'accept',
-      provider => 'ip6tables',
+      jump     => 'ACCEPT',
+      protocol => 'ip6tables',
     }
     firewall { '009-6 accept inbound icmp state established':
       chain    => 'INPUT',
       proto    => 'icmp',
       state    => 'ESTABLISHED',
-      action   => 'accept',
-      provider => 'ip6tables',
+      jump     => 'ACCEPT',
+      protocol => 'ip6tables',
     }
   }
 }

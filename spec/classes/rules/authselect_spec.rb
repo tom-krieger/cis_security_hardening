@@ -112,6 +112,99 @@ describe 'cis_security_hardening::rules::authselect' do
             end
           }
         end
+
+        context "on #{os} with enforce = #{enforce} and check = #{check} and with no available fetures" do
+          let(:facts) do
+            os_facts.merge(
+              cis_security_hardening: {
+                authselect: {
+                  check: check,
+                  available_features: [ ],
+                },
+              },
+            )
+          end
+          let(:params) do
+            {
+              'enforce' => enforce,
+              'base_profile' => 'sssd',
+              'custom_profile' => 'cis',
+              'profile_options' => ['with-sudo', 'with-faillock', 'without-nullok', 'with-pwhistory', 'with-bad'],
+            }
+          end
+
+          it {
+            is_expected.to compile
+
+            if enforce
+              is_expected.to contain_exec('create custom profile')
+                .with(
+                  'command' => 'authselect create-profile cis -b sssd --symlink-meta',
+                  'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+                  'onlyif'  => 'test ! -d /etc/authselect/custom/cis',
+                )
+
+              is_expected.to contain_exec('select authselect profile')
+                .with(
+                  'command' => 'authselect select custom/cis -f',
+                  'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+                  'onlyif'  => ['test -d /etc/authselect/custom/cis', "test -z \"$(authselect current | grep 'custom/cis')\""],
+                  'returns' => [0, 1],
+                )
+                .that_requires('Exec[create custom profile]')
+
+              if check == 3
+                is_expected.to contain_exec('fix authselect profile')
+                  .with(
+                    'command' => 'authselect select custom/cis -f',
+                    'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+                  )
+                  .that_requires('Exec[create custom profile]')
+              else
+                is_expected.not_to contain_exec('fix authselect profile')
+              end
+
+              is_expected.to contain_echo('unavailable feature with-bad')
+                .with(
+                  'message'  => 'authselect: unavailable feature with-bad with base profile sssd',
+                  'loglevel' => 'warning',
+                  'withpath' => false,
+                )
+              is_expected.to contain_echo('unavailable feature with-sudo')
+                .with(
+                  'message'  => 'authselect: unavailable feature with-sudo with base profile sssd',
+                  'loglevel' => 'warning',
+                  'withpath' => false,
+                )
+              is_expected.to contain_echo('unavailable feature with-faillock')
+                .with(
+                  'message'  => 'authselect: unavailable feature with-faillock with base profile sssd',
+                  'loglevel' => 'warning',
+                  'withpath' => false,
+                )
+              is_expected.to contain_echo('unavailable feature without-nullok')
+                .with(
+                  'message'  => 'authselect: unavailable feature without-nullok with base profile sssd',
+                  'loglevel' => 'warning',
+                  'withpath' => false,
+                )
+              is_expected.to contain_echo('unavailable feature with-pwhistory')
+                .with(
+                  'message'  => 'authselect: unavailable feature with-pwhistory with base profile sssd',
+                  'loglevel' => 'warning',
+                  'withpath' => false,
+                )
+            else
+              is_expected.not_to contain_exec('create custom profile')
+              is_expected.not_to contain_exec('select authselect profile')
+              is_expected.not_to contain_exec('unavailable feature with-sudo')
+              is_expected.not_to contain_exec('unavailable feature with-faillock')
+              is_expected.not_to contain_exec('unavailable feature with-nullok')
+              is_expected.not_to contain_echo('unavailable feature with-bad')
+              is_expected.not_to contain_exec('fix authselect profile')
+            end
+          }
+        end
       end
     end
   end

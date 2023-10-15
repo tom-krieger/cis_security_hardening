@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.9.0
+
+* Puppetlabs Firewall module minimal version is now 7.0.0
+* switched from `action` parameter to `jump` parameter for iptables
+* switched from `provider` parameter to `protocol` parameter for iptables
+
+  > Note that this change may affect you IPTables configuration. So please check your configuration before updating to this version.
+
+* Updated and added some unit tests
+
 ## Release 0.8.4
 
 * fix for issue #62
