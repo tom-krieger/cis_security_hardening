@@ -557,7 +557,7 @@ Data type: `Stdlib::Absolutepath`
 
 Command to use to upload facts to Puppet master
 
-Default value: `"${base_dir}/bin/fact_upload.sh"`
+Default value: `'/usr/share/cis_security_hardening/bin/fact_upload.sh'`
 
 ##### <a name="-cis_security_hardening--exclude_dirs_sticky_ww"></a>`exclude_dirs_sticky_ww`
 
