@@ -16,7 +16,7 @@
 * [`cis_security_hardening::rules::dac_on_symlinks`](#cis_security_hardening--rules--dac_on_symlinks): Ensure the operating system is configured to enable DAC on symlinks
 * [`cis_security_hardening::rules::gdm_lock_delay`](#cis_security_hardening--rules--gdm_lock_delay): Ensure overriding the screensaver lock-delay setting is prevented
 * [`cis_security_hardening::services`](#cis_security_hardening--services): Services
-* [`cis_security_hardening::sticky_world_writable_cron`](#cis_security_hardening--sticky_world_writable_cron): Create cron job for searching world writable dir3ctories with sticky bit
+* [`cis_security_hardening::sticky_world_writable_cron`](#cis_security_hardening--sticky_world_writable_cron): Create a cron job for the search for world writable directories with sticky bit set.
 
 #### Private Classes
 
@@ -525,6 +525,8 @@ The following parameters are available in the `cis_security_hardening` class:
 * [`auto_reboot`](#-cis_security_hardening--auto_reboot)
 * [`verbose_logging`](#-cis_security_hardening--verbose_logging)
 * [`remove_authconfig`](#-cis_security_hardening--remove_authconfig)
+* [`enable_sticky_world_writable_cron`](#-cis_security_hardening--enable_sticky_world_writable_cron)
+* [`enable_auditd_cron`](#-cis_security_hardening--enable_auditd_cron)
 
 ##### <a name="-cis_security_hardening--profile"></a>`profile`
 
@@ -606,9 +608,25 @@ Default value: `false`
 
 Data type: `Boolean`
 
-remove yuthconfig package on Redhat 7 or similar OSes
+remove authconfig package on Redhat 7 or similar OSes
 
 Default value: `false`
+
+##### <a name="-cis_security_hardening--enable_sticky_world_writable_cron"></a>`enable_sticky_world_writable_cron`
+
+Data type: `Boolean`
+
+Whether to enable the sticky world writable cron job.
+
+Default value: `true`
+
+##### <a name="-cis_security_hardening--enable_auditd_cron"></a>`enable_auditd_cron`
+
+Data type: `Boolean`
+
+Whether to enable the auditd cron job.
+
+Default value: `true`
 
 ### <a name="cis_security_hardening--auditd_cron"></a>`cis_security_hardening::auditd_cron`
 
@@ -628,12 +646,21 @@ include cis_security_hardening::auditd_cron
 
 The following parameters are available in the `cis_security_hardening::auditd_cron` class:
 
+* [`ensure`](#-cis_security_hardening--auditd_cron--ensure)
 * [`dirs_to_include`](#-cis_security_hardening--auditd_cron--dirs_to_include)
 * [`start_time_minute`](#-cis_security_hardening--auditd_cron--start_time_minute)
 * [`start_time_hour`](#-cis_security_hardening--auditd_cron--start_time_hour)
 * [`cron_repeat`](#-cis_security_hardening--auditd_cron--cron_repeat)
 * [`output_file`](#-cis_security_hardening--auditd_cron--output_file)
 * [`script`](#-cis_security_hardening--auditd_cron--script)
+
+##### <a name="-cis_security_hardening--auditd_cron--ensure"></a>`ensure`
+
+Data type: `Enum['present', 'absent']`
+
+Whether the cron job should be present or absent.
+
+Default value: `'present'`
 
 ##### <a name="-cis_security_hardening--auditd_cron--dirs_to_include"></a>`dirs_to_include`
 
@@ -921,7 +948,7 @@ include cis_security_hardening::services
 
 ### <a name="cis_security_hardening--sticky_world_writable_cron"></a>`cis_security_hardening::sticky_world_writable_cron`
 
-Create a cron ob for the search for world writable directories with sticky bit set.
+Create a cron job for the search for world writable directories with sticky bit set.
 
 #### Examples
 
@@ -935,9 +962,18 @@ include cis_security_hardening::sticky_world_writable_cron
 
 The following parameters are available in the `cis_security_hardening::sticky_world_writable_cron` class:
 
+* [`ensure`](#-cis_security_hardening--sticky_world_writable_cron--ensure)
 * [`dirs_to_exclude`](#-cis_security_hardening--sticky_world_writable_cron--dirs_to_exclude)
 * [`filename`](#-cis_security_hardening--sticky_world_writable_cron--filename)
 * [`script`](#-cis_security_hardening--sticky_world_writable_cron--script)
+
+##### <a name="-cis_security_hardening--sticky_world_writable_cron--ensure"></a>`ensure`
+
+Data type: `Enum['present', 'absent']`
+
+Whether the cron job should be present or absent.
+
+Default value: `'present'`
 
 ##### <a name="-cis_security_hardening--sticky_world_writable_cron--dirs_to_exclude"></a>`dirs_to_exclude`
 
