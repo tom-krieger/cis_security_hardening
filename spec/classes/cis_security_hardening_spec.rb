@@ -49,9 +49,6 @@ describe 'cis_security_hardening' do
             end
           end
         end
-
-        context 'with cron jobs absent' do
-        end
       end
     end
   end
