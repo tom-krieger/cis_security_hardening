@@ -3,13 +3,10 @@
 #
 # @param ensure
 #   Whether the cron job should be present or absent.
-#
 # @param dirs_to_exclude
 #    Array of directories to exclude from search.
-#
 # @param filename
 #    The file to write data to
-#
 # @param script
 #    The script to run
 #

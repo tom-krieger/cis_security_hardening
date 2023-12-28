@@ -33,12 +33,12 @@ describe 'cis_security_hardening' do
             is_expected.to contain_class('cis_security_hardening::auditd_cron')
 
             unless os_facts[:os]['name'].casecmp('ubuntu').zero? ||
-                  os_facts[:os]['name'].casecmp('debian').zero? ||
-                  os_facts[:os]['name'].casecmp('centos').zero? ||
-                  os_facts[:os]['name'].casecmp('redhat').zero? ||
-                  os_facts[:os]['name'].casecmp('almalinux').zero? ||
-                  os_facts[:os]['name'].casecmp('rocky').zero? ||
-                  os_facts[:os]['name'].casecmp('sles').zero?
+                   os_facts[:os]['name'].casecmp('debian').zero? ||
+                   os_facts[:os]['name'].casecmp('centos').zero? ||
+                   os_facts[:os]['name'].casecmp('redhat').zero? ||
+                   os_facts[:os]['name'].casecmp('almalinux').zero? ||
+                   os_facts[:os]['name'].casecmp('rocky').zero? ||
+                   os_facts[:os]['name'].casecmp('sles').zero?
 
               is_expected.to contain_echo('no bundles')
                 .with(

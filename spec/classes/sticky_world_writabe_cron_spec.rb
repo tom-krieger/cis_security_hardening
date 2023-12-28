@@ -50,6 +50,7 @@ describe 'cis_security_hardening::sticky_world_writable_cron' do
             'filename'        => '/usr/share/cis_security_hardening/data/world-writable-files.txt',
             'script'          => '/usr/share/cis_security_hardening/bin/sticy-world-writable.sh',
           }
+        end
 
         it do
           is_expected.to compile.with_all_deps

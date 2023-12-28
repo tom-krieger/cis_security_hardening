@@ -7,7 +7,6 @@
 #
 # @param ensure
 #   Whether the cron job should be present or absent.
-#
 # @param dirs_to_include
 #    A list of directories to search
 # @param start_time_minute
