@@ -44,11 +44,11 @@
 #
 # @api private
 class cis_security_hardening::rules::ntpd (
-  Boolean                        $enforce             = false,
+  Optional[Stdlib::Absolutepath] $ntp_statsdir,
   Optional[Array[Stdlib::Host]]  $ntp_servers,
+  Boolean                        $enforce             = false,
   Array                          $ntp_restrict        = [],
   Stdlib::Absolutepath           $ntp_driftfile       = '/var/lib/ntp/drift',
-  Optional[Stdlib::Absolutepath] $ntp_statsdir,
   Boolean                        $ntp_disable_monitor = true,
   Boolean                        $ntp_burst           = false,
   Boolean                        $ntp_service_manage  = true,

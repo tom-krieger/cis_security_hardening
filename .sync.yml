@@ -2,12 +2,8 @@
 Gemfile:
   optional:
     ':system_tests':
-      - gem: 'serverspec'
       - gem: 'hiera-puppet-helper'
     ':development':
-      - gem: 'puppet-strings'
-      - gem: 'puppet_litmus'
-      - gem: 'puppet-lint-legacy_facts-check'
       - gem: 'github_changelog_generator'
 
 spec/spec_helper.rb:
@@ -31,3 +27,7 @@ appveyor.yml:
 
 .gitlab-ci.yml:
   delete: true
+
+.gitignore:
+  paths:
+    - failed.txt
