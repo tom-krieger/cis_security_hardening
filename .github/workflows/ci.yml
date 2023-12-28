@@ -38,6 +38,6 @@ jobs:
           cache-version: 2
           bundler: '2.1.0'
       - name: Validate
-        run: bundle exec rake check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop syntax lint metadata_lint
+        run: bundle exec rake validate lint check rubocop syntax lint metadata_lint
       - name: Run tests
         run: bundle exec rake parallel_spec
