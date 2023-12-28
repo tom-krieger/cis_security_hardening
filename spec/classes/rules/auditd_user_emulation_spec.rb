@@ -49,7 +49,7 @@ describe 'cis_security_hardening::rules::auditd_user_emulation' do
               .with(
                 'order' => '196',
                 'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                'content' => '-a always,exit -F arch=b32 -C euid!=uid -F auid!=unset -S execve -k user_emulation',
+                'content' => '-a always,exit -F arch=b32 -S execve -C euid!=uid -F auid!=unset -k user_emulation',
               )
 
             if ['x86_64', 'amd64'].include?(os_facts[:os]['architecture'])
@@ -57,7 +57,7 @@ describe 'cis_security_hardening::rules::auditd_user_emulation' do
                 .with(
                   'order' => '197',
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
-                  'content' => '-a always,exit -F arch=b64 -C euid!=uid -F auid!=unset -S execve -k user_emulation',
+                  'content' => '-a always,exit -F arch=b64 -S execve -C euid!=uid -F auid!=unset -k user_emulation',
                 )
             end
           else
