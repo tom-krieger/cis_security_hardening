@@ -27,7 +27,7 @@
 
 Define a complete security baseline and monitor the baseline's rules. The definition of the baseline should be done in Hiera. The purpose of the module is to give the ability to setup a complete security baseline which not necessarily have to stick to industry security guides like the CIS benchmarks.
 
-The *cis_security_hardening* module does not use bechmark numbers for the class names of the rules. These numbers change from OS version to OS version and even from benchmark version to benchmark version. One main purpose is to ensure this module can be extended by further security settings and monitorings without changing the code of this module. Therefore the module uses a generic interface to call classes implementing particular security baseline rules.
+The *cis_security_hardening* module does not use benchmark numbers for the class names of the rules. These numbers change from OS version to OS version and even from benchmark version to benchmark version. One main purpose is to ensure this module can be extended by further security settings and monitorings without changing the code of this module. Therefore the module uses a generic interface to call classes implementing particular security baseline rules.
 
 This module also has the ability to create compliance reports. The reports can be created as a Puppet fact uploaded to the Puppet Master or as a CSV file which will remain on the servers for later collection.
 
@@ -57,7 +57,7 @@ The code of this security hardening module is based on the following CIS Benchma
 | Ubuntu 18.04 | CIS Ubuntu Linux 18.04 LTS Benchmark                         | 2.0.1   | 01-03-2020 |
 | Ubuntu 20.04 | CIS Ubuntu Linux 20.04 LTS Benchmark                         | 1.1.0   | 03-31-2021 |
 | Ubuntu 20.04 | CIS Ubuntu Linux 20.04 LTS STIG Benchmark                    | 1.0.0   | 26.07.2021 |
-| Ununtu 22.04 | VIS Ubuntu Linux 22.04 LTS Benchmark                         | 1.0.0   | 06-30-2022 |
+| Ubuntu 22.04 | CIS Ubuntu Linux 22.04 LTS Benchmark                         | 1.0.0   | 06-30-2022 |
 | Debian 10    | CIS Debian Linux 10 Benchmark                                | 1.0.0   | 02-13-2020 |
 | Debian 11    | CIS Debian Linux 11 Benchmark                                | 1.0.0   | 09-22-2022 |
 | Alma Linux 8 | CIS Alma Linux OS 8 Benchmark                                | 2.0.0   | 05-31-2022 |
@@ -76,7 +76,7 @@ It is highly recommended to have the complete security baseline definition writt
 The *cis_security_hardening* module has a parameter `enforce` for each rule. If this parameter is set to true all necessary changes are made to make a server compliant to the security baseline rules. This can have severe impacts to the machines, especially if security settings are defined in a wrong way.
 > Please test your settings before rolling out to production environments.
 
-The module needs a base directory. The base directory `/usr/share/cis_security_hardening` is created by the module during the fist run. Some data is collected with cronjobs once a day as collecting this data is somewhat expensive and time consuming depending on the server size, e. g. searching for s-bit programs . Under the base directory there will be a directory `bin` where all scripts for gathering information are located.
+The module needs a base directory. The base directory `/usr/share/cis_security_hardening` is created by the module during the first run. Some data is collected with cronjobs once a day as collecting this data is somewhat expensive and time consuming depending on the server size, e. g. searching for s-bit programs . Under the base directory there will be a directory `bin` where all scripts for gathering information are located.
 
 This module creates a larger fact `cis_security_hardening` to have all required information for applying the rules. Some information is collected with cronjobs once a day as these jobs might run for a long time (e. g. searching filesystems for s-bit programs).
 
@@ -103,7 +103,7 @@ The `data` folder contains example Hiera definitions for various operation syste
 
 ### Cronjobs
 
-Gathering information can sometime consume a lot of time. Gathering those facts during Puppet runs would have a significat impact on the time consumed by a Puppet run. Therefore some facts are only gathered once a day using cronjobs. The `cis_security_hardening` module installes the following cronjobs to collect information and provide the information to the fact scripts creating the `cis_security_hardening` fact.
+Gathering information can sometime consume a lot of time. Gathering those facts during Puppet runs would have a significant impact on the time consumed by a Puppet run. Therefore some facts are only gathered once a day using cronjobs. The `cis_security_hardening` module installs the following cronjobs to collect information and provide the information to the fact scripts creating the `cis_security_hardening` fact.
 
 #### Cron /etc/cron.d/sticky-world-writebale
 
@@ -165,7 +165,7 @@ For a list of supported OSes please look into the `metadata.json` file.
 
 ### Auditd
 
-Auditd is normally configured with immutable rules. This meens that changing rules will require a *reboot* to make the new rules effective.
+Auditd is normally configured with immutable rules. This means that changing rules will require a *reboot* to make the new rules effective.
 
 ### SELinux and Apparmor
 
@@ -183,7 +183,7 @@ The default value for *auto_reboot* is `true` and can easily be changed by setti
 
 The global parameter `time_until_reboot` sets the waiting time until the reboot will be performed. On Linux systems you can cancel this reboot with the `shutdown -c` command. But keep in mind that canceling the reboot won't activate some changes.
 
-For `rebooting` the `puppetlabs-reboot` module is used. Please obey the follwing comment from this module:
+For `rebooting` the `puppetlabs-reboot` module is used. Please obey the following comment from this module:
 > POSIX systems (with the exception of Solaris) only support
 specifying the timeout as minutes. As such, the value of timeout must be a multiple of 60. Other values will be rounded up to the
 nearest minute and a warning will be issued.
@@ -214,7 +214,7 @@ The Redhat 8 STIG benchmark contains many different and in my opinion older conf
   * reports that not all system command files are group-owned by root but the check searches for all files and not only these not having permissions /2000
 
 * CISCAT scanner for Redhat 7 STIG false positives:
-  * nosuid flag on home directries partitions is reported as missing but is set
+  * nosuid flag on home directory filesystems is reported as missing but is set
   * Tests for NFS settings report `failed` but no NFS is used
 
 ## Credits

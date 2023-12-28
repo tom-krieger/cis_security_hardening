@@ -1,4 +1,4 @@
-# @summary 
+# @summary
 #    Services
 #
 # Several exec resources needed from multiple classes.
@@ -6,26 +6,16 @@
 # @example
 #   include cis_security_hardening::services
 class cis_security_hardening::services {
-  $rel = fact('os') ? {
-    undef   => '',
-    default => fact('operatingsystemmajrelease')
-  }
-  $osfamily = fact('osfamily') ? {
-    undef   => 'unknown',
-    default => fact('osfamily').downcase()
-  }
-  if ($rel <= '6') and ($osfamily == 'redhat') {
-    exec { 'reload-sshd':
-      command     => 'service sshd reload',
-      path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-      refreshonly => true,
-    }
+  $sshd_reload_command = if fact('os.release.major') <= '6' and fact('os.family') == 'redhat' {
+    'service sshd reload'
   } else {
-    exec { 'reload-sshd':
-      command     => 'systemctl reload sshd',
-      path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-      refreshonly => true,
-    }
+    'systemctl reload sshd'
+  }
+
+  exec { 'reload-sshd':
+    command     => $sshd_reload_command,
+    path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+    refreshonly => true,
   }
 
   exec { 'reload-rsyslog':

@@ -63,7 +63,8 @@
     {
       "name": "puppetlabs-inifile",
       "version_requirement": ">= 5.2.0 < 7.0.0"
-    },{
+    },
+    {
       "name": "npwalker-recursive_file_permissions",
       "version_requirement": "0.6.2"
     }
@@ -127,7 +128,7 @@
       "version_requirement": ">= 7.0.0 < 9.0.0"
     }
   ],
-  "pdk-version": "2.7.1",
-  "template-url": "pdk-default#2.7.4",
-  "template-ref": "tags/2.7.4-0-g58edf57"
+  "pdk-version": "3.0.1",
+  "template-url": "pdk-default#3.0.1",
+  "template-ref": "tags/3.0.1-0-gd13288a"
 }
