@@ -1,0 +1,51 @@
+---
+name: CI
+
+on:
+  push:
+    branches:
+      - feature_pipeline_test
+  pull_request:
+
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.allow_failure }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - ruby: 2.7.8
+            puppet: 7
+            fixtures: .fixtures.yml
+            allow_failure: true
+          - ruby: 2.7.8
+            puppet: 7
+            fixtures: .fixtures-latest.yml
+            allow_failure: false
+          - ruby: 3.2.2
+            puppet: 8
+            fixtures: .fixtures.yml
+            allow_failure: true
+          - ruby: 3.2.2
+            puppet: 8
+            fixtures: .fixtures-latest.yml
+            allow_failure: false
+    env:
+      BUNDLE_WITHOUT: system_tests:release
+      PUPPET_GEM_VERSION: "~> ${{ matrix.puppet }}.0"
+      FIXTURES_YML: ${{ matrix.fixtures }}
+    name: Puppet ${{ matrix.puppet }} (Ruby ${{ matrix.ruby }} fixtures=${{ matrix.fixtures }})
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+          cache-version: 2
+          bundler: '2.1.0'
+      - name: Validate
+        run: bundle exec rake check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop syntax lint metadata_lint
+      - name: Run tests
+        run: bundle exec rake parallel_spec
