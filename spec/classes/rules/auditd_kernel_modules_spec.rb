@@ -54,6 +54,13 @@ describe 'cis_security_hardening::rules::auditd_kernel_modules' do
                   'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
                   'content' => "-a always,exit -S all -F path=/usr/bin/kmod -p x -F auid>=1000 -F auid!=#{auid} -k module-change",
                 )
+            elsif os_facts[:os]['name'].casecmp('redhat').zero? && os_facts[:os]['release']['major'] >= '8'
+              is_expected.to contain_concat__fragment('watch kernel modules rule 1')
+                .with(
+                  'order' => '204',
+                  'target' => '/etc/audit/rules.d/cis_security_hardening.rules',
+                  'content' => "-a always,exit -F path=/usr/bin/kmod -F perm=x -F auid>=1000 -F auid!=#{auid} -F key=kernel_modules",
+                )
             elsif os_facts[:os]['name'].casecmp('debian').zero? && os_facts[:os]['release']['major'] > '10'
               is_expected.to contain_concat__fragment('watch kernel modules rule 1')
                 .with(

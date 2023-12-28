@@ -24,14 +24,14 @@ class cis_security_hardening::rules::auditd_user_emulation (
     concat::fragment { 'watch user emulation rule 1':
       order   => '196',
       target  => $cis_security_hardening::rules::auditd_init::rules_file,
-      content => '-a always,exit -F arch=b32 -C euid!=uid -F auid!=unset -S execve -k user_emulation',
+      content => '-a always,exit -F arch=b32 -S execve -C euid!=uid -F auid!=unset -k user_emulation',
     }
 
     if  $facts['os']['architecture'] == 'x86_64' or $facts['os']['architecture'] == 'amd64' {
       concat::fragment { 'watch user emulation rule 2':
         order   => '197',
         target  => $cis_security_hardening::rules::auditd_init::rules_file,
-        content => '-a always,exit -F arch=b64 -C euid!=uid -F auid!=unset -S execve -k user_emulation',
+        content => '-a always,exit -F arch=b64 -S execve -C euid!=uid -F auid!=unset -k user_emulation',
       }
     }
   }

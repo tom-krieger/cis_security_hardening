@@ -43,6 +43,8 @@ class cis_security_hardening::rules::auditd_kernel_modules (
     }
     if $facts['os']['name'].downcase() == 'redhat' and $facts['os']['release']['major'] == '7' {
       $rule1 = "-a always,exit -S all -F path=/usr/bin/kmod -p x -F auid>=${uid} -F auid!=${auid} -k module-change"
+    } elsif $facts['os']['name'].downcase() == 'redhat' and $facts['os']['release']['major'] >= '8' {
+      $rule1 = "-a always,exit -F path=/usr/bin/kmod -F perm=x -F auid>=${uid} -F auid!=${auid} -F key=kernel_modules"
     } elsif $facts['os']['name'].downcase() == 'debian' and $facts['os']['release']['major'] > '10' {
       $rule1 = "-a always,exit -S all -F path=/usr/bin/kmod -F perm=x -F auid>=${uid} -F auid!=${auid} -k kernel_modules"
     } else {
