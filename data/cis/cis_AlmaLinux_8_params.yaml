@@ -15,6 +15,9 @@ cis_security_hardening::auditd_dirs_to_include:
   - '/usr'
 cis_security_hardening::auditd_rules_fact_file: '/opt/puppetlabs/facter/facts.d/cis_security_hardening_auditd.yaml'
 
+cis_security_hardening::auditd_cron::ensure: present
+cis_security_hardening::sticky_world_writable_cron::ensure: present
+
 cis_security_hardening::rules::cramfs::enforce: true
 cis_security_hardening::rules::squashfs::enforce: true
 cis_security_hardening::rules::udf::enforce: true

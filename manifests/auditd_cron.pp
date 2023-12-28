@@ -1,10 +1,12 @@
-# @summary 
+# @summary
 #    Create a cron job to search privileged commands for auditd
 #
 # Auditd rules can monitor privileged command use. As filesystems cn be huge and searching
 # the relevant commands can be time consuming this cron job will create a custom fact to
 # provide the auditd rule with appriate imput.
 #
+# @param ensure
+#   Whether the cron job should be present or absent.
 # @param dirs_to_include
 #    A list of directories to search
 # @param start_time_minute
@@ -21,6 +23,7 @@
 # @example
 #   include cis_security_hardening::auditd_cron
 class cis_security_hardening::auditd_cron (
+  Enum['present', 'absent'] $ensure       = 'present',
   Array $dirs_to_include                  = ['/usr'],
   Integer $start_time_minute              = 37,
   Integer $start_time_hour                = 3,
@@ -30,27 +33,32 @@ class cis_security_hardening::auditd_cron (
 ) {
   if ! empty($dirs_to_include) {
     file { '/etc/cron.d/auditd_priv_commands.cron':
-      ensure  => absent,
+      ensure => absent,
     }
+
     file { '/etc/cron.d/auditd_priv_commands':
-      ensure  => file,
-      content => epp('cis_security_hardening/auditd_priv_cmds.cron.epp', {
+      ensure  => stdlib::ensure($ensure, file),
+      content => epp("${module_name}/auditd_priv_cmds.cron.epp",
+        {
           minute      => $start_time_minute,
           hour        => $start_time_hour,
           cron_repeat => $cron_repeat,
           script      => $script,
-      }),
+        },
+      ),
       owner   => 'root',
       group   => 'root',
       mode    => '0644',
     }
 
     file { $script:
-      ensure  => file,
-      content => epp('cis_security_hardening/auditd_priv_cmds.epp', {
+      ensure  => stdlib::ensure($ensure, file),
+      content => epp("${module_name}/auditd_priv_cmds.epp",
+        {
           output_file     => $output_file,
           dirs_to_include => $dirs_to_include,
-      }),
+        },
+      ),
       owner   => 'root',
       group   => 'root',
       mode    => '0700',
