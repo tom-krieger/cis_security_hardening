@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.9.1
+
+* Updated Github action
+
 ## Release 0.9.0
 
 * Puppetlabs Firewall module minimal version is now 7.0.0
