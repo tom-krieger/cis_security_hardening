@@ -1,8 +1,8 @@
- # @summary
+# @summary
 #    Security baseline enforcement
 #
-# Define a complete security baseline and monitor the rules. The definition of the baseline can be done in Hiera. 
-# The purpose of the module is to give the ability to setup complete security baseline which not necessarily have to stick 
+# Define a complete security baseline and monitor the rules. The definition of the baseline can be done in Hiera.
+# The purpose of the module is to give the ability to setup complete security baseline which not necessarily have to stick
 # to an industry security guide like the CIS benchmarks.
 #
 # The easiest way to use the module is to put all rule data into a hiera file. For more information please coinsult the README file.
@@ -24,15 +24,21 @@
 #    Directories to search for privileged commands to create auditd rules.
 # @param time_until_reboot
 #    Time to wait until system is rebooted if required. Time in seconds. For `reboot` the `puppetlabs-reboot` module is used. Please obey
-#    the follwing comment from this module: POSIX systems (with the exception of Solaris) only support 
-#    specifying the timeout as minutes. As such, the value of timeout must be a multiple of 60. Other values will be rounded up to the 
+#    the follwing comment from this module: POSIX systems (with the exception of Solaris) only support
+#    specifying the timeout as minutes. As such, the value of timeout must be a multiple of 60. Other values will be rounded up to the
 #    nearest minute and a warning will be issued.
 # @param auto_reboot
 #    Reboot when necessary after `time_until_reboot` is exeeded
 # @param verbose_logging
 #    Print various info messages
 # @param remove_authconfig
-#    remove yuthconfig package on Redhat 7 or similar OSes
+#    remove authconfig package on Redhat 7 or similar OSes
+#
+# @param enable_sticky_world_writable_cron
+#   Whether to enable the sticky world writable cron job.
+#
+# @param enable_auditd_cron
+#   Whether to enable the auditd cron job.
 #
 # @example
 #   include cis_security_hardening
@@ -47,6 +53,8 @@ class cis_security_hardening (
   Boolean $auto_reboot                      = true,
   Boolean $verbose_logging                  = false,
   Boolean $remove_authconfig                = false,
+  Boolean $enable_sticky_world_writable_cron = true,
+  Boolean $enable_auditd_cron               = true,
 ) {
   contain cis_security_hardening::reboot
   contain cis_security_hardening::services
@@ -64,12 +72,14 @@ class cis_security_hardening (
   }
 
   class { 'cis_security_hardening::sticky_world_writable_cron':
+    ensure          => stdlib::ensure($enable_sticky_world_writable_cron),
     dirs_to_exclude => $exclude_dirs_sticky_ww,
     filename        => "${base_dir}/data/world-writable-files.txt",
     script          => "${base_dir}/bin/sticy-world-writable.sh",
   }
 
   class { 'cis_security_hardening::auditd_cron':
+    ensure          => stdlib::ensure($enable_auditd_cron),
     dirs_to_include => $auditd_dirs_to_include,
     output_file     => "${base_dir}/data/auditd_priv_cmds.txt",
     script          => "${base_dir}/bin/auditd_priv_cmds.sh",
