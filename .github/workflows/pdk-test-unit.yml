@@ -5,18 +5,36 @@ on:
   - workflow_dispatch
 
 jobs:
-  build:
+  unit:
     runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.allow_failure }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - ruby: 2.7.8
+            puppet: 7
+            fixtures: .fixtures.yml
+            allow_failure: false
+          - ruby: 3.2.2
+            puppet: 8
+            fixtures: .fixtures.yml
+            allow_failure: false
+    env:
+      BUNDLE_WITHOUT: system_tests:release
+      PUPPET_GEM_VERSION: "~> ${{ matrix.puppet }}.0"
+      FIXTURES_YML: ${{ matrix.fixtures }}
+    name: Puppet ${{ matrix.puppet }} (Ruby ${{ matrix.ruby }} fixtures=${{ matrix.fixtures }})
     steps:
-    - name: Clone repository
-      uses: actions/checkout@v4
-
-    - name: Run unit tests
-      uses: tom-krieger/action-pdk-test-unit@v6
-      with:
-        puppet-version: ""
-        # [optional]
-        # A string indicating the Puppet version to validate against, such as "5.4.2" or "5.5".
-        pe-version: ""
-        # [optional]
-        # A string indicating the PE version to validate against, such as "2017.3.5" or "2018.1".
+      - uses: actions/checkout@v4
+      - name: Setup ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+          cache-version: 2
+          bundler: '2.1.0'
+      - name: Validate
+        run: bundle exec rake validate lint check rubocop syntax lint metadata_lint
+      - name: Run tests
+        run: bundle exec rake parallel_spec
