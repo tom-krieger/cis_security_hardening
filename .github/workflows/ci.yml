@@ -18,18 +18,10 @@ jobs:
           - ruby: 2.7.8
             puppet: 7
             fixtures: .fixtures.yml
-            allow_failure: true
-          - ruby: 2.7.8
-            puppet: 7
-            fixtures: .fixtures-latest.yml
             allow_failure: false
           - ruby: 3.2.2
             puppet: 8
             fixtures: .fixtures.yml
-            allow_failure: true
-          - ruby: 3.2.2
-            puppet: 8
-            fixtures: .fixtures-latest.yml
             allow_failure: false
     env:
       BUNDLE_WITHOUT: system_tests:release
