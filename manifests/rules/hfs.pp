@@ -22,11 +22,11 @@ class cis_security_hardening::rules::hfs (
 ) {
   if $enforce {
     if $facts['os']['name'].downcase() == 'ubuntu' and $facts['os']['release']['major'] >= '20' {
-      mod::install { 'hfs':
+      kmod::install { 'hfs':
         command => '/bin/false',
       }
     } else {
-      mod::install { 'hfs':
+      kmod::install { 'hfs':
         command => '/bin/true',
       }
     }

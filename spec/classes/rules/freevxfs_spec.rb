@@ -5,9 +5,10 @@ require 'spec_helper'
 enforce_options = [true, false]
 
 describe 'cis_security_hardening::rules::freevxfs' do
-  on_supported_os.each do |os, _os_facts|
+  on_supported_os.each do |os, os_facts|
     enforce_options.each do |enforce|
       context "on #{os} with enforce = #{enforce}" do
+        let(:facts) { os_facts }
         let(:params) do
           {
             'enforce' => enforce,
