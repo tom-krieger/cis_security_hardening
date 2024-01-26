@@ -49,8 +49,10 @@ cis_security_hardening::benchmark::ubuntu::20:
     process_hardening:
       level1:
         - enable_aslr
+        - ptrace_scope
         - disable_prelink
         - restrict_core_dumps
+        - automatic_error_reporting
       stig:
         - limits_maxlogins
         - kdump_service
@@ -112,6 +114,8 @@ cis_security_hardening::benchmark::ubuntu::20:
         - ldap_client
         - rpcbind
     unused_network_protocols:
+      level1:
+        - disable_bluetooth
       level2:
         - disable_ipv6
         - disable_wireless

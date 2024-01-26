@@ -62,8 +62,10 @@ cis_security_hardening::rules::grub_bootloader_config::enforce: true
 cis_security_hardening::rules::single_user_mode::enforce: true
 
 cis_security_hardening::rules::enable_aslr::enforce: true
+cis_security_hardening::rules::ptrace_scope::enforce: true
 cis_security_hardening::rules::disable_prelink::enforce: true
 cis_security_hardening::rules::restrict_core_dumps::enforce: true
+cis_security_hardening::rules::automatic_error_reporting::enforce: true
 cis_security_hardening::rules::limits_maxlogins::enforce: true
 cis_security_hardening::rules::limits_maxlogins::maxlogins: 10
 cis_security_hardening::rules::kdump_service::enforce: true
@@ -156,6 +158,7 @@ cis_security_hardening::rules::rpcbind::enforce: true
 
 cis_security_hardening::rules::disable_ipv6::enforce: true
 cis_security_hardening::rules::disable_wireless::enforce: true
+cis_security_hardening::rules::disable_bluetooth::enforce: false
 
 cis_security_hardening::rules::disable_ip_forwarding::enforce: true
 cis_security_hardening::rules::disable_packet_redirect::enforce: true

@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.9.2
+
+* Updated to Ubuntu 20.04 benchmark version 2.0.1
+
 ## Release 0.9.1
 
 * Fix for issue #66
