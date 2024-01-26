@@ -20,7 +20,7 @@ describe 'cis_security_hardening::rules::disable_rds' do
 
           if enforce
             if (os_facts[:os]['name'].casecmp('debian').zero? && os_facts[:os]['release']['major'] > '10') ||
-               (os_facts[:os]['name'].casecmp('ubuntu').zero? && os_facts[:os]['release']['major'] >= '22')
+               (os_facts[:os]['name'].casecmp('ubuntu').zero? && os_facts[:os]['release']['major'] >= '20')
               cmd = '/bin/false'
               is_expected.to contain_kmod__blacklist('rds')
             else

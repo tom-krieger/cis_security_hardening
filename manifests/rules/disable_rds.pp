@@ -22,10 +22,8 @@ class cis_security_hardening::rules::disable_rds (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    if $facts['os']['name'].downcase() == 'debian' and
-    $facts['os']['release']['major'] > '10' or
-    ($facts['os']['name'].downcase() == 'ubuntu' and
-    $facts['os']['release']['major'] >= '20') {
+    if $facts['os']['name'].downcase() == 'debian' and $facts['os']['release']['major'] > '10' or
+    ($facts['os']['name'].downcase() == 'ubuntu' and $facts['os']['release']['major'] >= '20') {
       $command = '/bin/false'
       kmod::blacklist { 'rds': }
     } else {

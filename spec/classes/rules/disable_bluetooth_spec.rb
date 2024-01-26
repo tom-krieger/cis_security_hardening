@@ -21,10 +21,10 @@ describe 'cis_security_hardening::rules::disable_bluetooth' do
           if enforce
             if os_facts[:os]['name'].casecmp('ubuntu').zero? && os_facts[:os]['release']['major'] >= '20'
               is_expected.to contain_service('bluetooth.service')
-              with(
-                'ensure' => 'stopped',
-                'enable' => false,
-              )
+                .with(
+                  'ensure' => 'stopped',
+                  'enable' => false,
+                )
             else
               is_expected.to contain_kmod__install('bluetooth')
                 .with(
