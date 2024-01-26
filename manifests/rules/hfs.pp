@@ -25,6 +25,7 @@ class cis_security_hardening::rules::hfs (
       kmod::install { 'hfs':
         command => '/bin/false',
       }
+      kmod::blacklist { 'hfs': }
     } else {
       kmod::install { 'hfs':
         command => '/bin/true',

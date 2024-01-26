@@ -25,6 +25,7 @@ class cis_security_hardening::rules::freevxfs (
       kmod::install { 'freevxfs':
         command => '/bin/false',
       }
+      kmod::blacklist { 'freevxfs': }
     } else {
       kmod::install { 'freevxfs':
         command => '/bin/true',

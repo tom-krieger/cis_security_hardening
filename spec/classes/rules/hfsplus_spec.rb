@@ -19,7 +19,7 @@ describe 'cis_security_hardening::rules::hfsplus' do
           is_expected.to compile
           if enforce
             if os_facts[:os]['name'].casecmp('ubuntu').zero? && os_facts[:os]['release']['major'] >= '20'
-              is_expected.to contain_kmod__install('gfsplus')
+              is_expected.to contain_kmod__install('hfsplus')
                 .with(
                   command: '/bin/false',
                 )

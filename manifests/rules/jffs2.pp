@@ -25,6 +25,7 @@ class cis_security_hardening::rules::jffs2 (
       kmod::install { 'jffs2':
         command => '/bin/false',
       }
+      kmod::blacklist { 'jffs2': }
     } else {
       kmod::install { 'jffs2':
         command => '/bin/true',
