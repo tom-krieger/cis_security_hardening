@@ -7,7 +7,7 @@ enforce_options = [true, false]
 describe 'cis_security_hardening::rules::automatic_error_reporting' do
   on_supported_os.each do |os, os_facts|
     enforce_options.each do |enforce|
-      context "on #{os}" do
+      context "on #{os} with enforce #{enforce} and apport installed" do
         let(:facts) do
           os_facts.merge(
             cis_security_hardening: {
@@ -39,6 +39,22 @@ describe 'cis_security_hardening::rules::automatic_error_reporting' do
           else
             is_expected.not_to contain_package('apport')
           end
+        }
+      end
+
+      context "on #{os} with enforce #{enforce} and apport not installed" do
+        let(:facts) do
+          os_facts.merge()
+        end
+        let(:params) do
+          {
+            'enforce' => enforce,
+          }
+        end
+
+        it {
+          is_expected.to compile.with_all_deps
+          is_expected.not_to contain_package('apport')
         }
       end
     end
