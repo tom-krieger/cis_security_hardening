@@ -162,7 +162,7 @@ cis_security_hardening::rules::rpcbind::enforce: true
 
 cis_security_hardening::rules::disable_ipv6::enforce: true
 cis_security_hardening::rules::disable_wireless::enforce: true
-cis_security_hardening::rules::disable_bluetooth::enforce: false
+cis_security_hardening::rules::disable_bluetooth::enforce: true
 
 cis_security_hardening::rules::disable_ip_forwarding::enforce: true
 cis_security_hardening::rules::disable_packet_redirect::enforce: true
