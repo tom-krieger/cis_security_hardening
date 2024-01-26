@@ -8,6 +8,7 @@ describe 'cis_security_hardening::rules::hfs' do
   on_supported_os.each do |os, _os_facts|
     enforce_options.each do |enforce|
       context "on #{os} with enforce = #{enforce}" do
+        let(:facts) { os_facts }
         let(:params) do
           {
             'enforce' => enforce,
