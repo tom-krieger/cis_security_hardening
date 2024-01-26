@@ -14,14 +14,21 @@ cis_security_hardening::benchmark::ubuntu::20:
         - tmp_nodev
         - tmp_nosuid
         - tmp_noexec
+        - var_tmp_nodev
+        - var_tmp_nosuid
+        - var_tmp_noexec
+         - var_log_nodev
+        - var_log_noexec
+        - var_log_nosuid
+        - var_log_audit_nodev
+        - var_log_audit_noexec
+        - var_log_audit_nosuid
+        - home_nodev
+        - home_nosuid
         - dev_shm
         - dev_shm_nodev
         - dev_shm_nosuid
         - dev_shm_noexec
-        - var_tmp_nodev
-        - var_tmp_nosuid
-        - var_tmp_noexec
-        - home_nodev
         - sticky_world_writeable_files
         - disable_automount
         - disable_usb_storage
@@ -102,7 +109,6 @@ cis_security_hardening::benchmark::ubuntu::20:
         - rsh_client
         - talk_client
         - telnet_client
-
         - ldap_client
         - rpcbind
     unused_network_protocols:

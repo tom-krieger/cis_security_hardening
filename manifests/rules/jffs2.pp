@@ -21,8 +21,14 @@ class cis_security_hardening::rules::jffs2 (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    kmod::install { 'jffs2':
-      command => '/bin/true',
+    if $facts['os']['name'].downcase() == 'ubuntu' and $facts['os']['release']['major'] >= '20' {
+      kmod::install { 'jffs2':
+        command => '/bin/false',
+      }
+    } else {
+      kmod::install { 'jffs2':
+        command => '/bin/true',
+      }
     }
   }
 }

@@ -11,6 +11,9 @@ cis_security_hardening::auditd_dirs_to_include:
   - '/usr'
 cis_security_hardening::auditd_rules_fact_file: '/opt/puppetlabs/facter/facts.d/cis_security_hardening_auditd.yaml'
 
+cis_security_hardening::auditd_cron::ensure: present
+cis_security_hardening::sticky_world_writable_cron::ensure: present
+
 cis_security_hardening::rules::cramfs::enforce: true
 cis_security_hardening::rules::freevxfs::enforce: true
 cis_security_hardening::rules::jffs2::enforce: true
@@ -24,15 +27,24 @@ cis_security_hardening::rules::tmp_filesystem::size: 0
 cis_security_hardening::rules::tmp_noexec::enforce: true
 cis_security_hardening::rules::tmp_nodev::enforce: true
 cis_security_hardening::rules::tmp_nosuid::enforce: true
+cis_security_hardening::rules::var_nodev::enforce: true
+cis_security_hardening::rules::var_nosuid::enforce: true
+cis_security_hardening::rules::var_tmp_noexec::enforce: true
+cis_security_hardening::rules::var_tmp_nodev::enforce: true
+cis_security_hardening::rules::var_tmp_nosuid::enforce: true
+cis_security_hardening::rules::var_log_nodev::enforce: true
+cis_security_hardening::rules::var_log_noexec::enforce: true
+cis_security_hardening::rules::var_log_nosuid::enforce: true
+cis_security_hardening::rules::var_log_audit_nodev::enforce: true
+cis_security_hardening::rules::var_log_audit_noexec::enforce: true
+cis_security_hardening::rules::var_log_audit_nosuid::enforce: true
+cis_security_hardening::rules::home_nodev::enforce: true
+cis_security_hardening::rules::home_nosuid::enforce: true
 cis_security_hardening::rules::dev_shm::enforce: true
 cis_security_hardening::rules::dev_shm::size: 0
 cis_security_hardening::rules::dev_shm_noexec::enforce: true
 cis_security_hardening::rules::dev_shm_nodev::enforce: true
 cis_security_hardening::rules::dev_shm_nosuid::enforce: true
-cis_security_hardening::rules::var_tmp_noexec::enforce: true
-cis_security_hardening::rules::var_tmp_nodev::enforce: true
-cis_security_hardening::rules::var_tmp_nosuid::enforce: true
-cis_security_hardening::rules::home_nodev::enforce: true
 cis_security_hardening::rules::sticky_world_writeable_files::enforce: true
 cis_security_hardening::rules::disable_automount::enforce: true
 cis_security_hardening::rules::disable_usb_storage::enforce: true
@@ -435,6 +447,7 @@ cis_security_hardening::rules::sshd_limit_access::deny_users: []
 cis_security_hardening::rules::sshd_limit_access::allow_groups: []
 cis_security_hardening::rules::sshd_limit_access::deny_groups: []
 cis_security_hardening::rules::sshd_loglevel::enforce: true
+cis_security_hardening::rules::sshd_loglevel::log_level: INFO
 cis_security_hardening::rules::sshd_x11_forward::enforce: true
 cis_security_hardening::rules::sshd_max_auth_tries::enforce: true
 cis_security_hardening::rules::sshd_max_auth_tries::max_auth_tries: 4
@@ -481,6 +494,7 @@ cis_security_hardening::rules::sshd_max_startups::enforce: true
 cis_security_hardening::rules::sshd_max_sessions::enforce: true
 cis_security_hardening::rules::sshd_install::enforce: true
 cis_security_hardening::rules::sshd_x11_use_localhost::enforce: true
+
 cis_security_hardening::rules::pam_mfa::enforce: true
 cis_security_hardening::rules::pki_certs_validation::enforce: true
 cis_security_hardening::rules::pki_certs_validation::cert_policy: 'ca,signature,ocsp_on,crl_auto;'

@@ -27,7 +27,7 @@ describe 'cis_security_hardening::rules::disable_tipc' do
                 cmd = '/bin/true'
               end
             elsif os_facts[:os]['name'].casecmp('ubuntu').zero?
-              if os_facts[:os]['release']['major'] >= '22'
+              if os_facts[:os]['release']['major'] >= '20'
                 cmd = '/bin/false'
                 is_expected.to contain_kmod__blacklist('tipc')
               else
