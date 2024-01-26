@@ -19,7 +19,8 @@
 class cis_security_hardening::rules::automatic_error_reporting (
   Boolean $enforce = false,
 ) {
-  if $enforce and $facts['cis_security_hardening']['apport']['installed'] {
+  $apport = fact('cis_security_hardening.apport.installed')
+  if $enforce and $apport {
     $ensure = $facts['os']['family'].downcase() ? {
       'suse'  => 'absent',
       default => 'purged',

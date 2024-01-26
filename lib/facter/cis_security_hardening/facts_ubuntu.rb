@@ -49,6 +49,7 @@ def facts_ubuntu(os, distid, release)
                      end
   cis_security_hardening[:x11] = x11
 
+  # check for apport
   apport = {}
   pkgs = Facter::Core::Execution.exec('dpkg -l | grep apport| awk \'{print $2;}\'')
   apport['installed'] = if pkgs.nil? || pkgs.empty?
@@ -56,6 +57,7 @@ def facts_ubuntu(os, distid, release)
                         else
                           true
                         end
+  cis_security_hardening['apport'] = apport
 
   # check for xdmcp
   cis_security_hardening['xdcmp'] = File.exist?('/etc/gdm3/custom.conf')
