@@ -154,7 +154,7 @@ class cis_security_hardening (
       }
     }
 
-    $v1 = lookup('cis_security_hardening::rules::authselect::enforce')
+    $v1 = lookup('cis_security_hardening::rules::authselect::enforce', Boolean, 'first', false)
     $v2 = fact('cis_security_hardening.rules.authselect.enforce')
     echo { 'debug test 99':
       message  => "v1 = ${v1}, v2 = ${v2}",
