@@ -41,6 +41,12 @@ class cis_security_hardening::rules::iptables_install (
       }
     }
 
+    if $facts['os']['name'].downcase() == 'ubuntu' and $facts['os']['release']['major'] >= '20' {
+      ensure_packages(['iptables', 'iptables-persist'], {
+          ensure => installed,
+      })
+    }
+
     if ($facts['os']['name'].downcase() == 'redhat' or $facts['os']['name'].downcase() == 'centos') and
     $facts['os']['release']['major'] > '7' {
       $params_rh = {

@@ -44,7 +44,7 @@ describe 'cis_security_hardening::rules::automatic_error_reporting' do
 
       context "on #{os} with enforce #{enforce} and apport not installed" do
         let(:facts) do
-          os_facts.merge()
+          os_facts.merge
         end
         let(:params) do
           {

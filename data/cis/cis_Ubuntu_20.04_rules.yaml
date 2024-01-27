@@ -14,6 +14,8 @@ cis_security_hardening::benchmark::ubuntu::20:
         - tmp_nodev
         - tmp_nosuid
         - tmp_noexec
+        - var_nodev
+        - var_nosuid
         - var_tmp_nodev
         - var_tmp_nosuid
         - var_tmp_noexec

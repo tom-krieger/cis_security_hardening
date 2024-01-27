@@ -25,12 +25,12 @@ class cis_security_hardening::rules::rsyncd (
             ensure => purged,
         })
 
-        if $facts['os']['name'].downcase() == 'debian' {
-          ensure_resource('service', ['rsync'], {
-              ensure => 'stopped',
-              enable => false,
-          })
-        }
+        #if $facts['os']['name'].downcase() == 'debian' {
+        ensure_resource('service', ['rsync'], {
+            ensure => 'stopped',
+            enable => false,
+        })
+        #}
       }
       'suse': {
         ensure_packages(['rsync'], {

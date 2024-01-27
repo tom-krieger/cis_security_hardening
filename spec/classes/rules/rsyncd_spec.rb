@@ -27,13 +27,13 @@ describe 'cis_security_hardening::rules::rsyncd' do
                   'ensure' => 'purged',
                 )
 
-              if os_facts[:os]['name'].casecmp('debian').zero?
-                is_expected.to contain_service('rsync')
-                  .with(
-                    'ensure' => 'stopped',
-                    'enable' => false,
-                  )
-              end
+              # if os_facts[:os]['name'].casecmp('debian').zero?
+              is_expected.to contain_service('rsync')
+                .with(
+                  'ensure' => 'stopped',
+                  'enable' => false,
+                )
+              # end
 
             elsif os_facts[:os]['family'].casecmp('suse').zero?
 
