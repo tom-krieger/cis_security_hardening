@@ -153,14 +153,6 @@ class cis_security_hardening (
         include $class
       }
     }
-
-    $v1 = lookup('cis_security_hardening::rules::authselect::enforce', Boolean, 'first', false)
-    $v2 = fact('cis_security_hardening.rules.authselect.enforce')
-    echo { 'debug test 99':
-      message  => "v1 = ${v1}, v2 = ${v2}",
-      loglevel => 'info',
-      withpath => false,
-    }
   } else {
     echo { 'no bundles':
       message  => "No bundles found, enforcing nothing. (key = ${key})",

@@ -147,35 +147,38 @@ class cis_security_hardening::rules::umask_setting (
       mode    => '0644',
     }
 
-    $services.each |$srv| {
-      $profile = fact('cis_security_hardening.authselect.profile')
-      if $profile != undef and $profile != 'none' {
-        $pf_path = "/etc/authselect/custom/${profile}"
-      } else {
-        $pf_path = ''
-      }
-
-      $pf_file = "${pf_path}/${srv}"
-
-      if  (
-        $facts['os']['name'].downcase() == 'centos' or
-        $facts['os']['name'].downcase() == 'almalinux' or
-        $facts['os']['name'].downcase() == 'rocky'
-      ) and ($facts['os']['release']['major'] > '7' and $facts['os']['release']['major'] < '9') and $pf_path != '' {
-        file_line { "umask in ${srv}":
-          path               => $pf_file,
-          line               => 'session     optional                                     pam_umask.so',
-          match              => '^session\s+optional\s+pam_umask.so',
-          append_on_no_match => true,
-          notify             => Exec['authselect-apply-changes'],
+    $authselect_enforce = lookup('cis_security_hardening::rules::authselect::enforce', Boolean, 'first', false)
+    if ($facts['os']['family'].downcase() == 'redhat' and $authselect_enforce) or $facts['os']['family'].downcase() != 'redhat' {
+      $services.each |$srv| {
+        $profile = fact('cis_security_hardening.authselect.profile')
+        if $profile != undef and $profile != 'none' {
+          $pf_path = "/etc/authselect/custom/${profile}"
+        } else {
+          $pf_path = ''
         }
-      } else {
-        Pam { "pam umask ${srv}":
-          ensure  => present,
-          service => $srv,
-          type    => 'session',
-          control => 'optional',
-          module  => 'pam_umask.so',
+
+        $pf_file = "${pf_path}/${srv}"
+
+        if  (
+          $facts['os']['name'].downcase() == 'centos' or
+          $facts['os']['name'].downcase() == 'almalinux' or
+          $facts['os']['name'].downcase() == 'rocky'
+        ) and ($facts['os']['release']['major'] > '7' and $facts['os']['release']['major'] < '9') and $pf_path != '' {
+          file_line { "umask in ${srv}":
+            path               => $pf_file,
+            line               => 'session     optional                                     pam_umask.so',
+            match              => '^session\s+optional\s+pam_umask.so',
+            append_on_no_match => true,
+            notify             => Exec['authselect-apply-changes'],
+          }
+        } else {
+          Pam { "pam umask ${srv}":
+            ensure  => present,
+            service => $srv,
+            type    => 'session',
+            control => 'optional',
+            module  => 'pam_umask.so',
+          }
         }
       }
     }
