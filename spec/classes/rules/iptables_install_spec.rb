@@ -26,7 +26,7 @@ describe 'cis_security_hardening::rules::iptables_install' do
               )
 
             if os_facts[:os]['name'].casecmp('ubuntu').zero? && os_facts[:os]['release']['major'] >= '20'
-              is_expected.to contain_package('iptables-persist')
+              is_expected.to contain_package('iptables-persistent')
                 .with(
                   'ensure' => 'installed',
                 )
