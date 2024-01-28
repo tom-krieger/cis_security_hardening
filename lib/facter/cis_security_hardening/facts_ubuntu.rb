@@ -59,6 +59,15 @@ def facts_ubuntu(os, distid, release)
                         end
   cis_security_hardening['apport'] = apport
 
+  aide = {}
+  pkgs = Facter::Core::Execution.exec('dpkg -l | grep aide | awk \'{print $2;}\'')
+  aide['installed'] = if pkgs.nil? || pkgs.empty?
+                        false
+                      else
+                        true
+                      end
+  cis_security_hardening['aide'] = aide
+
   # check for xdmcp
   cis_security_hardening['xdcmp'] = File.exist?('/etc/gdm3/custom.conf')
 

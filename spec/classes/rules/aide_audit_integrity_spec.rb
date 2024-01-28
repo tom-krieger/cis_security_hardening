@@ -8,7 +8,14 @@ describe 'cis_security_hardening::rules::aide_audit_integrity' do
   on_supported_os.each do |os, os_facts|
     enforce_options.each do |enforce|
       context "on #{os}" do
-        let(:facts) { os_facts }
+        let(:facts) { os_facts.merge(
+          'cis_security_hardening' => {
+            'aide'=> {
+              'installed' => true,
+            }
+          }
+        ) 
+      }
         let(:params) do
           {
             'enforce' => enforce,
