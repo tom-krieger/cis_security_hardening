@@ -44,7 +44,7 @@ class cis_security_hardening::rules::aide_audit_integrity (
       'ubuntu': {
         $aide = fact('cis_security_hardening.aide.installed') ? {
           undef   => false,
-          default => true,
+          default => fact('cis_security_hardening.aide.installed'),
         }
         if $aide {
           if $facts['os']['release']['major'] >= '20' {
@@ -52,19 +52,23 @@ class cis_security_hardening::rules::aide_audit_integrity (
           } else {
             $conffile = '/etc/aide.conf'
           }
+        } else {
+          $conffile = ''
         }
       }
       default: {
         $conffile = '/etc/aide.conf'
       }
     }
-    $tools.each |$tool, $data| {
-      file_line { "aide tool ${tool}":
-        ensure             => present,
-        append_on_no_match => true,
-        path               => $conffile,
-        line               => "${tool} ${data}",
-        match              => "^${tool}",
+    unless empty($conffile) {
+      $tools.each |$tool, $data| {
+        file_line { "aide tool ${tool}":
+          ensure             => present,
+          append_on_no_match => true,
+          path               => $conffile,
+          line               => "${tool} ${data}",
+          match              => "^${tool}",
+        }
       }
     }
   }
