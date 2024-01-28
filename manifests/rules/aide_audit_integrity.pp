@@ -42,7 +42,7 @@ class cis_security_hardening::rules::aide_audit_integrity (
         $conffile = '/etc/aide.conf'
       }
       'ubuntu': {
-        if $facts['os']['release']['major'] >= '22' {
+        if $facts['os']['release']['major'] >= '20' {
           $conffile = '/etc/aide/aide.conf'
         } else {
           $conffile = '/etc/aide.conf'

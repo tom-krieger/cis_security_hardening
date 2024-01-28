@@ -30,7 +30,7 @@ describe 'cis_security_hardening::rules::aide_audit_integrity' do
             conffile = if os_facts[:os]['name'].casecmp('rocky').zero?
                          '/etc/aide.conf'
                        elsif os_facts[:os]['name'].casecmp('ubuntu').zero?
-                         if os_facts[:os]['release']['major'] >= '22'
+                         if os_facts[:os]['release']['major'] >= '20'
                            '/etc/aide/aide.conf'
                          else
                            '/etc/aide.conf'
