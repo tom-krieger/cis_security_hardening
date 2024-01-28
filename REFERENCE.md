@@ -12,6 +12,7 @@
 * [`cis_security_hardening::auditd_cron`](#cis_security_hardening--auditd_cron): Create a cron job to search privileged commands for auditd
 * [`cis_security_hardening::config`](#cis_security_hardening--config): Configure the module
 * [`cis_security_hardening::reboot`](#cis_security_hardening--reboot): Handle necessary reboot
+* [`cis_security_hardening::rules::automatic_error_reporting`](#cis_security_hardening--rules--automatic_error_reporting): Ensure Automatic Error Reporting is not enabled (Automated)
 * [`cis_security_hardening::rules::dac_on_hardlinks`](#cis_security_hardening--rules--dac_on_hardlinks): Ensure the operating system is configured to enable DAC on hardlinks
 * [`cis_security_hardening::rules::dac_on_symlinks`](#cis_security_hardening--rules--dac_on_symlinks): Ensure the operating system is configured to enable DAC on symlinks
 * [`cis_security_hardening::rules::gdm_lock_delay`](#cis_security_hardening--rules--gdm_lock_delay): Ensure overriding the screensaver lock-delay setting is prevented
@@ -785,6 +786,38 @@ Data type: `Boolean`
 Reboot when necessary after `time_until_reboot` is exeeded
 
 Default value: `$cis_security_hardening::auto_reboot`
+
+### <a name="cis_security_hardening--rules--automatic_error_reporting"></a>`cis_security_hardening::rules::automatic_error_reporting`
+
+The Apport Error Reporting Service automatically generates crash reports for debugging
+
+Rationale:
+Apport collects potentially sensitive data, such as core dumps, stack traces, and log files. They can contain passwords,
+credit card numbers, serial numbers, and other private material.
+
+#### Examples
+
+##### 
+
+```puppet
+class { 'cis_security_hardening::rules::automatic_error_reporting':
+          enforce => true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::automatic_error_reporting` class:
+
+* [`enforce`](#-cis_security_hardening--rules--automatic_error_reporting--enforce)
+
+##### <a name="-cis_security_hardening--rules--automatic_error_reporting--enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Sets rule enforcemt. If set to true, code will be exeuted to bring the system into a comliant state.
+
+Default value: `false`
 
 ### <a name="cis_security_hardening--rules--dac_on_hardlinks"></a>`cis_security_hardening::rules::dac_on_hardlinks`
 
