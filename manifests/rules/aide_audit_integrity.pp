@@ -44,7 +44,7 @@ class cis_security_hardening::rules::aide_audit_integrity (
       'ubuntu': {
         $aide = fact('cis_security_hardening.aide.installed') ? {
           undef   => false,
-          default => true,
+          default => fact('cis_security_hardening.aide.installed'),
         }
         if $aide {
           if $facts['os']['release']['major'] >= '20' {
