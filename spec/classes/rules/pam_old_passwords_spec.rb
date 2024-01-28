@@ -128,7 +128,7 @@ describe 'cis_security_hardening::rules::pam_old_passwords' do
                     'position'  => 'before *[type="password" and module="pam_unix.so"]',
                     'arguments' => ['use_authok', 'remember=5'],
                   )
-              elsif os_facts[:os]['name'].casecmp('ubuntu').zero? && os_facts[:os]['release']['major'] >= '22'
+              elsif os_facts[:os]['name'].casecmp('ubuntu').zero? && os_facts[:os]['release']['major'] >= '20'
                 is_expected.to contain_pam('ubuntu-remember-pld-pw')
                   .with(
                     'ensure'           => 'present',

@@ -54,7 +54,7 @@ class cis_security_hardening::rules::auditd_actions (
         }
       }
       'ubuntu': {
-        if $facts['os']['release']['major'] >= '22' {
+        if $facts['os']['release']['major'] >= '20' {
           concat::fragment { 'watch admin actions rule 1':
             order   => 21,
             target  => $cis_security_hardening::rules::auditd_init::rules_file,

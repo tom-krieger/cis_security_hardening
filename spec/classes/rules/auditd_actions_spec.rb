@@ -79,7 +79,7 @@ describe 'cis_security_hardening::rules::auditd_actions' do
 
             elsif os_facts[:os]['name'].casecmp('ubuntu').zero?
 
-              if os_facts[:os]['release']['major'] >= '22'
+              if os_facts[:os]['release']['major'] >= '20'
                 is_expected.to contain_concat__fragment('watch admin actions rule 1')
                   .with(
                     'order'   => 21,

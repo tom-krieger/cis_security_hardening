@@ -164,6 +164,8 @@ cis_security_hardening::benchmark::ubuntu::20:
         - ip6tables_outbound_established
         - ip6tables_open_ports
     configure_accounting:
+      level1: 
+        - aide_audit_integrity
       level2:
         - auditd_init
         - auditd_package
@@ -187,6 +189,7 @@ cis_security_hardening::benchmark::ubuntu::20:
         - auditd_scope
         - auditd_actions
         - auditd_modules
+        - auditd_user_emulation
         - auditd_immutable
       stig:
         - auditd_remote

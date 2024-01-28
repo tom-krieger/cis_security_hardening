@@ -37,7 +37,7 @@ describe 'cis_security_hardening::rules::rsyncd' do
                 .with(
                   'command' => 'systemctl mask rsync',
                   'path'    => ['/bin', '/usr/bin'],
-                  'onlyif'  => 'test "$(systemctl is-enabled rsync)" = "enabled"',
+                  'onlyif'  => 'test $(systemctl is-enabled rsync) = "enabled"',
                 )
 
             elsif os_facts[:os]['family'].casecmp('suse').zero?

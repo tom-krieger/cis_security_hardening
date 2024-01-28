@@ -33,7 +33,7 @@ class cis_security_hardening::rules::rsyncd (
         exec { 'mask rsync daemon':
           command => 'systemctl mask rsync',
           path    => ['/bin', '/usr/bin'],
-          onlyif  => 'test "$(systemctl is-enabled rsync)" = "enabled"',
+          onlyif  => 'test $(systemctl is-enabled rsync) = "enabled"',
         }
       }
       'suse': {

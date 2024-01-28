@@ -328,6 +328,7 @@ cis_security_hardening::rules::auditd_sudoedit_use::enforce: true
 cis_security_hardening::rules::auditd_chsh_use::enforce: true
 cis_security_hardening::rules::auditd_newgrp_use::enforce: true
 cis_security_hardening::rules::auditd_chcon_use::enforce: true
+cis_security_hardening::rules::auditd_user_emulation::enforce: true
 cis_security_hardening::rules::auditd_apparmor_parser_use::enforce: true
 cis_security_hardening::rules::auditd_setfacl_use::enforce: true
 cis_security_hardening::rules::auditd_chacl_use::enforce: true
@@ -365,6 +366,15 @@ cis_security_hardening::rules::auditd_tools_perms::tools:
   - /sbin/auditd 
   - /sbin/audispd 
   - /sbin/augenrules
+
+cis_security_hardening::rules::aide_audit_integrity::enforce: true
+cis_security_hardening::rules::aide_audit_integrity::tools:
+  /sbin/auditctl: p+i+n+u+g+s+b+acl+xattrs+sha512
+  /sbin/auditd: p+i+n+u+g+s+b+acl+xattrs+sha512
+  /sbin/ausearch: p+i+n+u+g+s+b+acl+xattrs+sha512
+  /sbin/aureport: p+i+n+u+g+s+b+acl+xattrs+sha512
+  /sbin/autrace: p+i+n+u+g+s+b+acl+xattrs+sha512
+  /sbin/augenrules: p+i+n+u+g+s+b+acl+xattrs+sha512
 
 cis_security_hardening::rules::rsyslog_installed::enforce: true
 cis_security_hardening::rules::rsyslog_service::enforce: true
@@ -510,6 +520,9 @@ cis_security_hardening::rules::pam_pw_requirements::enforce: true
 cis_security_hardening::rules::pam_pw_requirements::minlen: 14
 cis_security_hardening::rules::pam_pw_requirements::minclass: 4
 cis_security_hardening::rules::pam_pw_requirements::retry: 3
+cis_security_hardening::rules::pam_pw_requirements::difok: 2
+cis_security_hardening::rules::pam_pw_requirements::dictcheck: true
+cis_security_hardening::rules::pam_pw_requirements::maxrepeat: 3
 cis_security_hardening::rules::pam_lockout::enforce: true
 cis_security_hardening::rules::pam_lockout::attempts: 3
 cis_security_hardening::rules::pam_lockout::lockouttime: 300
