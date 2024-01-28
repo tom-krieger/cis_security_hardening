@@ -19,10 +19,18 @@ describe 'cis_security_hardening::rules::disable_bluetooth' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_kmod__install('bluetooth')
-              .with(
-                command: '/bin/true',
-              )
+            if os_facts[:os]['name'].casecmp('ubuntu').zero? && os_facts[:os]['release']['major'] >= '20'
+              is_expected.to contain_service('bluetooth.service')
+                .with(
+                  'ensure' => 'stopped',
+                  'enable' => false,
+                )
+            else
+              is_expected.to contain_kmod__install('bluetooth')
+                .with(
+                  command: '/bin/true',
+                )
+            end
           else
             is_expected.not_to contain_kmod__install('bluetooth')
           end

@@ -40,9 +40,8 @@ describe 'cis_security_hardening::rules::auditd_kernel_modules' do
           is_expected.to compile
 
           if enforce
-            auid = if os_facts[:os]['name'].casecmp('rocky').zero? || os_facts[:os]['name'].casecmp('almalinux').zero?
-                     'unset'
-                   elsif os_facts[:os]['name'].casecmp('debian').zero?
+            auid = if os_facts[:os]['name'].casecmp('rocky').zero? || os_facts[:os]['name'].casecmp('almalinux').zero? ||
+                      os_facts[:os]['name'].casecmp('debian').zero? || os_facts[:os]['name'].casecmp('ubuntu').zero?
                      'unset'
                    else
                      '4294967295'

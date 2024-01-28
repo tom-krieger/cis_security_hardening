@@ -40,6 +40,14 @@ class cis_security_hardening::rules::disable_usb_storage (
           $command = '/bin/true'
         }
       }
+      'ubuntu': {
+        if $facts['os']['name'].downcase() == 'ubuntu' and $facts['os']['release']['major'] >= '20' {
+          $command = '/bin/false'
+          kmod::blacklist { 'usb-storage': }
+        } else {
+          $command = '/bin/true'
+        }
+      }
       default: {
         $command = '/bin/true'
       }

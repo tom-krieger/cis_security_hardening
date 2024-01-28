@@ -189,23 +189,27 @@ describe 'cis_security_hardening::rules::umask_setting' do
                       'module'  => 'pam_umask.so',
                     )
                 else
-                  is_expected.to contain_pam('pam umask system-auth')
-                    .with(
-                      'ensure'  => 'present',
-                      'service' => 'system-auth',
-                      'type'    => 'session',
-                      'control' => 'optional',
-                      'module'  => 'pam_umask.so',
-                    )
+                  unless (os_facts[:os]['name'].casecmp('centos').zero? ||
+                      os_facts[:os]['name'].casecmp('redhat').zero?) &&
+                         (os_facts[:os]['release']['major'] == '7')
+                    is_expected.to contain_pam('pam umask system-auth')
+                      .with(
+                        'ensure'  => 'present',
+                        'service' => 'system-auth',
+                        'type'    => 'session',
+                        'control' => 'optional',
+                        'module'  => 'pam_umask.so',
+                      )
 
-                  is_expected.to contain_pam('pam umask password-auth')
-                    .with(
-                      'ensure'  => 'present',
-                      'service' => 'password-auth',
-                      'type'    => 'session',
-                      'control' => 'optional',
-                      'module'  => 'pam_umask.so',
-                    )
+                    is_expected.to contain_pam('pam umask password-auth')
+                      .with(
+                        'ensure'  => 'present',
+                        'service' => 'password-auth',
+                        'type'    => 'session',
+                        'control' => 'optional',
+                        'module'  => 'pam_umask.so',
+                      )
+                  end
                 end
               end
             end

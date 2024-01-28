@@ -21,8 +21,15 @@ class cis_security_hardening::rules::freevxfs (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    kmod::install { 'freevxfs':
-      command => '/bin/true',
+    if $facts['os']['name'].downcase() == 'ubuntu' and $facts['os']['release']['major'] >= '20' {
+      kmod::install { 'freevxfs':
+        command => '/bin/false',
+      }
+      kmod::blacklist { 'freevxfs': }
+    } else {
+      kmod::install { 'freevxfs':
+        command => '/bin/true',
+      }
     }
   }
 }

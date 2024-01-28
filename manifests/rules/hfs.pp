@@ -21,8 +21,16 @@ class cis_security_hardening::rules::hfs (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    kmod::install { 'hfs':
-      command => '/bin/true',
+    if $facts['os']['name'].downcase() == 'ubuntu' and $facts['os']['release']['major'] >= '20' {
+      kmod::install { 'hfs':
+        command => '/bin/false',
+      }
+      kmod::blacklist { 'hfs': }
+    } else {
+      kmod::install { 'hfs':
+        command => '/bin/true',
+      }
     }
+    k
   }
 }

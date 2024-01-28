@@ -39,7 +39,7 @@ class cis_security_hardening::rules::disable_tipc (
         }
       }
       'ubuntu': {
-        if $facts['os']['release']['major'] >= '22' {
+        if $facts['os']['release']['major'] >= '20' {
           $command = '/bin/false'
           kmod::blacklist { 'tipc': }
         } else {

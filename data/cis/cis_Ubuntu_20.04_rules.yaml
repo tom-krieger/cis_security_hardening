@@ -14,14 +14,23 @@ cis_security_hardening::benchmark::ubuntu::20:
         - tmp_nodev
         - tmp_nosuid
         - tmp_noexec
+        - var_nodev
+        - var_nosuid
+        - var_tmp_nodev
+        - var_tmp_nosuid
+        - var_tmp_noexec
+        - var_log_nodev
+        - var_log_noexec
+        - var_log_nosuid
+        - var_log_audit_nodev
+        - var_log_audit_noexec
+        - var_log_audit_nosuid
+        - home_nodev
+        - home_nosuid
         - dev_shm
         - dev_shm_nodev
         - dev_shm_nosuid
         - dev_shm_noexec
-        - var_tmp_nodev
-        - var_tmp_nosuid
-        - var_tmp_noexec
-        - home_nodev
         - sticky_world_writeable_files
         - disable_automount
         - disable_usb_storage
@@ -42,8 +51,10 @@ cis_security_hardening::benchmark::ubuntu::20:
     process_hardening:
       level1:
         - enable_aslr
+        - ptrace_scope
         - disable_prelink
         - restrict_core_dumps
+        - automatic_error_reporting
       stig:
         - limits_maxlogins
         - kdump_service
@@ -105,6 +116,8 @@ cis_security_hardening::benchmark::ubuntu::20:
         - ldap_client
         - rpcbind
     unused_network_protocols:
+      level1:
+        - disable_bluetooth
       level2:
         - disable_ipv6
         - disable_wireless
@@ -162,6 +175,8 @@ cis_security_hardening::benchmark::ubuntu::20:
         - ip6tables_outbound_established
         - ip6tables_open_ports
     configure_accounting:
+      level1: 
+        - aide_audit_integrity
       level2:
         - auditd_init
         - auditd_package
@@ -185,6 +200,7 @@ cis_security_hardening::benchmark::ubuntu::20:
         - auditd_scope
         - auditd_actions
         - auditd_modules
+        - auditd_user_emulation
         - auditd_immutable
       stig:
         - auditd_remote

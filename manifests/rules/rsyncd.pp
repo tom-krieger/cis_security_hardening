@@ -25,11 +25,15 @@ class cis_security_hardening::rules::rsyncd (
             ensure => purged,
         })
 
-        if $facts['os']['name'].downcase() == 'debian' {
-          ensure_resource('service', ['rsync'], {
-              ensure => 'stopped',
-              enable => false,
-          })
+        ensure_resource('service', ['rsync'], {
+            ensure => 'stopped',
+            enable => false,
+        })
+
+        exec { 'mask rsync daemon':
+          command => 'systemctl mask rsync',
+          path    => ['/bin', '/usr/bin'],
+          onlyif  => 'test $(systemctl is-enabled rsync) = "enabled"',
         }
       }
       'suse': {

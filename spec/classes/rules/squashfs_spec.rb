@@ -51,7 +51,7 @@ describe 'cis_security_hardening::rules::squashfs' do
                 )
               end
             elsif os_facts[:os]['name'].casecmp('ubuntu').zero?
-              if os_facts[:os]['release']['major'] >= '22'
+              if os_facts[:os]['release']['major'] >= '20'
                 is_expected.to contain_kmod__install('squashfs')
                   .with(
                   command: '/bin/false',

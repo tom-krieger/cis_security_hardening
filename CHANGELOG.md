@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.9.2
+
+* Updated to Ubuntu 20.04 benchmark version 2.0.1
+* fix for issue #76: umsask setting on Redhat like OSes only if authselect id not enforced
+
 ## Release 0.9.1
 
 * Fix for issue #66

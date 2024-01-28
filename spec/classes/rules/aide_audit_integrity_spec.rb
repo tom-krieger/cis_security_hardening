@@ -8,7 +8,15 @@ describe 'cis_security_hardening::rules::aide_audit_integrity' do
   on_supported_os.each do |os, os_facts|
     enforce_options.each do |enforce|
       context "on #{os}" do
-        let(:facts) { os_facts }
+        let(:facts) do
+          os_facts.merge(
+          'cis_security_hardening' => {
+            'aide' => {
+              'installed' => true,
+            }
+          },
+        )
+        end
         let(:params) do
           {
             'enforce' => enforce,
@@ -30,7 +38,7 @@ describe 'cis_security_hardening::rules::aide_audit_integrity' do
             conffile = if os_facts[:os]['name'].casecmp('rocky').zero?
                          '/etc/aide.conf'
                        elsif os_facts[:os]['name'].casecmp('ubuntu').zero?
-                         if os_facts[:os]['release']['major'] >= '22'
+                         if os_facts[:os]['release']['major'] >= '20'
                            '/etc/aide/aide.conf'
                          else
                            '/etc/aide.conf'

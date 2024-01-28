@@ -55,7 +55,7 @@ class cis_security_hardening::rules::udf (
         }
       }
       'ubuntu': {
-        if $facts['os']['release']['major'] >= '22' {
+        if $facts['os']['release']['major'] >= '20' {
           kmod::install { 'udf':
             command => '/bin/false',
           }
