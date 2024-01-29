@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.9.3
+
+* Fix fotr automatich error reporting in Ubuntu 20.04:
+  * use flag for package uninstallation
+  * disable and mask service
+
 ## Release 0.9.2
 
 * Updated to Ubuntu 20.04 benchmark version 2.0.1

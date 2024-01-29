@@ -20,7 +20,7 @@ describe 'cis_security_hardening::rules::automatic_error_reporting' do
         let(:params) do
           {
             'enforce' => enforce,
-            'delete_package'=> true,
+            'delete_package' => true,
           }
         end
 
@@ -40,7 +40,7 @@ describe 'cis_security_hardening::rules::automatic_error_reporting' do
                 'path'    => ['/bin', '/usr/bin'],
                 'onlyif'  => 'test $(systemctl is-enabled apport) = "enabled"',
               )
-          
+
             ensre = if os_facts[:os]['name'].casecmp('sles').zero?
                       'absent'
                     else
