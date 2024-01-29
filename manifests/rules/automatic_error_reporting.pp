@@ -9,6 +9,8 @@
 #
 # @param enforce
 #    Sets rule enforcemt. If set to true, code will be exeuted to bring the system into a comliant state.
+# @param delete_package
+#    If set to trur apport package will be removed, otherwise onle the service gets stopped and masked
 #
 #
 # @example
@@ -18,16 +20,30 @@
 #
 class cis_security_hardening::rules::automatic_error_reporting (
   Boolean $enforce = false,
+  Boolean $delete_package = false,
 ) {
   $apport = fact('cis_security_hardening.apport.installed')
   if $enforce and $apport {
-    $ensure = $facts['os']['family'].downcase() ? {
-      'suse'  => 'absent',
-      default => 'purged',
+    ensure_resource('service', ['apport'], {
+        ensure => 'stopped',
+        enable => false,
+    })
+
+    exec { 'mask apport daemon':
+      command => 'systemctl mask apport',
+      path    => ['/bin', '/usr/bin'],
+      onlyif  => 'test $(systemctl is-enabled apport) = "enabled"',
     }
 
-    ensure_packages(['apport'], {
-        ensure => $ensure,
-    })
+    if $delete_package {
+      $ensure = $facts['os']['family'].downcase() ? {
+        'suse'  => 'absent',
+        default => 'purged',
+      }
+
+      ensure_packages(['apport'], {
+          ensure => $ensure,
+      })
+    }
   }
 }
