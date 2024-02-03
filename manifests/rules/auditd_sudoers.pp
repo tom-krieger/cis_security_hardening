@@ -1,6 +1,5 @@
 # @summary
-#    Ensure the operating system generates audit records for all account creations, modifications, disabling, and termination 
-#    events that affect "/etc/sudoers"
+#    Ensure the operating system generates audit records for all account creations, modifications, disabling, and termination events
 #
 # The operating system must generate audit records for all account creations, modifications, disabling, and termination 
 # events that affect /etc/sudoers.

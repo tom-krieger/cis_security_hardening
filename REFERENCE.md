@@ -104,16 +104,13 @@ audited
 * `cis_security_hardening::rules::auditd_setfiles`: Ensure audit of setfiles command.
 * `cis_security_hardening::rules::auditd_setsebool`: Ensure audit of the setsebool command.
 * `cis_security_hardening::rules::auditd_setxattr_use`: Ensure successful and unsuccessful attempts to use the setxattr system call are recorded
-* `cis_security_hardening::rules::auditd_space_left`: Ensure the operating system takes action when allocated audit record storage volume reaches 75 percent of the repository
-maximum audit record storage capacity
+* `cis_security_hardening::rules::auditd_space_left`: Ensure the operating system takes action when allocated audit record storage volume reaches 75 percent
 * `cis_security_hardening::rules::auditd_ssh_agent_use`: Ensure successful and unsuccessful uses of the ssh-agent command are collected
 * `cis_security_hardening::rules::auditd_ssh_keysign_use`: Ensure successful and unsuccessful uses of the ssh-keysign command are collected
 * `cis_security_hardening::rules::auditd_sudo_use`: Ensure successful and unsuccessful uses of the sudo command are recorded
 * `cis_security_hardening::rules::auditd_sudoedit_use`: Ensure successful and unsuccessful attempts to use the sudoedit command are recorded
-* `cis_security_hardening::rules::auditd_sudoers`: Ensure the operating system generates audit records for all account creations, modifications, disabling, and termination
-events that affect "/etc/sudoers"
-* `cis_security_hardening::rules::auditd_sudoersd`: Ensure the operating system generates audit records for all account creations, modifications, disabling, and
-termination events that affect "/etc/sudoers.d/"
+* `cis_security_hardening::rules::auditd_sudoers`: Ensure the operating system generates audit records for all account creations, modifications, disabling, and termination events
+* `cis_security_hardening::rules::auditd_sudoersd`: Ensure the operating system generates audit records for all account creations, modifications, disabling, and termination events
 * `cis_security_hardening::rules::auditd_system_locale`: Ensure events that modify the system's network environment are collected
 * `cis_security_hardening::rules::auditd_time_change`: Ensure events that modify date and time information are collected
 * `cis_security_hardening::rules::auditd_tools_perms`: Ensure audit tools are mode of 0755 or more restrictive and owned by the right user and group

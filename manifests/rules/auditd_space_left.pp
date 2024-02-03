@@ -1,6 +1,5 @@
 # @summary
-#    Ensure the operating system takes action when allocated audit record storage volume reaches 75 percent of the repository 
-#    maximum audit record storage capacity
+#    Ensure the operating system takes action when allocated audit record storage volume reaches 75 percent
 #
 # The operating system must take action when allocated audit record storage volume reaches 75 percent of the repository maximum 
 # audit record storage capacity.
