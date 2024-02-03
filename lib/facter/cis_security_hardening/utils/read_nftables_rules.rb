@@ -2,6 +2,7 @@
 
 require 'pp'
 
+# read nftables rules data
 def read_nftables_rules(table = '')
   nft = {}
 

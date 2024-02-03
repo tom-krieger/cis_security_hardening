@@ -10,6 +10,7 @@ require 'facter/cis_security_hardening/utils/check_value_integer'
 require 'facter/cis_security_hardening/utils/read_open_ports'
 require 'facter/cis_security_hardening/utils/read_nfs_filesystems'
 
+# gather os common facts
 def common_facts(os, _distid, _release)
   facts = {}
 

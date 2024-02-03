@@ -2,6 +2,7 @@
 
 require 'pp'
 
+# read grub configuration data
 def read_grub_data
   grub = {}
   lines = Facter::Core::Execution.exec('grep /boot /etc/mtab').split("\n")

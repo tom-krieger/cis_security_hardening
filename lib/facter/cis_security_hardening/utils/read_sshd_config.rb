@@ -2,6 +2,7 @@
 
 require 'pp'
 
+# read sshd configuration data
 def read_sshd_config(long = true)
   sshd = {}
   if long

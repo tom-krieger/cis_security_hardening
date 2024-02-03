@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# read open ports
 def read_open_ports
   opports = []
   ss_cmd = ''

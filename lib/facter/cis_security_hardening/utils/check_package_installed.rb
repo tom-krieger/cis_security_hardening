@@ -4,7 +4,6 @@
 # params:
 #    opts: rpm options to use
 #    pkg:  package name to query
-
 def check_package_installed(pkg, opts = '-q')
   os = Facter.value(:osfamily)
   if (os == 'RedHat') || (os == 'Suse')

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# read firewalld xone ifaces
 def read_firewalld_zone_iface(val, firewalld)
   zone = 'undef'
   iface_assigned = false

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# read auditd configuration data
 def read_auditd_data
   auditd = {}
 

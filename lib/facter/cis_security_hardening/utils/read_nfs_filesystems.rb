@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# read nfs file systems
 def read_nfs_filesystems
   nfs_file_systems = {}
   if File.exist?('/etc/fstab')

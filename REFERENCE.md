@@ -810,12 +810,21 @@ class { 'cis_security_hardening::rules::automatic_error_reporting':
 The following parameters are available in the `cis_security_hardening::rules::automatic_error_reporting` class:
 
 * [`enforce`](#-cis_security_hardening--rules--automatic_error_reporting--enforce)
+* [`delete_package`](#-cis_security_hardening--rules--automatic_error_reporting--delete_package)
 
 ##### <a name="-cis_security_hardening--rules--automatic_error_reporting--enforce"></a>`enforce`
 
 Data type: `Boolean`
 
 Sets rule enforcemt. If set to true, code will be exeuted to bring the system into a comliant state.
+
+Default value: `false`
+
+##### <a name="-cis_security_hardening--rules--automatic_error_reporting--delete_package"></a>`delete_package`
+
+Data type: `Boolean`
+
+If set to trur apport package will be removed, otherwise onle the service gets stopped and masked
 
 Default value: `false`
 

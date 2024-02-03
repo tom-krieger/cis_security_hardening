@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# read apparmor configuration data
 def read_apparmor_data
   apparmor = {}
   if File.exist?('/sbin/apparmor_status') || File.exist?('/usr/sbin/apparmor_status')

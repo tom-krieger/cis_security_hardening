@@ -9,6 +9,7 @@ require 'facter/cis_security_hardening/utils/read_system_command_files'
 require 'facter/cis_security_hardening/utils/read_pam_pkcs11'
 require 'pp'
 
+# gather Ubuntu specific facts
 def facts_ubuntu(os, distid, release)
   cis_security_hardening = common_facts(os, distid, release)
 

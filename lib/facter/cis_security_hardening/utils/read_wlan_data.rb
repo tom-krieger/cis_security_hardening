@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# read wlan configuration data
 def read_wlan_data
   wlan = []
   data = {}

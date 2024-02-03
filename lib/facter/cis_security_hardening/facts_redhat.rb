@@ -9,8 +9,7 @@ require 'facter/cis_security_hardening/utils/read_firewalld_zone_iface'
 require 'facter/cis_security_hardening/utils/read_grub_data'
 require 'pp'
 
-# frozen_string_literal: true
-
+# gather Redhat specific facts
 def facts_redhat(os, distid, release)
   cis_security_hardening = common_facts(os, distid, release)
 

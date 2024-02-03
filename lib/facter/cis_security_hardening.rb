@@ -7,6 +7,7 @@ require 'facter/cis_security_hardening/facts_sles'
 require 'facter/cis_security_hardening/common_facts'
 require 'pp'
 
+# CIS security hardening facts
 Facter.add(:cis_security_hardening) do
   osfamily = Facter.value(:osfamily).downcase
   osystem = Facter.value(:operatingsystem).downcase

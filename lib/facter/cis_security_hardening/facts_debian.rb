@@ -7,6 +7,7 @@ require 'facter/cis_security_hardening/utils/read_iptables_rules'
 require 'facter/cis_security_hardening/utils/read_apparmor_data'
 require 'pp'
 
+# gather debian specific facts
 def facts_debian(os, distid, release)
   cis_security_hardening = common_facts(os, distid, release)
 
