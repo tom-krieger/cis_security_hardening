@@ -31,7 +31,13 @@ class cis_security_hardening::rules::shell_nologin (
     $no_shell_nologin = fact('cis_security_hardening.accounts.no_shell_nologin')
     if  $no_shell_nologin != undef and !empty($no_shell_nologin) {
       $no_shell_nologin.each | String $user | {
-        unless $user in $exclude {
+        if $user in $exclude {
+          echo { "user ${user} excluded":
+            message  => "user ${user} excluded",
+            loglevel => 'info',
+            withpath => false,
+          }
+        } else {
           exec { "nologin ${user}":
             command => "usermod -s /sbin/nologin ${user}",
             path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
