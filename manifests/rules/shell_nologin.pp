@@ -14,7 +14,7 @@
 #    Enforce the rule
 #
 # @param exclude
-#   Shells to exclude.
+#   Accounts to exclude.
 #
 # @example
 #   class { 'cis_security_hardening::rules::shell_nologin':
@@ -32,7 +32,7 @@ class cis_security_hardening::rules::shell_nologin (
     if  $no_shell_nologin != undef and !empty($no_shell_nologin) {
       $no_shell_nologin.each | String $user | {
         if $user in $exclude {
-          echo { "user ${user} excluded":
+          echo { "cis shell_nologin: user ${user} excluded":
             message  => "user ${user} excluded",
             loglevel => 'info',
             withpath => false,

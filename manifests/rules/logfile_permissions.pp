@@ -10,6 +10,8 @@
 #
 # @param enforce
 #    Enforce the rule
+# @param file_mode
+#.   Mode to set files to
 #
 # @example
 #   class { 'cis_security_hardening::rules::logfile_permissions':
@@ -19,6 +21,8 @@
 # @api private
 class cis_security_hardening::rules::logfile_permissions (
   Boolean $enforce = false,
+  String $file_mode = '0640',
+  Optional[String] $dir_mode = undef,
 ) {
   if $enforce {
     # ensure_resource('file', '/var/log', {
@@ -28,8 +32,17 @@ class cis_security_hardening::rules::logfile_permissions (
     #     ignore  => ['puppetlabs', 'puppet'],
     # })
 
+    $data = $dir_mode ? {
+      undef   => {
+        file_mode => $file_mode,
+      },
+      default => {
+        file_mode => $file_mode,
+        dir_mode => $dir_mode,
+      },
+    }
     recursive_file_permissions { '/var/log':
-      file_mode => '0640',
+      * => $data,
     }
   }
 }
