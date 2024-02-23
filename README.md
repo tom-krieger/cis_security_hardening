@@ -61,9 +61,9 @@ The code of this security hardening module is based on the following CIS Benchma
 | Debian 10    | CIS Debian Linux 10 Benchmark                                | 1.0.0   | 02-13-2020 |
 | Debian 11    | CIS Debian Linux 11 Benchmark                                | 1.0.0   | 09-22-2022 |
 | Alma Linux 8 | CIS Alma Linux OS 8 Benchmark                                | 2.0.0   | 05-31-2022 |
-| Alma Linux 8 | CIS Alma Linux OS 9 Benchmark                                | 1.0.0   | 12-12-2022 |
+| Alma Linux 9 | CIS Alma Linux OS 9 Benchmark                                | 1.0.0   | 12-12-2022 |
 | Rocky Linux 8| CIS Rocky Linux 8 Benchmark                                  | 1.0.0   | 03-29-2022 |
-| Rocky Linux 8| CIS Rocky Linux 9 Benchmark                                  | 1.0.0   | 12-13-2022 |
+| Rocky Linux 9| CIS Rocky Linux 9 Benchmark                                  | 1.0.0   | 12-13-2022 |
 
 The benchmarks can be found at [CIS Benchmarks Website](https://downloads.cisecurity.org/#/).
 
@@ -75,6 +75,8 @@ It is highly recommended to have the complete security baseline definition writt
 
 The *cis_security_hardening* module has a parameter `enforce` for each rule. If this parameter is set to true all necessary changes are made to make a server compliant to the security baseline rules. This can have severe impacts to the machines, especially if security settings are defined in a wrong way.
 > Please test your settings before rolling out to production environments.
+
+Some rules have additional parameters available to get a fine grained configuration in place.
 
 The module needs a base directory. The base directory `/usr/share/cis_security_hardening` is created by the module during the first run. Some data is collected with cronjobs once a day as collecting this data is somewhat expensive and time consuming depending on the server size, e. g. searching for s-bit programs . Under the base directory there will be a directory `bin` where all scripts for gathering information are located.
 

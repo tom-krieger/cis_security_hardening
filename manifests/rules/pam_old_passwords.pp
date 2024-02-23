@@ -127,7 +127,7 @@ class cis_security_hardening::rules::pam_old_passwords (
             arguments => ['use_authok', "remember=${oldpasswords}"],
           }
         } elsif ($facts['os']['name'].downcase() == 'ubuntu' and $facts['os']['release']['major'] >= '20') {
-          Pam { 'ubuntu-remember-pld-pw':
+          Pam { 'ubuntu-remember-old-pw':
             ensure           => present,
             service          => 'common-password',
             type             => 'password',
