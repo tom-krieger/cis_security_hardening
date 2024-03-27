@@ -61,7 +61,7 @@ The code of this security hardening module is based on the following CIS Benchma
 | Debian 10    | CIS Debian Linux 10 Benchmark                                | 1.0.0   | 02-13-2020 |
 | Debian 11    | CIS Debian Linux 11 Benchmark                                | 1.0.0   | 09-22-2022 |
 | Alma Linux 8 | CIS Alma Linux OS 8 Benchmark                                | 2.0.0   | 05-31-2022 |
-| Alma Linux 8 | CIS Alma Linux OS 9 Benchmark                                | 1.0.0   | 12-12-2022 |
+| Alma Linux 9 | CIS Alma Linux OS 9 Benchmark                                | 1.0.0   | 12-12-2022 |
 | Rocky Linux 8| CIS Rocky Linux 8 Benchmark                                  | 1.0.0   | 03-29-2022 |
 | Rocky Linux 9| CIS Rocky Linux 9 Benchmark                                  | 1.0.0   | 12-13-2022 |
 
