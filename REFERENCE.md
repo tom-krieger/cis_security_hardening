@@ -1060,6 +1060,7 @@ pxe_installarent_dirs{ 'create script dir':
 The following parameters are available in the `cis_security_hardening::parent_dirs` defined type:
 
 * [`dir_path`](#-cis_security_hardening--parent_dirs--dir_path)
+* [`base_path`](#-cis_security_hardening--parent_dirs--base_path)
 * [`owner`](#-cis_security_hardening--parent_dirs--owner)
 * [`group`](#-cis_security_hardening--parent_dirs--group)
 * [`mode`](#-cis_security_hardening--parent_dirs--mode)
@@ -1069,6 +1070,14 @@ The following parameters are available in the `cis_security_hardening::parent_di
 Data type: `Stdlib::Unixpath`
 
 The directories to be created.
+
+##### <a name="-cis_security_hardening--parent_dirs--base_path"></a>`base_path`
+
+Data type: `Optional[Stdlib::Unixpath]`
+
+A base path wich does not need to be created
+
+Default value: `undef`
 
 ##### <a name="-cis_security_hardening--parent_dirs--owner"></a>`owner`
 

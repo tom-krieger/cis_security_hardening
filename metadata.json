@@ -1,6 +1,6 @@
 {
   "name": "tomkrieger-cis_security_hardening",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "author": "Thomas Krieger",
   "summary": "Secure your systems according to CIS benchmarks",
   "license": "Apache-2.0",
@@ -67,6 +67,10 @@
     {
       "name": "npwalker-recursive_file_permissions",
       "version_requirement": "0.6.2"
+    },
+    {
+      "name": "puppet-systemd",
+      "version_requirement": "6.6.0"
     }
   ],
   "operatingsystem_support": [

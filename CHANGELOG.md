@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.9.4
+
+* added puppet-systemd module as it's a dependency of the puppet-logrotate module
+
 ## Release 0.9.3
 
 * Fix fotr automatich error reporting in Ubuntu 20.04:
@@ -19,7 +23,10 @@ All notable changes to this project will be documented in this file.
 * Fix for issue #70
 * Updated Github action
 * PR #71: Replace legacy facts with modern facts
-* PR #72: Allow for disabling of the sticky world writable and auditd cron jobs. If you have bigger systems where cronjobs collecting file information like for world writable files or auditd privileged commands might be too time consuming you can disable the cronjobs completely. The default value for both jobs in `present`.
+* PR #72: Allow for disabling of the sticky world writable and auditd cron jobs. If you have
+  bigger systems where cronjobs collecting file information like for world writable files or
+  auditd privileged commands might be too time consuming you can disable the cronjobs completely. 
+  The default value for both jobs in `present`.
 
   > Please note that not running the auditd privileged commands cronjob might result in not monitoring newly installed prvileged commands.
 
