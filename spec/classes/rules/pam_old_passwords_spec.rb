@@ -129,7 +129,7 @@ describe 'cis_security_hardening::rules::pam_old_passwords' do
                     'arguments' => ['use_authok', 'remember=5'],
                   )
               elsif os_facts[:os]['name'].casecmp('ubuntu').zero? && os_facts[:os]['release']['major'] >= '20'
-                is_expected.to contain_pam('ubuntu-remember-0ld-pw')
+                is_expected.to contain_pam('ubuntu-remember-old-pw')
                   .with(
                     'ensure'           => 'present',
                     'service'          => 'common-password',
