@@ -11,7 +11,9 @@
 # @param enforce
 #    Enforce the rule
 # @param file_mode
-#.   Mode to set files to
+#    Mode to set files to
+# @param [Optional[String]] dir_mode
+#    Directory mode to set
 #
 # @example
 #   class { 'cis_security_hardening::rules::logfile_permissions':
