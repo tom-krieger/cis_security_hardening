@@ -1,12 +1,12 @@
-# @summary 
-#    Ensure CUPS is not enabled 
+# @summary
+#    Ensure CUPS is not enabled
 #
-# The Common Unix Print System (CUPS) provides the ability to print to both local and network printers. 
-# A system running CUPS can also accept print jobs from remote systems and print them to local printers. 
+# The Common Unix Print System (CUPS) provides the ability to print to both local and network printers.
+# A system running CUPS can also accept print jobs from remote systems and print them to local printers.
 # It also provides a web based remote administration capability.
 #
 # Rationale:
-# If the system does not need to print jobs or accept print jobs from other systems, it is recommended 
+# If the system does not need to print jobs or accept print jobs from other systems, it is recommended
 # that CUPS be disabled to reduce the potential attack surface.
 #
 # @param enforce
@@ -39,7 +39,7 @@ class cis_security_hardening::rules::cups (
         })
       }
       'debian': {
-        if $facts['os']['release']['major'] > '10' {
+        if $facts['os']['release']['major'] > '12'{
           ensure_packages('cups', {
               ensure => $ensure,
           })

@@ -1,11 +1,11 @@
-# @summary 
-#    Ensure TIPC is disabled 
+# @summary
+#    Ensure TIPC is disabled
 #
-# The Transparent Inter-Process Communication (TIPC) protocol is designed to provide 
+# The Transparent Inter-Process Communication (TIPC) protocol is designed to provide
 # communication between cluster nodes.
 #
 # Rationale:
-# If the protocol is not being used, it is recommended that kernel module not be loaded, disabling 
+# If the protocol is not being used, it is recommended that kernel module not be loaded, disabling
 # the service to reduce the potential attack surface.
 #
 # @param enforce
@@ -23,7 +23,7 @@ class cis_security_hardening::rules::disable_tipc (
   if $enforce {
     case $facts['os']['name'].downcase() {
       'debian': {
-        if $facts['os']['release']['major'] > '10' {
+        if $facts['os']['release']['major'] > '12'{
           $command = '/bin/false'
           kmod::blacklist { 'tipc': }
         } else {
