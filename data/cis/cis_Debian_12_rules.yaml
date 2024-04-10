@@ -1,5 +1,5 @@
 ---
-cis_security_hardening::benchmark::debian::11:
+cis_security_hardening::benchmark::debian::12:
   bundles:
     filesystem_config:
       level1:

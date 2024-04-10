@@ -22,6 +22,8 @@ debian:
   images:
   - litmusimage/debian:9
   - litmusimage/debian:10
+  - litmusimage/debian:11
+  - litmusimage/debian:12
 rockylinux:
   provisioner: docker
   images:
