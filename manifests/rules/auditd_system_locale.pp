@@ -95,7 +95,7 @@ class cis_security_hardening::rules::auditd_system_locale (
     }
 
     if $facts['os']['family'].downcase() == 'debian' {
-      if $facts['os']['release']['major'] > '12'{
+      if $facts['os']['release']['major'] > '12' {
         concat::fragment { 'watch network environment rule 8':
           order   => '136',
           target  => $cis_security_hardening::rules::auditd_init::rules_file,

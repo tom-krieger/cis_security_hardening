@@ -41,7 +41,7 @@ class cis_security_hardening::rules::cramfs (
         }
       }
       'debian': {
-        if $facts['os']['release']['major'] > '12'{
+        if $facts['os']['release']['major'] > '12' {
           kmod::install { 'cramfs':
             command => '/bin/false',
           }

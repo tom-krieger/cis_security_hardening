@@ -72,7 +72,7 @@ class cis_security_hardening::rules::gnome_gdm (
         }
       }
       'debian': {
-        if $facts['os']['release']['major'] > '12'{
+        if $facts['os']['release']['major'] > '12' {
           file { '/etc/dconf/profile/cis':
             ensure  => file,
             content => "user-db:user\nsystem-db:cis\nfile-db:/usr/share/cis/greeter-dconf-defaults",
