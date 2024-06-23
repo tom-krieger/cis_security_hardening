@@ -1,11 +1,11 @@
-# @summary 
-#    Ensure GDM login banner is configured 
+# @summary
+#    Ensure GDM login banner is configured
 #
 # GDM is the GNOME Display Manager which handles graphical login for GNOME based systems.
 #
 # Rationale:
-# Warning messages inform users who are attempting to login to the system of their legal 
-# status regarding the system and must include the name of the organization that owns the 
+# Warning messages inform users who are attempting to login to the system of their legal
+# status regarding the system and must include the name of the organization that owns the
 # system and any monitoring policies that are in place.
 
 # @param enforce
@@ -72,7 +72,7 @@ class cis_security_hardening::rules::gnome_gdm (
         }
       }
       'debian': {
-        if $facts['os']['release']['major'] > '10' {
+        if $facts['os']['release']['major'] > '12' {
           file { '/etc/dconf/profile/cis':
             ensure  => file,
             content => "user-db:user\nsystem-db:cis\nfile-db:/usr/share/cis/greeter-dconf-defaults",

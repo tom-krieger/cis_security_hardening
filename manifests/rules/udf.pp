@@ -1,13 +1,13 @@
-# @summary 
-#    Ensure mounting of udf filesystems is disabled 
+# @summary
+#    Ensure mounting of udf filesystems is disabled
 #
-# The udf filesystem type is the universal disk format used to implement ISO/IEC 
-# 13346 and ECMA-167 specifications. This is an open vendor filesystem type for data 
-# storage on a broad range of media. This filesystem type is necessary to support 
+# The udf filesystem type is the universal disk format used to implement ISO/IEC
+# 13346 and ECMA-167 specifications. This is an open vendor filesystem type for data
+# storage on a broad range of media. This filesystem type is necessary to support
 # writing DVDs and newer optical disc formats.
 #
 # Rationale:
-# Removing support for unneeded filesystem types reduces the local attack surface of the system. 
+# Removing support for unneeded filesystem types reduces the local attack surface of the system.
 # If this filesystem type is not needed, disable it.
 #
 # @param enforce
@@ -43,7 +43,7 @@ class cis_security_hardening::rules::udf (
         }
       }
       'debian': {
-        if $facts['os']['release']['major'] > '10' {
+        if $facts['os']['release']['major'] > '12' {
           kmod::install { 'udf':
             command => '/bin/false',
           }

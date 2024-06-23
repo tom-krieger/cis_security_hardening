@@ -4,8 +4,12 @@ cis_security_hardening::benchmark::debian::12:
     filesystem_config:
       level1:
         - cramfs
-        - squashfs
+        - freevxfs
+        - jffs2
+        - hfs
+        - hfsplus
         - udf
+        - squashfs
         - tmp_filesystem
         - tmp_nodev
         - tmp_nosuid
@@ -27,6 +31,7 @@ cis_security_hardening::benchmark::debian::12:
         - dev_shm_nodev
         - dev_shm_nosuid
         - dev_shm_noexec
+        - sticky_world_writeable_files
         - disable_automount
         - disable_usb_storage
     filesystem_integrety:
@@ -253,6 +258,7 @@ cis_security_hardening::benchmark::debian::12:
         - root_gid
         - umask_setting
         - timeout_setting
+        - restrict_su
     system_file_permissions:
       level1:
         - passwd_perms

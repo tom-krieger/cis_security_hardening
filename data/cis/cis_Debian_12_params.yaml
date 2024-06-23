@@ -15,8 +15,12 @@ cis_security_hardening::auditd_cron::ensure: present
 cis_security_hardening::sticky_world_writable_cron::ensure: present
 
 cis_security_hardening::rules::cramfs::enforce: true
-cis_security_hardening::rules::squashfs::enforce: true
+cis_security_hardening::rules::freevxfs::enforce: true
+cis_security_hardening::rules::jffs2::enforce: true
+cis_security_hardening::rules::hfs::enforce: true
+cis_security_hardening::rules::hfsplus::enforce: true
 cis_security_hardening::rules::udf::enforce: true
+cis_security_hardening::rules::squashfs::enforce: true
 cis_security_hardening::rules::tmp_filesystem::enforce: true
 cis_security_hardening::rules::tmp_filesystem::enable: true
 cis_security_hardening::rules::tmp_filesystem::size: 0
@@ -41,6 +45,7 @@ cis_security_hardening::rules::dev_shm::size: 0
 cis_security_hardening::rules::dev_shm_noexec::enforce: true
 cis_security_hardening::rules::dev_shm_nodev::enforce: true
 cis_security_hardening::rules::dev_shm_nosuid::enforce: true
+cis_security_hardening::rules::sticky_world_writeable_files::enforce: true
 cis_security_hardening::rules::disable_automount::enforce: true
 cis_security_hardening::rules::disable_usb_storage::enforce: true
 
@@ -65,7 +70,6 @@ cis_security_hardening::rules::apparmor_profiles_enforcing::mode: enforce
 
 cis_security_hardening::rules::motd_perms::enforce: true
 cis_security_hardening::rules::motd_perms::content: |
-  
   ###################################################################
   # This system is for the use of authorized users only.            #
   # Individuals using this computer system without authority, or in #
@@ -82,7 +86,6 @@ cis_security_hardening::rules::motd_perms::content: |
   # evidence of criminal activity, system personnel may provide the #
   # evidence of such monitoring to law enforcement officials.       #
   ###################################################################
-  
 cis_security_hardening::rules::issue_perms::enforce: true
 cis_security_hardening::rules::issue_net_perms::enforce: true
 cis_security_hardening::rules::gnome_gdm::enforce: true
@@ -97,7 +100,7 @@ cis_security_hardening::rules::systemd_timesyncd::enforce: false
 cis_security_hardening::rules::systemd_timesyncd::fix_file_perms: true
 cis_security_hardening::rules::systemd_timesyncd::ntp_servers:
   - 0.de.pool.ntp.org
-  - 1.de.pool.ntp.org 
+  - 1.de.pool.ntp.org
   - 3.de.pool.ntp.org
 cis_security_hardening::rules::systemd_timesyncd::ntp_fallback_server:
   - 3.de.pool.ntp.org
@@ -254,8 +257,8 @@ cis_security_hardening::rules::auditd_init::buffer_size: 8192
 cis_security_hardening::rules::auditd_init::rules_file: /etc/audit/rules.d/cis_security_hardening.rules
 cis_security_hardening::rules::auditd_init::auto_reboot: true
 cis_security_hardening::rules::auditd_package::enforce: true
-cis_security_hardening::rules::auditd_package::packages: 
-  - auditd 
+cis_security_hardening::rules::auditd_package::packages:
+  - auditd
   - audispd-plugins
 cis_security_hardening::rules::auditd_service::enforce: true
 cis_security_hardening::rules::auditd_process::enforce: true

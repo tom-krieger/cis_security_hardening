@@ -22,33 +22,40 @@ debian:
   images:
   - litmusimage/debian:9
   - litmusimage/debian:10
+  - litmusimage/debian:11
+  - litmusimage/debian:12
 rockylinux:
   provisioner: docker
   images:
   - litmusimage/rockylinux:8
 vagrant:
   provisioner: vagrant
-  images: 
+  images:
   - 'centos/7'
   - 'almalinux-8'
   - 'rockylinux-8'
 
 vg-centos-7:
   provisioner: vagrant
-  images: 
+  images:
   - 'centos/7'
 
 vg-rocky-8:
   provisioner: vagrant
-  images: 
+  images:
   - 'rockylinux-8'
 
 vg-alma-8:
   provisioner: vagrant
-  images: 
+  images:
   - 'almalinux-8'
 
 vg-debian-11:
   provisioner: vagrant
   images:
   - 'debian-11-0-ruby'
+
+vg-debian-12:
+  provisioner: vagrant
+  images:
+  - 'debian-12-0-ruby'
