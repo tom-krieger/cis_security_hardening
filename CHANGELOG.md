@@ -5,10 +5,11 @@ All notable changes to this project will be documented in this file.
 ## Release 0.9.4
 
 * added puppet-systemd module as it's a dependency of the puppet-logrotate module
+* added Debian 12 support (thanks the PRs)
 
 ## Release 0.9.3
 
-* Fix fotr automatich error reporting in Ubuntu 20.04:
+* Fix fotr automaticq error reporting in Ubuntu 20.04:
   * use flag for package uninstallation
   * disable and mask service
 

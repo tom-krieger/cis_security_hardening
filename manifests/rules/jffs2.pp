@@ -21,14 +21,35 @@ class cis_security_hardening::rules::jffs2 (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    if $facts['os']['name'].downcase() == 'ubuntu' and $facts['os']['release']['major'] >= '20' {
-      kmod::install { 'jffs2':
-        command => '/bin/false',
+    case $facts['os']['name'].downcase() {
+      'ubuntu': {
+        if $facts['os']['release']['major'] >= '20' {
+          kmod::install { 'jffs2':
+            command => '/bin/false',
+          }
+          kmod::blacklist { 'jffs2': }
+        } else {
+          kmod::install { 'jffs2':
+            command => '/bin/true',
+          }
+        }
       }
-      kmod::blacklist { 'jffs2': }
-    } else {
-      kmod::install { 'jffs2':
-        command => '/bin/true',
+      'debian': {
+        if $facts['os']['release']['major'] >= '12' {
+          kmod::install { 'jffs2':
+            command => '/bin/false',
+          }
+          kmod::blacklist { 'jffs2': }
+        } else {
+          kmod::install { 'jffs2':
+            command => '/bin/true',
+          }
+        }
+      }
+      default: {
+        kmod::install { 'jffs2':
+          command => '/bin/true',
+        }
       }
     }
   }

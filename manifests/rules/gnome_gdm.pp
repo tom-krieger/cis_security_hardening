@@ -27,9 +27,9 @@ class cis_security_hardening::rules::gnome_gdm (
   String $banner_message = 'Authorized uses only. All activity may be monitored and reported.',
 ) {
   $gnome_gdm = fact('cis_security_hardening.gnome_gdm')
-  if  $enforce and $gnome_gdm != undef and $gnome_gdm {
+  if $enforce and $gnome_gdm != undef and $gnome_gdm {
     case $facts['os']['name'].downcase() {
-      'redhat','centos', 'almalinux', 'rocky': {
+      'redhat', 'centos', 'almalinux', 'rocky': {
         file { 'gdm':
           ensure  => file,
           path    => '/etc/dconf/profile/gdm',
@@ -72,7 +72,7 @@ class cis_security_hardening::rules::gnome_gdm (
         }
       }
       'debian': {
-        if $facts['os']['release']['major'] > '12' {
+        if $facts['os']['release']['major'] > '10' {
           file { '/etc/dconf/profile/cis':
             ensure  => file,
             content => "user-db:user\nsystem-db:cis\nfile-db:/usr/share/cis/greeter-dconf-defaults",

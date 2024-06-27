@@ -26,6 +26,13 @@ class cis_security_hardening::rules::dnsmasq (
             ensure => purged,
         })
       }
+      'debian': {
+        if $facts['os']['release']['major'] >= '12' {
+          ensure_packages(['dnsmasq'], {
+              ensure => purged,
+          })
+        }
+      }
       default: {
         # nothing to do yet
       }

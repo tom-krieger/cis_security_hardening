@@ -58,6 +58,7 @@ cis_security_hardening::rules::grub_bootloader_config::enforce: true
 cis_security_hardening::rules::single_user_mode::enforce: true
 
 cis_security_hardening::rules::enable_aslr::enforce: true
+cis_security_hardening::rules::ptrace_scope::enforce: true
 cis_security_hardening::rules::disable_prelink::enforce: true
 cis_security_hardening::rules::disable_apport::enforce: true
 cis_security_hardening::rules::restrict_core_dumps::enforce: true
@@ -119,10 +120,13 @@ cis_security_hardening::rules::ntpd::ntp_service_manage: true
 cis_security_hardening::rules::x11_installed::enforce: true
 cis_security_hardening::rules::avahi::enforce: true
 cis_security_hardening::rules::cups::enforce: true
+cis_security_hardening::rules::rpcbind::enforce: true
 cis_security_hardening::rules::dhcp::enforce: true
 cis_security_hardening::rules::ldapd::enforce: true
 cis_security_hardening::rules::nfs_utils::enforce: true
 cis_security_hardening::rules::bind::enforce: true
+cis_security_hardening::rules::tftp_server::enforce: true
+cis_security_hardening::rules::dnsmasq::enforce: true
 cis_security_hardening::rules::vsftp::enforce: true
 cis_security_hardening::rules::httpd::enforce: true
 cis_security_hardening::rules::dovecot::enforce: true
@@ -138,10 +142,11 @@ cis_security_hardening::rules::rsh_client::enforce: true
 cis_security_hardening::rules::talk_client::enforce: true
 cis_security_hardening::rules::telnet_client::enforce: true
 cis_security_hardening::rules::ldap_client::enforce: true
-cis_security_hardening::rules::rpcbind::enforce: true
+cis_security_hardening::rules::ftp::enforce: true
 
 cis_security_hardening::rules::disable_ipv6::enforce: true
 cis_security_hardening::rules::disable_wireless::enforce: true
+cis_security_hardening::rules::disable_bluetooth::enforce: true
 
 cis_security_hardening::rules::disable_ip_forwarding::enforce: true
 cis_security_hardening::rules::disable_packet_redirect::enforce: true
@@ -340,6 +345,8 @@ cis_security_hardening::rules::journald_rsyslog::enforce: true
 cis_security_hardening::rules::journald_compress::enforce: true
 cis_security_hardening::rules::journald_persistent::enforce: true
 cis_security_hardening::rules::logfile_permissions::enforce: true
+cis_security_hardening::rules::logfile_permissions::exclude_files:
+  - /var/log/apt/eipp.log.xz
 cis_security_hardening::rules::logrotate::enforce: true
 cis_security_hardening::rules::logrotate_configuration::enforce: true
 cis_security_hardening::rules::logrotate_configuration::permission: '0640'
@@ -464,3 +471,5 @@ cis_security_hardening::rules::passwd_bak_perms::enforce: true
 cis_security_hardening::rules::group_bak_perms::enforce: true
 cis_security_hardening::rules::shadow_bak_perms::enforce: true
 cis_security_hardening::rules::gshadow_bak_perms::enforce: true
+cis_security_hardening::rules::opassword_perms::enforce: true
+cis_security_hardening::rules::shells_perms::enforce: true
