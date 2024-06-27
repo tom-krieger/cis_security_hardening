@@ -11,9 +11,16 @@ cis_security_hardening::auditd_dirs_to_include:
   - '/usr'
 cis_security_hardening::auditd_rules_fact_file: '/opt/puppetlabs/facter/facts.d/cis_security_hardening_auditd.yaml'
 
+cis_security_hardening::auditd_cron::ensure: present
+cis_security_hardening::sticky_world_writable_cron::ensure: present
+
 cis_security_hardening::rules::cramfs::enforce: true
-cis_security_hardening::rules::squashfs::enforce: true
+cis_security_hardening::rules::freevxfs::enforce: true
+cis_security_hardening::rules::jffs2::enforce: true
+cis_security_hardening::rules::hfs::enforce: true
+cis_security_hardening::rules::hfsplus::enforce: true
 cis_security_hardening::rules::udf::enforce: true
+cis_security_hardening::rules::squashfs::enforce: true
 cis_security_hardening::rules::tmp_filesystem::enforce: true
 cis_security_hardening::rules::tmp_filesystem::enable: true
 cis_security_hardening::rules::tmp_filesystem::size: 0
@@ -38,6 +45,7 @@ cis_security_hardening::rules::dev_shm::size: 0
 cis_security_hardening::rules::dev_shm_noexec::enforce: true
 cis_security_hardening::rules::dev_shm_nodev::enforce: true
 cis_security_hardening::rules::dev_shm_nosuid::enforce: true
+cis_security_hardening::rules::sticky_world_writeable_files::enforce: true
 cis_security_hardening::rules::disable_automount::enforce: true
 cis_security_hardening::rules::disable_usb_storage::enforce: true
 
@@ -50,6 +58,7 @@ cis_security_hardening::rules::grub_bootloader_config::enforce: true
 cis_security_hardening::rules::single_user_mode::enforce: true
 
 cis_security_hardening::rules::enable_aslr::enforce: true
+cis_security_hardening::rules::ptrace_scope::enforce: true
 cis_security_hardening::rules::disable_prelink::enforce: true
 cis_security_hardening::rules::disable_apport::enforce: true
 cis_security_hardening::rules::restrict_core_dumps::enforce: true
@@ -94,7 +103,7 @@ cis_security_hardening::rules::systemd_timesyncd::enforce: false
 cis_security_hardening::rules::systemd_timesyncd::fix_file_perms: true
 cis_security_hardening::rules::systemd_timesyncd::ntp_servers:
   - 0.de.pool.ntp.org
-  - 1.de.pool.ntp.org 
+  - 1.de.pool.ntp.org
   - 3.de.pool.ntp.org
 cis_security_hardening::rules::systemd_timesyncd::ntp_fallback_server:
   - 3.de.pool.ntp.org
@@ -113,10 +122,13 @@ cis_security_hardening::rules::ntpd::ntp_service_manage: true
 cis_security_hardening::rules::x11_installed::enforce: true
 cis_security_hardening::rules::avahi::enforce: true
 cis_security_hardening::rules::cups::enforce: true
+cis_security_hardening::rules::rpcbind::enforce: true
 cis_security_hardening::rules::dhcp::enforce: true
 cis_security_hardening::rules::ldapd::enforce: true
 cis_security_hardening::rules::nfs_utils::enforce: true
 cis_security_hardening::rules::bind::enforce: true
+cis_security_hardening::rules::tftp_server::enforce: true
+cis_security_hardening::rules::dnsmasq::enforce: true
 cis_security_hardening::rules::vsftp::enforce: true
 cis_security_hardening::rules::httpd::enforce: true
 cis_security_hardening::rules::dovecot::enforce: true
@@ -132,10 +144,11 @@ cis_security_hardening::rules::rsh_client::enforce: true
 cis_security_hardening::rules::talk_client::enforce: true
 cis_security_hardening::rules::telnet_client::enforce: true
 cis_security_hardening::rules::ldap_client::enforce: true
-cis_security_hardening::rules::rpcbind::enforce: true
+cis_security_hardening::rules::ftp::enforce: true
 
 cis_security_hardening::rules::disable_ipv6::enforce: true
 cis_security_hardening::rules::disable_wireless::enforce: true
+cis_security_hardening::rules::disable_bluetooth::enforce: true
 
 cis_security_hardening::rules::disable_ip_forwarding::enforce: true
 cis_security_hardening::rules::disable_packet_redirect::enforce: true
@@ -251,8 +264,8 @@ cis_security_hardening::rules::auditd_init::buffer_size: 8192
 cis_security_hardening::rules::auditd_init::rules_file: /etc/audit/rules.d/cis_security_hardening.rules
 cis_security_hardening::rules::auditd_init::auto_reboot: true
 cis_security_hardening::rules::auditd_package::enforce: true
-cis_security_hardening::rules::auditd_package::packages: 
-  - auditd 
+cis_security_hardening::rules::auditd_package::packages:
+  - auditd
   - audispd-plugins
 cis_security_hardening::rules::auditd_service::enforce: true
 cis_security_hardening::rules::auditd_process::enforce: true
@@ -458,3 +471,5 @@ cis_security_hardening::rules::passwd_bak_perms::enforce: true
 cis_security_hardening::rules::group_bak_perms::enforce: true
 cis_security_hardening::rules::shadow_bak_perms::enforce: true
 cis_security_hardening::rules::gshadow_bak_perms::enforce: true
+cis_security_hardening::rules::opassword_perms::enforce: true
+cis_security_hardening::rules::shells_perms::enforce: true

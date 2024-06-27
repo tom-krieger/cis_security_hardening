@@ -73,7 +73,7 @@ class cis_security_hardening::rules::avahi (
         })
       }
       'debian': {
-        if $facts['os']['release']['major'] > '12' {
+        if $facts['os']['release']['major'] > '10' {
           exec { 'stop avahi service':
             command => 'systemctl stop avahi-demon.service',
             path    => ['/bin', '/usr/bin'],

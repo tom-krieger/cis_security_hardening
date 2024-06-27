@@ -22,14 +22,35 @@ class cis_security_hardening::rules::hfsplus (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    if $facts['os']['name'].downcase() == 'ubuntu' and $facts['os']['release']['major'] >= '20' {
-      kmod::install { 'hfsplus':
-        command => '/bin/false',
+    case $facts['os']['name'].downcase() {
+      'ubuntu': {
+        if $facts['os']['release']['major'] >= '20' {
+          kmod::install { 'hfsplus':
+            command => '/bin/false',
+          }
+          kmod::blacklist { 'hfsplus': }
+        } else {
+          kmod::install { 'hfsplus':
+            command => '/bin/true',
+          }
+        }
       }
-      kmod::blacklist { 'hfsplus': }
-    } else {
-      kmod::install { 'hfsplus':
-        command => '/bin/true',
+      'debian': {
+        if $facts['os']['release']['major'] >= '12' {
+          kmod::install { 'hfsplus':
+            command => '/bin/false',
+          }
+          kmod::blacklist { 'hfsplus': }
+        } else {
+          kmod::install { 'hfsplus':
+            command => '/bin/true',
+          }
+        }
+      }
+      default: {
+        kmod::install { 'hfsplus':
+          command => '/bin/true',
+        }
       }
     }
   }

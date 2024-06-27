@@ -43,7 +43,7 @@ class cis_security_hardening::rules::udf (
         }
       }
       'debian': {
-        if $facts['os']['release']['major'] > '12' {
+        if $facts['os']['release']['major'] > '10' {
           kmod::install { 'udf':
             command => '/bin/false',
           }

@@ -34,14 +34,35 @@ class cis_security_hardening::rules::disable_bluetooth (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    if $facts['os']['name'].downcase() == 'ubuntu' and $facts['os']['release']['major'] >= '20' {
-      service { 'bluetooth.service':
-        ensure => 'stopped',
-        enable => false,
+    case $facts['os']['name'].downcase() {
+      'ubuntu': {
+        if $facts['os']['release']['major'] >= '20' {
+          service { 'bluetooth.service':
+            ensure => 'stopped',
+            enable => false,
+          }
+        } else {
+          kmod::install { 'bluetooth':
+            command => '/bin/true',
+          }
+        }
       }
-    } else {
-      kmod::install { 'bluetooth':
-        command => '/bin/true',
+      'debian': {
+        if $facts['os']['release']['major'] >= '12' {
+          service { 'bluetooth.service':
+            ensure => 'stopped',
+            enable => false,
+          }
+        } else {
+          kmod::install { 'bluetooth':
+            command => '/bin/true',
+          }
+        }
+      }
+      default: {
+        kmod::install { 'bluetooth':
+          command => '/bin/true',
+        }
       }
     }
   }

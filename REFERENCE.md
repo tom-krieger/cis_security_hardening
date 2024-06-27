@@ -272,6 +272,7 @@ audited
 * `cis_security_hardening::rules::nis_client`: Ensure NIS Client is not installed
 * `cis_security_hardening::rules::ntp_package`: Install ntp package
 * `cis_security_hardening::rules::ntpd`: Ensure ntp is configured
+* `cis_security_hardening::rules::opassword_perms`: Ensure permissions on /etc/security/opasswd are configured
 * `cis_security_hardening::rules::opensc_pkcs11`: Ensure the opensc-pcks11 is installed
 * `cis_security_hardening::rules::openssl_pkcs11`: Ensure the operating system has the packages required for multifactor authentication
 * `cis_security_hardening::rules::pam_cached_auth`: Ensure PAM prohibits the use of cached authentications after one day
@@ -328,6 +329,7 @@ audited
 * `cis_security_hardening::rules::shadow_perms`: Ensure permissions on /etc/shadow are configured
 * `cis_security_hardening::rules::shadowed_passwords`: Ensure accounts in /etc/passwd use shadowed passwords
 * `cis_security_hardening::rules::shell_nologin`: Ensure system accounts aresecured
+* `cis_security_hardening::rules::shells_perms`: Ensure permissions on /etc/shells are configured
 * `cis_security_hardening::rules::single_user_mode`: Ensure authentication required for single user mode
 * `cis_security_hardening::rules::source_routed_packets`: Ensure source routed packets are not accepted
 * `cis_security_hardening::rules::squashfs`: Ensure mounting of squashfs filesystems is disabled
