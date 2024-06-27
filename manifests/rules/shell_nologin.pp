@@ -28,12 +28,23 @@ class cis_security_hardening::rules::shell_nologin (
   Array $exclude   = [],
 ) {
   if $enforce {
+    case $facts['os']['name'].downcase() {
+      'debian': {
+        $nologin = $facts['os']['release']['major'] ? {
+          '12'    => '/usr/sbin/nologin',
+          default => '/sbin/nologin',
+        }
+      }
+      default: {
+        $nologin = '/sbin/nologin'
+      }
+    }
     $no_shell_nologin = fact('cis_security_hardening.accounts.no_shell_nologin')
     if  $no_shell_nologin != undef and !empty($no_shell_nologin) {
       $no_shell_nologin.each | String $user | {
         unless $user in $exclude {
           exec { "nologin ${user}":
-            command => "usermod -s /sbin/nologin ${user}",
+            command => "usermod -s ${nologin} ${user}",
             path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
           }
         }
