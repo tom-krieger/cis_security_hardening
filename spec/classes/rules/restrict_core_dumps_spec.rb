@@ -33,6 +33,7 @@ describe 'cis_security_hardening::rules::restrict_core_dumps' do
                 'group'   => 'root',
                 'mode'    => '0644',
               )
+
             is_expected.to contain_sysctl('fs.suid_dumpable').with('value' => 0)
 
             if os_facts[:os]['family'].casecmp('redhat').zero? || os_facts[:os]['family'].casecmp('suse').zero?
