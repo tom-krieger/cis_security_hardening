@@ -68,8 +68,8 @@ class cis_security_hardening::rules::pam_passwd_sha512 (
         if ($facts['os']['name'].downcase() == 'debian' and $facts['os']['release']['major'] > '10') {
           $keyring = fact('cis_security_hardening.gnome_keyring.installed')
           $src_file = fact('cis_security_hardening.gnome_keyring.installed') ? {
-            true  => 'puppet:///modules/cis_security_hardening/pam_lockout/debian/common-password',
-            false => 'puppet:///modules/cis_security_hardening/pam_lockout/debian/common-password-wo-gnome-keyring',
+            default  => 'puppet:///modules/cis_security_hardening/pam_lockout/debian/common-password',
+            ''       => 'puppet:///modules/cis_security_hardening/pam_lockout/debian/common-password-wo-gnome-keyring',
           }
           file { '/etc/pam.d/common-password':
             ensure  => file,
