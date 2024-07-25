@@ -70,19 +70,7 @@ class cis_security_hardening::rules::restrict_core_dumps (
         }
       }
       'debian': {
-        if $facts['os']['release']['major'] >= '12' {
-          if $installed {
-            file_line { 'systemd-coredump-storage':
-              path => '/etc/systemd/coredump.conf',
-              line => 'Storage=none',
-            }
-
-            file_line { 'systemd-coredump-process-max':
-              path => '/etc/systemd/coredump.conf',
-              line => 'ProcessSizeMax=0',
-            }
-          }
-        } else {
+        if $installed {
           file_line { 'systemd-coredump-storage':
             path => '/etc/systemd/coredump.conf',
             line => 'Storage=none',

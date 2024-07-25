@@ -36,7 +36,7 @@ describe 'cis_security_hardening::rules::restrict_core_dumps' do
 
             is_expected.to contain_sysctl('fs.suid_dumpable').with('value' => 0)
 
-            if os_facts[:os]['family'].casecmp('redhat').zero? || os_facts[:os]['family'].casecmp('suse').zero?
+            if os_facts[:os]['family'].casecmp('redhat').zero? || os_facts[:os]['family'].casecmp('suse').zero? || os_facts[:os]['family'].casecmp('debian').zero?
               is_expected.to contain_file_line('systemd-coredump-storage')
                 .with(
                   'path' => '/etc/systemd/coredump.conf',
@@ -53,6 +53,13 @@ describe 'cis_security_hardening::rules::restrict_core_dumps' do
             is_expected.not_to contain_sysctl('fs.suid_dumpable')
             is_expected.not_to contain_file_line('systemd-coredump-storage')
             is_expected.not_to contain_file_line('systemd-coredump-process-max')
+
+            if os_facts[:os]['name'].casecmp('ubuntu').zero? && os_facts[:os]['release']['major'] >= '22'
+              is_expected.to contain_package('apport')
+                .with(
+                  'ensure'=> 'purged',
+                )
+            end
           end
         }
       end

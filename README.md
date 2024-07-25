@@ -44,7 +44,7 @@ A security baseline can be based on a CIS benchmark but can include more rules s
 The code of this security hardening module is based on the following CIS Benchmarks:
 
 | OS           | Benchmark version                                            | Version | Date       |
-|--------------|--------------------------------------------------------------|---------|------------|
+|--------------|--------------------------------------------------------------| ---: | ---: |
 | Suse SLES 12 | CIS SUSE Linux Enterprise 12 Benchmark                       | 3.1.0   | 01-24-2022 |
 | Suse SLES 15 | CIS SUSE Linux Enterprise 15 Benchmark                       | 1.1.1   | 09-17-2021 |
 | RedHat 7     | CIS Red Hat Enterprise Linux 7 Benchmark                     | 3.1.1   | 05-21-2021 |
