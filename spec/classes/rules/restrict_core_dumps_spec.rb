@@ -57,7 +57,7 @@ describe 'cis_security_hardening::rules::restrict_core_dumps' do
             if os_facts[:os]['name'].casecmp('ubuntu').zero? && os_facts[:os]['release']['major'] >= '22'
               is_expected.to contain_package('apport')
                 .with(
-                  'ensure'=> 'purged',
+                  'ensure' => 'purged',
                 )
             end
           end
