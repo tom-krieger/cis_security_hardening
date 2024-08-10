@@ -26,11 +26,7 @@ class cis_security_hardening::rules::aide_installed (
   Integer $aide_init_timeout = 1800,
 ) {
   if $enforce {
-    $os = fact('operatingsystem') ? {
-      undef   => 'unknown',
-      default => fact('operatingsystem').downcase()
-    }
-    case $os {
+    case $facts['os']['name'].downcase() {
       'ubuntu', 'debian': {
         ensure_packages(['aide', 'aide-common'], {
             ensure => installed,
