@@ -5,6 +5,7 @@
 1. [Description](#description)
 2. [Security baseline](#security-baseline)
 3. [CIS Benchmark Reference](#cis-benchmark-reference)
+    * [Deprecation notices](#deprecation-cotices)
 4. [Setup - The basics of getting started with cis_security_hardening](#setup)
     * [What cis_security_hardening affects](#what-cis_security_hardening-affects)
     * [Setup requirements](#setup-requirements)
@@ -67,6 +68,10 @@ The code of this security hardening module is based on the following CIS Benchma
 | Rocky Linux 9| CIS Rocky Linux 9 Benchmark                                  | 1.0.0   | 12-13-2022 |
 
 The benchmarks can be found at [CIS Benchmarks Website](https://downloads.cisecurity.org/#/).
+
+### Deprecation notices
+
+> Version 4.0.0 will be the final CIS benchmark for CentOS 7. There will be a final CentOS 7 update to cover version 4.0.0 but there will be no further development on CentOS 7. Bug fixed will be done on basis of PRs.
 
 ## Setup
 
