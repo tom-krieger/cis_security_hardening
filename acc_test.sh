@@ -1,7 +1,7 @@
 #!/bin/bash
 
 VGIMAGES="vg-centos-7 vg-alma-8 vg-rocky-8"
-VGIMAGES="vg-centos-7 vg-debian-11"
+VGIMAGES="vg-centos-7 vg-debian-11 vg-debian-12"
 
 if [ $# -ne 1 ]
 then
@@ -58,7 +58,7 @@ case $1 in
       # TARGET_HOST=localhost:2222 pdk bundle exec rspec ./spec/acceptance --format d
       # TARGET_HOST=localhost:2223 pdk bundle exec rspec ./spec/acceptance --format d
       pdk bundle exec rake 'litmus:tear_down'
-      
+
     done
     ;;
   *)

@@ -44,18 +44,45 @@ class cis_security_hardening::rules::restrict_core_dumps (
       default => false,
     }
 
-    if  (($facts['os']['family'].downcase() == 'suse') and $installed) or
-    ($facts['os']['family'].downcase() == 'redhat') or
-    ($facts['os']['name'].downcase() == 'rocky')  or ($facts['os']['name'].downcase() == 'almalinux') {
-      file_line { 'systemd-coredump-storage':
-        path => '/etc/systemd/coredump.conf',
-        line => 'Storage=none',
-      }
+    case $facts['os']['family'].downcase() {
+      'suse': {
+        if $installed {
+          file_line { 'systemd-coredump-storage':
+            path => '/etc/systemd/coredump.conf',
+            line => 'Storage=none',
+          }
 
-      file_line { 'systemd-coredump-process-max':
-        path => '/etc/systemd/coredump.conf',
-        line => 'ProcessSizeMax=0',
+          file_line { 'systemd-coredump-process-max':
+            path => '/etc/systemd/coredump.conf',
+            line => 'ProcessSizeMax=0',
+          }
+        }
       }
+      'redhat', 'rocky', 'almalinux': {
+        file_line { 'systemd-coredump-storage':
+          path => '/etc/systemd/coredump.conf',
+          line => 'Storage=none',
+        }
+
+        file_line { 'systemd-coredump-process-max':
+          path => '/etc/systemd/coredump.conf',
+          line => 'ProcessSizeMax=0',
+        }
+      }
+      'debian': {
+        if $installed {
+          file_line { 'systemd-coredump-storage':
+            path => '/etc/systemd/coredump.conf',
+            line => 'Storage=none',
+          }
+
+          file_line { 'systemd-coredump-process-max':
+            path => '/etc/systemd/coredump.conf',
+            line => 'ProcessSizeMax=0',
+          }
+        }
+      }
+      default: {}
     }
   } elsif $facts['os']['name'].downcase() == 'ubuntu' and $facts['os']['release']['major'] >= '22' {
     package { 'apport':

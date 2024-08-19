@@ -11,7 +11,11 @@
 # @param enforce
 #    Enforce the rule
 # @param file_mode
-#.   Mode to set files to
+#    Mode to set files to
+# @param [Optional[String]] dir_mode
+#    Directory mode to set
+# @param exclude_files
+#    Files not to change the permissions
 #
 # @example
 #   class { 'cis_security_hardening::rules::logfile_permissions':
@@ -23,15 +27,9 @@ class cis_security_hardening::rules::logfile_permissions (
   Boolean $enforce = false,
   String $file_mode = '0640',
   Optional[String] $dir_mode = undef,
+  Optional[Array] $exclude_files = undef,
 ) {
   if $enforce {
-    # ensure_resource('file', '/var/log', {
-    #     ensure  => directory,
-    #     recurse => true,
-    #     mode    => 'g-wx,o-rwx',     #lint:ignore:no_symbolic_file_modes
-    #     ignore  => ['puppetlabs', 'puppet'],
-    # })
-
     $data = $dir_mode ? {
       undef   => {
         file_mode => $file_mode,

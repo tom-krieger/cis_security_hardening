@@ -67,13 +67,23 @@ describe 'cis_security_hardening::rules::ntpd' do
                     'enable' => false,
                   )
 
-                is_expected.to contain_file_line('ntp runas')
-                  .with(
-                    'ensure' => 'present',
-                    'path'   => '/etc/init.d/ntp',
-                    'match'  => '^RUNASUSER=',
-                    'line'   =>  'RUNASUSER=ntp',
-                  )
+                if os_facts[:os]['name'].casecmp('debian').zero? && os_facts[:os]['release']['major'] >= '12'
+                  is_expected.to contain_file_line('ntp runas')
+                    .with(
+                      'ensure' => 'present',
+                      'path'   => '/etc/init.d/ntpsec',
+                      'match'  => '^RUNASUSER=',
+                      'line'   =>  'RUNASUSER=ntp',
+                    )
+                else
+                  is_expected.to contain_file_line('ntp runas')
+                    .with(
+                      'ensure' => 'present',
+                      'path'   => '/etc/init.d/ntp',
+                      'match'  => '^RUNASUSER=',
+                      'line'   =>  'RUNASUSER=ntp',
+                    )
+                end
 
               else
                 is_expected.not_to contain_service('systemd-timesyncd')

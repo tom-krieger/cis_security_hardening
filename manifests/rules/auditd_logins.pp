@@ -1,12 +1,12 @@
-# @summary 
-#    Ensure login and logout events are collected 
+# @summary
+#    Ensure login and logout events are collected
 #
-# Monitor login and logout events. The parameters below track changes to files associated with login/logout events. 
-# The file /var/log/lastlog maintain records of the last time a user successfully logged in. The /var/run/failock 
+# Monitor login and logout events. The parameters below track changes to files associated with login/logout events.
+# The file /var/log/lastlog maintain records of the last time a user successfully logged in. The /var/run/failock
 # directory maintains records of login failures via the pam_faillock module.
-# 
+#
 # Rationale:
-# Monitoring login/logout events could provide a system administrator with information associated with brute force 
+# Monitoring login/logout events could provide a system administrator with information associated with brute force
 # attacks against user logins.
 #
 # @param enforce
@@ -49,7 +49,7 @@ class cis_security_hardening::rules::auditd_logins (
           content => '-w /var/run/faillock -p wa -k logins',
         }
 
-        if $facts['os']['release']['major'] < '11' {
+        if $facts['os']['release']['major'] < '12' {
           concat::fragment { 'logins policy rule 3':
             order   => '53',
             target  => $cis_security_hardening::rules::auditd_init::rules_file,

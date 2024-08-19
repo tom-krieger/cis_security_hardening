@@ -27,11 +27,19 @@ describe 'cis_security_hardening::rules::shell_nologin' do
           is_expected.to compile
 
           if enforce
-            is_expected.to contain_exec('nologin test1')
-              .with(
-                'command' => 'usermod -s /sbin/nologin test1',
+            if os_facts[:os]['name'].casecmp('debian').zero? && os_facts[:os]['release']['major'] == '12'
+              is_expected.to contain_exec('nologin test1')
+                .with(
+                'command' => 'usermod -s /usr/sbin/nologin test1',
                 'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
               )
+            else
+              is_expected.to contain_exec('nologin test1')
+                .with(
+                  'command' => 'usermod -s /sbin/nologin test1',
+                  'path'    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+                )
+            end
           else
             is_expected.not_to contain_exec('nologin test1')
           end

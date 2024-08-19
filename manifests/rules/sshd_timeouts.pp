@@ -46,19 +46,21 @@ class cis_security_hardening::rules::sshd_timeouts (
       default => '/etc/ssh/sshd_config',
     }
     file_line { 'sshd-timeouts':
-      ensure => present,
-      path   => $path,
-      line   => "ClientAliveInterval ${client_alive_interval}",
-      match  => '^#?ClientAliveInterval.*',
-      notify => Exec['reload-sshd'],
+      ensure   => present,
+      path     => $path,
+      line     => "ClientAliveInterval ${client_alive_interval}",
+      match    => '^#?ClientAliveInterval.*',
+      multiple => true,
+      notify   => Exec['reload-sshd'],
     }
 
     file_line { 'sshd-timeouts-2':
-      ensure => present,
-      path   => $path,
-      line   => "ClientAliveCountMax ${client_alive_count_max}",
-      match  => '^#?ClientAliveCountMax.*',
-      notify => Exec['reload-sshd'],
+      ensure   => present,
+      path     => $path,
+      line     => "ClientAliveCountMax ${client_alive_count_max}",
+      match    => '^#?ClientAliveCountMax.*',
+      multiple => true,
+      notify   => Exec['reload-sshd'],
     }
   }
 }

@@ -16,6 +16,13 @@ def facts_debian(os, distid, release)
 
   # get gnome display manager information
   cis_security_hardening[:gnome_gdm] = File.exist?('/etc/gdm3/greeter.dconf')
+  gnome_keyring = {}
+  val = Facter::Core::Execution.exec('dpkg -l | grep libpam-gnome-keyring')
+  gnome_keyring['installed'] = if val.nil? || val.empty?
+                                 false
+                               else
+                                 true
+                               end
 
   # determine apport installation
   apport = {}

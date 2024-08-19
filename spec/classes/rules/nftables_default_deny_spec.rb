@@ -15,7 +15,7 @@ describe 'cis_security_hardening::rules::nftables_default_deny' do
           refreshonly => true,
         }
         package { 'nftables':
-          ensure => installes,
+          ensure => installed,
         }
         EOF
       end
