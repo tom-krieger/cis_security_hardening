@@ -4,8 +4,11 @@ All notable changes to this project will be documented in this file.
 
 ## Release 0.9.5
 
-* added Debain 12 support (based on PPR #80)
-* PR: 86 and 88: Replace legacy facts causing silent failures. Increase firewall dependency version. Add systemd to fixtures
+* added Debain 12 support (based on PR #80)
+* PR: 86 and 88:
+  * Replace legacy facts causing silent failures
+  * Increase firewall dependency version
+  * Add systemd to fixtures
 
 ## Release 0.9.4
 
