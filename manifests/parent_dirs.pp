@@ -6,6 +6,9 @@
 # @param dir_path
 #    The directories to be created.
 #
+# @param [Optional[Stdlib::Unixpath]] base_path
+#    A base path wich does not need to be created
+#
 # @param owner
 #    The directory owner.
 #
@@ -21,9 +24,10 @@
 #  }
 define cis_security_hardening::parent_dirs (
   Stdlib::Unixpath $dir_path,
-  Optional[String] $owner = undef,
-  Optional[String] $group = undef,
-  Optional[String] $mode  = undef,
+  Optional[Stdlib::Unixpath] $base_path = undef,
+  Optional[String] $owner               = undef,
+  Optional[String] $group               = undef,
+  Optional[String] $mode                = undef,
 ) {
   if $dir_path =~ /\/$/ {
     $_dir_path = "${dir_path}test.conf"
@@ -31,9 +35,22 @@ define cis_security_hardening::parent_dirs (
     $_dir_path = "${dir_path}/test.conf"
   }
 
+  $_base_path = $base_path ? {
+    undef   => '',
+    default => if $base_path !~ /\/$/ {
+      "${base_path}/"
+    } else {
+      $base_path
+    }
+  }
+
   $dirs = $_dir_path[1,-1].dirname.split('/').reduce([]) |$memo, $subdir| {
     $_dir =  $memo.empty ? {
-      true    => "/${subdir}",
+      true    => if empty($_base_path) {
+        "/${subdir}"
+      } else {
+        "${_base_path}${subdir}"
+      },
       default => "${$memo[-1]}/${subdir}",
     }
     concat($memo, $_dir)

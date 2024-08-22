@@ -18,12 +18,32 @@ describe 'cis_security_hardening::rules::hfsplus' do
         it {
           is_expected.to compile
           if enforce
-            if os_facts[:os]['name'].casecmp('ubuntu').zero? && os_facts[:os]['release']['major'] >= '20'
-              is_expected.to contain_kmod__install('hfsplus')
-                .with(
+            if os_facts[:os]['name'].casecmp('ubuntu').zero?
+              if os_facts[:os]['release']['major'] >= '20'
+                is_expected.to contain_kmod__install('hfsplus')
+                  .with(
                   command: '/bin/false',
                 )
-              is_expected.to contain_kmod__blacklist('hfsplus')
+                is_expected.to contain_kmod__blacklist('hfsplus')
+              else
+                is_expected.to contain_kmod__install('hfsplus')
+                  .with(
+                  command: '/bin/true',
+                )
+              end
+            elsif os_facts[:os]['name'].casecmp('debian').zero?
+              if os_facts[:os]['release']['major'] >= '12'
+                is_expected.to contain_kmod__install('hfsplus')
+                  .with(
+                  command: '/bin/false',
+                )
+                is_expected.to contain_kmod__blacklist('hfsplus')
+              else
+                is_expected.to contain_kmod__install('hfsplus')
+                  .with(
+                  command: '/bin/true',
+                )
+              end
             else
               is_expected.to contain_kmod__install('hfsplus')
                 .with(

@@ -1,6 +1,6 @@
 {
   "name": "tomkrieger-cis_security_hardening",
-  "version": "0.9.3",
+  "version": "0.9.5",
   "author": "Thomas Krieger",
   "summary": "Secure your systems according to CIS benchmarks",
   "license": "Apache-2.0",
@@ -54,7 +54,7 @@
     },
     {
       "name": "puppetlabs-firewall",
-      "version_requirement": ">= 7.0.0 < 8.0.0"
+      "version_requirement": ">= 7.0.0 < 9.0.0"
     },
     {
       "name": "puppetlabs-reboot",
@@ -67,6 +67,10 @@
     {
       "name": "npwalker-recursive_file_permissions",
       "version_requirement": "0.6.2"
+    },
+    {
+      "name": "puppet-systemd",
+      "version_requirement": "6.6.0"
     }
   ],
   "operatingsystem_support": [
@@ -111,7 +115,8 @@
       "operatingsystem": "Debian",
       "operatingsystemrelease": [
         "10",
-        "11"
+        "11",
+        "12"
       ]
     },
     {

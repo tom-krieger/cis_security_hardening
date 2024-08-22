@@ -1,5 +1,5 @@
 ---
-cis_security_hardening::benchmark::debian::11:
+cis_security_hardening::benchmark::debian::12:
   bundles:
     filesystem_config:
       level1:
@@ -32,12 +32,14 @@ cis_security_hardening::benchmark::debian::11:
         - dev_shm_nosuid
         - dev_shm_noexec
         - sticky_world_writeable_files
-        - disable_automount
         - disable_usb_storage
-    filesystem_integrety:
+    mandatory_access_control:
       level1:
-        - aide_installed
-        - aide_regular_checks
+        - apparmor
+        - apparmor_bootloader
+        - apparmor_profiles
+      level2:
+        - apparmor_profiles_enforcing
     boot_settings:
       level1:
         - grub_password
@@ -46,16 +48,10 @@ cis_security_hardening::benchmark::debian::11:
     process_hardening:
       level1:
         - enable_aslr
+        - ptrace_scope
         - disable_prelink
         - disable_apport
         - restrict_core_dumps
-    mandatory_access_control:
-      level1:
-        - apparmor
-        - apparmor_bootloader
-        - apparmor_profiles
-      level2:
-        - apparmor_profiles_enforcing
     warning_banners:
       level1:
         - issue_perms
@@ -71,25 +67,27 @@ cis_security_hardening::benchmark::debian::11:
         - gnome_gdm_package
     special_purpose_services:
       level1:
-        - systemd_timesyncd
-        - chrony
-        - ntpd
-        - x11_installed
+        - disable_automount
         - avahi
-        - cups
         - dhcp
-        - ldapd
-        - nfs
         - bind
+        - dnsmasq
         - vsftp
-        - httpd
+        - ldapd
         - dovecot
-        - samba
-        - squid
-        - net_snmp
+        - nfs
         - nis
-        - mta_local
+        - cups
+        - rpcbind
         - rsyncd
+        - samba
+        - net_snmp
+        - tftp_server
+        - httpd
+        - squid
+        - xinetd        
+        - x11_installed
+        - mta_local
     service_clients:
       level1:
         - nis_client
@@ -97,11 +95,28 @@ cis_security_hardening::benchmark::debian::11:
         - talk_client
         - telnet_client
         - ldap_client
-        - rpcbind
+        - ftp
+    time_synchronization:
+      level1:
+        - systemd_timesyncd
+        - chrony
+        - ntpd
+    configure_job_schedulers:
+      level1:
+        - crond_service
+        - crontab
+        - cron_hourly
+        - cron_daily
+        - cron_weekly
+        - cron_monthly
+        - etc_crond
+        - cron_restrict
+        - at_restrict
     unused_network_protocols:
       level2:
         - disable_ipv6
         - disable_wireless
+        - disable_bluetooth
         - disable_dccp
         - disable_sctp
         - disable_rds
@@ -153,62 +168,6 @@ cis_security_hardening::benchmark::debian::11:
         - ip6tables_loopback
         - ip6tables_outbound_established
         - ip6tables_open_ports
-    configure_accounting:
-      level2:
-        - auditd_init
-        - auditd_package
-        - auditd_service
-        - auditd_process
-        - auditd_max_log_file
-        - auditd_max_log_file_action
-        - auditd_when_disk_full
-        - auditd_backlog_limit
-        - auditd_time_change
-        - auditd_identity
-        - auditd_user_emulation
-        - auditd_system_locale
-        - auditd_mac_policy
-        - auditd_chacl_use
-        - auditd_chcon_use
-        - auditd_setfacl_use
-        - auditd_usermod_use
-        - auditd_logins
-        - auditd_session_logins
-        - auditd_perm_mod
-        - auditd_access
-        - auditd_kernel_modules
-        - auditd_privileged_commands
-        - auditd_mounts
-        - auditd_delete
-        - auditd_scope
-        - auditd_actions
-        - auditd_modules
-        - auditd_immutable
-    configure_logging:
-      level1:
-        - rsyslog_installed
-        - rsyslog_service
-        - rsyslog_default_file_perms
-        - rsyslog_logging
-        - rsyslog_remote_logs
-        - rsyslog_remote_syslog
-        - journald_rsyslog
-        - journald_compress
-        - journald_persistent
-        - logfile_permissions
-        - logrotate
-        - logrotate_configuration
-    configure_job_schedulers:
-      level1:
-        - crond_service
-        - crontab
-        - cron_hourly
-        - cron_daily
-        - cron_weekly
-        - cron_monthly
-        - etc_crond
-        - cron_restrict
-        - at_restrict
     configure_ssh:
       level1:
         - sshd_config_permissions
@@ -259,6 +218,55 @@ cis_security_hardening::benchmark::debian::11:
         - umask_setting
         - timeout_setting
         - restrict_su
+    filesystem_integrety:
+      level1:
+        - aide_installed
+        - aide_regular_checks
+    configure_logging:
+      level1:
+        - rsyslog_installed
+        - rsyslog_service
+        - rsyslog_default_file_perms
+        - rsyslog_logging
+        - rsyslog_remote_logs
+        - rsyslog_remote_syslog
+        - journald_rsyslog
+        - journald_compress
+        - journald_persistent
+        - logfile_permissions
+        - logrotate
+        - logrotate_configuration
+    configure_accounting:
+      level2:
+        - auditd_init
+        - auditd_package
+        - auditd_service
+        - auditd_process
+        - auditd_max_log_file
+        - auditd_max_log_file_action
+        - auditd_when_disk_full
+        - auditd_backlog_limit
+        - auditd_time_change
+        - auditd_identity
+        - auditd_user_emulation
+        - auditd_system_locale
+        - auditd_mac_policy
+        - auditd_chacl_use
+        - auditd_chcon_use
+        - auditd_setfacl_use
+        - auditd_usermod_use
+        - auditd_logins
+        - auditd_session_logins
+        - auditd_perm_mod
+        - auditd_access
+        - auditd_kernel_modules
+        - auditd_privileged_commands
+        - auditd_mounts
+        - auditd_delete
+        - auditd_scope
+        - auditd_actions
+        - auditd_modules
+        - auditd_immutable
     system_file_permissions:
       level1:
         - passwd_perms
@@ -269,6 +277,8 @@ cis_security_hardening::benchmark::debian::11:
         - shadow_bak_perms
         - gshadow_perms
         - gshadow_bak_perms
+        - shells_perms
+        - opassword_perms
     configure_user_groups:
       level1:
         - shadowed_passwords

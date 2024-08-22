@@ -30,12 +30,7 @@ class cis_security_hardening::rules::auditd_perm_mod (
       undef => '1000',
       default => fact('cis_security_hardening.auditd.uid_min'),
     }
-    $os = fact('operatingsystem') ? {
-      undef   => 'unknown',
-      default => fact('operatingsystem').downcase()
-    }
-
-    case $os {
+    case $facts['os']['name'].downcase() {
       'rocky', 'almalinux', 'redhat': {
         $auid = 'unset'
         $content_rule1 = "-a always,exit -F arch=b32 -S chmod,fchmod,fchmodat -F auid>=${uid} -F auid!=${auid} -k perm_mod"

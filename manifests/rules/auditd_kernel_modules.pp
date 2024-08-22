@@ -1,12 +1,12 @@
-# @summary 
+# @summary
 #    Ensure kernel module loading unloading and modification is collected
 #
-# Monitor the loading and unloading of kernel modules. All the loading / listing / dependency checking of modules is done by kmod 
+# Monitor the loading and unloading of kernel modules. All the loading / listing / dependency checking of modules is done by kmod
 # via symbolic links.
 #
 # The following system calls control loading and unloading of modules:
 # * init_module - load a module
-# * finit_module - load a module (used when the overhead of using cryptographically signed modules to determine the authenticity 
+# * finit_module - load a module (used when the overhead of using cryptographically signed modules to determine the authenticity
 #   of a module can be avoided)
 # * delete_module - delete a module
 # * create_module - create a loadable module entry
@@ -15,7 +15,7 @@
 # Any execution of the loading and unloading module programs and system calls will trigger an audit record with an identifier of modules.
 #
 # Rationale:
-# Monitoring the use of all the various ways to manipulate kernel module s could provide system administrators with evidence that 
+# Monitoring the use of all the various ways to manipulate kernel module s could provide system administrators with evidence that
 # an unauthorized change was made to a kernel module, possibly compromising the security of the system.
 #
 # @param enforce

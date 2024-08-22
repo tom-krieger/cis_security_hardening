@@ -18,12 +18,32 @@ describe 'cis_security_hardening::rules::freevxfs' do
         it {
           is_expected.to compile
           if enforce
-            if os_facts[:os]['name'].casecmp('ubuntu').zero? && os_facts[:os]['release']['major'] >= '20'
-              is_expected.to contain_kmod__install('freevxfs')
-                .with(
+            if os_facts[:os]['name'].casecmp('ubuntu').zero?
+              if os_facts[:os]['release']['major'] >= '20'
+                is_expected.to contain_kmod__install('freevxfs')
+                  .with(
                   command: '/bin/false',
                 )
-              is_expected.to contain_kmod__blacklist('freevxfs')
+                is_expected.to contain_kmod__blacklist('freevxfs')
+              else
+                is_expected.to contain_kmod__install('freevxfs')
+                  .with(
+                  command: '/bin/true',
+                )
+              end
+            elsif os_facts[:os]['name'].casecmp('debian').zero?
+              if os_facts[:os]['release']['major'] >= '12'
+                is_expected.to contain_kmod__install('freevxfs')
+                  .with(
+                  command: '/bin/false',
+                )
+                is_expected.to contain_kmod__blacklist('freevxfs')
+              else
+                is_expected.to contain_kmod__install('freevxfs')
+                  .with(
+                  command: '/bin/true',
+                )
+              end
             else
               is_expected.to contain_kmod__install('freevxfs')
                 .with(

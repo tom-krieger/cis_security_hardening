@@ -27,3 +27,4 @@ fixtures:
     puppet_agent:               "puppetlabs/puppet_agent"
     facts:                      "puppetlabs/facts"
     recursive_file_permissions: "npwalker/recursive_file_permissions"
+    systemd:                    "puppet/systemd"

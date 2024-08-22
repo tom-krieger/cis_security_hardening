@@ -92,9 +92,14 @@ class cis_security_hardening::rules::ntpd (
           ensure => stopped,
           enable => false,
       })
+      $ntp_file = if $facts['os']['name'].downcase() == 'debian' and $facts['os']['release']['major'] >= '12' {
+        '/etc/init.d/ntpsec'
+      } else {
+        '/etc/init.d/ntp'
+      }
       file_line { 'ntp runas':
         ensure => present,
-        path   => '/etc/init.d/ntp',
+        path   => $ntp_file,
         match  => '^RUNASUSER=',
         line   => 'RUNASUSER=ntp',
       }

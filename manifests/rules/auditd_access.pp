@@ -35,12 +35,7 @@ class cis_security_hardening::rules::auditd_access (
       undef => '1000',
       default => fact('cis_security_hardening.auditd.uid_min'),
     }
-    $os = fact('operatingsystem') ? {
-      undef   => 'unknown',
-      default => fact('operatingsystem').downcase()
-    }
-
-    case $os {
+    case $facts['os']['name'].downcase() {
       'almalinux', 'rocky', 'debian': {
         $content_rule1 = "-a always,exit -F arch=b32 -S creat,open,openat,truncate,ftruncate -F exit=-EACCES -F auid>=${uid} -F auid!=${auid} -k access" #lint:ignore:140chars
         $content_rule2 = "-a always,exit -F arch=b32 -S creat,open,openat,truncate,ftruncate -F exit=-EPERM -F auid>=${uid} -F auid!=${auid} -k access" #lint:ignore:140chars

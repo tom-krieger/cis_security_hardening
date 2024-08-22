@@ -5,6 +5,7 @@
 1. [Description](#description)
 2. [Security baseline](#security-baseline)
 3. [CIS Benchmark Reference](#cis-benchmark-reference)
+    * [Deprecation notices](#deprecation-cotices)
 4. [Setup - The basics of getting started with cis_security_hardening](#setup)
     * [What cis_security_hardening affects](#what-cis_security_hardening-affects)
     * [Setup requirements](#setup-requirements)
@@ -44,7 +45,7 @@ A security baseline can be based on a CIS benchmark but can include more rules s
 The code of this security hardening module is based on the following CIS Benchmarks:
 
 | OS           | Benchmark version                                            | Version | Date       |
-|--------------|--------------------------------------------------------------|---------|------------|
+|--------------|--------------------------------------------------------------| ---: | ---: |
 | Suse SLES 12 | CIS SUSE Linux Enterprise 12 Benchmark                       | 3.1.0   | 01-24-2022 |
 | Suse SLES 15 | CIS SUSE Linux Enterprise 15 Benchmark                       | 1.1.1   | 09-17-2021 |
 | RedHat 7     | CIS Red Hat Enterprise Linux 7 Benchmark                     | 3.1.1   | 05-21-2021 |
@@ -60,12 +61,17 @@ The code of this security hardening module is based on the following CIS Benchma
 | Ubuntu 22.04 | CIS Ubuntu Linux 22.04 LTS Benchmark                         | 1.0.0   | 06-30-2022 |
 | Debian 10    | CIS Debian Linux 10 Benchmark                                | 1.0.0   | 02-13-2020 |
 | Debian 11    | CIS Debian Linux 11 Benchmark                                | 1.0.0   | 09-22-2022 |
+| Debian 12.   | CIS Debian Linus 12 Benchmark                                | 1.0.1.  | 04-15-2024 |
 | Alma Linux 8 | CIS Alma Linux OS 8 Benchmark                                | 2.0.0   | 05-31-2022 |
-| Alma Linux 8 | CIS Alma Linux OS 9 Benchmark                                | 1.0.0   | 12-12-2022 |
+| Alma Linux 9 | CIS Alma Linux OS 9 Benchmark                                | 1.0.0   | 12-12-2022 |
 | Rocky Linux 8| CIS Rocky Linux 8 Benchmark                                  | 1.0.0   | 03-29-2022 |
-| Rocky Linux 8| CIS Rocky Linux 9 Benchmark                                  | 1.0.0   | 12-13-2022 |
+| Rocky Linux 9| CIS Rocky Linux 9 Benchmark                                  | 1.0.0   | 12-13-2022 |
 
 The benchmarks can be found at [CIS Benchmarks Website](https://downloads.cisecurity.org/#/).
+
+### Deprecation notices
+
+> Version 4.0.0 will be the final CIS benchmark for CentOS 7. There will be a final CentOS 7 update to cover version 4.0.0 but there will be no further development on CentOS 7. Bug fixed will be done on basis of PRs.
 
 ## Setup
 
@@ -75,6 +81,8 @@ It is highly recommended to have the complete security baseline definition writt
 
 The *cis_security_hardening* module has a parameter `enforce` for each rule. If this parameter is set to true all necessary changes are made to make a server compliant to the security baseline rules. This can have severe impacts to the machines, especially if security settings are defined in a wrong way.
 > Please test your settings before rolling out to production environments.
+
+Some rules have additional parameters available to get a fine grained configuration in place.
 
 The module needs a base directory. The base directory `/usr/share/cis_security_hardening` is created by the module during the first run. Some data is collected with cronjobs once a day as collecting this data is somewhat expensive and time consuming depending on the server size, e. g. searching for s-bit programs . Under the base directory there will be a directory `bin` where all scripts for gathering information are located.
 
