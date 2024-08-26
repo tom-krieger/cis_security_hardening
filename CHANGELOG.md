@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## Release 0.9.6
 
-* fix dependencies in metadata (thanks to `canihavethisone` for figuring out and testing the fix)
+* fix dependencies in metadata, removed systemd as it is an indirect dependency  (thanks to `canihavethisone` for figuring this out and testing the fix)
 * fixed some typos
 
 ## Release 0.9.5
