@@ -5,7 +5,7 @@
 1. [Description](#description)
 2. [Security baseline](#security-baseline)
 3. [CIS Benchmark Reference](#cis-benchmark-reference)
-    * [Deprecation notices](#deprecation-cotices)
+    * [Deprecation notices](#deprecation-notices)
 4. [Setup - The basics of getting started with cis_security_hardening](#setup)
     * [What cis_security_hardening affects](#what-cis_security_hardening-affects)
     * [Setup requirements](#setup-requirements)
