@@ -71,7 +71,7 @@ The benchmarks can be found at [CIS Benchmarks Website](https://downloads.cisecu
 
 ### Deprecation notices
 
-> Version 4.0.0 will be the final CIS benchmark for CentOS 7. There will be a final CentOS 7 update to cover version 4.0.0 but there will be no further development on CentOS 7. Bug fixed will be done on basis of PRs.
+> Version 4.0.0 will be the final CIS benchmark for CentOS 7. There will be a final CentOS 7 update to cover version 4.0.0 but there will be no further development on CentOS 7. Bug fixes will be done on basis of PRs.
 
 ## Setup
 
