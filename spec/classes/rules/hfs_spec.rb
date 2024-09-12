@@ -44,6 +44,12 @@ describe 'cis_security_hardening::rules::hfs' do
                   command: '/bin/true',
                 )
               end
+            elsif os_facts[:os]['name'].casecmp('centos').zero?
+              is_expected.to contain_kmod__install('hfs')
+                .with(
+                  command: '/bin/false',
+                )
+              is_expected.to contain_kmod__blacklist('hfs')
             else
               is_expected.to contain_kmod__install('hfs')
                 .with(

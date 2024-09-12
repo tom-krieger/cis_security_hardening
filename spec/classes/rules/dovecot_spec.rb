@@ -40,12 +40,10 @@ describe 'cis_security_hardening::rules::dovecot' do
                 .with(
                   'ensure' => 'purged',
                 )
-              if os_facts[:os]['release']['major'] >= '9'
-                is_expected.to contain_package('cyrus-imapd')
-                  .with(
-                    'ensure' => 'purged',
-                  )
-              end
+              is_expected.to contain_package('cyrus-imapd')
+                .with(
+                  'ensure' => 'purged',
+                )
             else
               is_expected.to contain_service('dovecot')
                 .with(

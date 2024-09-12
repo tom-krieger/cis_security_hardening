@@ -45,6 +45,16 @@ describe 'cis_security_hardening::rules::disable_bluetooth' do
                   command: '/bin/true',
                 )
               end
+            elsif os_facts[:os]['name'].casecmp('centos').zero?
+              is_expected.to contain_service('bluetooth.service')
+                .with(
+                  'ensure' => 'stopped',
+                  'enable' => false,
+                )
+              is_expected.to contain_package('bluez')
+                .with(
+                  'ensure' => 'absent',
+                )
             else
               is_expected.to contain_kmod__install('bluetooth')
                 .with(

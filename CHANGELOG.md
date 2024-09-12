@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.9.7
+
+* CentOS 7 4.0.0 benchmakr
+  > Please note that with 4.0.0 the CentOS 7 nechmark removes ntp and uses chrony
+  
 ## Release 0.9.6
 
 * fix dependencies in metadata, removed systemd as it is an indirect dependency  (thanks to `canihavethisone` for figuring this out and testing the fix)

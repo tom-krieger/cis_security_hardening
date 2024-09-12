@@ -16,7 +16,14 @@ cis_security_hardening::auditd_dirs_to_include:
   - '/usr'
 cis_security_hardening::auditd_rules_fact_file: '/opt/puppetlabs/facter/facts.d/cis_security_hardening_auditd.yaml'
 
+cis_security_hardening::auditd_cron::ensure: present
+cis_security_hardening::sticky_world_writable_cron::ensure: present
+
 cis_security_hardening::rules::cramfs::enforce: true
+cis_security_hardening::rules::freevxfs::enforce: true
+cis_security_hardening::rules::hfs::enforce: true
+cis_security_hardening::rules::hfsplus::enforce: true
+cis_security_hardening::rules::jffs2::enforce: true
 cis_security_hardening::rules::squashfs::enforce: true
 cis_security_hardening::rules::fat::enforce: false
 cis_security_hardening::rules::udf::enforce: true
@@ -35,6 +42,16 @@ cis_security_hardening::rules::var_tmp_noexec::enforce: true
 cis_security_hardening::rules::var_tmp_nodev::enforce: true
 cis_security_hardening::rules::var_tmp_nosuid::enforce: true
 cis_security_hardening::rules::home_nodev::enforce: true
+cis_security_hardening::rules::home_nosuid::enforce: true
+cis_security_hardening::rules::var_nodev::enforce: true
+cis_security_hardening::rules::var_noexec::enforce: true
+cis_security_hardening::rules::var_nosuid::enforce: true
+cis_security_hardening::rules::var_log_nodev::enforce: true
+cis_security_hardening::rules::var_log_noexec::enforce: true
+cis_security_hardening::rules::var_log_nosuid::enforce: true
+cis_security_hardening::rules::var_log_audit_nodev::enforce: true
+cis_security_hardening::rules::var_log_audit_noexec::enforce: true
+cis_security_hardening::rules::var_log_audit_nosuid::enforce: true
 cis_security_hardening::rules::sticky_world_writeable_files::enforce: true
 cis_security_hardening::rules::disable_automount::enforce: true
 cis_security_hardening::rules::disable_usb_storage::enforce: true
@@ -44,17 +61,22 @@ cis_security_hardening::rules::yum_gpgcheck::enforce: true
 cis_security_hardening::rules::sudo_installed::enforce: true
 cis_security_hardening::rules::sudo_use_pty::enforce: true
 cis_security_hardening::rules::sudo_log::enforce: true
+cis_security_hardening::rules::sudo_timeout::enforce: true
+cis_security_hardening::rules::restrict_su::enforce: true
+cis_security_hardening::rules::restrict_su::wheel_users:
+  - root
 
 cis_security_hardening::rules::aide_installed::enforce: true
 cis_security_hardening::rules::aide_regular_checks::enforce: true
 
 cis_security_hardening::rules::grub_password::enforce: false
+
 cis_security_hardening::rules::grub_bootloader_config::enforce: true
 cis_security_hardening::rules::single_user_mode::enforce: true
 
 cis_security_hardening::rules::restrict_core_dumps::enforce: true
 cis_security_hardening::rules::enable_aslr::enforce: true
-cis_security_hardening::rules::disable_prelink::enforce: true
+cis_security_hardening::rules::ptrace_scope::enforce: true
 
 cis_security_hardening::rules::selinux::enforce: true
 cis_security_hardening::rules::selinux_bootloader::enforce: true
@@ -90,22 +112,25 @@ cis_security_hardening::rules::motd_perms::content: |
 cis_security_hardening::rules::issue_perms::enforce: true
 cis_security_hardening::rules::issue_net_perms::enforce: true
 cis_security_hardening::rules::gnome_gdm::enforce: true
+cis_security_hardening::rules::gnome_gdm_package::enforce: true
+cis_security_hardening::rules::gdm_screensaver::enforce: true
+cis_security_hardening::rules::gdm_auto_mount::enforce: true
 cis_security_hardening::rules::xdmcp_config::enforce: true
 
 cis_security_hardening::rules::xinetd::enforce: true
 
+cis_security_hardening::rules::chrony::enforce: true
+cis_security_hardening::rules::chrony::ntp_servers: ~
+cis_security_hardening::rules::chrony::makestep_seconds: 1
+cis_security_hardening::rules::chrony::makestep_updates: 3
+
 cis_security_hardening::rules::ntp_package::enforce: true
-cis_security_hardening::rules::ntp_package::pkg: ntp
-cis_security_hardening::rules::chrony::enforce: false
-cis_security_hardening::rules::chrony::ntp_servers:
-  10.10.10.10: []
-  10.10.10.11: []
+cis_security_hardening::rules::ntp_package::pkg: chrony
 cis_security_hardening::rules::ntpd::enforce: true
-cis_security_hardening::rules::ntpd::ntp_servers:
-  - 10.10.10.1
-  - 10.10.10.11
+cis_security_hardening::rules::ntpd::ntp_servers: ~
 cis_security_hardening::rules::ntpd::ntp_restrict:
-  - 127.0.0.1
+  - '-4 default kod nomodify notrap nopeer noquery'
+  - '-6 default kod nomodify notrap nopeer noquery'
 cis_security_hardening::rules::ntpd::ntp_driftfile: /var/lib/ntp/drift
 cis_security_hardening::rules::ntpd::ntp_statsdir: '/var/log/ntpstats'
 cis_security_hardening::rules::ntpd::ntp_disable_monitor: true
@@ -119,9 +144,11 @@ cis_security_hardening::rules::ldapd::enforce: true
 cis_security_hardening::rules::nfs_utils::enforce: true
 cis_security_hardening::rules::rpcbind::enforce: true
 cis_security_hardening::rules::bind::enforce: true
+cis_security_hardening::rules::dnsmasq::enforce: true
 cis_security_hardening::rules::vsftp::enforce: true
 cis_security_hardening::rules::httpd::enforce: true
 cis_security_hardening::rules::dovecot::enforce: true
+cis_security_hardening::rules::tftp_server::enforce: true
 cis_security_hardening::rules::samba::enforce: true
 cis_security_hardening::rules::squid::enforce: true
 cis_security_hardening::rules::net_snmp::enforce: true
@@ -130,14 +157,17 @@ cis_security_hardening::rules::rsyncd::enforce: true
 cis_security_hardening::rules::nis::enforce: true
 cis_security_hardening::rules::telnet_server::enforce: true
 
+cis_security_hardening::rules::ftp::enforce: true
 cis_security_hardening::rules::nis_client::enforce: true
 cis_security_hardening::rules::rsh_client::enforce: true
 cis_security_hardening::rules::talk_client::enforce: true
 cis_security_hardening::rules::telnet_client::enforce: true
 cis_security_hardening::rules::ldap_client::enforce: true
+is_security_hardening::rules::tftp_client::enforce: true
 
 cis_security_hardening::rules::disable_ipv6::enforce: true
 cis_security_hardening::rules::disable_wireless::enforce: true
+cis_security_hardening::rules::disable_bluetooth::enforce: true
 
 cis_security_hardening::rules::disable_ip_forwarding::enforce: true
 cis_security_hardening::rules::disable_packet_redirect::enforce: true
@@ -153,6 +183,8 @@ cis_security_hardening::rules::enable_tcp_syn_cookies::enforce: true
 cis_security_hardening::rules::ipv6_router_advertisements::enforce: true
 
 cis_security_hardening::rules::disable_dccp::enforce: true
+cis_security_hardening::rules::disable_tipc::enforce: true
+cis_security_hardening::rules::disable_rds::enforce: true
 cis_security_hardening::rules::disable_sctp::enforce: true
 
 cis_security_hardening::rules::firewalld_install::enforce: false
@@ -168,17 +200,17 @@ cis_security_hardening::rules::firewalld_ports_services::expected_ports:
 cis_security_hardening::rules::firewalld_ports_services::expected_services:
   - ssh
 
-cis_security_hardening::rules::nftables_install::enforce: true
-cis_security_hardening::rules::nftables_flush_iptables::enforce: true
-cis_security_hardening::rules::nftables_table::enforce: true
+cis_security_hardening::rules::nftables_install::enforce: false
+cis_security_hardening::rules::nftables_flush_iptables::enforce: false
+cis_security_hardening::rules::nftables_table::enforce: false
 cis_security_hardening::rules::nftables_table::nftables_default_table: inet
-cis_security_hardening::rules::nftables_base_chains::enforce: true
+cis_security_hardening::rules::nftables_base_chains::enforce: false
 cis_security_hardening::rules::nftables_base_chains::table: inet
-cis_security_hardening::rules::nftables_loopback::enforce: true
+cis_security_hardening::rules::nftables_loopback::enforce: false
 cis_security_hardening::rules::nftables_loopback::table: inet
-cis_security_hardening::rules::nftables_outbound_established::enforce: true
+cis_security_hardening::rules::nftables_outbound_established::enforce: false
 cis_security_hardening::rules::nftables_outbound_established::table: inet
-cis_security_hardening::rules::nftables_default_deny::enforce: true
+cis_security_hardening::rules::nftables_default_deny::enforce: false
 cis_security_hardening::rules::nftables_default_deny::default_policy_input: drop
 cis_security_hardening::rules::nftables_default_deny::default_policy_output: drop
 cis_security_hardening::rules::nftables_default_deny::default_policy_forward: drop
@@ -196,8 +228,8 @@ cis_security_hardening::rules::nftables_default_deny::additional_rules:
     - tcp dport 53 accept
     - udp dport 53 accept
     - udp dport 123 accept
-cis_security_hardening::rules::nftables_persistence::enforce: true
-cis_security_hardening::rules::nftables_service::enforce: true
+cis_security_hardening::rules::nftables_persistence::enforce: false
+cis_security_hardening::rules::nftables_service::enforce: false
 
 cis_security_hardening::rules::iptables_install::enforce: true
 cis_security_hardening::rules::iptables_deny_policy::enforce: true
@@ -268,6 +300,7 @@ cis_security_hardening::rules::auditd_when_disk_full::action_mail_acct: root
 cis_security_hardening::rules::auditd_when_disk_full::admin_space_left_action: halt
 cis_security_hardening::rules::auditd_backlog_limit::enforce: true
 cis_security_hardening::rules::auditd_backlog_limit::backlog_limit: 8192
+cis_security_hardening::rules::auditd_user_emulation::enforce: true
 cis_security_hardening::rules::auditd_time_change::enforce: true
 cis_security_hardening::rules::auditd_identity::enforce: true
 cis_security_hardening::rules::auditd_system_locale::enforce: true
@@ -282,8 +315,34 @@ cis_security_hardening::rules::auditd_mounts::enforce: true
 cis_security_hardening::rules::auditd_delete::enforce: true
 cis_security_hardening::rules::auditd_scope::enforce: true
 cis_security_hardening::rules::auditd_actions::enforce: true
-cis_security_hardening::rules::auditd_modules::enforce: true
+cis_security_hardening::rules::auditd_chcon_use::enforce: true
+cis_security_hardening::rules::auditd_setfacl_use::enforce: true
+cis_security_hardening::rules::auditd_chacl_use::enforce: true
+cis_security_hardening::rules::auditd_usermod_use::enforce: true
+cis_security_hardening::rules::auditd_kernel_modules::enforce: true
 cis_security_hardening::rules::auditd_immutable::enforce: true
+cis_security_hardening::rules::auditd_log_perms::enforce: true
+cis_security_hardening::rules::auditd_log_perms::user: root
+cis_security_hardening::rules::auditd_log_perms::group: root
+cis_security_hardening::rules::auditd_log_perms::mode: '0600'
+cis_security_hardening::rules::auditd_log_dir_perms::enforce: true
+cis_security_hardening::rules::auditd_log_dir_perms::user: root
+cis_security_hardening::rules::auditd_log_dir_perms::group: root
+cis_security_hardening::rules::auditd_log_dir_perms::mode: '0700'
+cis_security_hardening::rules::auditd_log_config::enforce: true
+cis_security_hardening::rules::auditd_log_config::log_group: root
+cis_security_hardening::rules::auditd_tools_perms::enforce: true
+cis_security_hardening::rules::auditd_tools_perms::user: root
+cis_security_hardening::rules::auditd_tools_perms::group: root
+cis_security_hardening::rules::auditd_tools_perms::mode: '0755'
+cis_security_hardening::rules::auditd_tools_perms::tools:
+  - /sbin/auditctl 
+  - /sbin/aureport 
+  - /sbin/ausearch 
+  - /sbin/autrace
+  - /sbin/auditd 
+  - /sbin/audispd 
+  - /sbin/augenrules
 
 cis_security_hardening::rules::rsyslog_installed::enforce: true
 cis_security_hardening::rules::rsyslog_service::enforce: true
@@ -357,6 +416,7 @@ cis_security_hardening::rules::sshd_limit_access::deny_users: []
 cis_security_hardening::rules::sshd_limit_access::allow_groups: []
 cis_security_hardening::rules::sshd_limit_access::deny_groups: []
 cis_security_hardening::rules::sshd_loglevel::enforce: true
+cis_security_hardening::rules::sshd_loglevel::log_level: INFO
 cis_security_hardening::rules::sshd_x11_forward::enforce: true
 cis_security_hardening::rules::sshd_max_auth_tries::enforce: true
 cis_security_hardening::rules::sshd_max_auth_tries::max_auth_tries: 4
@@ -400,7 +460,9 @@ cis_security_hardening::rules::sshd_use_pam::enforce: true
 cis_security_hardening::rules::sshd_tcp_forwarding::enforce: true
 cis_security_hardening::rules::sshd_max_startups::enforce: true
 cis_security_hardening::rules::sshd_max_sessions::enforce: true
+cis_security_hardening::rules::sshd_gssapi::enforce: true
 
+cis_security_hardening::rules::pam_libpwquality::enforce: true
 cis_security_hardening::rules::pam_pw_requirements::enforce: true
 cis_security_hardening::rules::pam_pw_requirements::minlen: 14
 cis_security_hardening::rules::pam_pw_requirements::dcredit: -1
@@ -408,14 +470,17 @@ cis_security_hardening::rules::pam_pw_requirements::ucredit: -1
 cis_security_hardening::rules::pam_pw_requirements::ocredit: -1
 cis_security_hardening::rules::pam_pw_requirements::lcredit: -1
 cis_security_hardening::rules::pam_pw_requirements::minclass: -1
+cis_security_hardening::rules::pam_pw_requirements::maxrepeat: 3
 cis_security_hardening::rules::pam_pw_requirements::retry: 3
 cis_security_hardening::rules::pam_lockout::enforce: true
 cis_security_hardening::rules::pam_lockout::attempts: 3
 cis_security_hardening::rules::pam_lockout::lockouttime: 300
 cis_security_hardening::rules::pam_passwd_sha512::enforce: true
 cis_security_hardening::rules::pam_old_passwords::enforce: true
-cis_security_hardening::rules::pam_old_passwords::oldpasswords: 5
+cis_security_hardening::rules::pam_old_passwords::oldpasswords: 24
 cis_security_hardening::rules::pam_old_passwords::sha512: true
+cis_security_hardening::rules::pam_old_passwords::enforce_for_root: true
+cis_security_hardening::rules::adm_crypt_style::enforce: true
 
 cis_security_hardening::rules::passwd_expiration::enforce: true
 cis_security_hardening::rules::passwd_expiration::max_pass_days: 90
@@ -431,9 +496,6 @@ cis_security_hardening::rules::timeout_setting::enforce: true
 cis_security_hardening::rules::timeout_setting::default_timeout: 900
 cis_security_hardening::rules::umask_setting::enforce: true
 cis_security_hardening::rules::umask_setting::default_umask: '027'
-cis_security_hardening::rules::restrict_su::enforce: true
-cis_security_hardening::rules::restrict_su::wheel_users:
-  - root
 
 cis_security_hardening::rules::passwd_perms::enforce: true
 cis_security_hardening::rules::shadow_perms::enforce: true
@@ -443,5 +505,6 @@ cis_security_hardening::rules::passwd_bak_perms::enforce: true
 cis_security_hardening::rules::group_bak_perms::enforce: true
 cis_security_hardening::rules::shadow_bak_perms::enforce: true
 cis_security_hardening::rules::gshadow_bak_perms::enforce: true
-
+cis_security_hardening::rules::shells_perms::enforce: true
+cis_security_hardening::rules::opassword_perms::enforce: true
 cis_security_hardening::rules::shadowed_passwords::enforce: true

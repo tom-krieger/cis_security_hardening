@@ -36,11 +36,9 @@ class cis_security_hardening::rules::dovecot (
             ensure => purged,
         })
 
-        if $facts['os']['release']['major'] >= '9' {
-          ensure_packages(['cyrus-imapd'], {
-              ensure => purged,
-          })
-        }
+        ensure_packages(['cyrus-imapd'], {
+            ensure => purged,
+        })
       }
       default: {
         ensure_resource('service', ['dovecot'], {

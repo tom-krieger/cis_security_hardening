@@ -19,6 +19,9 @@
 # @param use_pam_unix
 #    Flag to determine if pam_unix or pam_pwhistory (false) is used on Redhat 7 systems.
 #
+# @param enforce_for_root
+#     Enforce password history for root
+#
 # @example
 #   class { 'cis_security_hardening::rules::pam_old_passwords':
 #       enforce => true,
@@ -29,6 +32,7 @@ class cis_security_hardening::rules::pam_old_passwords (
   Boolean $enforce      = false,
   Integer $oldpasswords = 5,
   Boolean $use_pam_unix = true,
+  Boolean $enforce_for_root = false,
 ) {
   if $enforce {
     $services = [
@@ -103,13 +107,17 @@ class cis_security_hardening::rules::pam_old_passwords (
                 position  => 'after *[type="password" and module="pam_unix.so" and control="requisite"]',
               }
             } else {
+              $_args = $enforce_for_root ? {
+                true  => ["remember=${oldpasswords}", 'enforce_for_root', 'use_auth_ok'],
+                false => ["remember=${oldpasswords}", 'use_auth_ok'],
+              }
               Pam { "pam-pwhistory-${service}":
                 ensure    => present,
                 service   => $service,
                 type      => 'password',
                 control   => 'required',
                 module    => 'pam_pwhistory.so',
-                arguments => ["remember=${oldpasswords}"],
+                arguments => $_args,
               }
             }
           }

@@ -34,6 +34,12 @@ class cis_security_hardening::rules::hfs (
           }
         }
       }
+      'centos': {
+        kmod::install { 'hfs':
+          command => '/bin/false',
+        }
+        kmod::blacklist { 'hfs': }
+      }
       'debian': {
         if $facts['os']['release']['major'] >= '12' {
           kmod::install { 'hfs':
