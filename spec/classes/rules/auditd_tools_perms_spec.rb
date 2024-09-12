@@ -24,7 +24,7 @@ describe 'cis_security_hardening::rules::auditd_tools_perms' do
             'user' => 'root',
             'group' => 'root',
             'mode' => '0755',
-            'tools' => ['/sbin/auditctl', '/sbin/aureport', '/sbin/auditd', '/sbin/augenrules', '/sbin/ausearch', '/sbin/autrace'],
+            'tools' => ['/sbin/auditctl', '/sbin/aureport', '/sbin/auditd', '/sbin/augenrules', '/sbin/ausearch', '/sbin/autrace', '/sbin/audispd'],
           }
         end
 
@@ -75,6 +75,13 @@ describe 'cis_security_hardening::rules::auditd_tools_perms' do
                 'group' => 'root',
                 'mode' => '0755',
               )
+            is_expected.to contain_file('/sbin/audispd')
+              .with(
+                'ensure' => 'file',
+                'owner' => 'root',
+                'group' => 'root',
+                'mode' => '0755',
+              )
           else
             is_expected.not_to contain_file('/sbin/auditctl')
             is_expected.not_to contain_file('/sbin/aureport')
@@ -82,6 +89,7 @@ describe 'cis_security_hardening::rules::auditd_tools_perms' do
             is_expected.not_to contain_file('/sbin/augenrules')
             is_expected.not_to contain_file('/sbin/ausearch')
             is_expected.not_to contain_file('/sbin/autrace')
+            is_expected.not_to contain_file('/sbin/audispd')
           end
         }
       end
