@@ -5,10 +5,10 @@ All notable changes to this project will be documented in this file.
 ## Release 0.9.7
 
 * CentOS 7 4.0.0 benchmark
-  > Please note that with 4.0.0 the CentOS 7 benchmark removes ntp and uses chrony
 
 * Redhat 7 4.0.0 benchmark
-  > Please note that with 4.0.0 the Redhat 7 benchmark removes ntp and uses chrony
+  
+> **Please note that with 4.0.0 the Redhat 7 benchmark and CentOS 7 benchmark removes ntp and uses chrony**
   
 ## Release 0.9.6
 
