@@ -27,3 +27,4 @@
 /inventory.yaml
 /spec/fixtures/litmus_inventory.yaml
 failed.txt
+scripts/cis

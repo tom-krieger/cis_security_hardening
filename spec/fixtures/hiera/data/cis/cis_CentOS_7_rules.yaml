@@ -62,6 +62,8 @@ cis_security_hardening::benchmark::centos::7:
         - motd_perms
         - issue_perms
         - issue_net_perms
+    gdm:
+      level1:
         - gnome_gdm
         - gnome_gdm_package
         - gdm_screensaver
@@ -101,7 +103,7 @@ cis_security_hardening::benchmark::centos::7:
         - telnet_client
         - tftp_client        
     unused_network_protocols:
-      level2:
+      level1:
         - disable_ipv6
         - disable_wireless
         - disable_bluetooth

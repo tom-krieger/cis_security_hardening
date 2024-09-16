@@ -124,7 +124,7 @@ cis_security_hardening::rules::chrony::ntp_servers: ~
 cis_security_hardening::rules::chrony::makestep_seconds: 1
 cis_security_hardening::rules::chrony::makestep_updates: 3
 
-cis_security_hardening::rules::ntp_package::enforce: true
+cis_security_hardening::rules::ntp_package::enforce: false
 cis_security_hardening::rules::ntp_package::pkg: chrony
 cis_security_hardening::rules::ntpd::enforce: true
 cis_security_hardening::rules::ntpd::ntp_servers: ~
@@ -480,8 +480,8 @@ cis_security_hardening::rules::pam_old_passwords::enforce: true
 cis_security_hardening::rules::pam_old_passwords::oldpasswords: 24
 cis_security_hardening::rules::pam_old_passwords::sha512: true
 cis_security_hardening::rules::pam_old_passwords::enforce_for_root: true
-cis_security_hardening::rules::adm_crypt_style::enforce: true
 
+cis_security_hardening::rules::adm_crypt_style::enforce: true
 cis_security_hardening::rules::passwd_expiration::enforce: true
 cis_security_hardening::rules::passwd_expiration::max_pass_days: 90
 cis_security_hardening::rules::passwd_min_days::enforce: true
