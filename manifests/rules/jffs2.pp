@@ -34,6 +34,12 @@ class cis_security_hardening::rules::jffs2 (
           }
         }
       }
+      'centos': {
+        kmod::install { 'jffs2':
+          command => '/bin/false',
+        }
+        kmod::blacklist { 'jffs2': }
+      }
       'debian': {
         if $facts['os']['release']['major'] >= '12' {
           kmod::install { 'jffs2':

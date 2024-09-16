@@ -44,6 +44,12 @@ describe 'cis_security_hardening::rules::jffs2' do
                   command: '/bin/true',
                 )
               end
+            elsif os_facts[:os]['name'].casecmp('centos').zero?
+              is_expected.to contain_kmod__install('jffs2')
+                .with(
+                  command: '/bin/false',
+                )
+              is_expected.to contain_kmod__blacklist('jffs2')
             else
               is_expected.to contain_kmod__install('jffs2')
                 .with(

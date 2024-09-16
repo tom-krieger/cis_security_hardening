@@ -58,7 +58,7 @@ class cis_security_hardening::rules::restrict_core_dumps (
           }
         }
       }
-      'redhat', 'rocky', 'almalinux': {
+      'redhat': {
         file_line { 'systemd-coredump-storage':
           path => '/etc/systemd/coredump.conf',
           line => 'Storage=none',

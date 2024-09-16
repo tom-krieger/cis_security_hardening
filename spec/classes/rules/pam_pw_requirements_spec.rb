@@ -46,6 +46,7 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
             'difok' => 8,
             'maxrepeat' => 3,
             'maxclassrepeat' => 4,
+            'maxsequence' => 3,
           }
         end
 
@@ -146,7 +147,7 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                     'type'      => 'password',
                     'control'   => 'requisite',
                     'module'    => 'pam_pwquality.so',
-                    'arguments' => ['try_first_pass', 'retry=3'],
+                    'arguments' => ['try_first_pass', 'local_users_only', 'retry=3'],
                   )
 
                 is_expected.to contain_pam('pam-password-auth-requisite')
@@ -156,8 +157,18 @@ describe 'cis_security_hardening::rules::pam_pw_requirements' do
                     'type'      => 'password',
                     'control'   => 'requisite',
                     'module'    => 'pam_pwquality.so',
-                    'arguments' => ['try_first_pass', 'retry=3'],
+                    'arguments' => ['try_first_pass', 'local_users_only', 'retry=3'],
                   )
+
+                is_expected.to contain_file_line('pam maxsequence')
+                  .with(
+                    'ensure'             => 'present',
+                    'path'               => '/etc/security/pwquality.conf',
+                    'line'               => 'maxsequence = 3',
+                    'match'              => '^#? ?maxsequence',
+                    'append_on_no_match' => true,
+                  )
+
               end
 
               if os_facts[:os]['release']['major'] > '7'

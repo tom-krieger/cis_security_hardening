@@ -16,6 +16,7 @@
 * [`cis_security_hardening::rules::dac_on_hardlinks`](#cis_security_hardening--rules--dac_on_hardlinks): Ensure the operating system is configured to enable DAC on hardlinks
 * [`cis_security_hardening::rules::dac_on_symlinks`](#cis_security_hardening--rules--dac_on_symlinks): Ensure the operating system is configured to enable DAC on symlinks
 * [`cis_security_hardening::rules::gdm_lock_delay`](#cis_security_hardening--rules--gdm_lock_delay): Ensure overriding the screensaver lock-delay setting is prevented
+* [`cis_security_hardening::rules::pam_libpwquality`](#cis_security_hardening--rules--pam_libpwquality): Ensure libpwquality is installed (Automated)
 * [`cis_security_hardening::services`](#cis_security_hardening--services): Services
 * [`cis_security_hardening::sticky_world_writable_cron`](#cis_security_hardening--sticky_world_writable_cron): Create a cron job for the search for world writable directories with sticky bit set.
 
@@ -61,6 +62,7 @@
 * `cis_security_hardening::rules::auditd_kernel_modules`: Ensure kernel module loading unloading and modification is collected
 * `cis_security_hardening::rules::auditd_kmod_use`: Ensure successful and unsuccessful attempts to use the kmod command are recorded
 * `cis_security_hardening::rules::auditd_local_events`: Ensure the operating system's audit daemon is configured to include local events
+* `cis_security_hardening::rules::auditd_log_config`: Ensure only authorized groups are assigned ownership of audit log files (Automated)
 * `cis_security_hardening::rules::auditd_log_dir_perms`: Ensure the audit log directory is 0750 or more restrictive
 * `cis_security_hardening::rules::auditd_log_format`: Ensure the operating system's audit daemon is configured to resolve audit information before writing to disk
 * `cis_security_hardening::rules::auditd_log_perms`: Ensure audit log files are not read or write-accessible by unauthorized users
@@ -974,6 +976,38 @@ Data type: `Integer`
 Lock delay timeout.
 
 Default value: `900`
+
+### <a name="cis_security_hardening--rules--pam_libpwquality"></a>`cis_security_hardening::rules::pam_libpwquality`
+
+The libpwquality package provides common functions for password quality checking
+
+Rationale:
+Strong passwords reduce the risk of systems being hacked through brute force
+methods.
+
+#### Examples
+
+##### 
+
+```puppet
+class {'cis_security_hardening::rules::pam_libpwquality':
+ enforce +> true,
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `cis_security_hardening::rules::pam_libpwquality` class:
+
+* [`enforce`](#-cis_security_hardening--rules--pam_libpwquality--enforce)
+
+##### <a name="-cis_security_hardening--rules--pam_libpwquality--enforce"></a>`enforce`
+
+Data type: `Boolean`
+
+Enforce the rule
+
+Default value: `false`
 
 ### <a name="cis_security_hardening--services"></a>`cis_security_hardening::services`
 

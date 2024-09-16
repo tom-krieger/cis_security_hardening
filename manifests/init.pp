@@ -9,11 +9,9 @@
 #
 # @param profile
 #    The benchmark profile to use. Currently only server profiles are supported.
-#
 # @param level
 #    The CIS Benchmark server security level. Higher levels include all rules of lover levels. Therefore level1 rules are all included
 #    in the level2 rules and stig includes level1 nd level 2 rules.
-#
 # @param update_postrun_command
 #    Update Puppet agent post run command
 # @param fact_upload_command
@@ -33,10 +31,8 @@
 #    Print various info messages
 # @param remove_authconfig
 #    remove authconfig package on Redhat 7 or similar OSes
-#
 # @param enable_sticky_world_writable_cron
 #   Whether to enable the sticky world writable cron job.
-#
 # @param enable_auditd_cron
 #   Whether to enable the auditd cron job.
 #

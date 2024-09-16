@@ -21,7 +21,7 @@ class cis_security_hardening::rules::dnsmasq (
 ) {
   if $enforce {
     case $facts['os']['name'].downcase() {
-      'redhat': {
+      'redhat', 'centos': {
         ensure_packages(['dnsmasq'], {
             ensure => purged,
         })

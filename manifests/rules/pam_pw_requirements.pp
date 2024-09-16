@@ -57,6 +57,9 @@
 # @param maxclassrepeat
 #    The maximum number of allowed consecutive characters of the same class in the new password.
 #
+# @param maxsequence
+#    Maximum length of monotonic character sequences
+#
 # @example
 #   class { 'cis_security_hardening::rules::pam_pw_requirements':
 #       enforce => true,
@@ -77,6 +80,7 @@ class cis_security_hardening::rules::pam_pw_requirements (
   Integer $difok          = 0,
   Integer $maxrepeat      = 0,
   Integer $maxclassrepeat = 0,
+  Integer $maxsequence    = 0,
 ) {
   if $enforce {
     require cis_security_hardening::rules::pam_old_passwords
@@ -178,6 +182,16 @@ class cis_security_hardening::rules::pam_pw_requirements (
           }
         }
 
+        if $maxsequence > 0 {
+          file_line { 'pam maxsequence':
+            ensure             => 'present',
+            path               => '/etc/security/pwquality.conf',
+            line               => "maxsequence = ${maxsequence}",
+            match              => '^#? ?maxsequence',
+            append_on_no_match => true,
+          }
+        }
+
         $profile = fact('cis_security_hardening.authselect.profile')
         if $profile != undef and $profile != 'none' {
           $pf_path = "/etc/authselect/custom/${profile}"
@@ -209,7 +223,7 @@ class cis_security_hardening::rules::pam_pw_requirements (
               type      => 'password',
               control   => 'requisite',
               module    => 'pam_pwquality.so',
-              arguments => ['try_first_pass', "retry=${retry}"],
+              arguments => ['try_first_pass', 'local_users_only', "retry=${retry}"],
             }
           } else {
             Pam { "pam-${service}-requisite":

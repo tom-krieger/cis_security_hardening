@@ -24,13 +24,13 @@ class cis_security_hardening::rules::udf (
 ) {
   if $enforce {
     case $facts['os']['name'].downcase() {
-      'rocky', 'almalinux': {
+      'rocky', 'almalinux', 'centos': {
         kmod::install { 'udf':
           command => '/bin/false',
         }
         kmod::blacklist { 'udf': }
       }
-      'centos', 'redhat': {
+      'redhat': {
         if $facts['os']['release']['major'] > '7' {
           kmod::install { 'udf':
             command => '/bin/false',

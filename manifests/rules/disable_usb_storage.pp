@@ -32,6 +32,10 @@ class cis_security_hardening::rules::disable_usb_storage (
           $command = '/bin/true'
         }
       }
+      'centos': {
+        $command = '/bin/false'
+        kmod::blacklist { 'usb-storage': }
+      }
       'redhat': {
         if $facts['os']['release']['major'] > '8' {
           $command = '/bin/false'

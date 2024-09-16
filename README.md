@@ -45,19 +45,19 @@ A security baseline can be based on a CIS benchmark but can include more rules s
 The code of this security hardening module is based on the following CIS Benchmarks:
 
 | OS           | Benchmark version                                            | Version | Date       |
-|--------------|--------------------------------------------------------------| ---: | ---: |
+|--------------|--------------------------------------------------------------| ---:    | ---:       |
 | Suse SLES 12 | CIS SUSE Linux Enterprise 12 Benchmark                       | 3.1.0   | 01-24-2022 |
 | Suse SLES 15 | CIS SUSE Linux Enterprise 15 Benchmark                       | 1.1.1   | 09-17-2021 |
-| RedHat 7     | CIS Red Hat Enterprise Linux 7 Benchmark                     | 3.1.1   | 05-21-2021 |
+| RedHat 7     | CIS Red Hat Enterprise Linux 7 Benchmark                     | 4.0.0   | 12-21-2023 |
 | RedHat 7     | CIS Red Hat Enterprise Linux 7 STIG Benchmark                | 2.0.0   | 11-29-2021 |
 | RedHat 8     | CIS Red Hat Enterprise Linux 8 Benchmark                     | 2.0.0   | 02-23-2022 |
 | RedHat 8     | CIS Red Hat Enterprise Linux 8 STIG Benchmark                | 1.0.0   | 11-12-2021 |
 | Redhat 9     | CIS Red Hat Enterprise Linux 9 benchmark                     | 1.0.0   | 11-28-2022 |
-| CentOS 7     | CIS CentOS Linux 7 Benchmark                                 | 3.1.2   | 08-31-2021 |
+| CentOS 7     | CIS CentOS Linux 7 Benchmark                                 | 4.0.0   | 12-22-2023 |
 | CentOS 8     | CIS CentOS Linux 8 Benchmark                                 | 2.0.0   | 02-23-2022 |
 | Ubuntu 18.04 | CIS Ubuntu Linux 18.04 LTS Benchmark                         | 2.0.1   | 01-03-2020 |
 | Ubuntu 20.04 | CIS Ubuntu Linux 20.04 LTS Benchmark                         | 2.0.1   | 06-29-2023 |
-| Ubuntu 20.04 | CIS Ubuntu Linux 20.04 LTS STIG Benchmark                    | 1.0.0   | 26.07.2021 |
+| Ubuntu 20.04 | CIS Ubuntu Linux 20.04 LTS STIG Benchmark                    | 1.0.0   | 07-26-2021 |
 | Ubuntu 22.04 | CIS Ubuntu Linux 22.04 LTS Benchmark                         | 1.0.0   | 06-30-2022 |
 | Debian 10    | CIS Debian Linux 10 Benchmark                                | 1.0.0   | 02-13-2020 |
 | Debian 11    | CIS Debian Linux 11 Benchmark                                | 1.0.0   | 09-22-2022 |
@@ -71,7 +71,7 @@ The benchmarks can be found at [CIS Benchmarks Website](https://downloads.cisecu
 
 ### Deprecation notices
 
-> Version 4.0.0 will be the final CIS benchmark for CentOS 7. There will be a final CentOS 7 update to cover version 4.0.0 but there will be no further development on CentOS 7. Bug fixes will be done on basis of PRs.
+> **Version 4.0.0 will be the final CIS benchmark for CentOS 7 and Redhat 7. There will be a final CentOS 7/Redhat 7 update to cover these versions but there will be no further development on CentOS 7/Redhat 7. Bug fixes will be done on basis of PRs.**
 
 ## Setup
 

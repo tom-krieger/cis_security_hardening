@@ -22,13 +22,13 @@ class cis_security_hardening::rules::cramfs (
 ) {
   if $enforce {
     case $facts['os']['name'].downcase() {
-      'rocky', 'almalinux': {
+      'rocky', 'almalinux', 'centos': {
         kmod::install { 'cramfs':
           command => '/bin/false',
         }
         kmod::blacklist { 'cramfs': }
       }
-      'centos', 'redhat': {
+      'redhat': {
         if $facts['os']['release']['major'] > '7' {
           kmod::install { 'cramfs':
             command => '/bin/false',

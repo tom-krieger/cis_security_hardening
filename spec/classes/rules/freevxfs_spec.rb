@@ -35,8 +35,8 @@ describe 'cis_security_hardening::rules::freevxfs' do
               if os_facts[:os]['release']['major'] >= '12'
                 is_expected.to contain_kmod__install('freevxfs')
                   .with(
-                  command: '/bin/false',
-                )
+                    command: '/bin/false',
+                  )
                 is_expected.to contain_kmod__blacklist('freevxfs')
               else
                 is_expected.to contain_kmod__install('freevxfs')
@@ -44,6 +44,12 @@ describe 'cis_security_hardening::rules::freevxfs' do
                   command: '/bin/true',
                 )
               end
+            elsif os_facts[:os]['name'].casecmp('centos').zero?
+              is_expected.to contain_kmod__install('freevxfs')
+                .with(
+                    command: '/bin/false',
+                  )
+              is_expected.to contain_kmod__blacklist('freevxfs')
             else
               is_expected.to contain_kmod__install('freevxfs')
                 .with(

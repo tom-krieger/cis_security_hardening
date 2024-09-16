@@ -36,6 +36,7 @@ describe 'cis_security_hardening::rules::pam_old_passwords' do
           {
             'enforce' => enforce,
             'oldpasswords' => 5,
+            'enforce_for_root' => true,
           }
         end
 

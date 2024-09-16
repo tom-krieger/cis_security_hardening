@@ -34,6 +34,12 @@ class cis_security_hardening::rules::freevxfs (
           }
         }
       }
+      'centos': {
+        kmod::install { 'freevxfs':
+          command => '/bin/false',
+        }
+        kmod::blacklist { 'freevxfs': }
+      }
       'debian': {
         if $facts['os']['release']['major'] >= '12' {
           kmod::install { 'freevxfs':

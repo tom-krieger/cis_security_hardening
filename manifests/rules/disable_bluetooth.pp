@@ -59,6 +59,15 @@ class cis_security_hardening::rules::disable_bluetooth (
           }
         }
       }
+      'centos': {
+        service { 'bluetooth.service':
+          ensure => 'stopped',
+          enable => false,
+        }
+        ensure_packages(['bluez'], {
+            ensure => absent,
+        })
+      }
       default: {
         kmod::install { 'bluetooth':
           command => '/bin/true',
