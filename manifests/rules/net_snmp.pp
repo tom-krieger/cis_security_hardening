@@ -43,7 +43,7 @@ class cis_security_hardening::rules::net_snmp (
       default => 'purged',
     }
 
-    ensure_packages($pkg, {
+    stdlib::ensure_packages($pkg, {
         ensure => $ensure,
     })
   }

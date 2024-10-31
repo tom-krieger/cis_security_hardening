@@ -55,7 +55,7 @@ class cis_security_hardening::rules::avahi (
             ensure => 'stopped',
             enable => false,
         })
-        ensure_packages(['avahi-autoipd', 'avahi'], {
+        stdlib::ensure_packages(['avahi-autoipd', 'avahi'], {
             ensure => $ensure,
         })
       }
@@ -68,7 +68,7 @@ class cis_security_hardening::rules::avahi (
             ensure => 'stopped',
             enable => false,
         })
-        ensure_packages(['avahi-daemon'], {
+        stdlib::ensure_packages(['avahi-daemon'], {
             ensure => $ensure,
         })
       }
@@ -89,7 +89,7 @@ class cis_security_hardening::rules::avahi (
             unless  => "test \"$(systemctl is-active avahi-daemon.socket)\" = \"inactive\"",
           }
 
-          ensure_packages(['avahi-daemon'], {
+          stdlib::ensure_packages(['avahi-daemon'], {
               ensure => $ensure,
               require => [Exec['stop avahi service'], Exec['stop avahi socket']]
           })
@@ -109,7 +109,7 @@ class cis_security_hardening::rules::avahi (
             ensure => 'stopped',
             enable => false,
         })
-        ensure_packages(['avahi-autoipd', 'avahi'], {
+        stdlib::ensure_packages(['avahi-autoipd', 'avahi'], {
             ensure => $ensure,
         })
       }

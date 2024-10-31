@@ -30,7 +30,7 @@ class cis_security_hardening::rules::samba (
         default => 'purged',
       }
 
-      ensure_packages(['samba'], {
+      stdlib::ensure_packages(['samba'], {
           ensure => $ensure,
       })
     } else {

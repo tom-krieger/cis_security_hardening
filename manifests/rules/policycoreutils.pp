@@ -28,7 +28,7 @@ class cis_security_hardening::rules::policycoreutils (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    ensure_packages(['policycoreutils'], {
+    stdlib::ensure_packages(['policycoreutils'], {
         ensure => installed,
     })
   }

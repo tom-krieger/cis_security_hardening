@@ -32,7 +32,7 @@ class cis_security_hardening::rules::krb5_server (
       default => 'purged',
     }
 
-    ensure_packages(['krb5-server'], {
+    stdlib::ensure_packages(['krb5-server'], {
         ensure => $ensure,
     })
   }

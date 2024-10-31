@@ -28,7 +28,7 @@ class cis_security_hardening::rules::tmux_package (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    ensure_packages(['tmux'], {
+    stdlib::ensure_packages(['tmux'], {
         ensure => installed,
     })
   }

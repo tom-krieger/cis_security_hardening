@@ -28,7 +28,7 @@ class cis_security_hardening::rules::aide_installed (
   if $enforce {
     case $facts['os']['name'].downcase() {
       'ubuntu', 'debian': {
-        ensure_packages(['aide', 'aide-common'], {
+        stdlib::ensure_packages(['aide', 'aide-common'], {
             ensure => installed,
             notify => Exec['aidedb-ubuntu-init'],
         })
@@ -53,7 +53,7 @@ class cis_security_hardening::rules::aide_installed (
         }
       }
       'centos', 'redhat', 'almalinux', 'rocky': {
-        ensure_packages(['aide'], {
+        stdlib::ensure_packages(['aide'], {
             ensure => installed,
             notify => Exec['aidedb'],
         })
@@ -76,7 +76,7 @@ class cis_security_hardening::rules::aide_installed (
         }
       }
       'sles': {
-        ensure_packages(['aide'], {
+        stdlib::ensure_packages(['aide'], {
             ensure => installed,
             notify => Exec['aidedb'],
         })

@@ -31,12 +31,12 @@ class cis_security_hardening::rules::nfs_utils (
     if $uninstall {
       case $facts['os']['name'].downcase() {
         'sles': {
-          ensure_packages(['nfs-utils', 'nfs-kernel-server'], {
+          stdlib::ensure_packages(['nfs-utils', 'nfs-kernel-server'], {
               ensure => absent,
           })
         }
         'rocky', 'almalinux': {
-          ensure_packages(['nfs-utils'], {
+          stdlib::ensure_packages(['nfs-utils'], {
               ensure => absent,
           })
         }
@@ -45,7 +45,7 @@ class cis_security_hardening::rules::nfs_utils (
               ensure => stopped,
               enable => false,
           })
-          ensure_packages(['nfs-utils'], {
+          stdlib::ensure_packages(['nfs-utils'], {
               ensure => absent,
           })
         }

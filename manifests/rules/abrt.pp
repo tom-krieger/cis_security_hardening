@@ -36,7 +36,7 @@ class cis_security_hardening::rules::abrt (
         default => 'purged',
       }
 
-      ensure_packages($pkgs, {
+      stdlib::ensure_packages($pkgs, {
           ensure => $ensure,
       })
     }

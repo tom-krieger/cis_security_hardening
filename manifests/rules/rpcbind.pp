@@ -42,7 +42,7 @@ class cis_security_hardening::rules::rpcbind (
     if $uninstall {
       case $facts['os']['name'].downcase() {
         'ubuntu': {
-          ensure_packages(['rpcbind'], {
+          stdlib::ensure_packages(['rpcbind'], {
               ensure => purged,
           })
         }
@@ -55,12 +55,12 @@ class cis_security_hardening::rules::rpcbind (
               ensure => stopped,
               enable => false,
           })
-          ensure_packages(['rpcbind'], {
+          stdlib::ensure_packages(['rpcbind'], {
               ensure => absent,
           })
         }
         'rocky', 'almalinux': {
-          ensure_packages(['rpcbind'], {
+          stdlib::ensure_packages(['rpcbind'], {
               ensure => absent,
           })
 
@@ -74,7 +74,7 @@ class cis_security_hardening::rules::rpcbind (
               ensure => 'stopped',
               enable => false,
           })
-          ensure_packages(['rpcbind'], {
+          stdlib::ensure_packages(['rpcbind'], {
               ensure => absent,
           })
         }

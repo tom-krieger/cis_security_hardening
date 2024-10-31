@@ -85,7 +85,7 @@ class cis_security_hardening::rules::ntpd (
     }
 
     if $facts['os']['family'].downcase() == 'debian' {
-      ensure_packages(['chrony'], {
+      stdlib::ensure_packages(['chrony'], {
           ensure => purged,
       })
       ensure_resource('service', 'systemd-timesyncd', {

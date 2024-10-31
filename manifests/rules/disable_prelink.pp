@@ -28,7 +28,7 @@ class cis_security_hardening::rules::disable_prelink (
       default => 'purged',
     }
 
-    ensure_packages(['prelink'], {
+    stdlib::ensure_packages(['prelink'], {
         ensure => $ensure,
     })
 

@@ -34,7 +34,7 @@ class cis_security_hardening::rules::crond_service (
     }
 
     if $uninstall_cron {
-      ensure_packages(['cronie'], {
+      stdlib::ensure_packages(['cronie'], {
           ensure => $ensure,
       })
     } else {

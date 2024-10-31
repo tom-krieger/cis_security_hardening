@@ -29,7 +29,7 @@ class cis_security_hardening::rules::usbguard_package (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    ensure_packages(['usbguard'], {
+    stdlib::ensure_packages(['usbguard'], {
         ensure => installed,
     })
   }

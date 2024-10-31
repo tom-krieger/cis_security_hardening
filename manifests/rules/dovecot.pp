@@ -22,21 +22,21 @@ class cis_security_hardening::rules::dovecot (
   if $enforce {
     case $facts['os']['name'].downcase() {
       'ubuntu': {
-        ensure_packages(['dovecot-imapd', 'dovecot-pop3d'], {
+        stdlib::ensure_packages(['dovecot-imapd', 'dovecot-pop3d'], {
             ensure => purged,
         })
       }
       'sles': {
-        ensure_packages(['dovecot'], {
+        stdlib::ensure_packages(['dovecot'], {
             ensure => absent,
         })
       }
       'redhat': {
-        ensure_packages(['dovecot'], {
+        stdlib::ensure_packages(['dovecot'], {
             ensure => purged,
         })
 
-        ensure_packages(['cyrus-imapd'], {
+        stdlib::ensure_packages(['cyrus-imapd'], {
             ensure => purged,
         })
       }

@@ -33,7 +33,7 @@ class cis_security_hardening::rules::tuned (
       default => 'purged',
     }
 
-    ensure_packages(['tuned'], {
+    stdlib::ensure_packages(['tuned'], {
         ensure => $ensure,
     })
   }

@@ -20,7 +20,7 @@ class cis_security_hardening::rules::ntp_package (
   Enum['ntp', 'chrony'] $pkg = 'ntp',
 ) {
   if $enforce {
-    ensure_packages($pkg, {
+    stdlib::ensure_packages($pkg, {
         ensure => installed,
     })
   }

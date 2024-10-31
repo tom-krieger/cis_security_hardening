@@ -62,7 +62,7 @@ class cis_security_hardening (
       'suse'  => 'absent',
       default => 'purged',
     }
-    ensure_packages(['authconfig'], {
+    stdlib::ensure_packages(['authconfig'], {
         ensure => $ensure,
     })
   }

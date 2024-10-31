@@ -252,7 +252,7 @@ class cis_security_hardening::rules::pam_pw_requirements (
             ensure => installed,
           }
         }
-        ensure_packages(['libpam-pwquality'], {
+        stdlib::ensure_packages(['libpam-pwquality'], {
             ensure => installed,
             notify => Exec['update-pam-config'],
         })

@@ -26,12 +26,12 @@ class cis_security_hardening::rules::nis (
   if $enforce {
     case $facts['os']['name'].downcase() {
       'ubuntu': {
-        ensure_packages(['nis'], {
+        stdlib::ensure_packages(['nis'], {
             ensure => purged,
         })
       }
       'sles':{
-        ensure_packages(['ypserv'], {
+        stdlib::ensure_packages(['ypserv'], {
             ensure => absent,
         })
       }

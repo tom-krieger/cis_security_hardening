@@ -35,7 +35,7 @@ class cis_security_hardening::rules::sudo_installed (
   Array $sudo_pkgs = ['sudo']
 ) {
   if $enforce {
-    ensure_packages($sudo_pkgs, {
+    stdlib::ensure_packages($sudo_pkgs, {
         ensure => installed,
     })
   }

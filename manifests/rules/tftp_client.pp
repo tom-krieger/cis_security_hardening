@@ -21,7 +21,7 @@ class cis_security_hardening::rules::tftp_client (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    ensure_packages(['tftp'], {
+    stdlib::ensure_packages(['tftp'], {
         ensure => absent,
     })
   }

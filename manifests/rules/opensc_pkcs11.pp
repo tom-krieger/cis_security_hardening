@@ -29,7 +29,7 @@ class cis_security_hardening::rules::opensc_pkcs11 (
       default  => ['opensc-pkcs11'],
     }
 
-    ensure_packages($pkgs, {
+    stdlib::ensure_packages($pkgs, {
         ensure => present,
     })
   }

@@ -26,7 +26,7 @@ class cis_security_hardening::rules::talk_client (
       default => 'purged',
     }
 
-    ensure_packages(['talk'], {
+    stdlib::ensure_packages(['talk'], {
         ensure => $ensure,
     })
   }

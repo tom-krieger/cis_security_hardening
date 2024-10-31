@@ -26,7 +26,7 @@ class cis_security_hardening::rules::tftp_server (
       default => 'purged',
     }
 
-    ensure_packages(['tftp-server'], {
+    stdlib::ensure_packages(['tftp-server'], {
         ensure => $ensure,
     })
   }

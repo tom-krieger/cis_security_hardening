@@ -27,7 +27,7 @@ class cis_security_hardening::rules::pam_mfa_redhat (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    ensure_packages(['dconf'], {
+    stdlib::ensure_packages(['dconf'], {
         ensure => installed,
     })
 

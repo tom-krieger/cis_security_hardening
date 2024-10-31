@@ -32,7 +32,7 @@ class cis_security_hardening::rules::x11_installed (
           'suse'  => 'absent',
           default => 'purged',
         }
-        ensure_packages([$pkg], {
+        stdlib::ensure_packages([$pkg], {
             ensure => $ensure,
         })
       }

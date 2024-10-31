@@ -21,7 +21,7 @@ class cis_security_hardening::rules::rsyncd (
   if $enforce {
     case $facts['os']['family'].downcase() {
       'debian': {
-        ensure_packages(['rsync'], {
+        stdlib::ensure_packages(['rsync'], {
             ensure => purged,
         })
 
@@ -37,7 +37,7 @@ class cis_security_hardening::rules::rsyncd (
         }
       }
       'suse': {
-        ensure_packages(['rsync'], {
+        stdlib::ensure_packages(['rsync'], {
             ensure => absent,
         })
       }

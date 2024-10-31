@@ -29,18 +29,18 @@ class cis_security_hardening::rules::cups (
 
     case $facts['os']['name'].downcase() {
       'ubuntu', 'sles': {
-        ensure_packages(['cups'], {
+        stdlib::ensure_packages(['cups'], {
             ensure => $ensure,
         })
       }
       'rocky', 'almalinux': {
-        ensure_packages(['cups'], {
+        stdlib::ensure_packages(['cups'], {
             ensure => $ensure,
         })
       }
       'debian': {
         if $facts['os']['release']['major'] > '10' {
-          ensure_packages('cups', {
+          stdlib::ensure_packages('cups', {
               ensure => $ensure,
           })
         } else {

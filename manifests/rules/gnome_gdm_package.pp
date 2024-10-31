@@ -30,7 +30,7 @@ class cis_security_hardening::rules::gnome_gdm_package (
       }
     }
 
-    ensure_packages($pkg, {
+    stdlib::ensure_packages($pkg, {
         ensure => $ensure,
     })
   }

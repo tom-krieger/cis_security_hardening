@@ -26,7 +26,7 @@ class cis_security_hardening::rules::vlock (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    ensure_packages(['vlock'], {
+    stdlib::ensure_packages(['vlock'], {
         ensure => present,
     })
   }

@@ -33,7 +33,7 @@ class cis_security_hardening::rules::disable_wireless (
     }
 
     if !empty($pkg) {
-      ensure_packages($pkg, {
+      stdlib::ensure_packages($pkg, {
           ensure => present,
       })
     }

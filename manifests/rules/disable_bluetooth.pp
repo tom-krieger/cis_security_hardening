@@ -64,7 +64,7 @@ class cis_security_hardening::rules::disable_bluetooth (
           ensure => 'stopped',
           enable => false,
         }
-        ensure_packages(['bluez'], {
+        stdlib::ensure_packages(['bluez'], {
             ensure => absent,
         })
       }

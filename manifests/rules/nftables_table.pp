@@ -30,7 +30,7 @@ class cis_security_hardening::rules::nftables_table (
 
     if(!($nftables_default_table in $tables)) {
       if(!defined(Package['nftables'])) {
-        ensure_packages(['nftables'], {
+        stdlib::ensure_packages(['nftables'], {
             ensure => installed,
             before => Exec["create nft table ${nftables_default_table}"],
         })

@@ -46,7 +46,7 @@ class cis_security_hardening::rules::firewalld_install (
       default => ['nftables', 'iptables-services'],
     }
 
-    ensure_packages($pkgs, {
+    stdlib::ensure_packages($pkgs, {
         ensure => installed,
     })
 
@@ -55,7 +55,7 @@ class cis_security_hardening::rules::firewalld_install (
       default => 'purged',
     }
 
-    ensure_packages($pkgs_remove, {
+    stdlib::ensure_packages($pkgs_remove, {
         ensure => $ensure,
     })
 

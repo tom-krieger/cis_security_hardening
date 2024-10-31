@@ -33,7 +33,7 @@ class cis_security_hardening::rules::auditd_rsyslog_gnutls (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    ensure_packages(['rsyslog-gnutls'], {
+    stdlib::ensure_packages(['rsyslog-gnutls'], {
         ensure => installed,
     })
   }

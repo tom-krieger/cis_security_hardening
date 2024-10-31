@@ -25,7 +25,7 @@ class cis_security_hardening::rules::rng_tools (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    ensure_packages(['rng-tools'], {
+    stdlib::ensure_packages(['rng-tools'], {
         ensure => installed,
     })
   }

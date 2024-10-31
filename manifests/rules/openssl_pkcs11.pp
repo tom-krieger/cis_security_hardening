@@ -31,7 +31,7 @@ class cis_security_hardening::rules::openssl_pkcs11 (
   Boolean $enforce = false
 ) {
   if $enforce {
-    ensure_packages(['openssl-pkcs11'], {
+    stdlib::ensure_packages(['openssl-pkcs11'], {
         ensure => installed,
     })
   }

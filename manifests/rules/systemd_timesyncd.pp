@@ -56,7 +56,7 @@ class cis_security_hardening::rules::systemd_timesyncd (
         default => 'purged',
       }
 
-      ensure_packages(['ntp', 'chrony'], {
+      stdlib::ensure_packages(['ntp', 'chrony'], {
           ensure => $ensure,
       })
 

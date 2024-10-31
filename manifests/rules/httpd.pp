@@ -22,22 +22,22 @@ class cis_security_hardening::rules::httpd (
   if $enforce {
     case $facts['os']['name'].downcase() {
       'ubuntu', 'debian': {
-        ensure_packages(['apache2'], {
+        stdlib::ensure_packages(['apache2'], {
             ensure => purged,
         })
       }
       'sles': {
-        ensure_packages(['httpd'], {
+        stdlib::ensure_packages(['httpd'], {
             ensure => absent,
         })
       }
       'redhat': {
         if $facts['os']['release']['major'] >= '9' {
-          ensure_packages(['nginx'], {
+          stdlib::ensure_packages(['nginx'], {
               ensure => purged,
           })
         }
-        ensure_packages(['httpd'], {
+        stdlib::ensure_packages(['httpd'], {
             ensure => purged,
         })
       }

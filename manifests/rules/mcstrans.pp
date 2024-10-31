@@ -25,7 +25,7 @@ class cis_security_hardening::rules::mcstrans (
       'suse'  => 'absent',
       default => 'purged',
     }
-    ensure_packages(['mcstrans'], {
+    stdlib::ensure_packages(['mcstrans'], {
         ensure => $ensure,
     })
   }

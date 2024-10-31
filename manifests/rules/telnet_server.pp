@@ -39,7 +39,7 @@ class cis_security_hardening::rules::telnet_server (
           enable => false,
       })
     }
-    ensure_packages($pkgs, {
+    stdlib::ensure_packages($pkgs, {
         ensure => $ensure,
     })
   }

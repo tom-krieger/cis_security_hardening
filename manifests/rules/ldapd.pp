@@ -23,12 +23,12 @@ class cis_security_hardening::rules::ldapd (
   if $enforce {
     case $facts['os']['name'].downcase() {
       'ubuntu': {
-        ensure_packages(['slapd'], {
+        stdlib::ensure_packages(['slapd'], {
             ensure => purged,
         })
       }
       'sles': {
-        ensure_packages(['openldap2'], {
+        stdlib::ensure_packages(['openldap2'], {
             ensure => absent,
         })
       }

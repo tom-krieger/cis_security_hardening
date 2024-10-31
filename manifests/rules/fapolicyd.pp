@@ -38,7 +38,7 @@ class cis_security_hardening::rules::fapolicyd (
   String $gid      = 'users',
 ) {
   if $enforce {
-    ensure_packages(['fapolicyd'], {
+    stdlib::ensure_packages(['fapolicyd'], {
         ensure => 'installed',
     })
 

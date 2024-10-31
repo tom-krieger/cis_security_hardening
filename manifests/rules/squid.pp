@@ -26,7 +26,7 @@ class cis_security_hardening::rules::squid (
         'suse'  => 'absent',
         default => 'purged',
       }
-      ensure_packages(['squid'], {
+      stdlib::ensure_packages(['squid'], {
           ensure => $ensure,
       })
     } else {

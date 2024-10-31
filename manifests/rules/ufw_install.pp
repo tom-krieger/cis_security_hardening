@@ -29,7 +29,7 @@ class cis_security_hardening::rules::ufw_install (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    ensure_packages(['ufw'], {
+    stdlib::ensure_packages(['ufw'], {
         ensure => installed,
     })
 
@@ -38,7 +38,7 @@ class cis_security_hardening::rules::ufw_install (
       default => 'purged',
     }
 
-    ensure_packages(['iptables-persistent'], {
+    stdlib::ensure_packages(['iptables-persistent'], {
         ensure => $ensure,
     })
   }

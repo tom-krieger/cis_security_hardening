@@ -63,7 +63,7 @@ class cis_security_hardening::rules::nftables_install (
       default => 'purged',
     }
 
-    ensure_packages($pkgs_remove, {
+    stdlib::ensure_packages($pkgs_remove, {
         ensure => $ensure,
     })
 
@@ -92,7 +92,7 @@ class cis_security_hardening::rules::nftables_install (
     }
 
     if $facts['os']['name'].downcase() == 'ubuntu' {
-      ensure_packages(['ufw'], {
+      stdlib::ensure_packages(['ufw'], {
           ensure => $ensure,
       })
     }

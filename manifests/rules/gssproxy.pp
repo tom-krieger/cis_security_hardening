@@ -30,7 +30,7 @@ class cis_security_hardening::rules::gssproxy (
       'suse'  => 'absent',
       default => 'purged',
     }
-    ensure_packages(['gssproxy'], {
+    stdlib::ensure_packages(['gssproxy'], {
         ensure => $ensure,
     })
   }

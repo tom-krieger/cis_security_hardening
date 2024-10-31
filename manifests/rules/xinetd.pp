@@ -26,7 +26,7 @@ class cis_security_hardening::rules::xinetd (
       default => 'purged',
     }
 
-    ensure_packages(['xinetd'], {
+    stdlib::ensure_packages(['xinetd'], {
         ensure => $ensure,
     })
   }

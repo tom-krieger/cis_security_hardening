@@ -22,7 +22,7 @@ class cis_security_hardening::rules::dhcp (
   if $enforce {
     case $facts['os']['name'].downcase() {
       'ubuntu': {
-        ensure_packages(['isc-dhcp-server'], {
+        stdlib::ensure_packages(['isc-dhcp-server'], {
             ensure => purged,
         })
       }
@@ -37,7 +37,7 @@ class cis_security_hardening::rules::dhcp (
         })
       }
       'sles': {
-        ensure_packages(['dhcp'], {
+        stdlib::ensure_packages(['dhcp'], {
             ensure => absent,
         })
       }

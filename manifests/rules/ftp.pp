@@ -25,7 +25,7 @@ class cis_security_hardening::rules::ftp (
       'suse'  => 'absent',
       default => 'purged',
     }
-    ensure_packages(['ftp'], {
+    stdlib::ensure_packages(['ftp'], {
         ensure => $ensure,
     })
   }

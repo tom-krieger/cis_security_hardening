@@ -32,7 +32,7 @@ class cis_security_hardening::rules::krb5_workstation (
       default => 'purged',
     }
 
-    ensure_packages(['krb5-workstation'], {
+    stdlib::ensure_packages(['krb5-workstation'], {
         ensure => $ensure,
     })
   }

@@ -20,7 +20,7 @@ class cis_security_hardening::rules::pam_libpwquality (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    ensure_packages(['libpwquality'], {
+    stdlib::ensure_packages(['libpwquality'], {
         ensure => installed,
     })
   }

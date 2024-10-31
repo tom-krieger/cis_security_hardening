@@ -41,7 +41,7 @@ class cis_security_hardening::rules::automatic_error_reporting (
         default => 'purged',
       }
 
-      ensure_packages(['apport'], {
+      stdlib::ensure_packages(['apport'], {
           ensure => $ensure,
       })
     }

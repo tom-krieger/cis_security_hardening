@@ -28,7 +28,7 @@ class cis_security_hardening::rules::vsftp (
         default => 'purged',
       }
 
-      ensure_packages(['vsftpd'], {
+      stdlib::ensure_packages(['vsftpd'], {
           ensure => $ensure,
       })
     } else {

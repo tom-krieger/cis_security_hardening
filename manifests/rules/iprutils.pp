@@ -32,7 +32,7 @@ class cis_security_hardening::rules::iprutils (
       default => 'purged',
     }
 
-    ensure_packages(['iprutils'], {
+    stdlib::ensure_packages(['iprutils'], {
         ensure => $ensure,
     })
   }

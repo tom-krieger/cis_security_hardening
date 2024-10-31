@@ -36,7 +36,7 @@ class cis_security_hardening::rules::disable_apport (
         'suse'  => 'absent',
         default => 'purged',
       }
-      ensure_packages('apport', {
+      stdlib::ensure_packages('apport', {
           ensure => $ensure,
       })
     }

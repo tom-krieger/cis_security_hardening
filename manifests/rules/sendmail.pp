@@ -35,7 +35,7 @@ class cis_security_hardening::rules::sendmail (
       'suse'  => 'absent',
       default => 'purged',
     }
-    ensure_packages(['sendmail'], {
+    stdlib::ensure_packages(['sendmail'], {
         ensure => $ensure,
     })
   }
