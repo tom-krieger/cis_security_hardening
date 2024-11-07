@@ -16,16 +16,15 @@
 # @example
 #   class { 'cis_security_hardening::rules::logrotate_configuration':
 #       enforce => true,
-#       permission => '640'
+#       permission => '0640'
 #   }
 #
 # @api private
 class cis_security_hardening::rules::logrotate_configuration (
   Boolean $enforce    = false,
-  String $permission  = '640',
+  String $permission  = '0640',
 ) {
-  if
-  cis_security_hardening::hash_key($facts, 'cis_security_hardening') and
+  if ($enforce) and cis_security_hardening::hash_key($facts, 'cis_security_hardening') and
   cis_security_hardening::hash_key($facts['cis_security_hardening'], 'logrotate_conf') {
     $facts['cis_security_hardening']['logrotate_conf'].each |$file, $data| {
       $match   = "${data['action']} ${data['mode']} ${data['user']} ${data['group']}"
