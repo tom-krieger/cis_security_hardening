@@ -38,10 +38,10 @@ class cis_security_hardening::rules::gdm_screensaver (
       unless  => "test \"$(gsettings get org.gnome.desktop.session idle-delay)\" = \"unit32 ${timeout}\"",
     }
 
-    exec { 'gdm screensaver ilde activates':
+    exec { 'gdm screensaver idle activates':
       command => 'gsettings set org.gnome.desktop.screensaver idle-activation-enabled "true"',
       path    => ['/bin', '/usr/bin'],
-      unless  => 'test "$(gsettings get org.gnome.desktop.session idle-delayidle-activation-enabled)" = "true"',
+      unless  => 'test "$(gsettings get org.gnome.desktop.screensaver idle-activation-enabled)" = "true"',
     }
 
     exec { 'gdm screensaver locktime':

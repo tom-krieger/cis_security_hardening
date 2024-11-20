@@ -35,11 +35,11 @@ describe 'cis_security_hardening::rules::gdm_screensaver' do
                 'unless'  => 'test "$(gsettings get org.gnome.desktop.session idle-delay)" = "unit32 800"',
               )
 
-            is_expected.to contain_exec('gdm screensaver ilde activates')
+            is_expected.to contain_exec('gdm screensaver idle activates')
               .with(
                 'command' => 'gsettings set org.gnome.desktop.screensaver idle-activation-enabled "true"',
                 'path'    => ['/bin', '/usr/bin'],
-                'unless'  => 'test "$(gsettings get org.gnome.desktop.session idle-delayidle-activation-enabled)" = "true"',
+                'unless'  => 'test "$(gsettings get org.gnome.desktop.screensaver idle-activation-enabled)" = "true"',
               )
 
             is_expected.to contain_exec('gdm screensaver locktime')
@@ -50,7 +50,7 @@ describe 'cis_security_hardening::rules::gdm_screensaver' do
               )
           else
             is_expected.not_to contain_exec('gdm screensaver enabled')
-            is_expected.not_to contain_exec('gdm screensaver ilde activates')
+            is_expected.not_to contain_exec('gdm screensaver idle activates')
             is_expected.not_to contain_exec('gdm screensaver locktime')
           end
         }
