@@ -29,15 +29,13 @@ class cis_security_hardening::rules::enable_reverse_path_filtering (
   if $enforce {
     sysctl {
       'net.ipv4.conf.all.rp_filter':
-        ensure    => present,
-        permanent => 'yes',
-        value     => 1,
+        ensure => present,
+        value  => 1,
     }
     sysctl {
       'net.ipv4.conf.default.rp_filter':
-        ensure    => present,
-        permanent => 'yes',
-        value     => 1,
+        ensure => present,
+        value  => 1,
     }
   }
 }

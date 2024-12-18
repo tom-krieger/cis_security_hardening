@@ -27,10 +27,9 @@ class cis_security_hardening::rules::user_namespaces (
   if $enforce {
     sysctl {
       'user.max_user_namespaces':
-        ensure    => present,
-        permanent => 'yes',
-        value     => 0,
-        notify    => Exec['reload-sysctl-system'],
+        ensure => present,
+        value  => 0,
+        notify => Exec['reload-sysctl-system'],
     }
   }
 }

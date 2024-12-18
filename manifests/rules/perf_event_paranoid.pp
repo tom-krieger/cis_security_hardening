@@ -35,10 +35,9 @@ class cis_security_hardening::rules::perf_event_paranoid (
   if $enforce {
     sysctl {
       'kernel.perf_event_paranoid':
-        ensure    => present,
-        permanent => 'yes',
-        value     => 2,
-        notify    => Exec['reload-sysctl-system'],
+        ensure => present,
+        value  => 2,
+        notify => Exec['reload-sysctl-system'],
     }
   }
 }
