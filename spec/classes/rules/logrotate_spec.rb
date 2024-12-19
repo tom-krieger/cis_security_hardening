@@ -31,11 +31,15 @@ describe 'cis_security_hardening::rules::logrotate' do
             is_expected.to create_class('logrotate')
               .with(
                 'config' => {
-                  'dateext'      => true,
-                  'compress'     => true,
-                  'rotate'       => 7,
-                  'rotate_every' => 'week',
-                  'ifempty'      => true,
+                  'dateext'       => true,
+                  'compress'      => true,
+                  'delaycompress' => false,
+                  'rotate'        => 7,
+                  'rotate_every'  => 'week',
+                  'ifempty'       => true,
+                  'su'            => false,
+                  'su_user'       => 'root',
+                  'su_group'      => 'syslog',
                 },
               )
 
